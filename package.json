@@ -30,8 +30,7 @@
     "db:start": "pg_ctl -D /usr/local/var/postgres start",
     "db:stop": "pg_ctl -D /usr/local/var/postgres stop",
     "redis": "redis-server /usr/local/etc/redis.conf",
-    "redis:stop": "redis-cli shutdown",
-    "HOW_TODO_test": "yarn run test:db:setup && jest --watch"
+    "redis:stop": "redis-cli shutdown"
   },
   "private": true,
   "devDependencies": {

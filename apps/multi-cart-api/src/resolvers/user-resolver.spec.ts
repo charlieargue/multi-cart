@@ -121,7 +121,7 @@ describe('User Tests', () => {
     });
 
     // ------------------------
-    it.only('UPDATEUSER: Can change current cart id', async () => {
+    it('UPDATEUSER: Can change current cart id', async () => {
         const { testUser, testCart }: { testUser: User, testCart: Cart } = await setupTestData();
         // console.log("🚀 ~ testUser", testUser)
         await expect(testUser.currentCartId).toEqual(null);

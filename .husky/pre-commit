@@ -1,8 +1,9 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
+# how to get my api tests to run with just npm test??
 npm test
-yarn test:db:setup && npx nx run multi-cart-api:test
+npx nx run multi-cart-api:test
 npx nx affected --target=lint  --base=origin/main
 
 
