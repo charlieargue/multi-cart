@@ -2,12 +2,6 @@
   "name": "multi-cart",
   "version": "0.0.0",
   "license": "MIT",
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint --verbose",
-      "commit-msg": "commitlint"
-    }
-  },
   "scripts": {
     "nx": "nx",
     "start": "nx serve",
