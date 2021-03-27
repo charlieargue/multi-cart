@@ -1,0 +1,125 @@
+{
+  "version": 2,
+  "cli": {
+    "defaultCollection": "@nrwl/react"
+  },
+  "defaultProject": "multi-cart",
+  "generators": {
+    "@nrwl/react": {
+      "application": {
+        "style": "scss",
+        "linter": "eslint",
+        "babel": true
+      },
+      "component": {
+        "style": "scss"
+      },
+      "library": {
+        "style": "scss",
+        "linter": "eslint"
+      }
+    }
+  },
+  "projects": {
+    "multi-cart": {
+      "root": "apps/multi-cart",
+      "sourceRoot": "apps/multi-cart/src",
+      "projectType": "application",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/web:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/multi-cart",
+            "index": "apps/multi-cart/src/index.html",
+            "main": "apps/multi-cart/src/main.tsx",
+            "polyfills": "apps/multi-cart/src/polyfills.ts",
+            "tsConfig": "apps/multi-cart/tsconfig.app.json",
+            "assets": [
+              "apps/multi-cart/src/favicon.ico",
+              "apps/multi-cart/src/assets"
+            ],
+            "styles": ["apps/multi-cart/src/styles.scss"],
+            "scripts": [],
+            "webpackConfig": "@nrwl/react/plugins/webpack"
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/multi-cart/src/environments/environment.ts",
+                  "with": "apps/multi-cart/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "executor": "@nrwl/web:dev-server",
+          "options": {
+            "buildTarget": "multi-cart:build"
+          },
+          "configurations": {
+            "production": {
+              "buildTarget": "multi-cart:build:production"
+            }
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/multi-cart/**/*.{ts,tsx,js,jsx}"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/multi-cart"],
+          "options": {
+            "jestConfig": "apps/multi-cart/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "multi-cart-e2e": {
+      "root": "apps/multi-cart-e2e",
+      "sourceRoot": "apps/multi-cart-e2e/src",
+      "projectType": "application",
+      "targets": {
+        "e2e": {
+          "executor": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/multi-cart-e2e/cypress.json",
+            "tsConfig": "apps/multi-cart-e2e/tsconfig.e2e.json",
+            "devServerTarget": "multi-cart:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "multi-cart:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/multi-cart-e2e/**/*.{js,ts}"]
+          }
+        }
+      }
+    }
+  }
+}
