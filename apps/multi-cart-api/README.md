@@ -1,21 +1,8 @@
-🔴 🔴 🔴 🔴 🔴 
-🔴 Needs nx updating
-🔴 🔴 🔴 🔴 🔴 
-
-
-
-NOTE: these instructions are incomplete and do not include package and database installation steps, amongst other things...
-
 # Quick Start
 
 ```sh
-# start the typescript compiler (🟡 in one terminal window)
-yarn watch
-```
-
-```sh
-# start the server locally (🟡 in another terminal window)
-yarn dev
+# start the API
+npm start multi-cart-api
 ```
 
 # GraphQL Playground
@@ -33,7 +20,15 @@ createdb multi-cart-test -U multi-cart-db-user
 
 # NOTE: you DO NOT need the server nor `yarn watch` running for tests to work!
 
-# run tests
-yarn test
+# ---- testing
+npx nx run multi-cart-api:test
+
+```
+
+# Linting
+
+```bash
+# ---- linting
+npx nx run multi-cart-api:lint
 
 ```
