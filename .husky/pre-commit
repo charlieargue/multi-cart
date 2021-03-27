@@ -2,3 +2,6 @@
 . "$(dirname "$0")/_/husky.sh"
 
 npm test
+npx nx affected --target=lint  --base=origin/main
+
+
