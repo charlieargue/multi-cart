@@ -1,0 +1,5 @@
+mutation UpdateUser($currentCartId: Int!) {
+  updateUser(currentCartId: $currentCartId) {
+    ...RegularUserResponse
+  }
+}

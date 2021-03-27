@@ -1,0 +1,16 @@
+overwrite: true
+# WHEN MOCKING BE: schema: "src/api/schema.graphql"
+schema: 'http://localhost:4000/graphql'
+documents: 'libs/react-data-access/src/lib/graphql/**/*.graphql'
+generates:
+  # ---------------------------------------
+  libs/react-data-access/src/lib/generated/graphql.ts:
+    plugins:
+      - 'typescript'
+      - 'typescript-operations'
+      - 'typescript-urql'
+      - 'typescript-resolvers'
+    config:
+      withHooks: true
+      withComponent: false
+      withHOC: false # not sure about this one?

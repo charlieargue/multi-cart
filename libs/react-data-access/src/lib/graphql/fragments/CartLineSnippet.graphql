@@ -1,0 +1,12 @@
+fragment CartLineSnippet on CartLine {
+  id
+  cartId
+  itemId
+  description
+  categoryId
+  uom
+  quantity
+  price
+  createdAt
+  updatedAt
+}

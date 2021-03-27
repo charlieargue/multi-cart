@@ -144,18 +144,22 @@
       "sourceRoot": "libs/react-data-access/src",
       "projectType": "library",
       "targets": {
-        "lint": {
-          "executor": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": ["libs/react-data-access/**/*.{ts,tsx,js,jsx}"]
-          }
-        },
         "test": {
           "executor": "@nrwl/jest:jest",
           "outputs": ["coverage/libs/react-data-access"],
           "options": {
             "jestConfig": "libs/react-data-access/jest.config.js",
             "passWithNoTests": true
+          }
+        },
+        "generate": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              {
+                "command": "npx graphql-codegen --config libs/react-data-access/codegen.yml"
+              }
+            ]
           }
         }
       }
@@ -199,9 +203,9 @@
           "builder": "@nrwl/workspace:run-commands",
           "options": {
             "commands": [
-              "npx nx run multi-cart-api:serve-execute",
               "npx redis-cli shutdown",
-              "npx redis-server /usr/local/etc/redis.conf"
+              "npx redis-server /usr/local/etc/redis.conf",
+              "npx nx run multi-cart-api:serve-execute"
             ]
           }
         },

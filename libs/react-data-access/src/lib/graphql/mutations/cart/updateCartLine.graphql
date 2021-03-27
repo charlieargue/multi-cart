@@ -1,0 +1,5 @@
+mutation UpdateCartLine($cartLine: CartLineInput!) {
+  updateCartLine(cartLine: $cartLine) {
+    ...CartLineSnippet
+  }
+}

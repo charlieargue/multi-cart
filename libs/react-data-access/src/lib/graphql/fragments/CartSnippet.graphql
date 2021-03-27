@@ -1,0 +1,10 @@
+fragment CartSnippet on Cart {
+  id
+  name
+  userId
+  cartLines {
+    ...CartLineSnippet
+  }
+  createdAt
+  updatedAt
+}

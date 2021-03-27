@@ -1,13 +1,33 @@
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "jsx": "react",
+    "target": "es5",
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "allowSyntheticDefaultImports": true,
+    "noEmit": true,
     "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "baseUrl": "./",
+    "paths": {
+      "app/*": ["src/appViews/*"],
+      "ui/*": ["src/ui/*"],
+      "generated/*": ["src/generated/*"],
+      "api": ["src/api/index.ts"],
+      "api/*": ["src/api/*"],
+      "utils/*": ["src/utils/*"]
+    },
+    "types": ["cypress", "@testing-library/cypress"]
   },
-  "files": [],
-  "include": [],
+  "exclude": ["node_modules", "cypress"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "**/*.d.ts"],
   "references": [
     {
       "path": "./tsconfig.lib.json"

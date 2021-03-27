@@ -1,0 +1,5 @@
+mutation BlankCart {
+  blankCart {
+    ...CartSnippet
+  }
+}

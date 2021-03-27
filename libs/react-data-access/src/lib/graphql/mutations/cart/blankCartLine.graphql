@@ -1,0 +1,5 @@
+mutation BlankCartLine($cartId: Int!){
+  blankCartLine(cartId: $cartId) {
+    ...CartLineSnippet
+  }
+}

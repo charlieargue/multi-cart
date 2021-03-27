@@ -1,0 +1,13 @@
+{
+  # WHEN MOCKING API: "schemaPath": "./src/api/schema.graphql",
+  "schemaPath": "http://localhost:4000/graphql",
+  "includes": [
+    # WHEN MOCKING API: "./src/api/schema.graphql", 
+    ],
+  "extensions": {
+    "endpoints": {
+      # "default": "http://localhost:3000/api/graphql" # MOCKED via FRONT
+      "default": "http://localhost:4000/graphql"   # POSTGRES BE
+    }
+  }
+}

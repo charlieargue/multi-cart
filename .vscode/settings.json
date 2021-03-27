@@ -1,4 +1,9 @@
 {
     "workbench.colorTheme": "Default Dark+",
-    "turboConsoleLog.addSemicolonInTheEnd": true
+    "turboConsoleLog.addSemicolonInTheEnd": true,
+    "bookmarks.useWorkaroundForFormatters": true,
+    "bookmarks.sideBar.expanded": true,
+    "bookmarks.saveBookmarksInProject": true,
+    "bookmarks.label.suggestion": "useWhenSelected",
+    "typescript.tsdk": "node_modules/typescript/lib"
 }

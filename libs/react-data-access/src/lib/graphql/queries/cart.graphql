@@ -1,0 +1,5 @@
+query Cart($id: Int!) {
+  cart(id: $id) {
+    ...CartSnippet
+  }
+}
