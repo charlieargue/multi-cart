@@ -1,11 +1,11 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 
-import ReactUi from './react-ui';
+import InputField from './InputField';
 
-describe('ReactUi', () => {
+describe('InputField', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<ReactUi />);
+    const { baseElement } = render(<InputField />);
     expect(baseElement).toBeTruthy();
   });
 });
