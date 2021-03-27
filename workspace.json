@@ -189,10 +189,20 @@
             }
           }
         },
-        "serve": {
+        "serve-execute": {
           "executor": "@nrwl/node:execute",
           "options": {
             "buildTarget": "multi-cart-api:build"
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              "npx nx run multi-cart-api:serve-execute",
+              "npx redis-cli shutdown",
+              "npx redis-server /usr/local/etc/redis.conf"
+            ]
           }
         },
         "lint": {
