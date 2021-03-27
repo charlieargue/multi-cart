@@ -75,22 +75,22 @@ export class CartResolver {
             cartLines: [],
         };
         try {
+            const { raw } = await getConnection()
+                .createQueryBuilder()
+                .insert()
+                .into(Cart)
+                .values([fresh as Cart])
+                .returning("*")
+                .execute();
+
+            const newCart = raw[0] as Cart;
+            newCart.cartLines = [];
+
+            return newCart;
         } catch (err) {
             console.log("🚀 ~ err", err)
             return new Error('🔴 could not create blank cart');
         }
-        const { raw } = await getConnection()
-            .createQueryBuilder()
-            .insert()
-            .into(Cart)
-            .values([fresh as any])
-            .returning("*")
-            .execute();
-
-        const newCart = raw[0] as Cart;
-        newCart.cartLines = [];
-
-        return newCart;
     }
 
     @Mutation(() => CartLine)
@@ -109,27 +109,28 @@ export class CartResolver {
             price: 0,
         } as CartLine;
         try {
+
+            const { raw } = await getConnection()
+                .createQueryBuilder()
+                .insert()
+                .into(CartLine)
+                .values([fresh as CartLine])
+                .returning("*")
+                .execute();
+
+            const newCartLine = raw[0] as CartLine;
+            return newCartLine;
         } catch (err) {
             console.log("🚀 ~ err", err)
             return new Error('🔴 could not create blank cart LINE');
         }
-        const { raw } = await getConnection()
-            .createQueryBuilder()
-            .insert()
-            .into(CartLine)
-            .values([fresh as any])
-            .returning("*")
-            .execute();
-
-        const newCartLine = raw[0] as CartLine;
-        return newCartLine;
     }
 
     @Mutation(() => Boolean)
     @UseMiddleware(isAuth) // 🛡
     async deleteCart(
         @Arg('id', () => Int) id: number,
-    ): Promise<Boolean> {
+    ): Promise<boolean> {
 
         // cascade cartlines is ON!
         await getConnection()
@@ -148,7 +149,7 @@ export class CartResolver {
         // NOTE: only because started with NON relational! non-unique cartLine IDs
         @Arg('cartId', () => Int) _cartId: number,
         @Arg('cartLineId', () => Int) cartLineId: number,
-    ): Promise<Boolean> {
+    ): Promise<boolean> {
         // cascade cartlines is ON!
         await getConnection()
             .createQueryBuilder()

@@ -1,4 +1,3 @@
-require('dotenv').config();
 import { ApolloServer } from 'apollo-server-express';
 import connectRedis from 'connect-redis';
 import cors from "cors";
@@ -16,6 +15,9 @@ import { User } from './entities/User';
 import { CartResolver } from './resolvers/cart';
 import { UserResolver } from './resolvers/user';
 import { MyContext } from "./types";
+import * as dotenv from "dotenv";
+dotenv.config();
+
 
 // ------------------------
 const main = async () => {
@@ -56,7 +58,7 @@ const main = async () => {
                 sameSite: 'lax', // protects against csrf 
             },
             saveUninitialized: false,
-            secret: process.env.SESSION_COOKIE_SECRET!,
+            secret: process.env.SESSION_COOKIE_SECRET,
             resave: false,
         })
     );

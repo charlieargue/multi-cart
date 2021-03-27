@@ -42,3 +42,6 @@ Thumbs.db
 # dotenv environment variables file
 .env
 .env.test
+
+# stupid files
+.DS_Store

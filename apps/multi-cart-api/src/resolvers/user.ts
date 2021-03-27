@@ -1,4 +1,4 @@
-import argon2 from 'argon2';
+import * as argon2 from 'argon2';
 import { Arg, Ctx, FieldResolver, Int, Mutation, Query, Resolver, Root, UseMiddleware } from 'type-graphql';
 import { getConnection } from 'typeorm';
 import { v4 } from 'uuid';
@@ -78,7 +78,7 @@ export class UserResolver {
         }
 
         // 🟢 You are logged in! (store user id in session, setting a cookie, keeping them logged in...)
-        req.session!.userId = user.id;
+        req.session.userId = user.id;
 
         return { user };
         // ✅ graphql will NOT return the .password field, FYI
@@ -105,7 +105,7 @@ export class UserResolver {
             }
         }
 
-        const valid = await argon2.verify((user as any).password, password);
+        const valid = await argon2.verify((user as User).password, password);
         if (!valid) {
             return {
                 errors: [{
@@ -116,10 +116,10 @@ export class UserResolver {
         }
 
         // 🟢 You are logged in!
-        req.session!.userId = user.id; // can be object, etc... more data in there, ...
+        req.session.userId = user.id; // can be object, etc... more data in there, ...
         return {
             user
-        } as any;
+        } as const;
     }
 
     @Mutation(() => Boolean)
@@ -204,7 +204,7 @@ export class UserResolver {
         await redis.del(key);
 
         // login user after change password
-        req.session!.userId = user.id;
+        req.session.userId = user.id;
 
         return {
             user
@@ -224,7 +224,7 @@ export class UserResolver {
                     return;
                 }
                 resolve(true);
-            })).then((_) => true);
+            })).then(() => true);
     }
 
 
@@ -233,6 +233,7 @@ export class UserResolver {
     @Mutation(() => UserResponse)
     @UseMiddleware(isAuth)
     async updateUser(
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         @Arg("currentCartId", () => Int!) currentCartId: number,
         @Ctx() { req }: MyContext
     ): Promise<UserResponse> {

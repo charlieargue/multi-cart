@@ -1,6 +1,6 @@
 import { createConnection } from "typeorm";
 
-const testConn = (drop: boolean = false) => {
+const testConn = (drop = false) => {
     return createConnection({
         type: "postgres",
         host: "localhost",
