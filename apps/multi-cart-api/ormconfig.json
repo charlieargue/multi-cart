@@ -1,0 +1,14 @@
+{
+    "type": "postgres",
+    "host": "localhost",
+    "port": 5432,
+    "username": "multi-cart-db-user",
+    "password": "666",
+    "database": "multi-cart-db",
+    "migrationsTableName": "migrations",
+    "entities": ["dist/entities/*.js"],
+    "migrations": ["dist/migrations/*.js"],
+    "cli": {
+        "migrationsDir": "src/migrations"
+    }
+}
