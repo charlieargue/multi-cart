@@ -25,9 +25,7 @@
       "targets": {
         "build": {
           "executor": "@nrwl/next:build",
-          "outputs": [
-            "{options.outputPath}"
-          ],
+          "outputs": ["{options.outputPath}"],
           "options": {
             "root": "apps/multi-cart",
             "outputPath": "dist/apps/multi-cart"
@@ -57,9 +55,7 @@
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/apps/multi-cart"
-          ],
+          "outputs": ["coverage/apps/multi-cart"],
           "options": {
             "jestConfig": "apps/multi-cart/jest.config.js",
             "passWithNoTests": true
@@ -68,9 +64,7 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "apps/multi-cart/**/*.{ts,tsx,js,jsx}"
-            ]
+            "lintFilePatterns": ["apps/multi-cart/**/*.{ts,tsx,js,jsx}"]
           }
         }
       }
@@ -96,9 +90,7 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "apps/multi-cart-e2e/**/*.{js,ts}"
-            ]
+            "lintFilePatterns": ["apps/multi-cart-e2e/**/*.{js,ts}"]
           }
         }
       }
@@ -111,16 +103,12 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "libs/react-ui/**/*.{ts,tsx,js,jsx}"
-            ]
+            "lintFilePatterns": ["libs/react-ui/**/*.{ts,tsx,js,jsx}"]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/react-ui"
-          ],
+          "outputs": ["coverage/libs/react-ui"],
           "options": {
             "jestConfig": "libs/react-ui/jest.config.js",
             "passWithNoTests": true
@@ -143,9 +131,7 @@
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/react-shared-components"
-          ],
+          "outputs": ["coverage/libs/react-shared-components"],
           "options": {
             "jestConfig": "libs/react-shared-components/jest.config.js",
             "passWithNoTests": true
@@ -161,16 +147,12 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "libs/react-data-access/**/*.{ts,tsx,js,jsx}"
-            ]
+            "lintFilePatterns": ["libs/react-data-access/**/*.{ts,tsx,js,jsx}"]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/react-data-access"
-          ],
+          "outputs": ["coverage/libs/react-data-access"],
           "options": {
             "jestConfig": "libs/react-data-access/jest.config.js",
             "passWithNoTests": true
@@ -186,15 +168,12 @@
       "targets": {
         "build": {
           "executor": "@nrwl/node:build",
-          "outputs": [
-            "{options.outputPath}"
-          ],
+          "outputs": ["{options.outputPath}"],
           "options": {
             "outputPath": "dist/apps/multi-cart-api",
             "main": "apps/multi-cart-api/src/index.ts",
             "tsConfig": "apps/multi-cart-api/tsconfig.app.json",
-            "assets": [
-            ]
+            "assets": []
           },
           "configurations": {
             "production": {
@@ -219,16 +198,12 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "apps/multi-cart-api/**/*.ts"
-            ]
+            "lintFilePatterns": ["apps/multi-cart-api/**/*.ts"]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/apps/multi-cart-api"
-          ],
+          "outputs": ["coverage/apps/multi-cart-api"],
           "options": {
             "jestConfig": "apps/multi-cart-api/jest.config.js",
             "passWithNoTests": true

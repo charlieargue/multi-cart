@@ -58,7 +58,7 @@ const main = async () => {
                 sameSite: 'lax', // protects against csrf 
             },
             saveUninitialized: false,
-            secret: process.env.SESSION_COOKIE_SECRET,
+            secret: process.env.SESSION_COOKIE_SECRET as string | string[],
             resave: false,
         })
     );

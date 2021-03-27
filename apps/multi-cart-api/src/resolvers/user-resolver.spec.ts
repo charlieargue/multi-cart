@@ -6,12 +6,15 @@ import { gCall } from "../test/test-utils/gCall";
 import { setupTestData } from "../test/test-utils/setupTestData";
 import testConn from "../test/test-utils/testConn";
 
+
 export let conn: Connection;
 beforeAll(async () => {
     conn = await testConn();
 });
 afterAll(async () => {
-    await conn.close();
+    if (conn) {
+        await conn.close();
+    }
 });
 
 const updateUserMutation = `
@@ -118,8 +121,9 @@ describe('User Tests', () => {
     });
 
     // ------------------------
-    it('UPDATEUSER: Can change current cart id', async () => {
+    it.only('UPDATEUSER: Can change current cart id', async () => {
         const { testUser, testCart }: { testUser: User, testCart: Cart } = await setupTestData();
+        // console.log("🚀 ~ testUser", testUser)
         await expect(testUser.currentCartId).toEqual(null);
         const result = await gCall({
             source: updateUserMutation,

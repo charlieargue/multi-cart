@@ -79,7 +79,7 @@ export class CartResolver {
                 .createQueryBuilder()
                 .insert()
                 .into(Cart)
-                .values([fresh as Cart])
+                .values([fresh as unknown as Cart])
                 .returning("*")
                 .execute();
 

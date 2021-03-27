@@ -2,6 +2,7 @@
 . "$(dirname "$0")/_/husky.sh"
 
 npm test
+yarn test:db:setup && npx nx run multi-cart-api:test
 npx nx affected --target=lint  --base=origin/main
 
 

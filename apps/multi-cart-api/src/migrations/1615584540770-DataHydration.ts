@@ -10,7 +10,7 @@ export class DataHydration1615584540770 implements MigrationInterface {
     }
 
     public async down(): Promise<void> {
-        return null;
+        return;
     }
 
 }
