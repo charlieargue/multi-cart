@@ -2,7 +2,7 @@ import { useField } from "formik";
 import React, { InputHTMLAttributes } from "react";
 import { Form } from "react-bootstrap";
 // 🔴 WIP: don't know how to make this work import 
-// import './InputField.module.scss';
+// import './InputField.module.css';
 
 type InputFieldProps = InputHTMLAttributes<HTMLInputElement> & {
   label?: string;

@@ -30,3 +30,14 @@ module.exports = withPlugins([
 ], {
     // ...
 });
+
+
+
+// ---------------------------
+// ALSO NOPE:
+// ---------------------------
+// thx: https://blog.nrwl.io/painlessly-build-and-deploy-next-js-apps-with-nx-225e2721da78
+const withSass = require('@zeit/next-sass');
+module.exports = withSass({
+  cssModules: true // assuming you want css modules :)
+});
