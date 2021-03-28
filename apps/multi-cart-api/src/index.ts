@@ -40,7 +40,7 @@ const main = async () => {
     const redis = new Redis();
 
     app.use(cors({
-        origin: 'http://localhost:3000',
+        origin: 'http://localhost:4200', // AKA the client/FE
         credentials: true
     }));
 

@@ -6,10 +6,10 @@ import NextLink from "next/link";
 import { useRouter } from "next/router";
 import React from 'react';
 import { Button, Col, Container, Row } from 'react-bootstrap';
-// 🔴 WIP: import '@multi-cart/react-ui/InputField.module.scss';
-// import '../../../libs/react-ui/src/lib/input-field/InputField.module.scss'; // 🔴 NOT LIKE THIS!
 import { createUrqlClient } from '../urql-customizations/createUrqlClient';
 import { toErrorMap } from '../utils/toErrorMap';
+// 🔴 WIP: import '@multi-cart/react-ui/InputField.module.scss';
+// import '../../../libs/react-ui/src/lib/input-field/InputField.module.scss'; // 🔴 NOT LIKE THIS!
 
 /* eslint-disable-next-line */
 export interface LoginProps { }

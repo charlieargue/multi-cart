@@ -1,17 +1,17 @@
-import { CartAvatar } from 'app/cart/cartAvatar/CartAvatar';
 import NextLink from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
 import { Button, Container, Nav, Navbar } from 'react-bootstrap';
-import { useLogoutMutation, useMeQuery } from '../../generated/graphql';
+import { useLogoutMutation, useMeQuery } from '@multi-cart/react-data-access';
+import { CartAvatar } from '../cart/cartAvatar/CartAvatar';
 
-export const NavBar: React.FC<{}> = ({ }) => {
+export const NavBar: React.FC = () => {
     const router = useRouter();
     const [{ data, fetching }] = useMeQuery();
     const [_, logout] = useLogoutMutation();
 
     let body = null;
-    let authLinks = (
+    const authLinks = (
         <>
             <NextLink href="/login">
                 <a className="mr-2">login</a>
@@ -21,7 +21,7 @@ export const NavBar: React.FC<{}> = ({ }) => {
             </NextLink>
         </>
     );
-    let currentUserAvatar = (
+    const currentUserAvatar = (
         <div className="d-flex align align-items-sm-baseline">
             <div className="mr-2 text-white">{data?.me?.username}</div>
             <CartAvatar currentCartId={data?.me?.currentCartId as number}/>

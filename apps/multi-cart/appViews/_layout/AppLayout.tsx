@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container } from 'react-bootstrap';
+import { WrapperVariant, Wrapper } from '@multi-cart/react-ui';
 import { NavBar } from './NavBar';
-import { Wrapper, WrapperVariant } from './Wrapper';
 
 interface AppLayoutProps {
     variant?: WrapperVariant
@@ -10,7 +10,7 @@ interface AppLayoutProps {
 export const AppLayout: React.FC<AppLayoutProps> = ({ children, variant }) => {
     return (
         <Container fluid className="mx-0 px-0">
-            {/* <NavBar /> */}
+            <NavBar />
             <Wrapper variant={variant}>
                 {children}
             </Wrapper>

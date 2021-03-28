@@ -1,1 +1,1 @@
-export * from './lib/react-shared-components';
+export * from './lib/auto-save/AutoSave';

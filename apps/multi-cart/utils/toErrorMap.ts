@@ -1,4 +1,4 @@
-import { FieldError } from "../generated/graphql";
+import { FieldError } from "@multi-cart/react-data-access";
 
 export const toErrorMap = (errors: FieldError[]) => {
 

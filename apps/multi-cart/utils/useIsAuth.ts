@@ -1,6 +1,6 @@
+import { useMeQuery } from "@multi-cart/react-data-access";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
-import { useMeQuery } from "../generated/graphql";
 
 const useIsAuth = () => {
     const [{ data, fetching }] = useMeQuery();
