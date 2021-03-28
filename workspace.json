@@ -1,21 +1,10 @@
 {
   "version": 2,
-  "cli": {
-    "defaultCollection": "@nrwl/next"
-  },
+  "cli": { "defaultCollection": "@nrwl/next" },
   "defaultProject": "multi-cart",
   "generators": {
-    "@nrwl/react": {
-      "application": {
-        "babel": true
-      }
-    },
-    "@nrwl/next": {
-      "application": {
-        "style": "scss",
-        "linter": "eslint"
-      }
-    }
+    "@nrwl/react": { "application": { "babel": true } },
+    "@nrwl/next": { "application": { "style": "scss", "linter": "eslint" } }
   },
   "projects": {
     "multi-cart": {
@@ -28,18 +17,14 @@
           "outputs": ["{options.outputPath}"],
           "options": {
             "root": "apps/multi-cart",
-            "outputPath": "dist/apps/multi-cart"
+            "outputPath": "dist/apps/multi-cart",
+            "styles": ["apps/multi-cart/src/styles.scss"]
           },
-          "configurations": {
-            "production": {}
-          }
+          "configurations": { "production": {} }
         },
         "serve": {
           "executor": "@nrwl/next:server",
-          "options": {
-            "buildTarget": "multi-cart:build",
-            "dev": true
-          },
+          "options": { "buildTarget": "multi-cart:build", "dev": true },
           "configurations": {
             "production": {
               "buildTarget": "multi-cart:build:production",
@@ -49,9 +34,7 @@
         },
         "export": {
           "executor": "@nrwl/next:export",
-          "options": {
-            "buildTarget": "multi-cart:build:production"
-          }
+          "options": { "buildTarget": "multi-cart:build:production" }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
@@ -82,9 +65,7 @@
             "devServerTarget": "multi-cart:serve"
           },
           "configurations": {
-            "production": {
-              "devServerTarget": "multi-cart:serve:production"
-            }
+            "production": { "devServerTarget": "multi-cart:serve:production" }
           }
         },
         "lint": {
@@ -195,9 +176,7 @@
         },
         "serve-execute": {
           "executor": "@nrwl/node:execute",
-          "options": {
-            "buildTarget": "multi-cart-api:build"
-          }
+          "options": { "buildTarget": "multi-cart-api:build" }
         },
         "serve": {
           "executor": "@nrwl/workspace:run-commands",
@@ -211,9 +190,7 @@
         },
         "lint": {
           "executor": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": ["apps/multi-cart-api/**/*.ts"]
-          }
+          "options": { "lintFilePatterns": ["apps/multi-cart-api/**/*.ts"] }
         },
         "test": {
           "executor": "@nrwl/workspace:run-commands",

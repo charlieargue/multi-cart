@@ -1,7 +1,8 @@
 import { useField } from "formik";
 import React, { InputHTMLAttributes } from "react";
 import { Form } from "react-bootstrap";
-// 🔴 WIP: don't know how to make this work import './InputField.module.scss';
+// 🔴 WIP: don't know how to make this work import 
+// import './InputField.module.scss';
 
 type InputFieldProps = InputHTMLAttributes<HTMLInputElement> & {
   label?: string;
@@ -10,6 +11,10 @@ type InputFieldProps = InputHTMLAttributes<HTMLInputElement> & {
 };
 
 // thx: https://formik.org/docs/api/useField
+// TODO: {/* {meta.touched && meta.error ? ( 
+//    <div className="error">{meta.error}</div>
+//  ) : null}
+// */}
 export const InputField: React.FC<InputFieldProps> = ({
   label,
   muted,
@@ -21,6 +26,7 @@ export const InputField: React.FC<InputFieldProps> = ({
   if (field.value !== null && props.value !== null) {
     return (
       <Form.Group>
+        <div className="testing">✊ Hi</div>
         {
           label && (
             <Form.Label className="text-muted">{label}</Form.Label>
@@ -32,12 +38,9 @@ export const InputField: React.FC<InputFieldProps> = ({
             <Form.Text className="text-muted">{muted}</Form.Text>
           )
         }
-        {/* {meta.touched && meta.error ? ( 
-           <div className="error">{meta.error}</div>
-         ) : null}
-      */}
       </Form.Group>
     );
   }
   return null;
 };
+export default InputField;
