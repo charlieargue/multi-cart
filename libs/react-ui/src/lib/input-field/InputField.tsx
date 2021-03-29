@@ -4,7 +4,7 @@ import { Form } from "react-bootstrap";
 // 🔴 WIP: don't know how to make this work import 
 // import './InputField.module.css';
 
-type InputFieldProps = InputHTMLAttributes<HTMLInputElement> & {
+export type InputFieldProps = InputHTMLAttributes<HTMLInputElement> & {
   label?: string;
   name: string;
   muted?: React.ReactNode;
@@ -26,7 +26,7 @@ export const InputField: React.FC<InputFieldProps> = ({
   if (field.value !== null && props.value !== null) {
     return (
       <Form.Group>
-        <div className="testing">✊ Hi</div>
+        {/* <div className="testing">✊ Hi</div> */}
         {
           label && (
             <Form.Label className="text-muted">{label}</Form.Label>

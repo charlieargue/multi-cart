@@ -12,7 +12,15 @@
   "tasksRunnerOptions": {
     "default": {
       "runner": "@nrwl/workspace/tasks-runners/default",
-      "options": { "cacheableOperations": ["build", "lint", "test", "e2e"] }
+      "options": {
+        "cacheableOperations": [
+          "build",
+          "lint",
+          "test",
+          "e2e",
+          "build-storybook"
+        ]
+      }
     }
   },
   "projects": {
@@ -21,6 +29,7 @@
     "react-ui": { "tags": [] },
     "react-shared-components": { "tags": [] },
     "react-data-access": { "tags": [] },
-    "multi-cart-api": { "tags": [] }
+    "multi-cart-api": { "tags": [] },
+    "react-ui-e2e": { "tags": [], "implicitDependencies": ["react-ui"] }
   }
 }
