@@ -44,12 +44,11 @@ Agile/kanban board for multi-cart
 
 ### 💪 Todo
 
-- [ ] Breadcrumbs (with storybook!)  
 - [ ] olas! (w/ storybook!, but yes, good for later, and good for deepening the cart object relationships!  
   - [ ] olas: Should be fast!, good for modal work, use CONTEXT on that modal?!  
   - [ ] olas: Good use case with those percentages: if they don't add up to 100%, then the CART AVATAR becomes red! (pure gql cache or is need UI state?)  
 
 ### 🧠 In Progress
 
-- [ ] 🛡 hello, make github VAR for that session secret, lol! And make NEW secure one!  
+- [ ] Breadcrumbs (with storybook!)  
 

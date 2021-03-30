@@ -8,8 +8,8 @@ export async function sendEmail(to: string, html: string) {
         port: 587,
         secure: false, // true for 465, false for other ports
         auth: {
-            user: 'aqno7okmkk2hcnlr@ethereal.email',
-            pass: 'ZZugYHFYkUMNEyv8n8',
+            user: process.env.SMTP_USERNAME,
+            pass: process.env.SMTP_PWD,
         },
     });
 

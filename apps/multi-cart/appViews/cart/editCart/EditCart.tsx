@@ -1,11 +1,12 @@
 import { useBlankCartLineMutation, useCartQuery, useDeleteCartMutation, useUpdateUserMutation } from '@multi-cart/react-data-access';
-import NextLink from 'next/link';
+
 import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
-import { Alert, Badge, Breadcrumb, Button, Col, Container, Row } from 'react-bootstrap';
-import { ExclamationCircleFill, HouseFill, PlusCircleFill, XSquareFill } from 'react-bootstrap-icons';
+import { Alert, Badge, Button, Col, Container, Row } from 'react-bootstrap';
+import { ExclamationCircleFill, PlusCircleFill, XSquareFill } from 'react-bootstrap-icons';
 import { AppLayout } from '../../_layout';
 import { CartLineRow } from './cartLineRow/CartLineRow';
+import { Breadcrumbs } from '@multi-cart/react-ui';
 
 // -------------------
 // 🛍 CART PAGE 
@@ -34,22 +35,18 @@ export const EditCart: React.FC<{ id: number }> = ({ id }) => {
     }, [id]);
 
     // TODO: component-ize:
-    const breadcrumb = (
-        <Breadcrumb className="mb-5">
-            <Breadcrumb.Item className="align-content"><NextLink href="/">
-                <HouseFill color="gray" className="mb-1" />
-            </NextLink></Breadcrumb.Item>
-            <Breadcrumb.Item active>Cart
-                <Badge pill variant="secondary" className="ml-2 align-text-bottom">#{id}</Badge>
-            </Breadcrumb.Item>
-        </Breadcrumb>
-    );
+    const links = [{
+        isActive: true,
+        label: "Cart",
+        id
+    }];
+    const breadcrumbs = <Breadcrumbs links={links} />;
 
     // fetching?
     if (fetching) {
         return (
             <AppLayout>
-                {breadcrumb}
+                {breadcrumbs}
                 <div>Loading...</div>
             </AppLayout>
         );
@@ -60,7 +57,7 @@ export const EditCart: React.FC<{ id: number }> = ({ id }) => {
         console.log("🚀 ~ error", error)
         return (
             <AppLayout>
-                {breadcrumb}
+                {breadcrumbs}
                 <Alert variant="danger">
                     {error.message}
                 </Alert>
@@ -72,7 +69,7 @@ export const EditCart: React.FC<{ id: number }> = ({ id }) => {
     if (!data?.cart) {
         return (
             <AppLayout>
-                {breadcrumb}
+                {breadcrumbs}
                 <Alert variant="warning">
                     Could not find cart
                 </Alert>
@@ -83,7 +80,7 @@ export const EditCart: React.FC<{ id: number }> = ({ id }) => {
     // if 👍 all good!
     return (
         <AppLayout>
-            {breadcrumb}
+            {breadcrumbs}
 
             {/* 🛍 cart header  */}
             <Container fluid>
@@ -145,18 +142,18 @@ export const EditCart: React.FC<{ id: number }> = ({ id }) => {
                         </tbody>
 
                     ) : (
-                        // ❌ empty cart 
-                        <tbody>
-                            <tr>
-                                <td className="pt-4" colSpan={20}>
-                                    <Alert variant="light">
-                                        <ExclamationCircleFill className="mr-2 mb-1" /> This cart is empty — <strong>please add a line</strong>!
+                            // ❌ empty cart 
+                            <tbody>
+                                <tr>
+                                    <td className="pt-4" colSpan={20}>
+                                        <Alert variant="light">
+                                            <ExclamationCircleFill className="mr-2 mb-1" /> This cart is empty — <strong>please add a line</strong>!
                                     </Alert>
-                                </td>
-                            </tr>
-                        </tbody>
+                                    </td>
+                                </tr>
+                            </tbody>
 
-                    )
+                        )
                 }
 
                 <tfoot>

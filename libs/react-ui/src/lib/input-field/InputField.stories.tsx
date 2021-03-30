@@ -26,7 +26,7 @@ const config = {
 };
 
 // -------------------
-export const primary = () => {
+export const withDefaultState = () => {
   const props: InputFieldProps = {
     name: text("name", ""),
     label: text("label", "defaut label: "),
@@ -34,7 +34,7 @@ export const primary = () => {
   };
   return <InputField value={props.value} label={props.label} name={props.name} />;
 };
-primary.story = config;
+withDefaultState.story = config;
 
 
 // -------------------
