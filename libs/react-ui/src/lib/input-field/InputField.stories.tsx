@@ -6,7 +6,7 @@ import { InputField, InputFieldProps } from './InputField';
 import withFormik from 'storybook-formik';
 
 
-// CSF storybook-form example:
+// CSF:
 export default {
   title: 'InputField',
   component: InputField,
@@ -17,9 +17,8 @@ const config = {
   parameters: {
     formik: {
       initialValues: {
-        value: "dupa",
-        label: "pupa",
-        name: "kupa",
+        label: "bb",
+        name: "cc",
         muted: false
       }
     }
@@ -31,8 +30,9 @@ export const primary = () => {
   const props: InputFieldProps = {
     name: text("name", ""),
     label: text("label", "defaut label: "),
+    value: "aa",
   };
-  return <InputField label={props.label} name={props.name} />;
+  return <InputField value={props.value} label={props.label} name={props.name} />;
 };
 primary.story = config;
 
@@ -42,29 +42,11 @@ export const secondary = () => {
   const props: InputFieldProps = {
     name: text("name", ""),
     label: text("label", "secondary label: "),
+    value: "vv",
   };
-  return <InputField label={props.label} name={props.name} />;
+  return <InputField value={props.value} label={props.label} name={props.name} />;
 };
 
 secondary.story = config;
-
-// storiesOf("InputField", module)
-//   .addDecorator(withFormik)
-//   // -------------------
-//   .add("empty", () => {
-//     const props: InputFieldProps = {
-//       name: text("name", ""),
-//       label: text("label", ""),
-//     };
-//     return <InputField name={props.name} />;
-//   }, initialValues)
-//   // -------------------
-//   .add("withLabel", () => {
-//     const props: InputFieldProps = {
-//       name: text("name", ""),
-//       label: text("label", "sweet"),
-//     };
-//     return <InputField label={props.label} name={props.name} />;
-//   }, initialValues);
 
 
