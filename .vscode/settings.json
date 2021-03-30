@@ -5,5 +5,10 @@
     "bookmarks.sideBar.expanded": true,
     "bookmarks.saveBookmarksInProject": true,
     "bookmarks.label.suggestion": "useWhenSelected",
-    "typescript.tsdk": "node_modules/typescript/lib"
+    "typescript.tsdk": "node_modules/typescript/lib",
+    "kanban": {
+        "trackTime": false,
+        "noTimeTrackingIfIdle": true,
+        "openOnStartup": true
+    }
 }
