@@ -16,6 +16,8 @@ import { CartResolver } from './resolvers/cart';
 import { UserResolver } from './resolvers/user';
 import { MyContext } from "./types";
 import * as dotenv from "dotenv";
+import { Account } from './entities/Account';
+import { CartLineAccount } from './entities/CartLineAccount';
 dotenv.config();
 
 
@@ -28,7 +30,7 @@ const main = async () => {
         username: process.env.PG_USERNAME,
         password: process.env.PG_PWD,
         logging: true,
-        entities: [User, Cart, CartLine],
+        entities: [User, Cart, CartLine, CartLineAccount, Account],
         migrations: [path.join(__dirname, "./migrations/*")],
     });
     conn.runMigrations();

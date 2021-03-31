@@ -46,6 +46,7 @@ export class CartResolver {
             .getRepository(Cart)
             .createQueryBuilder("c")
             .leftJoinAndSelect("c.cartLines", "cart_line")
+            // .leftJoinAndSelect("cart_line", "cart_line")
             .orderBy("c.createdAt", "DESC")
             .where("c.userId = :id", { id: req.session.userId })
             .take();

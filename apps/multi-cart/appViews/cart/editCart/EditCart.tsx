@@ -1,5 +1,4 @@
 import { useBlankCartLineMutation, useCartQuery, useDeleteCartMutation, useUpdateUserMutation } from '@multi-cart/react-data-access';
-
 import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 import { Alert, Badge, Button, Col, Container, Row } from 'react-bootstrap';
@@ -7,6 +6,8 @@ import { ExclamationCircleFill, PlusCircleFill, XSquareFill } from 'react-bootst
 import { AppLayout } from '../../_layout';
 import { CartLineRow } from './cartLineRow/CartLineRow';
 import { Breadcrumbs } from '@multi-cart/react-ui';
+import { LineAccountContainer } from '@multi-cart/react-shared-components';
+
 
 // -------------------
 // 🛍 CART PAGE 
@@ -127,16 +128,21 @@ export const EditCart: React.FC<{ id: number }> = ({ id }) => {
                     </tr>
                 </thead>
 
-                {/* Cart Lines? */}
+                {/* Cart Lines */}
                 {
                     data.cart.cartLines?.length ? (
 
-                        // ✅ OK, GOT DATA!
                         // TODO: switch to sort component, thx: https://stackoverflow.com/questions/48764203/how-to-sort-list-of-react-components-based-on-different-properties
                         <tbody>
                             {
                                 data.cart.cartLines?.sort((a, b) => a.id - b.id).map((line) => !line ? null : (
-                                    <CartLineRow key={line.id} line={line} />
+                                    <CartLineRow key={line.id} line={line} >
+                                        <LineAccountContainer line={line}>
+                                            {/* {line.lineAccounts.map((la) => !la ? null : (
+                                                <LineAccount  key={la.id} />
+                                            ))} */}
+                                        </LineAccountContainer>
+                                    </CartLineRow>
                                 ))
                             }
                         </tbody>

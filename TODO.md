@@ -6,6 +6,7 @@ Agile/kanban board for multi-cart
 
 - [ ] There’s ZERO error handling on login, add some toasts please! (maybe with 🇵🇱 urql interceptor / toast container)  
 - [ ] change/forgot password/login/register need work/checking (token works, nodemailer?)  
+- [ ] make cart name clickable and editable 
 - [ ] UI: store: switch to chakra-ui (follow their landing-page tutorial see #slack/design-resources) -- use that for store page! or keep react-bootstrap, but just DO SAME THING w/o chakra! FIGMA and nice design for my site/CV demo-app + code-samples  
 - [ ] “store” - “catalog” function  
   - [ ] store: Just add items, have the same COLUMNS as cart line  
@@ -44,11 +45,10 @@ Agile/kanban board for multi-cart
 
 ### 💪 Todo
 
-- [ ] olas! (w/ storybook!, but yes, good for later, and good for deepening the cart object relationships!  
-  - [ ] olas: Should be fast!, good for modal work, use CONTEXT on that modal?!  
   - [ ] olas: Good use case with those percentages: if they don't add up to 100%, then the CART AVATAR becomes red! (pure gql cache or is need UI state?)  
 
 ### 🧠 In Progress
 
-- [ ] Breadcrumbs (with storybook!)  
+- [ ] olas! (w/ storybook!, but yes, good for later, and good for deepening the cart object relationships!  
+  - [ ] olas: Should be fast!, good for modal work, use CONTEXT on that modal?!  
 

@@ -30,6 +30,10 @@
     "react-shared-components": { "tags": [] },
     "react-data-access": { "tags": [] },
     "multi-cart-api": { "tags": [] },
-    "react-ui-e2e": { "tags": [], "implicitDependencies": ["react-ui"] }
+    "react-ui-e2e": { "tags": [], "implicitDependencies": ["react-ui"] },
+    "react-shared-components-e2e": {
+      "tags": [],
+      "implicitDependencies": ["react-shared-components"]
+    }
   }
 }
