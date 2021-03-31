@@ -32,8 +32,8 @@
     "db:start": "pg_ctl -D /usr/local/var/postgres start",
     "db:stop": "pg_ctl -D /usr/local/var/postgres stop",
     "generate": "nx run react-data-access:generate",
-    "typeorm": "ts-node --project=apps/multi-cart-api/tsconfig.orm.json ./node_modules/typeorm/cli.js"
-
+    "typeorm": "ts-node --project=apps/multi-cart-api/tsconfig.orm.json ./node_modules/typeorm/cli.js",
+    "typeorm:compile-migrations": "tsc --project apps/multi-cart-api/src/migrations/tsconfig.orm-migrations-only.json"
   },
   "private": true,
   "devDependencies": {

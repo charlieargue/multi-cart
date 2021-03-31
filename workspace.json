@@ -226,6 +226,7 @@
             "commands": [
               "npx redis-cli shutdown",
               "npx redis-server /usr/local/etc/redis.conf",
+              "yarn typeorm:compile-migrations",
               "npx nx run multi-cart-api:serve-execute"
             ]
           }

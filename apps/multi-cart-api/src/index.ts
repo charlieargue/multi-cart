@@ -24,6 +24,8 @@ dotenv.config();
 // ------------------------
 const main = async () => {
 
+    // NOT WORKING: 
+    const pathToMigrations = path.join(__dirname, "../../..", "apps/multi-cart-api/src/migrations/*.js");
     const conn = await createConnection({
         type: 'postgres',
         database: 'multi-cart-db',
@@ -31,7 +33,7 @@ const main = async () => {
         password: process.env.PG_PWD,
         logging: true,
         entities: [User, Cart, CartLine, CartLineAccount, Account],
-        migrations: [path.join(__dirname, "./migrations/*")],
+        migrations: [pathToMigrations],
     });
     conn.runMigrations();
 
