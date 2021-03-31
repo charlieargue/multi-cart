@@ -1,4 +1,4 @@
-import { Field, Int, ObjectType } from "type-graphql";
+import { Field, Float, Int, ObjectType } from "type-graphql";
 import { BaseEntity, Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { Cart } from "./Cart";
 
@@ -16,23 +16,22 @@ export class CartLine extends BaseEntity {
     itemId: string;
 
     @Field(() => String, { nullable: true })
-    @Column()
+    @Column({type: "string"})
     description: string;
 
     @Field(() => String, { nullable: true })
-    @Column()
+    @Column({type: "string"})
     uom: string;
 
     @Field(() => Int, { nullable: true })
-    @Column()
+    @Column({type: "number"})
     quantity: number;
 
     @Field(() => Int, { nullable: true })
-    @Column()
+    @Column({type: "number"})
     categoryId: number;
 
-    // ❌ Don't use FLOAT in @Field
-    @Field()
+    @Field(() => Float)
     @Column({ type: "float", default: 0 })
     price: number;
 
@@ -41,7 +40,7 @@ export class CartLine extends BaseEntity {
     // FKs
     // ------------------------
     @Field(() => Int)
-    @Column()
+    @Column({type: "number"})
     cartId!: number;
 
 

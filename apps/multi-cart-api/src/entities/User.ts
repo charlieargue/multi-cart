@@ -6,7 +6,7 @@ import { Cart } from "./Cart";
 @Entity()
 export class User extends BaseEntity {
 
-    @Field()
+    @Field(() => Int)
     @PrimaryGeneratedColumn()
     id!: number;
 
@@ -19,7 +19,7 @@ export class User extends BaseEntity {
     email!: string;
 
     // 🛡 NO @Field(() => String)
-    @Column()
+    @Column({type: "string"})
     password!: string;
 
     // ------------------------

@@ -6,8 +6,8 @@
     "password": "666",
     "database": "multi-cart-db",
     "migrationsTableName": "migrations",
-    "entities": ["dist/entities/*.js"],
-    "migrations": ["dist/migrations/*.js"],
+    "entities": ["src/entities/*.js"],
+    "migrations": ["src/migrations/*.js"],
     "cli": {
         "migrationsDir": "src/migrations"
     }

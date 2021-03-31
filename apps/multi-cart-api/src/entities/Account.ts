@@ -1,4 +1,4 @@
-import { Field, ObjectType } from "type-graphql";
+import { Field, Float, ObjectType } from "type-graphql";
 import { BaseEntity, Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @ObjectType()
@@ -10,11 +10,10 @@ export class Account extends BaseEntity {
     accountNumber!: string; // i.e. 1234-123-12-12345
     
     @Field(() => String)
-    @Column()
+    @Column({type: "string"})
     accountName: string; // i.e. Selena Meyer Fund
 
-    // ❌ Don't use FLOAT in @Field
-    @Field()
+    @Field(() => Float)
     @Column({ type: "float", default: 0 })
     amountRemaining: number;
 
