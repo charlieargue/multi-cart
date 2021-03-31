@@ -1,12 +1,14 @@
 import { Field, ObjectType } from "type-graphql";
-import { BaseEntity, Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { BaseEntity, Column, CreateDateColumn, Entity, PrimaryColumn, UpdateDateColumn } from "typeorm";
 
 @ObjectType()
 @Entity()
 export class Account extends BaseEntity {
 
     @Field(() => String)
-    @PrimaryGeneratedColumn()
+    @PrimaryColumn("varchar", {
+        length: 20
+      })
     accountNumber!: string; // i.e. 1234-123-12-12345
     
     @Field(() => String)

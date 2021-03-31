@@ -42,29 +42,52 @@ export class CartResolver {
     carts(
         @Ctx() { req }: MyContext
     ): Promise<Cart[]> {
+
+
+        // ✅ GOOD!
+        // const qb = getConnection()
+        //     .getRepository(Cart)
+        //     .createQueryBuilder("c")
+        //     .leftJoinAndSelect("c.cartLines", "cart_line")
+        //     .orderBy("c.createdAt", "DESC")
+        //     .where("c.userId = :id", { id: req.session.userId })
+        //     .take();
+        // return qb.getMany();
+
+
+
+        // ❓ NO BUENO?
         const qb = getConnection()
-            // .getRepository(Cart)
-            .createQueryBuilder(Cart, "c")
-            .addSelect('c.id', 'c_id')
-            // .addSelect('t2.id_2', 't2_id_2')
-            // .addSelect('t3.event', 't3_event')
-            // .addSelect('t4.column1', 't4_column1') // up to this point: SELECT t1.id,t2.id_2,t3.event,t3.column1,t4.column1 FROM table1 t1
-            .innerJoin(CartLine, 'cl', 'c.id = cl.caid') //INNER JOIN table2 t2 ON t1.id = t2.id
-            // .innerJoin(table3, 't3', 't2.event = t3.event') // INNER JOIN table3 t3 ON t2.event = t3.event
-            // .innerJoin(table4, 't4', 't4.id = t2.id_2') // INNER JOIN table4 t4 ON t4.id = t2.id_2 
+            .getRepository(Cart)
+            .createQueryBuilder("c")
+            .leftJoinAndSelect("c.cartLines", "cart_line")
+            .leftJoinAndSelect("cart_line.cartLineAccounts", "cart_line_account")
             .orderBy("c.createdAt", "DESC")
             .where("c.userId = :id", { id: req.session.userId });
-
-
-
-
-
-        // .leftJoinAndSelect("c.cartLines", "cart_line")
-        // .leftJoinAndSelect("cart_line", "cart_line")
-        // .orderBy("c.createdAt", "DESC")
-        // .where("c.userId = :id", { id: req.session.userId });
-        // .take(); DECOMISH
         return qb.getMany();
+        
+        
+        
+            //     .select('*')
+        //     // .orderBy("c.createdAt", "DESC")
+        //     // .take();  // DECOMISH?
+        // // .select('cl.*')
+        // // .addSelect('cl.id', 'cl_id')
+        // // .addSelect('t3.event', 't3_event')
+        // // .addSelect('t4.column1', 't4_column1') // up to this point: SELECT t1.id,t2.id_2,t3.event,t3.column1,t4.column1 FROM table1 t1
+        // // .innerJoin(table3, 't3', 't2.event = t3.event') // INNER JOIN table3 t3 ON t2.event = t3.event
+        // // .innerJoin(table4, 't4', 't4.id = t2.id_2') // INNER JOIN table4 t4 ON t4.id = t2.id_2 
+        // // .where("c.userId = :id", { id: req.session.userId });
+
+
+
+
+
+        // // .leftJoinAndSelect("c.cartLines", "cart_line")
+        // // .leftJoinAndSelect("cart_line", "cart_line")
+        // // .orderBy("c.createdAt", "DESC")
+        // // .where("c.userId = :id", { id: req.session.userId });
+        // return qb.getMany();
 
         // thx: https://stackoverflow.com/questions/54998520/multiple-join-with-typeorm
         // thx: https://github.com/typeorm/typeorm/blob/master/docs/select-query-builder.md#getting-values-using-querybuilder

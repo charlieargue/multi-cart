@@ -1,6 +1,7 @@
 import { Field, Int, ObjectType } from "type-graphql";
-import { BaseEntity, Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { BaseEntity, Column, CreateDateColumn, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { Cart } from "./Cart";
+import { CartLineAccount } from './CartLineAccount';
 
 @ObjectType()
 @Entity()
@@ -53,6 +54,11 @@ export class CartLine extends BaseEntity {
         onDelete: "CASCADE",
     })
     cart?: Cart;
+
+    // NOTE: need this for ORM leftJoinAndSelect() to work
+    @Field(() => [CartLineAccount])
+    @OneToMany(() => CartLineAccount, (cartLineAccount) => cartLineAccount.cartLine)
+    cartLineAccounts: CartLineAccount[];
 
 
     // timestamps

@@ -18,6 +18,7 @@ import { MyContext } from "./types";
 import * as dotenv from "dotenv";
 import { Account } from './entities/Account';
 import { CartLineAccount } from './entities/CartLineAccount';
+import { AccountResolver } from './resolvers/account';
 dotenv.config();
 
 
@@ -70,7 +71,7 @@ const main = async () => {
     const apolloServer = new ApolloServer({
 
         schema: await buildSchema({
-            resolvers: [CartResolver, UserResolver],
+            resolvers: [CartResolver, UserResolver, AccountResolver],
             validate: false
         }),
         context: ({ req, res }): MyContext => ({
