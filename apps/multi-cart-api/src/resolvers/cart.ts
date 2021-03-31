@@ -43,20 +43,6 @@ export class CartResolver {
         @Ctx() { req }: MyContext
     ): Promise<Cart[]> {
 
-
-        // ✅ GOOD!
-        // const qb = getConnection()
-        //     .getRepository(Cart)
-        //     .createQueryBuilder("c")
-        //     .leftJoinAndSelect("c.cartLines", "cart_line")
-        //     .orderBy("c.createdAt", "DESC")
-        //     .where("c.userId = :id", { id: req.session.userId })
-        //     .take();
-        // return qb.getMany();
-
-
-
-        // ❓ NO BUENO?
         const qb = getConnection()
             .getRepository(Cart)
             .createQueryBuilder("c")
@@ -65,52 +51,20 @@ export class CartResolver {
             .orderBy("c.createdAt", "DESC")
             .where("c.userId = :id", { id: req.session.userId });
         return qb.getMany();
-        
-        
-        
-            //     .select('*')
-        //     // .orderBy("c.createdAt", "DESC")
-        //     // .take();  // DECOMISH?
-        // // .select('cl.*')
-        // // .addSelect('cl.id', 'cl_id')
-        // // .addSelect('t3.event', 't3_event')
-        // // .addSelect('t4.column1', 't4_column1') // up to this point: SELECT t1.id,t2.id_2,t3.event,t3.column1,t4.column1 FROM table1 t1
-        // // .innerJoin(table3, 't3', 't2.event = t3.event') // INNER JOIN table3 t3 ON t2.event = t3.event
-        // // .innerJoin(table4, 't4', 't4.id = t2.id_2') // INNER JOIN table4 t4 ON t4.id = t2.id_2 
-        // // .where("c.userId = :id", { id: req.session.userId });
-
-
-
-
-
-        // // .leftJoinAndSelect("c.cartLines", "cart_line")
-        // // .leftJoinAndSelect("cart_line", "cart_line")
-        // // .orderBy("c.createdAt", "DESC")
-        // // .where("c.userId = :id", { id: req.session.userId });
-        // return qb.getMany();
-
-        // thx: https://stackoverflow.com/questions/54998520/multiple-join-with-typeorm
-        // thx: https://github.com/typeorm/typeorm/blob/master/docs/select-query-builder.md#getting-values-using-querybuilder
-
-        // .addSelect('t1.id', 't1_id')
-        // .addSelect('t2.id_2', 't2_id_2')
-        // .addSelect('t3.event', 't3_event')
-        // .addSelect('t4.column1', 't4_column1') // up to this point: SELECT t1.id,t2.id_2,t3.event,t3.column1,t4.column1 FROM table1 t1
-        // .innerJoin(table2, 't2', 't1.id = t2.id') //INNER JOIN table2 t2 ON t1.id = t2.id
-        // .innerJoin(table3, 't3', 't2.event = t3.event') // INNER JOIN table3 t3 ON t2.event = t3.event
-        // .innerJoin(table4, 't4', 't4.id = t2.id_2') // INNER JOIN table4 t4 ON t4.id = t2.id_2 
-        // .where('t3.event = 2019') // WHERE t3.event = 2019
-        // .getRawMany() // depend on what you need really
     }
 
     @Query(() => Cart, { nullable: true })
     @UseMiddleware(isAuth) // 🛡
-    cart(@Arg("id", () => Int) id: number): Promise<Cart | undefined> {
+    cart(
+        @Arg("id", () => Int) id: number,
+        @Ctx() { req }: MyContext
+        ): Promise<Cart | undefined> {
         const qb = getConnection()
             .getRepository(Cart)
             .createQueryBuilder("c")
             .leftJoinAndSelect("c.cartLines", "cart_line")
-            .where("c.id = :id", { id });
+            .leftJoinAndSelect("cart_line.cartLineAccounts", "cart_line_account")
+            .where("c.id = :id AND c.userId = :userId", { id, userId: req.session.userId });
         return qb.getOne();
     }
 
@@ -182,7 +136,7 @@ export class CartResolver {
     async deleteCart(
         @Arg('id', () => Int) id: number,
     ): Promise<boolean> {
-
+        // TODO: add security on all these deletes/updates (that only owner of cart can do so!)
         // cascade cartlines is ON!
         await getConnection()
             .createQueryBuilder()

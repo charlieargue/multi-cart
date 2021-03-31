@@ -5,9 +5,10 @@ import { BaseEntity, Column, CreateDateColumn, Entity, PrimaryColumn, UpdateDate
 @Entity()
 export class Account extends BaseEntity {
 
-    @Field(() => String)
+    @Field(() => String, { nullable: false})
     @PrimaryColumn("varchar", {
-        length: 20
+        length: 20,
+        unique: true
       })
     accountNumber!: string; // i.e. 1234-123-12-12345
     

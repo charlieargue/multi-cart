@@ -55,10 +55,10 @@ export class CartLine extends BaseEntity {
     })
     cart?: Cart;
 
-    // NOTE: need this for ORM leftJoinAndSelect() to work
-    @Field(() => [CartLineAccount])
+    // NOTE: need this only for ORM leftJoinAndSelect() to work
+    @Field(() => [CartLineAccount], { nullable: true })
     @OneToMany(() => CartLineAccount, (cartLineAccount) => cartLineAccount.cartLine)
-    cartLineAccounts: CartLineAccount[];
+    cartLineAccounts?: CartLineAccount[];
 
 
     // timestamps
