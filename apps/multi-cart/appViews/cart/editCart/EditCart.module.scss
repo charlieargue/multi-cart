@@ -1,6 +1,8 @@
 .edit-cart {
   &__line-account-container {
-    margin-left: 70px;
-    margin-top: -10px;
+    // TODO: only for large screen, needs adjusting for breakpoints, or more elegant approach
+    margin-left: 58px;
+    margin-right: 31px;
+    margin-top: -2px;
   }
 }
