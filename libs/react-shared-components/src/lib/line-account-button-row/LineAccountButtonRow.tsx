@@ -13,7 +13,7 @@ export interface LineAccountButtonRowProps {
 }
 
 export function LineAccountButtonRow({ line, children }: LineAccountButtonRowProps) {
-  const [modalShow, setModalShow] = React.useState(false);
+  const [modalShow, setModalShow] = React.useState(true);
 
   return (
 

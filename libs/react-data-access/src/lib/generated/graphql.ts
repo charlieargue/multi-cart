@@ -359,6 +359,17 @@ export type UpdateUserMutation = (
   ) }
 );
 
+export type AccountsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type AccountsQuery = (
+  { __typename?: 'Query' }
+  & { accounts: Array<(
+    { __typename?: 'Account' }
+    & Pick<Account, 'accountName' | 'accountNumber' | 'amountRemaining'>
+  )> }
+);
+
 export type CartQueryVariables = Exact<{
   id: Scalars['Int'];
 }>;
@@ -570,6 +581,19 @@ export const UpdateUserDocument = gql`
 
 export function useUpdateUserMutation() {
   return Urql.useMutation<UpdateUserMutation, UpdateUserMutationVariables>(UpdateUserDocument);
+};
+export const AccountsDocument = gql`
+    query Accounts {
+  accounts {
+    accountName
+    accountNumber
+    amountRemaining
+  }
+}
+    `;
+
+export function useAccountsQuery(options: Omit<Urql.UseQueryArgs<AccountsQueryVariables>, 'query'> = {}) {
+  return Urql.useQuery<AccountsQuery>({ query: AccountsDocument, ...options });
 };
 export const CartDocument = gql`
     query Cart($id: Int!) {

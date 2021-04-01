@@ -1,5 +1,5 @@
 import { cacheExchange, Cache } from "@urql/exchange-graphcache";
-import { BlankCartLineMutation, Cart, CartLine, CartsDocument, CartsQuery, DeleteCartLineMutationVariables, DeleteCartMutationVariables, LoginMutation, LogoutMutation, MeDocument, MeQuery, RegisterMutation, UpdateCartLineMutation, UpdateCartLineMutationVariables } from "@multi-cart/react-data-access";
+import { Account, BlankCartLineMutation, Cart, CartLine, CartsDocument, CartsQuery, DeleteCartLineMutationVariables, DeleteCartMutationVariables, LoginMutation, LogoutMutation, MeDocument, MeQuery, RegisterMutation, UpdateCartLineMutation, UpdateCartLineMutationVariables } from "@multi-cart/react-data-access";
 import { betterUpdateQuery } from "./betterUpdateQuery";
 
 const invalidateAllCarts = (cache: Cache) => {
@@ -12,6 +12,11 @@ const invalidateAllCarts = (cache: Cache) => {
 
 // thx: https://formidable.com/blog/2020/normalized-cache/
 export const cache = cacheExchange({
+
+    // NOTE: resolved error:  no key could be generated for the data at this field
+    keys: {
+        Account: data => (data as Account).accountNumber,
+    },
 
     resolvers: {
         Cart: {
