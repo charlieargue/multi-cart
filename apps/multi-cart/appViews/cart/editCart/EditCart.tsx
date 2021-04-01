@@ -137,8 +137,8 @@ export const EditCart: React.FC<{ id: number }> = ({ id }) => {
                         // TODO: switch to sort component, thx: https://stackoverflow.com/questions/48764203/how-to-sort-list-of-react-components-based-on-different-properties
                         <tbody>
                             {
-                                data.cart.cartLines?.sort((a, b) => a.id - b.id).map((line) => !line ? null : (
-                                    <CartLineRow key={line.id} line={line} >
+                                data.cart.cartLines?.sort((a, b) => a.id - b.id).map((line, idx) => !line ? null : (
+                                    <CartLineRow key={line.id} line={line} idx={idx}>
                                         <Alert variant="success" className={clsx(styles['edit-cart__line-account-container'], "mb-5 pb-0 d-flex justify-content-sm-between align-items-sm-baseline")}>
                                             <LineAccountButtonRow line={line} />
                                             {/* 🔴 TODO: flex-wrap only after 2 elements! */}

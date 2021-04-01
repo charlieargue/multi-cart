@@ -11,13 +11,14 @@ import styles from './CartLineRow.module.scss';
 
 interface CartLineRowProps {
     line: CartLine;
+    idx: number;
     children?: ReactElement;
 }
 
 // - thx:https://itnext.io/formik-introduction-autosave-react-19d4c15cfb90
 // - thx: https://github.com/benawad/lireddit/tree/master/web/src/pages/post/edit
 // - thx: https://gist.github.com/jaredpalmer/56e10cabe839747b84b81410839829be
-export const CartLineRow: React.FC<CartLineRowProps> = ({ line, children }: CartLineRowProps) => {
+export const CartLineRow: React.FC<CartLineRowProps> = ({ line, children, idx }: CartLineRowProps) => {
     const [, deleteCartLine] = useDeleteCartLineMutation();
     const [, updateCartLine] = useUpdateCartLineMutation();
     const initializing = useRef(true);
@@ -66,7 +67,7 @@ export const CartLineRow: React.FC<CartLineRowProps> = ({ line, children }: Cart
                     <tr >
                         <td className="pl-3">
                             <Badge variant="secondary" className="text-gray-light">
-                                {line.id}
+                                {idx + 1}
                             </Badge>
                         </td>
                         <td>
