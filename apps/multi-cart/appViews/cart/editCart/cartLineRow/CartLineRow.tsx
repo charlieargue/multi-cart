@@ -91,7 +91,7 @@ export const CartLineRow: React.FC<CartLineRowProps> = ({ line, children }: Cart
                             </Form>
 
                         </td>
-                        <td className="pt-3">
+                        <td className="pt-2">
                             <CategoriesDropDown />
                         </td>
 
@@ -136,7 +136,7 @@ export const CartLineRow: React.FC<CartLineRowProps> = ({ line, children }: Cart
                 )}
             </Formik>
             <tr>
-                <td colSpan={20} className="bg-warning">
+                <td colSpan={20}>
                     {children}
                 </td>
             </tr>

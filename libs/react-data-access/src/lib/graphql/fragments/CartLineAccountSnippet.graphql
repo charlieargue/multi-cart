@@ -1,0 +1,8 @@
+fragment CartLineAccountSnippet on CartLineAccount {
+  id
+  amount
+  accountNumber
+  cartLineId
+  createdAt
+  updatedAt
+}

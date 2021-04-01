@@ -16,6 +16,15 @@ export type Scalars = {
   Float: number;
 };
 
+export type Account = {
+  __typename?: 'Account';
+  accountNumber: Scalars['String'];
+  accountName: Scalars['String'];
+  amountRemaining: Scalars['Float'];
+  createdAt: Scalars['String'];
+  updatedAt: Scalars['String'];
+};
+
 export type Cart = {
   __typename?: 'Cart';
   id: Scalars['Float'];
@@ -38,6 +47,17 @@ export type CartLine = {
   price: Scalars['Float'];
   cartId: Scalars['Int'];
   cart?: Maybe<Cart>;
+  cartLineAccounts?: Maybe<Array<CartLineAccount>>;
+  createdAt: Scalars['String'];
+  updatedAt: Scalars['String'];
+};
+
+export type CartLineAccount = {
+  __typename?: 'CartLineAccount';
+  id: Scalars['Float'];
+  amount: Scalars['Float'];
+  accountNumber: Scalars['String'];
+  cartLineId: Scalars['Float'];
   createdAt: Scalars['String'];
   updatedAt: Scalars['String'];
 };
@@ -72,6 +92,7 @@ export type Mutation = {
   changePassword: UserResponse;
   logout: Scalars['Boolean'];
   updateUser: UserResponse;
+  addCartLineAccount: CartLineAccount;
 };
 
 
@@ -122,11 +143,19 @@ export type MutationUpdateUserArgs = {
   currentCartId: Scalars['Int'];
 };
 
+
+export type MutationAddCartLineAccountArgs = {
+  amount: Scalars['Float'];
+  accountNumber: Scalars['String'];
+  cartLineId: Scalars['Int'];
+};
+
 export type Query = {
   __typename?: 'Query';
   carts: Array<Cart>;
   cart?: Maybe<Cart>;
   me?: Maybe<User>;
+  accounts: Array<Account>;
 };
 
 
@@ -156,9 +185,18 @@ export type UsernamePasswordInput = {
   password: Scalars['String'];
 };
 
+export type CartLineAccountSnippetFragment = (
+  { __typename?: 'CartLineAccount' }
+  & Pick<CartLineAccount, 'id' | 'amount' | 'accountNumber' | 'cartLineId' | 'createdAt' | 'updatedAt'>
+);
+
 export type CartLineSnippetFragment = (
   { __typename?: 'CartLine' }
   & Pick<CartLine, 'id' | 'cartId' | 'itemId' | 'description' | 'categoryId' | 'uom' | 'quantity' | 'price' | 'createdAt' | 'updatedAt'>
+  & { cartLineAccounts?: Maybe<Array<(
+    { __typename?: 'CartLineAccount' }
+    & CartLineAccountSnippetFragment
+  )>> }
 );
 
 export type CartSnippetFragment = (
@@ -356,6 +394,16 @@ export type MeQuery = (
   )> }
 );
 
+export const CartLineAccountSnippetFragmentDoc = gql`
+    fragment CartLineAccountSnippet on CartLineAccount {
+  id
+  amount
+  accountNumber
+  cartLineId
+  createdAt
+  updatedAt
+}
+    `;
 export const CartLineSnippetFragmentDoc = gql`
     fragment CartLineSnippet on CartLine {
   id
@@ -366,10 +414,13 @@ export const CartLineSnippetFragmentDoc = gql`
   uom
   quantity
   price
+  cartLineAccounts {
+    ...CartLineAccountSnippet
+  }
   createdAt
   updatedAt
 }
-    `;
+    ${CartLineAccountSnippetFragmentDoc}`;
 export const CartSnippetFragmentDoc = gql`
     fragment CartSnippet on Cart {
   id
@@ -631,11 +682,13 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
-  Cart: ResolverTypeWrapper<Cart>;
-  Float: ResolverTypeWrapper<Scalars['Float']>;
+  Account: ResolverTypeWrapper<Account>;
   String: ResolverTypeWrapper<Scalars['String']>;
+  Float: ResolverTypeWrapper<Scalars['Float']>;
+  Cart: ResolverTypeWrapper<Cart>;
   Int: ResolverTypeWrapper<Scalars['Int']>;
   CartLine: ResolverTypeWrapper<CartLine>;
+  CartLineAccount: ResolverTypeWrapper<CartLineAccount>;
   CartLineInput: CartLineInput;
   FieldError: ResolverTypeWrapper<FieldError>;
   Mutation: ResolverTypeWrapper<{}>;
@@ -648,11 +701,13 @@ export type ResolversTypes = {
 
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
-  Cart: Cart;
-  Float: Scalars['Float'];
+  Account: Account;
   String: Scalars['String'];
+  Float: Scalars['Float'];
+  Cart: Cart;
   Int: Scalars['Int'];
   CartLine: CartLine;
+  CartLineAccount: CartLineAccount;
   CartLineInput: CartLineInput;
   FieldError: FieldError;
   Mutation: {};
@@ -661,6 +716,15 @@ export type ResolversParentTypes = {
   User: User;
   UserResponse: UserResponse;
   UsernamePasswordInput: UsernamePasswordInput;
+};
+
+export type AccountResolvers<ContextType = any, ParentType extends ResolversParentTypes['Account'] = ResolversParentTypes['Account']> = {
+  accountNumber?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  accountName?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  amountRemaining?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
+  createdAt?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  updatedAt?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type CartResolvers<ContextType = any, ParentType extends ResolversParentTypes['Cart'] = ResolversParentTypes['Cart']> = {
@@ -684,6 +748,17 @@ export type CartLineResolvers<ContextType = any, ParentType extends ResolversPar
   price?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
   cartId?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   cart?: Resolver<Maybe<ResolversTypes['Cart']>, ParentType, ContextType>;
+  cartLineAccounts?: Resolver<Maybe<Array<ResolversTypes['CartLineAccount']>>, ParentType, ContextType>;
+  createdAt?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  updatedAt?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type CartLineAccountResolvers<ContextType = any, ParentType extends ResolversParentTypes['CartLineAccount'] = ResolversParentTypes['CartLineAccount']> = {
+  id?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
+  amount?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
+  accountNumber?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  cartLineId?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
   createdAt?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   updatedAt?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
@@ -707,12 +782,14 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   changePassword?: Resolver<ResolversTypes['UserResponse'], ParentType, ContextType, RequireFields<MutationChangePasswordArgs, 'newPassword' | 'token'>>;
   logout?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   updateUser?: Resolver<ResolversTypes['UserResponse'], ParentType, ContextType, RequireFields<MutationUpdateUserArgs, 'currentCartId'>>;
+  addCartLineAccount?: Resolver<ResolversTypes['CartLineAccount'], ParentType, ContextType, RequireFields<MutationAddCartLineAccountArgs, 'amount' | 'accountNumber' | 'cartLineId'>>;
 };
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
   carts?: Resolver<Array<ResolversTypes['Cart']>, ParentType, ContextType>;
   cart?: Resolver<Maybe<ResolversTypes['Cart']>, ParentType, ContextType, RequireFields<QueryCartArgs, 'id'>>;
   me?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
+  accounts?: Resolver<Array<ResolversTypes['Account']>, ParentType, ContextType>;
 };
 
 export type UserResolvers<ContextType = any, ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']> = {
@@ -732,8 +809,10 @@ export type UserResponseResolvers<ContextType = any, ParentType extends Resolver
 };
 
 export type Resolvers<ContextType = any> = {
+  Account?: AccountResolvers<ContextType>;
   Cart?: CartResolvers<ContextType>;
   CartLine?: CartLineResolvers<ContextType>;
+  CartLineAccount?: CartLineAccountResolvers<ContextType>;
   FieldError?: FieldErrorResolvers<ContextType>;
   Mutation?: MutationResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;

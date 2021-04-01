@@ -7,6 +7,9 @@ fragment CartLineSnippet on CartLine {
   uom
   quantity
   price
+  cartLineAccounts {
+    ...CartLineAccountSnippet
+  }
   createdAt
   updatedAt
 }

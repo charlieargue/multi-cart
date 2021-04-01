@@ -1,16 +1,18 @@
-import { useBlankCartLineMutation, useCartQuery, useDeleteCartMutation, useUpdateUserMutation } from '@multi-cart/react-data-access';
+import { CartLine, useBlankCartLineMutation, useCartQuery, useDeleteCartMutation, useUpdateUserMutation } from '@multi-cart/react-data-access';
+import { LineAccount, LineAccountButtonRow } from '@multi-cart/react-shared-components';
+import { Breadcrumbs } from '@multi-cart/react-ui';
+import clsx from 'clsx';
 import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 import { Alert, Badge, Button, Col, Container, Row } from 'react-bootstrap';
 import { ExclamationCircleFill, PlusCircleFill, XSquareFill } from 'react-bootstrap-icons';
 import { AppLayout } from '../../_layout';
 import { CartLineRow } from './cartLineRow/CartLineRow';
-import { Breadcrumbs } from '@multi-cart/react-ui';
-import { LineAccountContainer } from '@multi-cart/react-shared-components';
+import styles from './EditCart.module.scss';
 
 
 // -------------------
-// 🛍 CART PAGE 
+// 🛍 EDIT CART PAGE 
 // -------------------
 
 export const EditCart: React.FC<{ id: number }> = ({ id }) => {
@@ -111,7 +113,7 @@ export const EditCart: React.FC<{ id: number }> = ({ id }) => {
             </Container>
 
             {/* 🛍 cart */}
-            <table className="table table-striped table-hover mt-2">
+            <table className="table table-borderless table-responsive-sm table-sm mt-2" id="cart-table">
                 <thead>
                     <tr className="text-muted">
                         <th className="pl-3">#</th>
@@ -137,11 +139,16 @@ export const EditCart: React.FC<{ id: number }> = ({ id }) => {
                             {
                                 data.cart.cartLines?.sort((a, b) => a.id - b.id).map((line) => !line ? null : (
                                     <CartLineRow key={line.id} line={line} >
-                                        <LineAccountContainer line={line}>
-                                            {/* {line.lineAccounts.map((la) => !la ? null : (
-                                                <LineAccount  key={la.id} />
-                                            ))} */}
-                                        </LineAccountContainer>
+                                        <Alert variant="success" className={clsx(styles['edit-cart__line-account-container'], "mb-5 pb-0 d-flex justify-content-sm-between align-items-sm-baseline")}>
+                                            <LineAccountButtonRow line={line} />
+                                            {/* 🔴 TODO: flex-wrap only after 2 elements! */}
+                                            <div className="d-flex justify-content-sm-end mt-2 flex-wrap" >
+                                                {/* {(line as CartLine)?.cartLineAccounts?.map((cla) => !cla ? null : ( */}
+                                                {[1, 2, 3, 4].map((cla) => !cla ? null : (
+                                                    <LineAccount key={cla.id} />
+                                                ))}
+                                            </div>
+                                        </Alert>
                                     </CartLineRow>
                                 ))
                             }

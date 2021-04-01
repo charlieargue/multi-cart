@@ -12,9 +12,7 @@ export default {
 // -------------------
 export const withDefaultState = () => {
   /* eslint-disable-next-line */
-  return (<Container fluid className="mx-0 px-0">
-    <Breadcrumbs /></Container>)
-    ;
+  return <Breadcrumbs />;
 };
 
 // -------------------
