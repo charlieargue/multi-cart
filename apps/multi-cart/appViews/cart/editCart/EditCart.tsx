@@ -16,6 +16,7 @@ import styles from './EditCart.module.scss';
 // -------------------
 
 export const EditCart: React.FC<{ id: number }> = ({ id }) => {
+
     const router = useRouter();
     const [{ data, error, fetching }] = useCartQuery({
         variables: {
@@ -145,7 +146,8 @@ export const EditCart: React.FC<{ id: number }> = ({ id }) => {
                                             <div className="d-flex justify-content-sm-end mt-2 flex-wrap" >
                                                 {/* {(line as CartLine)?.cartLineAccounts?.map((cla) => !cla ? null : ( */}
                                                 {[1, 2, 3, 4].map((cla) => !cla ? null : (
-                                                    <LineAccount key={cla.id} />
+                                                    // <LineAccount key={cla.id} />
+                                                    <LineAccount key={cla} />
                                                 ))}
                                             </div>
                                         </Alert>

@@ -1,4 +1,0 @@
-- [ ] TODO?: move these into the `--directory=multi-cart` folder structure
-        - ✔ YES: react-data-access (since only for multi-cart)
-        - react-shared-components (NO -- could be for non-multi-cart front-ends!)
-        - react-ui (NO -- could be for other front-ends!)

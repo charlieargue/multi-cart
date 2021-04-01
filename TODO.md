@@ -38,6 +38,9 @@ Agile/kanban board for multi-cart
   - [ ] BE:🛡 un-authed user cannot CRUD carts  
   - [ ] BE:🛡 user can only see their own carts  
   - [ ] BE:🛡 make these BE jest tests!  
+- [ ] gotta use dataloader to solve n+1 probem, see li-reddit; apparently AppSync makes this issue moot -- solves the n+1 problem! https://youtu.be/VnG7ej56lWw?t=745 
+- [ ] libs: make multi-cart directory, move all in there
+- [ ] libs: migrate over multi-cart/appViews/carts stuff over into react-shared-components (like line-account)
 - [ ] BE: DOCKERIZE POSGRES?! yes, so easily installable,.... unless you go serverless! But then hard to demo/install for s/o else, right?!  
 - [ ] Tsconfigs and base/extended/lib-VS-app versions, and how I set it up is confusing still!!! Needs work  
 - [ ] BE: ⚙️ AppSync: again, just after making 1 or two entities mac (cart, user), see if you can whip up an appsync backend on AWS real quick (terraform, etc…)  

@@ -1,4 +1,51 @@
+# 👍 Commands: 
 
+```js
+$ npm run dev
+
+# website: 
+# • http://localhost:3000/
+
+# graphiQL playground: 
+# • http://localhost:3000/api/graphql
+```
+
+
+# 🏃‍♂️ Running the Mocked-API
+
+Resources:
+- https://spectrum.chat/urql/help/how-can-i-use-urql-exchange-graphcache-with-next-js~9cb89fcf-1bda-489a-9e74-04aa8904fa7c
+
+
+# 👔 Forms
+
+Resource:
+- https://final-form.org/docs/react-final-form/examples/simple
+
+
+# ▲ Next Integration:
+
+## getInitialProps
+- https://nextjs.org/docs/api-reference/data-fetching/getInitialProps
+
+
+
+# ⚙ CodeGen
+
+Resources:
+- https://graphql-code-generator.com/docs/getting-started/index
+
+
+
+
+
+* * * * *
+* * * * *
+* * * * *
+* * * * *
+* * * * *
+* * * * *
+* * * * *
 
 # MultiCart
 
