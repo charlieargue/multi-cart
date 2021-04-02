@@ -18,8 +18,9 @@ export function LineAccountModal(props: LineAccountModalProps) {
   const [, addCartLineAccount] = useAddCartLineAccountMutation();
 
   const handleSelect = async (a: Account) => {
-    const remainingAmount = getRemainingAmount(props.line);
-    console.log("🚀 ~ remainingAmount", remainingAmount);
+    console.log("LineAccountModal 🚀 ~ props.line (SHOULD BE EMPTY CLAS!)", props.line);
+    const remainingAmount = getRemainingAmount(props.line); // NOTE: since props.line is updated super-fast, it already has the NEW CLA in there,  somehow??
+    console.log("LineAccountModal 🚀 ~ remainingAmount", remainingAmount);
 
     await addCartLineAccount({
       cartId: props.line.cartId,

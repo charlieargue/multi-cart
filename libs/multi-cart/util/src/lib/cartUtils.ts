@@ -53,6 +53,7 @@ export const getTotalAmounts = (lineAccounts: CartLineAccount[]): number => {
 
 // ------------------
 export const getRemainingPercentage = (line: CartLine /* w/ Line Accounts */): number => {
+    console.log("CART UTILS 🚀 ~ line", line);
     return 100 - getTotalPercentages(line);
 }
 
@@ -73,7 +74,7 @@ export const getTotalPercentages = (line: CartLine /* w/ Line Accounts */): numb
 export const computePercentage = (la: CartLineAccount, line: CartLine) => {
     const ltwt: number = getLineTotalWithTax(line.price, line.quantity, 0);
     if (ltwt === 0) {
-        return 0;
+        return 100;
     } else {
         return (la.amount / ltwt) * 100;
     }

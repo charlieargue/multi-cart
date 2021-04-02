@@ -54,6 +54,7 @@ Agile/kanban board for multi-cart
 ### 💪 Todo
 
   - [ ] olas: Good use case with those percentages: if they don't add up to 100%, then the CART AVATAR becomes red! (pure gql cache or is need UI state?)  
+  - [ ] olas: cant add the same account number twice, highlight+disable plz
 
 ### 🧠 In Progress
 

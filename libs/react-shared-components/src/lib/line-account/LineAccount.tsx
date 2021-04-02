@@ -1,4 +1,4 @@
-import { getRemainingPercentage, toFriendlyCurrency } from '@multi-cart/multi-cart/util';
+import { computePercentage, getRemainingPercentage, toFriendlyCurrency } from '@multi-cart/multi-cart/util';
 import { CartLine, CartLineAccount } from '@multi-cart/react-data-access';
 import { InputField } from '@multi-cart/react-ui';
 import { Form, Formik } from "formik";
@@ -18,13 +18,25 @@ const stylesGroup = { maxWidth: "400px" };
 
 // -------------------
 export const LineAccount: React.FC<LineAccountProps> = ({ lineAccount, line }) => {
-  const remainingPercentage = getRemainingPercentage(line);
-  console.log("🚀 ~ remainingPercentage", remainingPercentage);
+  function getAppropriatePercentage(line: CartLine) {
+    // IF only 1 LA (in case of just added, it'll be the newly-added one), then compute percentage
+    if (line.cartLineAccounts && line.cartLineAccounts.length === 1) {
+      return computePercentage(lineAccount, line);
+    }
+    // IF more than 1 LA, then getRemainingPercentage()
+    if (line.cartLineAccounts && line.cartLineAccounts.length > 1) {
+      return getRemainingPercentage(line);
+    }
+    return -1;
+
+  }
+  const percentage = getAppropriatePercentage(line);
+  console.log("LineAccount 🚀 ~ percentage", percentage);
 
   return (
     <Formik
       initialValues={{
-        percentage: remainingPercentage//  ✊ ✊ ✊ ✊ ✊ ✊ ✊ ✊ ✊ ✊ ✊ ✊ ✊ ✊ 
+        percentage//  ✊ ✊ ✊ ✊ ✊ ✊ ✊ ✊ ✊ ✊ ✊ ✊ ✊ ✊ 
       }}
       onSubmit={async (values) => {
         // don't over fire when Formik hydrates form

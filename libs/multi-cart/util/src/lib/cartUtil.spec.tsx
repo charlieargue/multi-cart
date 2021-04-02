@@ -82,12 +82,12 @@ describe('Cart Utils', () => {
     expect(result).toEqual(75);
   });
 
-  it.only('can get remaining percentages - 0', () => {
+  it('can get remaining percentages - 0', () => {
     const result = getRemainingPercentage(CL);
     expect(result).toEqual(100);
   });
 
-  it.only('can get remaining percentages - 25%', () => {
+  it('can get remaining percentages - 25%', () => {
     const ANOTHER_CLA = {
       "id": 113,
       "amount": 25.5,
@@ -107,6 +107,35 @@ describe('Cart Utils', () => {
 
     // expect
     expect(result).toEqual(25);
+  });
+
+  it.only('🐞 BUG FIX: getting wrong remaining percentage', () => {
+    const inputCartLine = {
+      "id": 665,
+      "cartId": 770,
+      "itemId": "",
+      "description": "",
+      "categoryId": 1,
+      "uom": "EACH",
+      "quantity": 1,
+      "price": 34,
+      "cartLineAccounts": [
+        {
+          "id": 118,
+          "amount": 34,
+          "accountNumber": "63187-063",
+          "cartLineId": 665,
+          "createdAt": "1617347606773",
+          "updatedAt": "1617347606773",
+          "__typename": "CartLineAccount"
+        }
+      ],
+      "createdAt": "1617347597465",
+      "updatedAt": "1617347604522",
+      "__typename": "CartLine"
+    } as CartLine;
+    const result = getRemainingPercentage(inputCartLine);
+    expect(result).toEqual(100);
   });
 
 
