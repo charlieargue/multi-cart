@@ -4,6 +4,7 @@ import React from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
 import { WalletFill } from 'react-bootstrap-icons';
 import { useAccountsQuery } from '@multi-cart/react-data-access';
+import { toFriendlyCurrency } from '@multi-cart/multi-cart/util';
 
 /* eslint-disable-next-line */
 export type LineAccountModalProps = {
@@ -16,7 +17,7 @@ export function LineAccountModal(props: LineAccountModalProps) {
   const [{ data, fetching }] = useAccountsQuery();
 
   return (
-    <ModalComponent onHide={props.onHide} show={props.show} >
+    <ModalComponent onHide={props.onHide} show={props.show} dialogClassName="modal-scroll-y">
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
           <WalletFill className="mr-2" style={{ marginTop: "-3px" }} />Choose a Line Account
@@ -50,7 +51,7 @@ export function LineAccountModal(props: LineAccountModalProps) {
                   <tr key={a.accountNumber}>
                     <td>{a.accountNumber}</td>
                     <td>{a.accountName}</td>
-                    <td>{a.amountRemaining}</td>
+                    <td>{toFriendlyCurrency(a.amountRemaining)}</td>
                   </tr>
                 ))}
               </tbody>

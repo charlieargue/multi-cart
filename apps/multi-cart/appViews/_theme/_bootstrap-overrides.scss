@@ -43,3 +43,8 @@
 #cart-table.table-sm td {
   padding-bottom: 0 !important;
 }
+
+.modal-scroll-y .modal-body {
+  max-height: 300px;
+  overflow-y: scroll;
+}

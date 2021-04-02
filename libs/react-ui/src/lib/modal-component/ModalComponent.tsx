@@ -8,6 +8,7 @@ export type ModalComponentProps = {
   children?: React.ReactNode;
   onHide?(): void;
   show?: boolean;
+  dialogClassName?: string;
 }
 
 // -------------------

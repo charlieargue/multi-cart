@@ -19,7 +19,8 @@
       "@multi-cart/react-shared-components": [
         "libs/react-shared-components/src/index.ts"
       ],
-      "@multi-cart/react-data-access": ["libs/react-data-access/src/index.ts"]
+      "@multi-cart/react-data-access": ["libs/react-data-access/src/index.ts"],
+      "@multi-cart/multi-cart/util": ["libs/multi-cart/util/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

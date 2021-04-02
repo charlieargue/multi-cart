@@ -5,7 +5,7 @@ import router, { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import { useChangePasswordMutation } from '@multi-cart/react-data-access';
 import { createUrqlClient } from '../../urql-customizations/createUrqlClient';
-import { toErrorMap } from '../../utils/toErrorMap';
+import { toErrorMap } from '@multi-cart/multi-cart/util';
 import NextLink from "next/link";
 import { Alert, Button } from 'react-bootstrap';
 import { Box, Link } from 'react-bootstrap-icons';

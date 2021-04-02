@@ -5,5 +5,6 @@ module.exports = {
     '<rootDir>/libs/react-shared-components',
     '<rootDir>/libs/react-data-access',
     '<rootDir>/apps/multi-cart-api',
+    '<rootDir>/libs/multi-cart/util',
   ],
 };

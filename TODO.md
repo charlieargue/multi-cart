@@ -4,6 +4,7 @@ Agile/kanban board for multi-cart
 
 ### 📘 Backlog
 
+- [ ] put all utils into react-utils, and make sure all currency is using the same toNiceCurrency() util!
 - [ ] There’s ZERO error handling on login, add some toasts please! (maybe with 🇵🇱 urql interceptor / toast container)  
 - [ ] change/forgot password/login/register need work/checking (token works, nodemailer?)  
 - [ ] make cart name clickable and editable 
@@ -14,7 +15,7 @@ Agile/kanban board for multi-cart
   - [ ] store: Make a new shop page  
   - [ ] store: Have two modes: Condenscned table view & Bigger thumbnail view  
   - [ ] store: Paging! Must use paging! Sorry :)  
-  - [ ] store: Click product -> product details (SSR these pages!)  
+  - [ ] store: Click products -> product details (SSR these pages!) - PRODUCTS PAGE: https://getbootstrap.com/docs/5.0/examples/album/# -> https://getbootstrap.com/docs/5.0/examples/product/ + https://getbootstrap.com/docs/5.0/examples/jumbotron/ & maybe https://getbootstrap.com/docs/5.0/examples/starter-template/ & maybe https://getbootstrap.com/docs/5.0/examples/features/
   - [ ] store: And these pages are public! Don’t need to be authed to see them!  
   - [ ] store: But if you are authed You get BUY NOW buttons! (both on store and details views)  
   - [ ] store: BUY NOW: It goes into your current cart 🔴 What if you don’t have a current cart !!!  
@@ -25,11 +26,13 @@ Agile/kanban board for multi-cart
 - [ ] fix those LINT warnings (multi-cart)  
 - [ ] PRETTIER: get those attributes breaking in JSX!  
 - [ ] isOpen/Closed for carts avatar dropdown: 1) useContext, then 2) try zustand  
-- [ ] UI: make a drawer and remember settings by using 2) zustand, or switch to 3) redux  
+- [ ] UI: make a drawer and remember settings with either 2) zustand, or 3) redux, or 1) context (use UI: https://getbootstrap.com/docs/5.0/examples/sidebars/#)  
+- [ ] UI: I want this 2nd-ary nav for breadcrumbs! https://getbootstrap.com/docs/5.0/examples/offcanvas-navbar/ (and no more gray alert box)
 - [ ] Add user profile w/ Upload image! Copy 🇵🇱 multi-part upload  
 - [ ] urql assume success! (optimistic API calls!) see 🇵🇱  
 - [ ] HAND=OFF: good tricky flow! plus good broadcasting with SOCKET.IO or just gql? SEE BEN's google-docs-CLONE w/ socket.io  
 - [ ] must invalidate all posts / cache upon login (and elsewhere!)  see BEN 11:43:20 invalitedAllPosts()  
+- [ ] would be nice to have a way to add an account # (from some other account), and it be broadcast to all clients, so that it's automatically available to all current users!
 - [ ] 🐞 When you delete a user’s current cart, what then? Set the next one, or what if they don’t have one?  
 - [ ] MOCK: Bring back / update mocked api (see doc notes)  
 - [ ] check what/if-anything PLOP offers 🇵🇱 that NX isn't providing  

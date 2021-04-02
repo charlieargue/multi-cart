@@ -34,6 +34,7 @@
     "react-shared-components-e2e": {
       "tags": [],
       "implicitDependencies": ["react-shared-components"]
-    }
+    },
+    "multi-cart-util": { "tags": [] }
   }
 }

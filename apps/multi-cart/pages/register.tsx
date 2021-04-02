@@ -6,7 +6,7 @@ import { Button } from 'react-bootstrap';
 import { useRegisterMutation } from '@multi-cart/react-data-access';
 import { InputField, Wrapper } from '@multi-cart/react-ui';
 import { createUrqlClient } from '../urql-customizations/createUrqlClient';
-import { toErrorMap } from '../utils/toErrorMap';
+import { toErrorMap } from '@multi-cart/multi-cart/util';
 
 
 /* eslint-disable-next-line */

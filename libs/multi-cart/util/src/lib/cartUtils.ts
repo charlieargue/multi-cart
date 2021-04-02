@@ -1,4 +1,4 @@
-import { Cart } from "../generated/resolvers-types";
+import { Cart } from "@multi-cart/react-data-access";
 
 
 export const sumTotalItems = (cart?: Cart): number | any => {
