@@ -50,6 +50,7 @@ Agile/kanban board for multi-cart
 - [ ] BE: ⚙️ AppSync: again, just after making 1 or two entities mac (cart, user), see if you can whip up an appsync backend on AWS real quick (terraform, etc…)  
 - [ ] print out POSGRES basics  
 - [ ] I'd like to implement cloneRecalcAndSaveCostCenters and see the DIFFERENT (ng vs react)
+- [ ] 🐞 🔴 ERROR - memory leak - perform a React state update on an unmounted component (see DESKTOP pic) - maybe when quickly deleted CartLine when still autosaving from new CLA?
 
 ### 💪 Todo
 
