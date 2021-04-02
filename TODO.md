@@ -49,7 +49,7 @@ Agile/kanban board for multi-cart
 - [ ] Tsconfigs and base/extended/lib-VS-app versions, and how I set it up is confusing still!!! Needs work  
 - [ ] BE: ⚙️ AppSync: again, just after making 1 or two entities mac (cart, user), see if you can whip up an appsync backend on AWS real quick (terraform, etc…)  
 - [ ] print out POSGRES basics  
-- [ ] I'd like to implement `cloneRecalcAndSaveCostCenters` and see the DIFFERENT (ng vs react)
+- [ ] I'd like to implement cloneRecalcAndSaveCostCenters and see the DIFFERENT (ng vs react)
 
 ### 💪 Todo
 

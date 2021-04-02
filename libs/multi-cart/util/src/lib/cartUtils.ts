@@ -80,4 +80,17 @@ export const computePercentage = (la: CartLineAccount, line: CartLine) => {
     }
 }
 
+// ------------------------ TODO: jest test this
+export const getAppropriatePercentage = (la: CartLineAccount, line: CartLine) => {
+    // IF only 1 LA (in case of just added, it'll be the newly-added one), then compute percentage
+    if (line.cartLineAccounts && line.cartLineAccounts.length === 1) {
+        return computePercentage(la, line);
+    }
+    // IF more than 1 LA, then getRemainingPercentage()
+    if (line.cartLineAccounts && line.cartLineAccounts.length > 1) {
+        return getRemainingPercentage(line);
+    }
+    return -1;
+}
+
 
