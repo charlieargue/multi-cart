@@ -1,6 +1,6 @@
 import { Cart, CartLine, CartLineAccount } from "@multi-cart/react-data-access";
 
-
+// ------------------------
 export const sumTotalItems = (cart?: Cart): number | any => {
     if (cart && cart.cartLines) {
         return cart.cartLines.reduce((sum, cl) => {
@@ -26,11 +26,30 @@ export const sumTotalCost = (cart?: Cart): number => {
     return 0;
 };
 
+// ------------------------
+/*
+computePercentage = () => {
+    
+    
+    // IF first
+    result._percentage = this.getRemainingPercentage();
 
-// ------------------
-// export const getRemainingPercentage = (): number => {
-//     return 100 - this.ocs.getTotalPercentages(this.oCacheService.getCachedOlas(this.orderLineId, this.orderType));
-// }
+
+    // OR
+
+
+    const ltwt: number = this.getLineTotalWithTax(line.price, line.quantity, line.tax);
+    if (ltwt === 0) {
+        ola._percentage = 0; // TBD: what to do in this case, zero amount, X number of OLAs...
+    } else {
+        const rawPercentage: number = (ola.amount / ltwt) * 100;
+
+
+}
+
+
+
+*/
 
 // ------------------
 export const getRemainingAmount = (line: CartLine): number => {
@@ -56,15 +75,17 @@ export const getTotalAmounts = (lineAccounts: CartLineAccount[]): number => {
         .reduce((prev, curr) => prev + curr, 0);
 }
 
+// ------------------
+// export const getRemainingPercentage = (): number => {
+//     return 100 - this.ocs.getTotalPercentages(this.oCacheService.getCachedOlas(this.orderLineId, this.orderType));
+// }
+
 // // ------------------
-// getTotalPercentages = (orderLineAccounts: OrderLineAccount[]): number => {
-//     if (!orderLineAccounts) {
+// export const getTotalPercentages = (lineAccounts: CartLineAccount[]): number => {
+//     if (!lineAccounts) {
 //         return 0;
 //     }
-//     // just sum the percentages and make sure they equal?
-//     const totalPercantages =
-//         orderLineAccounts
-//             .map((ola: OrderLineAccount) => ola._percentage)
-//             .reduce((prev, curr) => prev + curr, 0);
-//     return this.us.safelyRound(totalPercantages);
+//     return lineAccounts
+//         .map((la: CartLineAccount) => la._percentage)
+//         .reduce((prev, curr) => prev + curr, 0);
 // }

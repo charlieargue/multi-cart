@@ -28,6 +28,7 @@ Agile/kanban board for multi-cart
 - [ ] isOpen/Closed for carts avatar dropdown: 1) useContext, then 2) try zustand  
 - [ ] UI: make a drawer and remember settings with either 2) zustand, or 3) redux, or 1) context (use UI: https://getbootstrap.com/docs/5.0/examples/sidebars/#)  
 - [ ] UI: I want this 2nd-ary nav for breadcrumbs! https://getbootstrap.com/docs/5.0/examples/offcanvas-navbar/ (and no more gray alert box)
+- [ ] UI: good thing to work on would be ability to collapse ALL/one-at-a-time the Line-Accounts (or just toggle on/off) and then SAVE that to state somewhere (but NOT persist), so you can navigate around and always see your cart collapsed/expanded (like ClickUp did)
 - [ ] Add user profile w/ Upload image! Copy 🇵🇱 multi-part upload  
 - [ ] urql assume success! (optimistic API calls!) see 🇵🇱  and https://github.com/FormidableLabs/urql/issues/863
 - [ ] HAND=OFF: good tricky flow! plus good broadcasting with SOCKET.IO or just gql? SEE BEN's google-docs-CLONE w/ socket.io  
@@ -48,6 +49,7 @@ Agile/kanban board for multi-cart
 - [ ] Tsconfigs and base/extended/lib-VS-app versions, and how I set it up is confusing still!!! Needs work  
 - [ ] BE: ⚙️ AppSync: again, just after making 1 or two entities mac (cart, user), see if you can whip up an appsync backend on AWS real quick (terraform, etc…)  
 - [ ] print out POSGRES basics  
+- [ ] I'd like to implement `cloneRecalcAndSaveCostCenters` and see the DIFFERENT (ng vs react)
 
 ### 💪 Todo
 

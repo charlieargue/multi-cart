@@ -176,7 +176,9 @@ export class CartResolver {
     @UseMiddleware(isAuth) // 🛡
     async updateCartLine(
         @Arg('cartLine', () => CartLineInput) cartLine: CartLineInput,
-    ): Promise<CartLine | Error | null> {
+    ): Promise<CartLine | Error | undefined> {
+
+        // TODO: security checks, and check each one here!!!
 
         const { raw } = await getConnection()
             .createQueryBuilder()
@@ -189,7 +191,35 @@ export class CartResolver {
             })
             .returning("*")
             .execute();
-        return raw[0];
+
+        // NEED THIS: .leftJoinAndSelect("cart_line.cartLineAccounts", "cart_line_account")
+        // OR THIS: .relation(CartLineAccount, "cartLineAccounts")
+        /// BUT DON'T WORK WITH UPDATE!!!?? afaik...
+        // .returning() ??? 
+
+        // console.log('🤖🤖🤖 raw[0] 🤖🤖🤖 ');
+        // console.log(JSON.stringify(raw[0], null, '  '));
+        // {
+        //     "id": 654,
+        //     "itemId": "dupa",
+        //     "description": "dupa",
+        //     "uom": "EACH",
+        //     "quantity": 1,
+        //     "categoryId": 1,
+        //     "cartId": 770,
+        //     "createdAt": "2021-04-02T05:19:19.668Z",
+        //     "updatedAt": "2021-04-02T05:25:14.464Z",
+        //     "price": 0
+        //   }
+
+        // NOTE: needed to return cartLine.cartLineAccounts hydrated, but not sure how to do it in one query builder call
+        const qb = getConnection()
+            .getRepository(CartLine)
+            .createQueryBuilder("cl")
+            .leftJoinAndSelect("cl.cartLineAccounts", "cart_line_account")
+            // .orderBy("c.createdAt", "DESC")
+            .where("cl.id = :id", { id: raw[0].id });
+        return qb.getOne();
     }
 
 }

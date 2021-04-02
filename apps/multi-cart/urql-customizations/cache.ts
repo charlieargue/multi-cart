@@ -88,25 +88,28 @@ export const cache = cacheExchange({
 
 
             // ------------------------
-            // updateCartLine: (result, args, cache, info) => {
-            //     // GAMEPLAN: find the cart in the cache data.carts
-            //     // find the cart line in it
-            //     // replace cart.cartLines with all old EXCEPT the UPDATED ONE
-            //     cache.updateQuery({ query: CartsDocument }, (data: CartsQuery | null) => {
-            //         console.log("🚀 ~ data", data);
-            //         const foundCachedCart = (data as any).carts
-            //             .find((c: Cart) => c.id === (args as UpdateCartLineMutationVariables).cartLine.cartId);
-            //         if (!foundCachedCart) {
-            //             throw new Error("🔴 did not find cached cart");
-            //         }
-            //         foundCachedCart.cartLines = foundCachedCart.cartLines
-            //             .map((cl: CartLine) => cl.id === (args as UpdateCartLineMutationVariables).cartLine.id ? (result as UpdateCartLineMutation).updateCartLine : cl);
-            //         return data;
-            //     });
-            // },
+            updateCartLine: (result, args, cache, info) => {
+                // GAMEPLAN: find the cart in the cache data.carts
+                // find the cart line in it
+                // replace cart.cartLines with all old EXCEPT the UPDATED ONE
+                cache.updateQuery({ query: CartsDocument }, (data: CartsQuery | null) => {
+                    console.log("🚀 ~ data", data);
+                    console.log("🚀 ~ (result as UpdateCartLineMutation).updateCartLine", (result as UpdateCartLineMutation).updateCartLine);
+                    const foundCachedCart = (data as any).carts
+                        .find((c: Cart) => c.id === (args as UpdateCartLineMutationVariables).cartLine.cartId);
+                    if (!foundCachedCart) {
+                        throw new Error("🔴 did not find cached cart");
+                    }
+                    foundCachedCart.cartLines = foundCachedCart.cartLines
+                        .map((cl: CartLine) => cl.id === (args as UpdateCartLineMutationVariables).cartLine.id ?
+                            (result as UpdateCartLineMutation).updateCartLine :
+                            cl);
+                    return data;
+                });
+            },
 
             addCartLineAccount: (result, args, cache, info) => {
-                
+
                 // PLURAL
                 // ------------------------
                 // NOTE: this needs to update the CARTS query, but CONFUSION: because this happens on the EDIT CART page?
