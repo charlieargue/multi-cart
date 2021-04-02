@@ -7,6 +7,7 @@ import { CartLineAccount } from '../entities/CartLineAccount';
 import { isAuth } from '../middleware/isAuth';
 import { MyContext } from '../types';
 
+
 @Resolver(Account)
 export class AccountResolver {
 
@@ -24,6 +25,7 @@ export class AccountResolver {
     @Mutation(() => CartLineAccount)
     @UseMiddleware(isAuth) // 🛡
     async addCartLineAccount(
+        @Arg('cartId', () => Int) _: number, // NOTE: this is needed during graph cache update
         @Arg('cartLineId', () => Int) cartLineId: number,
         @Arg('accountNumber', () => String) accountNumber: string,
         @Arg('amount', () => Float) amount: number,

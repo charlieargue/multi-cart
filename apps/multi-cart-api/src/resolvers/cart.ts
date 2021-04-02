@@ -58,7 +58,7 @@ export class CartResolver {
     cart(
         @Arg("id", () => Int) id: number,
         @Ctx() { req }: MyContext
-        ): Promise<Cart | undefined> {
+    ): Promise<Cart | undefined> {
         const qb = getConnection()
             .getRepository(Cart)
             .createQueryBuilder("c")
@@ -135,9 +135,14 @@ export class CartResolver {
     @UseMiddleware(isAuth) // 🛡
     async deleteCart(
         @Arg('id', () => Int) id: number,
+        @Ctx() { req }: MyContext
     ): Promise<boolean> {
         // TODO: add security on all these deletes/updates (that only owner of cart can do so!)
-        // cascade cartlines is ON!
+
+        // TODO: need to set user.currentCartId = null since there's an FK there!
+
+
+        // cascade cartlines & cartLineAccounts is ON!
         await getConnection()
             .createQueryBuilder()
             .delete()

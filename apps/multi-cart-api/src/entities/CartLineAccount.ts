@@ -33,14 +33,16 @@ export class CartLineAccount extends BaseEntity {
 
     // ASSOCIATIONS (only @manyToOne, no inverse @oneToMany needed on outer entities)
     // ------------------------
-    // @Field(() => Account) // WHY gql?
+    // NO: @Field(() => Account) // WHY gql?
     @ManyToOne(() => Account) // NOTE: these can be one-sided, unlike @OneToMany
     account: Account;
 
 
-    // @Field(() => CartLine)
-    @ManyToOne(() => CartLine)
-    cartLine : CartLine;
+    // NO: @Field(() => CartLine)
+    @ManyToOne(() => CartLine, {
+        onDelete: "CASCADE",
+    })
+    cartLine: CartLine;
 
 
     // timestamps

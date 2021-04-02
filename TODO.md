@@ -29,11 +29,11 @@ Agile/kanban board for multi-cart
 - [ ] UI: make a drawer and remember settings with either 2) zustand, or 3) redux, or 1) context (use UI: https://getbootstrap.com/docs/5.0/examples/sidebars/#)  
 - [ ] UI: I want this 2nd-ary nav for breadcrumbs! https://getbootstrap.com/docs/5.0/examples/offcanvas-navbar/ (and no more gray alert box)
 - [ ] Add user profile w/ Upload image! Copy 🇵🇱 multi-part upload  
-- [ ] urql assume success! (optimistic API calls!) see 🇵🇱  
+- [ ] urql assume success! (optimistic API calls!) see 🇵🇱  and https://github.com/FormidableLabs/urql/issues/863
 - [ ] HAND=OFF: good tricky flow! plus good broadcasting with SOCKET.IO or just gql? SEE BEN's google-docs-CLONE w/ socket.io  
 - [ ] must invalidate all posts / cache upon login (and elsewhere!)  see BEN 11:43:20 invalitedAllPosts()  
 - [ ] would be nice to have a way to add an account # (from some other account), and it be broadcast to all clients, so that it's automatically available to all current users!
-- [ ] 🐞 When you delete a user’s current cart, what then? Set the next one, or what if they don’t have one?  
+- [ ] 🐞 When you delete a user’s current cart, SET User.currentCartId to null FIRST? Set the next one, or what if they don’t have one?  And graphe-cache has to update the Me query during deleteCart !!! if user.currentCartId is changed! that'll update the avatar
 - [ ] MOCK: Bring back / update mocked api (see doc notes)  
 - [ ] check what/if-anything PLOP offers 🇵🇱 that NX isn't providing  
 - [ ] BE: jest test login!  

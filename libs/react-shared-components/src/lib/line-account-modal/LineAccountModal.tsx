@@ -1,20 +1,35 @@
 // import './LineAccountModal.module.scss';
+import { getRemainingAmount, toFriendlyCurrency } from '@multi-cart/multi-cart/util';
+import { Account, CartLine, useAccountsQuery, useAddCartLineAccountMutation } from '@multi-cart/react-data-access';
 import { ModalComponent, ModalComponentProps } from '@multi-cart/react-ui';
 import React from 'react';
-import { Modal, Button, Form } from 'react-bootstrap';
+import { Button, Form, Modal, Table } from 'react-bootstrap';
 import { WalletFill } from 'react-bootstrap-icons';
-import { useAccountsQuery } from '@multi-cart/react-data-access';
-import { toFriendlyCurrency } from '@multi-cart/multi-cart/util';
 
 /* eslint-disable-next-line */
 export type LineAccountModalProps = {
-
+  line: CartLine
 } & ModalComponentProps;
 
 // -------------------
 // thx: https://react-bootstrap.github.io/components/modal/
 export function LineAccountModal(props: LineAccountModalProps) {
   const [{ data, fetching }] = useAccountsQuery();
+  const [, addCartLineAccount] = useAddCartLineAccountMutation();
+
+  const handleSelect = async (a: Account) => {
+    const remainingAmount = getRemainingAmount(props.line);
+    console.log("🚀 ~ remainingAmount", remainingAmount);
+
+    await addCartLineAccount({
+      cartId: props.line.cartId,
+      cartLineId: props.line.id,
+      accountNumber: a.accountNumber,
+      amount: remainingAmount,
+    });
+    // TODO:  cache will auto-refresh so behind modal will already show newest CLA
+    props.onHide();
+  };
 
   return (
     <ModalComponent onHide={props.onHide} show={props.show} dialogClassName="modal-scroll-y">
@@ -38,7 +53,7 @@ export function LineAccountModal(props: LineAccountModalProps) {
         {/* RESULTS TABLE */}
         {
           !data && fetching ? (<div>loading...</div>) : (
-            <table className="table table-striped table-responsive-sm table-sm mt-2">
+            <Table striped hover responsive size="sm" className="mt-2">
               <thead>
                 <tr className="text-muted">
                   <th>Account #</th>
@@ -48,14 +63,14 @@ export function LineAccountModal(props: LineAccountModalProps) {
               </thead>
               <tbody>
                 {data?.accounts?.map((a, idx) => !a ? null : (
-                  <tr key={a.accountNumber}>
+                  <tr key={a.accountNumber} className="cursor-hand" onClick={() => handleSelect(a as Account)}>
                     <td>{a.accountNumber}</td>
                     <td>{a.accountName}</td>
                     <td>{toFriendlyCurrency(a.amountRemaining)}</td>
                   </tr>
                 ))}
               </tbody>
-            </table>
+            </Table>
           )}
 
 

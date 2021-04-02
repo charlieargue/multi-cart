@@ -1,4 +1,4 @@
-import { useBlankCartLineMutation, useCartQuery, useDeleteCartMutation, useUpdateUserMutation } from '@multi-cart/react-data-access';
+import { CartLine, useBlankCartLineMutation, useCartQuery, useDeleteCartMutation, useUpdateUserMutation } from '@multi-cart/react-data-access';
 import { LineAccount, LineAccountButtonRow } from '@multi-cart/react-shared-components';
 import { Breadcrumbs } from '@multi-cart/react-ui';
 import clsx from 'clsx';
@@ -140,14 +140,12 @@ export const EditCart: React.FC<{ id: number }> = ({ id }) => {
                             {
                                 data.cart.cartLines?.sort((a, b) => a.id - b.id).map((line, idx) => !line ? null : (
                                     <CartLineRow key={line.id} line={line} idx={idx}>
-                                        <Alert variant="success" className={clsx(styles['edit-cart__line-account-container'], "mb-5 pb-0 d-flex justify-content-sm-between align-items-sm-baseline")}>
+                                        <Alert variant="success" className={clsx(styles['edit-cart__line-account-container'], "mb-5 pb-3 d-flex justify-content-sm-between align-items-sm-baseline")}>
                                             <LineAccountButtonRow line={line} />
                                             {/* 🔴 TODO: flex-wrap only after 2 elements! */}
                                             <div className="d-flex justify-content-sm-end mt-2 flex-wrap" >
-                                                {/* {(line as CartLine)?.cartLineAccounts?.map((cla) => !cla ? null : ( */}
-                                                {[1, 2, 3, 4].map((cla) => !cla ? null : (
-                                                    // <LineAccount key={cla.id} />
-                                                    <LineAccount key={cla} />
+                                                {(line as CartLine)?.cartLineAccounts?.map((cla) => !cla ? null : (
+                                                    <LineAccount key={cla.id} />
                                                 ))}
                                             </div>
                                         </Alert>

@@ -148,6 +148,7 @@ export type MutationAddCartLineAccountArgs = {
   amount: Scalars['Float'];
   accountNumber: Scalars['String'];
   cartLineId: Scalars['Int'];
+  cartId: Scalars['Int'];
 };
 
 export type Query = {
@@ -271,6 +272,22 @@ export type RegisterMutation = (
   & { register: (
     { __typename?: 'UserResponse' }
     & RegularUserResponseFragment
+  ) }
+);
+
+export type AddCartLineAccountMutationVariables = Exact<{
+  cartId: Scalars['Int'];
+  cartLineId: Scalars['Int'];
+  accountNumber: Scalars['String'];
+  amount: Scalars['Float'];
+}>;
+
+
+export type AddCartLineAccountMutation = (
+  { __typename?: 'Mutation' }
+  & { addCartLineAccount: (
+    { __typename?: 'CartLineAccount' }
+    & Pick<CartLineAccount, 'id' | 'amount' | 'accountNumber' | 'cartLineId'>
   ) }
 );
 
@@ -508,6 +525,25 @@ export const RegisterDocument = gql`
 
 export function useRegisterMutation() {
   return Urql.useMutation<RegisterMutation, RegisterMutationVariables>(RegisterDocument);
+};
+export const AddCartLineAccountDocument = gql`
+    mutation AddCartLineAccount($cartId: Int!, $cartLineId: Int!, $accountNumber: String!, $amount: Float!) {
+  addCartLineAccount(
+    cartId: $cartId
+    cartLineId: $cartLineId
+    accountNumber: $accountNumber
+    amount: $amount
+  ) {
+    id
+    amount
+    accountNumber
+    cartLineId
+  }
+}
+    `;
+
+export function useAddCartLineAccountMutation() {
+  return Urql.useMutation<AddCartLineAccountMutation, AddCartLineAccountMutationVariables>(AddCartLineAccountDocument);
 };
 export const BlankCartDocument = gql`
     mutation BlankCart {
@@ -806,7 +842,7 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   changePassword?: Resolver<ResolversTypes['UserResponse'], ParentType, ContextType, RequireFields<MutationChangePasswordArgs, 'newPassword' | 'token'>>;
   logout?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   updateUser?: Resolver<ResolversTypes['UserResponse'], ParentType, ContextType, RequireFields<MutationUpdateUserArgs, 'currentCartId'>>;
-  addCartLineAccount?: Resolver<ResolversTypes['CartLineAccount'], ParentType, ContextType, RequireFields<MutationAddCartLineAccountArgs, 'amount' | 'accountNumber' | 'cartLineId'>>;
+  addCartLineAccount?: Resolver<ResolversTypes['CartLineAccount'], ParentType, ContextType, RequireFields<MutationAddCartLineAccountArgs, 'amount' | 'accountNumber' | 'cartLineId' | 'cartId'>>;
 };
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {

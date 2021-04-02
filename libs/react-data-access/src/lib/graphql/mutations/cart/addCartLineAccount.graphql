@@ -1,0 +1,18 @@
+mutation AddCartLineAccount(
+  $cartId: Int!
+  $cartLineId: Int!
+  $accountNumber: String!
+  $amount: Float!
+) {
+  addCartLineAccount(
+    cartId: $cartId
+    cartLineId: $cartLineId
+    accountNumber: $accountNumber
+    amount: $amount
+  ) {
+    id
+    amount
+    accountNumber
+    cartLineId
+  }
+}
