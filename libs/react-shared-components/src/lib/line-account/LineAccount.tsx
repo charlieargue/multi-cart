@@ -1,26 +1,30 @@
-import React from 'react';
-import { Badge, FormControl, InputGroup } from 'react-bootstrap';
-import { X } from 'react-bootstrap-icons';
-import { CartLineAccount } from '@multi-cart/react-data-access';
-import { Form, Formik } from "formik";
+import { getRemainingPercentage, toFriendlyCurrency } from '@multi-cart/multi-cart/util';
+import { CartLine, CartLineAccount } from '@multi-cart/react-data-access';
 import { InputField } from '@multi-cart/react-ui';
+import { Form, Formik } from "formik";
+import React from 'react';
+import { Badge, InputGroup } from 'react-bootstrap';
+import { X } from 'react-bootstrap-icons';
 // import './LineAccount.module.scss';
 
 /* eslint-disable-next-line */
 export interface LineAccountProps {
-  lineAccount: CartLineAccount
+  lineAccount: CartLineAccount;
+  line: CartLine;
 }
 
 // TODO: once figure out cssModules issue, move these styles into scss properly
 const stylesGroup = { maxWidth: "400px" };
 
 // -------------------
-export const LineAccount: React.FC<LineAccountProps> = ({ lineAccount }) => {
+export const LineAccount: React.FC<LineAccountProps> = ({ lineAccount, line }) => {
+  const remainingPercentage = getRemainingPercentage(line);
+  console.log("🚀 ~ remainingPercentage", remainingPercentage);
 
   return (
     <Formik
       initialValues={{
-        percentage: lineAccount.amount
+        percentage: remainingPercentage//  ✊ ✊ ✊ ✊ ✊ ✊ ✊ ✊ ✊ ✊ ✊ ✊ ✊ ✊ 
       }}
       onSubmit={async (values) => {
         // don't over fire when Formik hydrates form
@@ -31,24 +35,12 @@ export const LineAccount: React.FC<LineAccountProps> = ({ lineAccount }) => {
             <InputGroup.Prepend>
               <InputGroup.Text>
                 <strong>#</strong> {lineAccount.accountNumber}
-                <Badge style={{ backgroundColor: "#ccc" }} variant="success" className="ml-2 px-2 py-1 fw-light text-reset">$13.99</Badge>
+                <Badge style={{ backgroundColor: "#ccc" }} variant="success" className="ml-2 px-2 py-1 fw-light text-reset">{toFriendlyCurrency(lineAccount.amount)}</Badge>
                 <X size={18} className="text-danger fw-bold align-text-bottom ml-1 cursor-hand" />
               </InputGroup.Text>
             </InputGroup.Prepend>
 
-            {/* no INPUT FIELD, raw FormControl */}
-            {/* DECOMISH / BUGGY: was read-only for some reason, but onChange was firing...
-            
-            <FormControl
-              type="text"
-              aria-label="percentage"
-              name="percentage"
-              id="percentage"
-              value={values.percentage}
-              onChange={() => {
-                console.log('change');
-              }}
-            /> */}
+            {/* unwrapped INPUT FIELD */}
             <InputField
               type="text"
               aria-label="percentage"

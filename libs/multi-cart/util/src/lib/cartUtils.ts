@@ -26,30 +26,6 @@ export const sumTotalCost = (cart?: Cart): number => {
     return 0;
 };
 
-// ------------------------
-/*
-computePercentage = () => {
-    
-    
-    // IF first
-    result._percentage = this.getRemainingPercentage();
-
-
-    // OR
-
-
-    const ltwt: number = this.getLineTotalWithTax(line.price, line.quantity, line.tax);
-    if (ltwt === 0) {
-        ola._percentage = 0; // TBD: what to do in this case, zero amount, X number of OLAs...
-    } else {
-        const rawPercentage: number = (ola.amount / ltwt) * 100;
-
-
-}
-
-
-
-*/
 
 // ------------------
 export const getRemainingAmount = (line: CartLine): number => {
@@ -76,16 +52,67 @@ export const getTotalAmounts = (lineAccounts: CartLineAccount[]): number => {
 }
 
 // ------------------
-// export const getRemainingPercentage = (): number => {
-//     return 100 - this.ocs.getTotalPercentages(this.oCacheService.getCachedOlas(this.orderLineId, this.orderType));
-// }
+export const getRemainingPercentage = (line: CartLine /* w/ Line Accounts */): number => {
+    return 100 - getTotalPercentages(line);
+}
 
-// // ------------------
-// export const getTotalPercentages = (lineAccounts: CartLineAccount[]): number => {
-//     if (!lineAccounts) {
-//         return 0;
-//     }
-//     return lineAccounts
-//         .map((la: CartLineAccount) => la._percentage)
-//         .reduce((prev, curr) => prev + curr, 0);
-// }
+// ------------------
+export const getTotalPercentages = (line: CartLine /* w/ Line Accounts */): number => {
+    if (!line.cartLineAccounts) {
+        return 0;
+    }
+    const result = line.cartLineAccounts
+        .map((la: CartLineAccount) => {
+            return computePercentage(la, line); // hacky: TODO: better way
+        })
+        .reduce((prev, curr) => prev + curr, 0);
+    // console.log("🚀 ~ result", result);
+    return result;
+}
+
+// ------------------------
+const computePercentage = (la: CartLineAccount, line: CartLine) => {
+    const ltwt: number = getLineTotalWithTax(line.price, line.quantity, 0);
+    if (ltwt === 0) {
+        return 0;
+    } else {
+        return (la.amount / ltwt) * 100;
+    }
+}
+
+// const cla = {
+//     "id": 112,
+//     "amount": 34,
+//     "accountNumber": "68196-702",
+//     "cartLineId": 658,
+//     "createdAt": "1617343226465",
+//     "updatedAt": "1617343226465",
+//     "__typename": "CartLineAccount"
+// } as CartLineAccount;
+// const cl = {
+//     "id": 658,
+//     "cartId": 770,
+//     "itemId": "",
+//     "description": "",
+//     "categoryId": 1,
+//     "uom": "EACH",
+//     "quantity": 1,
+//     "price": 34,
+//     "cartLineAccounts": [
+//         // {
+//         //     "id": 112,
+//         //     "amount": 34,
+//         //     "accountNumber": "68196-702",
+//         //     "cartLineId": 658,
+//         //     "createdAt": "1617343226465",
+//         //     "updatedAt": "1617343226465",
+//         //     "__typename": "CartLineAccount"
+//         // }
+//     ],
+//     "createdAt": "1617343222075",
+//     "updatedAt": "1617343223547",
+//     "__typename": "CartLine"
+// } as CartLine;
+// // console.log(computePercentage(cla, cl));
+
+// // console.log(getRemainingPercentage(cl));
