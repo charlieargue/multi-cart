@@ -29,11 +29,7 @@ export const sumTotalCost = (cart?: Cart): number => {
 
 // ------------------
 export const getRemainingAmount = (line: CartLine): number => {
-
     return getLineTotalWithTax(line.price, line.quantity, 0) - getTotalAmounts(line.cartLineAccounts);
-    console.log("A) 🚀 ~ getLineTotalWithTax(line.price, line.quantity, 0)", getLineTotalWithTax(line.price, line.quantity, 0));
-    console.log("B) 🚀 ~ getTotalAmounts(line.cartLineAccounts)", getTotalAmounts(line.cartLineAccounts));
-    console.log("A - B = 🚀 ~ getRemainingAmount");
 }
 
 // ------------------
@@ -100,4 +96,4 @@ export const computeAmountGivenPercentage = (input: {
     }
 }
 
- 
+
