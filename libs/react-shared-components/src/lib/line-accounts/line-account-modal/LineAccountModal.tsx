@@ -19,7 +19,6 @@ export function LineAccountModal(props: LineAccountModalProps) {
 
   const handleSelect = async (a: Account) => {
     const remainingAmount = getRemainingAmount(props.line); // NOTE: since props.line is updated super-fast, it already has the NEW CLA in there,  somehow??
-
     await addCartLineAccount({
       cartId: props.line.cartId,
       cartLineId: props.line.id,

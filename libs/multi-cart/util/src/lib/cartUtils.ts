@@ -1,4 +1,5 @@
 import { Cart, CartLine, CartLineAccount } from "@multi-cart/react-data-access";
+import { roundToTwo } from './roundToTwo';
 
 // ------------------------
 export const sumTotalItems = (cart?: Cart): number | any => {
@@ -29,7 +30,7 @@ export const sumTotalCost = (cart?: Cart): number => {
 
 // ------------------
 export const getRemainingAmount = (line: CartLine): number => {
-    return getLineTotalWithTax(line.price, line.quantity, 0) - getTotalAmounts(line.cartLineAccounts);
+    return roundToTwo(getLineTotalWithTax(line.price, line.quantity, 0) - getTotalAmounts(line.cartLineAccounts));
 }
 
 // ------------------
@@ -54,7 +55,8 @@ export const getTotalAmounts = (lineAccounts: CartLineAccount[]): number => {
 // ------------------
 export const getRemainingPercentage = (line: CartLine, excludeCartLineAccountId?: number): number => {
     // NOTE: at this stage, the current LA we're trying to compute will ALREADY be in line.cartLineAccounts, so need to be able to exclude it!
-    return 100 - getTotalPercentages(line, excludeCartLineAccountId);
+    const result = 100 - getTotalPercentages(line, excludeCartLineAccountId);
+    return roundToTwo(result);
 }
 
 // ------------------
@@ -65,19 +67,21 @@ export const getTotalPercentages = (line: CartLine, excludeCartLineAccountId?: n
     const result = line.cartLineAccounts
         .filter(la => la.id !== excludeCartLineAccountId)
         .map((la: CartLineAccount) => {
-            return computePercentage(la, line); // hacky: TODO: better way
+            return computePercentageGivenAmount(la, line);
         })
         .reduce((prev, curr) => prev + curr, 0);
+
     return result;
 }
 
 // ------------------------
-export const computePercentage = (la: CartLineAccount, line: CartLine) => {
+export const computePercentageGivenAmount = (la: CartLineAccount, line: CartLine) => {
     const ltwt: number = getLineTotalWithTax(line.price, line.quantity, 0);
     if (ltwt === 0) {
         return 100;
     } else {
-        return (la.amount / ltwt) * 100;
+        const nicelyRoundedPercentage = roundToTwo((la.amount / ltwt) * 100); // NOTE: cannot do Math.round() because I want to allow .1 percent, which will round incorrectly to zero
+        return nicelyRoundedPercentage;
     }
 }
 
@@ -92,7 +96,7 @@ export const computeAmountGivenPercentage = (input: {
     if (ltwt === 0) {
         return 0;
     } else {
-        return (input.lineAccountPercentage / 100) * ltwt;
+        return roundToTwo((input.lineAccountPercentage / 100) * ltwt);
     }
 }
 

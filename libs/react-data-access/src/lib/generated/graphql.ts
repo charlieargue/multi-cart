@@ -58,6 +58,7 @@ export type CartLineAccount = {
   amount: Scalars['Float'];
   accountNumber: Scalars['String'];
   cartLineId: Scalars['Float'];
+  account: Account;
   createdAt: Scalars['String'];
   updatedAt: Scalars['String'];
 };
@@ -856,6 +857,7 @@ export type CartLineAccountResolvers<ContextType = any, ParentType extends Resol
   amount?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
   accountNumber?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   cartLineId?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
+  account?: Resolver<ResolversTypes['Account'], ParentType, ContextType>;
   createdAt?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   updatedAt?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;

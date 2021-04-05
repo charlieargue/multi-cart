@@ -1,10 +1,10 @@
 import { computeAmountGivenPercentage, getRemainingPercentage, toFriendlyCurrency } from '@multi-cart/multi-cart/util';
-import { CartLine, CartLineAccount, useUpdateCartLineAccountMutation } from '@multi-cart/react-data-access';
+import { CartLine, CartLineAccount, useAccountsQuery, useUpdateCartLineAccountMutation } from '@multi-cart/react-data-access';
 import { AutoSave } from '@multi-cart/react-shared-components';
 import { InputField } from '@multi-cart/react-ui';
 import { Form, Formik } from "formik";
 import React, { useEffect, useRef } from 'react';
-import { Badge, InputGroup } from 'react-bootstrap';
+import { Badge, InputGroup, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { X } from 'react-bootstrap-icons';
 // import './LineAccount.module.scss';
 
@@ -19,8 +19,11 @@ const stylesGroup = { maxWidth: "400px" };
 // -------------------
 export const LineAccount: React.FC<LineAccountProps> = ({ lineAccount, line }) => {
   const [, updateCartLineAccount] = useUpdateCartLineAccountMutation();
+  const [{ data: dataAccount, fetching: fetchingAccount }] = useAccountsQuery(); // NOTE: this is instead of adding in one more leftJoinAndSelect() to all the cart/carts queries, etc...
   const percentage = useRef(getRemainingPercentage(line, lineAccount.id));
   const laAmount = useRef('');
+
+  console.log(`🚀 ~ percentage.current`, percentage.current);
 
   // ------------------- update LA.AMOUNT when line.price|qty changes!
   useEffect(() => {
@@ -67,20 +70,24 @@ export const LineAccount: React.FC<LineAccountProps> = ({ lineAccount, line }) =
 
       }}>
       {({ isSubmitting, values, setValues }) => (
-        <Form className="ml-3" style={{ "width": "350px" }}>
+        <Form className="ml-3" style={{ "width": "300px" }}>
           <InputGroup className="mb-3 ml-3" style={stylesGroup} size="sm">
             <InputGroup.Prepend>
               <InputGroup.Text>
-                <Badge variant="warning" className="mr-2 px-2">{lineAccount.id}</Badge>
-                <strong>#</strong> {lineAccount.accountNumber}
-                <Badge style={{ backgroundColor: "#ccc" }} variant="success" className="ml-2 px-2 py-1 fw-light text-reset">{toFriendlyCurrency(lineAccount.amount)}</Badge>
+                {/* DEBUGGING: <Badge variant="warning" className="mr-2 px-2">{lineAccount.id}</Badge> */}
+                <OverlayTrigger
+                  overlay={<Tooltip>{dataAccount?.accounts && dataAccount.accounts.find(a => a.accountNumber === lineAccount.accountNumber).accountName}</Tooltip>}>
+                  <span className="cursor-hand"><strong>#</strong> {lineAccount.accountNumber}</span>
+                </OverlayTrigger>
+
+                <Badge style={{ backgroundColor: "#FDF198" }} variant="warning" className="ml-2 px-2 py-1 fw-light text-reset">{toFriendlyCurrency(lineAccount.amount)}</Badge>
                 <X size={18} className="text-danger fw-bold align-text-bottom ml-1 cursor-hand" />
               </InputGroup.Text>
             </InputGroup.Prepend>
 
             {/* unwrapped INPUT FIELD */}
             <InputField
-              type="text"
+              type="number"
               aria-label="percentage"
               name="percentage"
               id={`percentage_${lineAccount.id}`}
