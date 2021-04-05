@@ -93,6 +93,7 @@ export type Mutation = {
   logout: Scalars['Boolean'];
   updateUser: UserResponse;
   addCartLineAccount: CartLineAccount;
+  updateCartLineAccount: CartLineAccount;
 };
 
 
@@ -149,6 +150,12 @@ export type MutationAddCartLineAccountArgs = {
   accountNumber: Scalars['String'];
   cartLineId: Scalars['Int'];
   cartId: Scalars['Int'];
+};
+
+
+export type MutationUpdateCartLineAccountArgs = {
+  amount: Scalars['Float'];
+  id: Scalars['Int'];
 };
 
 export type Query = {
@@ -275,19 +282,17 @@ export type RegisterMutation = (
   ) }
 );
 
-export type AddCartLineAccountMutationVariables = Exact<{
-  cartId: Scalars['Int'];
-  cartLineId: Scalars['Int'];
-  accountNumber: Scalars['String'];
+export type UpdateCartLineAccountMutationVariables = Exact<{
+  id: Scalars['Int'];
   amount: Scalars['Float'];
 }>;
 
 
-export type AddCartLineAccountMutation = (
+export type UpdateCartLineAccountMutation = (
   { __typename?: 'Mutation' }
-  & { addCartLineAccount: (
+  & { updateCartLineAccount: (
     { __typename?: 'CartLineAccount' }
-    & Pick<CartLineAccount, 'id' | 'amount' | 'accountNumber' | 'cartLineId' | 'createdAt' | 'updatedAt'>
+    & Pick<CartLineAccount, 'id' | 'amount' | 'accountNumber' | 'cartLineId'>
   ) }
 );
 
@@ -347,6 +352,22 @@ export type UpdateCartLineMutation = (
     { __typename?: 'CartLine' }
     & CartLineSnippetFragment
   )> }
+);
+
+export type AddCartLineAccountMutationVariables = Exact<{
+  cartId: Scalars['Int'];
+  cartLineId: Scalars['Int'];
+  accountNumber: Scalars['String'];
+  amount: Scalars['Float'];
+}>;
+
+
+export type AddCartLineAccountMutation = (
+  { __typename?: 'Mutation' }
+  & { addCartLineAccount: (
+    { __typename?: 'CartLineAccount' }
+    & Pick<CartLineAccount, 'id' | 'amount' | 'accountNumber' | 'cartLineId' | 'createdAt' | 'updatedAt'>
+  ) }
 );
 
 export type ChangePasswordMutationVariables = Exact<{
@@ -526,26 +547,19 @@ export const RegisterDocument = gql`
 export function useRegisterMutation() {
   return Urql.useMutation<RegisterMutation, RegisterMutationVariables>(RegisterDocument);
 };
-export const AddCartLineAccountDocument = gql`
-    mutation AddCartLineAccount($cartId: Int!, $cartLineId: Int!, $accountNumber: String!, $amount: Float!) {
-  addCartLineAccount(
-    cartId: $cartId
-    cartLineId: $cartLineId
-    accountNumber: $accountNumber
-    amount: $amount
-  ) {
+export const UpdateCartLineAccountDocument = gql`
+    mutation UpdateCartLineAccount($id: Int!, $amount: Float!) {
+  updateCartLineAccount(id: $id, amount: $amount) {
     id
     amount
     accountNumber
     cartLineId
-    createdAt
-    updatedAt
   }
 }
     `;
 
-export function useAddCartLineAccountMutation() {
-  return Urql.useMutation<AddCartLineAccountMutation, AddCartLineAccountMutationVariables>(AddCartLineAccountDocument);
+export function useUpdateCartLineAccountMutation() {
+  return Urql.useMutation<UpdateCartLineAccountMutation, UpdateCartLineAccountMutationVariables>(UpdateCartLineAccountDocument);
 };
 export const BlankCartDocument = gql`
     mutation BlankCart {
@@ -597,6 +611,27 @@ export const UpdateCartLineDocument = gql`
 
 export function useUpdateCartLineMutation() {
   return Urql.useMutation<UpdateCartLineMutation, UpdateCartLineMutationVariables>(UpdateCartLineDocument);
+};
+export const AddCartLineAccountDocument = gql`
+    mutation AddCartLineAccount($cartId: Int!, $cartLineId: Int!, $accountNumber: String!, $amount: Float!) {
+  addCartLineAccount(
+    cartId: $cartId
+    cartLineId: $cartLineId
+    accountNumber: $accountNumber
+    amount: $amount
+  ) {
+    id
+    amount
+    accountNumber
+    cartLineId
+    createdAt
+    updatedAt
+  }
+}
+    `;
+
+export function useAddCartLineAccountMutation() {
+  return Urql.useMutation<AddCartLineAccountMutation, AddCartLineAccountMutationVariables>(AddCartLineAccountDocument);
 };
 export const ChangePasswordDocument = gql`
     mutation ChangePassword($token: String!, $newPassword: String!) {
@@ -845,6 +880,7 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   logout?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   updateUser?: Resolver<ResolversTypes['UserResponse'], ParentType, ContextType, RequireFields<MutationUpdateUserArgs, 'currentCartId'>>;
   addCartLineAccount?: Resolver<ResolversTypes['CartLineAccount'], ParentType, ContextType, RequireFields<MutationAddCartLineAccountArgs, 'amount' | 'accountNumber' | 'cartLineId' | 'cartId'>>;
+  updateCartLineAccount?: Resolver<ResolversTypes['CartLineAccount'], ParentType, ContextType, RequireFields<MutationUpdateCartLineAccountArgs, 'amount' | 'id'>>;
 };
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {

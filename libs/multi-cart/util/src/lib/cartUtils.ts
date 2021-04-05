@@ -29,7 +29,11 @@ export const sumTotalCost = (cart?: Cart): number => {
 
 // ------------------
 export const getRemainingAmount = (line: CartLine): number => {
+
     return getLineTotalWithTax(line.price, line.quantity, 0) - getTotalAmounts(line.cartLineAccounts);
+    console.log("A) 🚀 ~ getLineTotalWithTax(line.price, line.quantity, 0)", getLineTotalWithTax(line.price, line.quantity, 0));
+    console.log("B) 🚀 ~ getTotalAmounts(line.cartLineAccounts)", getTotalAmounts(line.cartLineAccounts));
+    console.log("A - B = 🚀 ~ getRemainingAmount");
 }
 
 // ------------------
@@ -54,14 +58,12 @@ export const getTotalAmounts = (lineAccounts: CartLineAccount[]): number => {
 // ------------------
 export const getRemainingPercentage = (line: CartLine, excludeCartLineAccountId?: number): number => {
     // NOTE: at this stage, the current LA we're trying to compute will ALREADY be in line.cartLineAccounts, so need to be able to exclude it!
-    // console.log("CART UTILS 🚀 ~ line", line);
     return 100 - getTotalPercentages(line, excludeCartLineAccountId);
 }
 
 // ------------------
 export const getTotalPercentages = (line: CartLine, excludeCartLineAccountId?: number): number => {
     if (!line.cartLineAccounts) {
-        console.log("🚀 ~ !line.cartLineAccounts, RETURNING ZERO!~");
         return 0;
     }
     const result = line.cartLineAccounts
@@ -83,6 +85,7 @@ export const computePercentage = (la: CartLineAccount, line: CartLine) => {
     }
 }
 
+// DECOMISH: 
 // ---------------------         
 // --- TODO: jest test this
 // NOTE: the _percentage VIEW MODEL does NOT factor into here, only the la.amount, etc...
@@ -99,4 +102,13 @@ export const computePercentage = (la: CartLineAccount, line: CartLine) => {
 //     return -1;
 // }
 
-
+// ------------------
+export const calculateDistributionAmount = (line: CartLine, percentage): number => {
+    console.log("🚀 ~ percentage", percentage);
+    // PROLLY: need excludeCartLineAccountId since don't want to reference own LA?
+    const totalPrice = getLineTotalWithTax(line.price, line.quantity, 0);
+    console.log("🚀 ~ totalPrice", totalPrice);
+    const rawAmount: number = totalPrice * percentage / 100;
+    console.log("🚀 ~ rawAmount", rawAmount);
+    return rawAmount;
+}

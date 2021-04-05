@@ -10,5 +10,7 @@
         "trackTime": false,
         "noTimeTrackingIfIdle": true,
         "openOnStartup": true
-    }
+    },
+    "turboConsoleLog.delimiterInsideMessage": "",
+    "turboConsoleLog.quote": "`"
 }

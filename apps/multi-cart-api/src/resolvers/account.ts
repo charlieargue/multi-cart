@@ -56,4 +56,45 @@ export class AccountResolver {
         return new Error('🔴 could not create CART LINE ACCOUNT');
     }
 
+    @Mutation(() => CartLineAccount)
+    @UseMiddleware(isAuth) // 🛡
+    async updateCartLineAccount(
+        // @Arg('cartId', () => Int) _: number, // NOTE: this is needed during graph cache update
+        @Arg('id', () => Int) id: number,
+        @Arg('amount', () => Float) amount: number,
+        @Ctx() { req }: MyContext
+    ): Promise<CartLineAccount | Error> {
+        console.log("🚀 ~ amount", amount);
+        try {
+        // make sure this cartLine EXISTS AND belongs to currently-logged-in user
+        // make sure the account number exists AND has remaining funds!
+        // insert new record into CLA
+        // NOTE: if I had added the  
+        const qb = getConnection()
+            .getRepository(CartLineAccount)
+            .createQueryBuilder("cla")
+            .leftJoinAndSelect("cla.cartLine", "cart_line")
+            .leftJoinAndSelect("cart_line.cart", "cart")
+            .where("cla.id = :id AND cart.userId = :userId", { id, userId: req.session.userId });
+
+        const foundCartLineAccount = await qb.getOne();
+
+
+        if (foundCartLineAccount) {
+            const result = await getConnection()
+                .createQueryBuilder()
+                .update(CartLineAccount)
+                .set({ amount })
+                .where('id = :id', { id })
+                .returning("*")
+                .execute();
+            return result.raw[0];
+        }
+        } catch (err) {
+            console.log("🔴 ~ err", err)
+            // TODO: this needs to return a RegularResponse with errors in it, like RegularUserResponse
+        }
+        return new Error('🔴 could not update CART LINE ACCOUNT');
+    }
+
 }
