@@ -1,10 +1,11 @@
-import { calculateDistributionAmount, getRemainingPercentage, toFriendlyCurrency } from '@multi-cart/multi-cart/util';
+import { calculateDistributionAmount, computeAmountGivenPercentage, getRemainingPercentage, toFriendlyCurrency } from '@multi-cart/multi-cart/util';
 import { CartLine, CartLineAccount, useUpdateCartLineAccountMutation } from '@multi-cart/react-data-access';
 import { InputField } from '@multi-cart/react-ui';
 import { Form, Formik } from "formik";
 import React, { useEffect, useRef, useState } from 'react';
 import { Badge, InputGroup } from 'react-bootstrap';
 import { X } from 'react-bootstrap-icons';
+import { AutoSave } from '@multi-cart/react-shared-components';
 // import './LineAccount.module.scss';
 
 /* eslint-disable-next-line */
@@ -20,7 +21,6 @@ export const LineAccount: React.FC<LineAccountProps> = ({ lineAccount, line }) =
   const [, updateCartLineAccount] = useUpdateCartLineAccountMutation();
   const percentage = useRef(getRemainingPercentage(line, lineAccount.id));
   const laAmount = useRef('');
-  const [skipThisUpdate, setSkipThisUpdate] = useState(null);
   const thisCartLineAccountId = lineAccount.id; // NOTE: this way, not passing in lineAccount.id into useEffect hence lineAccount not in DepArray
 
   // ------------------- PERCENTAGE
@@ -49,21 +49,22 @@ export const LineAccount: React.FC<LineAccountProps> = ({ lineAccount, line }) =
       // • anytime line.price or line.quantity changes
       // • need to hit a) calculate new AMOUNT for this LA
       // • and hit the DB saving that!
-
-      // calculate new amount based on percentage!
-      const newAmount: number = calculateDistributionAmount(line, percentage.current);
-      console.log(`🚀 ~ newAmount for LA# ${lineAccount.id}`, newAmount);
-
-      setSkipThisUpdate(true);
+      // CONFIRMED: graphe-cache IS automatically updating lineAccount.amount after database update!
+      const newAmount = computeAmountGivenPercentage({
+        linePrice: line.price,
+        lineQuantity: line.quantity,
+        lineTax: 0,
+        lineAccountPercentage: percentage.current
+      });
+      console.log(`🔥 ~ percentage.current`, percentage.current);
+      console.log(`🔥 useEffect 🔥 ~ newAmount`, newAmount);
       await updateCartLineAccount({
         id: lineAccount.id,
         amount: newAmount
       });
-
-      // CONFIRMED: automatically updating lineAccount.amount after database update!
     }
     saveCLA();
-  }, [line.price, line.quantity]);
+  }, [line.price, line.quantity, updateCartLineAccount, lineAccount.id]);
 
 
   return (
@@ -74,7 +75,24 @@ export const LineAccount: React.FC<LineAccountProps> = ({ lineAccount, line }) =
         percentage: percentage.current
       }}
       // enableReinitialize
-      onSubmit={async (values) => null}>
+      onSubmit={async (values) => {
+        // 1. calculate new AMOUNT based on this NEW percentage
+        // 2. update the DB 
+        const newAmount = computeAmountGivenPercentage({
+          linePrice: line.price,
+          lineQuantity: line.quantity,
+          lineTax: 0,
+          lineAccountPercentage: values.percentage
+        });
+        console.log(`🔴 FORMIK ~ newAmount`, newAmount);
+        // and must update the actual percentage ref (our "view model")
+        percentage.current = values.percentage;
+        await updateCartLineAccount({
+          id: lineAccount.id,
+          amount: newAmount
+        });
+
+      }}>
       {({ isSubmitting, values, setValues }) => (
         <Form className="ml-3" style={{ "width": "350px" }}>
           <InputGroup className="mb-3 ml-3" style={stylesGroup} size="sm">
@@ -95,7 +113,7 @@ export const LineAccount: React.FC<LineAccountProps> = ({ lineAccount, line }) =
               id={`percentage_${lineAccount.id}`}
               unwrapped={true}>
             </InputField>
-
+            <AutoSave debounceMs={300} />
             <InputGroup.Append>
               <InputGroup.Text><strong>%</strong></InputGroup.Text>
             </InputGroup.Append>

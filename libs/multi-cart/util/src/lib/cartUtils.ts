@@ -85,30 +85,19 @@ export const computePercentage = (la: CartLineAccount, line: CartLine) => {
     }
 }
 
-// DECOMISH: 
-// ---------------------         
-// --- TODO: jest test this
-// NOTE: the _percentage VIEW MODEL does NOT factor into here, only the la.amount, etc...
-// NOTE: however, that's not ok, once the percentage starts changing! only initially can we ...
-// export const getAppropriatePercentage = (la: CartLineAccount, line: CartLine) => {
-//     // IF only 1 LA (in case of just added, it'll be the newly-added one), then compute percentage
-//     if (line.cartLineAccounts && line.cartLineAccounts.length === 1) {
-//         return computePercentage(la, line);
-//     }
-//     // IF more than 1 LA, then getRemainingPercentage()
-//     if (line.cartLineAccounts && line.cartLineAccounts.length > 1) {
-//         return getRemainingPercentage(line);
-//     }
-//     return -1;
-// }
-
-// ------------------
-export const calculateDistributionAmount = (line: CartLine, percentage): number => {
-    console.log("🚀 ~ percentage", percentage);
-    // PROLLY: need excludeCartLineAccountId since don't want to reference own LA?
-    const totalPrice = getLineTotalWithTax(line.price, line.quantity, 0);
-    console.log("🚀 ~ totalPrice", totalPrice);
-    const rawAmount: number = totalPrice * percentage / 100;
-    console.log("🚀 ~ rawAmount", rawAmount);
-    return rawAmount;
+// ------------------------
+export const computeAmountGivenPercentage = (input: {
+    linePrice: number,
+    lineQuantity: number,
+    lineTax: number,
+    lineAccountPercentage: number
+}) => {
+    const ltwt: number = getLineTotalWithTax(input.linePrice, input.lineQuantity, input.lineTax);
+    if (ltwt === 0) {
+        return 0;
+    } else {
+        return (input.lineAccountPercentage / 100) * ltwt;
+    }
 }
+
+ 
