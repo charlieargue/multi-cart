@@ -287,7 +287,7 @@ export type AddCartLineAccountMutation = (
   { __typename?: 'Mutation' }
   & { addCartLineAccount: (
     { __typename?: 'CartLineAccount' }
-    & Pick<CartLineAccount, 'id' | 'amount' | 'accountNumber' | 'cartLineId'>
+    & Pick<CartLineAccount, 'id' | 'amount' | 'accountNumber' | 'cartLineId' | 'createdAt' | 'updatedAt'>
   ) }
 );
 
@@ -538,6 +538,8 @@ export const AddCartLineAccountDocument = gql`
     amount
     accountNumber
     cartLineId
+    createdAt
+    updatedAt
   }
 }
     `;

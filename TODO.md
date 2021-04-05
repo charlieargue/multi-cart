@@ -2,12 +2,12 @@
 
 Agile/kanban board for multi-cart
 
-### 📘 Backlog
 
-- [ ] put all utils into react-utils, and make sure all currency is using the same toNiceCurrency() util!
+### 😎 Wishlist
+
+- [ ] make cart name clickable and editable  
 - [ ] There’s ZERO error handling on login, add some toasts please! (maybe with 🇵🇱 urql interceptor / toast container)  
 - [ ] change/forgot password/login/register need work/checking (token works, nodemailer?)  
-- [ ] make cart name clickable and editable 
 - [ ] UI: store: switch to chakra-ui (follow their landing-page tutorial see #slack/design-resources) -- use that for store page! or keep react-bootstrap, but just DO SAME THING w/o chakra! FIGMA and nice design for my site/CV demo-app + code-samples  
 - [ ] “store” - “catalog” function  
   - [ ] store: Just add items, have the same COLUMNS as cart line  
@@ -15,7 +15,7 @@ Agile/kanban board for multi-cart
   - [ ] store: Make a new shop page  
   - [ ] store: Have two modes: Condenscned table view & Bigger thumbnail view  
   - [ ] store: Paging! Must use paging! Sorry :)  
-  - [ ] store: Click products -> product details (SSR these pages!) - PRODUCTS PAGE: https://getbootstrap.com/docs/5.0/examples/album/# -> https://getbootstrap.com/docs/5.0/examples/product/ + https://getbootstrap.com/docs/5.0/examples/jumbotron/ & maybe https://getbootstrap.com/docs/5.0/examples/starter-template/ & maybe https://getbootstrap.com/docs/5.0/examples/features/
+  - [ ] store: Click products -> product details (SSR these pages!) - PRODUCTS PAGE: https://getbootstrap.com/docs/5.0/examples/album/# -> https://getbootstrap.com/docs/5.0/examples/product/ + https://getbootstrap.com/docs/5.0/examples/jumbotron/ & maybe https://getbootstrap.com/docs/5.0/examples/starter-template/ & maybe https://getbootstrap.com/docs/5.0/examples/features/  
   - [ ] store: And these pages are public! Don’t need to be authed to see them!  
   - [ ] store: But if you are authed You get BUY NOW buttons! (both on store and details views)  
   - [ ] store: BUY NOW: It goes into your current cart 🔴 What if you don’t have a current cart !!!  
@@ -27,14 +27,15 @@ Agile/kanban board for multi-cart
 - [ ] PRETTIER: get those attributes breaking in JSX!  
 - [ ] isOpen/Closed for carts avatar dropdown: 1) useContext, then 2) try zustand  
 - [ ] UI: make a drawer and remember settings with either 2) zustand, or 3) redux, or 1) context (use UI: https://getbootstrap.com/docs/5.0/examples/sidebars/#)  
-- [ ] UI: I want this 2nd-ary nav for breadcrumbs! https://getbootstrap.com/docs/5.0/examples/offcanvas-navbar/ (and no more gray alert box)
-- [ ] UI: good thing to work on would be ability to collapse ALL/one-at-a-time the Line-Accounts (or just toggle on/off) and then SAVE that to state somewhere (but NOT persist), so you can navigate around and always see your cart collapsed/expanded (like ClickUp did)
+- [ ] UI: I want this 2nd-ary nav for breadcrumbs! https://getbootstrap.com/docs/5.0/examples/offcanvas-navbar/ (and no more gray alert box)  
+- [ ] UI: good thing to work on would be ability to collapse ALL/one-at-a-time the Line-Accounts (or just toggle on/off) and then SAVE that to state somewhere (but NOT persist), so you can navigate around and always see your cart collapsed/expanded (like ClickUp did)  
+- [ ] UI: fix the alignment on the EDIT CART page (left and right edges should all align)
 - [ ] Add user profile w/ Upload image! Copy 🇵🇱 multi-part upload  
-- [ ] urql assume success! (optimistic API calls!) see 🇵🇱  and https://github.com/FormidableLabs/urql/issues/863
+- [ ] urql assume success! (optimistic API calls!) see 🇵🇱  and https://github.com/FormidableLabs/urql/issues/863  
 - [ ] HAND=OFF: good tricky flow! plus good broadcasting with SOCKET.IO or just gql? SEE BEN's google-docs-CLONE w/ socket.io  
 - [ ] must invalidate all posts / cache upon login (and elsewhere!)  see BEN 11:43:20 invalitedAllPosts()  
-- [ ] would be nice to have a way to add an account # (from some other account), and it be broadcast to all clients, so that it's automatically available to all current users!
-- [ ] 🐞 When you delete a user’s current cart, SET User.currentCartId to null FIRST? Set the next one, or what if they don’t have one?  And graphe-cache has to update the Me query during deleteCart !!! if user.currentCartId is changed! that'll update the avatar
+- [ ] would be nice to have a way to add an account # (from some other account), and it be broadcast to all clients, so that it's automatically available to all current users!  
+- [ ] 🐞 When you delete a user’s current cart, SET User.currentCartId to null FIRST? Set the next one, or what if they don’t have one?  And graphe-cache has to update the Me query during deleteCart !!! if user.currentCartId is changed! that'll update the avatar  
 - [ ] MOCK: Bring back / update mocked api (see doc notes)  
 - [ ] check what/if-anything PLOP offers 🇵🇱 that NX isn't providing  
 - [ ] BE: jest test login!  
@@ -42,23 +43,28 @@ Agile/kanban board for multi-cart
   - [ ] BE:🛡 un-authed user cannot CRUD carts  
   - [ ] BE:🛡 user can only see their own carts  
   - [ ] BE:🛡 make these BE jest tests!  
-- [ ] gotta use dataloader to solve n+1 probem, see li-reddit; apparently AppSync makes this issue moot -- solves the n+1 problem! https://youtu.be/VnG7ej56lWw?t=745 
-- [ ] libs: make multi-cart directory, move all in there
-- [ ] libs: migrate over multi-cart/appViews/carts stuff over into react-shared-components (like line-account)
+- [ ] gotta use dataloader to solve n+1 probem, see li-reddit; apparently AppSync makes this issue moot -- solves the n+1 problem! https://youtu.be/VnG7ej56lWw?t=745  
+- [ ] libs: make multi-cart directory, move all in there  
+- [ ] libs: migrate over multi-cart/appViews/carts stuff over into react-shared-components (like line-account)  
 - [ ] BE: DOCKERIZE POSGRES?! yes, so easily installable,.... unless you go serverless! But then hard to demo/install for s/o else, right?!  
 - [ ] Tsconfigs and base/extended/lib-VS-app versions, and how I set it up is confusing still!!! Needs work  
 - [ ] BE: ⚙️ AppSync: again, just after making 1 or two entities mac (cart, user), see if you can whip up an appsync backend on AWS real quick (terraform, etc…)  
 - [ ] print out POSGRES basics  
-- [ ] I'd like to implement cloneRecalcAndSaveCostCenters and see the DIFFERENT (ng vs react)
-- [ ] 🐞 🔴 ERROR - memory leak - perform a React state update on an unmounted component (see DESKTOP pic) - maybe when quickly deleted CartLine when still autosaving from new CLA?
+- [ ] I'd like to implement cloneRecalcAndSaveCostCenters and see the DIFFERENT (ng vs react)  
+- [ ] 🐞 🔴 ERROR - memory leak - perform a React state update on an unmounted component (see DESKTOP pic) - maybe when quickly deleted CartLine when still autosaving from new CLA?  
+- [ ] go thru all my "TODO:" in codebase  
+
+### 📘 Backlog
+
 
 ### 💪 Todo
 
   - [ ] olas: Good use case with those percentages: if they don't add up to 100%, then the CART AVATAR becomes red! (pure gql cache or is need UI state?)  
-  - [ ] olas: cant add the same account number twice, highlight+disable plz
+  - [ ] olas: cant add the same account number twice, highlight+disable plz  
 
 ### 🧠 In Progress
 
+- [ ] put all utils into react-utils, and make sure all currency is using the same toNiceCurrency() util!  
 - [ ] olas! (w/ storybook!, but yes, good for later, and good for deepening the cart object relationships!  
   - [ ] olas: Should be fast!, good for modal work, use CONTEXT on that modal?!  
 

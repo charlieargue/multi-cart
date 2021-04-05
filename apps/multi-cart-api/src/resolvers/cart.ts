@@ -135,7 +135,7 @@ export class CartResolver {
     @UseMiddleware(isAuth) // 🛡
     async deleteCart(
         @Arg('id', () => Int) id: number,
-        @Ctx() { req }: MyContext
+        // @Ctx() { req }: MyContext
     ): Promise<boolean> {
         // TODO: add security on all these deletes/updates (that only owner of cart can do so!)
 

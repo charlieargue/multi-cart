@@ -14,5 +14,7 @@ mutation AddCartLineAccount(
     amount
     accountNumber
     cartLineId
+    createdAt
+    updatedAt
   }
 }

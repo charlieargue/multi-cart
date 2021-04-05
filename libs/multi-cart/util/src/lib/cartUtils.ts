@@ -52,17 +52,20 @@ export const getTotalAmounts = (lineAccounts: CartLineAccount[]): number => {
 }
 
 // ------------------
-export const getRemainingPercentage = (line: CartLine /* w/ Line Accounts */): number => {
-    console.log("CART UTILS 🚀 ~ line", line);
-    return 100 - getTotalPercentages(line);
+export const getRemainingPercentage = (line: CartLine, excludeCartLineAccountId?: number): number => {
+    // NOTE: at this stage, the current LA we're trying to compute will ALREADY be in line.cartLineAccounts, so need to be able to exclude it!
+    // console.log("CART UTILS 🚀 ~ line", line);
+    return 100 - getTotalPercentages(line, excludeCartLineAccountId);
 }
 
 // ------------------
-export const getTotalPercentages = (line: CartLine /* w/ Line Accounts */): number => {
+export const getTotalPercentages = (line: CartLine, excludeCartLineAccountId?: number): number => {
     if (!line.cartLineAccounts) {
+        console.log("🚀 ~ !line.cartLineAccounts, RETURNING ZERO!~");
         return 0;
     }
     const result = line.cartLineAccounts
+        .filter(la => la.id !== excludeCartLineAccountId)
         .map((la: CartLineAccount) => {
             return computePercentage(la, line); // hacky: TODO: better way
         })
@@ -80,17 +83,20 @@ export const computePercentage = (la: CartLineAccount, line: CartLine) => {
     }
 }
 
-// ------------------------ TODO: jest test this
-export const getAppropriatePercentage = (la: CartLineAccount, line: CartLine) => {
-    // IF only 1 LA (in case of just added, it'll be the newly-added one), then compute percentage
-    if (line.cartLineAccounts && line.cartLineAccounts.length === 1) {
-        return computePercentage(la, line);
-    }
-    // IF more than 1 LA, then getRemainingPercentage()
-    if (line.cartLineAccounts && line.cartLineAccounts.length > 1) {
-        return getRemainingPercentage(line);
-    }
-    return -1;
-}
+// ---------------------         
+// --- TODO: jest test this
+// NOTE: the _percentage VIEW MODEL does NOT factor into here, only the la.amount, etc...
+// NOTE: however, that's not ok, once the percentage starts changing! only initially can we ...
+// export const getAppropriatePercentage = (la: CartLineAccount, line: CartLine) => {
+//     // IF only 1 LA (in case of just added, it'll be the newly-added one), then compute percentage
+//     if (line.cartLineAccounts && line.cartLineAccounts.length === 1) {
+//         return computePercentage(la, line);
+//     }
+//     // IF more than 1 LA, then getRemainingPercentage()
+//     if (line.cartLineAccounts && line.cartLineAccounts.length > 1) {
+//         return getRemainingPercentage(line);
+//     }
+//     return -1;
+// }
 
 
