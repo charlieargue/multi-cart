@@ -3,7 +3,7 @@ import { CartLine, CartLineAccount, useAccountsQuery, useDeleteCartLineAccountMu
 import { AutoSave } from '@multi-cart/react-shared-components';
 import { InputField } from '@multi-cart/react-ui';
 import { Form, Formik } from "formik";
-import React, { Dispatch, SetStateAction, useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Badge, InputGroup, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { X } from 'react-bootstrap-icons';
 // import './LineAccount.module.scss';
@@ -13,8 +13,6 @@ import * as Yup from 'yup';
 export interface LineAccountProps {
   lineAccount: CartLineAccount;
   line: CartLine;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  setErrors(errors: string[]): void;
 }
 
 const LineAccountFormSchema = Yup.object().shape({
@@ -27,12 +25,11 @@ const LineAccountFormSchema = Yup.object().shape({
 const stylesGroup = { maxWidth: "400px" };
 
 // -------------------
-export const LineAccount: React.FC<LineAccountProps> = ({ lineAccount, line, setErrors }) => {
+export const LineAccount: React.FC<LineAccountProps> = ({ lineAccount, line }) => {
   const [, deleteCartLineAccount] = useDeleteCartLineAccountMutation();
   const [, updateCartLineAccount] = useUpdateCartLineAccountMutation();
   const [{ data: dataAccount, fetching: fetchingAccount }] = useAccountsQuery(); // NOTE: this is instead of adding in one more leftJoinAndSelect() to all the cart/carts queries, etc...
   const percentage = useRef(getRemainingPercentage(line, lineAccount.id));
-  const laAmount = useRef('');
 
   // ------------------- update LA.AMOUNT when line.price|qty changes!
   useEffect(() => {
@@ -100,6 +97,7 @@ export const LineAccount: React.FC<LineAccountProps> = ({ lineAccount, line, set
 
             {/* unwrapped INPUT FIELD */}
             <InputField
+              style={(errors.percentage && touched.percentage) ? { "border": "2px dotted red" } : null}
               type="number"
               aria-label="percentage"
               name="percentage"
@@ -111,10 +109,6 @@ export const LineAccount: React.FC<LineAccountProps> = ({ lineAccount, line, set
               <InputGroup.Text><strong>%</strong></InputGroup.Text>
             </InputGroup.Append>
           </InputGroup>
-          {
-            (errors.percentage && touched.percentage) && setErrors([errors.percentage])
-          }
-
         </Form>
       )}
     </Formik>

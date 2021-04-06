@@ -58,23 +58,28 @@ Agile/kanban board for multi-cart
 - [ ] Dockerize the backend (before AppSync!) -- see #docker  
 - [ ] BE: ⚙️ AppSync: again, just after making 1 or two entities mac (cart, user), see if you can whip up an appsync backend on AWS real quick (terraform, etc…)  
 
-### 💪 Todo
+### 🐞 BUGS
+- [ ] auto-completing upon bad number and all messed up after, see: https://www.loom.com/share/dc660f891df3425f887d1e97d295167c (possible circumvention by NOT allowing save if line totals are not 100%? unless you're creating a distribution, and not finished yet? TBD)
 
-- [ ] LA validation FAIL ==> red box on LA container & red box on cart avatar! (and then inside cart list? no... though would be good ui state use case, TBD)  
-- [ ] LA validation - must be 100% total (CART AVATAR becomes red! (pure gql cache or is need UI state?)  )  
+### 💪 Todo
 - [ ] olas: cant add the same account number twice, highlight+disable plz  
-- [ ] LA validation - must total amount = ltwt  
 - [ ] LA TESTING: lock down with JEST (try exercising auto-save here???)  
 - [ ] LA TESTING: lock down with CYPRESS (avoid auto-save & chaos tests)  
 - [ ] storybook for Line Accounts stuff  
 
 ### 🧠 In Progress
+- [ ] LA validation - must total amount = ltwt  
+- [ ] LA validation - must be 100% total (CART AVATAR becomes red! (pure gql cache or is need UI state?)  )  
 
-- [ ] LA validation - can't have 0% (formik validation + red border + LA container red + avatar red)  
+
+
+
+### 👿 Stuck On:
+- [ ] LA validation FAIL ==> red box on LA container & red box on cart avatar (tried everything but Formik JSX causes error)
 
 ### Done
 
 - [ ] 🐞 When you delete a user’s current cart, SET User.currentCartId to null FIRST? Set the next one, or what if they don’t have one?  And graphe-cache has to update the Me query during deleteCart !!! if user.currentCartId is changed! that'll update the avatar  
   - [ ] olas: Should be fast!, good for modal work, use CONTEXT on that modal?!  
 - [ ] make sure all currency is using the same toNiceCurrency() util!  
-
+- [ ] LA validation - can't have 0% (formik validation + red border + LA container red + avatar red)  

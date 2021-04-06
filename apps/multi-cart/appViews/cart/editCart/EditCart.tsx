@@ -16,14 +16,6 @@ import styles from './EditCart.module.scss';
 // -------------------
 
 export const EditCart: React.FC<{ id: number }> = ({ id }) => {
-
-    let lineAccountErrors = [];
-    const setErrors = (errors: string[]) => {
-        console.log(`🚀 ~ errors`, errors);
-        lineAccountErrors = [...new Set([...errors, ...lineAccountErrors])]; // NOTE: dedupe w/ new Set()
-        console.log(`🚀 ~ lineAccountErrors`, lineAccountErrors);
-    }
-
     const router = useRouter();
     const [{ data, error, fetching }] = useCartQuery({
         variables: {
@@ -155,13 +147,9 @@ export const EditCart: React.FC<{ id: number }> = ({ id }) => {
                                                     <LineAccount
                                                         key={cla.id}
                                                         lineAccount={cla}
-                                                        line={line}
-                                                        setErrors={setErrors} />
+                                                        line={line} />
                                                 ))}
                                             </div>
-                                            {lineAccountErrors.length ? lineAccountErrors.map(error => (
-                                                <div key={error}>{error}</div>
-                                            )) : null}
                                         </Alert>
                                     </CartLineRow>
                                 ))
