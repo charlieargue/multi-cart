@@ -24,8 +24,6 @@ export const LineAccount: React.FC<LineAccountProps> = ({ lineAccount, line }) =
   const percentage = useRef(getRemainingPercentage(line, lineAccount.id));
   const laAmount = useRef('');
 
-  console.log(`🚀 ~ percentage.current`, percentage.current);
-
   // ------------------- update LA.AMOUNT when line.price|qty changes!
   useEffect(() => {
     async function saveCLA() {

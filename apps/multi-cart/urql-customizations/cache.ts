@@ -46,6 +46,7 @@ export const cache = cacheExchange({
             },
 
             deleteCart: (_result, args, cache, info) => {
+                // CONFUSION: MISMATCH? cuz not removing the cart from cache, its still there cart(id:780x) in the urql cache inspector (as well as cache.inspectFIelds)
                 cache.invalidate({ __typename: 'Cart', id: (args as DeleteCartMutationVariables).id });
             },
 
