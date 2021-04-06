@@ -3,7 +3,7 @@ import { LineAccount, LineAccountButtonRow } from '@multi-cart/react-shared-comp
 import { Breadcrumbs } from '@multi-cart/react-ui';
 import clsx from 'clsx';
 import { useRouter } from 'next/router';
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Alert, Badge, Button, Col, Container, Row } from 'react-bootstrap';
 import { ExclamationCircleFill, PlusCircleFill, XSquareFill } from 'react-bootstrap-icons';
 import { AppLayout } from '../../_layout';
@@ -16,6 +16,13 @@ import styles from './EditCart.module.scss';
 // -------------------
 
 export const EditCart: React.FC<{ id: number }> = ({ id }) => {
+
+    let lineAccountErrors = [];
+    const setErrors = (errors: string[]) => {
+        console.log(`🚀 ~ errors`, errors);
+        lineAccountErrors = [...new Set([...errors, ...lineAccountErrors])]; // NOTE: dedupe w/ new Set()
+        console.log(`🚀 ~ lineAccountErrors`, lineAccountErrors);
+    }
 
     const router = useRouter();
     const [{ data, error, fetching }] = useCartQuery({
@@ -145,9 +152,16 @@ export const EditCart: React.FC<{ id: number }> = ({ id }) => {
                                             {/* 🔴 TODO: flex-wrap only after 2 elements! */}
                                             <div className="d-flex justify-content-sm-end mt-2 flex-wrap" >
                                                 {(line as CartLine)?.cartLineAccounts?.sort((a, b) => a.id - b.id).map((cla) => !cla ? null : (
-                                                    <LineAccount key={cla.id} lineAccount={cla} line={line}/>
+                                                    <LineAccount
+                                                        key={cla.id}
+                                                        lineAccount={cla}
+                                                        line={line}
+                                                        setErrors={setErrors} />
                                                 ))}
                                             </div>
+                                            {lineAccountErrors.length ? lineAccountErrors.map(error => (
+                                                <div key={error}>{error}</div>
+                                            )) : null}
                                         </Alert>
                                     </CartLineRow>
                                 ))

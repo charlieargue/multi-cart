@@ -4,3 +4,4 @@ export * from './lib/isServer';
 export * from './lib/toCompareDateFn';
 export * from './lib/toDaysAgo';
 export * from './lib/toErrorMap';
+export * from './lib/roundToTwo';

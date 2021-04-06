@@ -6,6 +6,7 @@ import { Form, Formik } from "formik";
 import React, { ReactElement, useRef } from 'react';
 import { Badge, Button, Dropdown, DropdownButton } from 'react-bootstrap';
 import { X } from 'react-bootstrap-icons';
+import { toFriendlyCurrency } from '@multi-cart/multi-cart/util';
 import { CategoriesDropDown } from '../categoriesDropDown/categoriesDropDown';
 import styles from './CartLineRow.module.scss';
 
@@ -74,6 +75,7 @@ export const CartLineRow: React.FC<CartLineRowProps> = ({ line, children, idx }:
                             <Form className={clsx(styles['cart-line-row__form'], 'align-items-baseline')}>
                                 <InputField
                                     name="itemId"
+                                    id={`itemId_${line.id}`}
                                     type="text"
                                     className="form-control w-100"
                                     aria-describedby="itemNum"
@@ -86,6 +88,7 @@ export const CartLineRow: React.FC<CartLineRowProps> = ({ line, children, idx }:
                             <Form className={clsx(styles['cart-line-row__form'], 'align-items-baseline')}>
                                 <InputField
                                     name="description"
+                                    id={`description_${line.id}`}
                                     className={clsx(styles['cart-line-row__description'], 'form-control')}
                                     type="text"
                                     placeholder="Description" />
@@ -108,6 +111,7 @@ export const CartLineRow: React.FC<CartLineRowProps> = ({ line, children, idx }:
                         </td>
                         <td>
                             <InputField
+                                id={`quantity_${line.id}`}
                                 name="quantity"
                                 type="number"
                                 className="form-control w-75"
@@ -116,6 +120,7 @@ export const CartLineRow: React.FC<CartLineRowProps> = ({ line, children, idx }:
                         </td>
                         <td>
                             <InputField
+                                id={`price_${line.id}`}
                                 name="price"
                                 type="number"
                                 className="form-control w-100"
@@ -123,7 +128,7 @@ export const CartLineRow: React.FC<CartLineRowProps> = ({ line, children, idx }:
                                 placeholder="Price" />
                         </td>
                         <td className="pr-3 text-right pt-3">
-                            ${typeof line.price === "number" && typeof line.quantity === "number" ? (line.price * line.quantity).toFixed(2) : 0}
+                            {typeof line.price === "number" && typeof line.quantity === "number" ? toFriendlyCurrency(line.price * line.quantity) : 0}
                         </td>
 
                         <td>

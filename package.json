@@ -82,6 +82,7 @@
     "@types/redis": "^2.8.28",
     "@types/uuid": "^8.3.0",
     "@types/webpack": "4.41.21",
+    "@types/yup": "^0.29.11",
     "@typescript-eslint/eslint-plugin": "4.3.0",
     "@typescript-eslint/parser": "4.3.0",
     "@urql/devtools": "^2.0.3",
@@ -146,6 +147,7 @@
     "type-graphql": "^1.1.1",
     "typeorm": "^0.2.31",
     "urql": "^2.0.1",
-    "uuid": "^8.3.2"
+    "uuid": "^8.3.2",
+    "yup": "^0.32.9"
   }
 }

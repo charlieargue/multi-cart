@@ -5,6 +5,7 @@ import { Form } from "react-bootstrap";
 // import './InputField.module.css';
 
 export type InputFieldProps = InputHTMLAttributes<HTMLInputElement> & {
+  id?: string;
   label?: string;
   name: string;
   muted?: React.ReactNode;
@@ -17,6 +18,7 @@ export type InputFieldProps = InputHTMLAttributes<HTMLInputElement> & {
 //  ) : null}
 // */}
 export const InputField: React.FC<InputFieldProps> = ({
+  id,
   label,
   muted,
   size: _,
@@ -24,6 +26,7 @@ export const InputField: React.FC<InputFieldProps> = ({
   ...props
 }) => {
   const [field, meta] = useField(props);
+  const jsxField = <Form.Control {...field} {...props} id={id ? id : field.name} />;
 
   if (field.value !== null && props.value !== null) {
     if (!unwrapped) {
@@ -32,10 +35,10 @@ export const InputField: React.FC<InputFieldProps> = ({
           {/* <div className="testing">✊ Hi</div> */}
           {
             label && (
-              <Form.Label className="text-muted">{label}</Form.Label>
+              jsxField
             )
           }
-          <Form.Control {...field} {...props} id={field.name} />
+          <Form.Control {...field} {...props} id={id ? id : field.name} />
           {
             muted && (
               <Form.Text className="text-muted">{muted}</Form.Text>
@@ -44,7 +47,7 @@ export const InputField: React.FC<InputFieldProps> = ({
         </Form.Group>
       );
     } else {
-      return (<Form.Control {...field} {...props} id={field.name} />);
+      return (jsxField);
     }
   }
   return null;

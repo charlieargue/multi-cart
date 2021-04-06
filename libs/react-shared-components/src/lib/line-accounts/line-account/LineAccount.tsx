@@ -3,21 +3,31 @@ import { CartLine, CartLineAccount, useAccountsQuery, useDeleteCartLineAccountMu
 import { AutoSave } from '@multi-cart/react-shared-components';
 import { InputField } from '@multi-cart/react-ui';
 import { Form, Formik } from "formik";
-import React, { useEffect, useRef } from 'react';
+import React, { Dispatch, SetStateAction, useEffect, useRef } from 'react';
 import { Badge, InputGroup, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { X } from 'react-bootstrap-icons';
 // import './LineAccount.module.scss';
+import * as Yup from 'yup';
 
 /* eslint-disable-next-line */
 export interface LineAccountProps {
   lineAccount: CartLineAccount;
   line: CartLine;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  setErrors(errors: string[]): void;
 }
+
+const LineAccountFormSchema = Yup.object().shape({
+  percentage: Yup.number()
+    .min(.01, 'Cannot be zero')
+    .max(100, 'Maximum is 100%')
+    .required('Required'),
+});
 
 const stylesGroup = { maxWidth: "400px" };
 
 // -------------------
-export const LineAccount: React.FC<LineAccountProps> = ({ lineAccount, line }) => {
+export const LineAccount: React.FC<LineAccountProps> = ({ lineAccount, line, setErrors }) => {
   const [, deleteCartLineAccount] = useDeleteCartLineAccountMutation();
   const [, updateCartLineAccount] = useUpdateCartLineAccountMutation();
   const [{ data: dataAccount, fetching: fetchingAccount }] = useAccountsQuery(); // NOTE: this is instead of adding in one more leftJoinAndSelect() to all the cart/carts queries, etc...
@@ -51,6 +61,7 @@ export const LineAccount: React.FC<LineAccountProps> = ({ lineAccount, line }) =
       initialValues={{
         percentage: percentage.current
       }}
+      validationSchema={LineAccountFormSchema}
       onSubmit={async (values) => {
         // 1. calculate new AMOUNT based on this NEW percentage
         // 2. and must update the actual percentage ref (our "view model")
@@ -68,7 +79,7 @@ export const LineAccount: React.FC<LineAccountProps> = ({ lineAccount, line }) =
         });
 
       }}>
-      {({ isSubmitting, values, setValues }) => (
+      {({ isSubmitting, values, setValues, errors, touched }) => (
         <Form className="ml-3" style={{ "width": "300px" }}>
           <InputGroup className="mb-3 ml-3" style={stylesGroup} size="sm">
             <InputGroup.Prepend>
@@ -100,6 +111,10 @@ export const LineAccount: React.FC<LineAccountProps> = ({ lineAccount, line }) =
               <InputGroup.Text><strong>%</strong></InputGroup.Text>
             </InputGroup.Append>
           </InputGroup>
+          {
+            (errors.percentage && touched.percentage) && setErrors([errors.percentage])
+          }
+
         </Form>
       )}
     </Formik>
