@@ -10,11 +10,6 @@ mutation AddCartLineAccount(
     accountNumber: $accountNumber
     amount: $amount
   ) {
-    id
-    amount
-    accountNumber
-    cartLineId
-    createdAt
-    updatedAt
+    ...CartLineAccountSnippet
   }
 }

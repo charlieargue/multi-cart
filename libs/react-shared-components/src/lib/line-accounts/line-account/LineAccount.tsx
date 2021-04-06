@@ -1,5 +1,5 @@
 import { computeAmountGivenPercentage, getRemainingPercentage, toFriendlyCurrency } from '@multi-cart/multi-cart/util';
-import { CartLine, CartLineAccount, useAccountsQuery, useUpdateCartLineAccountMutation } from '@multi-cart/react-data-access';
+import { CartLine, CartLineAccount, useAccountsQuery, useDeleteCartLineAccountMutation, useUpdateCartLineAccountMutation } from '@multi-cart/react-data-access';
 import { AutoSave } from '@multi-cart/react-shared-components';
 import { InputField } from '@multi-cart/react-ui';
 import { Form, Formik } from "formik";
@@ -18,6 +18,7 @@ const stylesGroup = { maxWidth: "400px" };
 
 // -------------------
 export const LineAccount: React.FC<LineAccountProps> = ({ lineAccount, line }) => {
+  const [, deleteCartLineAccount] = useDeleteCartLineAccountMutation();
   const [, updateCartLineAccount] = useUpdateCartLineAccountMutation();
   const [{ data: dataAccount, fetching: fetchingAccount }] = useAccountsQuery(); // NOTE: this is instead of adding in one more leftJoinAndSelect() to all the cart/carts queries, etc...
   const percentage = useRef(getRemainingPercentage(line, lineAccount.id));
@@ -76,12 +77,15 @@ export const LineAccount: React.FC<LineAccountProps> = ({ lineAccount, line }) =
               <InputGroup.Text>
                 {/* DEBUGGING: <Badge variant="warning" className="mr-2 px-2">{lineAccount.id}</Badge> */}
                 <OverlayTrigger
-                  overlay={<Tooltip>{dataAccount?.accounts && dataAccount.accounts.find(a => a.accountNumber === lineAccount.accountNumber).accountName}</Tooltip>}>
+                  overlay={<Tooltip id={`tooltip_account_name_${lineAccount.id}`}>{dataAccount?.accounts && dataAccount.accounts.find(a => a.accountNumber === lineAccount.accountNumber).accountName}</Tooltip>}>
                   <span className="cursor-hand"><strong>#</strong> {lineAccount.accountNumber}</span>
                 </OverlayTrigger>
 
                 <Badge style={{ backgroundColor: "#FDF198" }} variant="warning" className="ml-2 px-2 py-1 fw-light text-reset">{toFriendlyCurrency(lineAccount.amount)}</Badge>
-                <X size={18} className="text-danger fw-bold align-text-bottom ml-1 cursor-hand" />
+                <X
+                  size={18}
+                  className="text-danger fw-bold align-text-bottom ml-1 cursor-hand"
+                  onClick={() => deleteCartLineAccount({ cartLineAccountId: lineAccount.id })} />
               </InputGroup.Text>
             </InputGroup.Prepend>
 

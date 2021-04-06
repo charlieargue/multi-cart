@@ -2,7 +2,7 @@ import { Cart, CartLine, CartLineAccount } from "@multi-cart/react-data-access";
 import { roundToTwo } from './roundToTwo';
 
 // ------------------------
-export const sumTotalItems = (cart?: Cart): number | any => {
+export const sumTotalItems = (cart?: Cart): number => {
     if (cart && cart.cartLines) {
         return cart.cartLines.reduce((sum, cl) => {
             if (cl && typeof cl.quantity === "number") {

@@ -53,6 +53,7 @@ Agile/kanban board for multi-cart
 - [ ] I'd like to implement cloneRecalcAndSaveCostCenters and see the DIFFERENT (ng vs react)  
 - [ ] 🐞 🔴 ERROR - memory leak - perform a React state update on an unmounted component (see DESKTOP pic) - maybe when quickly deleted CartLine when still autosaving from new CLA?  
 - [ ] go thru all my "TODO:" in codebase  
+- [ ] go thru all my "CONFUSION:" in codebase, and remove all unecessary comments
 
 ### 📘 Backlog
 

@@ -1,5 +1,5 @@
 import { cacheExchange, Cache } from "@urql/exchange-graphcache";
-import { Account, AddCartLineAccountMutation, AddCartLineAccountMutationVariables, BlankCartLineMutation, Cart, CartDocument, CartLine, CartLineAccount, CartQuery, CartsDocument, CartsQuery, DeleteCartLineMutationVariables, DeleteCartMutationVariables, LoginMutation, LogoutMutation, MeDocument, MeQuery, RegisterMutation, UpdateCartLineMutation, UpdateCartLineMutationVariables } from "@multi-cart/react-data-access";
+import { Account, AddCartLineAccountMutation, AddCartLineAccountMutationVariables, BlankCartLineMutation, Cart, CartDocument, CartLine, CartLineAccount, CartQuery, CartsDocument, CartsQuery, DeleteCartLineAccountMutationVariables, DeleteCartLineMutationVariables, DeleteCartMutationVariables, LoginMutation, LogoutMutation, MeDocument, MeQuery, RegisterMutation, UpdateCartLineMutation, UpdateCartLineMutationVariables } from "@multi-cart/react-data-access";
 import { betterUpdateQuery } from "./betterUpdateQuery";
 import { gql } from '@urql/core';
 
@@ -60,32 +60,9 @@ export const cache = cacheExchange({
             },
 
             deleteCartLine: (result, args, cache) => {
-                cache.updateQuery({ query: CartsDocument }, (data: CartsQuery | null) => {
-                    // GAMEPLAN: find our data.carts cart USING ARGS
-                    // delete that cart's line!
-                    const foundCachedCart = (data as any).carts.find((c: Cart) => c.id === (args as DeleteCartLineMutationVariables).cartId)
-                    const idx = foundCachedCart.cartLines.findIndex((cl: CartLine) => cl.id === (args as DeleteCartLineMutationVariables).cartLineId)
-                    if (idx !== -1) {
-                        foundCachedCart.cartLines.splice(idx, 1);
-                    }
-                    return data;
-                });
-
+                cache.invalidate({ __typename: 'CartLine', id: (args as DeleteCartLineMutationVariables).cartLineId });
+                // TODO: I think this now means we can remove the cartId being passed here...
             },
-
-            // 💎 TODO: move to FYI
-
-            // 🔴 WAIT??!?!?! so this isn't even needed????
-            // CONFUSION: NO, this is NOT NEEDED, everything working as expected
-            // ------------------------
-            // ✅ ANSWER: If a mutation field's result isn't returning the full entity it updates then it becomes impossible for Graphcache to update said entity automatically
-            // ✅ I guess here since we're returning the full CART LINE entity, gql updates it's cache automatically (within the Carts & Cart queries?)
-            // 🧠 when I watch urql DEV TOOLS > Explorer Schema... when I ADD A LINE, it immediately BLACK SQUARE shows me the live update (in BOTH? Carts and Cart queries?)
-            // 🧠  but when I change a description, it seems to be RELOADING the entire cached tree for that CART?
-            // SEE https://www.loom.com/share/7c82e3080a3c4c359b65cad80a363da8 
-
-
-
 
             // ------------------------
             updateCartLine: (result, args, cache, info) => {
@@ -137,6 +114,13 @@ export const cache = cacheExchange({
                 // CONFUSION: so much, so if you do [[[[cache.updateQuery({ query: CartsDocument }, (data: CartsQuery | null) => {]]]] AGAAIN, its data comes back null!!?!?
 
 
+            },
+
+            deleteCartLineAccount: (result, args, cache) => {
+                // NOTE: urql+graphe cache is smart:
+                // • not only are there no explicitly cached entities for CartLineAccount (only as nested under cart -> cart lines -> ... )
+                // • but! when you do this, it BOTH removes the cla from the CartQuery data AS WELL AS the CartsQuery(plural) data!!!!!
+                cache.invalidate({ __typename: 'CartLineAccount', id: (args as DeleteCartLineAccountMutationVariables).cartLineAccountId });
             },
 
             logout: (_result, args, cache, info) => {

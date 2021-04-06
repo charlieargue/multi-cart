@@ -58,7 +58,6 @@ export type CartLineAccount = {
   amount: Scalars['Float'];
   accountNumber: Scalars['String'];
   cartLineId: Scalars['Float'];
-  account: Account;
   createdAt: Scalars['String'];
   updatedAt: Scalars['String'];
 };
@@ -95,6 +94,7 @@ export type Mutation = {
   updateUser: UserResponse;
   addCartLineAccount: CartLineAccount;
   updateCartLineAccount: CartLineAccount;
+  deleteCartLineAccount: Scalars['Boolean'];
 };
 
 
@@ -157,6 +157,11 @@ export type MutationAddCartLineAccountArgs = {
 export type MutationUpdateCartLineAccountArgs = {
   amount: Scalars['Float'];
   id: Scalars['Int'];
+};
+
+
+export type MutationDeleteCartLineAccountArgs = {
+  cartLineAccountId: Scalars['Int'];
 };
 
 export type Query = {
@@ -283,20 +288,6 @@ export type RegisterMutation = (
   ) }
 );
 
-export type UpdateCartLineAccountMutationVariables = Exact<{
-  id: Scalars['Int'];
-  amount: Scalars['Float'];
-}>;
-
-
-export type UpdateCartLineAccountMutation = (
-  { __typename?: 'Mutation' }
-  & { updateCartLineAccount: (
-    { __typename?: 'CartLineAccount' }
-    & Pick<CartLineAccount, 'id' | 'amount' | 'accountNumber' | 'cartLineId'>
-  ) }
-);
-
 export type BlankCartMutationVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -342,19 +333,6 @@ export type DeleteCartLineMutation = (
   & Pick<Mutation, 'deleteCartLine'>
 );
 
-export type UpdateCartLineMutationVariables = Exact<{
-  cartLine: CartLineInput;
-}>;
-
-
-export type UpdateCartLineMutation = (
-  { __typename?: 'Mutation' }
-  & { updateCartLine?: Maybe<(
-    { __typename?: 'CartLine' }
-    & CartLineSnippetFragment
-  )> }
-);
-
 export type AddCartLineAccountMutationVariables = Exact<{
   cartId: Scalars['Int'];
   cartLineId: Scalars['Int'];
@@ -367,8 +345,45 @@ export type AddCartLineAccountMutation = (
   { __typename?: 'Mutation' }
   & { addCartLineAccount: (
     { __typename?: 'CartLineAccount' }
-    & Pick<CartLineAccount, 'id' | 'amount' | 'accountNumber' | 'cartLineId' | 'createdAt' | 'updatedAt'>
+    & CartLineAccountSnippetFragment
   ) }
+);
+
+export type DeleteCartLineAccountMutationVariables = Exact<{
+  cartLineAccountId: Scalars['Int'];
+}>;
+
+
+export type DeleteCartLineAccountMutation = (
+  { __typename?: 'Mutation' }
+  & Pick<Mutation, 'deleteCartLineAccount'>
+);
+
+export type UpdateCartLineAccountMutationVariables = Exact<{
+  id: Scalars['Int'];
+  amount: Scalars['Float'];
+}>;
+
+
+export type UpdateCartLineAccountMutation = (
+  { __typename?: 'Mutation' }
+  & { updateCartLineAccount: (
+    { __typename?: 'CartLineAccount' }
+    & Pick<CartLineAccount, 'id' | 'amount' | 'accountNumber' | 'cartLineId'>
+  ) }
+);
+
+export type UpdateCartLineMutationVariables = Exact<{
+  cartLine: CartLineInput;
+}>;
+
+
+export type UpdateCartLineMutation = (
+  { __typename?: 'Mutation' }
+  & { updateCartLine?: Maybe<(
+    { __typename?: 'CartLine' }
+    & CartLineSnippetFragment
+  )> }
 );
 
 export type ChangePasswordMutationVariables = Exact<{
@@ -548,20 +563,6 @@ export const RegisterDocument = gql`
 export function useRegisterMutation() {
   return Urql.useMutation<RegisterMutation, RegisterMutationVariables>(RegisterDocument);
 };
-export const UpdateCartLineAccountDocument = gql`
-    mutation UpdateCartLineAccount($id: Int!, $amount: Float!) {
-  updateCartLineAccount(id: $id, amount: $amount) {
-    id
-    amount
-    accountNumber
-    cartLineId
-  }
-}
-    `;
-
-export function useUpdateCartLineAccountMutation() {
-  return Urql.useMutation<UpdateCartLineAccountMutation, UpdateCartLineAccountMutationVariables>(UpdateCartLineAccountDocument);
-};
 export const BlankCartDocument = gql`
     mutation BlankCart {
   blankCart {
@@ -602,6 +603,45 @@ export const DeleteCartLineDocument = gql`
 export function useDeleteCartLineMutation() {
   return Urql.useMutation<DeleteCartLineMutation, DeleteCartLineMutationVariables>(DeleteCartLineDocument);
 };
+export const AddCartLineAccountDocument = gql`
+    mutation AddCartLineAccount($cartId: Int!, $cartLineId: Int!, $accountNumber: String!, $amount: Float!) {
+  addCartLineAccount(
+    cartId: $cartId
+    cartLineId: $cartLineId
+    accountNumber: $accountNumber
+    amount: $amount
+  ) {
+    ...CartLineAccountSnippet
+  }
+}
+    ${CartLineAccountSnippetFragmentDoc}`;
+
+export function useAddCartLineAccountMutation() {
+  return Urql.useMutation<AddCartLineAccountMutation, AddCartLineAccountMutationVariables>(AddCartLineAccountDocument);
+};
+export const DeleteCartLineAccountDocument = gql`
+    mutation DeleteCartLineAccount($cartLineAccountId: Int!) {
+  deleteCartLineAccount(cartLineAccountId: $cartLineAccountId)
+}
+    `;
+
+export function useDeleteCartLineAccountMutation() {
+  return Urql.useMutation<DeleteCartLineAccountMutation, DeleteCartLineAccountMutationVariables>(DeleteCartLineAccountDocument);
+};
+export const UpdateCartLineAccountDocument = gql`
+    mutation UpdateCartLineAccount($id: Int!, $amount: Float!) {
+  updateCartLineAccount(id: $id, amount: $amount) {
+    id
+    amount
+    accountNumber
+    cartLineId
+  }
+}
+    `;
+
+export function useUpdateCartLineAccountMutation() {
+  return Urql.useMutation<UpdateCartLineAccountMutation, UpdateCartLineAccountMutationVariables>(UpdateCartLineAccountDocument);
+};
 export const UpdateCartLineDocument = gql`
     mutation UpdateCartLine($cartLine: CartLineInput!) {
   updateCartLine(cartLine: $cartLine) {
@@ -612,27 +652,6 @@ export const UpdateCartLineDocument = gql`
 
 export function useUpdateCartLineMutation() {
   return Urql.useMutation<UpdateCartLineMutation, UpdateCartLineMutationVariables>(UpdateCartLineDocument);
-};
-export const AddCartLineAccountDocument = gql`
-    mutation AddCartLineAccount($cartId: Int!, $cartLineId: Int!, $accountNumber: String!, $amount: Float!) {
-  addCartLineAccount(
-    cartId: $cartId
-    cartLineId: $cartLineId
-    accountNumber: $accountNumber
-    amount: $amount
-  ) {
-    id
-    amount
-    accountNumber
-    cartLineId
-    createdAt
-    updatedAt
-  }
-}
-    `;
-
-export function useAddCartLineAccountMutation() {
-  return Urql.useMutation<AddCartLineAccountMutation, AddCartLineAccountMutationVariables>(AddCartLineAccountDocument);
 };
 export const ChangePasswordDocument = gql`
     mutation ChangePassword($token: String!, $newPassword: String!) {
@@ -857,7 +876,6 @@ export type CartLineAccountResolvers<ContextType = any, ParentType extends Resol
   amount?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
   accountNumber?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   cartLineId?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
-  account?: Resolver<ResolversTypes['Account'], ParentType, ContextType>;
   createdAt?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   updatedAt?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
@@ -883,6 +901,7 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   updateUser?: Resolver<ResolversTypes['UserResponse'], ParentType, ContextType, RequireFields<MutationUpdateUserArgs, 'currentCartId'>>;
   addCartLineAccount?: Resolver<ResolversTypes['CartLineAccount'], ParentType, ContextType, RequireFields<MutationAddCartLineAccountArgs, 'amount' | 'accountNumber' | 'cartLineId' | 'cartId'>>;
   updateCartLineAccount?: Resolver<ResolversTypes['CartLineAccount'], ParentType, ContextType, RequireFields<MutationUpdateCartLineAccountArgs, 'amount' | 'id'>>;
+  deleteCartLineAccount?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationDeleteCartLineAccountArgs, 'cartLineAccountId'>>;
 };
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {

@@ -4,6 +4,7 @@ import { getConnection } from 'typeorm';
 import { Cart } from '../entities/Cart';
 import { isAuth } from '../middleware/isAuth';
 import { MyContext } from '../types';
+import { User } from '../entities/User';
 
 @InputType()
 class CartLineInput {
@@ -135,12 +136,20 @@ export class CartResolver {
     @UseMiddleware(isAuth) // 🛡
     async deleteCart(
         @Arg('id', () => Int) id: number,
-        // @Ctx() { req }: MyContext
+        @Ctx() { req }: MyContext
     ): Promise<boolean> {
         // TODO: add security on all these deletes/updates (that only owner of cart can do so!)
+        // 🛡 TODO: make this a re-usable method, since commonly done (find this cart for this currently-logged-in user, find a cart_line for ditto, CLA, etc...)
 
-        // TODO: need to set user.currentCartId = null since there's an FK there!
-
+        // set user.currentCartId = null since there's an FK there!
+        await getConnection()
+            .createQueryBuilder()
+            .update(User)
+            .set({ currentCartId: undefined })
+            .where('id = :id', {
+                id: req.session.userId,
+            })
+            .execute();
 
         // cascade cartlines & cartLineAccounts is ON!
         await getConnection()
@@ -156,7 +165,7 @@ export class CartResolver {
     @Mutation(() => Boolean)
     @UseMiddleware(isAuth) // 🛡
     async deleteCartLine(
-        // NOTE: only because started with NON relational! non-unique cartLine IDs
+        // NOTE: only because started with NON relational! non-unique cartLine IDs (afaik this is b/c either Mock-API-start or urql graph-cache needs it...)
         @Arg('cartId', () => Int) _cartId: number,
         @Arg('cartLineId', () => Int) cartLineId: number,
     ): Promise<boolean> {
