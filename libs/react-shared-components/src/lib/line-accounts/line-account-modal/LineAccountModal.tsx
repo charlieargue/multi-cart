@@ -5,6 +5,7 @@ import { ModalComponent, ModalComponentProps } from '@multi-cart/react-ui';
 import React from 'react';
 import { Button, Form, Modal, Table } from 'react-bootstrap';
 import { WalletFill } from 'react-bootstrap-icons';
+import clsx from 'clsx';
 
 /* eslint-disable-next-line */
 export type LineAccountModalProps = {
@@ -13,24 +14,46 @@ export type LineAccountModalProps = {
 
 // -------------------
 // thx: https://react-bootstrap.github.io/components/modal/
-export function LineAccountModal(props: LineAccountModalProps) {
+// thx: https://dev.to/asimdahall/simple-search-form-in-react-using-hooks-42pg
+export function LineAccountModal({ onHide, line, show }: LineAccountModalProps) {
   const [{ data, fetching }] = useAccountsQuery();
   const [, addCartLineAccount] = useAddCartLineAccountMutation();
+  const [searchResults, setSearchResults] = React.useState([]);
+  const [searchTerm, setSearchTerm] = React.useState("");
+  const handleChange = event => {
+    setSearchTerm(event.target.value);
+  };
 
+  // ------------------
+  React.useEffect(() => {
+    const results = data?.accounts.filter(account =>
+      account.accountNumber.toLowerCase().includes(searchTerm)
+    );
+    setSearchResults(results);
+  }, [data?.accounts, searchTerm]);
+
+
+  // ------------------
   const handleSelect = async (a: Account) => {
-    const remainingAmount = getRemainingAmount(props.line); // NOTE: since props.line is updated super-fast, it already has the NEW CLA in there,  somehow??
+    const remainingAmount = getRemainingAmount(line); // NOTE: since line is updated super-fast, it already has the NEW CLA in there,  somehow??
     await addCartLineAccount({
-      cartId: props.line.cartId,
-      cartLineId: props.line.id,
+      cartId: line.cartId,
+      cartLineId: line.id,
       accountNumber: a.accountNumber,
       amount: remainingAmount,
     });
     // TODO:  cache will auto-refresh so behind modal will already show newest CLA
-    props.onHide();
+    onHide();
   };
 
+  // ------------------
+  const isAlreadySelected = (accountNumber: string): boolean => {
+    return line.cartLineAccounts ? line.cartLineAccounts.filter((a) => a.accountNumber === accountNumber).length !== 0 : false;
+  }
+
+  // ------------------
   return (
-    <ModalComponent onHide={props.onHide} show={props.show} dialogClassName="modal-scroll-y">
+    <ModalComponent onHide={onHide} show={show} dialogClassName="modal-scroll-y">
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
           <WalletFill className="mr-2" style={{ marginTop: "-3px" }} />Choose a Line Account
@@ -44,13 +67,17 @@ export function LineAccountModal(props: LineAccountModalProps) {
             <Form.Text className="text-muted ml-1">
               Start typing to <strong>filter line accounts</strong>:
             </Form.Text>
-            <Form.Control type="text" placeholder="Search by account number or name" />
+            <Form.Control
+              type="text"
+              placeholder="Search by account number or name"
+              value={searchTerm}
+              onChange={handleChange} />
           </Form.Group>
         </Form>
 
         {/* RESULTS TABLE */}
         {
-          !data && fetching ? (<div>loading...</div>) : (
+          !searchResults && fetching ? (<div>loading...</div>) : (
             <Table striped hover responsive size="sm" className="mt-2">
               <thead>
                 <tr className="text-muted">
@@ -60,8 +87,12 @@ export function LineAccountModal(props: LineAccountModalProps) {
                 </tr>
               </thead>
               <tbody>
-                {data?.accounts?.map((a, idx) => !a ? null : (
-                  <tr key={a.accountNumber} className="cursor-hand" onClick={() => handleSelect(a as Account)}>
+                {searchResults?.map((a, idx) => !a ? null : (
+                  // [ngClass]="{'bg-yellow opacity-60': }">  
+                  <tr
+                    key={a.accountNumber}
+                    className={clsx("cursor-hand", isAlreadySelected(a.accountNumber) ? "bg-warning text-muted" : null)}
+                    onClick={() => isAlreadySelected(a.accountNumber) ? null : handleSelect(a as Account)}>
                     <td>{a.accountNumber}</td>
                     <td>{a.accountName}</td>
                     <td>{toFriendlyCurrency(a.amountRemaining)}</td>
@@ -74,7 +105,7 @@ export function LineAccountModal(props: LineAccountModalProps) {
 
       </Modal.Body>
       <Modal.Footer>
-        <Button onClick={props.onHide}>Close</Button>
+        <Button onClick={onHide}>Close</Button>
       </Modal.Footer>
     </ModalComponent>
   );

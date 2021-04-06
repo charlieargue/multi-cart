@@ -5,6 +5,8 @@ Agile/kanban board for multi-cart
 
 ### 😎 Wishlist
 
+- [ ] validation on cart line (item, desc?, qty, price, etc...)
+- [ ] finish cart line row (UOM, categories) ... or wait till store?
 - [ ] UI: store: switch to chakra-ui (follow their landing-page tutorial see #slack/design-resources) -- use that for store page! or keep react-bootstrap, but just DO SAME THING w/o chakra! FIGMA and nice design for my site/CV demo-app + code-samples  
 - [ ] “store” - “catalog” function  
   - [ ] store: Just add items, have the same COLUMNS as cart line  
@@ -62,24 +64,26 @@ Agile/kanban board for multi-cart
 - [ ] auto-completing upon bad number and all messed up after, see: https://www.loom.com/share/dc660f891df3425f887d1e97d295167c (possible circumvention by NOT allowing save if line totals are not 100%? unless you're creating a distribution, and not finished yet? TBD)
 
 ### 💪 Todo
-- [ ] olas: cant add the same account number twice, highlight+disable plz  
 - [ ] LA TESTING: lock down with JEST (try exercising auto-save here???)  
 - [ ] LA TESTING: lock down with CYPRESS (avoid auto-save & chaos tests)  
 - [ ] storybook for Line Accounts stuff  
 
 ### 🧠 In Progress
-- [ ] LA validation - must total amount = ltwt  
-- [ ] LA validation - must be 100% total (CART AVATAR becomes red! (pure gql cache or is need UI state?)  )  
 
 
 
 
 ### 👿 Stuck On:
 - [ ] LA validation FAIL ==> red box on LA container & red box on cart avatar (tried everything but Formik JSX causes error)
+- [ ] cannot get CSS/SCSS to work/import within libs/projects (next/nx issue), REPRO / see google doc notes
 
 ### Done
 
-- [ ] 🐞 When you delete a user’s current cart, SET User.currentCartId to null FIRST? Set the next one, or what if they don’t have one?  And graphe-cache has to update the Me query during deleteCart !!! if user.currentCartId is changed! that'll update the avatar  
-  - [ ] olas: Should be fast!, good for modal work, use CONTEXT on that modal?!  
-- [ ] make sure all currency is using the same toNiceCurrency() util!  
-- [ ] LA validation - can't have 0% (formik validation + red border + LA container red + avatar red)  
+- [x] la: cant add the same account number twice, highlight+disable plz  
+- [x] 🐞 When you delete a user’s current cart, SET User.currentCartId to null FIRST? Set the next one, or what if they don’t have one?  And graphe-cache has to update the Me query during deleteCart !!! if user.currentCartId is changed! that'll update the avatar  
+- [x] olas: Should be fast!, good for modal work, use CONTEXT on that modal?!  
+- [x] make sure all currency is using the same toNiceCurrency() util!  
+- [x] LA validation - can't have 0% (formik validation + red border + LA container red + avatar red)  
+- [x] LA validation - must total amount = ltwt  
+- [x] LA validation - must be 100% total (CART AVATAR becomes red! (pure gql cache or is need UI state?)  )  
+- [x] searching/filtering within line account modal
