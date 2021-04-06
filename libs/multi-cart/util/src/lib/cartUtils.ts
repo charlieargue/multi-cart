@@ -61,7 +61,7 @@ export const getRemainingPercentage = (line: CartLine, excludeCartLineAccountId?
 
 // ------------------
 export const getTotalPercentages = (line: CartLine, excludeCartLineAccountId?: number): number => {
-    if (!line.cartLineAccounts) {
+    if (!line?.cartLineAccounts) {
         return 0;
     }
     const result = line.cartLineAccounts
