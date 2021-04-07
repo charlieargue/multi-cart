@@ -5,8 +5,8 @@ Agile/kanban board for multi-cart
 
 ### 😎 Wishlist
 
-- [ ] validation on cart line (item, desc?, qty, price, etc...)
-- [ ] finish cart line row (UOM, categories) ... or wait till store?
+- [ ] validation on cart line (item, desc?, qty, price, etc...)  
+- [ ] finish cart line row (UOM, categories) ... or wait till store?  
 - [ ] UI: store: switch to chakra-ui (follow their landing-page tutorial see #slack/design-resources) -- use that for store page! or keep react-bootstrap, but just DO SAME THING w/o chakra! FIGMA and nice design for my site/CV demo-app + code-samples  
 - [ ] “store” - “catalog” function  
   - [ ] store: Just add items, have the same COLUMNS as cart line  
@@ -25,7 +25,7 @@ Agile/kanban board for multi-cart
 - [ ] PRETTIER: get those attributes breaking in JSX!  
 - [ ] UI: make a drawer and remember settings with either 2) zustand, or 3) redux, or 1) context (use UI: https://getbootstrap.com/docs/5.0/examples/sidebars/#)  
 - [ ] UI: I want this 2nd-ary nav for breadcrumbs! https://getbootstrap.com/docs/5.0/examples/offcanvas-navbar/ (and no more gray alert box)  
-- [ ] UI: how do I get a loading line indicator intercepting all urql calls like I had in angular?
+- [ ] UI: how do I get a loading line indicator intercepting all urql calls like I had in angular?  
 - [ ] UI: good thing to work on would be ability to collapse ALL/one-at-a-time the Line-Accounts (or just toggle on/off) and then SAVE that to state somewhere (but NOT persist), so you can navigate around and always see your cart collapsed/expanded (like ClickUp did)  
 - [ ] Add user profile w/ Upload image! Copy 🇵🇱 multi-part upload  
 - [ ] urql assume success! (optimistic API calls!) see 🇵🇱  and https://github.com/FormidableLabs/urql/issues/863  
@@ -49,14 +49,14 @@ Agile/kanban board for multi-cart
 - [ ] go thru all my "CONFUSION:" in codebase, and remove all unecessary comments  
 
 ### 🐞 BUGS
-- [ ] BUG: auto-completing upon bad number and all messed up after, see: https://www.loom.com/share/dc660f891df3425f887d1e97d295167c (possible circumvention by NOT allowing save if line totals are not 100%? unless you're creating a distribution, and not finished yet? TBD)
-- [ ] BUG: edit cart name: cancel all subscriptions error when click above-input-in-green-box quickly couple/few times!
-- [ ] BUG: LA validation FAIL ==> red box on LA container & red box on cart avatar (tried everything but Formik JSX causes error)
 
+- [ ] BUG: auto-completing upon bad number and all messed up after, see: https://www.loom.com/share/dc660f891df3425f887d1e97d295167c (possible circumvention by NOT allowing save if line totals are not 100%? unless you're creating a distribution, and not finished yet? TBD)  
+- [ ] BUG: edit cart name: cancel all subscriptions error when click above-input-in-green-box quickly couple/few times!  
+- [ ] BUG: LA validation FAIL ==> red box on LA container & red box on cart avatar (tried everything but Formik JSX causes error)  
 
 ### 📘 Backlog
 
-- [ ] FIX login form: seeing doubles!
+- [ ] FIX login form: seeing doubles!  
 - [ ] FIX that issue with libs + next + nx not allowing CSS/SCSS!!! ••• MAKE REPRO and get help •••  
 - [ ] There’s ZERO error handling on login, add some toasts please! (maybe with 🇵🇱 urql interceptor / toast container)  
 - [ ] change/forgot password/login/register need work/checking (token works, nodemailer?)  
@@ -69,26 +69,27 @@ Agile/kanban board for multi-cart
 - [ ] storybook for Line Accounts stuff  
 
 ### 💪 Todo
-- [ ] isOpen/Closed for carts avatar dropdown: 1) useContext, then 2) try zustand  
+
 - [ ] UI: fix the alignment on the EDIT CART page (left and right edges should all align)  
 
-
 ### 🧠 In Progress
-- [ ] make cart name clickable and editable  
 
-
+- [ ] highlight current cart in carts list  
+- [ ] isOpen/Closed for carts avatar dropdown: 1) useContext, then 2) try zustand  
 
 ### 👿 Stuck On:
 
-- [ ] 💎 VIP: 💎 cannot get CSS/SCSS to work/import within libs/projects (next/nx issue), REPRO / see google doc notes
+- [ ] 💎 VIP: 💎 cannot get CSS/SCSS to work/import within libs/projects (next/nx issue), REPRO / see google doc notes  
 
 ### Done
 
-- [x] la: cant add the same account number twice, highlight+disable plz  
-- [x] 🐞 When you delete a user’s current cart, SET User.currentCartId to null FIRST? Set the next one, or what if they don’t have one?  And graphe-cache has to update the Me query during deleteCart !!! if user.currentCartId is changed! that'll update the avatar  
-- [x] olas: Should be fast!, good for modal work, use CONTEXT on that modal?!  
-- [x] make sure all currency is using the same toNiceCurrency() util!  
-- [x] LA validation - can't have 0% (formik validation + red border + LA container red + avatar red)  
-- [x] LA validation - must total amount = ltwt  
-- [x] LA validation - must be 100% total (CART AVATAR becomes red! (pure gql cache or is need UI state?)  )  
-- [x] searching/filtering within line account modal
+- [ ] make cart name clickable and editable  
+- [ ] la: cant add the same account number twice, highlight+disable plz  
+- [ ] 🐞 When you delete a user’s current cart, SET User.currentCartId to null FIRST? Set the next one, or what if they don’t have one?  And graphe-cache has to update the Me query during deleteCart !!! if user.currentCartId is changed! that'll update the avatar  
+- [ ] olas: Should be fast!, good for modal work, use CONTEXT on that modal?!  
+- [ ] make sure all currency is using the same toNiceCurrency() util!  
+- [ ] LA validation - can't have 0% (formik validation + red border + LA container red + avatar red)  
+- [ ] LA validation - must total amount = ltwt  
+- [ ] LA validation - must be 100% total (CART AVATAR becomes red! (pure gql cache or is need UI state?)  )  
+- [ ] searching/filtering within line account modal  
+

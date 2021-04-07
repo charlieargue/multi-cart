@@ -51,7 +51,8 @@ export const CartAvatar: React.FC<CartAvatarProps> = ({ currentCartId = -1 }) =>
                                     <ListGroup.Item key={c.id}
                                         className={clsx(
                                             c.id == 2 ? styles['cart-avatar__current-cart'] : null,
-                                            'p-1')}>
+                                            'p-1')}
+                                        style={c.id === currentCartId ? { "backgroundColor": "#EAF6ED" } : null}>
                                         <NextLink
                                             href="/cart/[id]"
                                             as={`/cart/${c.id}`}>
