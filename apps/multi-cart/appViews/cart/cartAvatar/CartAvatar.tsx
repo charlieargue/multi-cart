@@ -59,7 +59,7 @@ export const CartAvatar: React.FC<CartAvatarProps> = ({ currentCartId = -1 }) =>
                                             <Container>
                                                 <Row>
                                                     <Col>
-                                                        <Badge variant="success" className="mr-1">{c.id}</Badge>
+                                                        <Badge variant="secondary" className="mr-1">{c.id}</Badge>
                                                         <strong>{c.name}</strong>
                                                         <br />
                                                         {toDaysAgo(c.createdAt)}
