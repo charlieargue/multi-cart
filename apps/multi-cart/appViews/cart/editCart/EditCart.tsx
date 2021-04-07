@@ -1,5 +1,5 @@
 import { CartLine, useBlankCartLineMutation, useCartQuery, useDeleteCartMutation, useUpdateUserMutation } from '@multi-cart/react-data-access';
-import { LineAccount, LineAccountButtonRow } from '@multi-cart/react-shared-components';
+import { LineAccount, LineAccountButtonRow, CartNameEditable } from '@multi-cart/react-shared-components';
 import { Breadcrumbs } from '@multi-cart/react-ui';
 import clsx from 'clsx';
 import { useRouter } from 'next/router';
@@ -89,10 +89,7 @@ export const EditCart: React.FC<{ id: number }> = ({ id }) => {
             <Container fluid>
                 <Row className="align-items-md-baseline">
                     <Col className="pl-2 d-flex align-items-md-baseline">
-                        <h2>
-                            <Button variant="success" size="lg" className="shadow-sm">
-                                {data.cart.name}</Button>
-                        </h2>
+                        <CartNameEditable name={data.cart.name} id={data.cart.id} />
                         <div className="ml-2">
                             <Badge pill variant="secondary" className="opacity-5">
                                 <strong>created on</strong> {data.cart.createdAt}

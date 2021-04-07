@@ -76,7 +76,7 @@ export const LineAccount: React.FC<LineAccountProps> = ({ lineAccount, line }) =
         });
 
       }}>
-      {({ isSubmitting, values, setValues, errors, touched }) => (
+      {({ /*isSubmitting, values, setValues,*/ errors, touched }) => (
         <Form className="ml-3" style={{ "width": "300px" }}>
           <InputGroup className="mb-3 ml-3" style={stylesGroup} size="sm">
             <InputGroup.Prepend>

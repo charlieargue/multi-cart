@@ -10,7 +10,7 @@
   cursor: pointer;
 }
 .opacity-5 {
-  opacity: .5;
+  opacity: 0.5;
 }
 
 .floatingSave {
@@ -39,15 +39,21 @@
 }
 @keyframes cssAnimation {
   to {
-      width:0;
-      height:0;
-      overflow:hidden;
+    width: 0;
+    height: 0;
+    overflow: hidden;
   }
 }
 @-webkit-keyframes cssAnimation {
   to {
-      width:0;
-      height:0;
-      visibility:hidden;
+    width: 0;
+    height: 0;
+    visibility: hidden;
   }
+}
+
+.button-editable {
+  // border-radius:
+  padding: 0.5em 1em;
+  font-size: 0.7em;
 }

@@ -1,39 +1,11 @@
-import { CartLine } from '../entities/CartLine';
-import { Arg, Ctx, Field, Float, InputType, Int, Mutation, Query, Resolver, UseMiddleware } from 'type-graphql';
+import { Arg, Ctx, Int, Mutation, Query, Resolver, UseMiddleware } from 'type-graphql';
 import { getConnection } from 'typeorm';
 import { Cart } from '../entities/Cart';
+import { CartLine } from '../entities/CartLine';
+import { User } from '../entities/User';
 import { isAuth } from '../middleware/isAuth';
 import { MyContext } from '../types';
-import { User } from '../entities/User';
-
-@InputType()
-class CartLineInput {
-
-    @Field(() => Int)
-    id: number;
-
-    @Field(() => Int)
-    cartId: number;
-
-    @Field(() => Int)
-    categoryId: number;
-
-    @Field(() => Int)
-    quantity: number;
-
-    @Field(() => Float)
-    price: number;
-
-    @Field()
-    itemId: string
-
-    @Field()
-    description: string
-
-    @Field()
-    uom: string
-
-}
+import { CartInput, CartLineInput } from './types/InputTypes';
 
 @Resolver(Cart)
 export class CartResolver {
@@ -180,7 +152,6 @@ export class CartResolver {
         return true;
     }
 
-
     @Mutation(() => CartLine, { nullable: true })
     @UseMiddleware(isAuth) // 🛡
     async updateCartLine(
@@ -201,26 +172,7 @@ export class CartResolver {
             .returning("*")
             .execute();
 
-        // NEED THIS: .leftJoinAndSelect("cart_line.cartLineAccounts", "cart_line_account")
-        // OR THIS: .relation(CartLineAccount, "cartLineAccounts")
-        /// BUT DON'T WORK WITH UPDATE!!!?? afaik...
-        // .returning() ??? 
-
-        // console.log('🤖🤖🤖 raw[0] 🤖🤖🤖 ');
-        // console.log(JSON.stringify(raw[0], null, '  '));
-        // {
-        //     "id": 654,
-        //     "itemId": "dupa",
-        //     "description": "dupa",
-        //     "uom": "EACH",
-        //     "quantity": 1,
-        //     "categoryId": 1,
-        //     "cartId": 770,
-        //     "createdAt": "2021-04-02T05:19:19.668Z",
-        //     "updatedAt": "2021-04-02T05:25:14.464Z",
-        //     "price": 0
-        //   }
-
+        // TODO: cart query has cart.userId and the case issue is ok, but not on updateCart()? why?
         // NOTE: needed to return cartLine.cartLineAccounts hydrated, but not sure how to do it in one query builder call
         const qb = getConnection()
             .getRepository(CartLine)
@@ -229,6 +181,28 @@ export class CartResolver {
             // .orderBy("c.createdAt", "DESC")
             .where("cl.id = :id", { id: raw[0].id });
         return qb.getOne();
+    }
+
+    @Mutation(() => Cart, { nullable: true })
+    @UseMiddleware(isAuth) // 🛡
+    async updateCart(
+        @Arg('cart', () => CartInput) cart: CartInput,
+        @Ctx() { req }: MyContext
+    ): Promise<Cart | Error | undefined> {
+
+        const { raw } = await getConnection()
+            .createQueryBuilder()
+            .update(Cart)
+            .set(
+                { name: cart.name }
+            )
+            .where("id = :id AND userId = :userId", { id: cart.id, userId: req.session.userId })
+            .returning("*")
+            .execute();
+
+        // NOTE: this auto-updates in the normalized graphcache! 
+        // TODO: good thing to have in a cypress test! (check the cart avatar drop-down, did the cart name update?)
+        return raw[0];
     }
 
 }

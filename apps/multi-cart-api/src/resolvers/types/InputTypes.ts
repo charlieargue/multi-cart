@@ -1,0 +1,42 @@
+import { InputType, Field, Int, Float } from 'type-graphql';
+
+@InputType()
+export class CartLineInput {
+
+    @Field(() => Int)
+    id: number;
+
+    @Field(() => Int)
+    cartId: number;
+
+    @Field(() => Int)
+    categoryId: number;
+
+    @Field(() => Int)
+    quantity: number;
+
+    @Field(() => Float)
+    price: number;
+
+    @Field()
+    itemId: string
+
+    @Field()
+    description: string
+
+    @Field()
+    uom: string
+
+}
+
+
+@InputType()
+export class CartInput {
+
+    @Field(() => Int)
+    id: number;
+
+    @Field()
+    name: string
+
+}

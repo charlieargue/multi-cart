@@ -36,6 +36,11 @@ export type Cart = {
   updatedAt: Scalars['String'];
 };
 
+export type CartInput = {
+  id: Scalars['Int'];
+  name: Scalars['String'];
+};
+
 export type CartLine = {
   __typename?: 'CartLine';
   id: Scalars['Int'];
@@ -86,6 +91,7 @@ export type Mutation = {
   deleteCart: Scalars['Boolean'];
   deleteCartLine: Scalars['Boolean'];
   updateCartLine?: Maybe<CartLine>;
+  updateCart?: Maybe<Cart>;
   register: UserResponse;
   login: UserResponse;
   forgotPassword: Scalars['Boolean'];
@@ -116,6 +122,11 @@ export type MutationDeleteCartLineArgs = {
 
 export type MutationUpdateCartLineArgs = {
   cartLine: CartLineInput;
+};
+
+
+export type MutationUpdateCartArgs = {
+  cart: CartInput;
 };
 
 
@@ -371,6 +382,19 @@ export type UpdateCartLineAccountMutation = (
     { __typename?: 'CartLineAccount' }
     & Pick<CartLineAccount, 'id' | 'amount' | 'accountNumber' | 'cartLineId'>
   ) }
+);
+
+export type UpdateCartMutationVariables = Exact<{
+  cart: CartInput;
+}>;
+
+
+export type UpdateCartMutation = (
+  { __typename?: 'Mutation' }
+  & { updateCart?: Maybe<(
+    { __typename?: 'Cart' }
+    & Pick<Cart, 'id' | 'name' | 'updatedAt'>
+  )> }
 );
 
 export type UpdateCartLineMutationVariables = Exact<{
@@ -642,6 +666,19 @@ export const UpdateCartLineAccountDocument = gql`
 export function useUpdateCartLineAccountMutation() {
   return Urql.useMutation<UpdateCartLineAccountMutation, UpdateCartLineAccountMutationVariables>(UpdateCartLineAccountDocument);
 };
+export const UpdateCartDocument = gql`
+    mutation UpdateCart($cart: CartInput!) {
+  updateCart(cart: $cart) {
+    id
+    name
+    updatedAt
+  }
+}
+    `;
+
+export function useUpdateCartMutation() {
+  return Urql.useMutation<UpdateCartMutation, UpdateCartMutationVariables>(UpdateCartDocument);
+};
 export const UpdateCartLineDocument = gql`
     mutation UpdateCartLine($cartLine: CartLineInput!) {
   updateCartLine(cartLine: $cartLine) {
@@ -804,6 +841,7 @@ export type ResolversTypes = {
   Float: ResolverTypeWrapper<Scalars['Float']>;
   Cart: ResolverTypeWrapper<Cart>;
   Int: ResolverTypeWrapper<Scalars['Int']>;
+  CartInput: CartInput;
   CartLine: ResolverTypeWrapper<CartLine>;
   CartLineAccount: ResolverTypeWrapper<CartLineAccount>;
   CartLineInput: CartLineInput;
@@ -823,6 +861,7 @@ export type ResolversParentTypes = {
   Float: Scalars['Float'];
   Cart: Cart;
   Int: Scalars['Int'];
+  CartInput: CartInput;
   CartLine: CartLine;
   CartLineAccount: CartLineAccount;
   CartLineInput: CartLineInput;
@@ -893,6 +932,7 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   deleteCart?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationDeleteCartArgs, 'id'>>;
   deleteCartLine?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationDeleteCartLineArgs, 'cartLineId' | 'cartId'>>;
   updateCartLine?: Resolver<Maybe<ResolversTypes['CartLine']>, ParentType, ContextType, RequireFields<MutationUpdateCartLineArgs, 'cartLine'>>;
+  updateCart?: Resolver<Maybe<ResolversTypes['Cart']>, ParentType, ContextType, RequireFields<MutationUpdateCartArgs, 'cart'>>;
   register?: Resolver<ResolversTypes['UserResponse'], ParentType, ContextType, RequireFields<MutationRegisterArgs, 'options'>>;
   login?: Resolver<ResolversTypes['UserResponse'], ParentType, ContextType, RequireFields<MutationLoginArgs, 'password' | 'usernameOrEmail'>>;
   forgotPassword?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationForgotPasswordArgs, 'email'>>;
