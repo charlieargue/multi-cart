@@ -44,7 +44,6 @@ Agile/kanban board for multi-cart
 - [ ] Tsconfigs and base/extended/lib-VS-app versions, and how I set it up is confusing still!!! Needs work  
 - [ ] print out POSGRES basics  
 - [ ] I'd like to implement cloneRecalcAndSaveCostCenters and see the DIFFERENCE (ng vs react)  
-- [ ] 🐞 🔴 ERROR - memory leak - perform a React state update on an unmounted component (see DESKTOP pic) - maybe when quickly deleted CartLine when still autosaving from new CLA?  
 - [ ] go thru all my "TODO:" in codebase  
 - [ ] go thru all my "CONFUSION:" in codebase, and remove all unecessary comments  
 
@@ -53,6 +52,7 @@ Agile/kanban board for multi-cart
 - [ ] BUG: auto-completing upon bad number and all messed up after, see: https://www.loom.com/share/dc660f891df3425f887d1e97d295167c (possible circumvention by NOT allowing save if line totals are not 100%? unless you're creating a distribution, and not finished yet? TBD)  
 - [ ] BUG: edit cart name: cancel all subscriptions error when click above-input-in-green-box quickly couple/few times!  
 - [ ] BUG: LA validation FAIL ==> red box on LA container & red box on cart avatar (tried everything but Formik JSX causes error)  
+- [ ] BUG: Saving message appears during each EDIT CART page load (though I thought I stopped that with the useRef initial load)
 
 ### 📘 Backlog
 
@@ -70,19 +70,19 @@ Agile/kanban board for multi-cart
 
 ### 💪 Todo
 
-- [ ] UI: fix the alignment on the EDIT CART page (left and right edges should all align)  
 
 ### 🧠 In Progress
+- [ ] 💎 VIP: 💎 cannot get CSS/SCSS to work/import within libs/projects (next/nx issue), REPRO / see google doc notes  
 
-- [ ] highlight current cart in carts list  
-- [ ] isOpen/Closed for carts avatar dropdown: 1) useContext, then 2) try zustand  
+
 
 ### 👿 Stuck On:
 
-- [ ] 💎 VIP: 💎 cannot get CSS/SCSS to work/import within libs/projects (next/nx issue), REPRO / see google doc notes  
 
 ### Done
 
+- [ ] FEATURE-NOT-BUG: CAN QUICKLY TOGGLE CARTS -- isOpen/Closed for carts avatar dropdown: 1) useContext, then 2) try zustand  
+- [ ] highlight current cart in carts list  
 - [ ] make cart name clickable and editable  
 - [ ] la: cant add the same account number twice, highlight+disable plz  
 - [ ] 🐞 When you delete a user’s current cart, SET User.currentCartId to null FIRST? Set the next one, or what if they don’t have one?  And graphe-cache has to update the Me query during deleteCart !!! if user.currentCartId is changed! that'll update the avatar  
@@ -92,4 +92,4 @@ Agile/kanban board for multi-cart
 - [ ] LA validation - must total amount = ltwt  
 - [ ] LA validation - must be 100% total (CART AVATAR becomes red! (pure gql cache or is need UI state?)  )  
 - [ ] searching/filtering within line account modal  
-
+- [ ] UI: (GOOD ENOUGH) fix the alignment on the EDIT CART page (left and right edges should all align)  

@@ -30,7 +30,7 @@ export function CartNameEditable({ name, id }: CartNameEditableProps) {
   // -------------------
   return (
     <h2 onClick={() => isEditing === false ? setIsEditing(!isEditing) : null}>
-      <div className="button-editable shadow-sm btn btn-success">
+      <div className="button-editable shadow btn btn-success">
         {isEditing && (
 
           // EDIT FORM -------------------- start

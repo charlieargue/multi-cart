@@ -18,7 +18,7 @@ export interface BreadcrumbsProps {
 // -------------------
 export function Breadcrumbs<BreadcrumbsProps>({ links = [] }) {
   return (
-    <Breadcrumb className="mb-5">
+    <Breadcrumb className="mb-4">
       <Breadcrumb.Item className="align-content"><NextLink href="/">
         <HouseFill color="gray" className="mb-1" data-test-id="icon-home" />
       </NextLink></Breadcrumb.Item>

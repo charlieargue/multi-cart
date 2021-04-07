@@ -1,9 +1,10 @@
-import { CartLine, useBlankCartLineMutation, useCartQuery, useDeleteCartMutation, useUpdateUserMutation } from '@multi-cart/react-data-access';
-import { LineAccount, LineAccountButtonRow, CartNameEditable } from '@multi-cart/react-shared-components';
+import { sumTotalCost, toFriendlyCurrency } from '@multi-cart/multi-cart/util';
+import { Cart, CartLine, useBlankCartLineMutation, useCartQuery, useDeleteCartMutation, useUpdateUserMutation } from '@multi-cart/react-data-access';
+import { CartNameEditable, LineAccount, LineAccountButtonRow } from '@multi-cart/react-shared-components';
 import { Breadcrumbs } from '@multi-cart/react-ui';
 import clsx from 'clsx';
 import { useRouter } from 'next/router';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Alert, Badge, Button, Col, Container, Row } from 'react-bootstrap';
 import { ExclamationCircleFill, PlusCircleFill, XSquareFill } from 'react-bootstrap-icons';
 import { AppLayout } from '../../_layout';
@@ -86,7 +87,8 @@ export const EditCart: React.FC<{ id: number }> = ({ id }) => {
             {breadcrumbs}
 
             {/* 🛍 cart header  */}
-            <Container fluid>
+            {/* TODO: search for all style= and get 'em outta here!  */}
+            <Container fluid style={{ "paddingLeft": "9px", "paddingRight": "6px", "borderTop": "1px solid #ccc", "borderBottom": "1px solid #ccc" }} className="py-3">
                 <Row className="align-items-md-baseline">
                     <Col className="pl-2 d-flex align-items-md-baseline">
                         <CartNameEditable name={data.cart.name} id={data.cart.id} />
@@ -170,8 +172,13 @@ export const EditCart: React.FC<{ id: number }> = ({ id }) => {
 
                 <tfoot>
                     <tr>
+                        <td align="right"
+                            colSpan={8}
+                            className="border-radius-lg">
+                            <strong className=""><u>Total:</u></strong>
+                            <strong className="ml-3"><u className="font-weight-bolder">{toFriendlyCurrency(sumTotalCost(data.cart as Cart))}</u></strong>
+                        </td>
                         <td align="left"
-                            colSpan={200}
                             className="border-radius-lg">
 
                             <div className="d-flex flex-row justify-content-end align-items-center">
