@@ -1,5 +1,5 @@
 // import './LineAccountModal.module.scss';
-import { getRemainingAmount, toFriendlyCurrency } from '@multi-cart/multi-cart/util';
+import { getRemainingAmount, toFriendlyCurrency } from '@multi-cart/util';
 import { Account, CartLine, useAccountsQuery, useAddCartLineAccountMutation } from '@multi-cart/react-data-access';
 import { ModalComponent, ModalComponentProps } from '@multi-cart/react-ui';
 import React from 'react';

@@ -3,7 +3,7 @@ import React, { ReactElement } from 'react';
 import { Badge } from 'react-bootstrap';
 import { PlusCircleFill, WalletFill } from 'react-bootstrap-icons';
 import { LineAccountModal } from '@multi-cart/react-shared-components';
-import { getTotalAmounts, getTotalPercentages } from '@multi-cart/multi-cart/util';
+import { getTotalAmounts, getTotalPercentages } from '@multi-cart/util';
 import clsx from 'clsx';
 
 // import './LineAccountButtonRow.module.scss';

@@ -1,4 +1,4 @@
-import { sumTotalCost, toFriendlyCurrency } from '@multi-cart/multi-cart/util';
+import { sumTotalCost, toFriendlyCurrency } from '@multi-cart/util';
 import { Cart, CartLine, useBlankCartLineMutation, useCartQuery, useDeleteCartMutation, useUpdateUserMutation } from '@multi-cart/react-data-access';
 import { CartNameEditable, LineAccount, LineAccountButtonRow } from '@multi-cart/react-shared-components';
 import { Breadcrumbs } from '@multi-cart/react-ui';

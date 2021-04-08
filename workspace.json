@@ -303,20 +303,20 @@
         }
       }
     },
-    "multi-cart-util": {
-      "root": "libs/multi-cart/util",
-      "sourceRoot": "libs/multi-cart/util/src",
+    "util": {
+      "root": "libs/util",
+      "sourceRoot": "libs/util/src",
       "projectType": "library",
       "targets": {
         "lint": {
           "executor": "@nrwl/linter:eslint",
-          "options": { "lintFilePatterns": ["libs/multi-cart/util/**/*.ts"] }
+          "options": { "lintFilePatterns": ["libs/util/**/*.ts"] }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/multi-cart/util"],
+          "outputs": ["coverage/libs/util"],
           "options": {
-            "jestConfig": "libs/multi-cart/util/jest.config.js",
+            "jestConfig": "libs/util/jest.config.js",
             "passWithNoTests": true
           }
         }

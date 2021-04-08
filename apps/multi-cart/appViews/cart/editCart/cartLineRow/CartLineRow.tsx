@@ -6,7 +6,7 @@ import { Form, Formik } from "formik";
 import React, { ReactElement, useRef } from 'react';
 import { Badge, Button, Dropdown, DropdownButton } from 'react-bootstrap';
 import { X } from 'react-bootstrap-icons';
-import { toFriendlyCurrency } from '@multi-cart/multi-cart/util';
+import { toFriendlyCurrency } from '@multi-cart/util';
 import { CategoriesDropDown } from '../categoriesDropDown/categoriesDropDown';
 import styles from './CartLineRow.module.scss';
 

@@ -3,7 +3,7 @@ import { Cart } from '@multi-cart/react-data-access';
 import React from 'react';
 import { Badge } from 'react-bootstrap';
 import { Cart3 } from 'react-bootstrap-icons';
-import { sumTotalItems, sumTotalCost, toFriendlyCurrency } from '@multi-cart/multi-cart/util';
+import { sumTotalItems, sumTotalCost, toFriendlyCurrency } from '@multi-cart/util';
 
 interface CartAvatarInnerProps {
     variant?: 'white' | 'black',

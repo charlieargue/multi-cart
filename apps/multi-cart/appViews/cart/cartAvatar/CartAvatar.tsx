@@ -7,7 +7,7 @@ import { Badge, Button, Col, Container, ListGroup, OverlayTrigger, Popover, Row 
 import { NewCartButton } from "../newCartButton/NewCartButton";
 import styles from './CartAvatar.module.scss';
 import { CartAvatarInner } from './CartAvatarInner';
-import { toDaysAgo } from '@multi-cart/multi-cart/util';
+import { toDaysAgo } from '@multi-cart/util';
 
 interface CartAvatarProps {
     currentCartId?: number;

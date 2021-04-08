@@ -7,7 +7,7 @@ import { useRouter } from "next/router";
 import React from 'react';
 import { Button, Col, Container, Row } from 'react-bootstrap';
 import { createUrqlClient } from '../urql-customizations/createUrqlClient';
-import { toErrorMap } from '@multi-cart/multi-cart/util';
+import { toErrorMap } from '@multi-cart/util';
 // 🔴 WIP: import '@multi-cart/react-ui/InputField.module.scss';
 // import '../../../libs/react-ui/src/lib/input-field/InputField.module.scss'; // 🔴 NOT LIKE THIS!
 

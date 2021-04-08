@@ -1,11 +1,11 @@
 {
-  "extends": ["../../../.eslintrc.json"],
+  "extends": ["../../.eslintrc.json"],
   "ignorePatterns": ["!**/*"],
   "overrides": [
     {
       "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
       "parserOptions": {
-        "project": ["libs/multi-cart/util/tsconfig.*?.json"]
+        "project": ["libs/util/tsconfig.*?.json"]
       },
       "rules": {}
     },

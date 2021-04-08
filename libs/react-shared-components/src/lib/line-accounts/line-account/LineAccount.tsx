@@ -1,4 +1,4 @@
-import { computeAmountGivenPercentage, getRemainingPercentage, toFriendlyCurrency } from '@multi-cart/multi-cart/util';
+import { computeAmountGivenPercentage, getRemainingPercentage, toFriendlyCurrency } from '@multi-cart/util';
 import { CartLine, CartLineAccount, useAccountsQuery, useDeleteCartLineAccountMutation, useUpdateCartLineAccountMutation } from '@multi-cart/react-data-access';
 import { AutoSave } from '@multi-cart/react-shared-components';
 import { InputField } from '@multi-cart/react-ui';
@@ -6,8 +6,9 @@ import { Form, Formik } from "formik";
 import React, { useEffect, useRef } from 'react';
 import { Badge, InputGroup, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { X } from 'react-bootstrap-icons';
-// import './LineAccount.module.scss';
+import styles from './LineAccount.module.scss';
 import * as Yup from 'yup';
+import clsx from 'clsx';
 
 /* eslint-disable-next-line */
 export interface LineAccountProps {
@@ -77,7 +78,7 @@ export const LineAccount: React.FC<LineAccountProps> = ({ lineAccount, line }) =
 
       }}>
       {({ /*isSubmitting, values, setValues,*/ errors, touched }) => (
-        <Form className="ml-3" style={{ "width": "300px" }}>
+        <Form className={clsx(styles["line-account__form"], "ml-3")} >
           <InputGroup className="mb-3 ml-3" style={stylesGroup} size="sm">
             <InputGroup.Prepend>
               <InputGroup.Text>
@@ -87,7 +88,7 @@ export const LineAccount: React.FC<LineAccountProps> = ({ lineAccount, line }) =
                   <span className="cursor-hand"><strong>#</strong> {lineAccount.accountNumber}</span>
                 </OverlayTrigger>
 
-                <Badge style={{ backgroundColor: "#FDF198" }} variant="warning" className="ml-2 px-2 py-1 fw-light text-reset">{toFriendlyCurrency(lineAccount.amount)}</Badge>
+                <Badge variant="warning" className="ml-2 px-2 py-1 fw-light text-reset bg-light-yellow">{toFriendlyCurrency(lineAccount.amount)}</Badge>
                 <X
                   size={18}
                   className="text-danger fw-bold align-text-bottom ml-1 cursor-hand"

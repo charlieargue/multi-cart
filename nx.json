@@ -35,6 +35,6 @@
       "tags": [],
       "implicitDependencies": ["react-shared-components"]
     },
-    "multi-cart-util": { "tags": [] }
+    "util": { "tags": [] }
   }
 }
