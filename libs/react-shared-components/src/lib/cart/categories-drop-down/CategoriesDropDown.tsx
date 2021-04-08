@@ -45,8 +45,8 @@ const CustomMenu = React.forwardRef(
                 />
                 <ul className="list-unstyled">
                     {React.Children.toArray(children).filter(
-                        (child: unknown) =>
-                            !value || (child as any).props.children.toLowerCase().startsWith(value),
+                        (child: React.ReactElement) =>
+                            !value || (child as React.ReactElement).props.children.toLowerCase().startsWith(value),
                     )}
                 </ul>
             </div>
@@ -55,7 +55,7 @@ const CustomMenu = React.forwardRef(
 );
 
 
-export const CategoriesDropDown: React.FC = () => {
+export const CategoriesDropDown = () => {
     return (
         <Badge pill variant="light" className="px-2 py-1">
             <Dropdown>

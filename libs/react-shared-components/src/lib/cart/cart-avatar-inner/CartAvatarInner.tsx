@@ -11,7 +11,7 @@ interface CartAvatarInnerProps {
   cart?: Cart
 }
 
-export const CartAvatarInner: React.FC<CartAvatarInnerProps> = ({ variant = 'white', cart }) => {
+export const CartAvatarInner = ({ variant = 'white', cart }: CartAvatarInnerProps) => {
 
   return (
     <>

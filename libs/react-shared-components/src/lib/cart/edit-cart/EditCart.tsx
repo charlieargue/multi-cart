@@ -10,8 +10,9 @@ import { Alert, Badge, Button, Col, Container, Row } from 'react-bootstrap';
 import { ExclamationCircleFill, PlusCircleFill, XSquareFill } from 'react-bootstrap-icons';
 import styles from './EditCart.module.scss';
 
+interface EditCartProps { id: number }
 
-export const EditCart: React.FC<{ id: number }> = ({ id }) => {
+export const EditCart = ({ id }: EditCartProps) => {
   const router = useRouter();
   const [{ data, error, fetching }] = useCartQuery({
     variables: {

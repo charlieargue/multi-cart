@@ -1,12 +1,11 @@
+import { createUrqlClient, useRegisterMutation } from '@multi-cart/react-data-access';
+import { InputField, Wrapper } from '@multi-cart/react-ui';
+import { toErrorMap } from '@multi-cart/util';
 import { Form, Formik } from 'formik';
 import { withUrqlClient } from 'next-urql';
 import { useRouter } from "next/router";
 import React from 'react';
 import { Button } from 'react-bootstrap';
-import { useRegisterMutation } from '@multi-cart/react-data-access';
-import { InputField, Wrapper } from '@multi-cart/react-ui';
-import { createUrqlClient } from '../urql-customizations/createUrqlClient';
-import { toErrorMap } from '@multi-cart/util';
 
 
 /* eslint-disable-next-line */

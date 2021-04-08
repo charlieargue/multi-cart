@@ -1,8 +1,7 @@
 import { useField } from "formik";
 import React, { InputHTMLAttributes } from "react";
 import { Form } from "react-bootstrap";
-// 🔴 WIP: don't know how to make this work import 
-// import './InputField.module.css';
+import styles from './InputField.module.css';
 
 export type InputFieldProps = InputHTMLAttributes<HTMLInputElement> & {
   id?: string;
@@ -17,33 +16,26 @@ export type InputFieldProps = InputHTMLAttributes<HTMLInputElement> & {
 //    <div className="error">{meta.error}</div>
 //  ) : null}
 // */}
-export const InputField: React.FC<InputFieldProps> = ({
+export const InputField = ({
   id,
   label,
   muted,
   size: _,
   unwrapped = false,
   ...props
-}) => {
+}: InputFieldProps) => {
   const [field, meta] = useField(props);
+  const jsxLabel = <Form.Label className="text-muted">{label}</Form.Label>;
   const jsxField = <Form.Control {...field} {...props} id={id ? id : field.name} />;
 
   if (field.value !== null && props.value !== null) {
     if (!unwrapped) {
       return (
         <Form.Group>
-          {/* <div className="testing">✊ Hi</div> */}
-          {
-            label && (
-              jsxField
-            )
-          }
-          <Form.Control {...field} {...props} id={id ? id : field.name} />
-          {
-            muted && (
-              <Form.Text className="text-muted">{muted}</Form.Text>
-            )
-          }
+          {label ? <>{jsxField} {jsxLabel}</> : jsxField}
+          {muted && (
+            <Form.Text className="text-muted">{muted}</Form.Text>
+          )}
         </Form.Group>
       );
     } else {

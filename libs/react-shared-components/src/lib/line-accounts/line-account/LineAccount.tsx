@@ -26,7 +26,7 @@ const LineAccountFormSchema = Yup.object().shape({
 const stylesGroup = { maxWidth: "400px" };
 
 // -------------------
-export const LineAccount: React.FC<LineAccountProps> = ({ lineAccount, line }) => {
+export const LineAccount = ({ lineAccount, line }: LineAccountProps) => {
   const [, deleteCartLineAccount] = useDeleteCartLineAccountMutation();
   const [, updateCartLineAccount] = useUpdateCartLineAccountMutation();
   const [{ data: dataAccount, fetching: fetchingAccount }] = useAccountsQuery(); // NOTE: this is instead of adding in one more leftJoinAndSelect() to all the cart/carts queries, etc...

@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { Alert, Button } from 'react-bootstrap';
 import { useForgotPasswordMutation } from '@multi-cart/react-data-access';
 import { InputField, Wrapper } from '@multi-cart/react-ui';
-import { createUrqlClient } from '../urql-customizations/createUrqlClient';
+import { createUrqlClient } from '@multi-cart/react-data-access';
 
 /* eslint-disable-next-line */
 export interface ForgotPasswordProps { }

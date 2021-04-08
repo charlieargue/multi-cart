@@ -15,7 +15,7 @@ interface CartAvatarProps {
 // TODO: 🔴 try this approach: https://stackoverflow.com/questions/28935314/reactbootstrap-popover-dismiss-on-click-outside
 // no overlayTRIGGER, and with onHide...
 
-export const CartAvatar: React.FC<CartAvatarProps> = ({ currentCartId = -1 }) => {
+export const CartAvatar = ({ currentCartId = -1 }: CartAvatarProps) => {
   // NEXT: wire up avatarInner to user.currentCartId
   // FOR NOW: wiring up avatarInner based on page param
   const router = useRouter();

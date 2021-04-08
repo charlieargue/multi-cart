@@ -6,9 +6,10 @@ import { NavBar } from '@multi-cart/react-shared-components';
 
 interface AppLayoutProps {
   variant?: WrapperVariant
+  children?: React.ReactNode
 }
 
-export const AppLayout: React.FC<AppLayoutProps> = ({ children, variant }) => {
+export const AppLayout = ({ children, variant }: AppLayoutProps) => {
   return (
     <Container fluid className="mx-0 px-0">
       <NavBar />

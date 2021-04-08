@@ -1,8 +1,8 @@
+import { createUrqlClient } from '@multi-cart/react-data-access';
+import { EditCart } from '@multi-cart/react-shared-components';
 import { withUrqlClient } from 'next-urql';
 import { useRouter } from 'next/router';
 import React from 'react';
-import { EditCart } from '@multi-cart/react-shared-components';
-import { createUrqlClient } from '../../urql-customizations/createUrqlClient';
 
 // -------------------
 const CartPage = () => {

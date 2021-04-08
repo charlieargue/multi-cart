@@ -6,7 +6,7 @@ import { Button, Container, Nav, Navbar } from 'react-bootstrap';
 import { useLogoutMutation, useMeQuery } from '@multi-cart/react-data-access';
 import { CartAvatar } from '@multi-cart/react-shared-components';
 
-export const NavBar: React.FC = () => {
+export const NavBar = () => {
     const router = useRouter();
     const [{ data, fetching }] = useMeQuery();
     const [_, logout] = useLogoutMutation();

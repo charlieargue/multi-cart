@@ -6,10 +6,11 @@ export type WrapperVariant = 'small' | 'regular';
 
 
 interface WrapperProps {
-    variant?: WrapperVariant
+    variant?: WrapperVariant;
+    children?: React.ReactNode;
 }
 
-export const Wrapper: React.FC<WrapperProps> = ({ children, variant = 'regular' }) => {
+export const Wrapper = ({ children, variant = 'regular' }: WrapperProps) => {
     return (
         <Container
             className={clsx(variant === 'regular' ? "md-container" : "sm-container", "mt-3")}

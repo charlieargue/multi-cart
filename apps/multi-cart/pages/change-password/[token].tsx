@@ -1,15 +1,14 @@
+import { createUrqlClient, useChangePasswordMutation } from '@multi-cart/react-data-access';
+import { InputField, Wrapper } from '@multi-cart/react-ui';
+import { toErrorMap } from '@multi-cart/util';
 import { Form, Formik } from 'formik';
 import { NextPage } from 'next';
 import { withUrqlClient } from 'next-urql';
-import router, { useRouter } from 'next/router';
-import React, { useState } from 'react';
-import { useChangePasswordMutation } from '@multi-cart/react-data-access';
-import { createUrqlClient } from '../../urql-customizations/createUrqlClient';
-import { toErrorMap } from '@multi-cart/util';
 import NextLink from "next/link";
+import { useRouter } from 'next/router';
+import React, { useState } from 'react';
 import { Alert, Button } from 'react-bootstrap';
-import { Box, Link } from 'react-bootstrap-icons';
-import { Wrapper, InputField } from '@multi-cart/react-ui';
+import { Link } from 'react-bootstrap-icons';
 
 export const ChangePassword: NextPage = () => {
     const router = useRouter();

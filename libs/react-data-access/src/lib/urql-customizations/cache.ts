@@ -1,7 +1,24 @@
-import { cacheExchange, Cache } from "@urql/exchange-graphcache";
-import { Account, AddCartLineAccountMutation, AddCartLineAccountMutationVariables, BlankCartLineMutation, Cart, CartDocument, CartLine, CartLineAccount, CartQuery, CartsDocument, CartsQuery, DeleteCartLineAccountMutationVariables, DeleteCartLineMutationVariables, DeleteCartMutationVariables, LoginMutation, LogoutMutation, MeDocument, MeQuery, RegisterMutation, UpdateCartLineMutation, UpdateCartLineMutationVariables } from "@multi-cart/react-data-access";
+import {
+    Account,
+    AddCartLineAccountMutation,
+    AddCartLineAccountMutationVariables,
+    BlankCartLineMutation,
+    Cart,
+    CartLine,
+    CartsDocument,
+    CartsQuery,
+    DeleteCartLineAccountMutationVariables,
+    DeleteCartLineMutationVariables,
+    DeleteCartMutationVariables, LoginMutation,
+    LogoutMutation,
+    MeDocument,
+    MeQuery,
+    RegisterMutation,
+    UpdateCartLineMutation,
+    UpdateCartLineMutationVariables
+} from "@multi-cart/react-data-access";
+import { Cache, cacheExchange } from "@urql/exchange-graphcache";
 import { betterUpdateQuery } from "./betterUpdateQuery";
-import { gql } from '@urql/core';
 
 const invalidateAllCarts = (cache: Cache) => {
     const allFields = cache.inspectFields("Query");

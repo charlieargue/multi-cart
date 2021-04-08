@@ -75,11 +75,11 @@ Agile/kanban board for multi-cart
 
 ### 🧠 In Progress
 
-- [ ] libs: migrate over multi-cart/appViews/carts stuff over into react-shared-components (like line-account)  
-- [ ] libs: migrate login/register/forgot-pwd/change-pwd also into react-shared-components (just leave the pages as shells that call shared components, no need for container components)
+- [ ] libs: migrate login/register/forgot-pwd/change-pwd also into react-shared-components (just leave the pages as shells that call shared components, no need for container components)  
 
 ### Done
 
+- [ ] libs: migrate over multi-cart/appViews/carts stuff over into react-shared-components (like line-account)  
 - [ ] no go back and remove all **style={{}}** occurrences and put in proper BEM **...module.scss** files  
 - [ ] 🟦 🟦 🟦 🟦 START WITH: too much work, and I will never have non-multi-cart projects here, so no need for libs/DIRECTORY... instead, make util be just util  
 - [ ] FIX that issue with libs + next + nx not allowing CSS/SCSS!!! ••• MAKE REPRO and get help •••  
