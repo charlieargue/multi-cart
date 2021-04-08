@@ -17,8 +17,7 @@
           "outputs": ["{options.outputPath}"],
           "options": {
             "root": "apps/multi-cart",
-            "outputPath": "dist/apps/multi-cart",
-            "styles": ["apps/multi-cart/src/styles.scss"]
+            "outputPath": "dist/apps/multi-cart"
           },
           "configurations": { "production": {} }
         },

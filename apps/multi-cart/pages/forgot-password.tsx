@@ -1,44 +1,11 @@
-import { Form, Formik } from 'formik';
 import { withUrqlClient } from 'next-urql';
-import React, { useState } from 'react';
-import { Alert, Button } from 'react-bootstrap';
-import { useForgotPasswordMutation } from '@multi-cart/react-data-access';
-import { InputField, Wrapper } from '@multi-cart/react-ui';
+import React from 'react';
+import { ForgotPassword } from '@multi-cart/react-shared-components';
 import { createUrqlClient } from '@multi-cart/react-data-access';
 
-/* eslint-disable-next-line */
-export interface ForgotPasswordProps { }
+const ForgotPasswordPage = () => {
 
-function ForgotPassword(props: ForgotPasswordProps) {
-    const [, forgotPassword] = useForgotPasswordMutation();
-    const [complete, setComplete] = useState(false);
-
-    return (
-        <Wrapper variant="small">
-            <Formik initialValues={{ email: "" }}
-                onSubmit={async (values, { setErrors }) => {
-                    const response = await forgotPassword(values);
-                    setComplete(true);
-                }}>
-                {({ isSubmitting }) =>
-                    complete ? (
-                        <Alert variant="info">
-                            🛡 If an account with that email exists, we sent you an email!
-                        </Alert>
-                    ) : (
-                        <Form>
-                            <InputField
-                                label="Email"
-                                name="email"
-                                placeholder="email"
-                                type="email">
-                            </InputField>
-                            <Button className="mt-4" type="submit">Forgot Password</Button>
-                        </Form>
-                    )}
-            </Formik>
-        </Wrapper>
-    );
+    return (<ForgotPassword />);
 }
 
-export default withUrqlClient(createUrqlClient)(ForgotPassword);
+export default withUrqlClient(createUrqlClient)(ForgotPasswordPage);

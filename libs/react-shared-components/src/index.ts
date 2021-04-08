@@ -1,3 +1,6 @@
+export * from './lib/auth/change-password/ChangePassword';
+export * from './lib/auth/forgot-password/ForgotPassword';
+export * from './lib/auth/register/Register';
 export * from './lib/auth/login/Login';
 export * from './lib/auth/useIsAuth';
 export * from './lib/auto-save/AutoSave';
@@ -13,4 +16,3 @@ export * from './lib/line-accounts/line-account-modal/LineAccountModal';
 export * from './lib/line-accounts/line-account/LineAccount';
 export * from './lib/_layout/app-layout/AppLayout';
 export * from './lib/_layout/nav-bar/NavBar';
-
