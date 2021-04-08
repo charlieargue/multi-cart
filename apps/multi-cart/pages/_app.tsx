@@ -1,4 +1,4 @@
-import '../_theme/app.scss';
+// import '../_theme/app.scss';
 import React from 'react';
 import { ChakraProvider, ColorModeProvider } from '@chakra-ui/react';
 import theme from '../_theme/theme';

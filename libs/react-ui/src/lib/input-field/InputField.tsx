@@ -1,6 +1,7 @@
-import { useField } from "formik";
+import { Box, FormControl, FormLabel, Input, useColorModeValue as mode, } from '@chakra-ui/react';
+import { Form, useField } from "formik";
 import React, { InputHTMLAttributes } from "react";
-import { Form } from "react-bootstrap";
+// import { Form } from "react-bootstrap";
 import styles from './InputField.module.css';
 
 export type InputFieldProps = InputHTMLAttributes<HTMLInputElement> & {
@@ -10,6 +11,7 @@ export type InputFieldProps = InputHTMLAttributes<HTMLInputElement> & {
   muted?: React.ReactNode;
   unwrapped?: boolean;
 };
+
 
 // thx: https://formik.org/docs/api/useField
 // TODO: {/* {meta.touched && meta.error ? ( 
@@ -25,18 +27,22 @@ export const InputField = ({
   ...props
 }: InputFieldProps) => {
   const [field, meta] = useField(props);
-  const jsxLabel = <Form.Label className="text-muted">{label}</Form.Label>;
-  const jsxField = <Form.Control {...field} {...props} id={id ? id : field.name} />;
+  // const jsxLabel = <Form.Label className="text-muted"></Form.Label>;
+  // const jsxField = <Form.Control {...field} {...props} id={id ? id : field.name} />;
+  const jsxLabel = <FormLabel>{label}</FormLabel>;
+  const jsxField = <Input {...field} {...props} id={id ? id : field.name} />;
 
   if (field.value !== null && props.value !== null) {
     if (!unwrapped) {
       return (
-        <Form.Group>
-          {label ? <>{jsxField} {jsxLabel}</> : jsxField}
+        <FormControl id={id}>
+          {label ? <>{jsxLabel}{jsxField}</> : jsxField}
           {muted && (
-            <Form.Text className="text-muted">{muted}</Form.Text>
+            <Box as="a" color={mode('blue.600', 'blue.200')} fontWeight="semibold" fontSize="sm">
+              {muted}
+            </Box>
           )}
-        </Form.Group>
+        </FormControl >
       );
     } else {
       return (jsxField);

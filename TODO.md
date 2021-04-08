@@ -74,11 +74,13 @@ Agile/kanban board for multi-cart
 - [ ] UI: for CartAvatar, use this: https://pro.chakra-ui.com/components/application-ui/cards
 - [ ] UI: build it all out, piece by piece, overhauling and using the ready pages I already built in my **chakra-demo-app**
 - [ ] UI: for Forgot Pwd -> the token page: https://pro.chakra-ui.com/components/application-ui/banners
+- [ ] UI: clean all the placeholder text and stuff up!
 
 
 ### 🧠 In Progress
 - [ ] UI: see the next with-chakra-ui TEMPLATE and bring it over, get that working!
 - [ ] UI: THEN remove react-bootstrap!
+- [ ] UI: keep some of my _theme scss, right? the new global stuff? TBD
 
 
 ### Done
