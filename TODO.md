@@ -72,10 +72,11 @@ Agile/kanban board for multi-cart
 
 ### 💪 Todo
 
-- [ ] libs: migrate over multi-cart/appViews/carts stuff over into react-shared-components (like line-account)  
 
 ### 🧠 In Progress
 
+- [ ] libs: migrate over multi-cart/appViews/carts stuff over into react-shared-components (like line-account)  
+- [ ] libs: migrate login/register/forgot-pwd/change-pwd also into react-shared-components (just leave the pages as shells that call shared components, no need for container components)
 
 ### Done
 

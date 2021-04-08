@@ -1,7 +1,7 @@
-import '../appViews/_theme/app.scss'; // 🔴 TODO: when this is fixed, put it back into @multi-cart/react-ui !!!
+import '../_theme/app.scss';
 import React from 'react';
 
-function MyApp({ Component, pageProps }: any) {
+function MyApp({ Component, pageProps }) {
 
   return (
     <Component {...pageProps} />

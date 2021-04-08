@@ -1,6 +1,6 @@
 import { withUrqlClient } from 'next-urql';
 import React from 'react';
-import { AppLayout } from '../appViews/_layout';
+import { AppLayout } from '@multi-cart/react-shared-components';
 import { createUrqlClient } from '../urql-customizations/createUrqlClient';
 
 const Index = () => {

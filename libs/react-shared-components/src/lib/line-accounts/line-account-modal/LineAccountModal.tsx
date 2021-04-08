@@ -27,7 +27,7 @@ export function LineAccountModal({ onHide, line, show }: LineAccountModalProps) 
   // ------------------
   React.useEffect(() => {
     const results = data?.accounts.filter(account =>
-      account.accountNumber.toLowerCase().includes(searchTerm)
+      account.accountNumber.toLowerCase().includes(searchTerm) || account.accountName.toLowerCase().includes(searchTerm)
     );
     setSearchResults(results);
   }, [data?.accounts, searchTerm]);
