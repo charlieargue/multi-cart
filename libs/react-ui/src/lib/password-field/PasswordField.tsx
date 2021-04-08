@@ -16,24 +16,23 @@ import {
 import * as React from 'react'
 import { HiEye, HiEyeOff } from 'react-icons/hi'
 import NextLink from 'next/link';
+import { InputField } from '@multi-cart/react-ui';
 
 export const PasswordField = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
-  const { isOpen, onToggle } = useDisclosure()
-  const inputRef = React.useRef<HTMLInputElement>(null)
-
-  const mergeRef = useMergeRefs(inputRef, ref)
+  const { isOpen, onToggle } = useDisclosure();
+  const inputRef = React.useRef<HTMLInputElement>(null);
 
   const onClickReveal = () => {
-    onToggle()
-    const input = inputRef.current
+    onToggle();
+    const input = inputRef.current;
     if (input) {
-      input.focus({ preventScroll: true })
-      const length = input.value.length * 2
+      input.focus({ preventScroll: true });
+      const length = input.value.length * 2;
       requestAnimationFrame(() => {
-        input.setSelectionRange(length, length)
+        input.setSelectionRange(length, length);
       })
     }
-  }
+  };
 
   return (
     <FormControl id="password">
@@ -55,8 +54,9 @@ export const PasswordField = React.forwardRef<HTMLInputElement, InputProps>((pro
             onClick={onClickReveal}
           />
         </InputRightElement>
-        <Input
-          ref={mergeRef}
+
+        <InputField
+          placeholder="password"
           name="password"
           type={isOpen ? 'text' : 'password'}
           autoComplete="current-password"

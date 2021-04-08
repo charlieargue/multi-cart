@@ -34,48 +34,21 @@ export function LoginForm(props: LoginFormProps) {
         }}>
         {({ isSubmitting }) => (
           <Form>
-
             <Stack spacing="6">
-              {/* <FormControl id="email">
-                <FormLabel>Email address</FormLabel>
-                <Input name="email" type="email" autoComplete="email" required />
-              </FormControl>
-              
-            */}
-
-
               <InputField
                 label="Username or Email"
                 name="usernameOrEmail"
                 placeholder="username or email">
               </InputField>
               <PasswordField />
-              {/* <InputField
-                label="Password"
-                name="password"
-                placeholder="password"
-                type="password"
-                muted={
-                  <Container fluid>
-                    <Row>
-                      <Col></Col>
-                      <Col className="text-right">Or <NextLink href="/register">register an account</NextLink></Col>
-                    </Row>
-                  </Container>
-                }>
-              </InputField> */}
-
               <Button type="submit" colorScheme="blue" size="lg" fontSize="md">
-                Sign in
+                Login
               </Button>
             </Stack>
-
-            {/* 
-            <Button className="mt-4" type="submit">Login</Button> */}
           </Form>
         )}
       </Formik>
-    </Wrapper>
+    </Wrapper >
   );
 }
 

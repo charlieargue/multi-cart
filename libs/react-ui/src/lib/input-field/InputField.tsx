@@ -1,4 +1,4 @@
-import { Box, FormControl, FormLabel, Input, useColorModeValue as mode, } from '@chakra-ui/react';
+import { Box, FormControl, FormLabel, Input, InputProps, useColorModeValue as mode, } from '@chakra-ui/react';
 import { Form, useField } from "formik";
 import React, { InputHTMLAttributes } from "react";
 // import { Form } from "react-bootstrap";
@@ -10,7 +10,12 @@ export type InputFieldProps = InputHTMLAttributes<HTMLInputElement> & {
   name: string;
   muted?: React.ReactNode;
   unwrapped?: boolean;
-};
+  ref?: (node: HTMLInputElement) => void;
+}
+  & InputProps
+  // TODO: hacky, but confused on merging in input prop types for Chakra + Password useRef + Formik to work...
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  & any;
 
 
 // thx: https://formik.org/docs/api/useField

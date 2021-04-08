@@ -24,20 +24,22 @@ const LoginPage = () => {
           <Logo mx="auto" h="8" iconColor={mode('blue.600', 'blue.200')} />
         </Box>
         <Heading mt="6" textAlign="center" size="xl" fontWeight="extrabold">
-          Sign in to your account
+          Login to your account
   </Heading>
         <Text mt="4" align="center" maxW="md" fontWeight="medium">
           <span>Don&apos;t have an account?</span>
-          <Box
-            as="a"
-            marginStart="1"
-            href="#"
-            color={mode('blue.600', 'blue.200')}
-            _hover={{ color: 'blue.600' }}
-            display={{ base: 'block', sm: 'revert' }}
-          >
-            <NextLink href="/register">register an account</NextLink>
-    </Box>
+          <NextLink href="/register">
+            <Box
+              as="a"
+              marginStart="1"
+              href="#"
+              color={mode('blue.600', 'blue.200')}
+              _hover={{ color: 'blue.600' }}
+              display={{ base: 'block', sm: 'revert' }}
+            >
+              register an account
+          </Box>
+          </NextLink>
         </Text>
       </Box>
       <Box maxW={{ sm: 'md' }} mx={{ sm: 'auto' }} mt="8" w={{ sm: 'full' }}>
@@ -48,7 +50,7 @@ const LoginPage = () => {
           shadow="base"
           rounded={{ sm: 'lg' }}
         >
-          
+
           {/* // ------------------- */}
           <LoginForm />
 
