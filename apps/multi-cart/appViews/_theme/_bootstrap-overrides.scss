@@ -27,6 +27,9 @@
   cursor: pointer;
   background: $green-light;
 }
+.w-300 {
+  width: 300px;
+}
 .w-50 {
   width: 50px;
 }
@@ -38,6 +41,12 @@
 }
 .ml_-2 {
   margin-left: -30px !important;
+}
+.mt-neg-3 {
+  margin-top: -3px;
+}
+.mt-neg-4 {
+  margin-top: -4px;
 }
 
 #cart-table.table-sm td {

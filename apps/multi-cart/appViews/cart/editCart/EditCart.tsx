@@ -88,7 +88,9 @@ export const EditCart: React.FC<{ id: number }> = ({ id }) => {
 
             {/* 🛍 cart header  */}
             {/* TODO: search for all style= and get 'em outta here!  */}
-            <Container fluid style={{ "paddingLeft": "9px", "paddingRight": "6px", "borderTop": "1px solid #ccc", "borderBottom": "1px solid #ccc" }} className="py-3">
+            <Container
+                fluid
+                className={clsx(styles["edit-cart__cart-header"], "py-3")}>
                 <Row className="align-items-md-baseline">
                     <Col className="pl-2 d-flex align-items-md-baseline">
                         <CartNameEditable name={data.cart.name} id={data.cart.id} />

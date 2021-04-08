@@ -56,7 +56,7 @@ export function LineAccountModal({ onHide, line, show }: LineAccountModalProps) 
     <ModalComponent onHide={onHide} show={show} dialogClassName="modal-scroll-y">
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
-          <WalletFill className="mr-2" style={{ marginTop: "-3px" }} />Choose a Line Account
+          <WalletFill className="mr-2 mt-neg-3" />Choose a Line Account
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>

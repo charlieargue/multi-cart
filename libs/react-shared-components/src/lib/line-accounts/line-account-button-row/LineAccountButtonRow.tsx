@@ -5,8 +5,7 @@ import { PlusCircleFill, WalletFill } from 'react-bootstrap-icons';
 import { LineAccountModal } from '@multi-cart/react-shared-components';
 import { getTotalAmounts, getTotalPercentages } from '@multi-cart/util';
 import clsx from 'clsx';
-
-// import './LineAccountButtonRow.module.scss';
+import styles from './LineAccountButtonRow.module.scss';
 
 export interface LineAccountButtonRowProps {
   line?: CartLine;
@@ -29,7 +28,7 @@ export function LineAccountButtonRow({ line, children }: LineAccountButtonRowPro
 
       {/* BUTTON ROW */}
       <div className="d-flex justify-content-sm-end flex-md-shrink-0" >
-        <div className="pr-1"><strong><WalletFill className="mr-1" style={{ marginTop: "-3px" }} />Line Accounts:</strong> </div>
+        <div className="pr-1"><strong><WalletFill className="mr-1 mt-neg-4" />Line Accounts:</strong> </div>
         <div className="pr-1">
           <Badge onClick={() => setModalShow(true)} pill variant="success" className="px-2 py-1 cursor-hand"><PlusCircleFill className="align-text-bottom mr-1" /> Add</Badge>
         </div>

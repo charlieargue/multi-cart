@@ -47,7 +47,7 @@ export function CartNameEditable({ name, id }: CartNameEditableProps) {
             }}>
             {({ errors, touched }) => (
               <Form
-                style={{ "width": "300px" }}
+                className="w-300"
                 onClick={(e) => { e.stopPropagation() }}>
 
                 {/* // style={(errors.percentage && touched.percentage) ? { "border": "2px dotted red" } : null} */}
