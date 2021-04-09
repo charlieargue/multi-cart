@@ -14,8 +14,8 @@ interface CartAvatarInnerProps {
 export const CartAvatarInner = ({ variant = 'white', cart }: CartAvatarInnerProps) => {
 
   return (
-    <HStack spacing={4}>
-      <Tag size="lg" variant="subtle" colorScheme="green">
+    <HStack spacing={4} cursor={'pointer'}>
+      <Tag size="lg" variant="transparent">
         <TagLabel>
           <span data-testid="currentCartTotalItems" className={variant === 'white' ? 'text-white' : 'text-black'}>{sumTotalItems(cart)}</span>
         </TagLabel>

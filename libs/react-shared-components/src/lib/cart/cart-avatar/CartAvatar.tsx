@@ -1,16 +1,25 @@
-import { Box } from '@chakra-ui/react';
+import { Badge, Box, Button, Flex, HStack, Menu, MenuButton, MenuDivider, MenuItem, MenuList, useColorModeValue as mode, Text } from '@chakra-ui/react';
 import { Cart, useCartsQuery } from '@multi-cart/react-data-access';
+import { CartAvatarInner, NewCartButton } from '@multi-cart/react-shared-components';
 import { useRouter } from 'next/router';
 import React from 'react';
-import { CartAvatarInner } from '@multi-cart/react-shared-components';
+import { CgChevronDown as ChevronDownIcon } from 'react-icons/cg';
+import { RiErrorWarningFill as WarningIcon } from 'react-icons/ri';
+import NextLink from 'next/link';
+import { toDaysAgo } from '@multi-cart/util';
+import clsx from 'clsx';
+import styles from './CartAvatar.module.scss';
 
 interface CartAvatarProps {
   currentCartId?: number;
 }
 
-// TODO: 🔴 try this approach: https://stackoverflow.com/questions/28935314/reactbootstrap-popover-dismiss-on-click-outside
-// no overlayTRIGGER, and with onHide...
+const noCartsMsg = <HStack direction="row" mr={4} spacing={1}>
+  <WarningIcon />
+  <span>You have no carts!</span>
+</HStack>;
 
+// -------------------
 export const CartAvatar = ({ currentCartId = -1 }: CartAvatarProps) => {
   const router = useRouter();
   const [{ data, fetching }] = useCartsQuery();
@@ -20,83 +29,75 @@ export const CartAvatar = ({ currentCartId = -1 }: CartAvatarProps) => {
     currentCart = data?.carts.find((c) => c.id === currentCartId) as Cart;
   }
 
-  // const popover = (
-  //   <Popover
-  //     id="popover-carts-avatar"
-  //     className={clsx(styles['cart-avatar__scrollable'], 'shadow-sm')}>
-  //     <Popover.Title as="h3" className="text-right">
-  //       {!data?.carts?.length && (<span>You have no carts!</span>)}
-  //       <NewCartButton className="ml-3 align-baseline" />
-
-  //     </Popover.Title>
-  //     <Popover.Content >
-
-  //       {/* if FETCHING and don't have DATA... */}
-  //       {
-  //         !data && fetching ? (<div>loading...</div>) : (
-
-  //           // OK, GOT DATA!
-  //           <div>
-  //             <ListGroup variant="flush">
-  //               {data?.carts?.map((c) => !c ? null : (
-  //                 <ListGroup.Item key={c.id}
-  //                   className={clsx(
-  //                     c.id == 2 ? styles['cart-avatar__current-cart'] : null,
-  //                     'p-1')}
-  //                   style={c.id === currentCartId ? { "backgroundColor": "#EAF6ED" } : null}>
-  //                   <NextLink
-  //                     href="/cart/[id]"
-  //                     as={`/cart/${c.id}`}>
-  //                     <Container>
-  //                       <Row>
-  //                         <Col>
-  //                           <Badge variant="secondary" className="mr-1">{c.id}</Badge>
-  //                           <strong>{c.name}</strong>
-  //                           <br />
-  //                           {toDaysAgo(c.createdAt)}
-  //                         </Col>
-  //                         <Col className="align-self-xl-center text-right">
-  //                           <CartAvatarInner
-  //                             variant="black"
-  //                             cart={!c ? {} as any : c}
-  //                           />
-  //                         </Col>
-  //                       </Row>
-  //                     </Container>
-  //                   </NextLink>
-  //                 </ListGroup.Item>
-  //               ))}
-  //             </ListGroup>
-  //           </div>
-  //         )}
-  //     </Popover.Content>
-  //   </Popover>
-  // );
-
 
   return (
-    <>
-      {  !data && fetching ? (<></>) : (
-        <CartAvatarInner cart={currentCart} />
-      )}
-      <span></span>
-    </>);
+    <Menu>
+      <MenuButton
+        rightIcon={<ChevronDownIcon />}
+        ml={2}
+        as={Button}
+        rounded={'full'}
+        variant={'solid'}
+        colorScheme="green"
+        _hover={{
+          "backgroundColor": mode("gray.400", "gray.900")
+        }}
+        cursor={'pointer'}>
+
+        {/* User Profile Avatar */}
+        {!data && fetching ? null : (
+          <CartAvatarInner cart={currentCart} />
+        )}
+
+      </MenuButton>
+
+      {/*  Dropdown */}
+      <MenuList minW="440px" maxH="85vh" className={styles['cart-avatar__scrollable']}>
+
+        {/* dropdown HEADER */}
+        <Flex justifyContent={'flex-end'} px={3} py={2}>
+          {!data?.carts?.length && noCartsMsg}
+
+
+          <NewCartButton className="ml-3 align-baseline" />
+        </Flex>
+        <MenuDivider />
+
+        {/* if FETCHING and don't have DATA... */}
+        {
+          !data && fetching ? (<div>loading...</div>) : data?.carts?.map((c) => !c ? null : (
+            <MenuItem
+              key={c.id}
+              bgColor={c.id === currentCartId ? mode("green.50", "gray.900") : null}>
+
+              <NextLink
+                href="/cart/[id]"
+                as={`/cart/${c.id}`}>
+
+                {/* dropdown CART GUTS */}
+                <Flex
+                  minW="100%"
+                  justify="space-between"
+                >
+                  <Box>
+                    <strong>{c.name}</strong>
+                    <br />
+                    <Text color="gray.500" fontSize="xs" ml={.5}>{toDaysAgo(c.createdAt)}</Text>
+                  </Box>
+                  <Box>
+                    <CartAvatarInner
+                      variant="black"
+                      cart={!c ? {} as any : c}
+                    />
+                  </Box>
+                </Flex>
+                {/* dropdown CART GUTS */}
+
+              </NextLink>
+              <MenuDivider />
+            </MenuItem>
+          ))}
+      </MenuList>
+    </Menu >
+  );
 }
-
-
-// <OverlayTrigger
-        //   trigger="click"
-        //   placement="bottom"
-        //   overlay={popover}
-        //   rootClose>
-        //   <Button
-        //     variant="outline-secondary"
-        //     color="transparent"
-        //     data-testid="btnMyCarts"
-        //     className="align-self-xl-center shadow-none">
-        //     {
-        //       // TODO:  change to: data && !fetching && (
-  //       )}
-
-  //   </Button>
-  // </OverlayTrigger>

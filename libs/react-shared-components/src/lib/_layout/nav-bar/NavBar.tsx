@@ -25,22 +25,13 @@ export const NavBar = (props) => {
     const [_, logout] = useLogoutMutation();
 
     return (
-        <Box bg={mode('gray.200', 'gray.700')} color={mode('gray.700', 'gray.200')} px={[14, 10, 7, 14]}>
+        <Box bg={mode('gray.200', 'gray.700')} color={mode('gray.700', 'gray.200')} px={[0, 10, 7, 14]} pr={[3, 0]}>
             <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
 
-                {/* Hamburger */}
-                <IconButton
-                    size={'md'}
-                    icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
-                    aria-label={'Open Menu'}
-                    display={{ md: !isOpen ? 'none' : 'inherit' }}
-                    onClick={isOpen ? onClose : onOpen}
-                />
 
                 {/* Logo */}
                 <Box
-                    className={styles["nav-bar__scale-down"]}
-                    display={{ base: 'none', md: 'block' }}>
+                    className={styles["nav-bar__scale-down"]}>
                     <Logo />
                 </Box>
 

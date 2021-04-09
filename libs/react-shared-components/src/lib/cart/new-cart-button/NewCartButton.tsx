@@ -2,11 +2,10 @@ import React from 'react';
 import clsx from 'clsx';
 import { useBlankCartMutation } from '@multi-cart/react-data-access';
 import { useRouter } from 'next/router';
-import { Button } from 'react-bootstrap';
-import { PlusCircleFill } from 'react-bootstrap-icons';
 import { useIsAuth } from '@multi-cart/react-shared-components';
-
+import { ImPlus as PlusIcon } from 'react-icons/im';
 import './NewCartButton.module.scss';
+import { Button } from '@chakra-ui/react';
 
 /* eslint-disable-next-line */
 export interface NewCartButtonProps {
@@ -22,6 +21,9 @@ export function NewCartButton({ className }: NewCartButtonProps) {
 
   return (
     <Button
+      leftIcon={<PlusIcon />}
+      colorScheme="pink"
+      variant="solid"
       onClick={async () => {
         const { error, data } = await blankCart();
         if (!error && data?.blankCart?.id) {
@@ -29,10 +31,9 @@ export function NewCartButton({ className }: NewCartButtonProps) {
         }
         // TODO: error handling
       }}
-      size="sm"
-      variant="success"
+      size="xs"
       className={clsx(className)}
-      data-testid="btnNewCart"><PlusCircleFill className="align-text-bottom mr-1" />New Cart
+      data-testid="btnNewCart">New Cart
     </Button>
   );
 }
