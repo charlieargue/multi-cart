@@ -14,9 +14,7 @@ export const Footer = () => {
         px={{ base: '6', md: '8' }}
         align="center"
       >
-        <a aria-current="page" aria-label="Back to Home page" href="/" rel="home">
-          <Logo h="6" color={["white", "white", "primary.500", "primary.500"]} />
-        </a>
+        <Logo h="6" color={["white", "white", "primary.500", "primary.500"]} />
         <Stack
           my={{ base: '6', md: 0 }}
           direction={{ base: 'column', md: 'row' }}
@@ -25,7 +23,7 @@ export const Footer = () => {
           spacing={{ base: '2', md: '8' }}
           textAlign={{ base: 'center', md: 'start' }}
         >
-          <Text>&copy; {new Date().getFullYear()} Karl Golka</Text>
+          <Text><a href="http://karlgolka.com" target="_blank">&copy; {new Date().getFullYear()} Karl Golka</a></Text>
           <Link>Privacy</Link>
           <Link>Terms and Conditions</Link>
         </Stack>

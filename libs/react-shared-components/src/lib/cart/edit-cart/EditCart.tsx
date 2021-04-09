@@ -192,7 +192,7 @@ export const EditCart = ({ id }: EditCartProps) => {
                           id: data.cart.id
                         });
                         if (response.data?.deleteCart === true) {
-                          router.push("/");
+                          router.push("/dashboard");
                         }
                         if (error) {
                           console.log("🚀 ~ error", error);

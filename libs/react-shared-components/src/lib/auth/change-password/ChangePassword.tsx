@@ -34,7 +34,7 @@ export const ChangePassword = () => {
             }
             setErrors(errorMap);
           } else if (response.data?.changePassword.user) {
-            router.push("/");
+            router.push("/dashboard");
           }
 
         }}>
