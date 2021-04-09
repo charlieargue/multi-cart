@@ -10,7 +10,7 @@ interface RegisterContainerProps {
 export const RegisterContainer = () => {
   return (
     <MicroLayout
-      heading={<><span role='img' aria-label='emoji'>👋 </span> Create Your Account!</>}
+      heading={<><span role='img' aria-label='emoji'>👋 </span> Register Your Account!</>}
       subHeading={<span>🛡 Your <strong>email is safe</strong> with us</span>} >
       <RegistrationForm />
     </MicroLayout >

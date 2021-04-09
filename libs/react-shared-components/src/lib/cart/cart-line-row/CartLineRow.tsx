@@ -13,7 +13,7 @@ import styles from './CartLineRow.module.scss';
 interface CartLineRowProps {
   line: CartLine;
   idx: number;
-  children?: ReactElement;
+  children?: React.ReactNode;
 }
 
 // - thx:https://itnext.io/formik-introduction-autosave-react-19d4c15cfb90

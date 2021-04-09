@@ -50,6 +50,7 @@ Agile/kanban board for multi-cart
 
 ### 🐞 BUGS
 
+- [ ] BUG: 🔴 ERROR: JavaScript heap out of memory -- BE or FE? split up and see
 - [ ] BUG: auto-completing upon bad number and all messed up after, see: https://www.loom.com/share/dc660f891df3425f887d1e97d295167c (possible circumvention by NOT allowing save if line totals are not 100%? unless you're creating a distribution, and not finished yet? TBD)  
 - [ ] BUG: Saving message appears during each EDIT CART page load (though I thought I stopped that with the useRef initial load)  
 
@@ -71,6 +72,8 @@ Agile/kanban board for multi-cart
 - [ ] storybook for Line Accounts stuff  
 
 ### 💪 Todo
+
+- [ ] UI: for Line Account SELECTION, maybe NO MODAL and instead drawer, https://chakra-ui.com/docs/overlay/drawer
 - [ ] UI: for CartAvatar, use this: https://pro.chakra-ui.com/components/application-ui/cards
 - [ ] UI: build it all out, piece by piece, overhauling and using the ready pages I already built in my **chakra-demo-app**
 - [ ] UI: for Forgot Pwd -> the token page: https://pro.chakra-ui.com/components/application-ui/banners
