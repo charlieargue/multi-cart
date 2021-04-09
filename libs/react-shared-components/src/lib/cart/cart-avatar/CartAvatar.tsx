@@ -2,6 +2,7 @@ import { Box } from '@chakra-ui/react';
 import { Cart, useCartsQuery } from '@multi-cart/react-data-access';
 import { useRouter } from 'next/router';
 import React from 'react';
+import { CartAvatarInner } from '@multi-cart/react-shared-components';
 
 interface CartAvatarProps {
   currentCartId?: number;
@@ -74,26 +75,28 @@ export const CartAvatar = ({ currentCartId = -1 }: CartAvatarProps) => {
 
 
   return (
+    <>
+      {  !data && fetching ? (<></>) : (
+        <CartAvatarInner cart={currentCart} />
+      )}
+      <span></span>
+    </>);
+}
 
-    <Box>Hello</Box>
-  // <OverlayTrigger
-  //   trigger="click"
-  //   placement="bottom"
-  //   overlay={popover}
-  //   rootClose>
-  //   <Button
-  //     variant="outline-secondary"
-  //     color="transparent"
-  //     data-testid="btnMyCarts"
-  //     className="align-self-xl-center shadow-none">
-  //     {
-  //       // TODO:  change to: data && !fetching && (
-  //       !data && fetching ? (<></>) : (
-  //         <CartAvatarInner cart={currentCart} />
+
+// <OverlayTrigger
+        //   trigger="click"
+        //   placement="bottom"
+        //   overlay={popover}
+        //   rootClose>
+        //   <Button
+        //     variant="outline-secondary"
+        //     color="transparent"
+        //     data-testid="btnMyCarts"
+        //     className="align-self-xl-center shadow-none">
+        //     {
+        //       // TODO:  change to: data && !fetching && (
   //       )}
 
   //   </Button>
   // </OverlayTrigger>
-
-  );
-}

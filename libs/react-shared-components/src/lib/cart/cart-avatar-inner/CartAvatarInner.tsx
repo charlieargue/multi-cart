@@ -1,10 +1,10 @@
-import './CartAvatarInner.module.scss';
-import clsx from 'clsx';
+import { HStack, Tag, TagLabel, TagLeftIcon, TagRightIcon } from '@chakra-ui/react';
 import { Cart } from '@multi-cart/react-data-access';
 import React from 'react';
-import { Badge } from 'react-bootstrap';
-import { Cart3 } from 'react-bootstrap-icons';
-import { sumTotalItems, sumTotalCost, toFriendlyCurrency } from '@multi-cart/util';
+import { CgClose as CloseIcon } from 'react-icons/cg';
+import { FaShoppingCart as ShoppingCartIcon, FaDollarSign as DollarIcon } from 'react-icons/fa';
+import { sumTotalCost, sumTotalItems, toFriendlyCurrency } from '@multi-cart/util';
+import './CartAvatarInner.module.scss';
 
 interface CartAvatarInnerProps {
   variant?: 'white' | 'black',
@@ -14,12 +14,18 @@ interface CartAvatarInnerProps {
 export const CartAvatarInner = ({ variant = 'white', cart }: CartAvatarInnerProps) => {
 
   return (
-    <>
-      <span data-testid="currentCartTotalItems" className={variant === 'white' ? 'text-white' : 'text-black'}>{sumTotalItems(cart)}</span>
-                &nbsp;
-      <Cart3 color={variant} className="ml-0 mr-2 align-text-top" />
-      <Badge pill className={clsx(['fw-bold mr-1 px-2 py-1', variant === 'white' ? 'bg-white text-dark' : 'bg-dark text-white'])}>$</Badge>
-      <strong data-testid="currentCartTotalCost" className={variant === 'white' ? 'text-white' : 'text-black'}>{toFriendlyCurrency(sumTotalCost(cart), true)}</strong>
-    </>
+    <HStack spacing={4}>
+      <Tag size="lg" variant="subtle" colorScheme="green">
+        <TagLabel>
+          <span data-testid="currentCartTotalItems" className={variant === 'white' ? 'text-white' : 'text-black'}>{sumTotalItems(cart)}</span>
+        </TagLabel>
+        <TagLeftIcon mr={2} ml={2} boxSize="16px" as={ShoppingCartIcon} />
+        <TagLeftIcon mr={0} boxSize="14px" as={DollarIcon} />
+        <TagLabel>
+          <strong data-testid="currentCartTotalCost" className={variant === 'white' ? 'text-white' : 'text-black'}>{toFriendlyCurrency(sumTotalCost(cart), true)}</strong>
+        </TagLabel>
+      </Tag>
+    </HStack>
+
   );
 }

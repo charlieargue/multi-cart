@@ -25,7 +25,7 @@ export const NavBar = (props) => {
     const [_, logout] = useLogoutMutation();
 
     return (
-        <Box bg={mode('gray.200', 'gray.700')} px={[14, 10, 7, 14]}>
+        <Box bg={mode('gray.200', 'gray.700')} color={mode('gray.700', 'gray.200')} px={[14, 10, 7, 14]}>
             <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
 
                 {/* Hamburger */}
@@ -61,7 +61,7 @@ export const NavBar = (props) => {
                             rounded={'full'}
                             variant={'solid'}
                             _hover={{
-                                "backgroundColor": "white"
+                                "backgroundColor": mode("gray.400", "gray.900")
                             }}
                             cursor={'pointer'}>
                             
