@@ -14,7 +14,7 @@ export const Footer = () => {
         px={{ base: '6', md: '8' }}
         align="center"
       >
-        <Logo h="6" color={["white", "white", "primary.500", "primary.500"]} />
+        <Box style={{ "marginBottom": "8px" }} ><Logo /></Box>
         <Stack
           my={{ base: '6', md: 0 }}
           direction={{ base: 'column', md: 'row' }}
@@ -27,7 +27,7 @@ export const Footer = () => {
           <Link>Privacy</Link>
           <Link>Terms and Conditions</Link>
         </Stack>
-        <ButtonGroup marginStart={{ md: 'auto' }} color="gray.600" variant="ghost">
+        <ButtonGroup ml={8} color="gray.600" variant="ghost">
           <IconButton as="a" href="www.google.com" aria-label="LinkedIn" icon={<FaLinkedin />} />
           <IconButton as="a" href="www.google.com" aria-label="LinkedIn" icon={<FaGithub />} />
           <IconButton as="a" href="www.google.com" aria-label="LinkedIn" icon={<FaTwitter />} />
