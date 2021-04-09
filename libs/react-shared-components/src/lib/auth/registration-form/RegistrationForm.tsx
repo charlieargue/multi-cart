@@ -1,17 +1,17 @@
+import { Stack, Button } from '@chakra-ui/react';
 import { useRegisterMutation } from '@multi-cart/react-data-access';
 import { InputField, Wrapper } from '@multi-cart/react-ui';
 import { toErrorMap } from '@multi-cart/util';
 import { Form, Formik } from 'formik';
 import { useRouter } from "next/router";
 import React from 'react';
-import { Button } from 'react-bootstrap';
-import './Register.module.scss';
+import './RegistrationForm.module.scss';
 
 
 /* eslint-disable-next-line */
-export interface RegisterProps { }
+export interface RegistrationFormProps { }
 
-export function Register(props: RegisterProps) {
+export function RegistrationForm(props: RegistrationFormProps) {
   const router = useRouter();
   const [, register] = useRegisterMutation()
 
@@ -31,25 +31,27 @@ export function Register(props: RegisterProps) {
 
         {({ isSubmitting }) => (
           <Form>
-            <InputField
-              label="Username"
-              name="username"
-              placeholder="username">
-            </InputField>
+            <Stack spacing="6">
+              <InputField
+                label="Username"
+                name="username"
+                placeholder="username">
+              </InputField>
 
-            <InputField
-              label="Email"
-              name="email"
-              placeholder="email"
-              type="email">
-            </InputField>
-            <InputField
-              label="Password"
-              name="password"
-              placeholder="password"
-              type="password">
-            </InputField>
-            <Button className="mt-4" type="submit">Register</Button>
+              <InputField
+                label="Email"
+                name="email"
+                placeholder="email"
+                type="email">
+              </InputField>
+              <InputField
+                label="Password"
+                name="password"
+                placeholder="password"
+                type="password">
+              </InputField>
+              <Button colorScheme="pink" size="lg" fontSize="md" type="submit">Register</Button>
+            </Stack>
           </Form>
         )
         }

@@ -1,6 +1,6 @@
 export * from './lib/auth/change-password/ChangePassword';
 export * from './lib/auth/forgot-password/ForgotPassword';
-export * from './lib/auth/register/Register';
+export * from './lib/auth/registration-form/RegistrationForm';
 export * from './lib/auth/login-form/LoginForm';
 export * from './lib/auth/useIsAuth';
 export * from './lib/auto-save/AutoSave';
