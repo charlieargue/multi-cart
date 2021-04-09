@@ -17,6 +17,13 @@ export interface MicroLayoutProps {
   children?: React.ReactNode;
 }
 
+/**
+ * Streamlined Layout for "little" pages like Login, Register, Forgot Password, etc...
+ *
+ * @export
+ * @param {MicroLayoutProps} { heading, subHeading, children }
+ * @return {*} 
+ */
 export function MicroLayout({ heading, subHeading, children }: MicroLayoutProps) {
   return (
     <Wrapper>

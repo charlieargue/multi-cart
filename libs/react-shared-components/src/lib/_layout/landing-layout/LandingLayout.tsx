@@ -4,20 +4,19 @@ import { Wrapper } from "@multi-cart/react-ui";
 import React from 'react';
 import './LandingLayout.module.scss';
 
-
-// --------------
-// NOTE: This component will always render the header, the footer, and any components that are passed as children.
-//              - Each page renders a layout and consists of many sections. 
-//              - Every section component takes as props its main variables (text, images, links), 
-//              - so it's super easy to customize your pages...
-// --------------
-
-
 /* eslint-disable-next-line */
 export interface LandingLayoutProps {
   children?: React.ReactNode;
 }
 
+
+/**
+ * Layout for Landing Pages and home page
+ *
+ * @export
+ * @param {LandingLayoutProps} props
+ * @return {*} 
+ */
 export function LandingLayout(props: LandingLayoutProps) {
   
   return (

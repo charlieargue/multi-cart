@@ -11,4 +11,4 @@ export const DashboardContainer = () => {
         <AppLayout>
             Dashboard
         </AppLayout>);
-}
+};

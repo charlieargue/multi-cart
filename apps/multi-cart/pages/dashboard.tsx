@@ -3,13 +3,14 @@ import { useIsAuth } from '@multi-cart/react-shared-components';
 import { NextPage } from 'next';
 import { withUrqlClient } from 'next-urql';
 import React from 'react';
+import { DashboardContainer } from '../appViews/DashboardContainer';
 
-const Dashboard: NextPage = () => {
+const DashboardPage: NextPage = () => {
   useIsAuth(); // 🛡 session authentication
 
   return (
-    <Dashboard />
+    <DashboardContainer />
   );
 }
 
-export default withUrqlClient(createUrqlClient, { ssr: false })(Dashboard);
+export default withUrqlClient(createUrqlClient, { ssr: false })(DashboardPage);
