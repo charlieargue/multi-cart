@@ -1,6 +1,6 @@
-import { Button, FormControl, FormLabel, Input, Stack } from '@chakra-ui/react';
+import { Button, Stack } from '@chakra-ui/react';
 import { useLoginMutation } from '@multi-cart/react-data-access';
-import { InputField, PasswordField, Wrapper } from '@multi-cart/react-ui';
+import { InputField, PasswordField } from '@multi-cart/react-ui';
 import { toErrorMap } from '@multi-cart/util';
 import { Form, Formik } from 'formik';
 import { useRouter } from "next/router";
@@ -16,7 +16,6 @@ export function LoginForm(props: LoginFormProps) {
   const [, login] = useLoginMutation();
 
   return (
-    <Wrapper variant="small">
       <Formik initialValues={{ usernameOrEmail: "", password: "" }}
         onSubmit={async (values, { setErrors }) => {
           const response = await login(values);
@@ -48,7 +47,6 @@ export function LoginForm(props: LoginFormProps) {
           </Form>
         )}
       </Formik>
-    </Wrapper >
   );
 }
 

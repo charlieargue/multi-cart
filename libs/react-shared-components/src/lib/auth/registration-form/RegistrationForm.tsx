@@ -1,6 +1,6 @@
-import { Stack, Button } from '@chakra-ui/react';
+import { Button, Stack } from '@chakra-ui/react';
 import { useRegisterMutation } from '@multi-cart/react-data-access';
-import { InputField, Wrapper } from '@multi-cart/react-ui';
+import { InputField } from '@multi-cart/react-ui';
 import { toErrorMap } from '@multi-cart/util';
 import { Form, Formik } from 'formik';
 import { useRouter } from "next/router";
@@ -16,7 +16,6 @@ export function RegistrationForm(props: RegistrationFormProps) {
   const [, register] = useRegisterMutation()
 
   return (
-    <Wrapper variant="small">
       <Formik initialValues={{ username: "", password: "", email: "" }}
         onSubmit={async (values, { setErrors }) => {
           const response = await register({
@@ -42,7 +41,8 @@ export function RegistrationForm(props: RegistrationFormProps) {
                 label="Email"
                 name="email"
                 placeholder="email"
-                type="email">
+                type="email"
+                muted="We'll never share your email.">
               </InputField>
               <InputField
                 label="Password"
@@ -56,6 +56,5 @@ export function RegistrationForm(props: RegistrationFormProps) {
         )
         }
       </Formik >
-    </Wrapper >
   );
 }

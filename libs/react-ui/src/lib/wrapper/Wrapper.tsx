@@ -1,21 +1,21 @@
-import clsx from 'clsx';
+import { Flex, useColorMode } from '@chakra-ui/react';
 import React from 'react';
-import { Container } from 'react-bootstrap';
-
-export type WrapperVariant = 'small' | 'regular';
 
 
-interface WrapperProps {
-    variant?: WrapperVariant;
-    children?: React.ReactNode;
-}
+export const Wrapper = (props) => {
+    const { colorMode } = useColorMode(); // TODO: abstract this out into a generic Container (but what about Box like MicroLayout?) -- see with=
+    const bgColor = { light: 'gray.50', dark: 'gray.900' };
+    const color = { light: 'black', dark: 'white' };
 
-export const Wrapper = ({ children, variant = 'regular' }: WrapperProps) => {
+    // NOTE: you don't even need children with ...props like that, wut?
     return (
-        <Container
-            className={clsx(variant === 'regular' ? "md-container" : "sm-container", "mt-3")}
-            fluid>
-            { children}
-        </Container>
+        <Flex
+            direction="column"
+            alignItems="center"
+            justifyContent="flex-start"
+            bg={bgColor[colorMode]}
+            color={color[colorMode]}
+            {...props}
+        />
     );
 }

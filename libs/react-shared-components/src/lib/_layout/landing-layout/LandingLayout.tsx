@@ -1,7 +1,8 @@
+import { Flex } from "@chakra-ui/react";
+import { DarkModeSwitch, Footer, Header } from "@multi-cart/react-shared-components";
+import { Wrapper } from "@multi-cart/react-ui";
 import React from 'react';
 import './LandingLayout.module.scss';
-import { Flex } from "@chakra-ui/react";
-import { Footer, Header } from "@multi-cart/react-shared-components";
 
 
 // --------------
@@ -18,18 +19,22 @@ export interface LandingLayoutProps {
 }
 
 export function LandingLayout(props: LandingLayoutProps) {
+  
   return (
-    <Flex
-      direction="column"
-      align="center"
-      maxW={{ xl: "1200px" }}
-      m="0 auto"
-      {...props}
-    >
-      <Header />
-      {props.children}
-      <Footer />
-    </Flex>
+    <Wrapper>
+      <Flex
+        direction="column"
+        align="center"
+        maxW={{ xl: "1200px" }}
+        m="0 auto"
+        {...props}
+      >
+        <Header />
+        {props.children}
+        <Footer />
+        <DarkModeSwitch />
+      </Flex>
+    </Wrapper>
   );
 }
 

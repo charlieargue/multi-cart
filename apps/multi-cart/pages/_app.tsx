@@ -1,4 +1,3 @@
-// import '../_theme/app.scss';
 import React from 'react';
 import { ChakraProvider, ColorModeProvider } from '@chakra-ui/react';
 import theme from '../_theme/theme';
@@ -9,7 +8,7 @@ function MyApp({ Component, pageProps }) {
     <ChakraProvider resetCSS theme={theme}>
       <ColorModeProvider
         options={{
-          useSystemColorMode: true,
+          useSystemColorMode: false,
         }}
       >
         <Component {...pageProps} />

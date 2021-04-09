@@ -10,7 +10,12 @@ export function Logo(props) {
         <Flex justifyContent="center">
           <Box className={styles["logo__scale-up"]}>🛍</Box>
           <Box>
-            <Text color="brand" fontSize="3xl">
+            <Text
+              color="brand.pink"
+              fontSize="3xl"
+              bgGradient="linear(to-l, brand.yellow, brand.pink)"
+              bgClip="text"
+              fontWeight="extrabold">
               <i>multi</i>&nbsp;<strong>cart</strong>
             </Text>
           </Box>

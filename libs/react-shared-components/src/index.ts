@@ -1,3 +1,4 @@
+export * from './lib/dark-mode-switch/DarkModeSwitch';
 export * from './lib/hero/Hero';
 export * from './lib/_layout/header/Header';
 export * from './lib/_layout/footer/Footer';

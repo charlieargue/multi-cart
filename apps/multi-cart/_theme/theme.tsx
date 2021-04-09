@@ -12,6 +12,8 @@ const breakpoints = createBreakpoints({
 })
 
 const theme = extendTheme({
+  initialColorMode: "light",
+  useSystemColorMode: false,
   colors: {
     100: "#E5FCF1",
     200: "#27EF96",
@@ -22,9 +24,10 @@ const theme = extendTheme({
     700: "#086F42",
     800: "#075C37",
     900: "#064C2E",
-    "brand": "#FF50BD", // PINK
+    "brand.pink": "#FF50BD",
+    "brand.yellow": "#EDC346",
+    fonts,
   },
-  fonts,
   breakpoints,
 })
 

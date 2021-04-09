@@ -1,5 +1,5 @@
 import { useChangePasswordMutation } from '@multi-cart/react-data-access';
-import { InputField, Wrapper } from '@multi-cart/react-ui';
+import { InputField } from '@multi-cart/react-ui';
 import { toErrorMap } from '@multi-cart/util';
 import { Form, Formik } from 'formik';
 import NextLink from "next/link";
@@ -16,7 +16,6 @@ export const ChangePassword = () => {
 
   return (
 
-    <Wrapper variant="small">
       <Formik initialValues={{ newPassword: "" }}
         onSubmit={async (values, { setErrors }) => {
           // hit DB
@@ -57,7 +56,6 @@ export const ChangePassword = () => {
           </Form>
         )}
       </Formik>
-    </Wrapper>
 
   );
 }

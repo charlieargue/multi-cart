@@ -1,21 +1,17 @@
-import './AppLayout.module.scss';
+import { NavBar } from '@multi-cart/react-shared-components';
 import React from 'react';
 import { Container } from 'react-bootstrap';
-import { WrapperVariant, Wrapper } from '@multi-cart/react-ui';
-import { NavBar } from '@multi-cart/react-shared-components';
+import './AppLayout.module.scss';
 
 interface AppLayoutProps {
-  variant?: WrapperVariant
   children?: React.ReactNode
 }
 
-export const AppLayout = ({ children, variant }: AppLayoutProps) => {
+export const AppLayout = ({ children }: AppLayoutProps) => {
   return (
     <Container fluid className="mx-0 px-0">
       <NavBar />
-      <Wrapper variant={variant}>
         {children}
-      </Wrapper>
     </Container>
   );
 }

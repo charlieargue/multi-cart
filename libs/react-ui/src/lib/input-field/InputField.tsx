@@ -1,4 +1,4 @@
-import { Box, FormControl, FormLabel, Input, InputProps, useColorModeValue as mode, } from '@chakra-ui/react';
+import { Box, FormControl, FormHelperText, FormLabel, Input, InputProps, useColorModeValue as mode, } from '@chakra-ui/react';
 import { Form, useField } from "formik";
 import React, { InputHTMLAttributes } from "react";
 // import { Form } from "react-bootstrap";
@@ -32,8 +32,6 @@ export const InputField = ({
   ...props
 }: InputFieldProps) => {
   const [field, meta] = useField(props);
-  // const jsxLabel = <Form.Label className="text-muted"></Form.Label>;
-  // const jsxField = <Form.Control {...field} {...props} id={id ? id : field.name} />;
   const jsxLabel = <FormLabel>{label}</FormLabel>;
   const jsxField = <Input {...field} {...props} id={id ? id : field.name} />;
 
@@ -43,9 +41,7 @@ export const InputField = ({
         <FormControl id={id}>
           {label ? <>{jsxLabel}{jsxField}</> : jsxField}
           {muted && (
-            <Box as="a" color={mode('blue.600', 'blue.200')} fontWeight="semibold" fontSize="sm">
-              {muted}
-            </Box>
+            <FormHelperText>{muted}</FormHelperText>
           )}
         </FormControl >
       );
