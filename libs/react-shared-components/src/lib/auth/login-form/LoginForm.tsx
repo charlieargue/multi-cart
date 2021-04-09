@@ -41,7 +41,7 @@ export function LoginForm(props: LoginFormProps) {
                 placeholder="username or email">
               </InputField>
               <PasswordField />
-              <Button type="submit" colorScheme="blue" size="lg" fontSize="md">
+              <Button type="submit" colorScheme="pink" size="lg" fontSize="md">
                 Login
               </Button>
             </Stack>

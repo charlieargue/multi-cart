@@ -20,11 +20,11 @@ const LoginPage = () => {
   return (
     <Box bg={mode('gray.50', 'inherit')} minH="100vh" py="12" px={{ sm: '6', lg: '8' }}>
       <Box maxW={{ sm: 'md' }} mx={{ sm: 'auto' }} w={{ sm: 'full' }}>
-        <Box mb={{ base: '10', md: '28' }}>
-          <Logo mx="auto" h="8" iconColor={mode('blue.600', 'blue.200')} />
+        <Box mb={{ base: '10', md: '24' }}>
+          <Logo />
         </Box>
         <Heading mt="6" textAlign="center" size="xl" fontWeight="extrabold">
-          Login to your account
+          Welcome back!
   </Heading>
         <Text mt="4" align="center" maxW="md" fontWeight="medium">
           <span>Don&apos;t have an account?</span>
@@ -33,8 +33,8 @@ const LoginPage = () => {
               as="a"
               marginStart="1"
               href="#"
-              color={mode('blue.600', 'blue.200')}
-              _hover={{ color: 'blue.600' }}
+              color={mode('pink.600', 'pink.200')}
+              _hover={{ color: 'pink.600' }}
               display={{ base: 'block', sm: 'revert' }}
             >
               register an account

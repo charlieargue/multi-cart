@@ -1,3 +1,4 @@
+// thx: (see code) https://pro.chakra-ui.com/components/application-ui/authentication
 import './PasswordField.module.scss';
 import {
   Box,
@@ -34,12 +35,14 @@ export const PasswordField = React.forwardRef<HTMLInputElement, InputProps>((pro
     }
   };
 
+  // TODO: why didn't this work in InputFIeld? // ref={mergeRef}
+
   return (
     <FormControl id="password">
       <Flex justify="space-between">
         <FormLabel>Password</FormLabel>
         <NextLink href="/forgot-password">
-          <Box as="a" color={mode('blue.600', 'blue.200')} fontWeight="semibold" fontSize="sm">
+          <Box as="a" color={mode('pink.600', 'pink.200')} fontWeight="semibold" fontSize="sm">
             Forgot Password?
         </Box>
         </NextLink>
