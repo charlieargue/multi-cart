@@ -6,7 +6,7 @@ import NextLink from 'next/link';
 export function Logo(props) {
   return (
     <NextLink href="/">
-      <a>
+      <a href="/">
         <Flex justifyContent="center">
           <Box className={styles["logo__scale-up"]}>🛍</Box>
           <Box>

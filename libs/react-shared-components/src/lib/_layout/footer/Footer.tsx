@@ -6,7 +6,7 @@ import { Logo } from '@multi-cart/react-ui';
 
 export const Footer = () => {
   return (
-    <Box as="footer" role="contentinfo" py="6">
+    <Box as="footer" role="contentinfo" py="6" >
       <Flex
         direction={{ base: 'column', md: 'row' }}
         maxW={{ base: 'xl', md: '7xl' }}

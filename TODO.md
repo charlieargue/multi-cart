@@ -15,7 +15,7 @@ Agile/kanban board for multi-cart
   - [ ] store: Make a new shop page  
   - [ ] store: Have two modes: Condenscned table view & Bigger thumbnail view  
   - [ ] store: Paging! Must use paging! Sorry :)  
-  - [ ] store: Click products -> product details (SSR these pages!) - PRODUCTS PAGE: https://getbootstrap.com/docs/5.0/examples/album/# -> https://getbootstrap.com/docs/5.0/examples/product/ + https://getbootstrap.com/docs/5.0/examples/jumbotron/ & maybe https://getbootstrap.com/docs/5.0/examples/starter-template/ & maybe https://getbootstrap.com/docs/5.0/examples/features/  
+  - [ ] store: Click products -> product details (SSR these pages!) - PRODUCTS PAGE: https://getbootstrap.com/docs/5.0/examples/album/# -> https://getbootstrap.com/docs/5.0/examples/product/ + https://getbootstrap.com/docs/5.0/examples/jumbotron/ & maybe https://getbootstrap.com/docs/5.0/examples/starter-template/ & maybe https://getbootstrap.com/docs/5.0/examples/features/  THIS: ===> https://chakra-templates.dev/components/cards
   - [ ] store: And these pages are public! Don’t need to be authed to see them!  
   - [ ] store: But if you are authed You get BUY NOW buttons! (both on store and details views)  
   - [ ] store: BUY NOW: It goes into your current cart 🔴 What if you don’t have a current cart !!!  
