@@ -1,11 +1,11 @@
 import { withUrqlClient } from 'next-urql';
 import React from 'react';
-import { ForgotPassword } from '@multi-cart/react-shared-components';
 import { createUrqlClient } from '@multi-cart/react-data-access';
+import { ForgotPasswordContainer } from '../appViews/auth/ForgotPasswordContainer';
 
 const ForgotPasswordPage = () => {
 
-    return (<ForgotPassword />);
+    return (<ForgotPasswordContainer />);
 }
 
 export default withUrqlClient(createUrqlClient)(ForgotPasswordPage);

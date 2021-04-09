@@ -1,3 +1,5 @@
+export * from './lib/banner/Banner';
+export * from './lib/action-link/ActionLink';
 export * from './lib/password-field/PasswordField';
 export * from './lib/divider-with-text/DividerWithText';
 export * from './lib/logo/Logo';

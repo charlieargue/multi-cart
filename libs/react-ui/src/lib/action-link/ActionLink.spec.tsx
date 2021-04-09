@@ -1,11 +1,11 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 
-import ForgotPassword from './ForgotPassword';
+import ActionLink from './ActionLink';
 
-describe('ForgotPassword', () => {
+describe('ActionLink', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<ForgotPassword />);
+    const { baseElement } = render(<ActionLink />);
     expect(baseElement).toBeTruthy();
   });
 });

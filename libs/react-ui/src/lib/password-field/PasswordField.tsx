@@ -42,7 +42,7 @@ export const PasswordField = React.forwardRef<HTMLInputElement, InputProps>((pro
       <Flex justify="space-between">
         <FormLabel>Password</FormLabel>
         <NextLink href="/forgot-password">
-          <Box as="a" color={mode('pink.600', 'pink.200')} fontWeight="semibold" fontSize="sm">
+          <Box href="#" as="a" color={mode('pink.600', 'pink.200')} fontWeight="semibold" fontSize="sm">
             Forgot Password?
         </Box>
         </NextLink>

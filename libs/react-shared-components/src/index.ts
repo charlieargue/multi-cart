@@ -1,5 +1,6 @@
+export * from './lib/micro-layout/MicroLayout';
 export * from './lib/auth/change-password/ChangePassword';
-export * from './lib/auth/forgot-password/ForgotPassword';
+export * from './lib/auth/forgot-password-form/ForgotPasswordForm';
 export * from './lib/auth/registration-form/RegistrationForm';
 export * from './lib/auth/login-form/LoginForm';
 export * from './lib/auth/useIsAuth';
