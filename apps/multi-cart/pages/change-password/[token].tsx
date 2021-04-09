@@ -8,4 +8,4 @@ export const ChangePasswordPage: NextPage = () => {
     return (<ChangePassword />);
 }
 
-export default withUrqlClient(createUrqlClient)(ChangePasswordPage);
+export default withUrqlClient(createUrqlClient, { ssr: false })(ChangePasswordPage);

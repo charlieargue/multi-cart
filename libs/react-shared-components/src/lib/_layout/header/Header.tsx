@@ -1,13 +1,15 @@
 import React from "react";
-import { Box, Flex, Text, Button } from "@chakra-ui/react";
+import { Box, Flex, Text, Button, useColorModeValue as mode } from "@chakra-ui/react";
 import { Logo } from "@multi-cart/react-ui";
 import NextLink from 'next/link';
 
+// TODO: componentize
 const MenuItem = ({ children, isLast = false, to = "/", ...rest }) => {
   return (
     <Text
       mb={{ base: isLast ? 0 : 8, sm: 0 }}
       mr={{ base: 0, sm: isLast ? 0 : 8 }}
+      color={mode('black', 'white')}
       display="block"
       {...rest}
     >

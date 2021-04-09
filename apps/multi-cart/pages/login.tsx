@@ -1,10 +1,11 @@
-import React from 'react'
 import { createUrqlClient } from '@multi-cart/react-data-access';
+import { NextPage } from 'next';
 import { withUrqlClient } from 'next-urql';
+import React from 'react';
 import { LoginContainer } from '../appViews/auth/LoginContainer';
 
-const LoginPage = () => {
+const LoginPage: NextPage = () => {
   return <LoginContainer />;
 };
 
-export default withUrqlClient(createUrqlClient)(LoginPage);
+export default withUrqlClient(createUrqlClient, { ssr: false })(LoginPage);

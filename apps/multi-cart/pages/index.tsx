@@ -1,14 +1,15 @@
 import { createUrqlClient } from '@multi-cart/react-data-access';
-import { AppLayout } from '@multi-cart/react-shared-components';
+import { NextPage } from 'next';
 import { withUrqlClient } from 'next-urql';
 import React from 'react';
 import { LandingContainer } from '../appViews/LandingContainer';
 
-const Index = () => {
+const Index: NextPage = () => {
 
   return (
     <LandingContainer />
   );
 }
 
-export default withUrqlClient(createUrqlClient)(Index);
+// SSR for SEO, etc.
+export default withUrqlClient(createUrqlClient, { ssr: true })(Index);
