@@ -31,7 +31,7 @@ export const CartAvatar = ({ currentCartId = -1 }: CartAvatarProps) => {
 
 
   return (
-    <Menu>
+    <Menu isLazy>
       <MenuButton
         rightIcon={<ChevronDownIcon />}
         ml={2}
@@ -40,7 +40,8 @@ export const CartAvatar = ({ currentCartId = -1 }: CartAvatarProps) => {
         variant={'solid'}
         colorScheme="green"
         _hover={{
-          "backgroundColor": mode("gray.400", "gray.900")
+          "backgroundColor": mode("gray.400", "gray.900"),
+          "color": mode("gray.400", "gray.100"),
         }}
         cursor={'pointer'}>
 
@@ -85,10 +86,7 @@ export const CartAvatar = ({ currentCartId = -1 }: CartAvatarProps) => {
                     <Text color="gray.500" fontSize="xs" ml={.5}>{toDaysAgo(c.createdAt)}</Text>
                   </Box>
                   <Box>
-                    <CartAvatarInner
-                      variant="black"
-                      cart={!c ? {} as any : c}
-                    />
+                    <CartAvatarInner cart={!c ? {} as any : c} />
                   </Box>
                 </Flex>
                 {/* dropdown CART GUTS */}

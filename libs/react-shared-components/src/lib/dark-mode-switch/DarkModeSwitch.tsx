@@ -15,7 +15,7 @@ export function DarkModeSwitch(props: DarkModeSwitchProps) {
       position="fixed"
       bottom="5rem"
       right="3rem"
-      color="green"
+      colorScheme="pink"
       isChecked={isDark}
       onChange={toggleColorMode}
     />
