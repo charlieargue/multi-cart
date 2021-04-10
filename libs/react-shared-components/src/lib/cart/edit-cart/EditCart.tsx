@@ -122,7 +122,6 @@ export const EditCart = ({ id }: EditCartProps) => {
       </Flex>
 
       {/* 🛍 cart */}
-      {/* <table className="table table-borderless table-responsive-sm table-sm mt-2" > */}
       <Table variant="simple" colorScheme="pink" id="cart-table" size="lg" marginBottom={10}>
         <TableCaption>
           Prices are estimates and subject to change
@@ -193,7 +192,7 @@ export const EditCart = ({ id }: EditCartProps) => {
                       mb={20}>
 
                       {/* WRAP IT ALL TOGETHER */}
-                      <Wrap spacing="12">
+                      <Wrap spacing="5" align="center">
                         <WrapItem><LineAccountButtonRow line={line} idx={idx} /></WrapItem>
                         {(line as CartLine)?.cartLineAccounts?.sort((a, b) => a.id - b.id).map((cla) => !cla ? null : (
                           <WrapItem>

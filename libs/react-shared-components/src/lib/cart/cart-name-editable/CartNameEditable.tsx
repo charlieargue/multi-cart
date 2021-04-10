@@ -29,7 +29,14 @@ export function CartNameEditable({ name, id }: CartNameEditableProps) {
   // -------------------
   return (
     <Box onClick={() => isEditing === false ? setIsEditing(!isEditing) : null} >
-      <Button colorScheme="pink" size="lg" shadow="lg" borderColor="gray.100" borderWidth="3px" bgGradient="linear(to-l, brand.yellow, brand.pink)">
+      <Button
+        colorScheme="pink"
+        size="lg"
+        shadow="lg"
+        borderColor="gray.100"
+        height="55px"
+        borderWidth="3px"
+        bgGradient="linear(to-l, brand.yellow, brand.pink)">
         {isEditing && (
 
           // EDIT FORM -------------------- start
@@ -51,7 +58,7 @@ export function CartNameEditable({ name, id }: CartNameEditableProps) {
                 {/* // style={(errors.percentage && touched.percentage) ? { "border": "2px dotted red" } : null} */}
                 {/* unwrapped INPUT FIELD */}
                 <InputField
-                  style={{"background": "white", "color": "black"}}
+                  style={{ "background": "white", "color": "black" }}
                   type="text"
                   autoFocus
                   aria-label="name"

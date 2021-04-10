@@ -14,7 +14,6 @@ export * from './lib/cart/new-cart-button/NewCartButton';
 export * from './lib/dark-mode-switch/DarkModeSwitch';
 export * from './lib/hero/Hero';
 export * from './lib/line-accounts/line-account-button-row/LineAccountButtonRow';
-export * from './lib/line-accounts/line-account-modal/LineAccountModal';
 export * from './lib/line-accounts/line-account/LineAccount';
 export * from './lib/_layout/app-layout/AppLayout';
 export * from './lib/_layout/footer/Footer';

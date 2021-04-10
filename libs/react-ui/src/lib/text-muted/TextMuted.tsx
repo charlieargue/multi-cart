@@ -7,6 +7,7 @@ import './TextMuted.module.scss';
 /* eslint-disable-next-line */
 export interface TextMutedProps {
   children?: React.ReactNode;
+  style?: unknown;
 }
 
 export function TextMuted(props: TextMutedProps) {
