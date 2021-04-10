@@ -20,10 +20,10 @@ export const AppLayout = (props: AppLayoutProps) => {
         <Flex
           direction="column"
           align="center"
-          minH="100vh" 
+          minH="100vh"
           {...props}
         >
-          <Box minWidth="95vw" py="2" px={{ sm: '6', lg: '8' }}>
+          <Box minWidth="95vw" py="2" px={{ sm: '12', lg: '20' }}>
             {props.children}
           </Box>
           <DarkModeSwitch />

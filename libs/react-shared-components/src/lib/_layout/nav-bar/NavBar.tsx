@@ -8,7 +8,7 @@ import {
     useColorModeValue as mode, useDisclosure
 } from '@chakra-ui/react';
 import { useLogoutMutation, useMeQuery } from '@multi-cart/react-data-access';
-import { CartAvatar } from '@multi-cart/react-shared-components';
+import { CartAvatar, DarkModeSwitch } from '@multi-cart/react-shared-components';
 import { Logo } from "@multi-cart/react-ui";
 import { useRouter } from 'next/router';
 import React from 'react';
@@ -55,7 +55,7 @@ export const NavBar = (props) => {
                                 "backgroundColor": mode("gray.400", "gray.900")
                             }}
                             cursor={'pointer'}>
-                            
+
                             {/* User Profile Avatar */}
                             <Flex alignItems={'center'}>
                                 <Box mr={2}>{data?.me?.username}</Box>
@@ -67,7 +67,7 @@ export const NavBar = (props) => {
                                 />
                             </Flex>
                         </MenuButton>
-                        
+
                         {/*  Dropdown */}
                         <MenuList>
                             {/* Logout */}
@@ -80,6 +80,8 @@ export const NavBar = (props) => {
                                 Logout</MenuItem>
                         </MenuList>
                     </Menu>
+
+                    
                 </Flex>
             </Flex>
         </Box >

@@ -1,13 +1,11 @@
-import { Badge, Box, Td, Tr, useColorModeValue as mode } from '@chakra-ui/react';
+import { Badge, Td, Text, Tr } from '@chakra-ui/react';
 import { CartLine, useDeleteCartLineMutation, useUpdateCartLineMutation } from '@multi-cart/react-data-access';
 import { AutoSave, CategoriesDropDown } from '@multi-cart/react-shared-components';
 import { InputField } from '@multi-cart/react-ui';
 import { toFriendlyCurrency } from '@multi-cart/util';
-import clsx from 'clsx';
 import { Form, Formik } from "formik";
 import React, { useRef } from 'react';
 import './CartLineRow.module.scss';
-import styles from './CartLineRow.module.scss';
 
 interface CartLineRowProps {
   line: CartLine;
@@ -71,12 +69,12 @@ export const CartLineRow = ({ line, children, idx }: CartLineRowProps) => {
               </Badge>
             </Td>
             <Td>
-              <Form className={clsx(styles['cart-line-row__form'], 'align-items-baseline')}>
+              <Form>
                 <InputField
+                  bg="white"
                   name="itemId"
                   id={`itemId_${line.id}`}
                   type="text"
-                  className="form-control w-100"
                   aria-describedby="itemNum"
                   placeholder="Item #" />
               </Form>
@@ -84,11 +82,11 @@ export const CartLineRow = ({ line, children, idx }: CartLineRowProps) => {
             </Td>
 
             <Td>
-              <Form className={clsx(styles['cart-line-row__form'], 'align-items-baseline')}>
+              <Form>
                 <InputField
+                  bg="white"
                   name="description"
                   id={`description_${line.id}`}
-                  className={clsx(styles['cart-line-row__description'], 'form-control')}
                   type="text"
                   placeholder="Description" />
               </Form>
@@ -110,24 +108,24 @@ export const CartLineRow = ({ line, children, idx }: CartLineRowProps) => {
             </Td>
             <Td>
               <InputField
+                bg="white"
                 id={`quantity_${line.id}`}
                 name="quantity"
                 type="number"
-                className="form-control w-75"
                 aria-describedby="itemQuantity"
                 placeholder="Qty" />
             </Td>
             <Td>
               <InputField
+                bg="white"
                 id={`price_${line.id}`}
                 name="price"
                 type="number"
-                className="form-control w-100"
                 aria-describedby="itemPrice"
                 placeholder="Price" />
             </Td>
-            <Td className="pr-3 text-right pt-3">
-              {typeof line.price === "number" && typeof line.quantity === "number" ? toFriendlyCurrency(line.price * line.quantity) : 0}
+            <Td>
+              <Text fontWeight="bold">{typeof line.price === "number" && typeof line.quantity === "number" ? toFriendlyCurrency(line.price * line.quantity) : 0}</Text>
             </Td>
 
             <Td>

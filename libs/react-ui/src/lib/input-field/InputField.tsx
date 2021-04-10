@@ -10,6 +10,7 @@ export type InputFieldProps = InputHTMLAttributes<HTMLInputElement> & {
   name: string;
   muted?: React.ReactNode;
   unwrapped?: boolean;
+  radius?: string;
   ref?: (node: HTMLInputElement) => void;
 }
   & InputProps
@@ -29,11 +30,12 @@ export const InputField = ({
   muted,
   size: _,
   unwrapped = false,
+  radius = "md",
   ...props
 }: InputFieldProps) => {
   const [field, meta] = useField(props);
   const jsxLabel = (<FormLabel>{label}</FormLabel>);
-  const jsxField = (<Input {...field} {...props} id={id ? id : field.name} />);
+  const jsxField = (<Input borderRadius={radius}  {...field} {...props} id={id ? id : field.name} />);
 
   if (field.value !== null && props.value !== null) {
     if (!unwrapped) {

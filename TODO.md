@@ -53,7 +53,8 @@ Agile/kanban board for multi-cart
 - [ ] BUG: 🔴 ERROR: JavaScript heap out of memory -- BE or FE? split up and (TODO: if that solves it, add it to the command array for FE:serve!)
 - [ ] BUG: auto-completing upon bad number and all messed up after, see: https://www.loom.com/share/dc660f891df3425f887d1e97d295167c (possible circumvention by NOT allowing save if line totals are not 100%? unless you're creating a distribution, and not finished yet? TBD)  
 - [ ] BUG: Saving message appears during each EDIT CART page load (though I thought I stopped that with the useRef initial load)  
-- [ ] BUG: 🔴 ERROR: ON FORGOT PWD: React does not recognize the nextHref prop on a DOM element. If you intentionally want it to appear in the DOM as a custom attribute, spell it as lowercase nexthref instead. If you accidentally passed it from a parent component, remove it from the DOM element.
+- [ ] BUG: 🔴 ERROR: ON LOGIN, FORGOT PWD, etc.: React does not recognize the nextHref prop on a DOM element. If you intentionally want it to appear in the DOM as a custom attribute, spell it as lowercase nexthref instead. If you accidentally passed it from a parent component, remove it from the DOM element.
+
 
 
 

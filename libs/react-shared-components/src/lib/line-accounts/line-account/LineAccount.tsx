@@ -108,7 +108,8 @@ export const LineAccount = ({ lineAccount, line }: LineAccountProps) => {
                 aria-label="percentage"
                 name="percentage"
                 id={`percentage_${lineAccount.id}`}
-                unwrapped={true}>
+                unwrapped={true}
+                radius="none">
               </InputField>
               <AutoSave debounceMs={300} />
             </Box>
