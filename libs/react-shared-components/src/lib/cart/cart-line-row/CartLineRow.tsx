@@ -1,4 +1,4 @@
-import { Badge, Td, Text, Tr } from '@chakra-ui/react';
+import { Badge, Button, Td, Text, Tr } from '@chakra-ui/react';
 import { CartLine, useDeleteCartLineMutation, useUpdateCartLineMutation } from '@multi-cart/react-data-access';
 import { AutoSave, CategoriesDropDown } from '@multi-cart/react-shared-components';
 import { InputField } from '@multi-cart/react-ui';
@@ -6,6 +6,7 @@ import { toFriendlyCurrency } from '@multi-cart/util';
 import { Form, Formik } from "formik";
 import React, { useRef } from 'react';
 import './CartLineRow.module.scss';
+import { CgClose as CloseIcon } from 'react-icons/cg';
 
 interface CartLineRowProps {
   line: CartLine;
@@ -129,9 +130,13 @@ export const CartLineRow = ({ line, children, idx }: CartLineRowProps) => {
             </Td>
 
             <Td>
-              {/* <Button className="bg-danger text-white p-0 mr-2" onClick={() => deleteCartLine({ cartId: line.cartId, cartLineId: line.id })}>
-                <X size={28} />
-              </Button> */}
+              <Button
+                rounded="lg"
+                bg="red"
+                p="1"
+                onClick={() => deleteCartLine({ cartId: line.cartId, cartLineId: line.id })}>
+                <CloseIcon color="white" size={19} />
+              </Button>
               {/* TODO: make float or not change width of rest of row, and NOT fire on component load */}
               <AutoSave debounceMs={300} />
             </Td>

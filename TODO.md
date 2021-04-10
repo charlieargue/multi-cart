@@ -50,6 +50,7 @@ Agile/kanban board for multi-cart
 
 ### 🐞 BUGS
 
+- [ ] BUG: 🔴 ERROR: percentage addition is not working correctly, see BUG on desktop (100 not summing up to 100)
 - [ ] BUG: 🔴 ERROR: JavaScript heap out of memory -- BE or FE? split up and (TODO: if that solves it, add it to the command array for FE:serve!)
 - [ ] BUG: auto-completing upon bad number and all messed up after, see: https://www.loom.com/share/dc660f891df3425f887d1e97d295167c (possible circumvention by NOT allowing save if line totals are not 100%? unless you're creating a distribution, and not finished yet? TBD)  
 - [ ] BUG: Saving message appears during each EDIT CART page load (though I thought I stopped that with the useRef initial load)  
