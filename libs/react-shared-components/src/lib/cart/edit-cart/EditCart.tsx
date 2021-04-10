@@ -1,16 +1,17 @@
 import {
-  Alert, AlertIcon, Badge, Box, Button, Flex, HStack, Stat, StatHelpText, StatLabel, StatNumber, Table,
+  Alert, AlertIcon, Badge, Box, Button, Divider, Flex, HStack, Stat, StatHelpText, StatLabel, StatNumber, Table,
   TableCaption, Tbody,
   Td, Tfoot, Thead,
-  Tooltip,
-  Tr
+  Tooltip, Text,
+  Tr, useColorModeValue as mode, Wrap, WrapItem
 } from '@chakra-ui/react';
 import { Cart, useBlankCartLineMutation, useCartQuery, useDeleteCartMutation, useUpdateUserMutation } from '@multi-cart/react-data-access';
-import { CartLineRow, CartNameEditable } from '@multi-cart/react-shared-components';
+import { CartLineRow, CartNameEditable, LineAccountButtonRow } from '@multi-cart/react-shared-components';
 import { BigAlert, Breadcrumbs, TextMuted } from '@multi-cart/react-ui';
 import { sumTotalCost, toFriendlyCurrency } from '@multi-cart/util';
 import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
+import { HiPencilAlt } from 'react-icons/hi';
 import { ImPlus as PlusIcon } from 'react-icons/im';
 import styles from './EditCart.module.scss';
 
@@ -115,7 +116,7 @@ export const EditCart = ({ id }: EditCartProps) => {
             colorScheme="green"
             onClick={() => blankCartLine({ cartId: data.cart.id })}>
             <PlusIcon />
-              &nbsp;Add <strong>line</strong>
+              &nbsp;Add&nbsp;<strong>line</strong>
           </Button>
         </Box>
       </Flex>
@@ -147,8 +148,15 @@ export const EditCart = ({ id }: EditCartProps) => {
         </TableCaption>
         <Thead>
 
-          <Tr style={{ "height": "90px" }} valign="middle" color="gray.500" borderBottom="1px solid #ddd">
-            <th>#</th>
+          <Tr
+            shadow="sm"
+            height="12"
+            align="left"
+            valign="middle"
+            color="gray.500"
+            bg={mode("gray.100", "gray.700")}
+            borderBottom="1px solid #ddd">
+            <th><Box ml={7}>#</Box></th>
             <th>Item #</th>
             <th>Description</th>
             <th>Category</th>
@@ -163,7 +171,7 @@ export const EditCart = ({ id }: EditCartProps) => {
             <th></th>
           </Tr>
         </Thead>
-        
+
 
         {/* Cart Lines */}
         {
@@ -174,10 +182,29 @@ export const EditCart = ({ id }: EditCartProps) => {
               {
                 data.cart.cartLines?.sort((a, b) => a.id - b.id).map((line, idx) => !line ? null : (
                   <CartLineRow key={line.id} line={line} idx={idx}>
-                    <Box borderWidth="1px" borderRadius="lg" p={3} shadow="sm" mt={2} mb={20} borderColor="pink">
-                      Line Accounts Go Here!
+                    <Box
+                      borderWidth="1px"
+                      borderRadius="lg"
+                      p={3}
+                      rounded={{ md: 'lg' }}
+                      bg={mode('white', 'gray.700')}
+                      shadow="base"
+                      mt={2}
+                      mb={20}>
+
+
+                      <Wrap>
+                        <WrapItem><LineAccountButtonRow line={line} idx={idx} /></WrapItem>
+                        <WrapItem>
+
+                          <Box>
+                            Line Accounts
+                          </Box>
+
+                        </WrapItem>
+                      </Wrap>
+
                       {/* "mb-5 pb-3 d-flex justify-content-sm-between align-items-sm-baseline" */}
-                      {/* <LineAccountButtonRow line={line} /> */}
                       {/* 🔴 TODO: flex-wrap only after 2 elements! */}
                       {/* <div className="d-flex justify-content-sm-end mt-2 flex-wrap" >
                         {(line as CartLine)?.cartLineAccounts?.sort((a, b) => a.id - b.id).map((cla) => !cla ? null : (
@@ -223,7 +250,7 @@ export const EditCart = ({ id }: EditCartProps) => {
                   <Stat align="right">
                     <StatLabel>Total:</StatLabel>
                     <StatNumber>{toFriendlyCurrency(sumTotalCost(data.cart as Cart))}</StatNumber>
-                    <StatHelpText><TextMuted>not including shipping</TextMuted></StatHelpText>
+                    <StatHelpText fontWeight="hairline">not including shipping</StatHelpText>
                   </Stat>
 
                 </Box>

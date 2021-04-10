@@ -28,7 +28,7 @@ export function CartNameEditable({ name, id }: CartNameEditableProps) {
 
   // -------------------
   return (
-    <Box onClick={() => isEditing === false ? setIsEditing(!isEditing) : null}>
+    <Box onClick={() => isEditing === false ? setIsEditing(!isEditing) : null} >
       <Button colorScheme="pink" size="lg">
         {isEditing && (
 

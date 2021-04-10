@@ -1,15 +1,13 @@
-import './CartLineRow.module.scss';
+import { Badge, Box, Td, Tr, useColorModeValue as mode } from '@chakra-ui/react';
 import { CartLine, useDeleteCartLineMutation, useUpdateCartLineMutation } from '@multi-cart/react-data-access';
 import { AutoSave, CategoriesDropDown } from '@multi-cart/react-shared-components';
 import { InputField } from '@multi-cart/react-ui';
 import { toFriendlyCurrency } from '@multi-cart/util';
 import clsx from 'clsx';
 import { Form, Formik } from "formik";
-import React, { ReactElement, useRef } from 'react';
-import { Badge, Button, Dropdown, DropdownButton } from 'react-bootstrap';
-import { X } from 'react-bootstrap-icons';
+import React, { useRef } from 'react';
+import './CartLineRow.module.scss';
 import styles from './CartLineRow.module.scss';
-import { Td, Tr } from '@chakra-ui/react';
 
 interface CartLineRowProps {
   line: CartLine;
@@ -68,7 +66,7 @@ export const CartLineRow = ({ line, children, idx }: CartLineRowProps) => {
         {({ isSubmitting }) => (
           <Tr >
             <Td className="pl-3">
-              <Badge variant="secondary" className="text-gray-light">
+              <Badge colorScheme="gray">
                 {idx + 1}
               </Badge>
             </Td>
@@ -101,14 +99,14 @@ export const CartLineRow = ({ line, children, idx }: CartLineRowProps) => {
             </Td>
 
             <Td>
-              <DropdownButton variant="light" id="dropdown-item-button" title="UOM">
+              {/* <DropdownButton variant="light" id="dropdown-item-button" title="UOM">
                 {
                   ['Each', 'Case', 'Box', 'Service'].map((uom) => (
                     <Dropdown.Item key={uom} as="button">{uom}</Dropdown.Item>
                   ))
                 }
 
-              </DropdownButton>
+              </DropdownButton> */}
             </Td>
             <Td>
               <InputField
@@ -133,9 +131,9 @@ export const CartLineRow = ({ line, children, idx }: CartLineRowProps) => {
             </Td>
 
             <Td>
-              <Button className="bg-danger text-white p-0 mr-2" onClick={() => deleteCartLine({ cartId: line.cartId, cartLineId: line.id })}>
+              {/* <Button className="bg-danger text-white p-0 mr-2" onClick={() => deleteCartLine({ cartId: line.cartId, cartLineId: line.id })}>
                 <X size={28} />
-              </Button>
+              </Button> */}
               {/* TODO: make float or not change width of rest of row, and NOT fire on component load */}
               <AutoSave debounceMs={300} />
             </Td>

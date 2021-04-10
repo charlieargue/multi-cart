@@ -1,54 +1,61 @@
+import { Button, ButtonGroup, IconButton, Stack, Text } from '@chakra-ui/react';
 import { CartLine } from '@multi-cart/react-data-access';
-import React, { ReactElement } from 'react';
-import { Badge } from 'react-bootstrap';
-import { PlusCircleFill, WalletFill } from 'react-bootstrap-icons';
-import { LineAccountModal } from '@multi-cart/react-shared-components';
 import { getTotalAmounts, getTotalPercentages } from '@multi-cart/util';
-import clsx from 'clsx';
-import styles from './LineAccountButtonRow.module.scss';
+import React, { ReactElement } from 'react';
+import { FaDollarSign as DollarIcon, FaPercentage as PercentageIcon, FaRegCreditCard as LineAccountsIcon } from 'react-icons/fa';
+import { ImPlus as PlusIcon } from 'react-icons/im';
 
 export interface LineAccountButtonRowProps {
   line?: CartLine;
   children?: ReactElement;
+  idx: number;
   // TODO: to make this re-usable, want to have prop for Add.onClick() handler?
 }
 
-export function LineAccountButtonRow({ line, children }: LineAccountButtonRowProps) {
-  const [modalShow, setModalShow] = React.useState(false);
+export function LineAccountButtonRow({ line, children, idx }: LineAccountButtonRowProps) {
+  // const [modalShow, setModalShow] = React.useState(false);
 
   return (
 
     <>
+      <Stack direction="row" spacing={4} align="center">
+        <LineAccountsIcon />
+        <Text fontWeight="bold" fontSize="md">
+          Line Accounts
+        </Text>
+        <Button
+          size="xs"
+          colorScheme="green"
+          onClick={() => console.log('drawer time!') /*setModalShow(true)*/}>
+          <PlusIcon />
+              &nbsp;Add&nbsp;<strong>account</strong>
+        </Button>
+        <ButtonGroup
+          size="sm"
+          isAttached
+          variant="outline"
+          colorScheme={getTotalPercentages(line) === 100 ? "green" : "red"}>
+          <Button mr="-px">Percentages: <Text ml={2} fontWeight="bolder">{getTotalPercentages(line)}</Text></Button>
+          <IconButton aria-label="Percentage Icon" icon={<PercentageIcon />} />
+        </ButtonGroup>
+        <ButtonGroup
+          size="sm"
+          isAttached
+          variant="outline"
+          colorScheme={getTotalPercentages(line) === 100 ? "green" : "red"}>
+          <Button mr="-px">Line Total w/ Tax: <Text ml={2} fontWeight="bolder">{getTotalAmounts(line.cartLineAccounts)}</Text></Button>
+          <IconButton aria-label="Line Total with Tax" icon={<DollarIcon />} />
+        </ButtonGroup>
+      </Stack>
+
+
       {/* MODAL */}
-      <LineAccountModal
+      {/* <LineAccountModal
         show={modalShow}
         onHide={() => setModalShow(false)}
         line={line}
-      />
+      /> */}
 
-      {/* BUTTON ROW */}
-      <div className="d-flex justify-content-sm-end flex-md-shrink-0" >
-        <div className="pr-1"><strong><WalletFill className="mr-1 mt-neg-4" />Line Accounts:</strong> </div>
-        <div className="pr-1">
-          <Badge onClick={() => setModalShow(true)} pill variant="success" className="px-2 py-1 cursor-hand"><PlusCircleFill className="align-text-bottom mr-1" /> Add</Badge>
-        </div>
-        <div className="pr-1">
-          <Badge
-            pill
-            variant={getTotalPercentages(line) === 100 ? "light" : "danger"}
-            style={getTotalPercentages(line) === 100 ? null : { "backgroundColor": "#F6C0C5" }}
-            className={clsx('px-2 py-1 fw-light', getTotalPercentages(line) === 100 ? 'text-reset' : 'text-danger')}>Percentages: <strong>{getTotalPercentages(line)}%</strong></Badge>
-        </div>
-        <div className="pr-1">
-          <Badge
-            pill
-            variant={getTotalPercentages(line) === 100 ? "light" : "danger"}
-            style={getTotalPercentages(line) === 100 ? null : { "backgroundColor": "#F6C0C5" }}
-            className={clsx('px-2 py-1 fw-light', getTotalPercentages(line) === 100 ? 'text-reset' : 'text-danger')}>Line Total w/ Tax: <strong>${getTotalAmounts(line.cartLineAccounts)}</strong></Badge>
-        </div>
-      </div>
-
-      {/* LINE ACCOUNTS themselves */}
       {children}
 
     </>
