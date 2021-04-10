@@ -1,16 +1,15 @@
-import './Hero.module.scss';
-import React from "react";
-import PropTypes from "prop-types";
 import {
   Box,
   Button,
   Flex,
-  Image,
-  Heading,
-  Stack,
-  Text
+  Heading, Image,
+  Stack
 } from "@chakra-ui/react";
 import NextLink from 'next/link';
+import PropTypes from "prop-types";
+import React from "react";
+import './Hero.module.scss';
+import { TextMuted } from '@multi-cart/react-ui';
 
 // -------------------
 export function Hero({
@@ -68,15 +67,7 @@ export function Hero({
             {ctaText}
           </Button>
         </NextLink>
-        <Text
-          fontSize="xs"
-          mt={2}
-          textAlign="center"
-          color="primary.800"
-          opacity="0.6"
-        >
-          &nbsp;&nbsp;&nbsp;&nbsp;No credit card required
-        </Text>
+        <TextMuted>&nbsp;&nbsp;&nbsp;&nbsp;No credit card required</TextMuted>
       </Stack>
       <Box w={{ base: "80%", sm: "60%", md: "50%" }} mb={{ base: 12, md: 0 }}>
         {/* TODO: Make this change every X secs */}

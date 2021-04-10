@@ -24,6 +24,7 @@ export const CartAvatar = ({ currentCartId = -1 }: CartAvatarProps) => {
   const router = useRouter();
   const [{ data, fetching }] = useCartsQuery();
 
+  // TODO: 🔴 NOT LIKE THIS: error (see issues) React has detected a change in the order of Hooks called by CartAvatar.
   let currentCart: Cart = {} as Cart;
   if ((currentCartId !== -1) && !fetching && data?.carts) {
     currentCart = data?.carts.find((c) => c.id === currentCartId) as Cart;

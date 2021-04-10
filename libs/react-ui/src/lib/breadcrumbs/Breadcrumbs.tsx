@@ -1,8 +1,11 @@
-import React from 'react';
-import { Breadcrumb, Badge } from 'react-bootstrap';
+import { Badge, Breadcrumb, BreadcrumbItem, BreadcrumbLink, HStack } from '@chakra-ui/react';
+import { TextMuted } from '@multi-cart/react-ui';
 import NextLink from 'next/link';
-import { HouseFill } from 'react-bootstrap-icons';
-// import './Breadcrumbs.module.scss';
+import React from 'react';
+import { CgChevronRight as ChevronRightIcon } from 'react-icons/cg';
+import { } from 'react-icons/fa';
+import { BiHomeSmile as HomeIcon } from 'react-icons/bi';
+import './Breadcrumbs.module.scss';
 
 /* eslint-disable-next-line */
 export interface BreadcrumbLink {
@@ -12,24 +15,36 @@ export interface BreadcrumbLink {
 }
 
 export interface BreadcrumbsProps {
-  links: BreadcrumbLink[]
+  links: BreadcrumbLink[];
 }
 
 // -------------------
 export function Breadcrumbs<BreadcrumbsProps>({ links = [] }) {
   return (
-    <Breadcrumb className="mb-4">
-      <Breadcrumb.Item className="align-content"><NextLink href="/">
-        <HouseFill color="gray" className="mb-1" data-test-id="icon-home" />
-      </NextLink></Breadcrumb.Item>
+    <Breadcrumb
+      fontWeight="medium"
+      mb={10}
+      spacing="8px"
+      separator={<ChevronRightIcon style={{ "marginTop": "6px" }} size={16} color="gray.500" />}>
+
+      {/* Home */}
+      <BreadcrumbItem>
+        <NextLink href="/">
+          <BreadcrumbLink href="#"><TextMuted>Home</TextMuted></BreadcrumbLink>
+        </NextLink>
+      </BreadcrumbItem>
+
+      {/* Links */}
       {links?.map((link) => !link ? null : (
-        <Breadcrumb.Item key={link.id || link.label} active={link.isActive}>{link.label}
-          {link.id && (
-            <Badge pill variant="secondary" className="ml-2 align-text-bottom">#{link.id}</Badge>
-          )}
-        </Breadcrumb.Item>
-      ))
-      }
+        <BreadcrumbItem key={link.id || link.label} isCurrentPage={link.isActive}>
+          <BreadcrumbLink href="#"><TextMuted>
+            {link.label}
+            {link.id && (
+              <Badge colorScheme="gray">#{link.id}</Badge>
+            )}
+          </TextMuted></BreadcrumbLink>
+        </BreadcrumbItem>
+      ))}
     </Breadcrumb>
   );
 }

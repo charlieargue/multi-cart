@@ -23,7 +23,7 @@ export const AppLayout = (props: AppLayoutProps) => {
           minH="100vh" 
           {...props}
         >
-          <Box minWidth="95vw" py="12" px={{ sm: '6', lg: '8' }}>
+          <Box minWidth="95vw" py="2" px={{ sm: '6', lg: '8' }}>
             {props.children}
           </Box>
           <DarkModeSwitch />

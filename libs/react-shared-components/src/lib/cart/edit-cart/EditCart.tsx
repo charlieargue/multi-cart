@@ -1,7 +1,7 @@
 import './EditCart.module.scss';
 import { sumTotalCost, toFriendlyCurrency } from '@multi-cart/util';
 import { Cart, CartLine, useBlankCartLineMutation, useCartQuery, useDeleteCartMutation, useUpdateUserMutation } from '@multi-cart/react-data-access';
-import { AppLayout, CartNameEditable, LineAccount, LineAccountButtonRow, CartLineRow } from '@multi-cart/react-shared-components';
+import { CartNameEditable, LineAccount, LineAccountButtonRow, CartLineRow } from '@multi-cart/react-shared-components';
 import { Breadcrumbs } from '@multi-cart/react-ui';
 import clsx from 'clsx';
 import { useRouter } from 'next/router';
@@ -32,7 +32,8 @@ export const EditCart = ({ id }: EditCartProps) => {
       };
       asyncWorkAround(id);
     }
-  }, [id]);
+  }, [id, updateUser]);
+  // TODO: does this need a DEP ARRAY? Try making it NULL, won't it still run on cmpnt load? And does changing between load cmpnts? if so, ALL GOOD!
 
   // TODO: component-ize:
   const links = [{
@@ -45,10 +46,10 @@ export const EditCart = ({ id }: EditCartProps) => {
   // fetching?
   if (fetching) {
     return (
-      <AppLayout>
+      <>
         {breadcrumbs}
         <div>Loading...</div>
-      </AppLayout>
+      </>
     );
   }
 
@@ -56,30 +57,30 @@ export const EditCart = ({ id }: EditCartProps) => {
   if (error) {
     console.log("🚀 ~ error", error)
     return (
-      <AppLayout>
+      <>
         {breadcrumbs}
         <Alert variant="danger">
           {error.message}
         </Alert>
-      </AppLayout>
+      </>
     );
   }
 
   // bad cart ID?
   if (!data?.cart) {
     return (
-      <AppLayout>
+      <>
         {breadcrumbs}
         <Alert variant="warning">
           Could not find cart
                 </Alert>
-      </AppLayout>
+      </>
     );
   }
 
   // if 👍 all good!
   return (
-    <AppLayout>
+    <>
       {breadcrumbs}
 
       {/* 🛍 cart header  */}
@@ -209,6 +210,6 @@ export const EditCart = ({ id }: EditCartProps) => {
         </tfoot>
       </table>
 
-    </AppLayout>
+    </>
   );
 };
