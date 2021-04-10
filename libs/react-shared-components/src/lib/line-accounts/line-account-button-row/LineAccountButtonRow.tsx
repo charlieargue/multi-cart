@@ -31,7 +31,7 @@ export function LineAccountButtonRow({ line, children, idx }: LineAccountButtonR
   // ------------------
   React.useEffect(() => {
     const results = data?.accounts.filter(account =>
-      account.accountNumber.toLowerCase().includes(searchTerm) || account.accountName.toLowerCase().includes(searchTerm)
+      account.accountNumber.toLowerCase().includes(searchTerm.toLowerCase()) || account.accountName.toLowerCase().includes(searchTerm.toLowerCase())
     );
     setSearchResults(results);
   }, [data?.accounts, searchTerm]);
@@ -89,9 +89,9 @@ export function LineAccountButtonRow({ line, children, idx }: LineAccountButtonR
                   colorScheme="gray">
                   <Thead>
                     <Tr>
-                      <Th><TextMuted style={{"textAlign": "left"}}>Account #</TextMuted></Th>
-                      <Th><TextMuted style={{"textAlign": "left"}}>Name</TextMuted></Th>
-                      <Th><TextMuted style={{"textAlign": "left"}}>Amount Remaining</TextMuted></Th>
+                      <Th><TextMuted style={{ "textAlign": "left" }}>Account #</TextMuted></Th>
+                      <Th><TextMuted style={{ "textAlign": "left" }}>Name</TextMuted></Th>
+                      <Th><TextMuted style={{ "textAlign": "left" }}>Amount Remaining</TextMuted></Th>
                     </Tr>
                   </Thead>
                   <Tbody>
