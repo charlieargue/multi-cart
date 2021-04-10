@@ -27,7 +27,6 @@ export function Hero({
       direction={{ base: "column-reverse", md: "row" }}
       minH="70vh"
       px={8}
-      mb={16}
       {...rest}
     >
       <Stack
