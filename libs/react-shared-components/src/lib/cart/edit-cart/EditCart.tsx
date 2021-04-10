@@ -1,14 +1,18 @@
-import { Alert, Badge, Box, Button, Flex, HStack } from '@chakra-ui/react';
+import {
+  Alert, AlertIcon, Badge, Box, Button, Flex, HStack, Stat, StatHelpText, StatLabel, StatNumber, Table,
+  TableCaption, Tbody,
+  Td, Tfoot, Thead,
+  Tooltip,
+  Tr
+} from '@chakra-ui/react';
 import { Cart, useBlankCartLineMutation, useCartQuery, useDeleteCartMutation, useUpdateUserMutation } from '@multi-cart/react-data-access';
-import { BigAlert, Breadcrumbs } from '@multi-cart/react-ui';
+import { CartLineRow, CartNameEditable } from '@multi-cart/react-shared-components';
+import { BigAlert, Breadcrumbs, TextMuted } from '@multi-cart/react-ui';
 import { sumTotalCost, toFriendlyCurrency } from '@multi-cart/util';
-import clsx from 'clsx';
 import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
-import { ExclamationCircleFill } from 'react-bootstrap-icons';
-import { CartNameEditable } from '@multi-cart/react-shared-components';
-import styles from './EditCart.module.scss';
 import { ImPlus as PlusIcon } from 'react-icons/im';
+import styles from './EditCart.module.scss';
 
 interface EditCartProps { id: number }
 
@@ -111,114 +115,124 @@ export const EditCart = ({ id }: EditCartProps) => {
             colorScheme="green"
             onClick={() => blankCartLine({ cartId: data.cart.id })}>
             <PlusIcon />
-              Add <strong>line</strong>
+              &nbsp;Add <strong>line</strong>
           </Button>
         </Box>
       </Flex>
 
       {/* 🛍 cart */}
-      <table className="table table-borderless table-responsive-sm table-sm mt-2" id="cart-table">
-        <thead>
-          <tr className="text-muted">
-            <th className="pl-3">#</th>
+      {/* <table className="table table-borderless table-responsive-sm table-sm mt-2" > */}
+      <Table variant="simple" colorScheme="pink" id="cart-table" size="lg">
+        <TableCaption>
+          Prices are estimates and subject to change
+            <Button
+            ml={2}
+            size="sm"
+            onClick={async () => {
+              if (typeof data.cart?.id === "number") {
+                const response = await deleteCart({
+                  id: data.cart.id
+                });
+                if (response.data?.deleteCart === true) {
+                  router.push("/dashboard");
+                }
+                if (error) {
+                  console.log("🚀 ~ error", error);
+                }
+
+              }
+            }}>
+            <strong>Delete</strong> Cart
+              </Button>
+        </TableCaption>
+        <Thead>
+
+          <Tr style={{ "height": "90px" }} valign="middle" color="gray.500">
+            <th>#</th>
             <th>Item #</th>
             <th>Description</th>
             <th>Category</th>
             <th>
-              <span>UOM</span>
+              <Tooltip hasArrow label="Unit of Measurement" bg="gray.300" color="black">
+                UOM
+            </Tooltip>
             </th>
-            <th><i className="fa fa-times"></i>&nbsp;Qty</th>
+            <th>Quantity</th>
             <th>Unit Price</th>
-            <th className="text-right pr-3">Total</th>
+            <th>Total</th>
             <th></th>
-          </tr>
-        </thead>
+          </Tr>
+        </Thead>
+
 
         {/* Cart Lines */}
         {
           data.cart.cartLines?.length ? (
 
             // TODO: switch to sort component, thx: https://stackoverflow.com/questions/48764203/how-to-sort-list-of-react-components-based-on-different-properties
-            <tbody>
+            <Tbody>
               {
                 data.cart.cartLines?.sort((a, b) => a.id - b.id).map((line, idx) => !line ? null : (
-                  // <CartLineRow key={line.id} line={line} idx={idx}>
-                  //   <Alert variant="success" className={clsx(styles['edit-cart__line-account-container'], "mb-5 pb-3 d-flex justify-content-sm-between align-items-sm-baseline")}>
-                  //     <LineAccountButtonRow line={line} />
-                  //     {/* 🔴 TODO: flex-wrap only after 2 elements! */}
-                  //     <div className="d-flex justify-content-sm-end mt-2 flex-wrap" >
-                  //       {(line as CartLine)?.cartLineAccounts?.sort((a, b) => a.id - b.id).map((cla) => !cla ? null : (
-                  //         <LineAccount
-                  //           key={cla.id}
-                  //           lineAccount={cla}
-                  //           line={line} />
-                  //       ))}
-                  //     </div>
-                  //   </Alert>
-                  // </CartLineRow>
-                  <div></div>
+                  <CartLineRow key={line.id} line={line} idx={idx}>
+                    <Alert
+                      status="success" >
+                        Line Accounts Go Here!
+                      {/* "mb-5 pb-3 d-flex justify-content-sm-between align-items-sm-baseline" */}
+                      {/* <LineAccountButtonRow line={line} /> */}
+                      {/* 🔴 TODO: flex-wrap only after 2 elements! */}
+                      {/* <div className="d-flex justify-content-sm-end mt-2 flex-wrap" >
+                        {(line as CartLine)?.cartLineAccounts?.sort((a, b) => a.id - b.id).map((cla) => !cla ? null : (
+                          <LineAccount
+                            key={cla.id}
+                            lineAccount={cla}
+                            line={line} />
+                        ))}
+                      </div> */}
+                    </Alert>
+                  </CartLineRow>
                 ))
               }
-            </tbody>
+            </Tbody>
 
           ) : (
               // ❌ empty cart 
-              <tbody>
-                <tr>
-                  <td className="pt-4" colSpan={20}>
-                    <Alert variant="light">
-                      <ExclamationCircleFill className="mr-2 mb-1" /> This cart is empty — <strong>please add a line</strong>!
-                                    </Alert>
-                  </td>
-                </tr>
-              </tbody>
+              <Tbody>
+                <Tr>
+                  <Td colSpan={20}>
+                    <Alert variant="left-accent" status="info" colorScheme="pink">
+                      <AlertIcon />
+                        This cart is empty — <strong>please add a line</strong>!
+                    </Alert>
+                  </Td>
+                </Tr>
+              </Tbody>
 
             )
         }
 
-        <tfoot>
-          <tr>
-            <td align="right"
-              colSpan={8}
-              className="border-radius-lg">
-              <strong className=""><u>Total:</u></strong>
-              <strong className="ml-3"><u className="font-weight-bolder">{toFriendlyCurrency(sumTotalCost(data.cart as Cart))}</u></strong>
-            </td>
-            <td align="left"
-              className="border-radius-lg">
+        {/* FOOTER */}
+        <Tfoot>
+          <Tr>
+            <Td
+              align="right"
+              colSpan={28}>
 
-              <div className="d-flex flex-row justify-content-end align-items-center">
+              <Flex
+                justifyContent="flex-end"
+                mr={{ base: -3, md: -3, xl: 9 }}>
+                <Box>
+                  <Stat align="right">
+                    <StatLabel>Total:</StatLabel>
+                    <StatNumber>{toFriendlyCurrency(sumTotalCost(data.cart as Cart))}</StatNumber>
+                    <StatHelpText><TextMuted>not including shipping</TextMuted></StatHelpText>
+                  </Stat>
 
-                {/* delete cart  */}
-                {/* <div className="p-2">
-                  <Button
-                    className="bg-danger text-white fw-bold"
-                    size="sm"
-                    onClick={async () => {
-                      if (typeof data.cart?.id === "number") {
-                        const response = await deleteCart({
-                          id: data.cart.id
-                        });
-                        if (response.data?.deleteCart === true) {
-                          router.push("/dashboard");
-                        }
-                        if (error) {
-                          console.log("🚀 ~ error", error);
-                        }
-
-                      }
-                    }}>
-                    <XSquareFill size={20} className="mr-1" /><strong>Delete</strong> Cart
-                                    </Button>
-                </div> */}
-
-
-
-              </div>
-            </td>
-          </tr>
-        </tfoot>
-      </table>
+                </Box>
+              </Flex>
+            </Td>
+          </Tr>
+        </Tfoot>
+      </Table>
 
     </>
   );
