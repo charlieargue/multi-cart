@@ -1,13 +1,12 @@
-import { Badge, Box, Button, Flex, HStack, Menu, MenuButton, MenuDivider, MenuItem, MenuList, useColorModeValue as mode, Text } from '@chakra-ui/react';
+import { Box, Button, Flex, HStack, Menu, MenuButton, MenuDivider, MenuItem, MenuList, Text, useColorModeValue as mode } from '@chakra-ui/react';
 import { Cart, useCartsQuery } from '@multi-cart/react-data-access';
 import { CartAvatarInner, NewCartButton } from '@multi-cart/react-shared-components';
+import { toDaysAgo } from '@multi-cart/util';
+import NextLink from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
 import { CgChevronDown as ChevronDownIcon } from 'react-icons/cg';
 import { RiErrorWarningFill as WarningIcon } from 'react-icons/ri';
-import NextLink from 'next/link';
-import { toDaysAgo } from '@multi-cart/util';
-import clsx from 'clsx';
 import styles from './CartAvatar.module.scss';
 
 interface CartAvatarProps {
@@ -25,10 +24,12 @@ export const CartAvatar = ({ currentCartId = -1 }: CartAvatarProps) => {
   const [{ data, fetching }] = useCartsQuery();
 
   // TODO: 🔴 NOT LIKE THIS: error (see issues) React has detected a change in the order of Hooks called by CartAvatar.
-  let currentCart: Cart = {} as Cart;
-  if ((currentCartId !== -1) && !fetching && data?.carts) {
-    currentCart = data?.carts.find((c) => c.id === currentCartId) as Cart;
-  }
+  const currentCart = (): Cart => {
+    if ((currentCartId !== -1) && !fetching && data?.carts) {
+      return data?.carts.find((c) => c.id === currentCartId) as Cart;
+    }
+    return null;
+  };
 
 
   return (
@@ -48,7 +49,7 @@ export const CartAvatar = ({ currentCartId = -1 }: CartAvatarProps) => {
 
         {/* User Profile Avatar */}
         {!data && fetching ? null : (
-          <CartAvatarInner cart={currentCart} />
+          <CartAvatarInner cart={currentCart()} />
         )}
 
       </MenuButton>

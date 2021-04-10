@@ -47,7 +47,7 @@ export function Breadcrumbs<BreadcrumbsProps>({ links = [] }) {
               <TextMuted>
                 {link.label}
                 {link.id && (
-                  <Badge colorScheme="teal" ml={2}>#{link.id}</Badge>
+                  <Badge mb={.5} colorScheme="teal" ml={2}>#{link.id}</Badge>
                 )}
               </TextMuted>
             </BreadcrumbLink>

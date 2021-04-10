@@ -1,8 +1,8 @@
 /* eslint-disable no-extra-boolean-cast */
+import { Avatar, Box } from '@chakra-ui/react';
 import { useFormikContext } from 'formik';
 import debounce from 'just-debounce-it';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { Fade } from 'react-bootstrap';
 
 // thx: https://itnext.io/formik-introduction-autosave-react-19d4c15cfb90
 // thx: https://codesandbox.io/s/formik-autosave-example-wfcb6?file=/src/AutoSavingForm.tsx:124-242
@@ -65,17 +65,15 @@ export const AutoSave = ({ debounceMs = 500 }) => {
   }, [formik.isSubmitting]);
 
 
+  // TODO: port from bootstrap to Chakra:f <Fade in={slowerIsSubmitting} timeout={3000}></Fade>
+  // TODO: make this a top-of-page LINE LOADING INDICATOR like I had
   // -------------------
-  return (
-    <Fade in={slowerIsSubmitting} timeout={3000}>
-      <p className="text-success w-100 floatingSave">
-        {!!formik.isSubmitting
-          ? 'Saving...'
-          : isSaved
-            ? 'Saved!'
-            : null}
-      </p>
-    </Fade>
-
-  );
+  return (<Box></Box>);
+  // <p className="text-success w-100 floatingSave">
+  //   {!!formik.isSubmitting
+  //     ? 'Saving...'
+  //     : isSaved
+  //       ? 'Saved!'
+  //       : null}
+  // </p>
 };

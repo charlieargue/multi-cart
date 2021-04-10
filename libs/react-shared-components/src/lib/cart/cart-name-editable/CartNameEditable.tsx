@@ -1,14 +1,13 @@
-import React, { useState } from 'react';
-import { Button } from 'react-bootstrap';
-import * as Yup from 'yup';
+import { Box, Button } from '@chakra-ui/react';
+import { useUpdateCartMutation } from '@multi-cart/react-data-access';
 import { AutoSave } from '@multi-cart/react-shared-components';
 import { InputField } from '@multi-cart/react-ui';
 import { Form, Formik } from "formik";
-import { useUpdateCartMutation } from '@multi-cart/react-data-access';
+import React, { useState } from 'react';
+import * as Yup from 'yup';
+import styles from './CartNameEditable.module.scss';
 
-// import './CartNameEditable.module.scss';
-
-// TODO: abstract this cmpnt further (with color, size, nothing cart-related) so more re-usable, and move to react-ui
+// TODO: UPDATE: NO, see Chakra Editable... abstract this cmpnt further (with color, size, nothing cart-related) so more re-usable, and move to react-ui... 
 
 /* eslint-disable-next-line */
 export interface CartNameEditableProps {
@@ -29,8 +28,8 @@ export function CartNameEditable({ name, id }: CartNameEditableProps) {
 
   // -------------------
   return (
-    <h2 onClick={() => isEditing === false ? setIsEditing(!isEditing) : null}>
-      <div className="button-editable shadow btn btn-success">
+    <Box onClick={() => isEditing === false ? setIsEditing(!isEditing) : null}>
+      <Button colorScheme="pink" size="lg">
         {isEditing && (
 
           // EDIT FORM -------------------- start
@@ -47,12 +46,12 @@ export function CartNameEditable({ name, id }: CartNameEditableProps) {
             }}>
             {({ errors, touched }) => (
               <Form
-                className="w-300"
                 onClick={(e) => { e.stopPropagation() }}>
 
                 {/* // style={(errors.percentage && touched.percentage) ? { "border": "2px dotted red" } : null} */}
                 {/* unwrapped INPUT FIELD */}
                 <InputField
+                  style={{"background": "white", "color": "black"}}
                   type="text"
                   autoFocus
                   aria-label="name"
@@ -71,8 +70,8 @@ export function CartNameEditable({ name, id }: CartNameEditableProps) {
         {!isEditing && (
           <span>{name}</span>
         )}
-      </div>
-    </h2>
+      </Button>
+    </Box>
 
   );
 }
