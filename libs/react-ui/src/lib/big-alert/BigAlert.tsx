@@ -1,23 +1,26 @@
 import { Alert, AlertDescription, AlertIcon, AlertTitle } from '@chakra-ui/react';
-import { error } from 'console';
 import React from 'react';
+import './BigAlert.module.scss';
 
-import './BigError.module.scss';
 
 /* eslint-disable-next-line */
-export interface BigErrorProps { }
+export interface BigAlertProps {
+  title: string;
+  type: "error" | "warning" | "info" | "success";
+  children?: React.ReactNode;
+}
 
-export type BigErrorMessageProps = {
+export type BigAlertMessageProps = {
   children: React.ReactNode;
 };
 
 
 // -------------------
-export function BigError(props: BigErrorProps) {
+export function BigAlert({ title, type, children }: BigAlertProps) {
   return (
     <Alert
       borderRadius="8px"
-      status="error"
+      status={type}
       variant="subtle"
       flexDirection="column"
       alignItems="center"
@@ -27,18 +30,19 @@ export function BigError(props: BigErrorProps) {
     >
       <AlertIcon boxSize="40px" mr={0} />
       <AlertTitle mt={4} mb={1} fontSize="lg">
-        Ooops, sorry! An error occurred:
-          </AlertTitle>
+        {title}
+      </AlertTitle>
+      {children}
     </Alert>
   );
 }
 
 // -------------------
-BigError.Message = ({ children }: BigErrorMessageProps) => (
+BigAlert.Message = ({ children }: BigAlertMessageProps) => (
   <AlertDescription maxWidth="sm">
     {children}
   </AlertDescription>
 );
 
 
-export default BigError;
+export default BigAlert;

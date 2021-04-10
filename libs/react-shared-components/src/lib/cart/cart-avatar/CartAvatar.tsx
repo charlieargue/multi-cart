@@ -42,7 +42,7 @@ export const CartAvatar = ({ currentCartId = -1 }: CartAvatarProps) => {
         colorScheme="green"
         _hover={{
           "backgroundColor": mode("gray.400", "gray.900"),
-          "color": mode("gray.400", "gray.100"),
+          "color": mode("gray.200", "gray.100"),
         }}
         cursor={'pointer'}>
 

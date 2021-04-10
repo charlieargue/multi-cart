@@ -11,6 +11,8 @@ import './Breadcrumbs.module.scss';
 export interface BreadcrumbLink {
   isActive: boolean;
   label: string;
+  href: string;
+  as: string;
   id?: number;
 }
 
@@ -30,23 +32,26 @@ export function Breadcrumbs<BreadcrumbsProps>({ links = [] }) {
       {/* Home */}
       <BreadcrumbItem>
         <NextLink href="/dashboard">
-          <BreadcrumbLink href="#"><TextMuted>Home</TextMuted></BreadcrumbLink>
+          <BreadcrumbLink href="/dashboard"><TextMuted>Home</TextMuted></BreadcrumbLink>
         </NextLink>
       </BreadcrumbItem>
 
       {/* Links */}
       {links?.map((link) => !link ? null : (
         <BreadcrumbItem key={link.id || link.label} isCurrentPage={link.isActive}>
-          <BreadcrumbLink href="#">
-            <NextLink href="/">
+          <NextLink
+            href={link.href}
+            as={link.as}
+          >
+            <BreadcrumbLink href="link.href">
               <TextMuted>
                 {link.label}
                 {link.id && (
                   <Badge colorScheme="teal" ml={2}>#{link.id}</Badge>
                 )}
               </TextMuted>
-            </NextLink>
-          </BreadcrumbLink>
+            </BreadcrumbLink>
+          </NextLink>
         </BreadcrumbItem>
       ))}
     </Breadcrumb>

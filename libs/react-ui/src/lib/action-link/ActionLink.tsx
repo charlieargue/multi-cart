@@ -11,7 +11,7 @@ export function ActionLink(props: ActionLinkProps) {
     <NextLink href={props.nextHref}>
       <chakra.a
         {...props}
-        href="#"
+        href="props.nextHref"
         px="4"
         py="1.5"
         textAlign="center"

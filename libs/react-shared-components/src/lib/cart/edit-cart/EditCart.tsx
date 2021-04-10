@@ -1,14 +1,12 @@
-import './EditCart.module.scss';
+import { Alert, Badge, Box, Flex } from '@chakra-ui/react';
+import { Cart, useBlankCartLineMutation, useCartQuery, useDeleteCartMutation, useUpdateUserMutation } from '@multi-cart/react-data-access';
+import { BigAlert, Breadcrumbs } from '@multi-cart/react-ui';
 import { sumTotalCost, toFriendlyCurrency } from '@multi-cart/util';
-import { Cart, CartLine, useBlankCartLineMutation, useCartQuery, useDeleteCartMutation, useUpdateUserMutation } from '@multi-cart/react-data-access';
-import { CartNameEditable, LineAccount, LineAccountButtonRow, CartLineRow } from '@multi-cart/react-shared-components';
-import { Breadcrumbs, BigError } from '@multi-cart/react-ui';
 import clsx from 'clsx';
 import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
-import { ExclamationCircleFill, PlusCircleFill, XSquareFill } from 'react-bootstrap-icons';
+import { ExclamationCircleFill } from 'react-bootstrap-icons';
 import styles from './EditCart.module.scss';
-import { AlertIcon, AlertTitle, AlertDescription, Alert } from '@chakra-ui/react';
 
 interface EditCartProps { id: number }
 
@@ -39,6 +37,8 @@ export const EditCart = ({ id }: EditCartProps) => {
   const links = [{
     isActive: true,
     label: "Cart",
+    href: "/cart/[id]",
+    as: `/cart/${id}`,
     id
   }];
   const breadcrumbs = (<Breadcrumbs links={links} />);
@@ -60,11 +60,11 @@ export const EditCart = ({ id }: EditCartProps) => {
     return (
       <>
         {breadcrumbs}
-        <BigError>
-          <BigError.Message>
+        <BigAlert type="error" title="Ooops, sorry! An error occurred:">
+          <BigAlert.Message>
             {error.message}
-          </BigError.Message>
-        </BigError>
+          </BigAlert.Message>
+        </BigAlert>
       </>
     );
   }
@@ -74,9 +74,14 @@ export const EditCart = ({ id }: EditCartProps) => {
     return (
       <>
         {breadcrumbs}
-        <Alert variant="warning">
-          Could not find cart
-                </Alert>
+
+        <BigAlert type="warning" title="Sorry...">
+          <BigAlert.Message>
+            Unfortunately, we could not find this cart!
+          </BigAlert.Message>
+        </BigAlert>
+
+
       </>
     );
   }
@@ -87,31 +92,28 @@ export const EditCart = ({ id }: EditCartProps) => {
       {breadcrumbs}
 
       {/* 🛍 cart header  */}
-      {/* TODO: search for all style= and get 'em outta here!  */}
-      {/* <Container
-        fluid
+      <Flex
+        justify="space-between"
         className={clsx(styles["edit-cart__cart-header"], "py-3")}>
-        <Row className="align-items-md-baseline">
-          <Col className="pl-2 d-flex align-items-md-baseline">
-            <CartNameEditable name={data.cart.name} id={data.cart.id} />
-            <div className="ml-2">
-              <Badge pill variant="secondary" className="opacity-5">
-                <strong>created on</strong> {data.cart.createdAt}
-              </Badge>
-            </div>
-          </Col>
-          <Col xs={2} className="text-right">
-            <Button
+        <Box>
+          {/* <CartNameEditable name={data.cart.name} id={data.cart.id} /> */}
+          <div className="ml-2">
+            {/* ON BADGE: className="opacity-5" */}
+            <Badge variant="gray">
+              <strong>created on</strong> {data.cart.createdAt}
+            </Badge>
+          </div>
+        </Box>
+        <Box className="text-right">
+          {/* <Button
               data-testid="btnAddCartLine"
               size="sm"
               variant="success"
               onClick={() => blankCartLine({ cartId: data.cart!.id })}>
               <PlusCircleFill className="align-text-bottom mr-1" />Add <strong>line</strong>
-            </Button>
-          </Col>
-
-        </Row>
-      </Container> */}
+            </Button> */}
+        </Box>
+      </Flex>
 
       {/* 🛍 cart */}
       <table className="table table-borderless table-responsive-sm table-sm mt-2" id="cart-table">
@@ -131,63 +133,63 @@ export const EditCart = ({ id }: EditCartProps) => {
           </tr>
         </thead>
 
-        {/* Cart Lines */}
-        {
-          data.cart.cartLines?.length ? (
+      {/* Cart Lines */}
+      {
+        data.cart.cartLines?.length ? (
 
-            // TODO: switch to sort component, thx: https://stackoverflow.com/questions/48764203/how-to-sort-list-of-react-components-based-on-different-properties
+          // TODO: switch to sort component, thx: https://stackoverflow.com/questions/48764203/how-to-sort-list-of-react-components-based-on-different-properties
+          <tbody>
+            {
+              data.cart.cartLines?.sort((a, b) => a.id - b.id).map((line, idx) => !line ? null : (
+                // <CartLineRow key={line.id} line={line} idx={idx}>
+                //   <Alert variant="success" className={clsx(styles['edit-cart__line-account-container'], "mb-5 pb-3 d-flex justify-content-sm-between align-items-sm-baseline")}>
+                //     <LineAccountButtonRow line={line} />
+                //     {/* 🔴 TODO: flex-wrap only after 2 elements! */}
+                //     <div className="d-flex justify-content-sm-end mt-2 flex-wrap" >
+                //       {(line as CartLine)?.cartLineAccounts?.sort((a, b) => a.id - b.id).map((cla) => !cla ? null : (
+                //         <LineAccount
+                //           key={cla.id}
+                //           lineAccount={cla}
+                //           line={line} />
+                //       ))}
+                //     </div>
+                //   </Alert>
+                // </CartLineRow>
+                <div></div>
+              ))
+            }
+          </tbody>
+
+        ) : (
+            // ❌ empty cart 
             <tbody>
-              {
-                data.cart.cartLines?.sort((a, b) => a.id - b.id).map((line, idx) => !line ? null : (
-                  // <CartLineRow key={line.id} line={line} idx={idx}>
-                  //   <Alert variant="success" className={clsx(styles['edit-cart__line-account-container'], "mb-5 pb-3 d-flex justify-content-sm-between align-items-sm-baseline")}>
-                  //     <LineAccountButtonRow line={line} />
-                  //     {/* 🔴 TODO: flex-wrap only after 2 elements! */}
-                  //     <div className="d-flex justify-content-sm-end mt-2 flex-wrap" >
-                  //       {(line as CartLine)?.cartLineAccounts?.sort((a, b) => a.id - b.id).map((cla) => !cla ? null : (
-                  //         <LineAccount
-                  //           key={cla.id}
-                  //           lineAccount={cla}
-                  //           line={line} />
-                  //       ))}
-                  //     </div>
-                  //   </Alert>
-                  // </CartLineRow>
-                  <div></div>
-                ))
-              }
+              <tr>
+                <td className="pt-4" colSpan={20}>
+                  <Alert variant="light">
+                    <ExclamationCircleFill className="mr-2 mb-1" /> This cart is empty — <strong>please add a line</strong>!
+                                    </Alert>
+                </td>
+              </tr>
             </tbody>
 
-          ) : (
-              // ❌ empty cart 
-              <tbody>
-                <tr>
-                  <td className="pt-4" colSpan={20}>
-                    <Alert variant="light">
-                      <ExclamationCircleFill className="mr-2 mb-1" /> This cart is empty — <strong>please add a line</strong>!
-                                    </Alert>
-                  </td>
-                </tr>
-              </tbody>
+          )
+      }
 
-            )
-        }
+      <tfoot>
+        <tr>
+          <td align="right"
+            colSpan={8}
+            className="border-radius-lg">
+            <strong className=""><u>Total:</u></strong>
+            <strong className="ml-3"><u className="font-weight-bolder">{toFriendlyCurrency(sumTotalCost(data.cart as Cart))}</u></strong>
+          </td>
+          <td align="left"
+            className="border-radius-lg">
 
-        <tfoot>
-          <tr>
-            <td align="right"
-              colSpan={8}
-              className="border-radius-lg">
-              <strong className=""><u>Total:</u></strong>
-              <strong className="ml-3"><u className="font-weight-bolder">{toFriendlyCurrency(sumTotalCost(data.cart as Cart))}</u></strong>
-            </td>
-            <td align="left"
-              className="border-radius-lg">
+            <div className="d-flex flex-row justify-content-end align-items-center">
 
-              <div className="d-flex flex-row justify-content-end align-items-center">
-
-                {/* delete cart  */}
-                {/* <div className="p-2">
+              {/* delete cart  */}
+              {/* <div className="p-2">
                   <Button
                     className="bg-danger text-white fw-bold"
                     size="sm"
@@ -208,11 +210,14 @@ export const EditCart = ({ id }: EditCartProps) => {
                     <XSquareFill size={20} className="mr-1" /><strong>Delete</strong> Cart
                                     </Button>
                 </div> */}
-              </div>
-            </td>
-          </tr>
-        </tfoot>
-      </table>
+
+
+
+            </div>
+          </td>
+        </tr>
+      </tfoot>
+    </table>
 
     </>
   );

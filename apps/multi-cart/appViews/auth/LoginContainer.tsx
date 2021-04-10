@@ -29,7 +29,7 @@ export const LoginContainer = () => {
           <Box
             as="a"
             marginStart="1"
-            href="#"
+            href="/register"
             color={mode('pink.600', 'pink.200')}
             _hover={{ color: 'pink.600' }}
             display={{ base: 'block', sm: 'revert' }}
