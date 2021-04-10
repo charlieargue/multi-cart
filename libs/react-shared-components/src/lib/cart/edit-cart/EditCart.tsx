@@ -102,7 +102,7 @@ export const EditCart = ({ id }: EditCartProps) => {
         justify="space-between"
         py={6}
         className={styles["edit-cart__cart-header"]}>
-        <HStack>
+        <HStack spacing="5">
           <CartNameEditable name={data.cart.name} id={data.cart.id} />
           <Badge colorScheme="pink" style={{ "opacity": ".5" }}>
             <strong>created on</strong> {data.cart.createdAt}
@@ -122,7 +122,7 @@ export const EditCart = ({ id }: EditCartProps) => {
 
       {/* 🛍 cart */}
       {/* <table className="table table-borderless table-responsive-sm table-sm mt-2" > */}
-      <Table variant="simple" colorScheme="pink" id="cart-table" size="lg">
+      <Table variant="simple" colorScheme="pink" id="cart-table" size="lg" marginBottom={10}>
         <TableCaption>
           Prices are estimates and subject to change
             <Button
@@ -147,7 +147,7 @@ export const EditCart = ({ id }: EditCartProps) => {
         </TableCaption>
         <Thead>
 
-          <Tr style={{ "height": "90px" }} valign="middle" color="gray.500">
+          <Tr style={{ "height": "90px" }} valign="middle" color="gray.500" borderBottom="1px solid #ddd">
             <th>#</th>
             <th>Item #</th>
             <th>Description</th>
@@ -163,7 +163,7 @@ export const EditCart = ({ id }: EditCartProps) => {
             <th></th>
           </Tr>
         </Thead>
-
+        
 
         {/* Cart Lines */}
         {
@@ -174,9 +174,8 @@ export const EditCart = ({ id }: EditCartProps) => {
               {
                 data.cart.cartLines?.sort((a, b) => a.id - b.id).map((line, idx) => !line ? null : (
                   <CartLineRow key={line.id} line={line} idx={idx}>
-                    <Alert
-                      status="success" >
-                        Line Accounts Go Here!
+                    <Box borderWidth="1px" borderRadius="lg" p={3} shadow="sm" mt={2} mb={20} borderColor="pink">
+                      Line Accounts Go Here!
                       {/* "mb-5 pb-3 d-flex justify-content-sm-between align-items-sm-baseline" */}
                       {/* <LineAccountButtonRow line={line} /> */}
                       {/* 🔴 TODO: flex-wrap only after 2 elements! */}
@@ -188,7 +187,7 @@ export const EditCart = ({ id }: EditCartProps) => {
                             line={line} />
                         ))}
                       </div> */}
-                    </Alert>
+                    </Box>
                   </CartLineRow>
                 ))
               }

@@ -23,7 +23,7 @@ export const Footer = () => {
           spacing={{ base: '2', md: '8' }}
           textAlign={{ base: 'center', md: 'start' }}
         >
-          <Text><a href="http://karlgolka.com" target="_blank">&copy; {new Date().getFullYear()} Karl Golka</a></Text>
+          <Text><Link isExternal href="http://karlgolka.com" target="_blank">&copy; {new Date().getFullYear()} Karl Golka</Link></Text>
           <Link>Privacy</Link>
           <Link>Terms and Conditions</Link>
         </Stack>

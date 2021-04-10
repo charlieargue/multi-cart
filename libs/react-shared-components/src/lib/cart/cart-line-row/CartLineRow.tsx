@@ -9,6 +9,7 @@ import React, { ReactElement, useRef } from 'react';
 import { Badge, Button, Dropdown, DropdownButton } from 'react-bootstrap';
 import { X } from 'react-bootstrap-icons';
 import styles from './CartLineRow.module.scss';
+import { Td, Tr } from '@chakra-ui/react';
 
 interface CartLineRowProps {
   line: CartLine;
@@ -65,13 +66,13 @@ export const CartLineRow = ({ line, children, idx }: CartLineRowProps) => {
         }}
       >
         {({ isSubmitting }) => (
-          <tr >
-            <td className="pl-3">
+          <Tr >
+            <Td className="pl-3">
               <Badge variant="secondary" className="text-gray-light">
                 {idx + 1}
               </Badge>
-            </td>
-            <td>
+            </Td>
+            <Td>
               <Form className={clsx(styles['cart-line-row__form'], 'align-items-baseline')}>
                 <InputField
                   name="itemId"
@@ -82,9 +83,9 @@ export const CartLineRow = ({ line, children, idx }: CartLineRowProps) => {
                   placeholder="Item #" />
               </Form>
 
-            </td>
+            </Td>
 
-            <td>
+            <Td>
               <Form className={clsx(styles['cart-line-row__form'], 'align-items-baseline')}>
                 <InputField
                   name="description"
@@ -94,12 +95,12 @@ export const CartLineRow = ({ line, children, idx }: CartLineRowProps) => {
                   placeholder="Description" />
               </Form>
 
-            </td>
-            <td className="pt-2">
+            </Td>
+            <Td className="pt-2">
               <CategoriesDropDown />
-            </td>
+            </Td>
 
-            <td>
+            <Td>
               <DropdownButton variant="light" id="dropdown-item-button" title="UOM">
                 {
                   ['Each', 'Case', 'Box', 'Service'].map((uom) => (
@@ -108,8 +109,8 @@ export const CartLineRow = ({ line, children, idx }: CartLineRowProps) => {
                 }
 
               </DropdownButton>
-            </td>
-            <td>
+            </Td>
+            <Td>
               <InputField
                 id={`quantity_${line.id}`}
                 name="quantity"
@@ -117,8 +118,8 @@ export const CartLineRow = ({ line, children, idx }: CartLineRowProps) => {
                 className="form-control w-75"
                 aria-describedby="itemQuantity"
                 placeholder="Qty" />
-            </td>
-            <td>
+            </Td>
+            <Td>
               <InputField
                 id={`price_${line.id}`}
                 name="price"
@@ -126,26 +127,26 @@ export const CartLineRow = ({ line, children, idx }: CartLineRowProps) => {
                 className="form-control w-100"
                 aria-describedby="itemPrice"
                 placeholder="Price" />
-            </td>
-            <td className="pr-3 text-right pt-3">
+            </Td>
+            <Td className="pr-3 text-right pt-3">
               {typeof line.price === "number" && typeof line.quantity === "number" ? toFriendlyCurrency(line.price * line.quantity) : 0}
-            </td>
+            </Td>
 
-            <td>
+            <Td>
               <Button className="bg-danger text-white p-0 mr-2" onClick={() => deleteCartLine({ cartId: line.cartId, cartLineId: line.id })}>
                 <X size={28} />
               </Button>
               {/* TODO: make float or not change width of rest of row, and NOT fire on component load */}
               <AutoSave debounceMs={300} />
-            </td>
-          </tr>
+            </Td>
+          </Tr>
         )}
       </Formik>
-      <tr>
-        <td colSpan={20}>
+      <Tr>
+        <Td colSpan={20}>
           {children}
-        </td>
-      </tr>
+        </Td>
+      </Tr>
     </>
   );
 }
