@@ -5,8 +5,8 @@ import {
   Tooltip, Text,
   Tr, useColorModeValue as mode, Wrap, WrapItem
 } from '@chakra-ui/react';
-import { Cart, useBlankCartLineMutation, useCartQuery, useDeleteCartMutation, useUpdateUserMutation } from '@multi-cart/react-data-access';
-import { CartLineRow, CartNameEditable, LineAccountButtonRow } from '@multi-cart/react-shared-components';
+import { Cart, CartLine, useBlankCartLineMutation, useCartQuery, useDeleteCartMutation, useUpdateUserMutation } from '@multi-cart/react-data-access';
+import { CartLineRow, CartNameEditable, LineAccount, LineAccountButtonRow } from '@multi-cart/react-shared-components';
 import { BigAlert, Breadcrumbs, TextMuted } from '@multi-cart/react-ui';
 import { sumTotalCost, toFriendlyCurrency } from '@multi-cart/util';
 import { useRouter } from 'next/router';
@@ -192,28 +192,20 @@ export const EditCart = ({ id }: EditCartProps) => {
                       mt={2}
                       mb={20}>
 
-
-                      <Wrap>
+                      {/* WRAP IT ALL TOGETHER */}
+                      <Wrap spacing="12">
                         <WrapItem><LineAccountButtonRow line={line} idx={idx} /></WrapItem>
-                        <WrapItem>
-
-                          <Box>
-                            Line Accounts
-                          </Box>
-
-                        </WrapItem>
-                      </Wrap>
-
-                      {/* "mb-5 pb-3 d-flex justify-content-sm-between align-items-sm-baseline" */}
-                      {/* 🔴 TODO: flex-wrap only after 2 elements! */}
-                      {/* <div className="d-flex justify-content-sm-end mt-2 flex-wrap" >
                         {(line as CartLine)?.cartLineAccounts?.sort((a, b) => a.id - b.id).map((cla) => !cla ? null : (
-                          <LineAccount
-                            key={cla.id}
-                            lineAccount={cla}
-                            line={line} />
+                          <WrapItem>
+                            <LineAccount
+                              key={cla.id}
+                              lineAccount={cla}
+                              line={line} />
+                          </WrapItem>
                         ))}
-                      </div> */}
+                      </Wrap>
+                      {/* //END: WRAP IT ALL... */}
+
                     </Box>
                   </CartLineRow>
                 ))

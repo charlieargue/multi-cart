@@ -14,7 +14,7 @@ export function DarkModeSwitch(props: DarkModeSwitchProps) {
     <Switch
       position="fixed"
       bottom="5rem"
-      right="3rem"
+      right="1.5rem"
       colorScheme="pink"
       isChecked={isDark}
       onChange={toggleColorMode}

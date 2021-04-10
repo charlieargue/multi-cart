@@ -4,11 +4,12 @@ import { AutoSave } from '@multi-cart/react-shared-components';
 import { InputField } from '@multi-cart/react-ui';
 import { Form, Formik } from "formik";
 import React, { useEffect, useRef } from 'react';
-import { Badge, InputGroup, OverlayTrigger, Tooltip } from 'react-bootstrap';
-import { X } from 'react-bootstrap-icons';
 import styles from './LineAccount.module.scss';
 import * as Yup from 'yup';
 import clsx from 'clsx';
+import { Badge, Box, HStack, InputGroup, InputLeftAddon, InputRightAddon, Tooltip } from '@chakra-ui/react';
+import { TiDelete as DeleteIcon } from 'react-icons/ti';
+import { FaPercentage as PercentageIcon } from 'react-icons/fa';
 
 /* eslint-disable-next-line */
 export interface LineAccountProps {
@@ -23,7 +24,6 @@ const LineAccountFormSchema = Yup.object().shape({
     .required('Required'),
 });
 
-const stylesGroup = { maxWidth: "400px" };
 
 // -------------------
 export const LineAccount = ({ lineAccount, line }: LineAccountProps) => {
@@ -78,37 +78,43 @@ export const LineAccount = ({ lineAccount, line }: LineAccountProps) => {
 
       }}>
       {({ /*isSubmitting, values, setValues,*/ errors, touched }) => (
-        <Form className={clsx(styles["line-account__form"], "ml-3")} >
-          <InputGroup className="mb-3 ml-3" style={stylesGroup} size="sm">
-            <InputGroup.Prepend>
-              <InputGroup.Text>
-                {/* DEBUGGING: <Badge variant="warning" className="mr-2 px-2">{lineAccount.id}</Badge> */}
-                <OverlayTrigger
-                  overlay={<Tooltip id={`tooltip_account_name_${lineAccount.id}`}>{dataAccount?.accounts && dataAccount.accounts.find(a => a.accountNumber === lineAccount.accountNumber).accountName}</Tooltip>}>
-                  <span className="cursor-hand"><strong>#</strong> {lineAccount.accountNumber}</span>
-                </OverlayTrigger>
+        <Form>
+          <InputGroup maxWidth="400px">
 
-                <Badge variant="warning" className="ml-2 px-2 py-1 fw-light text-reset bg-light-yellow">{toFriendlyCurrency(lineAccount.amount)}</Badge>
-                <X
-                  size={18}
-                  className="text-danger fw-bold align-text-bottom ml-1 cursor-hand"
-                  onClick={() => deleteCartLineAccount({ cartLineAccountId: lineAccount.id })} />
-              </InputGroup.Text>
-            </InputGroup.Prepend>
+            {/* LEFT PART */}
+            <Tooltip
+              hasArrow
+              label={dataAccount?.accounts && dataAccount.accounts.find(a => a.accountNumber === lineAccount.accountNumber).accountName}
+              bg="gray.300"
+              color="black">
+              <InputLeftAddon children={<HStack >
+                <Box><strong>#</strong> {lineAccount.accountNumber}</Box>
+                <Badge
+                  rounded="md"
+                  shadow="xs"
+                  ml={2}
+                  mt={-.5}
+                  variant="warning"
+                  bg="yellow.100">{toFriendlyCurrency(lineAccount.amount)}</Badge>
+                <DeleteIcon size="16" cursor={'pointer'} color="red" onClick={() => deleteCartLineAccount({ cartLineAccountId: lineAccount.id })} />
+              </HStack >} />
+            </Tooltip>
 
-            {/* unwrapped INPUT FIELD */}
-            <InputField
-              style={(errors.percentage && touched.percentage) ? { "border": "2px dotted red" } : null}
-              type="number"
-              aria-label="percentage"
-              name="percentage"
-              id={`percentage_${lineAccount.id}`}
-              unwrapped={true}>
-            </InputField>
-            <AutoSave debounceMs={300} />
-            <InputGroup.Append>
-              <InputGroup.Text><strong>%</strong></InputGroup.Text>
-            </InputGroup.Append>
+            {/* INPUT for PERCENTAGE */}
+            <Box minW="60px" maxW="80px">
+              {/* style={(errors.percentage && touched.percentage) ? { "border": "2px dotted red" } : null} */}
+              <InputField
+                type="number"
+                aria-label="percentage"
+                name="percentage"
+                id={`percentage_${lineAccount.id}`}
+                unwrapped={true}>
+              </InputField>
+              <AutoSave debounceMs={300} />
+            </Box>
+
+            {/* RIGHT PART */}
+            <InputRightAddon children={<PercentageIcon />} />
           </InputGroup>
         </Form>
       )}

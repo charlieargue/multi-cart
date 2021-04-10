@@ -18,7 +18,7 @@ export function LineAccountButtonRow({ line, children, idx }: LineAccountButtonR
   return (
 
     <>
-      <Stack direction="row" spacing={4} align="center">
+      <Stack direction="row" spacing={4} align="center" mt={1}>
         <LineAccountsIcon />
         <Text fontWeight="bold" fontSize="md">
           Line Accounts
