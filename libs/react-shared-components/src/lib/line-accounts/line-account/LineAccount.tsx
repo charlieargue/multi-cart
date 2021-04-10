@@ -83,11 +83,12 @@ export const LineAccount = ({ lineAccount, line }: LineAccountProps) => {
 
             {/* LEFT PART */}
             <Tooltip
+
               hasArrow
               label={dataAccount?.accounts && dataAccount.accounts.find(a => a.accountNumber === lineAccount.accountNumber).accountName}
               bg="gray.300"
               color="black">
-              <InputLeftAddon children={<HStack >
+              <InputLeftAddon children={<HStack cursor={'help'} >
                 <Box><strong>#</strong> {lineAccount.accountNumber}</Box>
                 <Badge
                   rounded="md"

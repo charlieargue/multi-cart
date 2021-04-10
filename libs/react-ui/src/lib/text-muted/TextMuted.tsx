@@ -8,12 +8,13 @@ import './TextMuted.module.scss';
 export interface TextMutedProps {
   children?: React.ReactNode;
   style?: unknown;
+  fontSize?: string;
 }
 
 export function TextMuted(props: TextMutedProps) {
   return (
     <Text
-      fontSize="xs"
+      fontSize={props.fontSize || "xs"}
       mt={2}
       textAlign="center"
       color="primary.800"

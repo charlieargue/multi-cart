@@ -132,7 +132,7 @@ export const CartLineRow = ({ line, children, idx }: CartLineRowProps) => {
             <Td>
               <Button
                 rounded="lg"
-                bg="red"
+                colorScheme="pink"
                 p="1"
                 onClick={() => deleteCartLine({ cartId: line.cartId, cartLineId: line.id })}>
                 <CloseIcon color="white" size={19} />

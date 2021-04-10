@@ -35,7 +35,12 @@ export const InputField = ({
 }: InputFieldProps) => {
   const [field, meta] = useField(props);
   const jsxLabel = (<FormLabel>{label}</FormLabel>);
-  const jsxField = (<Input borderRadius={radius}  {...field} {...props} id={id ? id : field.name} />);
+  const jsxField = (<Input
+    color={mode("inherit", "gray.900")}
+    borderRadius={radius}
+    {...field}
+    {...props}
+    id={id ? id : field.name} />);
 
   if (field.value !== null && props.value !== null) {
     if (!unwrapped) {
