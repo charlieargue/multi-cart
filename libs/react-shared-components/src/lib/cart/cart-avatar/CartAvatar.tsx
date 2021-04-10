@@ -14,10 +14,10 @@ interface CartAvatarProps {
   currentCartId?: number;
 }
 
-const noCartsMsg = <HStack direction="row" mr={4} spacing={1}>
+const noCartsMsg = (<HStack direction="row" mr={4} spacing={1}>
   <WarningIcon />
   <span>You have no carts!</span>
-</HStack>;
+</HStack>);
 
 // -------------------
 export const CartAvatar = ({ currentCartId = -1 }: CartAvatarProps) => {

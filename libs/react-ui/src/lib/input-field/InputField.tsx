@@ -32,8 +32,8 @@ export const InputField = ({
   ...props
 }: InputFieldProps) => {
   const [field, meta] = useField(props);
-  const jsxLabel = <FormLabel>{label}</FormLabel>;
-  const jsxField = <Input {...field} {...props} id={id ? id : field.name} />;
+  const jsxLabel = (<FormLabel>{label}</FormLabel>);
+  const jsxField = (<Input {...field} {...props} id={id ? id : field.name} />);
 
   if (field.value !== null && props.value !== null) {
     if (!unwrapped) {

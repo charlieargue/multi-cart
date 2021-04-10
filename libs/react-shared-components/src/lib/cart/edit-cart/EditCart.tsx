@@ -2,13 +2,13 @@ import './EditCart.module.scss';
 import { sumTotalCost, toFriendlyCurrency } from '@multi-cart/util';
 import { Cart, CartLine, useBlankCartLineMutation, useCartQuery, useDeleteCartMutation, useUpdateUserMutation } from '@multi-cart/react-data-access';
 import { CartNameEditable, LineAccount, LineAccountButtonRow, CartLineRow } from '@multi-cart/react-shared-components';
-import { Breadcrumbs } from '@multi-cart/react-ui';
+import { Breadcrumbs, BigError } from '@multi-cart/react-ui';
 import clsx from 'clsx';
 import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
-import { Alert, Badge, Button, Col, Container, Row } from 'react-bootstrap';
 import { ExclamationCircleFill, PlusCircleFill, XSquareFill } from 'react-bootstrap-icons';
 import styles from './EditCart.module.scss';
+import { AlertIcon, AlertTitle, AlertDescription, Alert } from '@chakra-ui/react';
 
 interface EditCartProps { id: number }
 
@@ -41,9 +41,10 @@ export const EditCart = ({ id }: EditCartProps) => {
     label: "Cart",
     id
   }];
-  const breadcrumbs = <Breadcrumbs links={links} />;
+  const breadcrumbs = (<Breadcrumbs links={links} />);
 
   // fetching?
+  // TODO: loading indicator
   if (fetching) {
     return (
       <>
@@ -53,15 +54,17 @@ export const EditCart = ({ id }: EditCartProps) => {
     );
   }
 
-  // error?
+  // big error
   if (error) {
     console.log("🚀 ~ error", error)
     return (
       <>
         {breadcrumbs}
-        <Alert variant="danger">
-          {error.message}
-        </Alert>
+        <BigError>
+          <BigError.Message>
+            {error.message}
+          </BigError.Message>
+        </BigError>
       </>
     );
   }
@@ -85,7 +88,7 @@ export const EditCart = ({ id }: EditCartProps) => {
 
       {/* 🛍 cart header  */}
       {/* TODO: search for all style= and get 'em outta here!  */}
-      <Container
+      {/* <Container
         fluid
         className={clsx(styles["edit-cart__cart-header"], "py-3")}>
         <Row className="align-items-md-baseline">
@@ -108,7 +111,7 @@ export const EditCart = ({ id }: EditCartProps) => {
           </Col>
 
         </Row>
-      </Container>
+      </Container> */}
 
       {/* 🛍 cart */}
       <table className="table table-borderless table-responsive-sm table-sm mt-2" id="cart-table">
@@ -136,20 +139,21 @@ export const EditCart = ({ id }: EditCartProps) => {
             <tbody>
               {
                 data.cart.cartLines?.sort((a, b) => a.id - b.id).map((line, idx) => !line ? null : (
-                  <CartLineRow key={line.id} line={line} idx={idx}>
-                    <Alert variant="success" className={clsx(styles['edit-cart__line-account-container'], "mb-5 pb-3 d-flex justify-content-sm-between align-items-sm-baseline")}>
-                      <LineAccountButtonRow line={line} />
-                      {/* 🔴 TODO: flex-wrap only after 2 elements! */}
-                      <div className="d-flex justify-content-sm-end mt-2 flex-wrap" >
-                        {(line as CartLine)?.cartLineAccounts?.sort((a, b) => a.id - b.id).map((cla) => !cla ? null : (
-                          <LineAccount
-                            key={cla.id}
-                            lineAccount={cla}
-                            line={line} />
-                        ))}
-                      </div>
-                    </Alert>
-                  </CartLineRow>
+                  // <CartLineRow key={line.id} line={line} idx={idx}>
+                  //   <Alert variant="success" className={clsx(styles['edit-cart__line-account-container'], "mb-5 pb-3 d-flex justify-content-sm-between align-items-sm-baseline")}>
+                  //     <LineAccountButtonRow line={line} />
+                  //     {/* 🔴 TODO: flex-wrap only after 2 elements! */}
+                  //     <div className="d-flex justify-content-sm-end mt-2 flex-wrap" >
+                  //       {(line as CartLine)?.cartLineAccounts?.sort((a, b) => a.id - b.id).map((cla) => !cla ? null : (
+                  //         <LineAccount
+                  //           key={cla.id}
+                  //           lineAccount={cla}
+                  //           line={line} />
+                  //       ))}
+                  //     </div>
+                  //   </Alert>
+                  // </CartLineRow>
+                  <div></div>
                 ))
               }
             </tbody>
@@ -183,7 +187,7 @@ export const EditCart = ({ id }: EditCartProps) => {
               <div className="d-flex flex-row justify-content-end align-items-center">
 
                 {/* delete cart  */}
-                <div className="p-2">
+                {/* <div className="p-2">
                   <Button
                     className="bg-danger text-white fw-bold"
                     size="sm"
@@ -203,7 +207,7 @@ export const EditCart = ({ id }: EditCartProps) => {
                     }}>
                     <XSquareFill size={20} className="mr-1" /><strong>Delete</strong> Cart
                                     </Button>
-                </div>
+                </div> */}
               </div>
             </td>
           </tr>

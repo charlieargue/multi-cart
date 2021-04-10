@@ -1,5 +1,6 @@
 export * from './lib/action-link/ActionLink';
 export * from './lib/banner/Banner';
+export * from './lib/big-error/BigError';
 export * from './lib/breadcrumbs/Breadcrumbs';
 export * from './lib/divider-with-text/DividerWithText';
 export * from './lib/input-field/InputField';
