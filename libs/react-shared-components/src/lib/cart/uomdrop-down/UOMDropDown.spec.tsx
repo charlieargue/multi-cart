@@ -1,11 +1,11 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 
-import ModalComponent from './ModalComponent';
+import UOMDropDown from './UOMDropDown';
 
-describe('ModalComponent', () => {
+describe('UOMDropDown', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<ModalComponent />);
+    const { baseElement } = render(<UOMDropDown />);
     expect(baseElement).toBeTruthy();
   });
 });

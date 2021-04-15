@@ -30,6 +30,7 @@ const theme = extendTheme({
     fonts,
   },
   breakpoints,
-})
+  // thx: https://chakra-ui.com/docs/theming/customize-theme#customizing-component-styles
+});
 
 export default theme

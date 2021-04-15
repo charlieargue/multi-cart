@@ -90,7 +90,7 @@ export const DashboardContainer = () => {
                                                                 Building 2
                                                             </Badge>
                                                         </Text>
-                                                        <Text fontSize="sm">UI Engineer</Text>
+                                                        <Text fontSize="sm">Lab Mngr</Text>
                                                     </Box>
                                                 </Flex>
                                             </Td>
@@ -109,7 +109,7 @@ export const DashboardContainer = () => {
                                                                 Lab 203
                                                             </Badge>
                                                         </Text>
-                                                        <Text fontSize="sm">UI Engineer</Text>
+                                                        <Text fontSize="sm">Lab Mngr</Text>
                                                     </Box>
                                                 </Flex>
                                             </Td>
@@ -124,11 +124,11 @@ export const DashboardContainer = () => {
                                                     <Box ml="3">
                                                         <Text fontWeight="bold">
                                                             Segun Adebayo
-                                                            <Badge ml="1" colorScheme="green">
-                                                                New
+                                                            <Badge ml="1" colorScheme="gray">
+                                                                Lab 450
                                                             </Badge>
                                                         </Text>
-                                                        <Text fontSize="sm">UI Engineer</Text>
+                                                        <Text fontSize="sm">Lab Mngr</Text>
                                                     </Box>
                                                 </Flex>
                                             </Td>
@@ -143,11 +143,11 @@ export const DashboardContainer = () => {
                                                     <Box ml="3">
                                                         <Text fontWeight="bold">
                                                             Sade Akinlade
-                                                            <Badge ml="1" colorScheme="green">
-                                                                New
+                                                            <Badge ml="1" colorScheme="gray">
+                                                                Lab 101
                                                             </Badge>
                                                         </Text>
-                                                        <Text fontSize="sm">UI Engineer</Text>
+                                                        <Text fontSize="sm">Lab Mngr</Text>
                                                     </Box>
                                                 </Flex>
                                             </Td>

@@ -1,6 +1,5 @@
 import React from 'react';
 import { LineAccount, LineAccountProps } from './LineAccount';
-import '../../../../../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
 export default {
   component: LineAccount,

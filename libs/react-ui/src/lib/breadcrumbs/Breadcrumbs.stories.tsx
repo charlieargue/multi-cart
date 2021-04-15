@@ -1,7 +1,5 @@
 import React from 'react';
-import { Container } from 'react-bootstrap';
 import { Breadcrumbs, BreadcrumbsProps, BreadcrumbLink } from './Breadcrumbs';
-import '../../../../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
 export default {
   component: Breadcrumbs,
@@ -22,7 +20,9 @@ export const withOneLink = () => {
     links: [{
       isActive: true,
       label: "Cart",
-      id: 5
+      id: 5,
+      href:"/cart",
+      as:"/cart"
     }]
   };
 
@@ -36,11 +36,15 @@ export const withMultipleLinks = () => {
     links: [{
       isActive: true,
       label: "Carts",
+      href:"/carts",
+      as:"/carts"
     },
     {
       isActive: false,
       label: "Cart",
-      id: 5
+      id: 5,
+      href:"/cart",
+      as:"/cart"
     }]
   };
 

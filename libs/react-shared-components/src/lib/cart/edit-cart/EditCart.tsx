@@ -161,9 +161,9 @@ export const EditCart = ({ id }: EditCartProps) => {
             <th><Box ml={8}>Description</Box></th>
             <th><Box ml={8}>Category</Box></th>
             <th>
-              <Tooltip hasArrow label="Unit of Measurement" bg="gray.300" color="black">
+              <Box ml={8}><Tooltip hasArrow label="Unit of Measurement" bg="gray.300" color="black">
                 UOM
-            </Tooltip>
+            </Tooltip></Box>
             </th>
             <th><Box ml={8}>Quantity</Box></th>
             <th><Box ml={8}>Unit Price</Box></th>

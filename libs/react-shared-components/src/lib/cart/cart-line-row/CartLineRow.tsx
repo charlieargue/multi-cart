@@ -1,6 +1,6 @@
 import { Badge, Button, Td, Text, Tr } from '@chakra-ui/react';
 import { CartLine, useDeleteCartLineMutation, useUpdateCartLineMutation } from '@multi-cart/react-data-access';
-import { AutoSave, CategoriesDropDown } from '@multi-cart/react-shared-components';
+import { AutoSave, CategoriesDropDown, UOMDropDown } from '@multi-cart/react-shared-components';
 import { InputField } from '@multi-cart/react-ui';
 import { toFriendlyCurrency } from '@multi-cart/util';
 import { Form, Formik } from "formik";
@@ -93,19 +93,12 @@ export const CartLineRow = ({ line, children, idx }: CartLineRowProps) => {
               </Form>
 
             </Td>
-            <Td className="pt-2">
+            <Td className="pt-2" minW="255px">
               <CategoriesDropDown />
             </Td>
 
             <Td>
-              {/* <DropdownButton variant="light" id="dropdown-item-button" title="UOM">
-                {
-                  ['Each', 'Case', 'Box', 'Service'].map((uom) => (
-                    <Dropdown.Item key={uom} as="button">{uom}</Dropdown.Item>
-                  ))
-                }
-
-              </DropdownButton> */}
+              <UOMDropDown />
             </Td>
             <Td>
               <InputField

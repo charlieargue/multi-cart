@@ -5,6 +5,7 @@ Agile/kanban board for multi-cart
 
 ### 😎 Wishlist
 
+- [ ] add back CAT/UOM dropdowns, and when you change them, you get a modal: "for this item only, or for this item in the master catalog? and then are you sure?"
 - [ ] CMPNT COMPISITION: try something different like **<CartLines lines={cart.cartLines}> ... children <LineAccounts accounts={}>** so all the **data?.map?...** logic is hidden in the lib/shared-cmpnts
 - [ ] validation on cart line (item, desc?, qty, price, etc...)  
 - [ ] finish cart line row (UOM, categories) ... or wait till store?  
