@@ -12,5 +12,8 @@
         "openOnStartup": true
     },
     "turboConsoleLog.delimiterInsideMessage": "",
-    "turboConsoleLog.quote": "`"
+    "turboConsoleLog.quote": "`",
+    "files.exclude": {
+        "dist": true
+    }
 }

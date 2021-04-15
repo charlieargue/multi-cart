@@ -320,6 +320,25 @@
           }
         }
       }
+    },
+    "mock-api": {
+      "root": "libs/mock-api",
+      "sourceRoot": "libs/mock-api/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": { "lintFilePatterns": ["libs/mock-api/**/*.ts"] }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/mock-api"],
+          "options": {
+            "jestConfig": "libs/mock-api/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
     }
   }
 }

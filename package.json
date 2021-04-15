@@ -6,6 +6,7 @@
     "nx": "nx",
     "start": "nx serve",
     "start:all": "nx run-many --target=serve --projects=multi-cart,multi-cart-api --parallel=true",
+    "mock": "export API_URL='http://localhost:3000/api/graphql' && nx run multi-cart:serve",
     "build": "nx build",
     "test": "nx test",
     "lint": "nx workspace-lint && nx lint",

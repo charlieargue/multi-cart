@@ -1,13 +1,18 @@
+🔴 🔴 🔴 🔴 🔴 🔴 
+🔴 TODO: update me!
+🔴 🔴 🔴 🔴 🔴 🔴 
+
+
 # 👍 Commands: 
 
 ```js
-$ npm run dev
+$ yarn start:all
 
 # website: 
-# • http://localhost:3000/
+# • http://localhost:4200/
 
 # graphiQL playground: 
-# • http://localhost:3000/api/graphql
+# • http://localhost:4000/graphql
 ```
 
 
@@ -16,6 +21,21 @@ $ npm run dev
 Resources:
 - https://spectrum.chat/urql/help/how-can-i-use-urql-exchange-graphcache-with-next-js~9cb89fcf-1bda-489a-9e74-04aa8904fa7c
 
+
+```js
+$ yarn mock
+
+# website: 
+# • http://localhost:4200/
+
+# graphiQL playground: 
+# • http://localhost:4200/api/graphql
+```
+
+
+
+
+- 
 
 # 👔 Forms
 

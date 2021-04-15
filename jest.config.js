@@ -6,5 +6,6 @@ module.exports = {
     '<rootDir>/libs/react-data-access',
     '<rootDir>/apps/multi-cart-api',
     '<rootDir>/libs/util',
+    '<rootDir>/libs/mock-api',
   ],
 };
