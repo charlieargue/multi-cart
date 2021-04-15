@@ -1,4 +1,3 @@
-
 import { Cart, CartLine } from '@multi-cart/react-data-access';
 
 export const carts: Cart[] = [{

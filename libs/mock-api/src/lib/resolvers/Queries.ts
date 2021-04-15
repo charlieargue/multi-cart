@@ -24,4 +24,10 @@ export const queries: QueryResolvers = {
             .filter((user) => user?.id === 1)[0]; // TODO:
     },
 
+    accounts() {
+        return db
+            .getData("/accounts")
+            .sort((a, b) => a.accountName.localeCompare(b.accountName));
+    },
+
 };
