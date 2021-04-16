@@ -10,6 +10,7 @@ import clsx from 'clsx';
 import { Badge, Box, HStack, InputGroup, InputLeftAddon, InputRightAddon, Tooltip } from '@chakra-ui/react';
 import { TiDelete as DeleteIcon } from 'react-icons/ti';
 import { FaPercentage as PercentageIcon } from 'react-icons/fa';
+import 'regenerator-runtime/runtime';
 
 /* eslint-disable-next-line */
 export interface LineAccountProps {

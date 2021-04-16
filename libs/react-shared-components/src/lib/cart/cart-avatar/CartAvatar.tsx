@@ -8,6 +8,7 @@ import React from 'react';
 import { CgChevronDown as ChevronDownIcon } from 'react-icons/cg';
 import { RiErrorWarningFill as WarningIcon } from 'react-icons/ri';
 import styles from './CartAvatar.module.scss';
+import 'regenerator-runtime/runtime';
 
 interface CartAvatarProps {
   currentCartId?: number;

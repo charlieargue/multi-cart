@@ -6,6 +6,7 @@ import { CgChevronRight as ChevronRightIcon } from 'react-icons/cg';
 import { } from 'react-icons/fa';
 import { BiHomeSmile as HomeIcon } from 'react-icons/bi';
 import './Breadcrumbs.module.scss';
+import 'regenerator-runtime/runtime';
 
 /* eslint-disable-next-line */
 export interface BreadcrumbLink {

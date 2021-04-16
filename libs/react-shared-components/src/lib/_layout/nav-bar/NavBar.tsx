@@ -16,6 +16,7 @@ import { CgClose as CloseIcon } from 'react-icons/cg';
 import { FiLogOut as LogoutIcon } from 'react-icons/fi';
 import { GiHamburgerMenu as HamburgerIcon } from 'react-icons/gi';
 import styles from './NavBar.module.scss';
+import 'regenerator-runtime/runtime';
 
 // -------------------
 export const NavBar = (props) => {

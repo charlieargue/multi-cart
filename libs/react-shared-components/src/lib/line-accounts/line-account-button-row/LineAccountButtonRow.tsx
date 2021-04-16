@@ -6,7 +6,7 @@ import { FaDollarSign as DollarIcon, FaPercentage as PercentageIcon, FaRegCredit
 import { ImPlus as PlusIcon } from 'react-icons/im';
 import { BiSearchAlt as SearchIcon } from 'react-icons/bi';
 import { TextMuted } from '@multi-cart/react-ui';
-
+import 'regenerator-runtime/runtime';
 
 export interface LineAccountButtonRowProps {
   line?: CartLine;

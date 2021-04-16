@@ -6,7 +6,7 @@ import { Form, Formik } from 'formik';
 import { useRouter } from "next/router";
 import React from 'react';
 import './RegistrationForm.module.scss';
-
+import 'regenerator-runtime/runtime';
 
 /* eslint-disable-next-line */
 export interface RegistrationFormProps { }

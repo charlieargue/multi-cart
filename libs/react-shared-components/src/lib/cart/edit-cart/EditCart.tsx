@@ -14,6 +14,7 @@ import React, { useEffect } from 'react';
 import { HiPencilAlt } from 'react-icons/hi';
 import { ImPlus as PlusIcon } from 'react-icons/im';
 import styles from './EditCart.module.scss';
+import 'regenerator-runtime/runtime';
 
 interface EditCartProps { id: number }
 

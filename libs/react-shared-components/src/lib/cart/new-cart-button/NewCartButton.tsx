@@ -6,6 +6,7 @@ import { useIsAuth } from '@multi-cart/react-shared-components';
 import { ImPlus as PlusIcon } from 'react-icons/im';
 import './NewCartButton.module.scss';
 import { Button } from '@chakra-ui/react';
+import 'regenerator-runtime/runtime';
 
 /* eslint-disable-next-line */
 export interface NewCartButtonProps {

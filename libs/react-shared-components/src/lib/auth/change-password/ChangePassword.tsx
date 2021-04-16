@@ -7,6 +7,7 @@ import NextLink from "next/link";
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import './ChangePassword.module.scss';
+import 'regenerator-runtime/runtime';
 
 export const ChangePassword = () => {
   const router = useRouter();
