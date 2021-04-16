@@ -1,60 +1,79 @@
 import { carts } from '../data/mocked-carts';
 import { Cart, CartLine, CartLineInput, MutationResolvers } from '@multi-cart/react-data-access';
-import faker from 'faker';
+import * as faker from 'faker';
 import { db } from '../data/setup';
 import { mockNewId } from '../mockNewId';
 
+// utility methods
+const getCartIds = (): number[] => {
+    return db.getData("/carts").map(c => c.id);
+};
+
+const addCart = (cart: Cart): void => {
+    db.push("/carts[]", cart, true);
+}
+
+const addCartLine = (cartLine: CartLine): void => {
+    // get index of this cart
+    const cartIdx: number = db.getIndex("/carts", cartLine.cartId);
+    // nested array push
+    db.push("/carts[" + cartIdx + "]/cartLines[]", cartLine, true);
+}
+
+// ------------------------
 export const mutations: MutationResolvers = {
 
-    // ------------------------ CARTS
+    // ------------------------ 
+    // CARTS
+    // ------------------------ 
 
     blankCart() {
         // NOTE: tried using the /carts[-1] method but the order gets messed up and then the IDs dupe...
-        const cartIds: number[] = db.getData("/carts").map(c => c.id);
         const fresh: Cart = {
-            id: mockNewId(cartIds),
+            id: mockNewId(getCartIds()),
             name: faker.company.companyName(),
             createdAt: new Date().toLocaleString(),
             updatedAt: new Date().toLocaleString(),
             userId: 1,
             cartLines: []
         } as Cart;
-        db.push("/carts[]", fresh, true);
+        addCart(fresh);
         return fresh;
     },
 
-    // TODO: change all these inputs to Ints/numbers dummy!
-    // blankCartLine(_: unknown, { cartId }: { cartId: string }) {
-    //     const nCartId = parseInt(cartId);
-    //     const cart = carts.find((c) => c.id === nCartId);
-    //     if (cart && cart.cartLines.length >= 0) {
-    //         // new safe id 
-    //         const nextId = mockNewId(cart.cartLines.map((cl) => (cl as any).id));
-    //         console.log("🚀 ~ nextId", nextId);
+    blankCartLine(_: unknown, { cartId }: { cartId: number }) {
+        const cart = db
+            .getData("/carts")
+            .filter((cart) => cart?.id === cartId)[0];
+        if (cart && cart.cartLines.length >= 0) {
+            // new safe id 
+            const nextId = mockNewId(getCartIds());
+            console.log("🚀 ~ nextId", nextId);
 
-    //         // create a new cart line
-    //         const fresh: CartLine = {
-    //             id: nextId,
-    //             cartId: nCartId,
-    //             itemId: "🔵 ITEM #" + faker.random.number(),
-    //             description: "🔵 CL : " + new Date().toUTCString(),
-    //             categoryId: faker.random.number(),
-    //             uom: faker.random.word(),
-    //             quantity: 1,
-    //             price: parseFloat(faker.commerce.price()),
-    //             createdAt: new Date().toLocaleString(),
-    //             updatedAt: new Date().toLocaleString(),
-    //         };
-    //         console.log("🚀 ~ fresh", fresh);
-    //         // insert into mocked data
-    //         cart.cartLines.push(fresh);
+            // create a new cart line
+            const fresh: CartLine = {
+                id: nextId,
+                cartId: cartId,
+                itemId: "🔵 ITEM #" + (faker as any).datatype.number(),
+                description: "🔵 CL : " + new Date().toUTCString(),
+                categoryId: (faker as any).datatype.number(),
+                uom: (faker as any).datatype.word(),
+                quantity: 1,
+                price: parseFloat(faker.commerce.price()),
+                createdAt: new Date().toLocaleString(),
+                updatedAt: new Date().toLocaleString(),
+            };
+            console.log("🚀 ~ fresh", fresh);
 
-    //         // return it
-    //         return fresh;
+            // insert into mocked data
+            addCartLine(fresh);
 
-    //     }
-    //     return null;
-    // },
+            // return it
+            return fresh;
+
+        }
+        return null;
+    },
 
     // deleteCart(_: unknown, { id }: { id: string }) {
     //     const idx = carts.findIndex((c) => c.id === parseInt(id));
@@ -80,24 +99,28 @@ export const mutations: MutationResolvers = {
     //     return false;
     // },
 
-    updateCartLine(_: unknown, { cartLine }: { cartLine: CartLineInput }) {
-        const cart = carts.find((c) => c.id === cartLine.cartId);
-        if (!cart) {
-            throw new Error("🔴 could not find cart");
-        } else {
-            const idx = cart.cartLines.findIndex((cl) => cl!.id === cartLine.id);
-            // get all the old props, update with new props, and re-set in the array!
-            cart.cartLines[idx] = {
-                ...cart.cartLines[idx],
-                ...(cartLine as CartLine)
-            };
-            // return cartLine;
-            return cart.cartLines[idx];
-        }
-    },
+    // updateCartLine(_: unknown, { cartLine }: { cartLine: CartLineInput }) {
+    //     const cart = carts.find((c) => c.id === cartLine.cartId);
+    //     if (!cart) {
+    //         throw new Error("🔴 could not find cart");
+    //     } else {
+    //         const idx = cart.cartLines.findIndex((cl) => cl!.id === cartLine.id);
+    //         // get all the old props, update with new props, and re-set in the array!
+    //         cart.cartLines[idx] = {
+    //             ...cart.cartLines[idx],
+    //             ...(cartLine as CartLine)
+    //         };
+    //         // return cartLine;
+    //         return cart.cartLines[idx];
+    //     }
+    // },
 
 
-    // ------------------------ AUTHENTICATION
+    // ------------------------ 
+    // AUTHENTICATION
+    // ------------------------ 
+
+
     login(_: unknown, { password, usernameOrEmail }: { password: string, usernameOrEmail: string }) {
         // see if got user
         const user = db
@@ -129,7 +152,6 @@ export const mutations: MutationResolvers = {
         } as const;
     },
 
-    // login?: Resolver<ResolversTypes['UserResponse'], ParentType, ContextType, RequireFields<MutationLoginArgs, >>;
 
     // TODO:
     // -----------------------    ----------------------------------------------
