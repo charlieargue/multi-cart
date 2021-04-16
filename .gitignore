@@ -45,3 +45,6 @@ Thumbs.db
 
 # stupid files
 .DS_Store
+
+# JSON database (for mocked api)
+libs/mock-api/mock-database.json

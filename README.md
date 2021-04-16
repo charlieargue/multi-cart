@@ -10,6 +10,10 @@ git clone https://github.com/charlieargue/multi-cart.git
 
 # 2) install libraries and fire it up!
 yarn && yarn mock
+
+# 3) try logging in:
+# username: mocked-user
+# password: mocking
 ```
 
 # 👍 Commands:
