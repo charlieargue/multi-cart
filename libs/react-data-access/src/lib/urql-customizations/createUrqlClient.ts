@@ -4,11 +4,14 @@ import { dedupExchange, Exchange, fetchExchange } from 'urql';
 // import { pipe, tap } from 'wonka'; // part of urql!
 import { cache } from './cache';
 
-const NX_API_URL = process.env.NX_API_URL ? process.env.NX_API_URL : 'http://localhost:4000/graphql'; // defaults to NODE backend
-// const NX_API_URL = process.env.NX_API_URL ? process.env.NX_API_URL : 'http://localhost:4200/api/graphql'; // defaults to NODE backend
+// TODO: figure out why terminal worked but in browser didn't... TBD
+// const NX_API_URL = process.env.NX_API_URL ? process.env.NX_API_URL : 'http://localhost:4000/graphql';       //  NODE backend
+const NX_API_URL = process.env.NX_API_URL ? process.env.NX_API_URL : 'http://localhost:4200/api/graphql'; // MOCKED API
 console.log(`🚀 ~ process.env.NX_API_URL`, process.env.NX_API_URL);
 console.log(`🚀 ~ NX_API_URL`, NX_API_URL);
 
+// TODO: things got wonky here, bring this back once stable again...
+// TODO: ditto for devtools
 // thx: https://github.com/FormidableLabs/urql/issues/225
 // BEN 6:15:38
 // const errorExchange: Exchange = ({ forward }) => ops$ => {

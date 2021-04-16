@@ -1,81 +1,77 @@
-🔴 🔴 🔴 🔴 🔴 🔴 
-🔴 TODO: update me!
-🔴 🔴 🔴 🔴 🔴 🔴 
+🔴 🔴 🔴 🔴 🔴 🔴
+🔴 TODO: work-in-progress... 🚧
+🔴 🔴 🔴 🔴 🔴 🔴
 
-# 🎢 Quick Start
+# 🎢 Quick Start with the Mocked-API
 
 ```bash
-clone bla bla...
+# 1) clone the repo
+git clone https://github.com/charlieargue/multi-cart.git
 
-cp apps/multi-cart-api/.env.dist apps/multi-cart-api/.env
+# 2) install libraries and fire it up!
+yarn && yarn mock
 ```
 
-
-# 👍 Commands: 
+# 👍 Commands:
 
 ```js
 $ yarn start:all
 
-# website: 
+# website:
 # • http://localhost:4200/
 
-# graphiQL playground: 
+# graphiQL playground:
 # • http://localhost:4000/graphql
+
 ```
-
-
-# 🏃‍♂️ Running the Mocked-API
-
-Resources:
-- https://spectrum.chat/urql/help/how-can-i-use-urql-exchange-graphcache-with-next-js~9cb89fcf-1bda-489a-9e74-04aa8904fa7c
-
-
-```js
-$ yarn mock
-
-# website: 
-# • http://localhost:4200/
-
-# graphiQL playground: 
-# • http://localhost:4200/api/graphql
-```
-
-
-
-
-- 
 
 # 👔 Forms
 
-Resource:
-- https://final-form.org/docs/react-final-form/examples/simple
+Resources:
 
+- https://formik.org/
+- https://final-form.org/docs/react-final-form/examples/simple
 
 # ▲ Next Integration:
 
 ## getInitialProps
+
 - https://nextjs.org/docs/api-reference/data-fetching/getInitialProps
-
-
 
 # ⚙ CodeGen
 
 Resources:
+
 - https://graphql-code-generator.com/docs/getting-started/index
 
+---
 
+---
 
+---
 
+---
 
-* * * * *
-* * * * *
-* * * * *
-* * * * *
-* * * * *
-* * * * *
-* * * * *
+---
+
+---
+
+---
 
 # MultiCart
+
+TODO:
+
+```
+# website:
+
+# • http://localhost:4200/
+
+# graphiQL playground:
+
+# • http://localhost:4200/api/graphql
+
+```
 
 This project was generated using [Nx](https://nx.dev).
 
@@ -153,8 +149,6 @@ Run `nx dep-graph` to see a diagram of the dependencies of your projects.
 ## Further help
 
 Visit the [Nx Documentation](https://nx.dev) to learn more.
-
-
 
 ## ☁ Nx Cloud
 

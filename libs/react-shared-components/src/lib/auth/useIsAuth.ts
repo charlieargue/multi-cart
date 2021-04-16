@@ -1,6 +1,7 @@
 import { useMeQuery } from "@multi-cart/react-data-access";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
+import 'regenerator-runtime/runtime';
 
 export const useIsAuth = () => {
     const [{ data, fetching }] = useMeQuery();
