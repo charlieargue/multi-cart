@@ -4,8 +4,10 @@ import { dedupExchange, Exchange, fetchExchange } from 'urql';
 import { pipe, tap } from 'wonka'; // part of urql!
 import { cache } from './cache';
 
-const API_URL = process.env.API_URL || 'http://localhost:4000/graphql'; // defaults to NODE backend
-console.log(`🚀 ~ API_URL`, API_URL);
+const NX_API_URL = process.env.NX_API_URL ? process.env.NX_API_URL : 'http://localhost:4000/graphql'; // defaults to NODE backend
+// const NX_API_URL = process.env.NX_API_URL ? process.env.NX_API_URL : 'http://localhost:4200/api/graphql'; // defaults to NODE backend
+console.log(`🚀 ~ process.env.NX_API_URL`, process.env.NX_API_URL);
+console.log(`🚀 ~ NX_API_URL`, NX_API_URL);
 
 // thx: https://github.com/FormidableLabs/urql/issues/225
 // BEN 6:15:38
@@ -19,7 +21,7 @@ const errorExchange: Exchange = ({ forward }) => ops$ => {
 
             // anytime there's an error in anything we run..
             // 🛡 sentry fire-and-forget CALL would go here!
-            
+
             // ERROR IF INCLUDED: 
             // You may need an additional loader to handle the result of these loaders.
             // if (error?.message.includes("not authenticated")) {
@@ -37,7 +39,7 @@ const errorExchange: Exchange = ({ forward }) => ops$ => {
 // [ ] TODO: global error handling goes here (unauth redirects/verifies)
 export const createUrqlClient = (ssrExchange: any) => ({
 
-    url: API_URL,
+    url: NX_API_URL,
     fetchOptions: {
         // VIP: session cookies will NOT work without this
         credentials: "include" as const

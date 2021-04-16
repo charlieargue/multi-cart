@@ -5,8 +5,8 @@
   "scripts": {
     "nx": "nx",
     "start": "nx serve",
-    "start:all": "nx run-many --target=serve --projects=multi-cart,multi-cart-api --parallel=true",
-    "mock": "export API_URL='http://localhost:3000/api/graphql' && nx run multi-cart:serve",
+    "start:all": "export NX_API_URL='http://localhost:4000/graphql' && nx run-many --target=serve --projects=multi-cart,multi-cart-api --parallel=true",
+    "mock": "export NX_API_URL='http://localhost:4200/api/graphql' && nx run multi-cart:serve",
     "build": "nx build",
     "test": "nx test",
     "lint": "nx workspace-lint && nx lint",
@@ -108,6 +108,7 @@
     "nodemon": "^2.0.7",
     "pinst": "^2.1.6",
     "prettier": "2.2.1",
+    "regenerator-runtime": "^0.13.7",
     "sass": "^1.32.8",
     "storybook-formik": "^2.1.4",
     "ts-jest": "^26.5.4",
