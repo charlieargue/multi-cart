@@ -1,5 +1,4 @@
-import { carts } from '../data/mocked-carts';
-import { Cart, CartLine, CartLineInput, MutationResolvers } from '@multi-cart/react-data-access';
+import { Cart, CartLine, MutationResolvers } from '@multi-cart/react-data-access';
 import * as faker from 'faker';
 import { db } from '../data/setup';
 import { mockNewId } from '../mockNewId';

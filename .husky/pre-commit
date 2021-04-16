@@ -5,5 +5,6 @@
 # npm test
 # npx nx run multi-cart-api:test
 # npx nx affected --target=lint  --base=origin/main
+npx nx affected --target=lint  --base=origin/kg-2021-04-16-finishing-mocked-api
 
 
