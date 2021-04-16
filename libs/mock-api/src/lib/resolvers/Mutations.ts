@@ -1,25 +1,25 @@
 import { carts } from '../data/mocked-carts';
 import { Cart, CartLine, CartLineInput, MutationResolvers } from '@multi-cart/react-data-access';
-// import { mockNewId } from '../mockNewId';
-// import faker from 'faker';
-
+import faker from 'faker';
+import { db } from '../data/setup';
+import { mockNewId } from '../mockNewId';
 
 export const mutations: MutationResolvers = {
 
+    // ------------------------ CARTS
+
     blankCart() {
-        // create a new cart
+        // NOTE: tried using the /carts[-1] method but the order gets messed up and then the IDs dupe...
+        const cartIds: number[] = db.getData("/carts").map(c => c.id);
         const fresh: Cart = {
-            id: carts.length + 1,
-            name: "🔴 " + new Date().toUTCString(),
+            id: mockNewId(cartIds),
+            name: faker.company.companyName(),
             createdAt: new Date().toLocaleString(),
             updatedAt: new Date().toLocaleString(),
             userId: 1,
             cartLines: []
         } as Cart;
-        // insert into mocked data
-        carts.push(fresh);
-
-        // return it
+        db.push("/carts[]", fresh, true);
         return fresh;
     },
 
@@ -95,4 +95,56 @@ export const mutations: MutationResolvers = {
             return cart.cartLines[idx];
         }
     },
+
+
+    // ------------------------ AUTHENTICATION
+    login(_: unknown, { password, usernameOrEmail }: { password: string, usernameOrEmail: string }) {
+        // see if got user
+        const user = db
+            .getData("/users")
+            .filter((user) => usernameOrEmail.includes("@") ? user.email === usernameOrEmail : user.username === usernameOrEmail)[0];
+
+        if (!user) {
+            return {
+                errors: [{
+                    field: "usernameOrEmail",
+                    message: "that usernameOrEmail doesn't exist"
+                }],
+            }
+        }
+        // NOTE: not salting passwords in mocked db
+        if (user.password !== password) {
+            return {
+                errors: [{
+                    field: "password",
+                    message: "incorrect password"
+                }]
+            }
+        }
+
+        // 🟢 You are logged in!
+        // DONE in pages/api/graphql.ts / HARD-CODED for now, TODO: make dynamic req.session.userId = user.id; // can be object, etc... more data in there, ...
+        return {
+            user
+        } as const;
+    },
+
+    // login?: Resolver<ResolversTypes['UserResponse'], ParentType, ContextType, RequireFields<MutationLoginArgs, >>;
+
+    // TODO:
+    // -----------------------    ----------------------------------------------
+    // blankCartLine?: Resolver<ResolversTypes['CartLine'], ParentType, ContextType, RequireFields<MutationBlankCartLineArgs, 'cartId'>>;
+    // deleteCart?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationDeleteCartArgs, 'id'>>;
+    // deleteCartLine?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationDeleteCartLineArgs, 'cartLineId' | 'cartId'>>;
+    // updateCartLine?: Resolver<Maybe<ResolversTypes['CartLine']>, ParentType, ContextType, RequireFields<MutationUpdateCartLineArgs, 'cartLine'>>;
+    // updateCart?: Resolver<Maybe<ResolversTypes['Cart']>, ParentType, ContextType, RequireFields<MutationUpdateCartArgs, 'cart'>>;
+    // register?: Resolver<ResolversTypes['UserResponse'], ParentType, ContextType, RequireFields<MutationRegisterArgs, 'options'>>;
+    // forgotPassword?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationForgotPasswordArgs, 'email'>>;
+    // changePassword?: Resolver<ResolversTypes['UserResponse'], ParentType, ContextType, RequireFields<MutationChangePasswordArgs, 'newPassword' | 'token'>>;
+    // logout?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
+    // updateUser?: Resolver<ResolversTypes['UserResponse'], ParentType, ContextType, RequireFields<MutationUpdateUserArgs, 'currentCartId'>>;
+    // addCartLineAccount?: Resolver<ResolversTypes['CartLineAccount'], ParentType, ContextType, RequireFields<MutationAddCartLineAccountArgs, 'amount' | 'accountNumber' | 'cartLineId' | 'cartId'>>;
+    // updateCartLineAccount?: Resolver<ResolversTypes['CartLineAccount'], ParentType, ContextType, RequireFields<MutationUpdateCartLineAccountArgs, 'amount' | 'id'>>;
+    // deleteCartLineAccount?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationDeleteCartLineAccountArgs, 'cartLineAccountId'>>;
+
 };

@@ -5,7 +5,7 @@ import { JsonDB } from 'node-json-db';
 import { Config } from 'node-json-db/dist/lib/JsonDBConfig'
 import { Cart, User, Account } from '@multi-cart/react-data-access';
 
-const db = new JsonDB(new Config("./mock-database", true, false, '/'));
+const db = new JsonDB(new Config("./libs/mock-api/mock-database", true, false, '/'));
 
 // hydrate data
 const hydrateData = (): void => {
