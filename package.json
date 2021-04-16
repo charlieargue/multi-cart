@@ -148,15 +148,11 @@
     "react-icons": "^4.2.0",
     "react-is": "^17.0.2",
     "react-select": "^4.3.0",
-    "regenerator-runtime": "^0.13.7",
     "tslib": "^2.0.0",
     "type-graphql": "^1.1.1",
     "typeorm": "^0.2.31",
     "urql": "^2.0.1",
     "uuid": "^8.3.2",
     "yup": "^0.32.9"
-  },
-  "browserslist": [
-    "last 1 Chrome version"
-  ]
+  }
 }

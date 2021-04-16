@@ -5,6 +5,7 @@ import { withUrqlClient } from 'next-urql';
 import React from 'react';
 import { DashboardContainer } from '../appViews/DashboardContainer';
 import 'regenerator-runtime/runtime';
+
 const DashboardPage: NextPage = () => {
   useIsAuth(); // 🛡 session authentication
 

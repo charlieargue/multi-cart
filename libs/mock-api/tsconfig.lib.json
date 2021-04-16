@@ -2,10 +2,8 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "outDir": "../../dist/out-tsc",
-    "types": [],
-    "typeRoots": ["node_modules/@types", "src/@types"],
+    "types": []
   },
-  "files": ["src/@types/graphql.d.ts"],
-  "include": ["**/*.ts", "src/**/*"],
-  "exclude": ["node_modules", "**/*.spec.ts"]
+  "include": ["**/*.ts"],
+  "exclude": ["**/*.spec.ts"]
 }

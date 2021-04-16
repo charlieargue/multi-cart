@@ -2,6 +2,14 @@
 🔴 TODO: update me!
 🔴 🔴 🔴 🔴 🔴 🔴 
 
+# 🎢 Quick Start
+
+```bash
+clone bla bla...
+
+cp apps/multi-cart-api/.env.dist apps/multi-cart-api/.env
+```
+
 
 # 👍 Commands: 
 

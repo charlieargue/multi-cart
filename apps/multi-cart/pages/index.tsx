@@ -4,6 +4,7 @@ import { withUrqlClient } from 'next-urql';
 import React from 'react';
 import { LandingContainer } from '../appViews/LandingContainer';
 import 'regenerator-runtime/runtime';
+
 const Index: NextPage = () => {
 
   return (

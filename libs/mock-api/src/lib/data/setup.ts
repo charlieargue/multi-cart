@@ -8,7 +8,7 @@ import { Cart, User, Account } from '@multi-cart/react-data-access';
 const db = new JsonDB(new Config("./libs/mock-api/mock-database", true, false, '/'));
 
 // hydrate data
-const hydrateData = (): void => {
+const hydrateData = () => {
 
     // push up mocked data into our mock json database
     carts.forEach((cart: Cart, index) => {

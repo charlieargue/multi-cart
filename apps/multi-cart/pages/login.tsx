@@ -4,6 +4,7 @@ import { withUrqlClient } from 'next-urql';
 import React from 'react';
 import { LoginContainer } from '../appViews/auth/LoginContainer';
 import 'regenerator-runtime/runtime';
+
 const LoginPage: NextPage = () => {
   return <LoginContainer />;
 };
