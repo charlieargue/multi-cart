@@ -1,4 +1,4 @@
-import { Account, Cart, CartInput, CartLine, CartLineInput, User } from '@multi-cart/react-data-access';
+import { Account, Cart, CartInput, CartLine, CartLineInput, User, UsernamePasswordInput, UserResponse } from '@multi-cart/react-data-access';
 import { toCompareDateFn } from '@multi-cart/util';
 import { db } from '../data/setup';
 
@@ -58,7 +58,7 @@ export const deleteCart = (id: number): boolean => {
         console.log(`🚀 ~ error deleteCart`, error);
         return false;
     }
-}
+};
 
 export const deleteCartLine = (cartId: number, cartLineId: number): boolean => {
     try {
@@ -70,14 +70,14 @@ export const deleteCartLine = (cartId: number, cartLineId: number): boolean => {
         console.log(`🚀 ~ error deleteCartLine: `, error);
         return false;
     }
-}
+};
 
 export const updateCartLine = (cartLine: CartLineInput): CartLine => {
     const cartIdx: number = getCartIdx(cartLine.cartId);
     const cartLineIdx: number = getCartLineIdx(cartIdx, cartLine.id);
     db.push("/carts[" + cartIdx + "]/cartLines[" + cartLineIdx + "]", cartLine, false); // default will override, so MERGE instead
     return db.getData("/carts[" + cartIdx + "]/cartLines[" + cartLineIdx + "]");
-}
+};
 
 export const updateCart = (cart: CartInput): Cart => {
     // NOTE: all these have no 🛡 security, and hard-coded userId, TODO:
@@ -85,7 +85,7 @@ export const updateCart = (cart: CartInput): Cart => {
     db.push("/carts[" + cartIdx + "]", cart, false); // default will override, so MERGE instead
     return db.getData("/carts[" + cartIdx + "]");
     // NOTE: this auto-updates in the normalized graphcache! 
-}
+};
 
 // ------------------------ 
 // ACCOUNTS
@@ -94,17 +94,66 @@ export const getAccounts = (): Account[] => {
     return db
         .getData("/accounts")
         .sort((a, b) => a.accountName.localeCompare(b.accountName));
-}
+};
 
 // ------------------------ 
 // AUTHENTICATION
 // ------------------------ 
 export const loginUser = (password: string, usernameOrEmail: string) => {
     return db
-            .getData("/users")
-            .filter((user) => usernameOrEmail.includes("@") ? user.email === usernameOrEmail : user.username === usernameOrEmail)[0];
-}
+        .getData("/users")
+        .filter((user) => usernameOrEmail.includes("@") ? user.email === usernameOrEmail : user.username === usernameOrEmail)[0];
+};
 
+export const registerUser = (options: UsernamePasswordInput) => {
+
+    return {
+        errors: [{
+            field: "username",
+            message: "registration is not allowed in MOCKED API, sorry... work-in-progress"
+        }]
+    };
+
+    // LOGIN MOCK up above...
+    // ------------------------
+    // return 
+
+    // SKIPPING:
+    // • const hashedPassword = await argon2.hash(options.password); AND //  to the db.push() password: hashedPassword
+    // • dupe checks against email/username, etc...
+    // TODO: finish this once get session MOCKED!
+    // TODO: need to mockNewId and options.id = ...
+    // + createdAt dates? see blankCart
+    // db.push("/users[]", options, false);
+    // now fetch this new user from db.getUser()...
+
+
+    // SKIPPING:
+    //     if (err.code === "23505" || err.detail.includes("already exists")) {
+    //         return {
+    //             errors: [{
+    //                 field: "username",
+    //                 message: "username has already been taken"
+    //             }]
+    //         };
+    //     }
+    // }
+
+    // SKIPPING:
+    // // 🟢 You are logged in! (store user id in session, setting a cookie, keeping them logged in...)
+    // req.session.userId = user.id;
+
+    // return { user };
+    // // ✅ graphql will NOT return the .password field, FYI
+};
+
+export const forgotPassword = (): boolean => {
+    // TODO: if you abstracted the data calls AND session calls in the REAL RESOLVERS, you could re-use code and have the "controller" logic (make a token, set a redis key, etc..) not duplicated!
+    console.log("😩 forgot password workflow is not allowed in MOCKED API, sorry... work-in-progress");
+    return false;
+    // see REAL RESOLVER
+
+};
 // ------------------------ 
 // USERs
 // ------------------------ 

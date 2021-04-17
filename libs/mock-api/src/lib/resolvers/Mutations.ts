@@ -1,7 +1,7 @@
 import { Cart, CartInput, CartLine, CartLineInput, MutationResolvers, User, UsernamePasswordInput } from '@multi-cart/react-data-access';
 import * as faker from 'faker';
 import { mockNewId } from '../mockNewId';
-import { addCart, addCartLine, deleteCart, deleteCartLine, getCart, getCartIds, getCartLineIds, loginUser, updateCart, updateCartLine, updateCurrentCart } from '../services/mocked-data-service';
+import { addCart, addCartLine, deleteCart, deleteCartLine, forgotPassword, getCart, getCartIds, getCartLineIds, loginUser, registerUser, updateCart, updateCartLine, updateCurrentCart } from '../services/mocked-data-service';
 import { validateRegister } from '@multi-cart/util';
 
 // ------------------------
@@ -126,58 +126,33 @@ export const mutations: MutationResolvers = {
         if (errors) {
             return { errors };
         }
+        return registerUser(options);
+    },
 
-        // REAL RESOLVER
-        // ------------------------
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    forgotPassword(_: unknown, { email }: { email: string }) {
+        return forgotPassword(/*email*/);
+    },
 
-        // const hashedPassword = await argon2.hash(options.password);
-
-        // const user = registerUser(options);
-        // let user;
-        // try {
-        //     const result = await getConnection()
-        //         .createQueryBuilder()
-        //         .insert()
-        //         .into(User)
-        //         .values({
-        //             username: options.username,
-        //             email: options.email,
-        //             password: hashedPassword
-        //         })
-        //         .returning("*")
-        //         .execute();
-
-        //     user = result.raw[0];
-
-        // } catch (err) {
-        //     console.log("🚀 ~ err", err);
-        //     if (err.code === "23505" || err.detail.includes("already exists")) {
-        //         return {
-        //             errors: [{
-        //                 field: "username",
-        //                 message: "username has already been taken"
-        //             }]
-        //         };
-        //     }
-        // }
-
-        // // 🟢 You are logged in! (store user id in session, setting a cookie, keeping them logged in...)
-        // req.session.userId = user.id;
-
-        // return { user };
-        // // ✅ graphql will NOT return the .password field, FYI
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    changePassword(_: unknown, { token, newPassword }: { token: string, newPassword: string, }) {
+        return {
+            errors: [{
+                field: "password",
+                message: "change password workflow is not allowed in MOCKED API, sorry... work-in-progress"
+            }]
+        };
     },
 
 
+    logout() {
+        // TODO: mocked session, see real resolver
+        return true;
+    },
 
 
     // TODO:
     // -----------------------    ----------------------------------------------
-    // register?: Resolver<ResolversTypes['UserResponse'], ParentType, ContextType, RequireFields<MutationRegisterArgs, 'options'>>;
-    // forgotPassword?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationForgotPasswordArgs, 'email'>>;
-    // changePassword?: Resolver<ResolversTypes['UserResponse'], ParentType, ContextType, RequireFields<MutationChangePasswordArgs, 'newPassword' | 'token'>>;
-    // logout?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
-    // updateUser?: Resolver<ResolversTypes['UserResponse'], ParentType, ContextType, RequireFields<MutationUpdateUserArgs, 'currentCartId'>>;
     // addCartLineAccount?: Resolver<ResolversTypes['CartLineAccount'], ParentType, ContextType, RequireFields<MutationAddCartLineAccountArgs, 'amount' | 'accountNumber' | 'cartLineId' | 'cartId'>>;
     // updateCartLineAccount?: Resolver<ResolversTypes['CartLineAccount'], ParentType, ContextType, RequireFields<MutationUpdateCartLineAccountArgs, 'amount' | 'id'>>;
     // deleteCartLineAccount?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationDeleteCartLineAccountArgs, 'cartLineAccountId'>>;

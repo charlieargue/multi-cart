@@ -1,5 +1,4 @@
 export * from './lib/types/InputTypes';
-export * from './lib/types/UsernamePasswordInput';
 export * from './lib/types/OutputTypes';
 export * from './lib/entities/Account';
 export * from './lib/entities/Cart';
