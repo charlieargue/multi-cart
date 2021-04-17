@@ -1,7 +1,7 @@
 import { Cart, CartInput, CartLine, CartLineAccount, CartLineInput, MutationResolvers, User, UsernamePasswordInput } from '@multi-cart/react-data-access';
 import * as faker from 'faker';
 import { mockNewId } from '../mockNewId';
-import { addCart, addCartLine, addCartLineAccount, deleteCart, deleteCartLine, forgotPassword, getCart, getCartIds, getCartLineAccountIds, getCartLineIds, loginUser, registerUser, updateCart, updateCartLine, updateCurrentCart } from '../services/mocked-data-service';
+import { addCart, addCartLine, addCartLineAccount, deleteCart, deleteCartLine, forgotPassword, getCart, getCartIds, getCartLineAccountIds, getCartLineIds, loginUser, registerUser, updateCart, updateCartLine, updateCartLineAccount, updateCurrentCart } from '../services/mocked-data-service';
 import { validateRegister } from '@multi-cart/util';
 
 // ------------------------
@@ -39,6 +39,7 @@ export const mutations: MutationResolvers = {
                 categoryId: 1,
                 uom: "EACH",
                 quantity: 1,
+                cartLineAccounts: [],
                 price: 0,
                 createdAt: new Date().toLocaleString(),
                 updatedAt: new Date().toLocaleString(),
@@ -83,6 +84,10 @@ export const mutations: MutationResolvers = {
             updatedAt: new Date().toLocaleString(),
         } as CartLineAccount;
         return addCartLineAccount(cartId, fresh);
+    },
+
+    updateCartLineAccount(_: unknown, { amount, id }: { amount: number, id: number }) {
+        return updateCartLineAccount(amount, id);
     },
 
 
@@ -166,7 +171,7 @@ export const mutations: MutationResolvers = {
 
     // TODO:
     // -----------------------    ----------------------------------------------
-    // updateCartLineAccount?: Resolver<ResolversTypes['CartLineAccount'], ParentType, ContextType, RequireFields<MutationUpdateCartLineAccountArgs, 'amount' | 'id'>>;
+    // ?: Resolver<ResolversTypes['CartLineAccount'], ParentType, ContextType, RequireFields<MutationUpdateCartLineAccountArgs, 'amount' | 'id'>>;
     // deleteCartLineAccount?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationDeleteCartLineAccountArgs, 'cartLineAccountId'>>;
 
 };

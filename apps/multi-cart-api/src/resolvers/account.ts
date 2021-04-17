@@ -57,7 +57,7 @@ export class AccountResolver {
     @Mutation(() => CartLineAccount)
     @UseMiddleware(isAuth) // 🛡
     async updateCartLineAccount(
-        // @Arg('cartId', () => Int) _: number, // NOTE: this is needed during graph cache update
+        // NOTE: graph cache DIDN'T need cartId for this update
         @Arg('id', () => Int) id: number,
         @Arg('amount', () => Float) amount: number,
         @Ctx() { req }: MyContext

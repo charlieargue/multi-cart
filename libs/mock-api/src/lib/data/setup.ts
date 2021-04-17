@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { carts } from '../data/mocked-carts';
 import { users } from '../data/mocked-users';
 import { accounts } from '../data/mocked-accounts';
@@ -11,11 +12,11 @@ const db = new JsonDB(new Config("./libs/mock-api/mock-database", true, false, '
 const hydrateData = () => {
 
     // only hydrate if database is empty, otherwise leave it alone
-    const numberOfCarts = db.count("/carts");
-    const numberOfUsers = db.count("/users");
-    const numberOfAccounts = db.count("/accounts");
-
-    if ([numberOfAccounts, numberOfCarts, numberOfUsers].every(n => n === 0)) {
+    try {
+        const numberOfCarts = db.count("/carts");
+        const numberOfUsers = db.count("/users");
+        const numberOfAccounts = db.count("/accounts");
+    } catch (err) {
         console.log(`🚀 ~ HYDRATING MOCK DATA 🔴 💎 🔴 💎 🔴 💎 🔴 💎 🔴 💎 `);
 
         // push up mocked data into our mock json database
@@ -45,7 +46,7 @@ const hydrateData = () => {
             }
         });
 
-    } 
+    }
 
 };
 

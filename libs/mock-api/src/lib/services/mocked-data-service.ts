@@ -42,6 +42,11 @@ export const getCartLineIdx = (cartIdx: number, cartLineId: number): number => {
     return db.getIndex("/carts[" + cartIdx + "]/cartLines", cartLineId);
 };
 
+// ATTN: two are idx and one's an id
+export const getCartLineAccountIdx = (cartIdx: number, cartLineIdx: number, cartLineAccountId: number): number => {
+    return db.getIndex("/carts[" + cartIdx + "]/cartLines[" + cartLineIdx + "]/cartLineAccounts", cartLineAccountId);
+};
+
 export const getCart = (id: number): Cart => {
     const idx: number = getCartIdx(id);
     return db
@@ -139,12 +144,57 @@ export const addCartLineAccount = (cartId: number, fresh: CartLineAccount): Cart
         //     console.log("🔴 ~ err", err)
         //     // TODO: this needs to return a RegularResponse with errors in it, like RegularUserResponse
     }
-    return new Error('🔴 could not create CART LINE ACCOUNT');
-
-
+    // return new Error('🔴 could not create CART LINE ACCOUNT');
 };
 
 
+export const updateCartLineAccount = (amount: number, id: number): CartLineAccount => {
+    try {
+        // SKIPPING
+        //     // make sure this cartLine EXISTS AND belongs to currently-logged-in user
+        //     // make sure the account number exists AND has remaining funds!
+        //     // insert new record into CLA
+        //     // NOTE: if I had added the  
+
+        // hmmm, given just a cla id, we have no normalized data (why didn't we create a /lineaccounts again? ... because then we'd have to fake all the JOINS in the mocked responses!)
+        // TODO: go thru each cart, and it's cart lines, searching for THIS cart line account ID! fun!
+        // nested for() loops and BREAK OUT WHEN FOUND!
+        let foundCartLineAccount: CartLineAccount;
+        let foundCartLine: CartLine;
+        let foundCart: Cart;
+        const carts: Cart[] = getCarts();
+        console.log(`🚀 ~ carts`, carts);
+        for (let c = 0; c < carts.length; c++) {
+            for (let cl = 0; cl < carts[c].cartLines.length; cl++) {
+
+                const foundCLA: CartLineAccount = carts[c].cartLines[cl].cartLineAccounts.find(cla => cla.id === id);
+                console.log(`🚀 ~ foundCLA`, foundCLA);
+                if (foundCLA) {
+                    foundCartLineAccount = foundCLA;
+                    foundCartLine = carts[c].cartLines[cl];
+                    foundCart = carts[c];
+                    break;
+                }
+            }
+        }
+        // NOTE: can assume will CLA exists
+        if (!foundCartLineAccount) {
+            throw new Error("🔴 ERROR: did not find mock data cart line account");
+        }
+
+        const cartIdx: number = getCartIdx(foundCart.id);
+        const cartLineIdx: number = getCartLineIdx(cartIdx, foundCartLine.id);
+        const cartLineAccountIdx: number = getCartLineAccountIdx(cartIdx, cartLineIdx, foundCartLineAccount.id);
+        db.push("/carts[" + cartIdx + "]/cartLines[" + cartLineIdx + "]/cartLineAccounts", {
+            amount,
+            id
+        }, false); // default will override, so MERGE instead
+        return db.getData("/carts[" + cartIdx + "]/cartLines[" + cartLineIdx + "]/cartLineAccounts[" + cartLineAccountIdx + "]");
+    } catch (err) {
+        console.log("🔴 ~ updateCartLineAccount err: ", err)
+        // TODO: this needs to return a RegularResponse with errors in it, like RegularUserResponse
+    }
+}
 
 // ------------------------ 
 // AUTHENTICATION
