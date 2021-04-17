@@ -1,16 +1,14 @@
-import { computeAmountGivenPercentage, getRemainingPercentage, toFriendlyCurrency } from '@multi-cart/util';
+import { Badge, Box, HStack, InputGroup, InputLeftAddon, InputRightAddon, Tooltip } from '@chakra-ui/react';
 import { CartLine, CartLineAccount, useAccountsQuery, useDeleteCartLineAccountMutation, useUpdateCartLineAccountMutation } from '@multi-cart/react-data-access';
 import { AutoSave } from '@multi-cart/react-shared-components';
 import { InputField } from '@multi-cart/react-ui';
+import { computeAmountGivenPercentage, getRemainingPercentage, toFriendlyCurrency } from '@multi-cart/util';
 import { Form, Formik } from "formik";
 import React, { useEffect, useRef } from 'react';
-import styles from './LineAccount.module.scss';
-import * as Yup from 'yup';
-import clsx from 'clsx';
-import { Badge, Box, HStack, InputGroup, InputLeftAddon, InputRightAddon, Tooltip } from '@chakra-ui/react';
-import { TiDelete as DeleteIcon } from 'react-icons/ti';
 import { FaPercentage as PercentageIcon } from 'react-icons/fa';
+import { TiDelete as DeleteIcon } from 'react-icons/ti';
 import 'regenerator-runtime/runtime';
+import * as Yup from 'yup';
 
 /* eslint-disable-next-line */
 export interface LineAccountProps {
@@ -54,7 +52,7 @@ export const LineAccount = ({ lineAccount, line }: LineAccountProps) => {
       });
     }
     saveCLA();
-  }, [line.price, line.quantity, updateCartLineAccount, lineAccount.id]);
+  }, [line.id, line.cartId, line.price, line.quantity, updateCartLineAccount, lineAccount.id]);
 
 
   return (
@@ -76,7 +74,9 @@ export const LineAccount = ({ lineAccount, line }: LineAccountProps) => {
         percentage.current = values.percentage;
         await updateCartLineAccount({
           id: lineAccount.id,
-          amount: newAmount
+          amount: newAmount,
+          cartId: line.cartId,
+          cartLineId: line.id,
         });
 
       }}>

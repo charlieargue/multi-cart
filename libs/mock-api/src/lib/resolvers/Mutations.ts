@@ -87,7 +87,7 @@ export const mutations: MutationResolvers = {
     },
 
     updateCartLineAccount(_: unknown, { cartId, cartLineId, amount, id }: { cartId: number, cartLineId: number, amount: number, id: number }) {
-        return updateCartLineAccount(amount, id);
+        return updateCartLineAccount(cartId, cartLineId, amount, id);
     },
 
 
@@ -171,7 +171,6 @@ export const mutations: MutationResolvers = {
 
     // TODO:
     // -----------------------    ----------------------------------------------
-    // ?: Resolver<ResolversTypes['CartLineAccount'], ParentType, ContextType, RequireFields<MutationUpdateCartLineAccountArgs, 'amount' | 'id'>>;
     // deleteCartLineAccount?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationDeleteCartLineAccountArgs, 'cartLineAccountId'>>;
 
 };
