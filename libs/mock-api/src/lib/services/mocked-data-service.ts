@@ -1,4 +1,4 @@
-import { Cart, CartLine, User, Account } from '@multi-cart/react-data-access';
+import { Cart, CartLine, User, Account, CartLineInput, CartInput } from '@multi-cart/react-data-access';
 import { db } from '../data/setup';
 import { toCompareDateFn } from '@multi-cart/util';
 
@@ -72,6 +72,21 @@ export const deleteCartLine = (cartId: number, cartLineId: number): boolean => {
     }
 }
 
+export const updateCartLine = (cartLine: CartLineInput): CartLine => {
+    const cartIdx: number = getCartIdx(cartLine.cartId);
+    const cartLineIdx: number = getCartLineIdx(cartIdx, cartLine.id);
+    db.push("/carts[" + cartIdx + "]/cartLines[" + cartLineIdx + "]", cartLine, false); // default will override, so MERGE instead
+    return db.getData("/carts[" + cartIdx + "]/cartLines[" + cartLineIdx + "]");
+}
+
+export const updateCart = (cart: CartInput): Cart => {
+    // NOTE: all these have no 🛡 security, and hard-coded userId, TODO:
+    const cartIdx: number = getCartIdx(cart.id);
+    db.push("/carts[" + cartIdx + "]", cart, false); // default will override, so MERGE instead
+    return db.getData("/carts[" + cartIdx + "]");
+    // NOTE: this auto-updates in the normalized graphcache! 
+}
+
 // ------------------------ 
 // ACCOUNTS
 // ------------------------ 
@@ -103,3 +118,4 @@ export const updateCurrentCart = (userId: number, cartId: number | undefined): U
     return db
         .getData("/users[" + idx + "]");
 }
+

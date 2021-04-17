@@ -1,8 +1,9 @@
-import { Cart, CartLine, MutationResolvers, User } from '@multi-cart/react-data-access';
+import { Cart, CartInput, CartLine, CartLineInput, MutationResolvers, User } from '@multi-cart/react-data-access';
 import * as faker from 'faker';
+import { carts } from '../data/mocked-carts';
 import { db } from '../data/setup';
 import { mockNewId } from '../mockNewId';
-import { addCart, addCartLine, deleteCart, deleteCartLine, getCart, getCartIds, getCartLineIds, updateCurrentCart } from '../services/mocked-data-service';
+import { addCart, addCartLine, deleteCart, deleteCartLine, getCart, getCartIds, getCartLineIds, updateCart, updateCartLine, updateCurrentCart } from '../services/mocked-data-service';
 
 
 // ------------------------
@@ -65,21 +66,13 @@ export const mutations: MutationResolvers = {
         return deleteCartLine(cartId, cartLineId);
     },
 
-    // updateCartLine(_: unknown, { cartLine }: { cartLine: CartLineInput }) {
-    //     const cart = carts.find((c) => c.id === cartLine.cartId);
-    //     if (!cart) {
-    //         throw new Error("🔴 could not find cart");
-    //     } else {
-    //         const idx = cart.cartLines.findIndex((cl) => cl!.id === cartLine.id);
-    //         // get all the old props, update with new props, and re-set in the array!
-    //         cart.cartLines[idx] = {
-    //             ...cart.cartLines[idx],
-    //             ...(cartLine as CartLine)
-    //         };
-    //         // return cartLine;
-    //         return cart.cartLines[idx];
-    //     }
-    // },
+    updateCartLine(_: unknown, { cartLine }: { cartLine: CartLineInput }) {
+        return updateCartLine(cartLine);
+    },
+
+    updateCart(_: unknown, { cart }: { cart: CartInput }) {
+        return updateCart(cart);
+    },
 
 
     // ------------------------ 
@@ -134,9 +127,6 @@ export const mutations: MutationResolvers = {
 
     // TODO:
     // -----------------------    ----------------------------------------------
-    // deleteCartLine?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationDeleteCartLineArgs, 'cartLineId' | 'cartId'>>;
-    // updateCartLine?: Resolver<Maybe<ResolversTypes['CartLine']>, ParentType, ContextType, RequireFields<MutationUpdateCartLineArgs, 'cartLine'>>;
-    // updateCart?: Resolver<Maybe<ResolversTypes['Cart']>, ParentType, ContextType, RequireFields<MutationUpdateCartArgs, 'cart'>>;
     // register?: Resolver<ResolversTypes['UserResponse'], ParentType, ContextType, RequireFields<MutationRegisterArgs, 'options'>>;
     // forgotPassword?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationForgotPasswordArgs, 'email'>>;
     // changePassword?: Resolver<ResolversTypes['UserResponse'], ParentType, ContextType, RequireFields<MutationChangePasswordArgs, 'newPassword' | 'token'>>;
