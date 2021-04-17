@@ -86,7 +86,7 @@ export const mutations: MutationResolvers = {
         return addCartLineAccount(cartId, fresh);
     },
 
-    updateCartLineAccount(_: unknown, { amount, id }: { amount: number, id: number }) {
+    updateCartLineAccount(_: unknown, { cartId, cartLineId, amount, id }: { cartId: number, cartLineId: number, amount: number, id: number }) {
         return updateCartLineAccount(amount, id);
     },
 

@@ -1,9 +1,8 @@
-import { Cart, CartLine, User } from '@multi-cart/api-types';
+import { Cart, CartLine, User, CartInput, CartLineInput } from '@multi-cart/api-types';
 import { Arg, Ctx, Int, Mutation, Query, Resolver, UseMiddleware } from 'type-graphql';
 import { getConnection } from 'typeorm';
 import { isAuth } from '../middleware/isAuth';
 import { MyContext } from '../types';
-import { CartInput, CartLineInput } from './types/InputTypes';
 
 @Resolver(Cart)
 export class CartResolver {

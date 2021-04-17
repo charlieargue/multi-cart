@@ -1,6 +1,8 @@
+import { Account, Cart, CartLine, CartLineAccount, User } from '@multi-cart/api-types';
 import { ApolloServer } from 'apollo-server-express';
 import connectRedis from 'connect-redis';
 import cors from "cors";
+import * as dotenv from "dotenv";
 import express from "express";
 import session from 'express-session';
 import Redis from 'ioredis';
@@ -9,16 +11,10 @@ import "reflect-metadata";
 import { buildSchema } from 'type-graphql';
 import { createConnection } from 'typeorm';
 import { COOKIENAME, __prod__ } from './constants';
-import { Cart } from "./entities/Cart";
-import { CartLine } from './entities/CartLine';
-import { User } from './entities/User';
+import { AccountResolver } from './resolvers/account';
 import { CartResolver } from './resolvers/cart';
 import { UserResolver } from './resolvers/user';
 import { MyContext } from "./types";
-import * as dotenv from "dotenv";
-import { Account } from './entities/Account';
-import { CartLineAccount } from './entities/CartLineAccount';
-import { AccountResolver } from './resolvers/account';
 dotenv.config();
 
 

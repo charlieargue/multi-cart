@@ -47,6 +47,8 @@ export const LineAccount = ({ lineAccount, line }: LineAccountProps) => {
         lineAccountPercentage: percentage.current
       });
       await updateCartLineAccount({
+        cartId: line.cartId,
+        cartLineId: line.id,
         id: lineAccount.id,
         amount: newAmount
       });

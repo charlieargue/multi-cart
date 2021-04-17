@@ -78,7 +78,7 @@ export const graphqlSchema = `type Query {
       cartLineId: Int!
       cartId: Int!
     ): CartLineAccount!
-    updateCartLineAccount(amount: Float!, id: Int!): CartLineAccount!
+    updateCartLineAccount(cartId: Int!, cartLineId: Int!, amount: Float!, id: Int!): CartLineAccount!
     deleteCartLineAccount(cartLineAccountId: Int!): Boolean!
   }
   

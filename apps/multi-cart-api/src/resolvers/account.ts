@@ -58,7 +58,10 @@ export class AccountResolver {
     @UseMiddleware(isAuth) // 🛡
     async updateCartLineAccount(
         // NOTE: graph cache DIDN'T need cartId for this update
-        @Arg('id', () => Int) id: number,
+        // UPDATE NOTE: but to make mocking life easier, adding cart and cartLine Ids..
+        @Arg('cartId', () => Int) cartId: number, 
+        @Arg('cartLineId', () => Int) cartLineId: number,
+        @Arg('id', () => Int) id: number, // this is the cartLineAccount ID
         @Arg('amount', () => Float) amount: number,
         @Ctx() { req }: MyContext
     ): Promise<CartLineAccount | Error> {

@@ -109,6 +109,7 @@ export const getAccounts = (): Account[] => {
 
 
 export const addCartLineAccount = (cartId: number, fresh: CartLineAccount): CartLineAccount => {
+    console.log(`🍋 🍋 🍋 🍋  ~ fresh`, fresh);
     // TODO: hacky, hard-coded for userId 1
     // SKIPPING:
     //         where: {
@@ -128,15 +129,18 @@ export const addCartLineAccount = (cartId: number, fresh: CartLineAccount): Cart
                 throw new Error(`Insufficient Account Funds: FUND: ${foundAccount.accountNumber}, NAME: ${foundAccount.accountName}, REQUEST AMOUNT: $${fresh.amount}, REMAINING: $${foundAccount.amountRemaining}`);
             }
             const cartIdx: number = getCartIdx(cartId);
+            console.log(`🍋 ~ cartIdx`, cartIdx);
             const cartLineIdx: number = getCartLineIdx(cartIdx, fresh.cartLineId);
+            console.log(`🍋 ~ cartLineIdx`, cartLineIdx);
 
             // nested.nested array push
-            db.push(
-                "/carts[" + cartIdx + "]/cartLines[" + cartLineIdx + "]",
-                fresh,
-                true);
+            // db.push(
+            //     "/carts[" + cartIdx + "]/cartLines[" + cartLineIdx + "]/cartLineAccounts[]",
+            //     fresh,
+            //     true);
 
             // cheating here..., not actually pulling from "db"
+            console.log(`🚀 ~ fresh CartLineAccount`, fresh);
             return fresh;
 
         }
@@ -156,6 +160,9 @@ export const updateCartLineAccount = (amount: number, id: number): CartLineAccou
         //     // insert new record into CLA
         //     // NOTE: if I had added the  
 
+
+        // STOP: just change the "endpoint"/mutation to include cartId and cartLineId also! duh... sadly...
+
         // hmmm, given just a cla id, we have no normalized data (why didn't we create a /lineaccounts again? ... because then we'd have to fake all the JOINS in the mocked responses!)
         // TODO: go thru each cart, and it's cart lines, searching for THIS cart line account ID! fun!
         // nested for() loops and BREAK OUT WHEN FOUND!
@@ -163,7 +170,8 @@ export const updateCartLineAccount = (amount: number, id: number): CartLineAccou
         let foundCartLine: CartLine;
         let foundCart: Cart;
         const carts: Cart[] = getCarts();
-        console.log(`🚀 ~ carts`, carts);
+        console.log('🤖🤖🤖 (in updateCartLineAccount()) carts 🤖🤖🤖 ');
+        console.log(JSON.stringify(carts, null, '  '));
         for (let c = 0; c < carts.length; c++) {
             for (let cl = 0; cl < carts[c].cartLines.length; cl++) {
 
@@ -189,7 +197,11 @@ export const updateCartLineAccount = (amount: number, id: number): CartLineAccou
             amount,
             id
         }, false); // default will override, so MERGE instead
-        return db.getData("/carts[" + cartIdx + "]/cartLines[" + cartLineIdx + "]/cartLineAccounts[" + cartLineAccountIdx + "]");
+
+        const updatedCLA: CartLineAccount = db.getData("/carts[" + cartIdx + "]/cartLines[" + cartLineIdx + "]/cartLineAccounts[" + cartLineAccountIdx + "]");
+        console.log(`🚀 ~ updatedCLA`, updatedCLA);
+
+        return updatedCLA;
     } catch (err) {
         console.log("🔴 ~ updateCartLineAccount err: ", err)
         // TODO: this needs to return a RegularResponse with errors in it, like RegularUserResponse
