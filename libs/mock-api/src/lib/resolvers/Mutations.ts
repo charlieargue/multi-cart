@@ -1,23 +1,9 @@
-import { Cart, CartLine, MutationResolvers } from '@multi-cart/react-data-access';
+import { Cart, CartLine, MutationResolvers, User } from '@multi-cart/react-data-access';
 import * as faker from 'faker';
 import { db } from '../data/setup';
 import { mockNewId } from '../mockNewId';
+import { addCart, addCartLine, deleteCart, deleteCartLine, getCart, getCartIds, getCartLineIds, updateCurrentCart } from '../services/mocked-data-service';
 
-// utility methods
-const getCartIds = (): number[] => {
-    return db.getData("/carts").map(c => c.id);
-};
-
-const addCart = (cart: Cart): void => {
-    db.push("/carts[]", cart, true);
-}
-
-const addCartLine = (cartLine: CartLine): void => {
-    // get index of this cart
-    const cartIdx: number = db.getIndex("/carts", cartLine.cartId);
-    // nested array push
-    db.push("/carts[" + cartIdx + "]/cartLines[]", cartLine, true);
-}
 
 // ------------------------
 export const mutations: MutationResolvers = {
@@ -27,7 +13,6 @@ export const mutations: MutationResolvers = {
     // ------------------------ 
 
     blankCart() {
-        // NOTE: tried using the /carts[-1] method but the order gets messed up and then the IDs dupe...
         const fresh: Cart = {
             id: mockNewId(getCartIds()),
             name: faker.company.companyName(),
@@ -41,22 +26,20 @@ export const mutations: MutationResolvers = {
     },
 
     blankCartLine(_: unknown, { cartId }: { cartId: number }) {
-        const cart = db
-            .getData("/carts")
-            .filter((cart) => cart?.id === cartId)[0];
+        const cart = getCart(cartId);
         if (cart && cart.cartLines.length >= 0) {
             // new safe id 
-            const nextId = mockNewId(getCartIds());
+            const nextId = mockNewId(getCartLineIds(cartId));
             console.log("🚀 ~ nextId", nextId);
 
             // create a new cart line
             const fresh: CartLine = {
                 id: nextId,
                 cartId: cartId,
-                itemId: "🔵 ITEM #" + (faker as any).datatype.number(),
+                itemId: "🔵 ITEM #" + faker.random.number(),
                 description: "🔵 CL : " + new Date().toUTCString(),
-                categoryId: (faker as any).datatype.number(),
-                uom: (faker as any).datatype.word(),
+                categoryId: faker.random.number(),
+                uom: faker.random.word(),
                 quantity: 1,
                 price: parseFloat(faker.commerce.price()),
                 createdAt: new Date().toLocaleString(),
@@ -74,29 +57,13 @@ export const mutations: MutationResolvers = {
         return null;
     },
 
-    // deleteCart(_: unknown, { id }: { id: string }) {
-    //     const idx = carts.findIndex((c) => c.id === parseInt(id));
-    //     if (idx !== -1) {
-    //         carts.splice(idx, 1);
-    //         return true;
-    //     }
-    //     return false;
-    // },
+    deleteCart(_: unknown, { id }: { id: number }) {
+        return deleteCart(id);
+    },
 
-    // deleteCartLine(_: unknown, { cartId, cartLineId }: { cartId: string, cartLineId: string }) {
-    //     const findCartFn = (c: Cart): boolean => c.id === parseInt(cartId);
-    //     const idx = carts
-    //         .find(findCartFn)
-    //         ?.cartLines.findIndex((cl) => cl!.id === parseInt(cartLineId));
-    //     if (idx !== -1) {
-    //         carts
-    //             .find(findCartFn)
-    //             ?.cartLines
-    //             .splice(idx!, 1);
-    //         return true;
-    //     }
-    //     return false;
-    // },
+    deleteCartLine(_: unknown, { cartId, cartLineId }: { cartId: number, cartLineId: number }) {
+        return deleteCartLine(cartId, cartLineId);
+    },
 
     // updateCartLine(_: unknown, { cartLine }: { cartLine: CartLineInput }) {
     //     const cart = carts.find((c) => c.id === cartLine.cartId);
@@ -114,6 +81,19 @@ export const mutations: MutationResolvers = {
     //     }
     // },
 
+
+    // ------------------------ 
+    // USERs
+    // ------------------------ 
+
+    updateUser(_: unknown, { currentCartId }: { currentCartId: number }) {
+        // TODO: hacky: hard-coded 1 userId because not sure how to set session in this mocked context... yet...
+        const updatedUser: User = updateCurrentCart(1, currentCartId);
+        console.log(`🚀 ~ updatedUser`, updatedUser);
+        return {
+            user: updatedUser
+        };
+    },
 
     // ------------------------ 
     // AUTHENTICATION
@@ -154,8 +134,6 @@ export const mutations: MutationResolvers = {
 
     // TODO:
     // -----------------------    ----------------------------------------------
-    // blankCartLine?: Resolver<ResolversTypes['CartLine'], ParentType, ContextType, RequireFields<MutationBlankCartLineArgs, 'cartId'>>;
-    // deleteCart?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationDeleteCartArgs, 'id'>>;
     // deleteCartLine?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationDeleteCartLineArgs, 'cartLineId' | 'cartId'>>;
     // updateCartLine?: Resolver<Maybe<ResolversTypes['CartLine']>, ParentType, ContextType, RequireFields<MutationUpdateCartLineArgs, 'cartLine'>>;
     // updateCart?: Resolver<Maybe<ResolversTypes['Cart']>, ParentType, ContextType, RequireFields<MutationUpdateCartArgs, 'cart'>>;

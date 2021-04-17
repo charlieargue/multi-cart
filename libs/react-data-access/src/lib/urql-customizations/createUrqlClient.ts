@@ -48,7 +48,7 @@ export const createUrqlClient = (ssrExchange: any) => ({
         credentials: "include" as const
     },
     exchanges: [
-        // devtoolsExchange,
+        devtoolsExchange,
         dedupExchange,
         cache,
         // errorExchange,

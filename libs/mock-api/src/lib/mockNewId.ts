@@ -1,4 +1,5 @@
 export const mockNewId = (listIds: number[]): number => {
+    console.log(`🚀 ~ listIds`, listIds);
     if (listIds.length) {
         // get max
         const maxId = Math.max(...listIds);

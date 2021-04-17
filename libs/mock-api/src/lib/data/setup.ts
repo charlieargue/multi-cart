@@ -10,6 +10,11 @@ const db = new JsonDB(new Config("./libs/mock-api/mock-database", true, false, '
 // hydrate data
 const hydrateData = () => {
 
+    // delete db before each setup
+    db.delete("/carts");
+    db.delete("/users");
+    db.delete("/accounts");
+
     // push up mocked data into our mock json database
     carts.forEach((cart: Cart, index) => {
         if (index === 0) {

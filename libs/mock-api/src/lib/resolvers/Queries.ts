@@ -1,33 +1,24 @@
 import { QueryResolvers } from '@multi-cart/react-data-access';
-import { toCompareDateFn } from '@multi-cart/util';
-import { db } from '../data/setup';
+import { getAccounts, getCart, getCarts, getUser } from '../services/mocked-data-service';
 
 
 export const queries: QueryResolvers = {
 
     carts() {
-        return db
-            .getData("/carts")
-            .sort((a, b) => toCompareDateFn(a, b));
+        return getCarts();
     },
 
     cart(_: unknown, { id }: { id: number }) {
-        return db
-            .getData("/carts")
-            .filter((cart) => cart?.id === id)[0];
+        return getCart(id);
     },
 
     me() {
-        // TODO: TBD how to session with mocked api?
-        return db
-            .getData("/users")
-            .filter((user) => user?.id === 1)[0]; // TODO:
+        // TODO: TBD how to session with mocked api? hacky: hardcoded 1 for userId
+        return getUser(1);
     },
 
     accounts() {
-        return db
-            .getData("/accounts")
-            .sort((a, b) => a.accountName.localeCompare(b.accountName));
+        return getAccounts();
     },
 
 };

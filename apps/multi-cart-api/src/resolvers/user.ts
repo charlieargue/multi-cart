@@ -24,7 +24,6 @@ export class UserResolver {
         return "";
     }
 
-
     @Query(() => User, { nullable: true })
     me(
         @Ctx() { req }: MyContext
@@ -228,6 +227,7 @@ export class UserResolver {
     }
 
 
+    // TODO: make an input type!
     // TODO: do we not want a more generic UpdateUser at this point? yes, because this will be for all non-secure user.fields
     //       and we want to pass in a UserInput object!
     @Mutation(() => UserResponse)

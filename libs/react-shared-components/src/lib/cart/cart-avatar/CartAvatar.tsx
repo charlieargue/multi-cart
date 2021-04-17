@@ -1,4 +1,4 @@
-import { Box, Button, Flex, HStack, Menu, MenuButton, MenuDivider, MenuItem, MenuList, Text, useColorModeValue as mode } from '@chakra-ui/react';
+import { Badge, Box, Button, Flex, HStack, Menu, MenuButton, MenuDivider, MenuItem, MenuList, Text, useColorModeValue as mode } from '@chakra-ui/react';
 import { Cart, useCartsQuery } from '@multi-cart/react-data-access';
 import { CartAvatarInner, NewCartButton } from '@multi-cart/react-shared-components';
 import { toDaysAgo } from '@multi-cart/util';
@@ -83,6 +83,8 @@ export const CartAvatar = ({ currentCartId = -1 }: CartAvatarProps) => {
                   minW="100%"
                   justify="space-between"
                 >
+                  {/* DEBUGGING */}
+                  <Badge>{c.id}</Badge>
                   <Box>
                     <strong>{c.name}</strong>
                     <br />
