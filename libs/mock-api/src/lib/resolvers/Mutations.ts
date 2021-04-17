@@ -29,7 +29,6 @@ export const mutations: MutationResolvers = {
         if (cart && cart.cartLines.length >= 0) {
             // new safe id 
             const nextId = mockNewId(getCartLineIds(cartId));
-            console.log("🚀 ~ nextId", nextId);
 
             // create a new cart line
             const fresh: CartLine = {
@@ -44,7 +43,6 @@ export const mutations: MutationResolvers = {
                 createdAt: new Date().toLocaleString(),
                 updatedAt: new Date().toLocaleString(),
             };
-            console.log("🚀 ~ fresh", fresh);
 
             // insert into mocked data
             addCartLine(fresh);
@@ -80,7 +78,6 @@ export const mutations: MutationResolvers = {
     updateUser(_: unknown, { currentCartId }: { currentCartId: number }) {
         // TODO: hacky: hard-coded 1 userId because not sure how to set session in this mocked context... yet...
         const updatedUser: User = updateCurrentCart(1, currentCartId);
-        console.log(`🚀 ~ updatedUser`, updatedUser);
         return {
             user: updatedUser
         };

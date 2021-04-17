@@ -64,7 +64,6 @@ export class AccountResolver {
         @Arg('amount', () => Float) amount: number,
         @Ctx() { req }: MyContext
     ): Promise<CartLineAccount | Error> {
-        console.log("🚀 ~ amount", amount);
         try {
             // make sure this cartLine EXISTS AND belongs to currently-logged-in user
             // make sure the account number exists AND has remaining funds!

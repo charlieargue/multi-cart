@@ -7,8 +7,6 @@ import { cache } from './cache';
 // TODO: figure out why terminal worked but in browser didn't... TBD
 // const NX_API_URL = process.env.NX_API_URL ? process.env.NX_API_URL : 'http://localhost:4000/graphql';       //  NODE backend
 const NX_API_URL = process.env.NX_API_URL ? process.env.NX_API_URL : 'http://localhost:4200/api/graphql'; // MOCKED API
-console.log(`🚀 ~ process.env.NX_API_URL`, process.env.NX_API_URL);
-console.log(`🚀 ~ NX_API_URL`, NX_API_URL);
 
 // TODO: things got wonky here, bring this back once stable again...
 // TODO: ditto for devtools

@@ -45,9 +45,7 @@ const hydrateData = () => {
             }
         });
 
-    } else {
-        console.log(`🚀 ~ vee proceed ✅ 😀 ✅ 😀 ✅ 😀 ✅ 😀 ✅ 😀  `);
-    }
+    } 
 
 };
 
