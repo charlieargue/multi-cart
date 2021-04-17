@@ -44,9 +44,6 @@ export const getCartLineIdx = (cartIdx: number, cartLineId: number): number => {
 
 // ATTN: two are idx and one's an id
 export const getCartLineAccountIdx = (cartIdx: number, cartLineIdx: number, cartLineAccountId: number): number => {
-    console.log(`🚀 ~ cartLineAccountId`, cartLineAccountId);
-    console.log(`🚀 ~ cartLineIdx`, cartLineIdx);
-    console.log(`🚀 ~ cartIdx`, cartIdx);
     return db.getIndex("/carts[" + cartIdx + "]/cartLines[" + cartLineIdx + "]/cartLineAccounts", cartLineAccountId);
 };
 
@@ -112,7 +109,6 @@ export const getAccounts = (): Account[] => {
 
 
 export const addCartLineAccount = (cartId: number, fresh: CartLineAccount): CartLineAccount => {
-    console.log(`🍋 🍋 🍋 🍋  ~ fresh`, fresh);
     // TODO: hacky, hard-coded for userId 1
     // SKIPPING:
     //         where: {
@@ -132,9 +128,7 @@ export const addCartLineAccount = (cartId: number, fresh: CartLineAccount): Cart
                 throw new Error(`Insufficient Account Funds: FUND: ${foundAccount.accountNumber}, NAME: ${foundAccount.accountName}, REQUEST AMOUNT: $${fresh.amount}, REMAINING: $${foundAccount.amountRemaining}`);
             }
             const cartIdx: number = getCartIdx(cartId);
-            console.log(`🍋 ~ cartIdx`, cartIdx);
             const cartLineIdx: number = getCartLineIdx(cartIdx, fresh.cartLineId);
-            console.log(`🍋 ~ cartLineIdx`, cartLineIdx);
 
             // nested.nested array push
             db.push(
@@ -143,7 +137,6 @@ export const addCartLineAccount = (cartId: number, fresh: CartLineAccount): Cart
                 true);
 
             // cheating here..., not actually pulling from "db"
-            console.log(`🚀 ~ fresh CartLineAccount`, fresh);
             return fresh;
 
         }
@@ -169,9 +162,6 @@ export const updateCartLineAccount = (cartId: number, cartLineId: number, amount
         const cartIdx: number = getCartIdx(cartId);
         const cartLineIdx: number = getCartLineIdx(cartIdx, cartLineId);
         const cartLineAccountIdx: number = getCartLineAccountIdx(cartIdx, cartLineIdx, id);
-        console.log(`🚀 ~ cartIdx`, cartIdx);
-        console.log(`🚀 ~ cartLineIdx`, cartLineIdx);
-        console.log(`🚀 ~ cartLineAccountIdx`, cartLineAccountIdx);
         if (cartLineAccountIdx !== -1) {
             db.push("/carts[" + cartIdx + "]/cartLines[" + cartLineIdx + "]/cartLineAccounts[" + cartLineAccountIdx + "]", {
                 amount,
@@ -179,8 +169,6 @@ export const updateCartLineAccount = (cartId: number, cartLineId: number, amount
             }, false); // default will override, so MERGE instead
 
             const updatedCLA: CartLineAccount = db.getData("/carts[" + cartIdx + "]/cartLines[" + cartLineIdx + "]/cartLineAccounts[" + cartLineAccountIdx + "]");
-            console.log(`🚀 ~ updatedCLA`, updatedCLA);
-
             return updatedCLA;
         }
     } catch (err) {
