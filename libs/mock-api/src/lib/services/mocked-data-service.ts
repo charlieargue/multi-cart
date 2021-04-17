@@ -1,4 +1,4 @@
-import { Account, Cart, CartInput, CartLine, CartLineInput, User, UsernamePasswordInput, UserResponse } from '@multi-cart/react-data-access';
+import { Account, Cart, CartInput, CartLine, CartLineAccount, CartLineInput, User, UsernamePasswordInput, UserResponse } from '@multi-cart/react-data-access';
 import { toCompareDateFn } from '@multi-cart/util';
 import { db } from '../data/setup';
 
@@ -13,6 +13,12 @@ export const getCartIds = (): number[] => {
 export const getCartLineIds = (cartId: number): number[] => {
     const cart: Cart = getCart(cartId);
     return cart.cartLines.map(c => c.id);
+};
+
+export const getCartLineAccountIds = (cartId: number, cartLineId: number): number[] => {
+    const cart: Cart = getCart(cartId);
+    const foundCartLine: CartLine = cart.cartLines.find(cl => cl.id === cartLineId);
+    return (foundCartLine.cartLineAccounts || []).map(cla => cla.id);
 };
 
 export const addCart = (cart: Cart): void => {
@@ -95,6 +101,50 @@ export const getAccounts = (): Account[] => {
         .getData("/accounts")
         .sort((a, b) => a.accountName.localeCompare(b.accountName));
 };
+
+
+export const addCartLineAccount = (cartId: number, fresh: CartLineAccount): CartLineAccount => {
+    // TODO: hacky, hard-coded for userId 1
+    // SKIPPING:
+    //         where: {
+    //             userId: req.session.userId,
+    //         }
+
+    try {
+        // SKIPPING: make sure this cartLine EXISTS AND belongs to currently-logged-in user
+        // make sure the account number exists AND has remaining funds!
+        // insert new record into CLA
+        const foundAccount = getAccounts().find(a => a.accountNumber === fresh.accountNumber);
+        const foundCart = getCart(cartId);
+        const foundCartLine = foundCart.cartLines.find(cl => cl.id === fresh.cartLineId);
+        if (foundCart && foundCartLine && foundAccount) {
+            const hasSufficientFunds: boolean = (foundAccount.amountRemaining - fresh.amount > 0);
+            if (!hasSufficientFunds) {
+                throw new Error(`Insufficient Account Funds: FUND: ${foundAccount.accountNumber}, NAME: ${foundAccount.accountName}, REQUEST AMOUNT: $${fresh.amount}, REMAINING: $${foundAccount.amountRemaining}`);
+            }
+            const cartIdx: number = getCartIdx(cartId);
+            const cartLineIdx: number = getCartLineIdx(cartIdx, fresh.cartLineId);
+
+            // nested.nested array push
+            db.push(
+                "/carts[" + cartIdx + "]/cartLines[" + cartLineIdx + "]",
+                fresh,
+                true);
+
+            // cheating here..., not actually pulling from "db"
+            return fresh;
+
+        }
+    } catch (err) {
+        //     console.log("🔴 ~ err", err)
+        //     // TODO: this needs to return a RegularResponse with errors in it, like RegularUserResponse
+    }
+    return new Error('🔴 could not create CART LINE ACCOUNT');
+
+
+};
+
+
 
 // ------------------------ 
 // AUTHENTICATION

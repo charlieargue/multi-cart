@@ -1,7 +1,7 @@
-import { Cart, CartInput, CartLine, CartLineInput, MutationResolvers, User, UsernamePasswordInput } from '@multi-cart/react-data-access';
+import { Cart, CartInput, CartLine, CartLineAccount, CartLineInput, MutationResolvers, User, UsernamePasswordInput } from '@multi-cart/react-data-access';
 import * as faker from 'faker';
 import { mockNewId } from '../mockNewId';
-import { addCart, addCartLine, deleteCart, deleteCartLine, forgotPassword, getCart, getCartIds, getCartLineIds, loginUser, registerUser, updateCart, updateCartLine, updateCurrentCart } from '../services/mocked-data-service';
+import { addCart, addCartLine, addCartLineAccount, deleteCart, deleteCartLine, forgotPassword, getCart, getCartIds, getCartLineAccountIds, getCartLineIds, loginUser, registerUser, updateCart, updateCartLine, updateCurrentCart } from '../services/mocked-data-service';
 import { validateRegister } from '@multi-cart/util';
 
 // ------------------------
@@ -34,12 +34,12 @@ export const mutations: MutationResolvers = {
             const fresh: CartLine = {
                 id: nextId,
                 cartId: cartId,
-                itemId: "🔵 ITEM #" + faker.random.number(),
-                description: "🔵 CL : " + new Date().toUTCString(),
-                categoryId: faker.random.number(),
-                uom: faker.random.word(),
+                itemId: "",
+                description: "",
+                categoryId: 1,
+                uom: "EACH",
                 quantity: 1,
-                price: parseFloat(faker.commerce.price()),
+                price: 0,
                 createdAt: new Date().toLocaleString(),
                 updatedAt: new Date().toLocaleString(),
             };
@@ -69,6 +69,22 @@ export const mutations: MutationResolvers = {
     updateCart(_: unknown, { cart }: { cart: CartInput }) {
         return updateCart(cart);
     },
+
+    // ------------------------ 
+    // LINE ACCOUNTS (for carts)
+    // ------------------------ 
+    addCartLineAccount(_: unknown, { cartId, cartLineId, accountNumber, amount }: { cartId: number, cartLineId: number, accountNumber: string, amount: number }) {
+        const fresh: CartLineAccount = {
+            id: mockNewId(getCartLineAccountIds(cartId, cartLineId)),
+            amount,
+            accountNumber,
+            cartLineId,
+            createdAt: new Date().toLocaleString(),
+            updatedAt: new Date().toLocaleString(),
+        } as CartLineAccount;
+        return addCartLineAccount(cartId, fresh);
+    },
+
 
 
     // ------------------------ 
@@ -150,7 +166,6 @@ export const mutations: MutationResolvers = {
 
     // TODO:
     // -----------------------    ----------------------------------------------
-    // addCartLineAccount?: Resolver<ResolversTypes['CartLineAccount'], ParentType, ContextType, RequireFields<MutationAddCartLineAccountArgs, 'amount' | 'accountNumber' | 'cartLineId' | 'cartId'>>;
     // updateCartLineAccount?: Resolver<ResolversTypes['CartLineAccount'], ParentType, ContextType, RequireFields<MutationUpdateCartLineAccountArgs, 'amount' | 'id'>>;
     // deleteCartLineAccount?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationDeleteCartLineAccountArgs, 'cartLineAccountId'>>;
 

@@ -1,9 +1,6 @@
 import { Arg, Ctx, Float, Int, Mutation, Query, Resolver, UseMiddleware } from 'type-graphql';
 import { getConnection } from 'typeorm';
-import { Account } from '../entities/Account';
-import { Cart } from '../entities/Cart';
-import { CartLine } from '../entities/CartLine';
-import { CartLineAccount } from '../entities/CartLineAccount';
+import { Account, Cart, CartLine, CartLineAccount } from '@multi-cart/api-types';
 import { isAuth } from '../middleware/isAuth';
 import { MyContext } from '../types';
 
@@ -22,6 +19,7 @@ export class AccountResolver {
         return qb.getMany();
     }
 
+    // TODO: make this an input type
     @Mutation(() => CartLineAccount)
     @UseMiddleware(isAuth) // 🛡
     async addCartLineAccount(
