@@ -1,9 +1,6 @@
-import { Text, Box, SimpleGrid, Stack, Stat, StatLabel, StatNumber, useColorModeValue as mode, Divider, Button, Flex, HStack, Heading, Switch, Tfoot, Table, Th, TableCaption, Thead, Tr, Tbody, Td, Badge, Avatar } from '@chakra-ui/react';
-import { AppLayout, CartAvatarInner } from '@multi-cart/react-shared-components';
-import { Breadcrumbs } from '@multi-cart/react-ui';
+import { Avatar, Badge, Box, Divider, Flex, Heading, HStack, SimpleGrid, Stack, Stat, StatLabel, StatNumber, Switch, Table, Tbody, Td, Text, Th, Thead, Tr, useColorModeValue as mode } from '@chakra-ui/react';
+import { AppLayout, Card } from '@multi-cart/react-shared-components';
 import React from 'react';
-import { FcDoughnutChart, FcMultipleDevices, FcPrivacy, FcTimeline } from 'react-icons/fc'
-import { HiPencilAlt } from 'react-icons/hi';
 
 
 interface StatCardProps {
@@ -12,7 +9,7 @@ interface StatCardProps {
 export const StatCard = (props: StatCardProps) => {
     const { label, value } = props.data
     return (
-        <Stat px={{ base: 4, sm: 6 }} py="5" bg={mode('white', 'gray.700')} shadow="base" rounded="lg">
+        <Stat maxH="100px" mt="5" px={{ base: 4, sm: 6 }} py="5" bg={mode('white', 'gray.700')} shadow="base" rounded="lg">
             <StatLabel fontWeight="medium" isTruncated color={mode('gray.500', 'gray.400')}>
                 {label}
             </StatLabel>
@@ -162,7 +159,7 @@ export const DashboardContainer = () => {
                 </Box>
 
                 {/* Settings Toggles */}
-                <Box mr="auto" p={{ md: '8' }} minW="50%">
+                <Box mr="auto" minW="50%">
                     <Box
                         rounded={{ md: 'lg' }}
                         bg={mode('white', 'gray.700')}
@@ -192,7 +189,7 @@ export const DashboardContainer = () => {
                             </Stack>
                             <Switch colorScheme="pink" size="lg" />
                         </Flex>
-                        
+
                         {/* Settings */}
                         <Divider py={2} mb={2} />
                         <Flex justifyContent="space-between" align="flex-end">
@@ -246,10 +243,11 @@ export const DashboardContainer = () => {
             {/* Stats */}
             <Box as="section" bg={mode('gray.50', 'gray.800')} p="10">
                 <Box mr="auto" >
-                    <SimpleGrid columns={{ base: 1, md: 3 }} spacing="6">
+                    <SimpleGrid columns={{ base: 1, md: 4 }} spacing="6">
                         {data.map((stat, idx) => (
                             <StatCard key={idx} data={stat} />
                         ))}
+                        <Card />
                     </SimpleGrid>
                 </Box>
             </Box>
