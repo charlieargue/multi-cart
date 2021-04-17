@@ -21,7 +21,8 @@
       ],
       "@multi-cart/react-data-access": ["libs/react-data-access/src/index.ts"],
       "@multi-cart/util": ["libs/util/src/index.ts"],
-      "@multi-cart/mock-api": ["libs/mock-api/src/index.ts"]
+      "@multi-cart/mock-api": ["libs/mock-api/src/index.ts"],
+      "@multi-cart/api-types": ["libs/api-types/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

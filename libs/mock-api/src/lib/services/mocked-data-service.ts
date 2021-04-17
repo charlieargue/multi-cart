@@ -1,6 +1,6 @@
-import { Cart, CartLine, User, Account, CartLineInput, CartInput } from '@multi-cart/react-data-access';
-import { db } from '../data/setup';
+import { Account, Cart, CartInput, CartLine, CartLineInput, User } from '@multi-cart/react-data-access';
 import { toCompareDateFn } from '@multi-cart/util';
+import { db } from '../data/setup';
 
 // ------------------------ 
 // CARTS
@@ -94,6 +94,15 @@ export const getAccounts = (): Account[] => {
     return db
         .getData("/accounts")
         .sort((a, b) => a.accountName.localeCompare(b.accountName));
+}
+
+// ------------------------ 
+// AUTHENTICATION
+// ------------------------ 
+export const loginUser = (password: string, usernameOrEmail: string) => {
+    return db
+            .getData("/users")
+            .filter((user) => usernameOrEmail.includes("@") ? user.email === usernameOrEmail : user.username === usernameOrEmail)[0];
 }
 
 // ------------------------ 

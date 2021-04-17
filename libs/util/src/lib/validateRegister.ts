@@ -1,4 +1,4 @@
-import { UsernamePasswordInput } from "../resolvers/types/UsernamePasswordInput";
+import { UsernamePasswordInput } from "@multi-cart/api-types";
 
 export const validateRegister = (options: UsernamePasswordInput) => {
 

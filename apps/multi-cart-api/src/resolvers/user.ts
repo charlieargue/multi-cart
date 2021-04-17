@@ -3,13 +3,11 @@ import { Arg, Ctx, FieldResolver, Int, Mutation, Query, Resolver, Root, UseMiddl
 import { getConnection } from 'typeorm';
 import { v4 } from 'uuid';
 import { COOKIENAME, FORGET_PASSWORD_PREFIX } from '../constants';
-import { User } from '../entities/User';
 import { isAuth } from '../middleware/isAuth';
 import { MyContext } from '../types';
 import { sendEmail } from '../utils/sendEmail';
-import { validateRegister } from '../utils/validateRegister';
-import { UserResponse } from './types/OutputTypes';
-import { UsernamePasswordInput } from './types/UsernamePasswordInput'; // INPUT TYPE!
+import { validateRegister } from '@multi-cart/util';
+import { User, UserResponse, UsernamePasswordInput } from '@multi-cart/api-types';
 
 @Resolver(User)
 export class UserResolver {

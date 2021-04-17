@@ -7,5 +7,6 @@ module.exports = {
     '<rootDir>/apps/multi-cart-api',
     '<rootDir>/libs/util',
     '<rootDir>/libs/mock-api',
+    '<rootDir>/libs/api-types',
   ],
 };

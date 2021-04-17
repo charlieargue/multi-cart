@@ -36,6 +36,7 @@
       "implicitDependencies": ["react-shared-components"]
     },
     "util": { "tags": [] },
-    "mock-api": { "tags": [] }
+    "mock-api": { "tags": [] },
+    "api-types": { "tags": [] }
   }
 }

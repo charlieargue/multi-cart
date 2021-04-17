@@ -1,10 +1,8 @@
-import { Cart, CartInput, CartLine, CartLineInput, MutationResolvers, User } from '@multi-cart/react-data-access';
+import { Cart, CartInput, CartLine, CartLineInput, MutationResolvers, User, UsernamePasswordInput } from '@multi-cart/react-data-access';
 import * as faker from 'faker';
-import { carts } from '../data/mocked-carts';
-import { db } from '../data/setup';
 import { mockNewId } from '../mockNewId';
-import { addCart, addCartLine, deleteCart, deleteCartLine, getCart, getCartIds, getCartLineIds, updateCart, updateCartLine, updateCurrentCart } from '../services/mocked-data-service';
-
+import { addCart, addCartLine, deleteCart, deleteCartLine, getCart, getCartIds, getCartLineIds, loginUser, updateCart, updateCartLine, updateCurrentCart } from '../services/mocked-data-service';
+import { validateRegister } from '@multi-cart/util';
 
 // ------------------------
 export const mutations: MutationResolvers = {
@@ -95,9 +93,7 @@ export const mutations: MutationResolvers = {
 
     login(_: unknown, { password, usernameOrEmail }: { password: string, usernameOrEmail: string }) {
         // see if got user
-        const user = db
-            .getData("/users")
-            .filter((user) => usernameOrEmail.includes("@") ? user.email === usernameOrEmail : user.username === usernameOrEmail)[0];
+        const user = loginUser(password, usernameOrEmail);
 
         if (!user) {
             return {
@@ -123,6 +119,56 @@ export const mutations: MutationResolvers = {
             user
         } as const;
     },
+
+
+    register(_: unknown, { options }: { options: UsernamePasswordInput }) {
+        const errors = validateRegister(options);
+        if (errors) {
+            return { errors };
+        }
+
+        // REAL RESOLVER
+        // ------------------------
+
+        // const hashedPassword = await argon2.hash(options.password);
+
+        // const user = registerUser(options);
+        // let user;
+        // try {
+        //     const result = await getConnection()
+        //         .createQueryBuilder()
+        //         .insert()
+        //         .into(User)
+        //         .values({
+        //             username: options.username,
+        //             email: options.email,
+        //             password: hashedPassword
+        //         })
+        //         .returning("*")
+        //         .execute();
+
+        //     user = result.raw[0];
+
+        // } catch (err) {
+        //     console.log("🚀 ~ err", err);
+        //     if (err.code === "23505" || err.detail.includes("already exists")) {
+        //         return {
+        //             errors: [{
+        //                 field: "username",
+        //                 message: "username has already been taken"
+        //             }]
+        //         };
+        //     }
+        // }
+
+        // // 🟢 You are logged in! (store user id in session, setting a cookie, keeping them logged in...)
+        // req.session.userId = user.id;
+
+        // return { user };
+        // // ✅ graphql will NOT return the .password field, FYI
+    },
+
+
 
 
     // TODO:
