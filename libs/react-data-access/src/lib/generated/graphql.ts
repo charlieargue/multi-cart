@@ -174,6 +174,8 @@ export type MutationUpdateCartLineAccountArgs = {
 
 
 export type MutationDeleteCartLineAccountArgs = {
+  cartId: Scalars['Int'];
+  cartLineId: Scalars['Int'];
   cartLineAccountId: Scalars['Int'];
 };
 
@@ -363,6 +365,8 @@ export type AddCartLineAccountMutation = (
 );
 
 export type DeleteCartLineAccountMutationVariables = Exact<{
+  cartId: Scalars['Int'];
+  cartLineId: Scalars['Int'];
   cartLineAccountId: Scalars['Int'];
 }>;
 
@@ -648,8 +652,12 @@ export function useAddCartLineAccountMutation() {
   return Urql.useMutation<AddCartLineAccountMutation, AddCartLineAccountMutationVariables>(AddCartLineAccountDocument);
 };
 export const DeleteCartLineAccountDocument = gql`
-    mutation DeleteCartLineAccount($cartLineAccountId: Int!) {
-  deleteCartLineAccount(cartLineAccountId: $cartLineAccountId)
+    mutation DeleteCartLineAccount($cartId: Int!, $cartLineId: Int!, $cartLineAccountId: Int!) {
+  deleteCartLineAccount(
+    cartId: $cartId
+    cartLineId: $cartLineId
+    cartLineAccountId: $cartLineAccountId
+  )
 }
     `;
 
@@ -950,7 +958,7 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   updateUser?: Resolver<ResolversTypes['UserResponse'], ParentType, ContextType, RequireFields<MutationUpdateUserArgs, 'currentCartId'>>;
   addCartLineAccount?: Resolver<ResolversTypes['CartLineAccount'], ParentType, ContextType, RequireFields<MutationAddCartLineAccountArgs, 'amount' | 'accountNumber' | 'cartLineId' | 'cartId'>>;
   updateCartLineAccount?: Resolver<ResolversTypes['CartLineAccount'], ParentType, ContextType, RequireFields<MutationUpdateCartLineAccountArgs, 'cartId' | 'cartLineId' | 'amount' | 'id'>>;
-  deleteCartLineAccount?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationDeleteCartLineAccountArgs, 'cartLineAccountId'>>;
+  deleteCartLineAccount?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationDeleteCartLineAccountArgs, 'cartId' | 'cartLineId' | 'cartLineAccountId'>>;
 };
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {

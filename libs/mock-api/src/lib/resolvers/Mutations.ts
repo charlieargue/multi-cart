@@ -1,7 +1,7 @@
 import { Cart, CartInput, CartLine, CartLineAccount, CartLineInput, MutationResolvers, User, UsernamePasswordInput } from '@multi-cart/react-data-access';
 import * as faker from 'faker';
 import { mockNewId } from '../mockNewId';
-import { addCart, addCartLine, addCartLineAccount, deleteCart, deleteCartLine, forgotPassword, getCart, getCartIds, getCartLineAccountIds, getCartLineIds, loginUser, registerUser, updateCart, updateCartLine, updateCartLineAccount, updateCurrentCart } from '../services/mocked-data-service';
+import { addCart, addCartLine, addCartLineAccount, deleteCart, deleteCartLine, deleteCartLineAccount, forgotPassword, getCart, getCartIds, getCartLineAccountIds, getCartLineIds, loginUser, registerUser, updateCart, updateCartLine, updateCartLineAccount, updateCurrentCart } from '../services/mocked-data-service';
 import { validateRegister } from '@multi-cart/util';
 
 // ------------------------
@@ -90,6 +90,10 @@ export const mutations: MutationResolvers = {
         return updateCartLineAccount(cartId, cartLineId, amount, id);
     },
 
+    // TODO: when going serverless: how will this work on DynamoDB? Is there VTL for Postgres/Auroro? ...
+    deleteCartLineAccount(_: unknown, { cartId, cartLineId, cartLineAccountId }: { cartId: number, cartLineId: number, cartLineAccountId: number }) {
+        return deleteCartLineAccount(cartId, cartLineId, cartLineAccountId);
+    },
 
 
     // ------------------------ 
@@ -168,9 +172,5 @@ export const mutations: MutationResolvers = {
         return true;
     },
 
-
-    // TODO:
-    // -----------------------    ----------------------------------------------
-    // deleteCartLineAccount?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationDeleteCartLineAccountArgs, 'cartLineAccountId'>>;
-
 };
+

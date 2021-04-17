@@ -79,7 +79,7 @@ export const graphqlSchema = `type Query {
       cartId: Int!
     ): CartLineAccount!
     updateCartLineAccount(cartId: Int!, cartLineId: Int!, amount: Float!, id: Int!): CartLineAccount!
-    deleteCartLineAccount(cartLineAccountId: Int!): Boolean!
+    deleteCartLineAccount(cartId: Int!, cartLineId: Int!, cartLineAccountId: Int!): Boolean!
   }
   
   input CartLineInput {

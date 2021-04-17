@@ -1,3 +1,11 @@
-mutation DeleteCartLineAccount($cartLineAccountId: Int!) {
-  deleteCartLineAccount(cartLineAccountId: $cartLineAccountId)
+mutation DeleteCartLineAccount(
+  $cartId: Int!
+  $cartLineId: Int!
+  $cartLineAccountId: Int!
+) {
+  deleteCartLineAccount(
+    cartId: $cartId
+    cartLineId: $cartLineId
+    cartLineAccountId: $cartLineAccountId
+  )
 }

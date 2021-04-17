@@ -177,6 +177,19 @@ export const updateCartLineAccount = (cartId: number, cartLineId: number, amount
     }
 }
 
+export const deleteCartLineAccount = (cartId: number, cartLineId: number, cartLineAccountId: number): boolean => {
+    try {
+        const cartIdx: number = getCartIdx(cartId);
+        const cartLineIdx: number = getCartLineIdx(cartIdx, cartLineId);
+        const cartLineAccountIdx: number = getCartLineAccountIdx(cartIdx, cartLineIdx, cartLineAccountId);
+        db.delete("/carts[" + cartIdx + "]/cartLines[" + cartLineIdx + "]/cartLineAccounts[" + cartLineAccountIdx + "]");
+        return true;
+    } catch (error) {
+        console.log(`🚀 ~ error deleteCartLineAccount: `, error);
+        return false;
+    }
+};
+
 // ------------------------ 
 // AUTHENTICATION
 // ------------------------ 

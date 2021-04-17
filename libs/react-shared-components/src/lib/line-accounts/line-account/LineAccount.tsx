@@ -100,7 +100,11 @@ export const LineAccount = ({ lineAccount, line }: LineAccountProps) => {
                   mt={-.5}
                   variant="warning"
                   bg="yellow.100">{toFriendlyCurrency(lineAccount.amount)}</Badge>
-                <DeleteIcon size="16" cursor={'pointer'} color="red" onClick={() => deleteCartLineAccount({ cartLineAccountId: lineAccount.id })} />
+                <DeleteIcon size="16" cursor={'pointer'} color="red" onClick={() => deleteCartLineAccount({
+                  cartId: line.cartId,
+                  cartLineId: line.id,
+                  cartLineAccountId: lineAccount.id
+                })} />
               </HStack >} />
             </Tooltip>
 
