@@ -166,6 +166,8 @@ export type MutationAddCartLineAccountArgs = {
 
 
 export type MutationUpdateCartLineAccountArgs = {
+  cartId: Scalars['Int'];
+  cartLineId: Scalars['Int'];
   amount: Scalars['Float'];
   id: Scalars['Int'];
 };
@@ -371,6 +373,8 @@ export type DeleteCartLineAccountMutation = (
 );
 
 export type UpdateCartLineAccountMutationVariables = Exact<{
+  cartId: Scalars['Int'];
+  cartLineId: Scalars['Int'];
   id: Scalars['Int'];
   amount: Scalars['Float'];
 }>;
@@ -653,8 +657,13 @@ export function useDeleteCartLineAccountMutation() {
   return Urql.useMutation<DeleteCartLineAccountMutation, DeleteCartLineAccountMutationVariables>(DeleteCartLineAccountDocument);
 };
 export const UpdateCartLineAccountDocument = gql`
-    mutation UpdateCartLineAccount($id: Int!, $amount: Float!) {
-  updateCartLineAccount(id: $id, amount: $amount) {
+    mutation UpdateCartLineAccount($cartId: Int!, $cartLineId: Int!, $id: Int!, $amount: Float!) {
+  updateCartLineAccount(
+    cartId: $cartId
+    cartLineId: $cartLineId
+    id: $id
+    amount: $amount
+  ) {
     id
     amount
     accountNumber
@@ -940,7 +949,7 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   logout?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   updateUser?: Resolver<ResolversTypes['UserResponse'], ParentType, ContextType, RequireFields<MutationUpdateUserArgs, 'currentCartId'>>;
   addCartLineAccount?: Resolver<ResolversTypes['CartLineAccount'], ParentType, ContextType, RequireFields<MutationAddCartLineAccountArgs, 'amount' | 'accountNumber' | 'cartLineId' | 'cartId'>>;
-  updateCartLineAccount?: Resolver<ResolversTypes['CartLineAccount'], ParentType, ContextType, RequireFields<MutationUpdateCartLineAccountArgs, 'amount' | 'id'>>;
+  updateCartLineAccount?: Resolver<ResolversTypes['CartLineAccount'], ParentType, ContextType, RequireFields<MutationUpdateCartLineAccountArgs, 'cartId' | 'cartLineId' | 'amount' | 'id'>>;
   deleteCartLineAccount?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationDeleteCartLineAccountArgs, 'cartLineAccountId'>>;
 };
 

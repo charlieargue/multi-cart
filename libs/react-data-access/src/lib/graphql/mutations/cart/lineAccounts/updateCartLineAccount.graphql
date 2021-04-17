@@ -4,7 +4,12 @@ mutation UpdateCartLineAccount(
   $id: Int!
   $amount: Float!
 ) {
-  updateCartLineAccount(id: $id, amount: $amount) {
+  updateCartLineAccount(
+    cartId: $cartId
+    cartLineId: $cartLineId
+    id: $id
+    amount: $amount
+  ) {
     id
     amount
     accountNumber

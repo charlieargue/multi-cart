@@ -1,12 +1,12 @@
 // - https://formidable.com/open-source/urql/docs/advanced/server-side-rendering/#nextjs
 import { devtoolsExchange } from '@urql/devtools';
-import { dedupExchange, Exchange, fetchExchange } from 'urql';
+import { dedupExchange, fetchExchange } from 'urql';
 // import { pipe, tap } from 'wonka'; // part of urql!
 import { cache } from './cache';
 
 // TODO: figure out why terminal worked but in browser didn't... TBD
-const NX_API_URL = process.env.NX_API_URL ? process.env.NX_API_URL : 'http://localhost:4000/graphql';       //  NODE backend
-// const NX_API_URL = process.env.NX_API_URL ? process.env.NX_API_URL : 'http://localhost:4200/api/graphql'; // MOCKED API
+// const NX_API_URL = process.env.NX_API_URL ? process.env.NX_API_URL : 'http://localhost:4000/graphql';       //  NODE backend
+const NX_API_URL = process.env.NX_API_URL ? process.env.NX_API_URL : 'http://localhost:4200/api/graphql'; // MOCKED API
 
 // TODO: things got wonky here, bring this back once stable again...
 // TODO: ditto for devtools
