@@ -15,14 +15,14 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@multi-cart/react-ui": ["libs/react-ui/src/lib/index.ts"],
+      "@multi-cart/react-ui": ["libs/react-ui/src/index.ts"],
       "@multi-cart/react-shared-components": [
-        "libs/react-shared-components/src/lib/index.ts"
+        "libs/react-shared-components/src/index.ts"
       ],
-      "@multi-cart/react-data-access": ["libs/react-data-access/src/lib/index.ts"],
-      "@multi-cart/util": ["libs/util/src/lib/index.ts"],
-      "@multi-cart/mock-api": ["libs/mock-api/src/lib/index.ts"],
-      "@multi-cart/api-types": ["libs/api-types/src/lib/index.ts"]
+      "@multi-cart/react-data-access": ["libs/react-data-access/src/index.ts"],
+      "@multi-cart/util": ["libs/util/src/index.ts"],
+      "@multi-cart/mock-api": ["libs/mock-api/src/index.ts"],
+      "@multi-cart/api-types": ["libs/api-types/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
