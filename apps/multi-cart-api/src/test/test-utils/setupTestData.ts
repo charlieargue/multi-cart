@@ -1,6 +1,5 @@
 import faker from "faker";
-import { Cart } from "../../entities/Cart";
-import { User } from "../../entities/User";
+import { User, Cart } from "@multi-cart/api-types";
 
 export async function setupTestData() {
 

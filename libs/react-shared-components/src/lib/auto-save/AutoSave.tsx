@@ -1,5 +1,5 @@
 /* eslint-disable no-extra-boolean-cast */
-import { Avatar, Box } from '@chakra-ui/react';
+import { Box } from '@chakra-ui/react';
 import { useFormikContext } from 'formik';
 import debounce from 'just-debounce-it';
 import React, { useCallback, useEffect, useRef, useState } from 'react';

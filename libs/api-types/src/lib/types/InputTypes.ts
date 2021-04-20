@@ -1,5 +1,5 @@
 import { InputType, Field, Int, Float } from 'type-graphql';
-
+import "reflect-metadata";
 
 @InputType()
 export class UsernamePasswordInput {
