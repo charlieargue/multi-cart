@@ -5,8 +5,10 @@ import { dedupExchange, fetchExchange } from 'urql';
 import { cache } from './cache';
 
 // TODO: figure out why terminal worked but in browser didn't... TBD
-// const NX_API_URL = process.env.NX_API_URL ? process.env.NX_API_URL : 'http://localhost:4000/graphql';       //  NODE backend
-const NX_API_URL = process.env.NX_API_URL ? process.env.NX_API_URL : 'http://localhost:4200/api/graphql'; // MOCKED API
+// const NEXT_PUBLIC_API_URL = process.env.NEXT_PUBLIC_API_URL ? process.env.NEXT_PUBLIC_API_URL : 'http://localhost:4000/graphql';       //  NODE backend
+// const NEXT_PUBLIC_API_URL = process.env.NEXT_PUBLIC_API_URL ? process.env.NEXT_PUBLIC_API_URL : 'http://localhost:4200/api/graphql'; // MOCKED API
+const NEXT_PUBLIC_API_URL = process.env.NEXT_PUBLIC_API_URL; // VERCEL-ized
+console.log(`🚀 ~ NEXT_PUBLIC_API_URL`, NEXT_PUBLIC_API_URL);
 
 // TODO: things got wonky here, bring this back once stable again...
 // TODO: ditto for devtools
@@ -20,8 +22,8 @@ const NX_API_URL = process.env.NX_API_URL ? process.env.NX_API_URL : 'http://loc
 //         tap(({ error }) => {
 //             console.log(`🚀 ~ error`, error);
 
-            // anytime there's an error in anything we run..
-            // 🛡 sentry fire-and-forget CALL would go here!
+// anytime there's an error in anything we run..
+// 🛡 sentry fire-and-forget CALL would go here!
 
 //             // ERROR IF INCLUDED: 
 //             // You may need an additional loader to handle the result of these loaders.
@@ -40,7 +42,7 @@ const NX_API_URL = process.env.NX_API_URL ? process.env.NX_API_URL : 'http://loc
 // [ ] TODO: global error handling goes here (unauth redirects/verifies)
 export const createUrqlClient = (ssrExchange: any) => ({
 
-    url: NX_API_URL,
+    url: NEXT_PUBLIC_API_URL,
     fetchOptions: {
         // VIP: session cookies will NOT work without this
         credentials: "include" as const
