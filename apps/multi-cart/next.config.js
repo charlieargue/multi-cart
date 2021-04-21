@@ -10,7 +10,6 @@ module.exports = withNx({
             include: [nextConfig.dir],
             use: 'graphql-tag/loader',
         });
-        // ❌ NOPE: config.webpack5 = true; // thx: https://github.com/vercel/next.js/issues/21740
         return config;
     },
 });
