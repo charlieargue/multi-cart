@@ -41,6 +41,7 @@ Thumbs.db
 
 # dotenv environment variables file
 .env
+.env.production
 .env.test
 // TODO: see BEN dunno where
 .env.development.local
