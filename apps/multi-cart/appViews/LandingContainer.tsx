@@ -45,7 +45,7 @@ export const LandingContainer = () => {
         <Divider />
 
         {/* Features */}
-        <Box as="section" py="25">
+        <Box as="section" py="36">
             <Box mr="auto" px={{ base: '6', md: '8' }}>
                 <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacingX="10" spacingY="14">
                     <Feature title="Secure by default" icon={<FcPrivacy />}>
