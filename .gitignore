@@ -42,9 +42,14 @@ Thumbs.db
 # dotenv environment variables file
 .env
 .env.test
+// TODO: see BEN dunno where
+.env.development.local
+.env.test.local
+.env.production.local
 
 # stupid files
 .DS_Store
 
 # JSON database (for mocked api)
 libs/mock-api/mock-database.json
+.vercel
