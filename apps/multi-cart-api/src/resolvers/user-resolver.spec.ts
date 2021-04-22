@@ -1,7 +1,6 @@
 import faker from 'faker';
 import { Connection } from "typeorm";
-import { Cart } from '../entities/Cart';
-import { User } from "../entities/User";
+import { Cart, User } from "@multi-cart/api-types";
 import { gCall } from "../test/test-utils/gCall";
 import { setupTestData } from "../test/test-utils/setupTestData";
 import testConn from "../test/test-utils/testConn";
@@ -17,6 +16,7 @@ afterAll(async () => {
     }
 });
 
+// TODO: pull these from @api-types, or...
 const updateUserMutation = `
 mutation UpdateUser($currentCartId: Int!) {
     updateUser(currentCartId: $currentCartId) {
@@ -42,6 +42,7 @@ query Me {
   }
   `;
 
+  // TODO: nx this, or moot since serverless?
 const registerMutation = `
 mutation Register($options: UsernamePasswordInput!) {
     register(options: $options) {
