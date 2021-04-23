@@ -54,7 +54,7 @@ export const LandingContainer = () => {
                         </Feature>
                     <Feature title="Always up to date" icon={<FcTimeline />}>
                         Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
-                        invidunt ut labore. no public directory... one more try
+                        invidunt ut labore. no public directory... one more try... fingers crossed <span role='img' aria-label='emoji'>🤞</span>
                         </Feature>
                     <Feature title="Incredible statistics" icon={<FcDoughnutChart />}>
                         At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no
