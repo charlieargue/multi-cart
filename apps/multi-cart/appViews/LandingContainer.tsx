@@ -49,7 +49,7 @@ export const LandingContainer = () => {
             <Box mr="auto" px={{ base: '6', md: '8' }}>
                 <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacingX="10" spacingY="14">
                     <Feature title="Secure by default" icon={<FcPrivacy />}>
-                        At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no
+                        More Lorem ipsum something or another Stet clita kasd gubergren, no
                         sea takimata sanctus.
                         </Feature>
                     <Feature title="Always up to date" icon={<FcTimeline />}>
