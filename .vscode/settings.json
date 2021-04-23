@@ -14,6 +14,7 @@
     "turboConsoleLog.delimiterInsideMessage": "",
     "turboConsoleLog.quote": "`",
     "files.exclude": {
+        ".vercel": true,
         "dist": true
     }
 }
