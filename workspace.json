@@ -271,6 +271,12 @@
           }
         }
       }
+    },
+    "multi-cart-iac": {
+      "root": "libs/multi-cart-iac",
+      "sourceRoot": "libs/multi-cart-iac/src",
+      "projectType": "library",
+      "targets": {}
     }
   }
 }

@@ -1,0 +1,21 @@
+## NOTE: THERE ARE NO "OR"s in dynamodb QUERIES!!! but YES in SCANS ... in expression logic
+## check password here? or need separate function? TBD
+
+#if( $ctx.args.usernameOrEmail ) 
+  #set( $normalized = $ctx.args.usernameOrEmail )
+#end
+#if( $ctx.args.email ) 
+  #set( $normalized = $ctx.args.email )
+#end
+
+{
+  "version": "2017-02-28",
+  "operation": "Scan",
+  "filter" : {
+    "expression": "email = :usernameOrEmail or username = :usernameOrEmail",
+        "expressionValues" : {
+            ":usernameOrEmail" : $util.dynamodb.toDynamoDBJson($normalized)
+        }
+  }
+
+}

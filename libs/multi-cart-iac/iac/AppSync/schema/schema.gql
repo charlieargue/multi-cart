@@ -1,0 +1,144 @@
+## ------------------------------
+#  ACCOUNTS
+## ------------------------------
+type Account {
+  id: ID!
+  accountNumber: String!
+  accountName: String!
+  amountRemaining: Float!
+  createdAt: String!
+  updatedAt: String!
+}
+
+## ------------------------------
+#  CARTS
+## ------------------------------
+type Cart {
+  id: ID!
+  name: String!
+  userId: ID!
+  cartLines: [CartLine!]!
+  # user: User!
+  createdAt: String!
+  updatedAt: String!
+}
+
+type CartLine {
+  id: ID!
+  itemId: String
+  description: String
+  uom: String
+  quantity: Int
+  categoryId: ID
+  price: Float!
+  cartId: ID!
+  # cart: Cart
+  cartLineAccounts: [CartLineAccount!]
+  createdAt: String!
+  updatedAt: String!
+}
+
+type CartLineAccount {
+  id: ID!
+  amount: Float!
+  accountNumber: String!
+  cartLineId: ID!
+  createdAt: String!
+  updatedAt: String!
+}
+
+## ------------------------------
+#  USER
+## ------------------------------
+type User {
+  id: ID!
+  username: String!
+  email: String!
+  currentCartId: ID
+  createdAt: String!
+  updatedAt: String!
+}
+
+## ------------------------------
+#  INPUTS / OUTPUTS
+## ------------------------------
+input UsernamePasswordInput {
+  username: String!
+  email: String!
+  password: String!
+}
+
+input CartInput {
+  id: ID!
+  name: String!
+}
+
+input CartLineInput {
+  id: ID!
+  cartId: ID!
+  categoryId: ID!
+  quantity: Int!
+  price: Float!
+  itemId: String!
+  description: String!
+  uom: String!
+}
+
+type UserResponse {
+  errors: [FieldError!]
+  user: User
+}
+
+type FieldError {
+  field: String!
+  message: String!
+}
+
+## ------------------------------
+#  QUERIES / MUTATIONS
+## ------------------------------
+type Query {
+  cart(id: ID!): Cart
+  carts: [Cart!]!
+  users: [User!]!
+  accounts: [Account]
+  me: User
+}
+
+type Mutation {
+  # CARTS
+  blankCart: Cart!
+  deleteCart(id: ID!): Boolean!
+  blankCartLine(cartId: ID!): CartLine!
+  deleteCartLine(cartLineId: ID!, cartId: ID!): Boolean!
+  updateCart(cart: CartInput!): Cart
+  updateCartLine(cartLine: CartLineInput!): CartLine
+  addCartLineAccount(
+    amount: Float!
+    accountNumber: String!
+    cartLineId: ID!
+    cartId: ID!
+  ): CartLineAccount!
+  deleteCartLineAccount(
+    cartId: ID!
+    cartLineId: ID!
+    cartLineAccountId: ID!
+  ): Boolean!
+  updateCartLineAccount(
+    cartId: ID!
+    cartLineId: ID!
+    amount: Float!
+    id: ID!
+  ): CartLineAccount!
+
+  # ACCOUNTS
+  hydrateAccounts: Boolean!
+
+  # USERS
+  register(options: UsernamePasswordInput!): UserResponse!
+  login(password: String!, usernameOrEmail: String!): UserResponse!
+  logout: Boolean!
+  forgotPassword(email: String!): Boolean!
+  # TODO: SKIPPING FOR NOW UNTIL SESSION/TOKEN: changePassword(newPassword: String!, token: String!): UserResponse!
+  updateUser(currentCartId: ID!): UserResponse!
+}

@@ -1,0 +1,18 @@
+## TODO: how to NOT have duplicate CART:GETITEMS? should I make the other one a pipeline resolver (not UNIT resolver)
+## and then I can use this function in BOTH?
+
+#if( $ctx.args.cartId ) 
+  #set( $normalized = $ctx.args.cartId )
+#end
+#if( $ctx.args.cartLine.cartId ) 
+  #set( $normalized = $ctx.args.cartLine.cartId )
+#end
+
+
+{
+  "version": "2018-05-29",
+  "operation": "GetItem",
+  "key": {
+    "id" : { "S": "$normalized" }
+  },
+}

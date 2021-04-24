@@ -1,0 +1,30 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Action": ["dynamodb:*"],
+      "Effect": "Allow",
+      "Resource": [
+        "${USER_TABLE_ARN}",  "${USER_TABLE_ARN}/*",
+        "${CART_TABLE_ARN}",  "${CART_TABLE_ARN}/*",
+        "${ACCOUNT_TABLE_ARN}",  "${ACCOUNT_TABLE_ARN}/*"
+      ]
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "logs:CreateLogGroup",
+        "logs:CreateLogStream",
+        "logs:PutLogEvents"
+      ],
+      "Resource": ["arn:aws:logs:*:*:*"]
+    },
+    {
+      "Action": ["dynamodb:BatchGetItem", "dynamodb:BatchWriteItem"],
+      "Effect": "Allow",
+      "Resource": [
+        "${ACCOUNT_TABLE_ARN}",  "${ACCOUNT_TABLE_ARN}/*"
+      ]
+    }
+  ]
+}

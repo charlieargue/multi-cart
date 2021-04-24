@@ -1,0 +1,44 @@
+#set($freshCartLineId = $util.autoId() )
+#set($nowTime = $util.time.nowISO8601() )
+$util.qr($context.stash.put("freshCartLineId", $freshCartLineId))
+
+
+## thx? https://stackoverflow.com/questions/44219664/inserting-a-nested-attributes-array-element-in-dynamodb-table-without-retrieving
+## thx: https://stackoverflow.com/questions/50992106/append-item-to-list-using-aws-appsync-to-dynamodb/50995195
+## NOTE: cannot do "returnValues": "ALL_NEW|etc..."... it's that way by default!
+## -------------------------------------
+## blank cart LINE
+## -------------------------------------
+{
+    "version" : "2017-02-28",
+    "operation" : "UpdateItem",
+    "key" : {
+        "id" : { "S": "$ctx.args.cartId"}
+    },
+    "update" : {
+        "expression" : "SET #cls = list_append(#cls, :cl)",
+        "expressionNames": { 
+            "#cls" : "cartLines"
+        },
+        "expressionValues" : {
+          ":cl":  {
+                "L": [
+                    { "M" : { 
+                        "id": { "S":  "$freshCartLineId"},
+                        "cartId": { "S":  "$ctx.args.cartId"},
+                        "itemId": { "S":  ""},
+                        "description": { "S":  ""},
+                        "uom": { "S":  "EACH"},
+                        "categoryId": { "N":  1},
+                        "quantity": { "N":  1},
+                        "price": { "N":  0},
+                        "cartLineAccounts": $util.dynamodb.toDynamoDBJson([]), 
+                        "createdAt": { "S": "$nowTime"},
+                        "updatedAt": { "S": "$nowTime"}
+                      }},
+                    
+                ]
+              }
+        },
+    },
+}

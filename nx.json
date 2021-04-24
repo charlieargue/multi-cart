@@ -35,6 +35,7 @@
       "implicitDependencies": ["react-shared-components"]
     },
     "util": { "tags": [] },
-    "mock-api": { "tags": [] }
+    "mock-api": { "tags": [] },
+    "multi-cart-iac": { "tags": [] }
   }
 }

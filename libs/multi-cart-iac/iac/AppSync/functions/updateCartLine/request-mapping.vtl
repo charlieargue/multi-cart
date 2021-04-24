@@ -1,0 +1,33 @@
+## -------------------------------------
+## UPDATE cart LINE
+## -------------------------------------
+
+## get INDEX of this cartLine 
+#foreach ($item in $ctx.prev.result.cartLines)
+    #if($item.id == "$ctx.args.cartLine.id")
+        #set($idx = $foreach.count)
+    #end
+#end
+#set ($idxZeroBased = $idx - 1)
+## $utils.error($util.dynamodb.toDynamoDBJson($idx))
+{
+    "version" : "2017-02-28",
+    "operation" : "UpdateItem",
+    "key" : {
+        "id" : { "S": "$ctx.args.cartLine.cartId"}
+    },
+    "update" : {
+        "expression" : "SET #cls[$idxZeroBased].itemId = :itemId, #cls[$idxZeroBased].description = :description,  #cls[$idxZeroBased].price = :price,  #cls[$idxZeroBased].uom = :uom,  #cls[$idxZeroBased].categoryId = :categoryId,  #cls[$idxZeroBased].quantity = :quantity",
+        "expressionNames": { 
+            "#cls" : "cartLines"
+        },
+        "expressionValues": {
+            ":itemId" : { "S": "$ctx.args.cartLine.itemId" },
+            ":description" : { "S": "$ctx.args.cartLine.description" },
+            ":price" : { "N": "$ctx.args.cartLine.price" },
+            ":uom" : { "S": "$ctx.args.cartLine.uom" },
+            ":categoryId" : { "S": "$ctx.args.cartLine.categoryId" },
+            ":quantity" : { "N": "$ctx.args.cartLine.quantity" },
+        }
+    },
+}

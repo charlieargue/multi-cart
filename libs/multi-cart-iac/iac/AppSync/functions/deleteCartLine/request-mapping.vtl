@@ -1,0 +1,25 @@
+## -------------------------------------
+## DELETE cart LINE
+## -------------------------------------
+
+## get INDEX of this cartLine 
+#foreach ($item in $ctx.prev.result.cartLines)
+    #if($item.id == "$ctx.args.cartLineId")
+        #set($idx = $foreach.count)
+    #end
+#end
+#set ($idxZeroBased = $idx - 1)
+## $utils.error($util.dynamodb.toDynamoDBJson($idx))
+{
+    "version" : "2017-02-28",
+    "operation" : "UpdateItem",
+    "key" : {
+        "id" : { "S": "$ctx.args.cartId"}
+    },
+    "update" : {
+        "expression" : "REMOVE #cls[$idxZeroBased]",
+        "expressionNames": { 
+            "#cls" : "cartLines"
+        },
+    },
+}

@@ -1,0 +1,610 @@
+#set($nowTime = $util.time.nowISO8601() )
+#set($accountsMockData = [{
+    "accountNumber": { "S":  "69016-001" },
+    "accountName": { "S":  "Automotive" },
+    "amountRemaining": { "N":  584552.97 },
+    "createdAt": { "S": $nowTime},
+    "updatedAt": { "S": $nowTime}
+  }, {
+    "accountNumber": { "S":  "0268-1526" },
+    "accountName": { "S":  "Music" },
+    "amountRemaining": { "N":  442957.76 },
+    "createdAt": { "S": $nowTime},
+    "updatedAt": { "S": $nowTime}
+  }, {
+    "accountNumber": { "S":  "0085-0517" },
+    "accountName": { "S":  "Home" },
+    "amountRemaining": { "N":  816749.05 },
+    "createdAt": { "S": $nowTime},
+    "updatedAt": { "S": $nowTime}
+  }, {
+    "accountNumber": { "S":  "51079-978" },
+    "accountName": { "S":  "Beauty" },
+    "amountRemaining": { "N":  855827.19 },
+    "createdAt": { "S": $nowTime},
+    "updatedAt": { "S": $nowTime}
+  }, {
+    "accountNumber": { "S":  "60512-8002" },
+    "accountName": { "S":  "Beauty" },
+    "amountRemaining": { "N":  352113.59 },
+    "createdAt": { "S": $nowTime},
+    "updatedAt": { "S": $nowTime}
+  }, {
+    "accountNumber": { "S":  "14783-033" },
+    "accountName": { "S":  "Sports" },
+    "amountRemaining": { "N":  987027.62 },
+    "createdAt": { "S": $nowTime},
+    "updatedAt": { "S": $nowTime}
+  }, {
+    "accountNumber": { "S":  "65044-5032" },
+    "accountName": { "S":  "Outdoors" },
+    "amountRemaining": { "N":  910264.16 },
+    "createdAt": { "S": $nowTime},
+    "updatedAt": { "S": $nowTime}
+  }, {
+    "accountNumber": { "S":  "36987-2379" },
+    "accountName": { "S":  "Home" },
+    "amountRemaining": { "N":  882181.45 },
+    "createdAt": { "S": $nowTime},
+    "updatedAt": { "S": $nowTime}
+  }, {
+    "accountNumber": { "S":  "30142-501" },
+    "accountName": { "S":  "Sports" },
+    "amountRemaining": { "N":  254613.68 },
+    "createdAt": { "S": $nowTime},
+    "updatedAt": { "S": $nowTime}
+  }, {
+    "accountNumber": { "S":  "60724-101" },
+    "accountName": { "S":  "Home" },
+    "amountRemaining": { "N":  918472.94 },
+    "createdAt": { "S": $nowTime},
+    "updatedAt": { "S": $nowTime}
+  }, {
+    "accountNumber": { "S":  "0781-1228" },
+    "accountName": { "S":  "Games" },
+    "amountRemaining": { "N":  639208.58 },
+    "createdAt": { "S": $nowTime},
+    "updatedAt": { "S": $nowTime}
+  }, {
+    "accountNumber": { "S":  "55292-601" },
+    "accountName": { "S":  "Toys" },
+    "amountRemaining": { "N":  586338.02 },
+    "createdAt": { "S": $nowTime},
+    "updatedAt": { "S": $nowTime}
+  }, {
+    "accountNumber": { "S":  "58118-0213" },
+    "accountName": { "S":  "Industrial" },
+    "amountRemaining": { "N":  873588.08 },
+    "createdAt": { "S": $nowTime},
+    "updatedAt": { "S": $nowTime}
+  }, {
+    "accountNumber": { "S":  "60429-623" },
+    "accountName": { "S":  "Automotive" },
+    "amountRemaining": { "N":  317243.93 },
+    "createdAt": { "S": $nowTime},
+    "updatedAt": { "S": $nowTime}
+  }, {
+    "accountNumber": { "S":  "36987-1018" },
+    "accountName": { "S":  "Beauty" },
+    "amountRemaining": { "N":  925863.72 },
+    "createdAt": { "S": $nowTime},
+    "updatedAt": { "S": $nowTime}
+  }, {
+    "accountNumber": { "S":  "55154-4616" },
+    "accountName": { "S":  "Tools" },
+    "amountRemaining": { "N":  413202.74 },
+    "createdAt": { "S": $nowTime},
+    "updatedAt": { "S": $nowTime}
+  }, {
+    "accountNumber": { "S":  "45802-732" },
+    "accountName": { "S":  "Movies" },
+    "amountRemaining": { "N":  773693.94 },
+    "createdAt": { "S": $nowTime},
+    "updatedAt": { "S": $nowTime}
+  }, {
+    "accountNumber": { "S":  "21130-461" },
+    "accountName": { "S":  "Health" },
+    "amountRemaining": { "N":  232165.59 },
+    "createdAt": { "S": $nowTime},
+    "updatedAt": { "S": $nowTime}
+  }, {
+    "accountNumber": { "S":  "17089-383" },
+    "accountName": { "S":  "Health" },
+    "amountRemaining": { "N":  158998.24 },
+    "createdAt": { "S": $nowTime},
+    "updatedAt": { "S": $nowTime}
+  }, {
+    "accountNumber": { "S":  "21130-343" },
+    "accountName": { "S":  "Baby" },
+    "amountRemaining": { "N":  111652.31 },
+    "createdAt": { "S": $nowTime},
+    "updatedAt": { "S": $nowTime}
+  }, {
+    "accountNumber": { "S":  "0280-0800" },
+    "accountName": { "S":  "Electronics" },
+    "amountRemaining": { "N":  114097.31 },
+    "createdAt": { "S": $nowTime},
+    "updatedAt": { "S": $nowTime}
+  }, {
+    "accountNumber": { "S":  "49348-104" },
+    "accountName": { "S":  "Baby" },
+    "amountRemaining": { "N":  517679.36 },
+    "createdAt": { "S": $nowTime},
+    "updatedAt": { "S": $nowTime}
+  }, {
+    "accountNumber": { "S":  "43742-0066" },
+    "accountName": { "S":  "Games" },
+    "amountRemaining": { "N":  503472.22 },
+    "createdAt": { "S": $nowTime},
+    "updatedAt": { "S": $nowTime}
+  }, {
+    "accountNumber": { "S":  "10019-553" },
+    "accountName": { "S":  "Music" },
+    "amountRemaining": { "N":  738745.46 },
+    "createdAt": { "S": $nowTime},
+    "updatedAt": { "S": $nowTime}
+  }, {
+    "accountNumber": { "S":  "75957-002" },
+    "accountName": { "S":  "Baby" },
+    "amountRemaining": { "N":  372906.06 },
+    "createdAt": { "S": $nowTime},
+    "updatedAt": { "S": $nowTime}
+  }, {
+    "accountNumber": { "S":  "60505-0194" },
+    "accountName": { "S":  "Clothing" },
+    "amountRemaining": { "N":  368472.92 },
+    "createdAt": { "S": $nowTime},
+    "updatedAt": { "S": $nowTime}
+  }, {
+    "accountNumber": { "S":  "0615-5530" },
+    "accountName": { "S":  "Computers" },
+    "amountRemaining": { "N":  184865.56 },
+    "createdAt": { "S": $nowTime},
+    "updatedAt": { "S": $nowTime}
+  }, {
+    "accountNumber": { "S":  "57237-024" },
+    "accountName": { "S":  "Jewelery" },
+    "amountRemaining": { "N":  164161.08 },
+    "createdAt": { "S": $nowTime},
+    "updatedAt": { "S": $nowTime}
+  }, {
+    "accountNumber": { "S":  "50242-080" },
+    "accountName": { "S":  "Kids" },
+    "amountRemaining": { "N":  402247.52 },
+    "createdAt": { "S": $nowTime},
+    "updatedAt": { "S": $nowTime}
+  }, {
+    "accountNumber": { "S":  "50419-453" },
+    "accountName": { "S":  "Jewelery" },
+    "amountRemaining": { "N":  737034.17 },
+    "createdAt": { "S": $nowTime},
+    "updatedAt": { "S": $nowTime}
+  }, {
+    "accountNumber": { "S":  "0185-0149" },
+    "accountName": { "S":  "Kids" },
+    "amountRemaining": { "N":  575573.64 },
+    "createdAt": { "S": $nowTime},
+    "updatedAt": { "S": $nowTime}
+  }, {
+    "accountNumber": { "S":  "0067-2067" },
+    "accountName": { "S":  "Clothing" },
+    "amountRemaining": { "N":  142709.02 },
+    "createdAt": { "S": $nowTime},
+    "updatedAt": { "S": $nowTime}
+  }, {
+    "accountNumber": { "S":  "55316-194" },
+    "accountName": { "S":  "Electronics" },
+    "amountRemaining": { "N":  115449.25 },
+    "createdAt": { "S": $nowTime},
+    "updatedAt": { "S": $nowTime}
+  }, {
+    "accountNumber": { "S":  "36987-1767" },
+    "accountName": { "S":  "Computers" },
+    "amountRemaining": { "N":  153705.89 },
+    "createdAt": { "S": $nowTime},
+    "updatedAt": { "S": $nowTime}
+  }, {
+    "accountNumber": { "S":  "37000-099" },
+    "accountName": { "S":  "Industrial" },
+    "amountRemaining": { "N":  385900.05 },
+    "createdAt": { "S": $nowTime},
+    "updatedAt": { "S": $nowTime}
+  }, {
+    "accountNumber": { "S":  "16590-966" },
+    "accountName": { "S":  "Outdoors" },
+    "amountRemaining": { "N":  126513.18 },
+    "createdAt": { "S": $nowTime},
+    "updatedAt": { "S": $nowTime}
+  }, {
+    "accountNumber": { "S":  "58411-112" },
+    "accountName": { "S":  "Clothing" },
+    "amountRemaining": { "N":  180733.74 },
+    "createdAt": { "S": $nowTime},
+    "updatedAt": { "S": $nowTime}
+  }, {
+    "accountNumber": { "S":  "43406-0006" },
+    "accountName": { "S":  "Tools" },
+    "amountRemaining": { "N":  21288.16 },
+    "createdAt": { "S": $nowTime},
+    "updatedAt": { "S": $nowTime}
+  }, {
+    "accountNumber": { "S":  "52763-501" },
+    "accountName": { "S":  "Sports" },
+    "amountRemaining": { "N":  552424.60 },
+    "createdAt": { "S": $nowTime},
+    "updatedAt": { "S": $nowTime}
+  }, {
+    "accountNumber": { "S":  "61957-1019" },
+    "accountName": { "S":  "Grocery" },
+    "amountRemaining": { "N":  870760.88 },
+    "createdAt": { "S": $nowTime},
+    "updatedAt": { "S": $nowTime}
+  }, {
+    "accountNumber": { "S":  "0409-6637" },
+    "accountName": { "S":  "Garden" },
+    "amountRemaining": { "N":  108155.97 },
+    "createdAt": { "S": $nowTime},
+    "updatedAt": { "S": $nowTime}
+  }, {
+    "accountNumber": { "S":  "54868-0700" },
+    "accountName": { "S":  "Kids" },
+    "amountRemaining": { "N":  691131.64 },
+    "createdAt": { "S": $nowTime},
+    "updatedAt": { "S": $nowTime}
+  }, {
+    "accountNumber": { "S":  "0220-9314" },
+    "accountName": { "S":  "Automotive" },
+    "amountRemaining": { "N":  440912.37 },
+    "createdAt": { "S": $nowTime},
+    "updatedAt": { "S": $nowTime}
+  }, {
+    "accountNumber": { "S":  "61750-0022" },
+    "accountName": { "S":  "Beauty" },
+    "amountRemaining": { "N":  778238.13 },
+    "createdAt": { "S": $nowTime},
+    "updatedAt": { "S": $nowTime}
+  }, {
+    "accountNumber": { "S":  "65862-125" },
+    "accountName": { "S":  "Shoes" },
+    "amountRemaining": { "N":  192000.11 },
+    "createdAt": { "S": $nowTime},
+    "updatedAt": { "S": $nowTime}
+  }, {
+    "accountNumber": { "S":  "52584-013" },
+    "accountName": { "S":  "Music" },
+    "amountRemaining": { "N":  99871.59 },
+    "createdAt": { "S": $nowTime},
+    "updatedAt": { "S": $nowTime}
+  }, {
+    "accountNumber": { "S":  "42291-678" },
+    "accountName": { "S":  "Movies" },
+    "amountRemaining": { "N":  210071.72 },
+    "createdAt": { "S": $nowTime},
+    "updatedAt": { "S": $nowTime}
+  }, {
+    "accountNumber": { "S":  "0015-3030" },
+    "accountName": { "S":  "Clothing" },
+    "amountRemaining": { "N":  388743.92 },
+    "createdAt": { "S": $nowTime},
+    "updatedAt": { "S": $nowTime}
+  }, {
+    "accountNumber": { "S":  "54868-1037" },
+    "accountName": { "S":  "Industrial" },
+    "amountRemaining": { "N":  538661.88 },
+    "createdAt": { "S": $nowTime},
+    "updatedAt": { "S": $nowTime}
+  }, {
+    "accountNumber": { "S":  "54868-6133" },
+    "accountName": { "S":  "Industrial" },
+    "amountRemaining": { "N":  746028.32 },
+    "createdAt": { "S": $nowTime},
+    "updatedAt": { "S": $nowTime}
+  }, {
+    "accountNumber": { "S":  "59779-088" },
+    "accountName": { "S":  "Toys" },
+    "amountRemaining": { "N":  985749.73 },
+    "createdAt": { "S": $nowTime},
+    "updatedAt": { "S": $nowTime}
+  }, {
+    "accountNumber": { "S":  "0378-7106" },
+    "accountName": { "S":  "Home" },
+    "amountRemaining": { "N":  367833.15 },
+    "createdAt": { "S": $nowTime},
+    "updatedAt": { "S": $nowTime}
+  }, {
+    "accountNumber": { "S":  "37000-109" },
+    "accountName": { "S":  "Home" },
+    "amountRemaining": { "N":  82562.99 },
+    "createdAt": { "S": $nowTime},
+    "updatedAt": { "S": $nowTime}
+  }, {
+    "accountNumber": { "S":  "55154-3380" },
+    "accountName": { "S":  "Baby" },
+    "amountRemaining": { "N":  552962.57 },
+    "createdAt": { "S": $nowTime},
+    "updatedAt": { "S": $nowTime}
+  }, {
+    "accountNumber": { "S":  "58737-104" },
+    "accountName": { "S":  "Kids" },
+    "amountRemaining": { "N":  361095.88 },
+    "createdAt": { "S": $nowTime},
+    "updatedAt": { "S": $nowTime}
+  }, {
+    "accountNumber": { "S":  "51141-0005" },
+    "accountName": { "S":  "Music" },
+    "amountRemaining": { "N":  918148.55 },
+    "createdAt": { "S": $nowTime},
+    "updatedAt": { "S": $nowTime}
+  }, {
+    "accountNumber": { "S":  "60760-465" },
+    "accountName": { "S":  "Garden" },
+    "amountRemaining": { "N":  794512.23 },
+    "createdAt": { "S": $nowTime},
+    "updatedAt": { "S": $nowTime}
+  }, {
+    "accountNumber": { "S":  "0078-0495" },
+    "accountName": { "S":  "Beauty" },
+    "amountRemaining": { "N":  208056.60 },
+    "createdAt": { "S": $nowTime},
+    "updatedAt": { "S": $nowTime}
+  }, {
+    "accountNumber": { "S":  "24286-1523" },
+    "accountName": { "S":  "Outdoors" },
+    "amountRemaining": { "N":  325792.87 },
+    "createdAt": { "S": $nowTime},
+    "updatedAt": { "S": $nowTime}
+  }, {
+    "accountNumber": { "S":  "58118-0811" },
+    "accountName": { "S":  "Health" },
+    "amountRemaining": { "N":  774654.76 },
+    "createdAt": { "S": $nowTime},
+    "updatedAt": { "S": $nowTime}
+  }, {
+    "accountNumber": { "S":  "0159-2400" },
+    "accountName": { "S":  "Electronics" },
+    "amountRemaining": { "N":  594742.45 },
+    "createdAt": { "S": $nowTime},
+    "updatedAt": { "S": $nowTime}
+  }, {
+    "accountNumber": { "S":  "43269-721" },
+    "accountName": { "S":  "Jewelery" },
+    "amountRemaining": { "N":  506008.90 },
+    "createdAt": { "S": $nowTime},
+    "updatedAt": { "S": $nowTime}
+  }, {
+    "accountNumber": { "S":  "0093-5347" },
+    "accountName": { "S":  "Garden" },
+    "amountRemaining": { "N":  592130.25 },
+    "createdAt": { "S": $nowTime},
+    "updatedAt": { "S": $nowTime}
+  }, {
+    "accountNumber": { "S":  "54569-5813" },
+    "accountName": { "S":  "Sports" },
+    "amountRemaining": { "N":  478494.71 },
+    "createdAt": { "S": $nowTime},
+    "updatedAt": { "S": $nowTime}
+  }, {
+    "accountNumber": { "S":  "60512-6203" },
+    "accountName": { "S":  "Kids" },
+    "amountRemaining": { "N":  289872.67 },
+    "createdAt": { "S": $nowTime},
+    "updatedAt": { "S": $nowTime}
+  }, {
+    "accountNumber": { "S":  "51435-003" },
+    "accountName": { "S":  "Outdoors" },
+    "amountRemaining": { "N":  319126.67 },
+    "createdAt": { "S": $nowTime},
+    "updatedAt": { "S": $nowTime}
+  }, {
+    "accountNumber": { "S":  "51285-081" },
+    "accountName": { "S":  "Industrial" },
+    "amountRemaining": { "N":  860114.96 },
+    "createdAt": { "S": $nowTime},
+    "updatedAt": { "S": $nowTime}
+  }, {
+    "accountNumber": { "S":  "68084-478" },
+    "accountName": { "S":  "Computers" },
+    "amountRemaining": { "N":  708588.50 },
+    "createdAt": { "S": $nowTime},
+    "updatedAt": { "S": $nowTime}
+  }, {
+    "accountNumber": { "S":  "65342-2070" },
+    "accountName": { "S":  "Toys" },
+    "amountRemaining": { "N":  518653.78 },
+    "createdAt": { "S": $nowTime},
+    "updatedAt": { "S": $nowTime}
+  }, {
+    "accountNumber": { "S":  "37000-287" },
+    "accountName": { "S":  "Automotive" },
+    "amountRemaining": { "N":  38673.23 },
+    "createdAt": { "S": $nowTime},
+    "updatedAt": { "S": $nowTime}
+  }, {
+    "accountNumber": { "S":  "0299-6100" },
+    "accountName": { "S":  "Music" },
+    "amountRemaining": { "N":  433607.03 },
+    "createdAt": { "S": $nowTime},
+    "updatedAt": { "S": $nowTime}
+  }, {
+    "accountNumber": { "S":  "64679-757" },
+    "accountName": { "S":  "Electronics" },
+    "amountRemaining": { "N":  484162.92 },
+    "createdAt": { "S": $nowTime},
+    "updatedAt": { "S": $nowTime}
+  }, {
+    "accountNumber": { "S":  "68828-091" },
+    "accountName": { "S":  "Jewelery" },
+    "amountRemaining": { "N":  123514.25 },
+    "createdAt": { "S": $nowTime},
+    "updatedAt": { "S": $nowTime}
+  }, {
+    "accountNumber": { "S":  "49349-964" },
+    "accountName": { "S":  "Shoes" },
+    "amountRemaining": { "N":  664415.02 },
+    "createdAt": { "S": $nowTime},
+    "updatedAt": { "S": $nowTime}
+  }, {
+    "accountNumber": { "S":  "50458-398" },
+    "accountName": { "S":  "Tools" },
+    "amountRemaining": { "N":  528557.26 },
+    "createdAt": { "S": $nowTime},
+    "updatedAt": { "S": $nowTime}
+  }, {
+    "accountNumber": { "S":  "52854-015" },
+    "accountName": { "S":  "Grocery" },
+    "amountRemaining": { "N":  860178.32 },
+    "createdAt": { "S": $nowTime},
+    "updatedAt": { "S": $nowTime}
+  }, {
+    "accountNumber": { "S":  "0378-0372" },
+    "accountName": { "S":  "Beauty" },
+    "amountRemaining": { "N":  810348.24 },
+    "createdAt": { "S": $nowTime},
+    "updatedAt": { "S": $nowTime}
+  }, {
+    "accountNumber": { "S":  "42406-007" },
+    "accountName": { "S":  "Kids" },
+    "amountRemaining": { "N":  206864.83 },
+    "createdAt": { "S": $nowTime},
+    "updatedAt": { "S": $nowTime}
+  }, {
+    "accountNumber": { "S":  "0049-3990" },
+    "accountName": { "S":  "Toys" },
+    "amountRemaining": { "N":  100387.01 },
+    "createdAt": { "S": $nowTime},
+    "updatedAt": { "S": $nowTime}
+  }, {
+    "accountNumber": { "S":  "48951-0076" },
+    "accountName": { "S":  "Shoes" },
+    "amountRemaining": { "N":  22657.87 },
+    "createdAt": { "S": $nowTime},
+    "updatedAt": { "S": $nowTime}
+  }, {
+    "accountNumber": { "S":  "37808-578" },
+    "accountName": { "S":  "Tools" },
+    "amountRemaining": { "N":  828057.73 },
+    "createdAt": { "S": $nowTime},
+    "updatedAt": { "S": $nowTime}
+  }, {
+    "accountNumber": { "S":  "37000-807" },
+    "accountName": { "S":  "Shoes" },
+    "amountRemaining": { "N":  522989.48 },
+    "createdAt": { "S": $nowTime},
+    "updatedAt": { "S": $nowTime}
+  }, {
+    "accountNumber": { "S":  "0095-0073" },
+    "accountName": { "S":  "Shoes" },
+    "amountRemaining": { "N":  269369.76 },
+    "createdAt": { "S": $nowTime},
+    "updatedAt": { "S": $nowTime}
+  }, {
+    "accountNumber": { "S":  "0187-0994" },
+    "accountName": { "S":  "Industrial" },
+    "amountRemaining": { "N":  284932.36 },
+    "createdAt": { "S": $nowTime},
+    "updatedAt": { "S": $nowTime}
+  }, {
+    "accountNumber": { "S":  "48951-4063" },
+    "accountName": { "S":  "Health" },
+    "amountRemaining": { "N":  649677.21 },
+    "createdAt": { "S": $nowTime},
+    "updatedAt": { "S": $nowTime}
+  }, {
+    "accountNumber": { "S":  "21695-511" },
+    "accountName": { "S":  "Books" },
+    "amountRemaining": { "N":  102702.30 },
+    "createdAt": { "S": $nowTime},
+    "updatedAt": { "S": $nowTime}
+  }, {
+    "accountNumber": { "S":  "64092-010" },
+    "accountName": { "S":  "Games" },
+    "amountRemaining": { "N":  520867.04 },
+    "createdAt": { "S": $nowTime},
+    "updatedAt": { "S": $nowTime}
+  }, {
+    "accountNumber": { "S":  "36987-3207" },
+    "accountName": { "S":  "Outdoors" },
+    "amountRemaining": { "N":  654689.93 },
+    "createdAt": { "S": $nowTime},
+    "updatedAt": { "S": $nowTime}
+  }, {
+    "accountNumber": { "S":  "51346-105" },
+    "accountName": { "S":  "Health" },
+    "amountRemaining": { "N":  196925.14 },
+    "createdAt": { "S": $nowTime},
+    "updatedAt": { "S": $nowTime}
+  }, {
+    "accountNumber": { "S":  "0378-0480" },
+    "accountName": { "S":  "Sports" },
+    "amountRemaining": { "N":  413216.29 },
+    "createdAt": { "S": $nowTime},
+    "updatedAt": { "S": $nowTime}
+  }, {
+    "accountNumber": { "S":  "63323-377" },
+    "accountName": { "S":  "Baby" },
+    "amountRemaining": { "N":  223910.00 },
+    "createdAt": { "S": $nowTime},
+    "updatedAt": { "S": $nowTime}
+  }, {
+    "accountNumber": { "S":  "66184-526" },
+    "accountName": { "S":  "Toys" },
+    "amountRemaining": { "N":  541249.59 },
+    "createdAt": { "S": $nowTime},
+    "updatedAt": { "S": $nowTime}
+  }, {
+    "accountNumber": { "S":  "59535-1051" },
+    "accountName": { "S":  "Outdoors" },
+    "amountRemaining": { "N":  116393.61 },
+    "createdAt": { "S": $nowTime},
+    "updatedAt": { "S": $nowTime}
+  }, {
+    "accountNumber": { "S":  "0228-2848" },
+    "accountName": { "S":  "Automotive" },
+    "amountRemaining": { "N":  609716.47 },
+    "createdAt": { "S": $nowTime},
+    "updatedAt": { "S": $nowTime}
+  }, {
+    "accountNumber": { "S":  "69082-500" },
+    "accountName": { "S":  "Grocery" },
+    "amountRemaining": { "N":  906349.03 },
+    "createdAt": { "S": $nowTime},
+    "updatedAt": { "S": $nowTime}
+  }, {
+    "accountNumber": { "S":  "59039-002" },
+    "accountName": { "S":  "Outdoors" },
+    "amountRemaining": { "N":  675401.39 },
+    "createdAt": { "S": $nowTime},
+    "updatedAt": { "S": $nowTime}
+  }, {
+    "accountNumber": { "S":  "0078-0357" },
+    "accountName": { "S":  "Shoes" },
+    "amountRemaining": { "N":  45361.94 },
+    "createdAt": { "S": $nowTime},
+    "updatedAt": { "S": $nowTime}
+  }, {
+    "accountNumber": { "S":  "0615-6548" },
+    "accountName": { "S":  "Baby" },
+    "amountRemaining": { "N":  107384.29 },
+    "createdAt": { "S": $nowTime},
+    "updatedAt": { "S": $nowTime}
+  }, {
+    "accountNumber": { "S":  "55714-4416" },
+    "accountName": { "S":  "Baby" },
+    "amountRemaining": { "N":  918961.78 },
+    "createdAt": { "S": $nowTime},
+    "updatedAt": { "S": $nowTime}
+  }, {
+    "accountNumber": { "S":  "51346-171" },
+    "accountName": { "S":  "Jewelery" },
+    "amountRemaining": { "N":  212528.55 },
+    "createdAt": { "S": $nowTime},
+    "updatedAt": { "S": $nowTime}
+  }])
+
+{
+    "version" : "2018-05-29",
+    "operation" : "BatchPutItem",
+    "tables" : {
+         "AccountTable": $utils.toJson($accountsMockData)
+ }
+}

@@ -1,0 +1,18 @@
+## TODO: password
+#set($freshUserId = $util.autoId() )
+#set($nowTime = $util.time.nowISO8601() )
+
+{
+ "version": "2018-05-29",
+ "operation" : "PutItem",
+ "key" : {
+   "id" : { "S": "$freshUserId"}
+ },
+ "attributeValues" : {
+    "username" :  $util.dynamodb.toDynamoDBJson($ctx.args.options.username),
+    "email" :  $util.dynamodb.toDynamoDBJson($ctx.args.options.email),
+    "currentCartId" :  $util.dynamodb.toDynamoDBJson(""),
+    "createdAt": $util.dynamodb.toDynamoDBJson($nowTime),
+    "updatedAt": $util.dynamodb.toDynamoDBJson($nowTime)
+ }
+}

@@ -1,0 +1,17 @@
+#set($freshCartId = $util.autoId() )
+#set($nowTime = $util.time.nowISO8601() )
+
+{
+ "version": "2018-05-29",
+ "operation" : "PutItem",
+ "key" : {
+   "id" : { "S": "$freshCartId"}
+ },
+ "attributeValues" : {
+    "name" : { "S" : "Cart $freshCartId" },
+    "userId": $util.dynamodb.toDynamoDBJson(1), 
+    "cartLines": $util.dynamodb.toDynamoDBJson([]), 
+    "createdAt": $util.dynamodb.toDynamoDBJson($nowTime),
+    "updatedAt": $util.dynamodb.toDynamoDBJson($nowTime)
+ }
+}
