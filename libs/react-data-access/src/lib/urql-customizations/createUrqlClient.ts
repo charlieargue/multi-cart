@@ -4,10 +4,7 @@ import { dedupExchange, fetchExchange } from 'urql';
 // import { pipe, tap } from 'wonka'; // part of urql!
 import { cache } from './cache';
 
-// TODO: figure out why terminal worked but in browser didn't... TBD
-// const NEXT_PUBLIC_API_URL = process.env.NEXT_PUBLIC_API_URL ? process.env.NEXT_PUBLIC_API_URL : 'http://localhost:4000/graphql';       //  NODE backend
-// const NEXT_PUBLIC_API_URL = process.env.NEXT_PUBLIC_API_URL ? process.env.NEXT_PUBLIC_API_URL : 'http://localhost:4200/api/graphql'; // MOCKED API
-const NEXT_PUBLIC_API_URL = process.env.NEXT_PUBLIC_API_URL; // VERCEL-ized
+const NEXT_PUBLIC_API_URL = process.env.NEXT_PUBLIC_API_URL;
 console.log(`🚀 ~ NEXT_PUBLIC_API_URL`, NEXT_PUBLIC_API_URL);
 
 // TODO: things got wonky here, bring this back once stable again...

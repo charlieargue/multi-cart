@@ -1,4 +1,4 @@
-import { UsernamePasswordInput } from "@multi-cart/api-types";
+import { UsernamePasswordInput } from "@multi-cart/react-data-access";
 
 export const validateRegister = (options: UsernamePasswordInput) => {
 

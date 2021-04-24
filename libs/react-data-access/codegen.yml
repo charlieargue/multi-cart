@@ -1,7 +1,7 @@
 overwrite: true
 # WHEN MOCKING BE:
 schema: 'libs/mock-api/src/lib/schema.graphql'
-# NODE BE:
+# SERVERLESS APPSYNC:
 # schema: 'http://localhost:4000/graphql'
 documents: 'libs/react-data-access/src/lib/graphql/**/*.graphql'
 generates:
@@ -15,4 +15,4 @@ generates:
     config:
       withHooks: true
       withComponent: false
-      withHOC: false # not sure about this one?
+      withHOC: false
