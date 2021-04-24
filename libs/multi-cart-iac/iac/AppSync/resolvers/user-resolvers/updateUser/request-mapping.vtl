@@ -1,0 +1,15 @@
+## TODO: bring in session current user ID
+
+{
+    "version" : "2017-02-28",
+    "operation" : "UpdateItem",
+    "key" : {
+        "id" : { "S" : "9cb1b7e9-bbbe-416f-b205-5108bbfbbf9d" }
+    },
+    "update" : {
+        "expression" : "SET currentCartId = :cartId",
+        "expressionValues": {
+            ":cartId" : $util.dynamodb.toDynamoDBJson($context.arguments.currentCartId)
+        }
+    }
+}

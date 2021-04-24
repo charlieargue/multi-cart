@@ -1,0 +1,5 @@
+#if($ctx.result.items.isEmpty())
+    $utils.toJson(null)
+#else
+    $utils.toJson($ctx.result.items[0])
+#end 

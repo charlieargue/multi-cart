@@ -1,0 +1,14 @@
+##  // 🟥 you are NOT logged in!
+##         if (!req.session.userId) {
+##             return null;
+##         }
+##         return User.findOne(req.session.userId)
+#set($sessionUserId = "9cb1b7e9-bbbe-416f-b205-5108bbfbbf9d" ) ## TODO: hard-coded, temp
+
+{
+  "version": "2018-05-29",
+  "operation": "GetItem",
+  "key": {
+    "id": $util.dynamodb.toDynamoDBJson($sessionUserId),
+  },
+}

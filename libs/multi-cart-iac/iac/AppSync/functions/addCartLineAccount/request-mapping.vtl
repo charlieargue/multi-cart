@@ -1,0 +1,49 @@
+## TODO: this could/might benefit from a BatchGetItems: cart, account
+
+## VIP: $ctx.prev.result   ==========> ACCOUNT 
+## VIP: $ctx.stash.cart    ==========> CART (w/ lines)
+#set($cart = $context.stash.cart)
+#set($freshCartLineAccountId = $util.autoId() )
+#set($nowTime = $util.time.nowISO8601() )
+$util.qr($context.stash.put("freshCartLineAccountId", $freshCartLineAccountId))
+
+## get INDEX of this cartLine 
+#foreach ($item in $cart.cartLines)
+    #if($item.id == "$ctx.args.cartLineId")
+        #set($idx = $foreach.count)
+    #end
+#end
+#set ($idxZeroBased = $idx - 1)
+## $utils.error($util.dynamodb.toDynamoDBJson($idxZeroBased))
+
+## -------------------------------------
+## add cart line ACCOUNT
+## -------------------------------------
+{
+    "version" : "2017-02-28",
+    "operation" : "UpdateItem",
+    "key" : {
+        "id" : { "S": "$ctx.args.cartId" }
+    },
+    "update" : {
+        "expression" : "SET #cls[$idxZeroBased].#clas = list_append(#cls[$idxZeroBased].#clas, :cla)",
+        "expressionNames": { 
+            "#cls" : "cartLines",
+            "#clas" : "cartLineAccounts"
+        },
+        "expressionValues" : {
+          ":cla":  {
+                "L": [
+                    { "M" : { 
+                        "id": { "S":  "$freshCartLineAccountId"},
+                        "cartLineId": { "S":  "$ctx.args.cartLineId"},
+                        "accountNumber": { "S":  "$ctx.prev.result.accountNumber"},
+                        "amount": { "N":  $ctx.args.amount},
+                        "createdAt": { "S": "$nowTime"},
+                        "updatedAt": { "S": "$nowTime"}
+                      }},
+                ]
+              }
+        },
+    },
+}

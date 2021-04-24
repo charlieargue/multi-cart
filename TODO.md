@@ -5,6 +5,7 @@ Agile/kanban board for multi-cart
 
 ### 😎 Wishlist
 
+- [ ] so we need a pipeline resolver of multiple hydrate1, hydrate2, 3... batch resolvers? to get 25x4=100 accounts hydrated?
 - [ ] addCartLineAccount INPUT TYPE
 - [ ] add back CAT/UOM dropdowns, and when you change them, you get a modal: "for this item only, or for this item in the master catalog? and then are you sure?"
 - [ ] CMPNT COMPISITION: try something different like **<CartLines lines={cart.cartLines}> ... children <LineAccounts accounts={}>** so all the **data?.map?...** logic is hidden in the lib/shared-cmpnts
@@ -85,6 +86,16 @@ Agile/kanban board for multi-cart
 - [ ] UI: build it all out, piece by piece, overhauling and using the ready pages I already built in my **chakra-demo-app**
 - [ ] UI: for Forgot Pwd -> the token page: https://pro.chakra-ui.com/components/application-ui/banners
 - [ ] UI: clean all the placeholder text and stuff up!
+- [ ] ⛅️ IAC: get salted passwords (see register) working again
+- [ ] ⛅️ IAC: get session working again
+- [ ] ⛅️ IAC: login pipeline needs to verify password
+- [ ] ⛅️ IAC: add INDEX (w/ unique constraint) to username + email in UserTable (and then can switch back from Scan-to-Query for login?)
+- [ ] ⛅️ IAC: add INDEX (w/ unique constraint) to accountNumber in AccountTable
+- [ ] ⛅️ IAC: logout (does nothing right now)
+- [ ] ⛅️ IAC: error handling (better BOOLEAN response mapping) for when deleteCart(NON-EXISTENT-CART)
+- [ ] ⛅️ IAC: hydrate in categories like you did accounts
+- [ ] ⛅️ IAC: search for all TODO: in codes base 
+
 
 
 ### 🧠 In Progress

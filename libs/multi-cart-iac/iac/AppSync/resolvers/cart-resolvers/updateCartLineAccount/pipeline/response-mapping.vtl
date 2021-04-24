@@ -1,0 +1,17 @@
+## NOTE: the UpdateItem for updating/appending cart line ACCOUNTS returns the entire CART w/ cartLines w/ cartLineAccounts... 
+##       so have to filter down to return just the one new fresh cart line ACCOUNT
+
+## cart LINES
+#foreach($cl in $context.result.cartLines)
+    #if($cl.id == "$ctx.args.cartLineId")
+
+        ## cart line ACCOUNTS
+        #foreach($cla in $cl.cartLineAccounts)
+            #if($cla.id == "$ctx.args.id")
+                #set($data = $cla)
+            #end
+        #end
+    #end
+#end
+
+$util.toJson($data)

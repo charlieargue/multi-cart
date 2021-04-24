@@ -1,0 +1,10 @@
+## NOTE: the UpdateItem for updating cart LINE returns the entire CART w/ cartLines... 
+##       so have to filter down to return just the one new fresh cart LINE
+
+#foreach($item in $context.result.cartLines)
+    #if($item.id == "$ctx.args.cartLine.id")
+        #set($data = $item)
+    #end
+#end
+
+$util.toJson($data)

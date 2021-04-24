@@ -1,0 +1,36 @@
+## VIP: $ctx.stash.cart    ==========> CART (w/ lines)
+#set($cart = $context.stash.cart)
+
+## TODO: how to break out of these foreach, and can they be nested and .count still works as expected?
+## get INDEX of this cartLine 
+#foreach ($cl in $cart.cartLines)
+    #if($cl.id == "$ctx.args.cartLineId")
+        #set($clIdx = $foreach.count)
+    #end
+#end
+#set ($clIdxZeroBased = $clIdx - 1)
+
+#foreach ($cla in $cart.cartLines[$clIdxZeroBased].cartLineAccounts)
+    #if($cla.id == "$ctx.args.cartLineAccountId")
+        #set($claIdx = $foreach.count)
+    #end
+#end
+#set ($claIdxZeroBased = $claIdx - 1)
+
+## -------------------------------------
+## delete cart line ACCOUNT
+## -------------------------------------
+{
+    "version" : "2017-02-28",
+    "operation" : "UpdateItem",
+    "key" : {
+        "id" : { "S": "$ctx.args.cartId"}
+    },
+    "update" : {
+        "expression" : "REMOVE #cls[$clIdxZeroBased].#clas[$claIdxZeroBased]",
+        "expressionNames": { 
+             "#cls" : "cartLines",
+            "#clas" : "cartLineAccounts"
+        },
+    },
+}

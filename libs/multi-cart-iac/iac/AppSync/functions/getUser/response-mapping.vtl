@@ -1,0 +1,30 @@
+## 🧠 Hmmmm, linting error but works?!
+
+## Pass back the result from DynamoDB.
+#if($ctx.result.items.isEmpty())
+    $utils.toJson(null)
+#else
+    $utils.toJson($ctx.result.items[0])
+#end 
+
+## #if( $context.result && $context.result.error )
+##     $utils.error($context.result.error)
+## #else
+##     ## SINGULAR or PLURAL
+##     #if( $context.result && $context.result.items.length )
+
+##         ## PLURAL
+##         ## $utils.error('💎 3')
+##         ## $utils.error($util.dynamodb.toDynamoDBJson($context.result.items))
+##         $utils.toJson($context.result.items[0])
+
+##         ## #else
+##         ##     ## TODO: CONFUSION here
+##         ##     ## $utils.error($util.dynamodb.toDynamoDBJson($context.result.items))
+##         ##     ## SINGULAR
+##         ##     ## $utils.error('💎 4')
+##         ##     $utils.toJson($context.result.items[0])
+##     #else 
+##         $utils.toJson(null)
+##     #end
+## #end

@@ -1,0 +1,186 @@
+## TODO: figure out how to use accountNumber as unique ID so no need for extra
+#set($nowTime = $util.time.nowISO8601() )
+#set($accountsMockData = [{
+"id": { "S": "b71a1e74-960f-431b-81cb-2329f43e12a5" },
+        "accountNumber": { "S":  "69016-001" },
+        "accountName": { "S":  "Automotive" },
+        "amountRemaining": { "N":  584552.97 },
+        "createdAt": { "S": $nowTime},
+        "updatedAt": { "S": $nowTime}
+      }, {
+        "id": { "S": "4a141760-435f-468d-b12a-dfd48ec3abd8" },
+        "accountNumber": { "S":  "0268-1526" },
+        "accountName": { "S":  "Music" },
+        "amountRemaining": { "N":  442957.76 },
+        "createdAt": { "S": $nowTime},
+        "updatedAt": { "S": $nowTime}
+      }, {
+        "id": { "S": "cb49a396-7a44-4624-8e5d-a8a3637ec9c4" },
+        "accountNumber": { "S":  "0085-0517" },
+        "accountName": { "S":  "Home" },
+        "amountRemaining": { "N":  816749.05 },
+        "createdAt": { "S": $nowTime},
+        "updatedAt": { "S": $nowTime}
+      }, {
+        "id": { "S": "b1b9c5af-8935-4d19-9b4d-a4b87339734f" },
+        "accountNumber": { "S":  "51079-978" },
+        "accountName": { "S":  "Beauty" },
+        "amountRemaining": { "N":  855827.19 },
+        "createdAt": { "S": $nowTime},
+        "updatedAt": { "S": $nowTime}
+      }, {
+        "id": { "S": "8a673328-8095-4bd4-aca1-25130daef905" },
+        "accountNumber": { "S":  "60512-8002" },
+        "accountName": { "S":  "Beauty" },
+        "amountRemaining": { "N":  352113.59 },
+        "createdAt": { "S": $nowTime},
+        "updatedAt": { "S": $nowTime}
+      }, {
+        "id": { "S": "7abc9dc3-a971-4c21-987e-f516c91512cb" },
+        "accountNumber": { "S":  "14783-033" },
+        "accountName": { "S":  "Sports" },
+        "amountRemaining": { "N":  987027.62 },
+        "createdAt": { "S": $nowTime},
+        "updatedAt": { "S": $nowTime}
+      }, {
+        "id": { "S": "c27dcf6f-bd0f-40d3-ab25-135edeac8c48" },
+        "accountNumber": { "S":  "65044-5032" },
+        "accountName": { "S":  "Outdoors" },
+        "amountRemaining": { "N":  910264.16 },
+        "createdAt": { "S": $nowTime},
+        "updatedAt": { "S": $nowTime}
+      }, {
+        "id": { "S": "dadcc88f-ec7f-45ce-a7f6-5dd144fb46fe" },
+        "accountNumber": { "S":  "36987-2379" },
+        "accountName": { "S":  "Home" },
+        "amountRemaining": { "N":  882181.45 },
+        "createdAt": { "S": $nowTime},
+        "updatedAt": { "S": $nowTime}
+      }, {
+        "id": { "S": "0dd3111c-9526-472c-bef2-f839dda503c6" },
+        "accountNumber": { "S":  "30142-501" },
+        "accountName": { "S":  "Sports" },
+        "amountRemaining": { "N":  254613.68 },
+        "createdAt": { "S": $nowTime},
+        "updatedAt": { "S": $nowTime}
+      }, {
+        "id": { "S": "6afa74f8-57ca-42f4-817e-4cd0d1227501" },
+        "accountNumber": { "S":  "60724-101" },
+        "accountName": { "S":  "Home" },
+        "amountRemaining": { "N":  918472.94 },
+        "createdAt": { "S": $nowTime},
+        "updatedAt": { "S": $nowTime}
+      }, {
+        "id": { "S": "40fded26-df83-4798-b851-37fcd8ac2646" },
+        "accountNumber": { "S":  "0781-1228" },
+        "accountName": { "S":  "Games" },
+        "amountRemaining": { "N":  639208.58 },
+        "createdAt": { "S": $nowTime},
+        "updatedAt": { "S": $nowTime}
+      }, {
+        "id": { "S": "dcd53956-2e6f-43f8-886c-f50a453c50bc" },
+        "accountNumber": { "S":  "55292-601" },
+        "accountName": { "S":  "Toys" },
+        "amountRemaining": { "N":  586338.02 },
+        "createdAt": { "S": $nowTime},
+        "updatedAt": { "S": $nowTime}
+      }, {
+        "id": { "S": "093caad3-5798-4e5f-86ef-4c0592a2029f" },
+        "accountNumber": { "S":  "58118-0213" },
+        "accountName": { "S":  "Industrial" },
+        "amountRemaining": { "N":  873588.08 },
+        "createdAt": { "S": $nowTime},
+        "updatedAt": { "S": $nowTime}
+      }, {
+        "id": { "S": "94ed9a18-8c91-4181-b8f6-c625e52e71a0" },
+        "accountNumber": { "S":  "60429-623" },
+        "accountName": { "S":  "Automotive" },
+        "amountRemaining": { "N":  317243.93 },
+        "createdAt": { "S": $nowTime},
+        "updatedAt": { "S": $nowTime}
+      }, {
+        "id": { "S": "d3854b6a-80b9-4233-9eaa-039c9de3b984" },
+        "accountNumber": { "S":  "36987-1018" },
+        "accountName": { "S":  "Beauty" },
+        "amountRemaining": { "N":  925863.72 },
+        "createdAt": { "S": $nowTime},
+        "updatedAt": { "S": $nowTime}
+      }, {
+        "id": { "S": "6885130e-ba19-4962-ac1e-5286f08aa8e0" },
+        "accountNumber": { "S":  "55154-4616" },
+        "accountName": { "S":  "Tools" },
+        "amountRemaining": { "N":  413202.74 },
+        "createdAt": { "S": $nowTime},
+        "updatedAt": { "S": $nowTime}
+      }, {
+        "id": { "S": "2b911ca4-2638-472d-9d01-c4755a66c2f4" },
+        "accountNumber": { "S":  "45802-732" },
+        "accountName": { "S":  "Movies" },
+        "amountRemaining": { "N":  773693.94 },
+        "createdAt": { "S": $nowTime},
+        "updatedAt": { "S": $nowTime}
+      }, {
+        "id": { "S": "c66e9d6f-fb2b-496f-9ce7-ed74395b8e78" },
+        "accountNumber": { "S":  "21130-461" },
+        "accountName": { "S":  "Health" },
+        "amountRemaining": { "N":  232165.59 },
+        "createdAt": { "S": $nowTime},
+        "updatedAt": { "S": $nowTime}
+      }, {
+        "id": { "S": "5b2b1368-23f7-4e8f-b046-1b6bfec473d7" },
+        "accountNumber": { "S":  "17089-383" },
+        "accountName": { "S":  "Health" },
+        "amountRemaining": { "N":  158998.24 },
+        "createdAt": { "S": $nowTime},
+        "updatedAt": { "S": $nowTime}
+      }, {
+        "id": { "S": "bb595091-fb13-4004-a814-abbf799aac8c" },
+        "accountNumber": { "S":  "21130-343" },
+        "accountName": { "S":  "Baby" },
+        "amountRemaining": { "N":  111652.31 },
+        "createdAt": { "S": $nowTime},
+        "updatedAt": { "S": $nowTime}
+      }, {
+        "id": { "S": "94bc2637-dc66-4793-b967-5baba817114e" },
+        "accountNumber": { "S":  "0280-0800" },
+        "accountName": { "S":  "Electronics" },
+        "amountRemaining": { "N":  114097.31 },
+        "createdAt": { "S": $nowTime},
+        "updatedAt": { "S": $nowTime}
+      }, {
+        "id": { "S": "5e6297e4-e4cb-4a0f-8bd6-f9b0514b46d4" },
+        "accountNumber": { "S":  "49348-104" },
+        "accountName": { "S":  "Baby" },
+        "amountRemaining": { "N":  517679.36 },
+        "createdAt": { "S": $nowTime},
+        "updatedAt": { "S": $nowTime}
+      }, {
+        "id": { "S": "703babfd-e78a-4229-bcfe-bd5db24bcc75" },
+        "accountNumber": { "S":  "43742-0066" },
+        "accountName": { "S":  "Games" },
+        "amountRemaining": { "N":  503472.22 },
+        "createdAt": { "S": $nowTime},
+        "updatedAt": { "S": $nowTime}
+      }, {
+        "id": { "S": "70d45087-3c7d-4ea6-94e4-a895113a15fb" },
+        "accountNumber": { "S":  "10019-553" },
+        "accountName": { "S":  "Music" },
+        "amountRemaining": { "N":  738745.46 },
+        "createdAt": { "S": $nowTime},
+        "updatedAt": { "S": $nowTime}
+      }, {
+        "id": { "S": "b02d8c83-8a09-4ea9-9d23-1ff3143d6c73" },
+        "accountNumber": { "S":  "75957-002" },
+        "accountName": { "S":  "Baby" },
+        "amountRemaining": { "N":  372906.06 },
+        "createdAt": { "S": $nowTime},
+        "updatedAt": { "S": $nowTime}
+      }])
+
+{
+    "version" : "2018-05-29",
+    "operation" : "BatchPutItem",
+    "tables" : {
+         "AccountTable": $utils.toJson($accountsMockData)
+ }
+}
