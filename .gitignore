@@ -47,6 +47,7 @@ Thumbs.db
 **/.env.test
 **/.env.development.local
 **/.env.test.local
+**/.env.mock.local
 **/.env.production.local
 
 # stupid files
