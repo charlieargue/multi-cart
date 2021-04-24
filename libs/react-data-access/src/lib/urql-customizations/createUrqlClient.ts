@@ -42,9 +42,12 @@ export const createUrqlClient = (ssrExchange: any) => ({
     url: NEXT_PUBLIC_API_URL,
     fetchOptions: {
         // VIP: session cookies will NOT work without this
-        credentials: "include" as const,
+        // TODO: need this for session cookies (afaik, before serverless)
+        // BUT CAUSES CORS Access-Control-Allow-Origin wildcard ERROR
+        //  credentials: "include" as const,
         headers: {
             "x-api-key": process.env.NEXT_PUBLIC_API_KEY,
+            "Access-Control-Allow-Origin": "http://localhost:4200",
         },
     },
     exchanges: [
