@@ -186,74 +186,6 @@
         }
       }
     },
-    "multi-cart-api": {
-      "root": "apps/multi-cart-api",
-      "sourceRoot": "apps/multi-cart-api/src",
-      "projectType": "application",
-      "prefix": "multi-cart-api",
-      "targets": {
-        "build": {
-          "executor": "@nrwl/node:build",
-          "outputs": ["{options.outputPath}"],
-          "options": {
-            "outputPath": "dist/apps/multi-cart-api",
-            "main": "apps/multi-cart-api/src/index.ts",
-            "tsConfig": "apps/multi-cart-api/tsconfig.app.json",
-            "assets": []
-          },
-          "configurations": {
-            "production": {
-              "optimization": true,
-              "extractLicenses": true,
-              "inspect": false,
-              "fileReplacements": [
-                {
-                  "replace": "apps/multi-cart-api/src/environments/environment.ts",
-                  "with": "apps/multi-cart-api/src/environments/environment.prod.ts"
-                }
-              ]
-            }
-          }
-        },
-        "serve-execute": {
-          "executor": "@nrwl/node:execute",
-          "options": { "buildTarget": "multi-cart-api:build" }
-        },
-        "serve": {
-          "executor": "@nrwl/workspace:run-commands",
-          "options": {
-            "commands": [
-              "npx redis-cli shutdown",
-              "npx redis-server /usr/local/etc/redis.conf",
-              "yarn typeorm:compile-migrations",
-              "npx nx run multi-cart-api:serve-execute"
-            ]
-          }
-        },
-        "lint": {
-          "executor": "@nrwl/linter:eslint",
-          "options": { "lintFilePatterns": ["apps/multi-cart-api/**/*.ts"] }
-        },
-        "test": {
-          "executor": "@nrwl/workspace:run-commands",
-          "options": {
-            "commands": [
-              "ts-node --project ./apps/multi-cart-api/tsconfig.json apps/multi-cart-api/src/test/test-utils/setup.ts",
-              "npx nx run multi-cart-api:test-jest"
-            ],
-            "parallel": false
-          }
-        },
-        "test-jest": {
-          "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/multi-cart-api"],
-          "options": {
-            "jestConfig": "apps/multi-cart-api/jest.config.js",
-            "passWithNoTests": true
-          }
-        }
-      }
-    },
     "react-ui-e2e": {
       "root": "apps/react-ui-e2e",
       "sourceRoot": "apps/react-ui-e2e/src",
@@ -335,25 +267,6 @@
           "outputs": ["coverage/libs/mock-api"],
           "options": {
             "jestConfig": "libs/mock-api/jest.config.js",
-            "passWithNoTests": true
-          }
-        }
-      }
-    },
-    "api-types": {
-      "root": "libs/api-types",
-      "sourceRoot": "libs/api-types/src",
-      "projectType": "library",
-      "targets": {
-        "lint": {
-          "executor": "@nrwl/linter:eslint",
-          "options": { "lintFilePatterns": ["libs/api-types/**/*.ts"] }
-        },
-        "test": {
-          "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/api-types"],
-          "options": {
-            "jestConfig": "libs/api-types/jest.config.js",
             "passWithNoTests": true
           }
         }

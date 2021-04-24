@@ -19,15 +19,15 @@ cd multi-cart && yarn && yarn mock
 # 👍 Commands:
 
 ```js
-$ yarn start:all
+$ yarn start 
 
 # website:
 # • http://localhost:4200/
 
-# graphiQL playground:
+# GraphQL playground:
 # • http://localhost:4000/graphql
 
-```
+````
 
 # 👔 Forms
 

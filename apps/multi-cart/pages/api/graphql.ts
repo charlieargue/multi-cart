@@ -3,6 +3,13 @@ import { schema } from '@multi-cart/mock-api';
 import { Request, Response } from 'express';
 import { graphqlHTTP } from 'express-graphql';
 
+// -------------------------------------
+// MOCKED API
+// - stood up by next.js automatically
+// - uses code-generated schema
+// - uses mocked data and mocked resolver endpoints
+// -------------------------------------
+
 // thx: https://www.graphql-tools.com/docs/mocking/
 export default async function handler(req: Request & { session: Session & { userId?: number } }, res: Response) {
     req.is = (type: string | string[]) =>

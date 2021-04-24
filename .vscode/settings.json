@@ -1,5 +1,5 @@
 {
-    "workbench.colorTheme": "Fodder Contrast (rainglow)",
+    "workbench.colorTheme": "Freshcut Contrast (rainglow)",
     "turboConsoleLog.addSemicolonInTheEnd": true,
     "bookmarks.useWorkaroundForFormatters": true,
     "bookmarks.sideBar.expanded": true,
@@ -15,6 +15,7 @@
     "turboConsoleLog.quote": "`",
     "files.exclude": {
         ".vercel": true,
+        "**/.vercel": true,
         "dist": true
     }
 }
