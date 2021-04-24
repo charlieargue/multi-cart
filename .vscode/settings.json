@@ -15,6 +15,7 @@
     "turboConsoleLog.quote": "`",
     "files.exclude": {
         ".vercel": true,
+        "**/.terraform": true,
         "**/.vercel": true,
         "dist": true
     }

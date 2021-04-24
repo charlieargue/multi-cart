@@ -43,7 +43,6 @@ Thumbs.db
 .env
 .env.production
 .env.test
-// TODO: see BEN dunno where
 .env.development.local
 .env.test.local
 .env.production.local
