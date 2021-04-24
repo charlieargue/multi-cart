@@ -54,7 +54,7 @@ Thumbs.db
 
 # JSON database (for mocked api)
 libs/mock-api/mock-database.json
-.vercel
+**/.vercel
 
 #  Local .terraform directories
 **/.terraform/**/*
