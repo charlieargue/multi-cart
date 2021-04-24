@@ -56,7 +56,7 @@ libs/mock-api/mock-database.json
 .vercel
 
 #  Local .terraform directories
-.terraform/**/*
+**/.terraform/**/*
 **/iac/.terraform/**/*
 
 # .tfstate files

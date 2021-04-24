@@ -42,7 +42,10 @@ export const createUrqlClient = (ssrExchange: any) => ({
     url: NEXT_PUBLIC_API_URL,
     fetchOptions: {
         // VIP: session cookies will NOT work without this
-        credentials: "include" as const
+        credentials: "include" as const,
+        headers: {
+            "x-api-key": process.env.NEXT_PUBLIC_API_KEY,
+        },
     },
     exchanges: [
         devtoolsExchange,
