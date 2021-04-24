@@ -2,6 +2,26 @@
 🔴 TODO: work-in-progress... 🚧
 🔴 🔴 🔴 🔴 🔴 🔴
 
+# 🎢 Quick Start with the Serverless AppSync/Terraform API
+
+```bash
+# 1) clone the repo
+git clone https://github.com/charlieargue/multi-cart.git
+
+# 2) install libraries 
+cd multi-cart && yarn && yarn start
+
+# 3) 🔴 NO: only need this if trying to run terraform apply .... setup terraform
+cd libs/multi-cart-iac
+terraform init
+
+
+# 4) try logging in:
+# username: mocked-user
+# password: mocking
+```
+
+
 # 🎢 Quick Start with the Mocked-API
 
 ```bash
@@ -9,7 +29,7 @@
 git clone https://github.com/charlieargue/multi-cart.git
 
 # 2) install libraries and fire it up!
-cd multi-cart && yarn && yarn mock
+cd multi-cart && yarn && yarn start
 
 # 3) try logging in:
 # username: mocked-user
