@@ -41,6 +41,7 @@ Thumbs.db
 
 # dotenv environment variables file
 .env
+.env.local
 .env.production
 .env.test
 .env.development.local
