@@ -29,7 +29,7 @@
     "prepare": "husky install",
     "postinstall": "husky install",
     "generate": "nx run react-data-access:generate",
-    "tfa": "cd libs/multi-cart-iac && terraform apply -auto-approve"
+    "tfa": "terraform -chdir=libs/multi-cart-iac apply -auto-approve"
   },
   "private": true,
   "devDependencies": {
