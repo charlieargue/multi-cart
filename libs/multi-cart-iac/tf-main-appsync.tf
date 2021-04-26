@@ -1,4 +1,3 @@
-
 resource "aws_appsync_graphql_api" "MultiCartPOC" {
   authentication_type = "API_KEY"
   name                = "MultiCartPOC"
@@ -10,5 +9,5 @@ resource "aws_appsync_graphql_api" "MultiCartPOC" {
 }
 
 resource "aws_appsync_api_key" "api_key" {
-  api_id = "c4h3m6svizchdi7bqp2l4ts3gm"
+  api_id = var.APPSYNC_API_KEY
 }

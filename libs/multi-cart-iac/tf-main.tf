@@ -1,3 +1,15 @@
+
+##################################################################################
+# VARIABLES
+##################################################################################
+variable "AWS_REGION_VAR" { default = "" }
+variable "APPSYNC_API_KEY" { default = "" }
+
+
+
+## -------------------------------------
+## MAIN CONFIG
+## -------------------------------------
 terraform {
   required_providers {
     aws = {
@@ -9,7 +21,7 @@ terraform {
 
 provider "aws" {
   profile = "default"
-  region  = "us-west-2"
+  region  = var.AWS_REGION_VAR
 }
 
 resource "aws_budgets_budget" "cost" {

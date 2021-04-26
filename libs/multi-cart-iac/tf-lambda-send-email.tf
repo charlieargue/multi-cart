@@ -1,4 +1,3 @@
-
 ## ------------------------------
 ## Lambda Resources
 ## • archive/zip of files
@@ -15,6 +14,7 @@ data "archive_file" "lambda_send_email_archive" {
 }
 
 # LAMBDA ƛ
+// TODO: pass in variable
 resource "aws_lambda_function" "lambda_send_email_function" {
   filename         = data.archive_file.lambda_send_email_archive.output_path
   function_name    = "lambda_send_email_function"
@@ -23,10 +23,11 @@ resource "aws_lambda_function" "lambda_send_email_function" {
   source_code_hash = data.archive_file.lambda_send_email_archive.output_base64sha256
   runtime          = "nodejs12.x"
   publish          = true
-  # environment {
-  #   variables = {
-  #   }
-  # }
+  environment {
+    variables = {
+      AWS_REGION_VAR = var.AWS_REGION_VAR
+    }
+  }
   depends_on = [
     aws_iam_role_policy_attachment.lambda_logs,
   ]
