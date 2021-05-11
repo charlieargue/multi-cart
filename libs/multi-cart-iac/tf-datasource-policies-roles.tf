@@ -4,7 +4,7 @@
 # - allows AppSync service to assume IAM role for accessing DynamoDB tables
 resource "aws_iam_role" "iam_role_for_dynamo" {
   name               = "iam_role_for_dynamo"
-  assume_role_policy = file("./iac/AppSync/policies-roles/AppSync/role.json")
+  assume_role_policy = file("./AppSync/policies-roles/AppSync/role.json")
 }
 
 
@@ -13,7 +13,7 @@ resource "aws_iam_role" "iam_role_for_dynamo" {
 resource "aws_iam_role_policy" "iam_role_policy_for_dynamo" {
   name = "iam_role_policy_for_dynamo"
   role = aws_iam_role.iam_role_for_dynamo.id
-  policy = templatefile("./iac/AppSync/policies-roles/DynamoDB/policy.json", {
+  policy = templatefile("./AppSync/policies-roles/DynamoDB/policy.json", {
     USER_TABLE_ARN    = aws_dynamodb_table.user_dynamo_table.arn,
     CART_TABLE_ARN    = aws_dynamodb_table.cart_dynamo_table.arn,
     ACCOUNT_TABLE_ARN = aws_dynamodb_table.account_dynamo_table.arn,
@@ -24,15 +24,15 @@ resource "aws_iam_role_policy" "iam_role_policy_for_dynamo" {
 # (thx: https://www.terraform.io/docs/providers/aws/r/lambda_function.html)
 resource "aws_iam_role" "iam_role_for_lambda" {
   name               = "iam_role_for_lambda"
-  assume_role_policy = file("./iac/AppSync/policies-roles/lambdas/role.json")
+  assume_role_policy = file("./AppSync/policies-roles/lambdas/role.json")
 }
 
 # ROLE + POLICY for lambdas ƛ 
 resource "aws_iam_role_policy" "iam_role_policy_for_lambda" {
   name = "iam_role_policy_for_lambda"
   role = aws_iam_role.iam_role_for_lambda.id
-  policy = templatefile("./iac/AppSync/policies-roles/lambdas/policy.json", {
-    GET_LAMBDA_ARN = aws_lambda_function.lambda_send_email_function.arn,
+  policy = templatefile("./AppSync/policies-roles/lambdas/policy.json", {
+    GET_LAMBDA_ARN = module.send_email.function_arn,
   })
 }
 

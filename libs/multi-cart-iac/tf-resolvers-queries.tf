@@ -5,8 +5,8 @@ resource "aws_appsync_resolver" "list_users_resolver" {
   field             = "users"
   type              = "Query"
   data_source       = aws_appsync_datasource.multicart_dynamodb_user_datasource.name
-  request_template  = file("./iac/AppSync/resolvers/user-resolvers/users/request-mapping.vtl")
-  response_template = file("./iac/AppSync/resolvers/_generic/generic-response-mapping-items.vtl")
+  request_template  = file("./AppSync/resolvers/user-resolvers/users/request-mapping.vtl")
+  response_template = file("./AppSync/resolvers/_generic/generic-response-mapping-items.vtl")
   depends_on = [
     aws_appsync_graphql_api.MultiCartPOC,
     aws_appsync_datasource.multicart_dynamodb_user_datasource,
@@ -19,8 +19,8 @@ resource "aws_appsync_resolver" "me_resolver" {
   field             = "me"
   type              = "Query"
   data_source       = aws_appsync_datasource.multicart_dynamodb_user_datasource.name
-  request_template  = file("./iac/AppSync/resolvers/user-resolvers/me/request-mapping.vtl")
-  response_template = file("./iac/AppSync/resolvers/_generic/generic-response-mapping-item-SINGULAR.vtl")
+  request_template  = file("./AppSync/resolvers/user-resolvers/me/request-mapping.vtl")
+  response_template = file("./AppSync/resolvers/_generic/generic-response-mapping-item-SINGULAR.vtl")
   depends_on = [
     aws_appsync_graphql_api.MultiCartPOC,
     aws_appsync_datasource.multicart_dynamodb_user_datasource,
@@ -33,8 +33,8 @@ resource "aws_appsync_resolver" "list_accounts_resolver" {
   field             = "accounts"
   type              = "Query"
   data_source       = aws_appsync_datasource.multicart_dynamodb_account_datasource.name
-  request_template  = file("./iac/AppSync/resolvers/account-resolvers/accounts/request-mapping.vtl")
-  response_template = file("./iac/AppSync/resolvers/_generic/generic-response-mapping-items.vtl")
+  request_template  = file("./AppSync/resolvers/account-resolvers/accounts/request-mapping.vtl")
+  response_template = file("./AppSync/resolvers/_generic/generic-response-mapping-items.vtl")
   depends_on = [
     aws_appsync_graphql_api.MultiCartPOC,
     aws_appsync_datasource.multicart_dynamodb_account_datasource,
@@ -49,8 +49,8 @@ resource "aws_appsync_resolver" "list_carts_resolver" {
   field             = "carts"
   type              = "Query"
   data_source       = aws_appsync_datasource.multicart_dynamodb_cart_datasource.name
-  request_template  = file("./iac/AppSync/resolvers/cart-resolvers/carts/request-mapping.vtl")
-  response_template = file("./iac/AppSync/resolvers/_generic/generic-response-mapping-items.vtl")
+  request_template  = file("./AppSync/resolvers/cart-resolvers/carts/request-mapping.vtl")
+  response_template = file("./AppSync/resolvers/_generic/generic-response-mapping-items.vtl")
   depends_on = [
     aws_appsync_graphql_api.MultiCartPOC,
     aws_appsync_datasource.multicart_dynamodb_cart_datasource,
@@ -65,8 +65,8 @@ resource "aws_appsync_resolver" "get_cart_resolver" {
   field             = "cart"
   type              = "Query"
   data_source       = aws_appsync_datasource.multicart_dynamodb_cart_datasource.name
-  request_template  = file("./iac/AppSync/resolvers/cart-resolvers/cart/request-mapping.vtl")
-  response_template = file("./iac/AppSync/resolvers/_generic/generic-response-mapping-item-SINGULAR.vtl")
+  request_template  = file("./AppSync/resolvers/cart-resolvers/cart/request-mapping.vtl")
+  response_template = file("./AppSync/resolvers/_generic/generic-response-mapping-item-SINGULAR.vtl")
   depends_on = [
     aws_appsync_graphql_api.MultiCartPOC,
     aws_appsync_datasource.multicart_dynamodb_cart_datasource,

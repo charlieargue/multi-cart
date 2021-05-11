@@ -59,7 +59,7 @@ libs/mock-api/mock-database.json
 
 #  Local .terraform directories
 **/.terraform/**/*
-**/iac/.terraform/**/*
+**/.terraform/**/*
 
 # .tfstate files
 **/*.tfstate

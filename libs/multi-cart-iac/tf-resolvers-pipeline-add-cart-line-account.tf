@@ -20,8 +20,8 @@ resource "aws_appsync_resolver" "add_cart_line_account_pipeline_resolver" {
   api_id            = aws_appsync_graphql_api.MultiCartPOC.id
   field             = "addCartLineAccount"
   type              = "Mutation"
-  request_template  = file("./iac/AppSync/resolvers/cart-resolvers/addCartLineAccount/pipeline/request-mapping.vtl")
-  response_template = file("./iac/AppSync/resolvers/cart-resolvers/addCartLineAccount/pipeline/response-mapping.vtl")
+  request_template  = file("./AppSync/resolvers/cart-resolvers/addCartLineAccount/pipeline/request-mapping.vtl")
+  response_template = file("./AppSync/resolvers/cart-resolvers/addCartLineAccount/pipeline/response-mapping.vtl")
   pipeline_config {
     functions = [
       "${aws_appsync_function.get_cart_function.function_id}",

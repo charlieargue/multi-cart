@@ -5,8 +5,8 @@
 #   field             = "updateCart"
 #   type              = "Mutation"
 #   data_source       = aws_appsync_datasource.multicart_dynamodb_cart_datasource.name
-#   request_template  = file("./iac/AppSync/resolvers/cart-resolvers/updateCart/request-mapping.vtl")
-#   response_template = file("./iac/AppSync/resolvers/_generic/generic-response-mapping-item-SINGULAR.vtl")
+#   request_template  = file("./AppSync/resolvers/cart-resolvers/updateCart/request-mapping.vtl")
+#   response_template = file("./AppSync/resolvers/_generic/generic-response-mapping-item-SINGULAR.vtl")
 #   depends_on = [
 #     aws_appsync_graphql_api.MultiCartPOC,
 #     aws_appsync_datasource.multicart_dynamodb_cart_datasource,
@@ -25,8 +25,8 @@ resource "aws_appsync_resolver" "update_cart_line_pipeline_resolver" {
   api_id            = aws_appsync_graphql_api.MultiCartPOC.id
   field             = "updateCartLine"
   type              = "Mutation"
-  request_template  = file("./iac/AppSync/resolvers/cart-resolvers/updateCartLine/pipeline/request-mapping.vtl")
-  response_template = file("./iac/AppSync/resolvers/cart-resolvers/updateCartLine/pipeline/response-mapping.vtl")
+  request_template  = file("./AppSync/resolvers/cart-resolvers/updateCartLine/pipeline/request-mapping.vtl")
+  response_template = file("./AppSync/resolvers/cart-resolvers/updateCartLine/pipeline/response-mapping.vtl")
   pipeline_config {
     functions = [
       "${aws_appsync_function.get_cart_function.function_id}",
