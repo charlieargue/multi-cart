@@ -1,5 +1,5 @@
 {
-    "workbench.colorTheme": "Freshcut Contrast (rainglow)",
+    "workbench.colorTheme": "Fodder (rainglow)",
     "turboConsoleLog.addSemicolonInTheEnd": true,
     "bookmarks.useWorkaroundForFormatters": true,
     "bookmarks.sideBar.expanded": true,
@@ -18,5 +18,12 @@
         "**/.terraform": true,
         "**/.vercel": true,
         "dist": true
+    },
+    "files.associations": {
+        "*.tf": "terraform",
+        "*.tfvars*": "terraform",
+        "*.tfvars.backup": "terraform",
+        "*.tfstate*": "terraform",
+        "*.terraform*": "terraform"
     }
 }

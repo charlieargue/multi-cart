@@ -64,7 +64,8 @@ libs/mock-api/mock-database.json
 # .tfstate files
 **/*.tfstate
 **/*.tfstate.*
-**/.terraform.lock.hcl
+# this should be in git:
+!**/.terraform.lock.hcl
 
 # .tfvars files
 **/*.tfvars
