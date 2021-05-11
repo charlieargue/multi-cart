@@ -1,6 +1,6 @@
 ##################################################################################
 # VARIABLES
 ##################################################################################
-variable "AWS_REGION_VAR" { default = "" }
-variable "APPSYNC_API_KEY" { default = "" }
+variable "aws_region" { default = "" }
+variable "aws_appsync_api_key" { default = "" }
 

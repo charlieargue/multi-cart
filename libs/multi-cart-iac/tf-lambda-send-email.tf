@@ -25,7 +25,7 @@ resource "aws_lambda_function" "lambda_send_email_function" {
   publish          = true
   environment {
     variables = {
-      AWS_REGION_VAR = var.AWS_REGION_VAR
+      aws_region = var.aws_region
     }
   }
   depends_on = [

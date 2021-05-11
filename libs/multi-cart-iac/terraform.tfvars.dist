@@ -1,2 +1,2 @@
-AWS_REGION_VAR = ""
-APPSYNC_API_KEY = ""
+aws_region = ""
+aws_appsync_api_key = ""

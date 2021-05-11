@@ -9,5 +9,5 @@ resource "aws_appsync_graphql_api" "MultiCartPOC" {
 }
 
 resource "aws_appsync_api_key" "api_key" {
-  api_id = var.APPSYNC_API_KEY
+  api_id = var.aws_appsync_api_key
 }
