@@ -28,9 +28,11 @@ resource "aws_budgets_budget" "cost" {
 
 
 locals {
-  env_name = lower(terraform.workspace) # a nice lowercase version, in case I ever switch actual workspace names
+  env_name                     = lower(terraform.workspace) # a nice lowercase version, in case I ever switch actual workspace names
+  assert_not_default_workspace = terraform.workspace == "default" ? file("ERROR: default workspace not allowed") : null
+
   common_tags = {
     Environment = local.env_name
-    AppPrefix = "multicart_"
+    AppPrefix   = "multicart_"
   }
 }
