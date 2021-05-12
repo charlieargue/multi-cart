@@ -2,5 +2,4 @@
 # VARIABLES
 ##################################################################################
 variable "aws_region" { default = "" }
-variable "aws_appsync_api_key" { default = "" }
 

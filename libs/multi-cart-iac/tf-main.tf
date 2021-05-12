@@ -2,6 +2,8 @@
 # MAIN CONFIG
 ##################################################################################
 terraform {
+  backend "local" {
+  }
   required_providers {
     aws = {
       source  = "hashicorp/aws"
@@ -26,7 +28,9 @@ resource "aws_budgets_budget" "cost" {
 
 
 locals {
+  env_name = lower(terraform.workspace) # a nice lowercase version, in case I ever switch actual workspace names
   common_tags = {
-    # Environment          = terraform.workspace
+    Environment = local.env_name
+    AppPrefix = "multicart_"
   }
 }

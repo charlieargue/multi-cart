@@ -1,6 +1,6 @@
-resource "aws_appsync_graphql_api" "MultiCartPOC" {
+resource "aws_appsync_graphql_api" "MultiCart" {
   authentication_type = "API_KEY"
-  name                = "MultiCartPOC"
+  name                = "MultiCart_${local.common_tags.Environment}"
   schema              = file("./AppSync/schema/schema.gql")
   log_config {
     cloudwatch_logs_role_arn = aws_iam_role.multicart_appsync_logging_role.arn
@@ -12,5 +12,5 @@ resource "aws_appsync_graphql_api" "MultiCartPOC" {
 }
 
 resource "aws_appsync_api_key" "api_key" {
-  api_id = var.aws_appsync_api_key
+  api_id = aws_appsync_graphql_api.MultiCart.id
 }

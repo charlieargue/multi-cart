@@ -8,20 +8,20 @@
 
 ## ARCHIVE/ZIP
 data "archive_file" "lambda_send_email_archive" {
-  type        = "zip"
-  
+  type = "zip"
+
   # ATTN: this module will be collapsed/flattened by terraform, so PATHS are from root directory, not from nested module!
   source_dir  = "./AppSync/lambdas/sendEmail"
-  output_path = "./build/MultiCartPOC_lambda_send_email.zip"
+  output_path = "./build/${local.filename}"
 }
 
 # AWS LAMBDA ƛ FUNCTION
 resource "aws_lambda_function" "lambda_send_email_function" {
-  filename         = data.archive_file.lambda_send_email_archive.output_path
-  function_name    = "lambda_send_email_function"
+  function_name    = "lambda_send_email_function_${var.common_tags.Environment}"
   role             = var.role_arn
   handler          = "exports.handler"
   source_code_hash = data.archive_file.lambda_send_email_archive.output_base64sha256
+  filename         = "./build/${local.filename}"
   runtime          = "nodejs12.x"
   publish          = true
   environment {

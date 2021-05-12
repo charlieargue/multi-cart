@@ -6,7 +6,7 @@
 
 # pipeline FUNCTION - getUser
 resource "aws_appsync_function" "get_user_function" {
-  api_id                    = aws_appsync_graphql_api.MultiCartPOC.id
+  api_id                    = aws_appsync_graphql_api.MultiCart.id
   data_source               = aws_appsync_datasource.multicart_dynamodb_user_datasource.name
   name                      = "get_user_function"
   request_mapping_template  = file("./AppSync/functions/getUser/request-mapping.vtl")
@@ -21,7 +21,7 @@ resource "aws_appsync_function" "get_user_function" {
 
 # pipeline FUNCTION - 
 resource "aws_appsync_function" "get_cart_function" {
-  api_id                    = aws_appsync_graphql_api.MultiCartPOC.id
+  api_id                    = aws_appsync_graphql_api.MultiCart.id
   data_source               = aws_appsync_datasource.multicart_dynamodb_cart_datasource.name
   name                      = "get_cart_function"
   request_mapping_template  = file("./AppSync/functions/getCart/request-mapping.vtl")
@@ -30,7 +30,7 @@ resource "aws_appsync_function" "get_cart_function" {
 
 # pipeline FUNCTION - 
 resource "aws_appsync_function" "delete_cart_line_function" {
-  api_id                    = aws_appsync_graphql_api.MultiCartPOC.id
+  api_id                    = aws_appsync_graphql_api.MultiCart.id
   data_source               = aws_appsync_datasource.multicart_dynamodb_cart_datasource.name
   name                      = "delete_cart_line_function"
   request_mapping_template  = file("./AppSync/functions/deleteCartLine/request-mapping.vtl")
@@ -39,7 +39,7 @@ resource "aws_appsync_function" "delete_cart_line_function" {
 
 # pipeline FUNCTION - 
 resource "aws_appsync_function" "update_cart_line_function" {
-  api_id                    = aws_appsync_graphql_api.MultiCartPOC.id
+  api_id                    = aws_appsync_graphql_api.MultiCart.id
   data_source               = aws_appsync_datasource.multicart_dynamodb_cart_datasource.name
   name                      = "update_cart_line_function"
   request_mapping_template  = file("./AppSync/functions/updateCartLine/request-mapping.vtl")
@@ -48,7 +48,7 @@ resource "aws_appsync_function" "update_cart_line_function" {
 
 # pipeline FUNCTION - 
 resource "aws_appsync_function" "add_cart_line_account_function" {
-  api_id                    = aws_appsync_graphql_api.MultiCartPOC.id
+  api_id                    = aws_appsync_graphql_api.MultiCart.id
   data_source               = aws_appsync_datasource.multicart_dynamodb_cart_datasource.name
   name                      = "add_cart_line_account_function"
   request_mapping_template  = file("./AppSync/functions/addCartLineAccount/request-mapping.vtl")
@@ -57,7 +57,7 @@ resource "aws_appsync_function" "add_cart_line_account_function" {
 
 # pipeline FUNCTION - 
 resource "aws_appsync_function" "delete_cart_line_account_function" {
-  api_id                    = aws_appsync_graphql_api.MultiCartPOC.id
+  api_id                    = aws_appsync_graphql_api.MultiCart.id
   data_source               = aws_appsync_datasource.multicart_dynamodb_cart_datasource.name
   name                      = "delete_cart_line_account_function"
   request_mapping_template  = file("./AppSync/functions/deleteCartLineAccount/request-mapping.vtl")
@@ -66,7 +66,7 @@ resource "aws_appsync_function" "delete_cart_line_account_function" {
 
 # pipeline FUNCTION - 
 resource "aws_appsync_function" "update_cart_line_account_function" {
-  api_id                    = aws_appsync_graphql_api.MultiCartPOC.id
+  api_id                    = aws_appsync_graphql_api.MultiCart.id
   data_source               = aws_appsync_datasource.multicart_dynamodb_cart_datasource.name
   name                      = "update_cart_line_account_function"
   request_mapping_template  = file("./AppSync/functions/updateCartLineAccount/request-mapping.vtl")
@@ -78,7 +78,7 @@ resource "aws_appsync_function" "update_cart_line_account_function" {
 ## -------------------------------------
 # pipeline FUNCTION - 
 resource "aws_appsync_function" "get_account_function" {
-  api_id                    = aws_appsync_graphql_api.MultiCartPOC.id
+  api_id                    = aws_appsync_graphql_api.MultiCart.id
   data_source               = aws_appsync_datasource.multicart_dynamodb_account_datasource.name
   name                      = "get_account_function"
   request_mapping_template  = file("./AppSync/functions/getAccount/request-mapping.vtl")
@@ -92,7 +92,7 @@ resource "aws_appsync_function" "get_account_function" {
 
 # WRAPPER FUNCTION for lambda (so can be called from pipeline resolver)
 resource "aws_appsync_function" "lambda_send_email_appsync_function" {
-  api_id                    = aws_appsync_graphql_api.MultiCartPOC.id
+  api_id                    = aws_appsync_graphql_api.MultiCart.id
   data_source               = module.send_email.data_source_name
   name                      = "lambda_send_email_appsync_function"
   request_mapping_template  = file("./AppSync/functions/lambdaSendEmail/request-mapping.vtl")

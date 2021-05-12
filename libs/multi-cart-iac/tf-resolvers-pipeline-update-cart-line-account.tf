@@ -8,7 +8,7 @@
 # // TODO: change the input variable $id to be $cartLineAccountId for constitency
 resource "aws_appsync_resolver" "update_cart_line_account_pipeline_resolver" {
   kind              = "PIPELINE"
-  api_id            = aws_appsync_graphql_api.MultiCartPOC.id
+  api_id            = aws_appsync_graphql_api.MultiCart.id
   field             = "updateCartLineAccount"
   type              = "Mutation"
   request_template  = file("./AppSync/resolvers/_generic/generic-request-mapping-EMPTY.vtl")
