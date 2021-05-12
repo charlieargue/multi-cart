@@ -9,7 +9,7 @@ resource "aws_iam_role" "iam_role_for_dynamo" {
 
 
 # POLICY
-# CONFUSION: is this used? where? how?
+# TODO: CONFUSION: is this used? where? how? maybe it just needs to exist... and not referenced by TF
 resource "aws_iam_role_policy" "iam_role_policy_for_dynamo" {
   name = "iam_role_policy_for_dynamo"
   role = aws_iam_role.iam_role_for_dynamo.id
@@ -25,6 +25,9 @@ resource "aws_iam_role_policy" "iam_role_policy_for_dynamo" {
 resource "aws_iam_role" "iam_role_for_lambda" {
   name               = "iam_role_for_lambda"
   assume_role_policy = file("./AppSync/policies-roles/lambdas/role.json")
+  tags = merge(local.common_tags, {
+    Description = "AWS IAM role for Lambda functions"
+  })
 }
 
 # ROLE + POLICY for lambdas ƛ 

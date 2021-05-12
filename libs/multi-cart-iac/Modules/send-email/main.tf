@@ -29,9 +29,9 @@ resource "aws_lambda_function" "lambda_send_email_function" {
       aws_region = var.aws_region
     }
   }
-  # depends_on = [
-  #   aws_iam_role_policy_attachment.lambda_logs,
-  # ]
+  tags = merge(var.common_tags, {
+    Description = "AWS lambda function for Sending Email"
+  })
 }
 
 
@@ -44,9 +44,6 @@ resource "aws_appsync_datasource" "lambda_send_email_datasource" {
   lambda_config {
     function_arn = aws_lambda_function.lambda_send_email_function.arn
   }
-  # depends_on = [
-  #   aws_appsync_graphql_api.MultiCartPOC,
-  # ]
 }
 
 

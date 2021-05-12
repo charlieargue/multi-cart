@@ -10,8 +10,8 @@ module "send_email" {
   aws_region = var.aws_region
   app_id     = aws_appsync_graphql_api.MultiCartPOC.id
 
-  source = "./Modules/send-email"
-  #   common_tags = local.common_tags
+  source      = "./Modules/send-email"
+  common_tags = local.common_tags
 
   depends_on = [
     aws_appsync_graphql_api.MultiCartPOC,

@@ -1,9 +1,6 @@
-
-
-
-## -------------------------------------
-## MAIN CONFIG
-## -------------------------------------
+##################################################################################
+# MAIN CONFIG
+##################################################################################
 terraform {
   required_providers {
     aws = {
@@ -25,4 +22,11 @@ resource "aws_budgets_budget" "cost" {
   time_period_end   = "2087-06-15_00:00"
   time_period_start = "2017-07-01_00:00"
   time_unit         = "MONTHLY"
+}
+
+
+locals {
+  common_tags = {
+    # Environment          = terraform.workspace
+  }
 }

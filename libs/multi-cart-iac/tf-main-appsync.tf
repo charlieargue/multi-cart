@@ -6,6 +6,9 @@ resource "aws_appsync_graphql_api" "MultiCartPOC" {
     cloudwatch_logs_role_arn = aws_iam_role.multicart_appsync_logging_role.arn
     field_log_level          = "ALL"
   }
+  tags = merge(local.common_tags, {
+    Description = "GraphQL API for MultiCart"
+  })
 }
 
 resource "aws_appsync_api_key" "api_key" {
