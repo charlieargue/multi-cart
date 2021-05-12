@@ -25,7 +25,7 @@ resource "aws_appsync_resolver" "update_cart_line_pipeline_resolver" {
   api_id            = aws_appsync_graphql_api.MultiCartPOC.id
   field             = "updateCartLine"
   type              = "Mutation"
-  request_template  = file("./AppSync/resolvers/cart-resolvers/updateCartLine/pipeline/request-mapping.vtl")
+  request_template  = file("./AppSync/resolvers/_generic/generic-request-mapping-EMPTY.vtl")
   response_template = file("./AppSync/resolvers/cart-resolvers/updateCartLine/pipeline/response-mapping.vtl")
   pipeline_config {
     functions = [

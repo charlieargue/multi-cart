@@ -37,7 +37,7 @@ resource "aws_appsync_resolver" "forgot_password_pipeline_resolver" {
   api_id            = aws_appsync_graphql_api.MultiCartPOC.id
   field             = "forgotPassword"
   type              = "Mutation"
-  request_template  = file("./AppSync/resolvers/user-resolvers/forgotPassword/pipeline/request-mapping.vtl")
+  request_template  = file("./AppSync/resolvers/_generic/generic-request-mapping-EMPTY.vtl")
   response_template = file("./AppSync/resolvers/user-resolvers/forgotPassword/pipeline/response-mapping.vtl")
   pipeline_config {
     functions = [

@@ -9,6 +9,8 @@
 ## ARCHIVE/ZIP
 data "archive_file" "lambda_send_email_archive" {
   type        = "zip"
+  
+  # ATTN: this module will be collapsed/flattened by terraform, so PATHS are from root directory, not from nested module!
   source_dir  = "./AppSync/lambdas/sendEmail"
   output_path = "./build/MultiCartPOC_lambda_send_email.zip"
 }
