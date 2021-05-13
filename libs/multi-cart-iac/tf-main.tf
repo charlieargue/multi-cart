@@ -4,8 +4,10 @@
 terraform {
   backend "remote" {
     hostname = "app.terraform.io"
+    
     # organization = "{{ORGANIZATION_NAME}}"
     organization = "multi-cart"
+    
     workspaces {
       # prefix = "multi-cart-"
       name = "multi-cart-dev"
