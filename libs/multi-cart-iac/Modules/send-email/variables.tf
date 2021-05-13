@@ -1,12 +1,15 @@
 ##################################################################################
 # VARIABLES
 ##################################################################################
+variable "role_arn" { default = "" }
 variable "aws_region" { default = "" }
-
+variable "app_id" { default = "" }
+variable "common_tags" { default = "" }
 
 ##################################################################################
 # LOCALS
 ##################################################################################
 locals {
-  org_name = "multi-cart" # for TF Cloud
+  filename = "MultiCart_lambda_send_email.zip"
 }
+

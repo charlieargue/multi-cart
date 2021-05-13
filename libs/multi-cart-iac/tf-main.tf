@@ -1,21 +1,27 @@
-
-
-
-## -------------------------------------
-## MAIN CONFIG
-## -------------------------------------
+##################################################################################
+# MAIN CONFIG
+##################################################################################
 terraform {
+  backend "remote" {
+    organization = "{{local.org_name}}"
+    workspaces {
+      name = "{{WORKSPACE_NAME}}"
+    }
+  }
   required_providers {
     aws = {
       source  = "hashicorp/aws"
       version = "~> 3.27"
     }
   }
+
+  required_version = ">= 0.13.0"
 }
+
 
 provider "aws" {
   profile = "default"
-  region  = var.AWS_REGION_VAR
+  region  = var.aws_region
 }
 
 resource "aws_budgets_budget" "cost" {
@@ -25,4 +31,15 @@ resource "aws_budgets_budget" "cost" {
   time_period_end   = "2087-06-15_00:00"
   time_period_start = "2017-07-01_00:00"
   time_unit         = "MONTHLY"
+}
+
+
+locals {
+  env_name                     = lower(terraform.workspace) # a nice lowercase version, in case I ever switch actual workspace names
+  assert_not_default_workspace = terraform.workspace == "default" ? file("ERROR: default workspace not allowed") : null
+
+  common_tags = {
+    Environment = local.env_name
+    AppPrefix   = "multicart_"
+  }
 }
