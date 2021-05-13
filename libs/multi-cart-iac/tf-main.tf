@@ -3,9 +3,10 @@
 ##################################################################################
 terraform {
   backend "remote" {
-    organization = "{{local.org_name}}"
+    hostname = "app.terraform.io"
+    organization = "multi-cart"
     workspaces {
-      name = "{{WORKSPACE_NAME}}"
+      prefix = "multi-cart-"
     }
   }
   required_providers {
@@ -33,13 +34,3 @@ resource "aws_budgets_budget" "cost" {
   time_unit         = "MONTHLY"
 }
 
-
-locals {
-  env_name                     = lower(terraform.workspace) # a nice lowercase version, in case I ever switch actual workspace names
-  assert_not_default_workspace = terraform.workspace == "default" ? file("ERROR: default workspace not allowed") : null
-
-  common_tags = {
-    Environment = local.env_name
-    AppPrefix   = "multicart_"
-  }
-}
