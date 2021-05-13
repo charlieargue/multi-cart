@@ -1,7 +1,7 @@
 ##################################################################################
 # VARIABLES
 ##################################################################################
-variable "aws_region" { default = "" }
+variable "aws_region" { default = "just kidding what is going on" }
 
 
 ##################################################################################
@@ -13,7 +13,7 @@ locals {
   assert_not_default_workspace = terraform.workspace == "default" ? file("ERROR: default workspace not allowed") : null
 
   common_tags = {
-    OrgName     = "multi-cart" # for TF Cloud
+    OrgName     = "multi-cart"
     Environment = local.env_name
     AppPrefix   = "multicart_"
   }
