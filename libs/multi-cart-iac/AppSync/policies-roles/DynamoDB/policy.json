@@ -5,9 +5,12 @@
       "Action": ["dynamodb:*"],
       "Effect": "Allow",
       "Resource": [
-        "${USER_TABLE_ARN}",  "${USER_TABLE_ARN}/*",
-        "${CART_TABLE_ARN}",  "${CART_TABLE_ARN}/*",
-        "${ACCOUNT_TABLE_ARN}",  "${ACCOUNT_TABLE_ARN}/*"
+        "${USER_TABLE_ARN}",
+        "${USER_TABLE_ARN}/*",
+        "${CART_TABLE_ARN}",
+        "${CART_TABLE_ARN}/*",
+        "${ACCOUNT_TABLE_ARN}",
+        "${ACCOUNT_TABLE_ARN}/*"
       ]
     },
     {
@@ -22,9 +25,7 @@
     {
       "Action": ["dynamodb:BatchGetItem", "dynamodb:BatchWriteItem"],
       "Effect": "Allow",
-      "Resource": [
-        "${ACCOUNT_TABLE_ARN}",  "${ACCOUNT_TABLE_ARN}/*"
-      ]
+      "Resource": ["${ACCOUNT_TABLE_ARN}", "${ACCOUNT_TABLE_ARN}/*"]
     }
   ]
 }

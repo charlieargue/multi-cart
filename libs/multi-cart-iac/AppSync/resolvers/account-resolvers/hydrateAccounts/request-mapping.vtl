@@ -181,6 +181,6 @@
     "version" : "2018-05-29",
     "operation" : "BatchPutItem",
     "tables" : {
-         "AccountTable": $utils.toJson($accountsMockData)
+         "${ACCOUNT_TABLE_NAME}",: $utils.toJson($accountsMockData)
  }
 }

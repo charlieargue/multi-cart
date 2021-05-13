@@ -75,7 +75,10 @@ resource "aws_appsync_resolver" "hydrate_accounts_resolver" {
   field             = "hydrateAccounts"
   type              = "Mutation"
   data_source       = aws_appsync_datasource.multicart_dynamodb_account_datasource.name
-  request_template  = file("./AppSync/resolvers/account-resolvers/hydrateAccounts/request-mapping.vtl")
+  request_template  = templatefile("./AppSync/resolvers/account-resolvers/hydrateAccounts/request-mapping.vtl", {
+    # NOTE: because different environment suffixes
+    ACCOUNT_TABLE_NAME = aws_dynamodb_table.account_dynamo_table.name
+  })
   response_template = file("./AppSync/resolvers/_generic/generic-response-mapping-item-BOOLEAN.vtl")
   depends_on = [
     aws_appsync_graphql_api.MultiCart,
