@@ -10,7 +10,7 @@ variable "ENVIRONMENT" { default = "dev" }
 # LOCALS
 ##################################################################################
 locals {
-  
+
   # NOTE: does not work in TF CLOUD (but could be useful locally)
   # assert_not_default_workspace = terraform.workspace == "default" ? file("ERROR: default workspace not allowed") : null
 

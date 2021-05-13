@@ -1,6 +1,10 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
+# terraform
+# tf validate
+# tf fmt
+
 # how to get my api tests to run with just npm test??
 # npm test
 # npx nx run multi-cart-api:test
