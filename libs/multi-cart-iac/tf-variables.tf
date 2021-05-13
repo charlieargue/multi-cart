@@ -1,21 +1,22 @@
 ##################################################################################
 # VARIABLES
 ##################################################################################
-variable "aws_region" { default = "" }
+variable "AWS_REGION" { default = "" }
 variable "ORGANIZATION_NAME" { default = "" }
+variable "ENVIRONMENT" { default = "dev" }
 
 
 ##################################################################################
 # LOCALS
 ##################################################################################
 locals {
-  env_name                     = "dev" # 🔴 HARD CODED TEMP!
-  # env_name                     = lower(terraform.workspace) # a nice lowercase version, in case I ever switch actual workspace names
+  
+  # COOL: but not needed on TF Cloud anymore...
   # assert_not_default_workspace = terraform.workspace == "default" ? file("ERROR: default workspace not allowed") : null
 
   common_tags = {
     OrgName     = "multi-cart"
-    Environment = local.env_name
+    Environment = "${var.ENVIRONMENT}"
     AppPrefix   = "multicart_"
   }
 }
