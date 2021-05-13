@@ -15,7 +15,7 @@ locals {
   # assert_not_default_workspace = terraform.workspace == "default" ? file("ERROR: default workspace not allowed") : null
 
   common_tags = {
-    OrgName     = "multi-cart"
+    OrgName     = "${var.ORGANIZATION_NAME}"
     Environment = "${var.ENVIRONMENT}"
     AppPrefix   = "multicart_"
   }
