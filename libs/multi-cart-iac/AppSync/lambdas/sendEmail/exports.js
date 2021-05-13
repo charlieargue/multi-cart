@@ -5,10 +5,10 @@
 
 "use strict"
 const {
-  AWS_REGION
+  AWS_REGION_VAR
 } = process.env;
 const AWS = require('aws-sdk');
-const ses = new AWS.SES({ region: AWS_REGION });
+const ses = new AWS.SES({ region: AWS_REGION_VAR });
 
 // --------------
 // thx: https://stackoverflow.com/questions/57944675/aws-appsync-how-to-send-an-email-after-a-mutation
