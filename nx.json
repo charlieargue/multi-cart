@@ -7,7 +7,7 @@
     ".eslintrc.json": "*",
     "nx.json": "*"
   },
-  "affected": { "defaultBase": "main" },
+  "affected": { "defaultBase": "develop" },
   "npmScope": "multi-cart",
   "tasksRunnerOptions": {
     "default": {
