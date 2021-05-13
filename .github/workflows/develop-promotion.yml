@@ -12,3 +12,4 @@ jobs:
         uses: peter-evans/create-pull-request@v3
         with:
           base: develop
+          branch: kg-2021-05-12-iac-hello-tf-cloud
