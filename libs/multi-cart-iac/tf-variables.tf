@@ -1,9 +1,9 @@
 ##################################################################################
 # VARIABLES
 ##################################################################################
-variable "AWS_REGION" { default = "" }
-variable "ORGANIZATION_NAME" { default = "" }
-variable "ENVIRONMENT" { default = "" }
+variable "AWS_REGION" { default = "us-west-2" }
+variable "ORGANIZATION_NAME" { default = "multi-cart" }
+variable "ENVIRONMENT" { default = "dev" }
 
 
 ##################################################################################
@@ -11,7 +11,7 @@ variable "ENVIRONMENT" { default = "" }
 ##################################################################################
 locals {
   
-  # COOL: but not needed on TF Cloud anymore...
+  # NOTE: does not work in TF CLOUD (but could be useful locally)
   # assert_not_default_workspace = terraform.workspace == "default" ? file("ERROR: default workspace not allowed") : null
 
   common_tags = {
