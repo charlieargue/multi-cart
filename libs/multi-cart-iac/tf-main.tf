@@ -2,7 +2,11 @@
 # MAIN CONFIG
 ##################################################################################
 terraform {
-  backend "local" {
+  backend "remote" {
+    organization = "{{local.org_name}}"
+    workspaces {
+      name = "{{WORKSPACE_NAME}}"
+    }
   }
   required_providers {
     aws = {
@@ -10,7 +14,10 @@ terraform {
       version = "~> 3.27"
     }
   }
+
+  required_version = ">= 0.13.0"
 }
+
 
 provider "aws" {
   profile = "default"
