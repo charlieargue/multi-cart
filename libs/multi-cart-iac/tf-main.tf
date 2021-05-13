@@ -22,7 +22,7 @@ terraform {
 
 provider "aws" {
   profile = "default"
-  region  = var.aws_region
+  region  = var.AWS_REGION
 }
 
 resource "aws_budgets_budget" "cost" {

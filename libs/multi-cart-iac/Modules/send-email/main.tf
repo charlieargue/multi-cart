@@ -26,7 +26,7 @@ resource "aws_lambda_function" "lambda_send_email_function" {
   publish          = true
   environment {
     variables = {
-      aws_region = var.aws_region
+      AWS_REGION = var.AWS_REGION
     }
   }
   tags = merge(var.common_tags, {

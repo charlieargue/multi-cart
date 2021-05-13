@@ -7,7 +7,7 @@
 module "send_email" {
   #   inputs:
   role_arn   = aws_iam_role.iam_role_for_lambda.arn
-  aws_region = var.aws_region
+  AWS_REGION = var.AWS_REGION
   app_id     = aws_appsync_graphql_api.MultiCart.id
 
   source      = "./Modules/send-email"
