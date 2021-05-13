@@ -2,7 +2,7 @@ name: From any develop branch commit, create main pull request & MERGE
 on:
   push:
     branches:
-      - 'develop' 
+      - develop
 jobs:
   developPromotion:
     runs-on: ubuntu-latest
