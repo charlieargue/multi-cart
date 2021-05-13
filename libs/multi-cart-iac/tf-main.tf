@@ -10,7 +10,7 @@ terraform {
     
     workspaces {
       # prefix = "multi-cart-"
-      name = "multi-cart-dev"
+      name = "multi-cart-prod"
     }
   }
   required_providers {
