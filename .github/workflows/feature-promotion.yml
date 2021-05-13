@@ -11,6 +11,7 @@ jobs:
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v3
         with:
-          # base: kg-2021-05-12-iac-hello-tf-cloud
-          base: 'kg-**'
+          # current branch (filtering done above)
+          # thx: https://stackoverflow.com/questions/58033366/how-to-get-current-branch-within-github-actions
+          base: ${GITHUB_REF##*/}
           branch: develop
