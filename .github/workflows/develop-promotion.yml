@@ -1,0 +1,16 @@
+name: From any develop branch commit, create main pull request & MERGE
+on:
+  push:
+    branches:
+      - 'develop' 
+jobs:
+  developPromotion:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v3
+        with:
+          # CONFUSING: backwards from githubs "comparing changes" syntax, sigh
+          base: develop
+          branch: main
