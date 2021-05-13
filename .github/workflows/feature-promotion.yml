@@ -31,7 +31,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           # Repository name with owner. For example, actions/checkout
-          repository: 'develop'
+          repository: develop
 
       - name: Create PROD Pull Request
         uses: peter-evans/create-pull-request@v3
