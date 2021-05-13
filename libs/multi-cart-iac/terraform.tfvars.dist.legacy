@@ -1,3 +1,5 @@
+# DECOMISSIONED because using TF CLOUD + remote execution
+
 AWS_REGION = "us-west-2"
 ORGANIZATION_NAME = "multi-cart"
 ENVIRONMENT = "prod"

@@ -20,6 +20,4 @@ jobs:
         uses: peter-evans/create-pull-request@v3
         with:
           base: ${{ steps.vars.outputs.short_ref }}
-          # base: kg-2021-05-12-iac-hello-tf-cloud
-          # base: kg-**
           branch: develop
