@@ -3,7 +3,7 @@
 ##################################################################################
 variable "AWS_REGION" { default = "" }
 variable "ORGANIZATION_NAME" { default = "" }
-variable "ENVIRONMENT" { default = "prod" } # 🔴🔴🔴🔴🔴🔴🔴🔴
+variable "ENVIRONMENT" { default = "" }
 
 
 ##################################################################################

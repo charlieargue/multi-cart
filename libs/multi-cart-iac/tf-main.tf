@@ -2,17 +2,13 @@
 # MAIN CONFIG
 ##################################################################################
 terraform {
-  backend "local" {
-  # backend "remote" {
-    # hostname = "app.terraform.io"
+  backend "remote" {
+    hostname = "app.terraform.io"
+    organization = "multi-cart"
     
-    # organization = "{{ORGANIZATION_NAME}}"
-    # organization = "multi-cart"
-    
-    # workspaces {
-    #   # prefix = "multi-cart-"
-    #   name = "multi-cart-prod"
-    # }
+    workspaces {
+      prefix = "multi-cart-"
+    }
   }
   required_providers {
     aws = {
