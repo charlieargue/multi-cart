@@ -1,23 +1,41 @@
-name: From any feature branch commit, create develop pull request & MERGE
+name: Feature -> develop, AND ON SUCCESS, 🔥 develop -> main
 on:
   push:
     branches:
-      - 'kg-**' 
+      - 'kg-**'
 jobs:
-  developPromotion:
+  # ---------------------
+  featurePromotion:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      
+
       - name: Set output
         id: vars
         run: echo ::set-output name=short_ref::${GITHUB_REF#refs/*/}
 
       - name: Check output
         run: echo ${{ steps.vars.outputs.short_ref }} ✊
-      
+
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v3
         with:
           base: ${{ steps.vars.outputs.short_ref }}
           branch: develop
+
+  # --------------------- develop -> PRODUCTION
+  developPromotion:
+    needs: featurePromotion
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          # Repository name with owner. For example, actions/checkout
+          repository: 'develop'
+
+      - name: Create PROD Pull Request
+        uses: peter-evans/create-pull-request@v3
+        with:
+          # CONFUSING: backwards from githubs "comparing changes" syntax, sigh
+          base: develop
+          branch: main
