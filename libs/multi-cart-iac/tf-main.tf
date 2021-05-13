@@ -4,9 +4,9 @@
 terraform {
   backend "remote" {
     hostname = "app.terraform.io"
-    organization = "multi-cart"
+    organization = "{{ORGANIZATION_NAME}}"
     workspaces {
-      prefix = "multi-cart-"
+      prefix = "{{ORGANIZATION_NAME}}-"
     }
   }
   required_providers {
