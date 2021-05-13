@@ -1,4 +1,7 @@
 {
+  "repository": {
+    "url": "https://github.com/charlieargue/multi-cart.git"
+  },
   "name": "multi-cart",
   "version": "0.0.0",
   "license": "MIT",
