@@ -28,9 +28,9 @@ jobs:
     needs: featurePromotion
     runs-on: ubuntu-latest
     steps:
+      # thx: https://github.com/actions/checkout
       - uses: actions/checkout@v2
         with:
-          # Repository name with owner. For example, actions/checkout
           ref: 'develop'
 
       - name: Create PROD Pull Request
