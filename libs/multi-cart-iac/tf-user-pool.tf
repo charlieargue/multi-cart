@@ -43,7 +43,7 @@ resource "aws_cognito_user_pool" "multicart_app_user_pool" {
 resource "aws_cognito_user_pool_domain" "multicart_app_user_pool_domain" {
   user_pool_id = "${aws_cognito_user_pool.multicart_app_user_pool.id}"
   # DOMAIN PREFIX
-  domain = "multicart.app"
+  domain = "www.multicart.app"
 }
 
 # CLIENT
@@ -59,6 +59,6 @@ resource "aws_cognito_user_pool_client" "multicart_app_user_pool_client" {
   # APP INTEGRATION -
   # APP CLIENT SETTINGS
   supported_identity_providers = ["COGNITO"]
-  callback_urls                = ["https://multicart.app"]
+  callback_urls                = ["https://www.multicart.app"]
   logout_urls                  = ["https://www.multicart.app/login"]
 }
