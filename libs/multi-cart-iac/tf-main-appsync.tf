@@ -1,11 +1,21 @@
+# thx: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/appsync_graphql_api
+## ------------------------------
 resource "aws_appsync_graphql_api" "MultiCart" {
+  name                = "MultiCart_${local.common_tags.Environment}"
+  schema              = file("./AppSync/schema/schema.gql")
+  
   authentication_type = "AMAZON_COGNITO_USER_POOLS"
-  # TODO: this is temp, for during-inital-development ONLY! switch to a client-pool via COGNITO-user-pools
+  # TODO: this is temp, for during-inital-development ONLY! switch to a client-pool via COGNITO-user-pools for CLIENT-APP AUTHENTICATION later!
   additional_authentication_provider {
     authentication_type = "API_KEY"
   }
-  name                = "MultiCart_${local.common_tags.Environment}"
-  schema              = file("./AppSync/schema/schema.gql")
+  # USER AUTHENTICATION is done with this:
+  user_pool_config {
+    aws_region     = var.AWS_REGION
+    default_action = "DENY"
+    user_pool_id   = aws_cognito_user_pool.multicart_app_user_pool.id
+  }
+  
   log_config {
     cloudwatch_logs_role_arn = aws_iam_role.multicart_appsync_logging_role.arn
     field_log_level          = "ALL"
