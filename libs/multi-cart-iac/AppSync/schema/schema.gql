@@ -101,7 +101,7 @@ type Query {
   cart(id: ID!): Cart
   carts: [Cart!]!
   users: [User!]!
-  
+
   accounts: [Account] @aws_auth(cognito_groups: ["User"])
   me: User
 }
