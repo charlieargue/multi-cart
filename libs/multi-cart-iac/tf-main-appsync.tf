@@ -12,7 +12,7 @@ resource "aws_appsync_graphql_api" "MultiCart" {
   # USER AUTHENTICATION is done with this:
   user_pool_config {
     aws_region     = var.AWS_REGION
-    default_action = "DENY"
+    default_action = "ALLOW"
     user_pool_id   = aws_cognito_user_pool.multicart_app_user_pool.id
   }
   
