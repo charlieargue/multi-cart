@@ -1,5 +1,6 @@
 ## ------------------------------
 # thx: https://johncodeinaire.com/aws-cognito-terraform-tutorial/
+# thx: https://github.com/mineiros-io/terraform-aws-cognito-user-pool/blob/master/examples/complete/main.tf
 ## ------------------------------
 resource "aws_cognito_user_pool" "multicart_app_user_pool" {
   # This is choosen when creating a user pool in the console
@@ -43,7 +44,7 @@ resource "aws_cognito_user_pool" "multicart_app_user_pool" {
 resource "aws_cognito_user_pool_domain" "multicart_app_user_pool_domain" {
   user_pool_id = "${aws_cognito_user_pool.multicart_app_user_pool.id}"
   # DOMAIN PREFIX
-  domain = "www.multicart.app"
+  domain = "${local.common_tags.OrgName}-${local.common_tags.Environment}"
 }
 
 # CLIENT
