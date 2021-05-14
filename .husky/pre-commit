@@ -1,9 +1,7 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-# terraform
-# tf validate
-# tf fmt
+# sadly, can't run any terraform validate or fmt commands now that in TF cloud...
 
 # how to get my api tests to run with just npm test??
 # npm test
