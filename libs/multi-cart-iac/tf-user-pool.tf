@@ -1,6 +1,8 @@
 ## ------------------------------
 # thx: https://johncodeinaire.com/aws-cognito-terraform-tutorial/
 # thx: https://github.com/mineiros-io/terraform-aws-cognito-user-pool/blob/master/examples/complete/main.tf
+# thx: STANDARD ATTRIBUTES for USERS in POOL: 
+#       - https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-settings-attributes.html#cognito-user-pools-standard-attributes
 ## ------------------------------
 resource "aws_cognito_user_pool" "multicart_app_user_pool" {
   # This is choosen when creating a user pool in the console
