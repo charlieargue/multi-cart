@@ -8,12 +8,12 @@ resource "aws_appsync_graphql_api" "MultiCart" {
   authentication_type = "API_KEY"
   additional_authentication_provider {
     authentication_type = "AMAZON_COGNITO_USER_POOLS"
-  }
-  # USER AUTHENTICATION is done with this:
-  user_pool_config {
-    aws_region     = var.AWS_REGION
-    # default_action = "ALLOW"
-    user_pool_id   = aws_cognito_user_pool.multicart_app_user_pool.id
+    # USER AUTHENTICATION is done with this:
+    user_pool_config {
+      aws_region = var.AWS_REGION
+      # default_action = "ALLOW"
+      user_pool_id = aws_cognito_user_pool.multicart_app_user_pool.id
+    }
   }
 
   log_config {
