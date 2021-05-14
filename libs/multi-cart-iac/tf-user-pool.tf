@@ -54,8 +54,8 @@ resource "aws_cognito_user_pool_client" "multicart_app_user_pool_client" {
   # APP CLIENTS
   name                   = "${local.common_tags.AppPrefix}webclient"
   refresh_token_validity = 30
-  read_attributes  = ["username"]
-  write_attributes = ["username"]
+#   read_attributes  = ["username"]
+#   write_attributes = ["username"]
 
   # APP INTEGRATION -
   # APP CLIENT SETTINGS
