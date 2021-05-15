@@ -54,12 +54,9 @@ resource "aws_cognito_user_pool_client" "multicart_app_user_pool_client" {
   user_pool_id = "${aws_cognito_user_pool.multicart_app_user_pool.id}"
 
   # APP CLIENTS
-  name                   = "${local.common_tags.AppPrefix}webclient"
+  name                   = "${local.common_tags.AppPrefix}webclient_${local.common_tags.Environment}"
   refresh_token_validity = 30
-#   read_attributes  = ["username"]
-#   write_attributes = ["username"]
 
-  # APP INTEGRATION -
   # APP CLIENT SETTINGS
   supported_identity_providers = ["COGNITO"]
   callback_urls                = ["https://www.multicart.app"]
