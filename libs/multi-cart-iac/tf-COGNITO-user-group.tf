@@ -7,9 +7,11 @@ resource "aws_iam_role" "multicart_app_user_group_role" {
 
 ## ------------------------------
 resource "aws_cognito_user_group" "multicart_app_user_group" {
-  name         = "${local.common_tags.AppPrefix}user_group_${local.common_tags.Environment}"
+  name         = "Admin" # huh?
+  # name         = "${local.common_tags.AppPrefix}user_group_${local.common_tags.Environment}"
   user_pool_id = "${aws_cognito_user_pool.multicart_app_user_pool.id}"
   description  = "Managed by Terraform"
   precedence   = 42
   role_arn     = aws_iam_role.multicart_app_user_group_role.arn
+
 }

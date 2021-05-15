@@ -44,14 +44,14 @@ resource "aws_cognito_user_pool" "multicart_app_user_pool" {
 
 # DOMAIN NAME
 resource "aws_cognito_user_pool_domain" "multicart_app_user_pool_domain" {
-  user_pool_id = "${aws_cognito_user_pool.multicart_app_user_pool.id}"
+  user_pool_id = aws_cognito_user_pool.multicart_app_user_pool.id
   # DOMAIN PREFIX
   domain = "${local.common_tags.OrgName}-${local.common_tags.Environment}"
 }
 
 # CLIENT
 resource "aws_cognito_user_pool_client" "multicart_app_user_pool_client" {
-  user_pool_id = "${aws_cognito_user_pool.multicart_app_user_pool.id}"
+  user_pool_id = aws_cognito_user_pool.multicart_app_user_pool.id
 
   # APP CLIENTS
   name                   = "${local.common_tags.AppPrefix}webclient_${local.common_tags.Environment}"
@@ -61,4 +61,8 @@ resource "aws_cognito_user_pool_client" "multicart_app_user_pool_client" {
   supported_identity_providers = ["COGNITO"]
   callback_urls                = ["https://www.multicart.app"]
   logout_urls                  = ["https://www.multicart.app/login"]
+  allowed_oauth_scopes         = ["aws.cognito.signin.user.admin"]
+  allowed_oauth_flows          = ["implicit"]
+  explicit_auth_flows          = ["ALLOW_CUSTOM_AUTH", "ALLOW_USER_SRP_AUTH", "ALLOW_REFRESH_TOKEN_AUTH"]
+  # TODO: 🛡 late lock down with prevent_user_existence_errors  = true
 }
