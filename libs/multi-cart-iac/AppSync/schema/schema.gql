@@ -2,7 +2,7 @@
 #  ACCOUNTS
 ## ------------------------------
 # type Account @aws_cognito_user_pools(cognito_groups: ["multicart_user_group_dev"]) {
-type Account @aws_api_key @aws_cognito_user_pools(cognito_groups: ["Admin"]) {
+type Account @aws_api_key @aws_cognito_user_pools {
   id: ID!
   accountNumber: String!
   accountName: String!
@@ -101,7 +101,7 @@ type FieldError {
 # 🧠 Placing the directive on the type implies that the auth config is valid for all the fields in that type. 
 # 🧠 Placing the directive on the field makes it apply to the field only.
 # 🧠 type Query @aws_cognito_user_pools {
-type Query @aws_api_key {
+type Query @aws_api_key @aws_cognito_user_pools {
   cart(id: ID!): Cart
   carts: [Cart!]!
   users: [User!]!
