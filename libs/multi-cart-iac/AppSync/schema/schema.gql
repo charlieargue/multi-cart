@@ -105,7 +105,7 @@ type Query  {
   carts: [Cart!]!
   users: [User!]!
 
-  accounts: [Account] @aws_cognito_user_pools(cognito_groups: ["Users"])
+  accounts: [Account] @aws_cognito_user_pools(cognito_groups: ["multicart_user_group_dev"])
   me: User
 }
 
