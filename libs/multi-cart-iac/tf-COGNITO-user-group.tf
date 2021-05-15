@@ -1,6 +1,8 @@
 # thx: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cognito_user_group
 ## ------------------------------
 # TODO: if works, move into .json file
+
+# TODO: THAT STRINGEQUALS is wrong, hard-coded! 🔴🔴🔴🔴🔴🔴🔴
 resource "aws_iam_role" "multicart_app_user_group_role" {
   name = "${local.common_tags.AppPrefix}cognito_user_group_role_${local.common_tags.Environment}"
 
@@ -14,15 +16,7 @@ resource "aws_iam_role" "multicart_app_user_group_role" {
       "Principal": {
         "Federated": "cognito-identity.amazonaws.com"
       },
-      "Action": "sts:AssumeRoleWithWebIdentity",
-      "Condition": {
-        "StringEquals": {
-          "cognito-identity.amazonaws.com:aud": "us-east-1:12345678-dead-beef-cafe-123456790ab"
-        },
-        "ForAnyValue:StringLike": {
-          "cognito-identity.amazonaws.com:amr": "authenticated"
-        }
-      }
+      "Action": "sts:AssumeRoleWithWebIdentity"
     }
   ]
 }
