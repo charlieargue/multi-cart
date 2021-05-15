@@ -101,7 +101,7 @@ type FieldError {
 # 🧠 Placing the directive on the type implies that the auth config is valid for all the fields in that type. 
 # 🧠 Placing the directive on the field makes it apply to the field only.
 # 🧠 type Query @aws_cognito_user_pools {
-type Query  {
+type Query @aws_api_key {
   cart(id: ID!): Cart
   carts: [Cart!]!
   users: [User!]!
