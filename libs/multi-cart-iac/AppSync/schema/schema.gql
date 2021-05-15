@@ -106,7 +106,7 @@ type Query @aws_api_key {
   carts: [Cart!]!
   users: [User!]!
 
-  accounts: [Account] @aws_cognito_user_pools(cognito_groups: ["Admin"])
+  accounts: [Account] @aws_api_key @aws_cognito_user_pools(cognito_groups: ["Admin"])
   me: User
 }
 
