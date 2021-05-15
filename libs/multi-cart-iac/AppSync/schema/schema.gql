@@ -1,7 +1,7 @@
 ## ------------------------------
 #  ACCOUNTS
 ## ------------------------------
-type Account {
+type Account @aws_cognito_user_pools {
   id: ID!
   accountNumber: String!
   accountName: String!
