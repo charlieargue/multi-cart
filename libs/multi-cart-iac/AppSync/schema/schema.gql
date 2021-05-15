@@ -97,7 +97,7 @@ type FieldError {
 ## ------------------------------
 #  QUERIES / MUTATIONS
 ## ------------------------------
-type Query {
+type Query @aws_auth {
   cart(id: ID!): Cart
   carts: [Cart!]!
   users: [User!]!

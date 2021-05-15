@@ -1,8 +1,6 @@
 # thx: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cognito_user_group
 ## ------------------------------
 # TODO: if works, move into .json file
-
-# TODO: THAT STRINGEQUALS is wrong, hard-coded! 🔴🔴🔴🔴🔴🔴🔴
 resource "aws_iam_role" "multicart_app_user_group_role" {
   name = "${local.common_tags.AppPrefix}cognito_user_group_role_${local.common_tags.Environment}"
 
