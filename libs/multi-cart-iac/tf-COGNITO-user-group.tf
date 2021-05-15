@@ -1,24 +1,8 @@
 # thx: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cognito_user_group
 ## ------------------------------
-# TODO: if works, move into .json file
 resource "aws_iam_role" "multicart_app_user_group_role" {
   name = "${local.common_tags.AppPrefix}cognito_user_group_role_${local.common_tags.Environment}"
-
-  assume_role_policy = <<EOF
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Sid": "",
-      "Effect": "Allow",
-      "Principal": {
-        "Federated": "cognito-identity.amazonaws.com"
-      },
-      "Action": "sts:AssumeRoleWithWebIdentity"
-    }
-  ]
-}
-EOF
+  assume_role_policy = file("./AppSync/policies-roles/Cognito/role.json")
 }
 
 ## ------------------------------
