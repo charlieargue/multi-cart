@@ -1,13 +1,17 @@
 {
-    "Version": "2012-10-17",
-    "Statement": [
-      {
-        "Sid": "",
-        "Effect": "Allow",
-        "Principal": {
-          "Federated": "cognito-identity.amazonaws.com"
-        },
-        "Action": "sts:AssumeRoleWithWebIdentity"
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "Federated": "cognito-identity.amazonaws.com"
+      },
+      "Action": "sts:AssumeRoleWithWebIdentity",
+      "Condition": {
+        "StringEquals": {
+          "cognito-identity.amazonaws.com:aud": "eu-central-1:500a5721-abca-xxxx-xxxx-c15625a7xxxx"
+        }
       }
-    ]
-  }
+    }
+  ]
+}
