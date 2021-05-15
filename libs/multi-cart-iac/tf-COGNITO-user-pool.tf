@@ -64,7 +64,7 @@ resource "aws_cognito_user_pool_client" "multicart_app_user_pool_client" {
   allowed_oauth_flows_user_pool_client = true
   allowed_oauth_scopes                 = ["aws.cognito.signin.user.admin"]
   allowed_oauth_flows                  = ["implicit"]
-  explicit_auth_flows                  = ["ALLOW_CUSTOM_AUTH", "ALLOW_USER_SRP_AUTH", "ALLOW_REFRESH_TOKEN_AUTH", "USER_PASSWORD_AUTH"]
+  explicit_auth_flows                  = ["USER_PASSWORD_AUTH"]
   generate_secret                      = true
 
   # TODO: 🛡 late lock down with prevent_user_existence_errors  = true
