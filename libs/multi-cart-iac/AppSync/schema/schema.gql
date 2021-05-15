@@ -2,7 +2,7 @@
 #  ACCOUNTS
 ## ------------------------------
 # type Account @aws_cognito_user_pools(cognito_groups: ["multicart_user_group_dev"]) {
-type Account @aws_cognito_user_pools {
+type Account @aws_api_key @aws_cognito_user_pools {
   id: ID!
   accountNumber: String!
   accountName: String!
