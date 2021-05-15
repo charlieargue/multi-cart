@@ -97,12 +97,12 @@ type FieldError {
 ## ------------------------------
 #  QUERIES / MUTATIONS
 ## ------------------------------
-type Query @aws_auth @aws_api_key {
+type Query @aws_auth {
   cart(id: ID!): Cart
   carts: [Cart!]!
   users: [User!]!
 
-  accounts: [Account] @aws_api_key @aws_auth(cognito_groups: ["Users"])
+  accounts: [Account] @aws_auth(cognito_groups: ["Users"])
   me: User
 }
 
