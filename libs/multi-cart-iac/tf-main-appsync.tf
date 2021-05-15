@@ -13,7 +13,7 @@ resource "aws_appsync_graphql_api" "MultiCart" {
     user_pool_config {
       aws_region = var.AWS_REGION
       default_action = "DENY"
-      user_pool_id = aws_cognito_user_pool.multicart_app_user_pool.id
+      user_pool_id = "${aws_cognito_user_pool.multicart_app_user_pool.id}"
     }
   }
 
