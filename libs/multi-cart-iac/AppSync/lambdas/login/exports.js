@@ -1,59 +1,29 @@
-// // 🔴
-// // 🔴 ATTENTION: while in non-production mode, in SES Sandbox, can only send emails to/from karl@multicart.app!
-// // 🔴
-// // 🔴
+// // Amazon Cognito creates a session which includes the id, access, and refresh tokens of an authenticated user.
 
-// "use strict"
-// const {
-//   AWS_REGION_VAR
-// } = process.env;
-// const AWS = require('aws-sdk');
-// const ses = new AWS.SES({ region: AWS_REGION_VAR });
+var authenticationData = {
+    Username : 'username',
+    Password : 'password',
+};
+var authenticationDetails = new AmazonCognitoIdentity.AuthenticationDetails(authenticationData);
+var poolData = { UserPoolId : 'us-east-1_ExaMPle',
+    ClientId : '1example23456789'
+};
+var userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
+var userData = {
+    Username : 'username',
+    Pool : userPool
+};
+var cognitoUser = new AmazonCognitoIdentity.CognitoUser(userData);
+cognitoUser.authenticateUser(authenticationDetails, {
+    onSuccess: function (result) {
+        var accessToken = result.getAccessToken().getJwtToken();
 
-// // --------------
-// // thx: https://stackoverflow.com/questions/57944675/aws-appsync-how-to-send-an-email-after-a-mutation
-// // --------------
-// exports.handler = async (event, context, callback) => {
-//   console.log("🚀 ~ event", event) // event has PAYLOAD, and we put whatever we want in there
-//   const fromEmail = "karl@multicart.app"
-//   const user = event.user
-//   // TODO: abstract these to receive from even.inputs so can re-use this lambda in future
-//   const subject = "💎 Change Password"
-//   const token = "WIP"
-//   const link = `<a href="http://multicart.app/change-password/${token}">reset password</a>`
-//   if (user) {
-//     const bccEmailAddresses = []
-//     const ccEmailAddresses = []
-//     const toEmailAddresses = [user.email]
-//     const bodyData = "Testing, testing, 1, 2, 3 <br />" + link
-//     const bodyCharset = "UTF-8"
-//     const subjectData = subject
-//     const subjectCharset = "UTF-8"
-//     const sourceEmail = fromEmail
-//     const replyToAddresses = []
+        /* Use the idToken for Logins Map when Federating User Pools with identity pools or when passing through an Authorization Header to an API Gateway Authorizer */
+        var idToken = result.idToken.jwtToken;
+    },
 
-//     const emailParams = {
-//       Destination: {
-//         BccAddresses: bccEmailAddresses,
-//         CcAddresses: ccEmailAddresses,
-//         ToAddresses: toEmailAddresses,
-//       },
-//       Message: {
-//         Body: {
-//           Html: {
-//             Data: bodyData,
-//             Charset: bodyCharset,
-//           },
-//         },
-//         Subject: {
-//           Data: subjectData,
-//           Charset: subjectCharset,
-//         },
-//       },
-//       Source: sourceEmail,
-//       ReplyToAddresses: replyToAddresses,
-//     }
+    onFailure: function(err) {
+        alert(err);
+    },
 
-//     await ses.sendEmail(emailParams).promise()
-//   }
-// }
+});
