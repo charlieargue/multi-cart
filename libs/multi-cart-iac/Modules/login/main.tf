@@ -17,7 +17,7 @@ resource "aws_lambda_function" "lambda_login_function" {
   publish          = true
   environment {
     variables = {
-      AWS_REGION_VAR = var.aws_region
+      # AWS_REGION_VAR = var.aws_region
     }
   }
   tags = merge(var.common_tags, {
