@@ -1,4 +1,5 @@
-
+# DESCRIPTION:
+# AppSync "wrapper" FUNCTIONs so can be called from pipeline resolvers
 
 ## -------------------------------------
 ## USERS
@@ -83,18 +84,4 @@ resource "aws_appsync_function" "get_account_function" {
   name                      = "get_account_function"
   request_mapping_template  = file("./AppSync/functions/getAccount/request-mapping.vtl")
   response_mapping_template = file("./AppSync/functions/getAccount/response-mapping.vtl")
-}
-
-
-## -------------------------------------
-## LAMBDA WRAPPERs
-## -------------------------------------
-
-# WRAPPER FUNCTION for lambda (so can be called from pipeline resolver)
-resource "aws_appsync_function" "lambda_send_email_appsync_function" {
-  api_id                    = aws_appsync_graphql_api.MultiCart.id
-  data_source               = module.send_email.data_source_name
-  name                      = "lambda_send_email_appsync_function"
-  request_mapping_template  = file("./AppSync/functions/lambdaSendEmail/request-mapping.vtl")
-  response_mapping_template = file("./AppSync/functions/lambdaSendEmail/response-mapping.vtl")
 }

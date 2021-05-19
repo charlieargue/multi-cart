@@ -26,7 +26,7 @@ resource "aws_lambda_function" "lambda_send_email_function" {
   publish          = true
   environment {
     variables = {
-      AWS_REGION_VAR = var.AWS_REGION
+      AWS_REGION_VAR = var.aws_region
     }
   }
   tags = merge(var.common_tags, {
@@ -44,6 +44,15 @@ resource "aws_appsync_datasource" "lambda_send_email_datasource" {
   lambda_config {
     function_arn = aws_lambda_function.lambda_send_email_function.arn
   }
+}
+
+## LAMBDA AppSync function WRAPPER
+resource "aws_appsync_function" "lambda_send_email_appsync_function" {
+  api_id                    = var.app_id
+  data_source               = aws_appsync_datasource.lambda_send_email_datasource.name
+  name                      = "lambda_send_email_appsync_function"
+  request_mapping_template  = file(var.lambda_request_vtl)
+  response_mapping_template = file(var.lambda_response_vtl)
 }
 
 

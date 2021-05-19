@@ -42,7 +42,7 @@ resource "aws_appsync_resolver" "forgot_password_pipeline_resolver" {
   pipeline_config {
     functions = [
       "${aws_appsync_function.get_user_function.function_id}",
-      "${aws_appsync_function.lambda_send_email_appsync_function.function_id}",
+      "${module.send_email.function_id}",
     ]
   }
 }

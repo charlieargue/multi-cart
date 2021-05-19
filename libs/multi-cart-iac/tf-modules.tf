@@ -9,10 +9,11 @@ module "send_email" {
   role_arn   = aws_iam_role.iam_role_for_lambda.arn
   AWS_REGION = var.AWS_REGION
   app_id     = aws_appsync_graphql_api.MultiCart.id
+  common_tags = local.common_tags
+  lambda_request_vtl = "./AppSync/functions/lambdaSendEmail/request-mapping.vtl"
+  lambda_response_vtl = "./AppSync/functions/lambdaSendEmail/response-mapping.vtl"
 
   source      = "./Modules/send-email"
-  common_tags = local.common_tags
-
   depends_on = [
     aws_appsync_graphql_api.MultiCart,
     aws_iam_role_policy_attachment.lambda_logs,
