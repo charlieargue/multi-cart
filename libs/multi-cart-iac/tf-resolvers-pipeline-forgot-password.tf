@@ -32,20 +32,20 @@
 
 
 # PIPELINE 
-# resource "aws_appsync_resolver" "forgot_password_pipeline_resolver" {
-#   kind              = "PIPELINE"
-#   api_id            = aws_appsync_graphql_api.MultiCart.id
-#   field             = "forgotPassword"
-#   type              = "Mutation"
-#   request_template  = file("./AppSync/resolvers/_generic/generic-request-mapping-EMPTY.vtl")
-#   response_template = file("./AppSync/resolvers/user-resolvers/forgotPassword/pipeline/response-mapping.vtl")
-#   pipeline_config {
-#     functions = [
-#       "${aws_appsync_function.get_user_function.function_id}",
-#       "${module.send_email.function_id}",
-#     ]
-#   }
-# }
+resource "aws_appsync_resolver" "forgot_password_pipeline_resolver" {
+  kind              = "PIPELINE"
+  api_id            = aws_appsync_graphql_api.MultiCart.id
+  field             = "forgotPassword"
+  type              = "Mutation"
+  request_template  = file("./AppSync/resolvers/_generic/generic-request-mapping-EMPTY.vtl")
+  response_template = file("./AppSync/resolvers/user-resolvers/forgotPassword/pipeline/response-mapping.vtl")
+  pipeline_config {
+    functions = [
+      "${aws_appsync_function.get_user_function.function_id}",
+      "${module.send_email.function_id}",
+    ]
+  }
+}
 
 
 
