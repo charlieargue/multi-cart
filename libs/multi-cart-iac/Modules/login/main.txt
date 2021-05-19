@@ -37,14 +37,13 @@ resource "aws_appsync_datasource" "lambda_login_datasource" {
   }
 }
 
-
-# # LAMBDA WRAPPERs function for AppSync (so can be called from pipeline resolver)
-# resource "aws_appsync_function" "lambda_send_email_appsync_function" {
-#   api_id                    = aws_appsync_graphql_api.MultiCart.id
-#   data_source               = module.send_email.data_source_name
-#   name                      = "lambda_send_email_appsync_function"
-#   request_mapping_template  = file("./AppSync/functions/lambdaSendEmail/request-mapping.vtl")
-#   response_mapping_template = file("./AppSync/functions/lambdaSendEmail/response-mapping.vtl")
-# }
+## LAMBDA AppSync function WRAPPER
+resource "aws_appsync_function" "lambda_login_appsync_function" {
+  api_id                    = var.app_id
+  data_source               = aws_appsync_datasource.lambda_login_datasource.name
+  name                      = "lambda_login_appsync_function"
+  request_mapping_template  = file(var.lambda_request_vtl)
+  response_mapping_template = file(var.lambda_response_vtl)
+}
 
 
