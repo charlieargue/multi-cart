@@ -3,6 +3,7 @@
     "operation": "Invoke",
     "payload": {
         "field": "login",
-        "user":  $utils.toJson($context.prev.result),
+        "usernameOrEmail":  $utils.toJson($ctx.args.usernameOrEmail ),
+        "password":  $utils.toJson($ctx.args.password ),
     }
 }

@@ -71,11 +71,11 @@ resource "aws_appsync_resolver" "update_cart_resolver" {
 
 # TODO: security and other todos
 resource "aws_appsync_resolver" "hydrate_accounts_resolver" {
-  api_id            = aws_appsync_graphql_api.MultiCart.id
-  field             = "hydrateAccounts"
-  type              = "Mutation"
-  data_source       = aws_appsync_datasource.multicart_dynamodb_account_datasource.name
-  request_template  = templatefile("./AppSync/resolvers/account-resolvers/hydrateAccounts/request-mapping.vtl", {
+  api_id      = aws_appsync_graphql_api.MultiCart.id
+  field       = "hydrateAccounts"
+  type        = "Mutation"
+  data_source = aws_appsync_datasource.multicart_dynamodb_account_datasource.name
+  request_template = templatefile("./AppSync/resolvers/account-resolvers/hydrateAccounts/request-mapping.vtl", {
     # NOTE: because different environment suffixes
     ACCOUNT_TABLE_NAME = aws_dynamodb_table.account_dynamo_table.name
   })

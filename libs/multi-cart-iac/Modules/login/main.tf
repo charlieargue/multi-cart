@@ -15,11 +15,11 @@ resource "aws_lambda_function" "lambda_login_function" {
   filename         = "./build/${local.filename}"
   runtime          = "nodejs12.x"
   publish          = true
-  environment {
-    variables = {
-      # AWS_REGION_VAR = var.aws_region
-    }
-  }
+  # environment {
+  #   variables = {
+  #     # AWS_REGION_VAR = var.aws_region
+  #   }
+  # }
   tags = merge(var.common_tags, {
     Description = "AWS lambda function for logging in (against COGNITO user pool)"
   })
