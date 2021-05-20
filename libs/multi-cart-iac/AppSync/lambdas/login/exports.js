@@ -7,7 +7,7 @@ const {
     AWS_REGION_VAR
 } = process.env;
 const CognitoIdentityServiceProvider = require('aws-sdk/clients/cognitoidentityserviceprovider') // Much smaller size
-const AmazonCognitoIdentity = new CognitoIdentityServiceProvider({
+const cognito = new CognitoIdentityServiceProvider({
     apiVersion: '2016-04-18',
     region: AWS_REGION_VAR
 });
@@ -20,7 +20,7 @@ exports.handler = async (event, context, callback) => {
     const password = event.password
     try {
 
-        const data = await AmazonCognitoIdentity.adminInitiateAuth({
+        const data = await cognito.adminInitiateAuth({
             AuthFlow: 'ADMIN_NO_SRP_AUTH',
             ClientId: CLIENT_ID,
             UserPoolId: POOL_ID,
