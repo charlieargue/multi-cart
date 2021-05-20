@@ -20,16 +20,16 @@ resource "aws_lambda_function" "lambda_login_function" {
 }
 
 
-# # LAMBDA ƛ DATASOURCE
-# resource "aws_appsync_datasource" "lambda_login_datasource" {
-#   api_id           = var.app_id
-#   name             = "lambda_login_datasource"
-#   service_role_arn = var.role_arn
-#   type             = "AWS_LAMBDA"
-#   lambda_config {
-#     function_arn = aws_lambda_function.lambda_login_function.arn
-#   }
-# }
+# LAMBDA ƛ DATASOURCE
+resource "aws_appsync_datasource" "lambda_login_datasource" {
+  api_id           = var.app_id
+  name             = "lambda_login_datasource"
+  service_role_arn = var.role_arn
+  type             = "AWS_LAMBDA"
+  lambda_config {
+    function_arn = aws_lambda_function.lambda_login_function.arn
+  }
+}
 
 # ## LAMBDA AppSync function WRAPPER
 # resource "aws_appsync_function" "lambda_login_appsync_function" {
