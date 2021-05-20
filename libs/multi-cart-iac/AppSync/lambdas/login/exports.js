@@ -6,7 +6,7 @@
 //     POOL_ID,
 //     CLIENT_ID
 // } = process.env;
-const AWS = require('aws-sdk');
+// const AWS = require('aws-sdk');
 
 // thx: https://docs.aws.amazon.com/cognito/latest/developerguide/authentication.html
 // thx: https://dzone.com/articles/authentication-and-authorization-to-amazon-cognito
