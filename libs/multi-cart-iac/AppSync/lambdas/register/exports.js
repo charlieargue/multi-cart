@@ -83,7 +83,6 @@ exports.handler = async (event, context, callback) => {
             }
 
         */
-        console.log('✅ 1 ✅ ')
         if (initAuthResponse.ChallengeName === 'NEW_PASSWORD_REQUIRED') {
             const newPasswordResponse = await cognito.adminRespondToAuthChallenge({
                 ChallengeName: 'NEW_PASSWORD_REQUIRED',
@@ -95,7 +94,6 @@ exports.handler = async (event, context, callback) => {
                 },
                 Session: initAuthResponse.Session
             }).promise()
-            console.log('✅ 1a ✅ ')
             token = newPasswordResponse.AuthenticationResult.AccessToken
             /*
 
@@ -118,8 +116,6 @@ exports.handler = async (event, context, callback) => {
 
 
         }
-        console.log('✅ 2 ✅ ')
-        console.log(`🚀 ~ token`, token);
         return {
             token
         }
