@@ -19,9 +19,8 @@ resource "aws_appsync_resolver" "login_pipeline_resolver" {
   response_template = file("./AppSync/resolvers/user-resolvers/login/pipeline/response-mapping.vtl")
   pipeline_config {
     functions = [
-      # "${module.login.function_id}",
-      "${aws_appsync_function.get_user_function.function_id}", # A
-      # B
+      "${module.login.appsync_function_id}",
+      # "${aws_appsync_function.get_user_function.function_id}",
     ]
   }
 }
