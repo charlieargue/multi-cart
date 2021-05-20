@@ -40,7 +40,7 @@ exports.handler = async (event, context, callback) => {
                 USERNAME: usernameOrEmail,
                 PASSWORD: password,
             },
-        });
+        }).promise();
         console.log("✅ ✅ ✅ ✅ ✅ ✅ ✅  ~ GREAT SUCCESS!");
         console.log(data);
     } catch (err) {
