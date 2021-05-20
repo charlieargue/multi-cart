@@ -37,13 +37,13 @@ resource "aws_appsync_datasource" "lambda_login_datasource" {
   }
 }
 
-# ## LAMBDA AppSync function WRAPPER
-# resource "aws_appsync_function" "lambda_login_appsync_function" {
-#   api_id                    = var.app_id
-#   data_source               = aws_appsync_datasource.lambda_login_datasource.name
-#   name                      = "lambda_login_appsync_function"
-#   request_mapping_template  = file(var.lambda_request_vtl)
-#   response_mapping_template = file(var.lambda_response_vtl)
-# }
+## LAMBDA AppSync function WRAPPER
+resource "aws_appsync_function" "lambda_login_appsync_function" {
+  api_id                    = var.app_id
+  data_source               = aws_appsync_datasource.lambda_login_datasource.name
+  name                      = "lambda_login_appsync_function"
+  request_mapping_template  = file(var.lambda_request_vtl)
+  response_mapping_template = file(var.lambda_response_vtl)
+}
 
 
