@@ -19,6 +19,6 @@ locals {
     Environment = "${var.ENVIRONMENT}"
     AppPrefix   = "multicart_",
     # just triggering deploys, trouble-shooting TF cloud
-    Foo = "bar4"
+    Foo = "bar5"
   }
 }
