@@ -20,7 +20,7 @@ resource "aws_appsync_resolver" "login_pipeline_resolver" {
   pipeline_config {
     functions = [
       "${module.login.appsync_function_id}",
-      # "${aws_appsync_function.get_user_function.function_id}",
+      "${aws_appsync_function.get_user_function.function_id}",
     ]
   }
 }
