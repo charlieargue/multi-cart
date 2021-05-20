@@ -13,6 +13,8 @@ const cognito = new CognitoIdentityServiceProvider({
 })
 
 // thx: https://dev.to/franzwong/howto-implement-user-sign-up-and-login-with-aws-cognito-boa
+// > the password is passed as a temporary password. It means user needs to change on 1st login. 
+// > But we don’t want to do this because the password is already provided by the user. We need to programmatically to change the password for them.
 exports.handler = async (event, context, callback) => {
     const username = event.username
     const email = event.email
@@ -26,15 +28,37 @@ exports.handler = async (event, context, callback) => {
             TemporaryPassword: password,
             UserAttributes: [
                 {
-                    Name: 'email', /* required */
+                    Name: 'email',
                     Value: email
                 },
             ],
         }).promise()
-        console.log('🤖🤖🤖 createdUser 🤖🤖🤖 ')
-        console.log(JSON.stringify(createdUser, null, '  '))
-        
 
+        /*
+        CREATE USER - RESPONSE:
+        {
+            "User": {
+                "Username": "karlgolka3",
+                "Attributes": [
+                    {
+                        "Name": "sub",
+                        "Value": "a36fe378-fb89-4ed4-9f82-f598bca0e399"
+                    },
+                    {
+                        "Name": "email",
+                        "Value": "contact@karlgolka3.com"
+                    }
+                ],
+                "UserCreateDate": "2021-05-20T18:41:42.075Z",
+                "UserLastModifiedDate": "2021-05-20T18:41:42.075Z",
+                "Enabled": true,
+                "UserStatus": "FORCE_CHANGE_PASSWORD"
+            }
+        }
+        */
+
+
+        let token;
         const initAuthResponse = await cognito.adminInitiateAuth({
             AuthFlow: 'ADMIN_NO_SRP_AUTH',
             ClientId: CLIENT_ID,
@@ -45,11 +69,23 @@ exports.handler = async (event, context, callback) => {
             }
         }).promise()
 
-        console.log('🤖🤖🤖 initAuthResponse 🤖🤖🤖 ')
-        console.log(JSON.stringify(initAuthResponse, null, '  '))
+        /*
+        FYI
+
+        {
+                "ChallengeName": "NEW_PASSWORD_REQUIRED",
+                "Session": "AYABeFvOBUP...",
+                "ChallengeParameters": {
+                    "USER_ID_FOR_SRP": "karlgolka3",
+                    "requiredAttributes": "[]",
+                    "userAttributes": "{\"email\":\"contact@karlgolka3.com\"}"
+                }
+            }
+
+        */
 
         if (initAuthResponse.ChallengeName === 'NEW_PASSWORD_REQUIRED') {
-            await cognito.adminRespondToAuthChallenge({
+            const newPasswordResponse = await cognito.adminRespondToAuthChallenge({
                 ChallengeName: 'NEW_PASSWORD_REQUIRED',
                 ClientId: CLIENT_ID,
                 UserPoolId: POOL_ID,
@@ -59,36 +95,20 @@ exports.handler = async (event, context, callback) => {
                 },
                 Session: initAuthResponse.Session
             }).promise()
+            console.log('🤖🤖🤖 newPasswordResponse 🤖🤖🤖 ')
+            console.log(JSON.stringify(newPasswordResponse, null, '  '))
+            
+        } 
+        token = initAuthResponse.AuthenticationResult.AccessToken
+        return {
+            token
         }
 
-        console.log("✅ ✅ ✅ ✅ ✅ ✅ ✅  ~ REGISTER 😀 SUCCESS!")
-        console.log(`🚀 ~ initAuthResponse`, initAuthResponse);
-
     } catch (err) {
-        throw err
+        console.log('🔴🔴🔴 err 🔴🔴🔴 ')
+        console.log(JSON.stringify(err, null, '  '))
+        console.log(err, err.stack);
     }
 
 }
-
-/*
-        FYI - RESPONSE SYNTAX:
-        {
-            "AuthenticationResult": {
-                "AccessToken": "string",
-                "ExpiresIn": number,
-                "IdToken": "string",
-                "NewDeviceMetadata": {
-                    "DeviceGroupKey": "string",
-                    "DeviceKey": "string"
-                },
-                "RefreshToken": "string",
-                "TokenType": "string"
-            },
-            "ChallengeName": "string",
-            "ChallengeParameters": {
-                "string" : "string"
-            },
-            "Session": "string"
-            }
-        */
 
