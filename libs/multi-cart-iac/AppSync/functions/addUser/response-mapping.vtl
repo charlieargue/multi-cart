@@ -1,6 +1,4 @@
-## $utils.error($util.dynamodb.toDynamoDBJson($context.result))
 {
     "user": $utils.toJson($context.result),
-    "token": "TBD🔴 dunno"
-    ## "token": $utils.toJson($context.prev.result.token),
+    "token": $utils.toJson($context.prev.result.token),
 }
