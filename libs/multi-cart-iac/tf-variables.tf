@@ -20,8 +20,6 @@ locals {
     AppPrefix   = "multicart_",
     # just triggering deploys, trouble-shooting TF cloud
     Foo     = "bar5",
-    FooBar  = "foobar5",
-    FooBar6 = "foobar5",
-    FooBar7 = "foobar5",
+    
   }
 }
