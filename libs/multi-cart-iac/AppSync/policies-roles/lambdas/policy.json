@@ -22,7 +22,7 @@
     {
       "Effect": "Allow",
       "Action": "cognito-idp:AdminInitiateAuth",
-      "Resource": ["${GET_LAMBDA_LOGIN_ARN}", "${GET_LAMBDA_LOGIN_ARN}/*"]
+      "Resource": ["${USER_POOL_ARN}", "${USER_POOL_ARN}/*"]
     }
   ]
 }
