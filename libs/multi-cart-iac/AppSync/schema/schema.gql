@@ -88,7 +88,7 @@ type FieldError {
 ## ------------------------------
 #  ACCOUNTS
 ## ------------------------------
-type Account @aws_api_key {
+type Account @aws_api_key @aws_cognito_user_pools {
   id: ID!
   accountNumber: String!
   accountName: String!
