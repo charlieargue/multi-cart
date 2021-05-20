@@ -16,38 +16,18 @@ const AmazonCognitoIdentity = new CognitoIdentityServiceProvider({
 // thx: https://docs.aws.amazon.com/cognito/latest/developerguide/amazon-cognito-user-pools-authentication-flow.html#amazon-cognito-user-pools-server-side-authentication-flow
 // big-thx: https://dev.to/franzwong/howto-implement-user-sign-up-and-login-with-aws-cognito-boa
 exports.handler = async (event, context, callback) => {
-    const usernameOrEmail = event.usernameOrEmail
-    const password = event.password
-    try {
+    console.log("✅ ✅ ✅ ✅ ✅ ✅ ✅  ~ GREAT SUCCESS!");
 
-        const data = await AmazonCognitoIdentity.adminInitiateAuth({
-            AuthFlow: 'ADMIN_NO_SRP_AUTH',
-            ClientId: CLIENT_ID,
-            UserPoolId: POOL_ID,
-            AuthParameters: {
-                USERNAME: usernameOrEmail,
-                PASSWORD: password,
-            },
-        }).promise();
-        console.log("✅ ✅ ✅ ✅ ✅ ✅ ✅  ~ GREAT SUCCESS!");
-        console.log(data);
-        
-       return {
-           token: data.AuthenticationResult.AccessToken
-       }
-    } catch (err) {
-        console.log(err, err.stack);
-    }   
 }
 
-/* 
+/*
         FYI - RESPONSE SYNTAX:
         {
-            "AuthenticationResult": { 
+            "AuthenticationResult": {
                 "AccessToken": "string",
                 "ExpiresIn": number,
                 "IdToken": "string",
-                "NewDeviceMetadata": { 
+                "NewDeviceMetadata": {
                     "DeviceGroupKey": "string",
                     "DeviceKey": "string"
                 },
@@ -55,8 +35,8 @@ exports.handler = async (event, context, callback) => {
                 "TokenType": "string"
             },
             "ChallengeName": "string",
-            "ChallengeParameters": { 
-                "string" : "string" 
+            "ChallengeParameters": {
+                "string" : "string"
             },
             "Session": "string"
             }
