@@ -152,6 +152,7 @@ type Mutation @aws_api_key {
   login(password: String!, usernameOrEmail: String!): UserResponse!
   logout: Boolean!
   forgotPassword(email: String!): Boolean!
-  # TODO: SKIPPING FOR NOW UNTIL SESSION/TOKEN: changePassword(newPassword: String!, token: String!): UserResponse!
+  # TODO: SKIPPING FOR NOW UNTIL SESSION/TOKEN: 
+  changePassword(newPassword: String!, token: String!): UserResponse!
   updateUser(currentCartId: ID!): UserResponse!
 }
