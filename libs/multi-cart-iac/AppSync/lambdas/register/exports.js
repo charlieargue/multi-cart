@@ -31,7 +31,9 @@ exports.handler = async (event, context, callback) => {
                 },
             ],
         }).promise()
-        console.log(`🚀 ~ createdUser`, createdUser);
+        console.log('🤖🤖🤖 createdUser 🤖🤖🤖 ')
+        console.log(JSON.stringify(createdUser, null, '  '))
+        
 
         const initAuthResponse = await cognito.adminInitiateAuth({
             AuthFlow: 'ADMIN_NO_SRP_AUTH',
