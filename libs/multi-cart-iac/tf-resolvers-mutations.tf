@@ -93,22 +93,6 @@ resource "aws_appsync_resolver" "hydrate_accounts_resolver" {
 
 
 # TODO: security and other todos
-# TODO: how is this returning a UserResponse? where is the .user / .error nesting happening?
-resource "aws_appsync_resolver" "register_user_resolver" {
-  api_id            = aws_appsync_graphql_api.MultiCart.id
-  field             = "register"
-  type              = "Mutation"
-  data_source       = aws_appsync_datasource.multicart_dynamodb_user_datasource.name
-  request_template  = file("./AppSync/resolvers/user-resolvers/register/request-mapping.vtl")
-  response_template = file("./AppSync/resolvers/_generic/generic-response-mapping-item-SINGULAR.vtl")
-  depends_on = [
-    aws_appsync_graphql_api.MultiCart,
-    aws_appsync_datasource.multicart_dynamodb_user_datasource,
-  ]
-}
-
-
-# TODO: security and other todos
 resource "aws_appsync_resolver" "logout_resolver" {
   api_id            = aws_appsync_graphql_api.MultiCart.id
   field             = "logout"

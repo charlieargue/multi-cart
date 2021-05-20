@@ -8,7 +8,9 @@
         "${GET_LAMBDA_SEND_EMAIL_ARN}",
         "${GET_LAMBDA_SEND_EMAIL_ARN}/*",
         "${GET_LAMBDA_LOGIN_ARN}",
-        "${GET_LAMBDA_LOGIN_ARN}/*"
+        "${GET_LAMBDA_LOGIN_ARN}/*",
+        "${GET_LAMBDA_REGISTER_ARN}",
+        "${GET_LAMBDA_REGISTER_ARN}/*"
       ]
     },
     {
