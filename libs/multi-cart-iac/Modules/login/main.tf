@@ -1,4 +1,3 @@
-
 ## ARCHIVE/ZIP
 data "archive_file" "lambda_login_archive" {
   type = "zip"

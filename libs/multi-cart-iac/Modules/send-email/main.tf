@@ -1,11 +1,3 @@
-
-##################################################################################
-## • archive/zip of files
-## • function and wrapper function 
-## • datasource 
-##################################################################################
-
-
 ## ARCHIVE/ZIP
 data "archive_file" "lambda_send_email_archive" {
   type = "zip"
