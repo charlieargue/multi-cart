@@ -15,36 +15,41 @@ exports.handler = async (event, context, callback) => {
     console.log(`🚀 ~ usernameOrEmail`, usernameOrEmail);
 
 
-    // // // Amazon Cognito creates a session which includes the id, access, and refresh tokens of an authenticated user.
+    // Amazon Cognito creates a session which includes the id, access, and refresh tokens of an authenticated user.
+    var authenticationData = {
+        Username: usernameOrEmail,
+        Password: password,
+    };
+    var authenticationDetails = new AmazonCognitoIdentity.AuthenticationDetails(authenticationData);
+    var poolData = {
+        UserPoolId: POOL_ID,
+        ClientId: CLIENT_ID
+    };
+    var userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
+    var userData = {
+        Username: USERNAME,
+        Pool: userPool
+    };
+    var cognitoUser = new AmazonCognitoIdentity.CognitoUser(userData);
+    cognitoUser.authenticateUser(authenticationDetails, {
+        onSuccess: function (result) {
+            var accessToken = result.getAccessToken().getJwtToken();
+            console.log(`🚀 ~ accessToken`, accessToken);
+            return {
+                token: accessToken
+            };
 
-    // var authenticationData = {
-    //     Username: usernameOrEmail,
-    //     Password: password,
-    // };
-    // var authenticationDetails = new AmazonCognitoIdentity.AuthenticationDetails(authenticationData);
-    // var poolData = {
-    //     UserPoolId: POOL_ID,
-    //     ClientId: CLIENT_ID
-    // };
-    // var userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
-    // var userData = {
-    //     Username: USERNAME,
-    //     Pool: userPool
-    // };
-    // var cognitoUser = new AmazonCognitoIdentity.CognitoUser(userData);
-    // cognitoUser.authenticateUser(authenticationDetails, {
-    //     onSuccess: function (result) {
-    //         var accessToken = result.getAccessToken().getJwtToken();
+            // does NOT apply?
+            /* Use the idToken for Logins Map when Federating User Pools with identity pools
+             or when passing through an Authorization Header to an API Gateway Authorizer */
+            var idToken = result.idToken.jwtToken;
+        },
 
-    //         /* Use the idToken for Logins Map when Federating User Pools with identity pools or when passing through an Authorization Header to an API Gateway Authorizer */
-    //         var idToken = result.idToken.jwtToken;
-    //     },
+        onFailure: function (err) {
+            alert(err);
+        },
 
-    //     onFailure: function (err) {
-    //         alert(err);
-    //     },
-
-    // });
+    });
 
 }
 
