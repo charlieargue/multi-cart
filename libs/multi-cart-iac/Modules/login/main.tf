@@ -16,7 +16,8 @@ resource "aws_lambda_function" "lambda_login_function" {
   publish          = true
   environment {
     variables = {
-      POOL_ID = 666
+      POOL_ID = var.pool_id,
+      CLIENT_ID = var.client_id,
     }
   }
   tags = merge(var.common_tags, {

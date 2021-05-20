@@ -32,6 +32,8 @@ module "login" {
   common_tags         = local.common_tags
   lambda_request_vtl  = "./AppSync/functions/lambdaLogin/request-mapping.vtl"
   lambda_response_vtl = "./AppSync/functions/lambdaLogin/response-mapping.vtl"
+  pool_id             = aws_cognito_user_pool.multicart_app_user_pool.id
+  client_id           = aws_cognito_user_pool_client.multicart_app_user_pool_client.id
 
   source = "./Modules/login"
   depends_on = [

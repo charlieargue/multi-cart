@@ -1,24 +1,25 @@
 
 "use strict"
-// const {
-//     USERNAME,
-//     PASSWORD,
-//     POOL_ID,
-//     CLIENT_ID
-// } = process.env;
-// const AWS = require('aws-sdk');
+const {
+    POOL_ID,
+    CLIENT_ID
+} = process.env;
 
 // thx: https://docs.aws.amazon.com/cognito/latest/developerguide/authentication.html
 // thx: https://dzone.com/articles/authentication-and-authorization-to-amazon-cognito
 exports.handler = async (event, context, callback) => {
+    const usernameOrEmail = event.usernameOrEmail
+    const password = event.password
     console.log("👍👍👍👍👍👍👍👍👍👍👍 ~ event", event) // event has PAYLOAD, and we put whatever we want in there
+    console.log(`🚀 ~ password`, password);
+    console.log(`🚀 ~ usernameOrEmail`, usernameOrEmail);
 
 
     // // // Amazon Cognito creates a session which includes the id, access, and refresh tokens of an authenticated user.
 
     // var authenticationData = {
-    //     Username: USERNAME,
-    //     Password: PASSWORD,
+    //     Username: usernameOrEmail,
+    //     Password: password,
     // };
     // var authenticationDetails = new AmazonCognitoIdentity.AuthenticationDetails(authenticationData);
     // var poolData = {
