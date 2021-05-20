@@ -77,7 +77,8 @@ input CartLineInput {
 
 type UserResponse {
   errors: [FieldError!]
-  user: User
+  user: User,
+  token: String
 }
 
 type FieldError {
@@ -117,7 +118,7 @@ type Query @aws_api_key {
 ## ------------------------------
 #  MUTATIONS
 ## ------------------------------
-type Mutation {
+type Mutation @aws_api_key {
   # CARTS
   blankCart: Cart!
   deleteCart(id: ID!): Boolean!
