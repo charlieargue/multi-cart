@@ -95,9 +95,27 @@ exports.handler = async (event, context, callback) => {
                 },
                 Session: initAuthResponse.Session
             }).promise()
-            console.log('🤖🤖🤖 newPasswordResponse 🤖🤖🤖 ')
-            console.log(JSON.stringify(newPasswordResponse, null, '  '))
+            token = newPasswordResponse.AuthenticationResult.AccessToken
+            /*
+
+            NEW PASSWORD RESPONSE:
+            --------------------------
+            {
+                "ChallengeParameters": {},
+                "AuthenticationResult": {
+                    "AccessToken": "eyJraW...",
+                    "ExpiresIn": 3600,
+                    "TokenType": "Bearer",
+                    "RefreshToken": "eyJjdH...",
+                    "NewDeviceMetadata": {
+                        "DeviceKey": "us-west-2_cd083315-8....",
+                        "DeviceGroupKey": "-cgSNKCRd"
+                    }
+                }
+            }
+            */
             
+
         } 
         token = initAuthResponse.AuthenticationResult.AccessToken
         return {

@@ -18,21 +18,8 @@ resource "aws_appsync_resolver" "register_pipeline_resolver" {
   pipeline_config {
     functions = [
       "${module.register.appsync_function_id}", // 1) setup COGNITO user
-      // 2) call register_user wrapper function to PUTITEM into DDB (and return)
+      "${aws_appsync_function.add_user_function.function_id}",
+      // 2) PUTITEM into DDB (and return with token from step 1)
     ]
   }
 }
-
-
-
-# # TODO: security and other todos
-# # TODO: how is this returning a UserResponse? where is the .user / .error nesting happening?
-# resource "aws_appsync_resolver" "register_user_resolver" {
-#   data_source       = aws_appsync_datasource.multicart_dynamodb_user_datasource.name
-#   request_template  = file("./AppSync/resolvers/user-resolvers/register/request-mapping.vtl")
-#   response_template = file("./AppSync/resolvers/_generic/generic-response-mapping-item-SINGULAR.vtl")
-#   depends_on = [
-#     aws_appsync_graphql_api.MultiCart,
-#     aws_appsync_datasource.multicart_dynamodb_user_datasource,
-#   ]
-# }
