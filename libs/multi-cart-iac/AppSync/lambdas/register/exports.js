@@ -19,12 +19,19 @@ exports.handler = async (event, context, callback) => {
     const password = event.password
 
     try {
-        await cognito.adminCreateUser({
+        const createdUser = await cognito.adminCreateUser({
             UserPoolId: POOL_ID,
-            Username: username,
             MessageAction: 'SUPPRESS',
+            Username: username,
             TemporaryPassword: password,
+            UserAttributes: [
+                {
+                    Name: 'email', /* required */
+                    Value: email
+                },
+            ],
         }).promise()
+        console.log(`🚀 ~ createdUser`, createdUser);
 
         const initAuthResponse = await cognito.adminInitiateAuth({
             AuthFlow: 'ADMIN_NO_SRP_AUTH',
@@ -48,7 +55,7 @@ exports.handler = async (event, context, callback) => {
                 Session: initAuthResponse.Session
             }).promise()
         }
-        
+
         console.log("✅ ✅ ✅ ✅ ✅ ✅ ✅  ~ REGISTER 😀 SUCCESS!")
         console.log(`🚀 ~ initAuthResponse`, initAuthResponse);
 
