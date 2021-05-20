@@ -17,6 +17,8 @@ locals {
   common_tags = {
     OrgName     = "${var.ORGANIZATION_NAME}"
     Environment = "${var.ENVIRONMENT}"
-    AppPrefix   = "multicart_"
+    AppPrefix   = "multicart_",
+    # just triggering deploys, trouble-shooting TF cloud
+    Foo = "bar"
   }
 }
