@@ -1,9 +1,17 @@
-
 "use strict"
 const {
     POOL_ID,
     CLIENT_ID
 } = process.env;
+const {
+    AWS_REGION_VAR
+} = process.env;
+const AWS = require('aws-sdk');
+const AmazonCognitoIdentity = new AWS.CognitoIdentityServiceProvider(
+    {
+        apiVersion: '2016-04-18',
+        region: AWS_REGION_VAR
+    });
 
 // thx: https://docs.aws.amazon.com/cognito/latest/developerguide/authentication.html
 // thx: https://dzone.com/articles/authentication-and-authorization-to-amazon-cognito
@@ -16,24 +24,24 @@ exports.handler = async (event, context, callback) => {
 
 
     // Amazon Cognito creates a session which includes the id, access, and refresh tokens of an authenticated user.
-    var authenticationData = {
+    const authenticationData = {
         Username: usernameOrEmail,
         Password: password,
     };
-    var authenticationDetails = new AmazonCognitoIdentity.AuthenticationDetails(authenticationData);
-    var poolData = {
+    const authenticationDetails = new AmazonCognitoIdentity.AuthenticationDetails(authenticationData);
+    const poolData = {
         UserPoolId: POOL_ID,
         ClientId: CLIENT_ID
     };
-    var userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
-    var userData = {
+    const userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
+    const userData = {
         Username: USERNAME,
         Pool: userPool
     };
-    var cognitoUser = new AmazonCognitoIdentity.CognitoUser(userData);
+    const cognitoUser = new AmazonCognitoIdentity.CognitoUser(userData);
     cognitoUser.authenticateUser(authenticationDetails, {
         onSuccess: function (result) {
-            var accessToken = result.getAccessToken().getJwtToken();
+            const accessToken = result.getAccessToken().getJwtToken();
             console.log(`🚀 ~ accessToken`, accessToken);
             return {
                 token: accessToken
@@ -42,7 +50,7 @@ exports.handler = async (event, context, callback) => {
             // does NOT apply?
             /* Use the idToken for Logins Map when Federating User Pools with identity pools
              or when passing through an Authorization Header to an API Gateway Authorizer */
-            var idToken = result.idToken.jwtToken;
+            const idToken = result.idToken.jwtToken;
         },
 
         onFailure: function (err) {

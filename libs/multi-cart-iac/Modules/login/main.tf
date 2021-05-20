@@ -18,6 +18,7 @@ resource "aws_lambda_function" "lambda_login_function" {
     variables = {
       POOL_ID = var.pool_id,
       CLIENT_ID = var.client_id,
+      AWS_REGION_VAR = var.aws_region
     }
   }
   tags = merge(var.common_tags, {
