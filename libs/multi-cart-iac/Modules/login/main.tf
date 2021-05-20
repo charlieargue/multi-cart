@@ -5,19 +5,19 @@ data "archive_file" "lambda_login_archive" {
   output_path = "./build/${local.filename}"
 }
 
-# # AWS LAMBDA ƛ FUNCTION
-# resource "aws_lambda_function" "lambda_login_function" {
-#   function_name    = "lambda_login_function_${var.common_tags.Environment}"
-#   role             = var.role_arn
-#   handler          = "exports.handler"
-#   source_code_hash = data.archive_file.lambda_login_archive.output_base64sha256
-#   filename         = "./build/${local.filename}"
-#   runtime          = "nodejs12.x"
-#   publish          = true
-#   tags = merge(var.common_tags, {
-#     Description = "AWS lambda function for logging in (against COGNITO user pool)"
-#   })
-# }
+# AWS LAMBDA ƛ FUNCTION
+resource "aws_lambda_function" "lambda_login_function" {
+  function_name    = "lambda_login_function_${var.common_tags.Environment}"
+  role             = var.role_arn
+  handler          = "exports.handler"
+  source_code_hash = data.archive_file.lambda_login_archive.output_base64sha256
+  filename         = "./build/${local.filename}"
+  runtime          = "nodejs12.x"
+  publish          = true
+  tags = merge(var.common_tags, {
+    Description = "AWS lambda function for logging in (against COGNITO user pool)"
+  })
+}
 
 
 # # LAMBDA ƛ DATASOURCE
