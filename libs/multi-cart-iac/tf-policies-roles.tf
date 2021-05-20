@@ -35,7 +35,9 @@ resource "aws_iam_role_policy" "iam_role_policy_for_lambda" {
   name = "${local.common_tags.AppPrefix}iam_role_policy_for_lambda_${local.common_tags.Environment}"
   role = aws_iam_role.iam_role_for_lambda.id
   policy = templatefile("./AppSync/policies-roles/lambdas/policy.json", {
-    GET_LAMBDA_ARN = module.send_email.function_arn,
+    # VIP: don't forget to list all lambdas here
+    GET_LAMBDA_SEND_EMAIL_ARN = module.send_email.function_arn,
+    GET_LAMBDA_LOGIN_ARN = module.login.function_arn,
   })
 }
 

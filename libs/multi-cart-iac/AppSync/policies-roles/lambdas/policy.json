@@ -4,7 +4,10 @@
     {
       "Effect": "Allow",
       "Action": ["lambda:InvokeFunction"],
-      "Resource": ["${GET_LAMBDA_ARN}", "${GET_LAMBDA_ARN}/*"]
+      "Resource": [
+        "${GET_LAMBDA_SEND_EMAIL_ARN}", "${GET_LAMBDA_SEND_EMAIL_ARN}/*",
+        "${GET_LAMBDA_LOGIN_ARN}", "${GET_LAMBDA_LOGIN_ARN}/*"
+      ]
     },
     {
       "Effect": "Allow",
