@@ -11,7 +11,7 @@ const CognitoIdentityServiceProvider = require('aws-sdk/clients/cognitoidentitys
 const AmazonCognitoIdentity = new CognitoIdentityServiceProvider({
     apiVersion: '2016-04-18',
     region: AWS_REGION_VAR
-    
+
     // DO I NEED?
     // accessKeyId:...
     // secretAccessKey: ...
@@ -29,24 +29,23 @@ exports.handler = async (event, context, callback) => {
     console.log("👍👍👍👍👍👍👍👍👍👍👍 ~ event", event) // event has PAYLOAD, and we put whatever we want in there
     console.log(`🚀 ~ password`, password);
     console.log(`🚀 ~ usernameOrEmail`, usernameOrEmail);
-    
-    AmazonCognitoIdentity.adminInitiateAuth({
-        AuthFlow: 'ADMIN_NO_SRP_AUTH',
-        ClientId: CLIENT_ID,
-        UserPoolId: POOL_ID,
-        AuthParameters: {
-            USERNAME: usernameOrEmail,
-            PASSWORD: password,
-        },
-    }, function(err, data) {
-        if (err) {
-            console.log(err, err.stack);
-        }
-        else {
-            console.log("✅ ✅ ✅ ✅ ✅ ✅ ✅  ~ GREAT SUCCESS!");
-            console.log(data);
-        }
-    });
+
+    try {
+
+        const data = await AmazonCognitoIdentity.adminInitiateAuth({
+            AuthFlow: 'ADMIN_NO_SRP_AUTH',
+            ClientId: CLIENT_ID,
+            UserPoolId: POOL_ID,
+            AuthParameters: {
+                USERNAME: usernameOrEmail,
+                PASSWORD: password,
+            },
+        });
+        console.log("✅ ✅ ✅ ✅ ✅ ✅ ✅  ~ GREAT SUCCESS!");
+        console.log(data);
+    } catch (err) {
+        console.log(err, err.stack);
+    }
 
 
     /*
