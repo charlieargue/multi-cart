@@ -1,1 +1,5 @@
-$utils.toJson($context.result)
+
+{
+    "user": $utils.toJson($context.result),
+    "token": $utils.toJson($context.prev.result.token),
+}
