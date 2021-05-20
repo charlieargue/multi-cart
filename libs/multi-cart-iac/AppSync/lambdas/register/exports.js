@@ -118,6 +118,7 @@ exports.handler = async (event, context, callback) => {
 
         } 
         token = initAuthResponse.AuthenticationResult.AccessToken
+        console.log(`🚀 ~ token`, token);
         return {
             token
         }
