@@ -17,9 +17,10 @@ resource "aws_appsync_resolver" "register_pipeline_resolver" {
   response_template = file("./AppSync/resolvers/user-resolvers/register/pipeline/response-mapping.vtl")
   pipeline_config {
     functions = [
-      "${module.register.appsync_function_id}", // 1) setup COGNITO user
-      "${aws_appsync_function.add_user_function.function_id}",
+      // 1) setup COGNITO user
       // 2) PUTITEM into DDB (and return with token from step 1)
+      "${module.register.appsync_function_id}",
+      "${aws_appsync_function.add_user_function.function_id}",
     ]
   }
 }
