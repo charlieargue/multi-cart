@@ -8,8 +8,8 @@
    "id" : { "S": "$freshUserId"}
  },
  "attributeValues" : {
-    "username" :  $util.dynamodb.toDynamoDBJson($ctx.args.options.username),
     "email" :  $util.dynamodb.toDynamoDBJson($ctx.args.options.email),
+    "username" :  $util.dynamodb.toDynamoDBJson($ctx.args.options.username),
     "currentCartId" :  $util.dynamodb.toDynamoDBJson(""),
     "createdAt": $util.dynamodb.toDynamoDBJson($nowTime),
     "updatedAt": $util.dynamodb.toDynamoDBJson($nowTime)
