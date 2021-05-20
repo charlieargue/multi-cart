@@ -40,10 +40,13 @@ exports.handler = async (event, context, callback) => {
             ClientId: CLIENT_ID,
             UserPoolId: POOL_ID,
             AuthParameters: {
-                USERNAME: email,
+                USERNAME: username,
                 PASSWORD: password
             }
         }).promise()
+
+        console.log('🤖🤖🤖 initAuthResponse 🤖🤖🤖 ')
+        console.log(JSON.stringify(initAuthResponse, null, '  '))
 
         if (initAuthResponse.ChallengeName === 'NEW_PASSWORD_REQUIRED') {
             await cognito.adminRespondToAuthChallenge({
@@ -51,7 +54,7 @@ exports.handler = async (event, context, callback) => {
                 ClientId: CLIENT_ID,
                 UserPoolId: POOL_ID,
                 ChallengeResponses: {
-                    USERNAME: email,
+                    USERNAME: username,
                     NEW_PASSWORD: password,
                 },
                 Session: initAuthResponse.Session
