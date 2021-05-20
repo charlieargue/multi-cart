@@ -19,10 +19,11 @@ const AmazonCognitoIdentity = new CognitoIdentityServiceProvider({
 
 
 
-// thx: https://docs.aws.amazon.com/cognito/latest/developerguide/authentication.html
-// thx: https://dzone.com/articles/authentication-and-authorization-to-amazon-cognito
+// no-thx: https://docs.aws.amazon.com/cognito/latest/developerguide/authentication.html
+// no-thx: https://dzone.com/articles/authentication-and-authorization-to-amazon-cognito
 // thx: https://stackoverflow.com/questions/48313291/using-aws-cognito-in-a-lambda-function-with-npm
 // thx: https://docs.aws.amazon.com/cognito/latest/developerguide/amazon-cognito-user-pools-authentication-flow.html#amazon-cognito-user-pools-server-side-authentication-flow
+// big-thx: https://dev.to/franzwong/howto-implement-user-sign-up-and-login-with-aws-cognito-boa
 exports.handler = async (event, context, callback) => {
     const usernameOrEmail = event.usernameOrEmail
     const password = event.password
@@ -43,6 +44,27 @@ exports.handler = async (event, context, callback) => {
         }).promise();
         console.log("✅ ✅ ✅ ✅ ✅ ✅ ✅  ~ GREAT SUCCESS!");
         console.log(data);
+        /* 
+        RESPONSE SYNTAX:
+        {
+            "AuthenticationResult": { 
+                "AccessToken": "string",
+                "ExpiresIn": number,
+                "IdToken": "string",
+                "NewDeviceMetadata": { 
+                    "DeviceGroupKey": "string",
+                    "DeviceKey": "string"
+                },
+                "RefreshToken": "string",
+                "TokenType": "string"
+            },
+            "ChallengeName": "string",
+            "ChallengeParameters": { 
+                "string" : "string" 
+            },
+            "Session": "string"
+            }
+        */
     } catch (err) {
         console.log(err, err.stack);
     }

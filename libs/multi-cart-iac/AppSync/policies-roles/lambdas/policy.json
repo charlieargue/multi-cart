@@ -5,14 +5,24 @@
       "Effect": "Allow",
       "Action": ["lambda:InvokeFunction"],
       "Resource": [
-        "${GET_LAMBDA_SEND_EMAIL_ARN}", "${GET_LAMBDA_SEND_EMAIL_ARN}/*",
-        "${GET_LAMBDA_LOGIN_ARN}", "${GET_LAMBDA_LOGIN_ARN}/*"
+        "${GET_LAMBDA_SEND_EMAIL_ARN}",
+        "${GET_LAMBDA_SEND_EMAIL_ARN}/*",
+        "${GET_LAMBDA_LOGIN_ARN}",
+        "${GET_LAMBDA_LOGIN_ARN}/*"
       ]
     },
     {
       "Effect": "Allow",
       "Action": ["ses:SendEmail", "ses:SendRawEmail"],
-      "Resource": "*"
+      "Resource": [
+        "${GET_LAMBDA_SEND_EMAIL_ARN}",
+        "${GET_LAMBDA_SEND_EMAIL_ARN}/*"
+      ]
+    },
+    {
+      "Effect": "Allow",
+      "Action": "cognito-idp:AdminInitiateAuth",
+      "Resource": ["${GET_LAMBDA_LOGIN_ARN}", "${GET_LAMBDA_LOGIN_ARN}/*"]
     }
   ]
 }
