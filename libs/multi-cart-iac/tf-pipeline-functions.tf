@@ -13,6 +13,7 @@ resource "aws_appsync_function" "get_user_function" {
   response_mapping_template = file("./AppSync/functions/getUser/response-mapping.vtl")
 }
 
+# bla 1
 resource "aws_appsync_function" "add_user_function" {
   api_id                    = aws_appsync_graphql_api.MultiCart.id
   data_source               = aws_appsync_datasource.multicart_dynamodb_user_datasource.name
