@@ -1,2 +1,14 @@
+## if NO token return from pipeline!
+#if(!$util.isNullOrBlank($context.result.token))
+    $util.error($util.toJson({
+    "data": {
+            "login": {
+                "user": null,
+                "token": null
+            }
+        }
+    }))
+#else
 $util.qr($context.stash.put('token', $context.result.token))
 {}
+#end
