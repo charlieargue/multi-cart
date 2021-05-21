@@ -40,7 +40,7 @@ type CartLineAccount @aws_cognito_user_pools {
 ## ------------------------------
 #  USER
 ## ------------------------------
-type User {
+type User @aws_api_key @aws_cognito_user_pools {
   id: ID!
   username: String!
   email: String!
@@ -49,13 +49,13 @@ type User {
   updatedAt: String!
 }
 
-type UserResponse {
+type UserResponse @aws_api_key @aws_cognito_user_pools {
   errors: [FieldError!]
   user: User
   token: String
 }
 
-type FieldError {
+type FieldError @aws_api_key @aws_cognito_user_pools {
   field: String!
   message: String!
 }
@@ -114,7 +114,7 @@ type Query @aws_cognito_user_pools(cognito_groups: ["User"]) {
 ## ------------------------------
 #  MUTATIONS
 ## ------------------------------
-type Mutation @aws_api_key {
+type Mutation @aws_api_key @aws_cognito_user_pools {
   # CARTS
   blankCart: Cart! @aws_cognito_user_pools(cognito_groups: ["User"])
 
