@@ -46,6 +46,7 @@ exports.handler = async (event, context, callback) => {
 
 
         // ATTEMPT to AUTHENTICATE (will get new-password-required CHALLENGE)
+        // default 3600 second (1 hr) expiration and then needs REFRESHING! 86400 seconds = max 24 hours
         const initAuthResponse = await cognito.adminInitiateAuth({
             AuthFlow: 'ADMIN_NO_SRP_AUTH',
             ClientId: CLIENT_ID,

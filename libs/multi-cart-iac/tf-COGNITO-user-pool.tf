@@ -55,7 +55,6 @@ resource "aws_cognito_user_pool_client" "multicart_app_user_pool_client" {
 
   # APP CLIENTS
   name                   = "${local.common_tags.AppPrefix}webclient_${local.common_tags.Environment}"
-  refresh_token_validity = 30
 
   # APP CLIENT SETTINGS
   supported_identity_providers         = ["COGNITO"]
@@ -67,5 +66,8 @@ resource "aws_cognito_user_pool_client" "multicart_app_user_pool_client" {
   explicit_auth_flows                  = ["ADMIN_NO_SRP_AUTH"] # prolly don't need the U_P one, and don't YET want the Server-Side one
   # NO! generate_secret                      = true
 
-  # TODO: 🛡 late lock down with prevent_user_existence_errors  = true
+  refresh_token_validity = 30 # in days
+  access_token_validity = 24 # in hours
+  
+  # TODO: 🛡 later lock down with prevent_user_existence_errors  = true
 }
