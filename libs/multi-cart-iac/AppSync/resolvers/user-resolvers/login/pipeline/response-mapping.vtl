@@ -1,13 +1,14 @@
 ## if NO token OR no user, return nulls!
 #if($util.isNullOrBlank($context.result.token))
-    #return($util.toJson({
+    #set($result = {
     "data": {
             "login": {
                 "user": null,
                 "token": null
             }
         }
-    }))
+    })
+    $util.toJson($result)
 #else
 {
     "user": $utils.toJson($context.result),
