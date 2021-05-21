@@ -1,0 +1,94 @@
+{
+	"files": [
+		{
+			"path": "libs/multi-cart-iac/tf-resolvers-pipeline-register.tf",
+			"bookmarks": [
+				{
+					"line": 10,
+					"column": 4,
+					"label": "1) PIPELINE resolver"
+				}
+			]
+		},
+		{
+			"path": "libs/multi-cart-iac/AppSync/resolvers/user-resolvers/register/pipeline/response-mapping.vtl",
+			"bookmarks": [
+				{
+					"line": 0,
+					"column": 20,
+					"label": "9) PIPELINE resp VTL"
+				}
+			]
+		},
+		{
+			"path": "libs/multi-cart-iac/AppSync/functions/lambdaRegister/request-mapping.vtl",
+			"bookmarks": [
+				{
+					"line": 2,
+					"column": 17,
+					"label": "4) Invoke lambda req VTL"
+				}
+			]
+		},
+		{
+			"path": "libs/multi-cart-iac/AppSync/functions/lambdaRegister/response-mapping.vtl",
+			"bookmarks": [
+				{
+					"line": 0,
+					"column": 8,
+					"label": "5) lambda resp VTL"
+				}
+			]
+		},
+		{
+			"path": "libs/multi-cart-iac/Modules/register/main.tf",
+			"bookmarks": [
+				{
+					"line": 42,
+					"column": 65,
+					"label": "3) lambda_register_appsync_function"
+				}
+			]
+		},
+		{
+			"path": "libs/multi-cart-iac/AppSync/functions/addUser/request-mapping.vtl",
+			"bookmarks": [
+				{
+					"line": 7,
+					"column": 25,
+					"label": "7) add_user_fn PutItem req VTL"
+				}
+			]
+		},
+		{
+			"path": "libs/multi-cart-iac/AppSync/functions/addUser/response-mapping.vtl",
+			"bookmarks": [
+				{
+					"line": 3,
+					"column": 53,
+					"label": "8) add_user_fn resp VTL (adds token)"
+				}
+			]
+		},
+		{
+			"path": "libs/multi-cart-iac/tf-pipeline-functions.tf",
+			"bookmarks": [
+				{
+					"line": 15,
+					"column": 50,
+					"label": "6) add_user_function"
+				}
+			]
+		},
+		{
+			"path": "libs/multi-cart-iac/AppSync/resolvers/_generic/generic-request-mapping-EMPTY.vtl",
+			"bookmarks": [
+				{
+					"line": 0,
+					"column": 2,
+					"label": "2) empty PIPELINE req VTL"
+				}
+			]
+		}
+	]
+}
