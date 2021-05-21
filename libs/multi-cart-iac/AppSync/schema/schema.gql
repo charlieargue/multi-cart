@@ -49,6 +49,29 @@ type User {
   updatedAt: String!
 }
 
+type UserResponse @aws_api_key {
+  errors: [FieldError!]
+  user: User
+  token: String
+}
+
+type FieldError {
+  field: String!
+  message: String!
+}
+
+## ------------------------------
+#  ACCOUNTS
+## ------------------------------
+type Account @aws_cognito_user_pools {
+  id: ID!
+  accountNumber: String!
+  accountName: String!
+  amountRemaining: Float!
+  createdAt: String!
+  updatedAt: String!
+}
+
 ## ------------------------------
 #  INPUTS / OUTPUTS
 ## ------------------------------
@@ -74,29 +97,6 @@ input CartLineInput {
   uom: String!
 }
 
-type UserResponse @aws_api_key {
-  errors: [FieldError!]
-  user: User
-  token: String
-}
-
-type FieldError {
-  field: String!
-  message: String!
-}
-
-## ------------------------------
-#  ACCOUNTS
-## ------------------------------
-type Account @aws_cognito_user_pools {
-  id: ID!
-  accountNumber: String!
-  accountName: String!
-  amountRemaining: Float!
-  createdAt: String!
-  updatedAt: String!
-}
-
 ## ------------------------------
 #  QUERIES
 ## ------------------------------
@@ -116,39 +116,57 @@ type Query @aws_cognito_user_pools(cognito_groups: ["User"]) {
 ## ------------------------------
 type Mutation @aws_api_key {
   # CARTS
-  blankCart: Cart!
+  blankCart: Cart! @aws_cognito_user_pools(cognito_groups: ["User"])
+
   deleteCart(id: ID!): Boolean!
+    @aws_cognito_user_pools(cognito_groups: ["User"])
+
   blankCartLine(cartId: ID!): CartLine!
+    @aws_cognito_user_pools(cognito_groups: ["User"])
+
   deleteCartLine(cartLineId: ID!, cartId: ID!): Boolean!
+    @aws_cognito_user_pools(cognito_groups: ["User"])
+
   updateCart(cart: CartInput!): Cart
+    @aws_cognito_user_pools(cognito_groups: ["User"])
+
   updateCartLine(cartLine: CartLineInput!): CartLine
+    @aws_cognito_user_pools(cognito_groups: ["User"])
+
   addCartLineAccount(
     amount: Float!
     accountNumber: String!
     cartLineId: ID!
     cartId: ID!
-  ): CartLineAccount!
+  ): CartLineAccount! @aws_cognito_user_pools(cognito_groups: ["User"])
+
   deleteCartLineAccount(
     cartId: ID!
     cartLineId: ID!
     cartLineAccountId: ID!
-  ): Boolean!
+  ): Boolean! @aws_cognito_user_pools(cognito_groups: ["User"])
+
   updateCartLineAccount(
     cartId: ID!
     cartLineId: ID!
     amount: Float!
     id: ID!
-  ): CartLineAccount!
+  ): CartLineAccount! @aws_cognito_user_pools(cognito_groups: ["User"])
 
   # ACCOUNTS
-  hydrateAccounts: Boolean!
+  hydrateAccounts: Boolean! @aws_cognito_user_pools(cognito_groups: ["Admin"])
 
   # USERS
-  register(options: UsernamePasswordInput!): UserResponse!
-  login(password: String!, usernameOrEmail: String!): UserResponse!
-  logout: Boolean!
+  register(options: UsernamePasswordInput!): UserResponse! # 👍 PUBLIC
+  login(password: String!, usernameOrEmail: String!): UserResponse! # 👍 PUBLIC
+  logout: Boolean! @aws_cognito_user_pools(cognito_groups: ["User"])
+
   forgotPassword(email: String!): Boolean!
-  # TODO: SKIPPING FOR NOW UNTIL SESSION/TOKEN:
+    @aws_cognito_user_pools(cognito_groups: ["User"])
+
   changePassword(newPassword: String!, token: String!): UserResponse!
+    @aws_cognito_user_pools(cognito_groups: ["User"])
+
   updateUser(currentCartId: ID!): UserResponse!
+    @aws_cognito_user_pools(cognito_groups: ["User"])
 }
