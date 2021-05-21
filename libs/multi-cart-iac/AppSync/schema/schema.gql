@@ -1,5 +1,3 @@
-# TODO: all types and queries and mutations get BOTH @auths ! (right?)
-
 ## ------------------------------
 #  CARTS
 ## ------------------------------
@@ -100,9 +98,6 @@ input CartLineInput {
 ## ------------------------------
 #  QUERIES
 ## ------------------------------
-# 🧠 Placing the directive on the type implies that the auth config is valid for all the fields in that type.
-# 🧠 Placing the directive on the field makes it apply to the field only.
-# 🧠 type Query @aws_cognito_user_pools {
 type Query @aws_cognito_user_pools(cognito_groups: ["User"]) {
   cart(id: ID!): Cart
   carts: [Cart!]!
