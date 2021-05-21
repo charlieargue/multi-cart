@@ -1,6 +1,5 @@
 # TODO: all types and queries and mutations get BOTH @auths ! (right?)
 
-
 ## ------------------------------
 #  CARTS
 ## ------------------------------
@@ -77,7 +76,7 @@ input CartLineInput {
 
 type UserResponse {
   errors: [FieldError!]
-  user: User,
+  user: User
   token: String
 }
 
@@ -98,22 +97,19 @@ type Account @aws_cognito_user_pools {
   updatedAt: String!
 }
 
-
 ## ------------------------------
 #  QUERIES
 ## ------------------------------
-# 🧠 Placing the directive on the type implies that the auth config is valid for all the fields in that type. 
+# 🧠 Placing the directive on the type implies that the auth config is valid for all the fields in that type.
 # 🧠 Placing the directive on the field makes it apply to the field only.
 # 🧠 type Query @aws_cognito_user_pools {
-type Query {
+type Query @aws_cognito_user_pools(cognito_groups: ["User"]) {
   cart(id: ID!): Cart
   carts: [Cart!]!
   users: [User!]!
-
-  accounts: [Account] @aws_cognito_user_pools(cognito_groups: ["User"])
+  accounts: [Account]
   me: User
 }
-
 
 ## ------------------------------
 #  MUTATIONS
@@ -152,7 +148,7 @@ type Mutation @aws_api_key {
   login(password: String!, usernameOrEmail: String!): UserResponse!
   logout: Boolean!
   forgotPassword(email: String!): Boolean!
-  # TODO: SKIPPING FOR NOW UNTIL SESSION/TOKEN: 
+  # TODO: SKIPPING FOR NOW UNTIL SESSION/TOKEN:
   changePassword(newPassword: String!, token: String!): UserResponse!
   updateUser(currentCartId: ID!): UserResponse!
 }
