@@ -40,7 +40,7 @@ type CartLineAccount @aws_cognito_user_pools {
 ## ------------------------------
 #  USER
 ## ------------------------------
-type User @aws_api_key {
+type User {
   id: ID!
   username: String!
   email: String!
