@@ -23,7 +23,13 @@
     },
     {
       "Effect": "Allow",
-      "Action": ["cognito-idp:AdminInitiateAuth", "cognito-idp:AdminCreateUser", "cognito-idp:AdminRespondToAuthChallenge"],
+      "Action": [
+        "cognito-idp:AdminInitiateAuth",
+        "cognito-idp:AdminCreateUser",
+        "cognito-idp:AdminRespondToAuthChallenge",
+        "cognito-idp:AdminAddUserToGroup"
+
+      ],
       "Resource": ["${USER_POOL_ARN}", "${USER_POOL_ARN}/*"]
     }
   ]

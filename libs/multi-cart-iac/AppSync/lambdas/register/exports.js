@@ -19,8 +19,11 @@ exports.handler = async (event, context, callback) => {
     const username = event.username
     const email = event.email
     const password = event.password
+    let token;
 
     try {
+
+        // CREATE USER in COGNITO
         const createdUser = await cognito.adminCreateUser({
             UserPoolId: POOL_ID,
             MessageAction: 'SUPPRESS',
@@ -34,31 +37,15 @@ exports.handler = async (event, context, callback) => {
             ],
         }).promise()
 
-        /*
-        CREATE USER - RESPONSE:
-        {
-            "User": {
-                "Username": "karlgolka3",
-                "Attributes": [
-                    {
-                        "Name": "sub",
-                        "Value": "a36fe378-fb89-4ed4-9f82-f598bca0e399"
-                    },
-                    {
-                        "Name": "email",
-                        "Value": "contact@karlgolka3.com"
-                    }
-                ],
-                "UserCreateDate": "2021-05-20T18:41:42.075Z",
-                "UserLastModifiedDate": "2021-05-20T18:41:42.075Z",
-                "Enabled": true,
-                "UserStatus": "FORCE_CHANGE_PASSWORD"
-            }
-        }
-        */
+        // add to default "Users" GROUP
+        const addedToGroup = await cognito.adminAddUserToGroup({
+            GroupName: 'User', //The name of the group in you cognito user pool that you want to add the user to
+            UserPoolId: POOL_ID,
+            Username: username
+        }).promise()
 
 
-        let token;
+        // ATTEMPT to AUTHENTICATE (will get new-password-required CHALLENGE)
         const initAuthResponse = await cognito.adminInitiateAuth({
             AuthFlow: 'ADMIN_NO_SRP_AUTH',
             ClientId: CLIENT_ID,
@@ -69,20 +56,8 @@ exports.handler = async (event, context, callback) => {
             }
         }).promise()
 
-        /*
-        FYI
 
-        {
-                "ChallengeName": "NEW_PASSWORD_REQUIRED",
-                "Session": "AYABeFvOBUP...",
-                "ChallengeParameters": {
-                    "USER_ID_FOR_SRP": "karlgolka3",
-                    "requiredAttributes": "[]",
-                    "userAttributes": "{\"email\":\"contact@karlgolka3.com\"}"
-                }
-            }
-
-        */
+        // SET NEW (same as original) PASSWORD
         if (initAuthResponse.ChallengeName === 'NEW_PASSWORD_REQUIRED') {
             const newPasswordResponse = await cognito.adminRespondToAuthChallenge({
                 ChallengeName: 'NEW_PASSWORD_REQUIRED',
@@ -94,26 +69,9 @@ exports.handler = async (event, context, callback) => {
                 },
                 Session: initAuthResponse.Session
             }).promise()
+            
+            // FINALLY, get ACCESS TOKEN
             token = newPasswordResponse.AuthenticationResult.AccessToken
-            /*
-
-            NEW PASSWORD RESPONSE:
-            --------------------------
-            {
-                "ChallengeParameters": {},
-                "AuthenticationResult": {
-                    "AccessToken": "eyJraW...",
-                    "ExpiresIn": 3600,
-                    "TokenType": "Bearer",
-                    "RefreshToken": "eyJjdH...",
-                    "NewDeviceMetadata": {
-                        "DeviceKey": "us-west-2_cd083315-8....",
-                        "DeviceGroupKey": "-cgSNKCRd"
-                    }
-                }
-            }
-            */
-
 
         }
         return {
@@ -128,3 +86,56 @@ exports.handler = async (event, context, callback) => {
 
 }
 
+
+
+/*
+INIT AUTH RESPONSE
+--------------------------
+{
+    "ChallengeName": "NEW_PASSWORD_REQUIRED",
+    "Session": "AYABeFvOBUP...",
+    "ChallengeParameters": {
+        "USER_ID_FOR_SRP": "karlgolka3",
+        "requiredAttributes": "[]",
+        "userAttributes": "{\"email\":\"contact@karlgolka3.com\"}"
+    }
+}
+
+CREATE USER - RESPONSE:
+--------------------------
+{
+    "User": {
+        "Username": "karlgolka3",
+        "Attributes": [
+            {
+                "Name": "sub",
+                "Value": "a36fe378-fb89-4ed4-9f82-f598bca0e399"
+            },
+            {
+                "Name": "email",
+                "Value": "contact@karlgolka3.com"
+            }
+        ],
+        "UserCreateDate": "2021-05-20T18:41:42.075Z",
+        "UserLastModifiedDate": "2021-05-20T18:41:42.075Z",
+        "Enabled": true,
+        "UserStatus": "FORCE_CHANGE_PASSWORD"
+    }
+}
+
+NEW PASSWORD RESPONSE:
+--------------------------
+{
+    "ChallengeParameters": {},
+    "AuthenticationResult": {
+        "AccessToken": "eyJraW...",
+        "ExpiresIn": 3600,
+        "TokenType": "Bearer",
+        "RefreshToken": "eyJjdH...",
+        "NewDeviceMetadata": {
+            "DeviceKey": "us-west-2_cd083315-8....",
+            "DeviceGroupKey": "-cgSNKCRd"
+        }
+    }
+}
+*/
