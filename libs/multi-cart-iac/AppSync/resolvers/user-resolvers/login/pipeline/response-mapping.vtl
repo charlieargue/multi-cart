@@ -1,6 +1,6 @@
 ## if NO token OR no user, return nulls!
-$util.error($util.toJson($context.result.token))
-#if($util.isNullOrBlank($context.result.token))
+## $util.error($util.toJson($context.result.token))
+#if($util.isNullOrBlank($context.stash.token))
     #set($result = {
     "data": {
             "login": {
