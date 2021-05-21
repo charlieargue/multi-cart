@@ -40,7 +40,7 @@ type CartLineAccount @aws_cognito_user_pools {
 ## ------------------------------
 #  USER
 ## ------------------------------
-type User @aws_cognito_user_pools{
+type User {
   id: ID!
   username: String!
   email: String!
@@ -74,13 +74,13 @@ input CartLineInput {
   uom: String!
 }
 
-type UserResponse @aws_cognito_user_pools{
+type UserResponse {
   errors: [FieldError!]
   user: User
   token: String
 }
 
-type FieldError @aws_cognito_user_pools{
+type FieldError {
   field: String!
   message: String!
 }
