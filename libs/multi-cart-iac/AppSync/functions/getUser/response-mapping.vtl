@@ -2,8 +2,6 @@
 #if($ctx.result.items.isEmpty())
     $utils.toJson(null)
 #else
-    {
-        "user": $utils.toJson($ctx.result.items[0]),
-        "token": $utils.toJson($context.prev.result.token),
-    }
-#end
+    $utils.toJson($ctx.result.items[0])
+#end 
+
