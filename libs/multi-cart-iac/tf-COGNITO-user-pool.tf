@@ -54,7 +54,7 @@ resource "aws_cognito_user_pool_client" "multicart_app_user_pool_client" {
   user_pool_id = aws_cognito_user_pool.multicart_app_user_pool.id
 
   # APP CLIENTS
-  name                   = "${local.common_tags.AppPrefix}webclient_${local.common_tags.Environment}"
+  name = "${local.common_tags.AppPrefix}webclient_${local.common_tags.Environment}"
 
   # APP CLIENT SETTINGS
   supported_identity_providers         = ["COGNITO"]
@@ -67,7 +67,7 @@ resource "aws_cognito_user_pool_client" "multicart_app_user_pool_client" {
   # NO! generate_secret                      = true
 
   refresh_token_validity = 30 # in days
-  access_token_validity = 24 # in hours
-  
+  access_token_validity  = 24 # in hours
+
   # TODO: 🛡 later lock down with prevent_user_existence_errors  = true
 }
