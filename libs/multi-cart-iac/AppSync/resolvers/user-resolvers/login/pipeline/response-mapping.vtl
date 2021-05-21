@@ -1,5 +1,5 @@
 ## if NO token OR no user, return nulls!
-$util.error('💎 dupa')
+$util.error($context.result.token)
 #if($util.isNullOrBlank($context.result.token))
     #set($result = {
     "data": {
