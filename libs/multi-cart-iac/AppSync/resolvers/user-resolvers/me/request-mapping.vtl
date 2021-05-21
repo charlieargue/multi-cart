@@ -10,7 +10,7 @@
 ## 2) will it have a username? if so, we're good! or email!?
 ## 3)
 
-$utils.error('WUT', 'IS HAPPENING', $ctx.identity)
+$utils.error('WUT', 'IS HAPPENING', $utils.toJson($ctx.identity))
 ## #set($sessionUserId = "9cb1b7e9-bbbe-416f-b205-5108bbfbbf9d" ) ## TODO: hard-coded, temp
 
 ## {
