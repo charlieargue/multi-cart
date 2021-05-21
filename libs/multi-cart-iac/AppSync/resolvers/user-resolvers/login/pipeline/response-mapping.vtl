@@ -1,10 +1,11 @@
 ## if NO token OR no user, return nulls!
+#set ($varname = "null")
 #if($util.isNullOrBlank($context.result.token))
     #set($result = {
     "data": {
             "login": {
-                "user": null,
-                "token": null
+                "user": $null,
+                "token": $null
             }
         }
     })
