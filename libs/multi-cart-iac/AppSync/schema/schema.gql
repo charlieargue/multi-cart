@@ -3,7 +3,7 @@
 ## ------------------------------
 #  CARTS
 ## ------------------------------
-type Cart {
+type Cart @aws_cognito_user_pools {
   id: ID!
   name: String!
   userId: ID!
@@ -13,7 +13,7 @@ type Cart {
   updatedAt: String!
 }
 
-type CartLine {
+type CartLine @aws_cognito_user_pools {
   id: ID!
   itemId: String
   description: String
@@ -28,7 +28,7 @@ type CartLine {
   updatedAt: String!
 }
 
-type CartLineAccount {
+type CartLineAccount @aws_cognito_user_pools {
   id: ID!
   amount: Float!
   accountNumber: String!
@@ -40,7 +40,7 @@ type CartLineAccount {
 ## ------------------------------
 #  USER
 ## ------------------------------
-type User {
+type User @aws_cognito_user_pools{
   id: ID!
   username: String!
   email: String!
@@ -74,13 +74,13 @@ input CartLineInput {
   uom: String!
 }
 
-type UserResponse {
+type UserResponse @aws_cognito_user_pools{
   errors: [FieldError!]
   user: User
   token: String
 }
 
-type FieldError {
+type FieldError @aws_cognito_user_pools{
   field: String!
   message: String!
 }
