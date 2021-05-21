@@ -1,5 +1,4 @@
 ## if NO token return from pipeline!
-$utils.error($util.toJson($context.result.token))
 #if($util.isNullOrBlank($context.result.token))
     $util.error($util.toJson({
     "data": {
