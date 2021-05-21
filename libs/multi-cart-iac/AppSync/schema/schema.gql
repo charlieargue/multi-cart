@@ -74,7 +74,7 @@ input CartLineInput {
   uom: String!
 }
 
-type UserResponse {
+type UserResponse @aws_api_key {
   errors: [FieldError!]
   user: User
   token: String
