@@ -1,10 +1,9 @@
-$utils.error($util.toJson($ctx.identity))
-#set($sessionUserId = "9cb1b7e9-bbbe-416f-b205-5108bbfbbf9d" ) ## TODO: hard-coded, temp
-
-## {
-##   "version": "2018-05-29",
-##   "operation": "GetItem",
-##   "key": {
-##     "id": $util.dynamodb.toDynamoDBJson($sessionUserId),
-##   },
-## }
+{
+  "version": "2017-02-28",
+  "operation": "Scan",
+  "filter" : {
+    "expression": "username = :username",
+        "expressionValues" : {
+            ":username" : $util.dynamodb.toDynamoDBJson($ctx.identity.username)
+        }
+  }

@@ -20,7 +20,7 @@ resource "aws_appsync_resolver" "me_resolver" {
   type              = "Query"
   data_source       = aws_appsync_datasource.multicart_dynamodb_user_datasource.name
   request_template  = file("./AppSync/resolvers/user-resolvers/me/request-mapping.vtl")
-  response_template = file("./AppSync/resolvers/_generic/generic-response-mapping-item-SINGULAR.vtl")
+  response_template = file("./AppSync/resolvers/_generic/generic-response-mapping-items-NULL-OR-FIRST.vtl")
   depends_on = [
     aws_appsync_graphql_api.MultiCart,
     aws_appsync_datasource.multicart_dynamodb_user_datasource,

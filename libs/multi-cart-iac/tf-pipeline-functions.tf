@@ -87,5 +87,6 @@ resource "aws_appsync_function" "get_account_function" {
   data_source               = aws_appsync_datasource.multicart_dynamodb_account_datasource.name
   name                      = "get_account_function"
   request_mapping_template  = file("./AppSync/functions/getAccount/request-mapping.vtl")
-  response_mapping_template = file("./AppSync/functions/getAccount/response-mapping.vtl")
+  response_mapping_template = file("./AppSync/resolvers/_generic/generic-response-mapping-items-NULL-OR-FIRST.vtl")
+  # response_mapping_template = file("./AppSync/functions/getAccount/response-mapping.vtl")
 }
