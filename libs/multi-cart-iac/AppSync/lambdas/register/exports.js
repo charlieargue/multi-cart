@@ -70,7 +70,7 @@ exports.handler = async (event, context, callback) => {
                 },
                 Session: initAuthResponse.Session
             }).promise()
-            
+
             // FINALLY, get ACCESS TOKEN
             token = newPasswordResponse.AuthenticationResult.AccessToken
 
@@ -83,6 +83,12 @@ exports.handler = async (event, context, callback) => {
         console.log('🔴🔴🔴 err 🔴🔴🔴 ')
         console.log(JSON.stringify(err, null, '  '))
         console.log(err, err.stack);
+        return {
+            token: null,
+            errors: [
+                err
+            ]
+        }
     }
 
 }
