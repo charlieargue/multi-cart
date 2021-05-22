@@ -9,7 +9,6 @@ resource "aws_iam_role" "multicart_app_user_group_role" {
 resource "aws_cognito_user_group" "multicart_app_user_group" {
   name         = "User"
   user_pool_id = aws_cognito_user_pool.multicart_app_user_pool.id
-  description  = "Default users group, aka Role=User"
+  description  = "Default User group (all users must belong to this group)"
   role_arn     = aws_iam_role.multicart_app_user_group_role.arn
-
 }
