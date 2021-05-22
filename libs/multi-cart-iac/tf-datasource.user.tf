@@ -39,9 +39,9 @@ resource "aws_dynamodb_table" "user_dynamo_table" {
     read_capacity   = 1
     projection_type = "ALL"
   }
-  
+
   global_secondary_index {
-    name            = "UsernameIndex"
+    name            = "EmailIndex"
     hash_key        = "email"
     write_capacity  = 1
     read_capacity   = 1
