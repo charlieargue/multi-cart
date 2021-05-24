@@ -10,7 +10,7 @@ resource "aws_appsync_function" "get_user_function" {
   data_source               = aws_appsync_datasource.multicart_dynamodb_user_datasource.name
   name                      = "get_user_function"
   request_mapping_template  = file("./AppSync/functions/getUser/request-mapping.vtl")
-  response_mapping_template = file("./AppSync/functions/getUser/response-mapping.vtl")
+  response_mapping_template = file("./AppSync/resolvers/_generic/generic-response-mapping-items-NULL-OR-FIRST.vtl")
 }
 
 resource "aws_appsync_function" "add_user_function" {
