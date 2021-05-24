@@ -10,5 +10,8 @@
     "attributeValues" : { "email" : $util.dynamodb.toDynamoDBJson($ctx.args.options.email), "username" :
     $util.dynamodb.toDynamoDBJson($ctx.args.options.username), "currentCartId" :
     $util.dynamodb.toDynamoDBJson(""), "createdAt": $util.dynamodb.toDynamoDBJson($nowTime),
-    "updatedAt": $util.dynamodb.toDynamoDBJson($nowTime) } } #else $utils.error('Unique constraint violation', 'UNIQUE_CONSTRAINT', 'That username or email has already been registered')
+    "updatedAt": $util.dynamodb.toDynamoDBJson($nowTime) } } 
+  #else 
+    $utils.error('Unique constraint violation', 'UNIQUE_CONSTRAINT', 'That username or email has already been registered')
+    $util.qr($context.stash.put('error', 'That username or email has already been registered'))
 #end
