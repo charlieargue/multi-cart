@@ -1,10 +1,8 @@
 ## GAMEPLAN:
 ## -------------------------------------
-##  1) hit cognito and create the user w/ new password CHALLENGE flow
-##  2) NO! USE CLOUD NATIVE and PIPLINE... post confirmation trigger -> create that same user in DynamoDB
-##  3) return new DDB user + token as UserResponse
-
-
+##  1) hit cognito and create the user via Lambda
+##  2) do unique constraints "manually" with get user call(s)
+##  3) return new DDB user + token
 
 
 # PIPELINE resolver
@@ -17,9 +15,8 @@ resource "aws_appsync_resolver" "register_pipeline_resolver" {
   response_template = file("./AppSync/resolvers/_generic/generic-response-mapping-USER+TOKEN.vtl")
   pipeline_config {
     functions = [
-      // 1) setup COGNITO user
-      // 2) PUTITEM into DDB (and return with token from step 1)
       "${module.register.appsync_function_id}",
+      "${aws_appsync_function.get_user_function.function_id}",
       "${aws_appsync_function.add_user_function.function_id}",
     ]
   }

@@ -1,8 +1,11 @@
 ## NOTE: THERE ARE NO "OR"s in dynamodb QUERIES!!! but YES in SCANS ... in expression logic
-## check password here? or need separate function? TBD
 
+## NOTE: flexible to handle both login and register flows
 #if( $ctx.args.usernameOrEmail ) 
   #set( $normalized = $ctx.args.usernameOrEmail )
+#end
+#if( $ctx.args.username ) 
+  #set( $normalized = $ctx.args.username )
 #end
 #if( $ctx.args.email ) 
   #set( $normalized = $ctx.args.email )
