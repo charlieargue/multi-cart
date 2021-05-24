@@ -9,7 +9,8 @@
 ## if we get back null, we proceed
 ## otherwise, return an error
 #if($util.isNullOrBlank($util.toJson($ctx.prev.result)))
-    $utils.error('💎 dupa - 2')
+    ## $utils.error('💎 dupa - 2')
+    $utils.error($util.toJson($ctx.prev.result))
 
     { "version": "2018-05-29", "operation" : "PutItem", "key" : { "id" : { "S": "$freshUserId"} },
     "attributeValues" : { "email" : $util.dynamodb.toDynamoDBJson($ctx.args.options.email), "username" :
