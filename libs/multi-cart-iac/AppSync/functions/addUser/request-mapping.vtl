@@ -2,6 +2,8 @@
 #set($freshUserId = $util.autoId() )
 #set($nowTime = $util.time.nowISO8601() )
 
+$utils.error('💎 dupa')
+
 ## NOTE: this is a manual "UNIQUE CONSTRAINT" since DDB doesn't natively support them, sigh
 ## if we get back null, we proceed
 ## otherwise, return an error
