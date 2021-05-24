@@ -14,7 +14,7 @@ resource "aws_appsync_resolver" "register_pipeline_resolver" {
   field             = "register"
   type              = "Mutation"
   request_template  = file("./AppSync/resolvers/_generic/generic-request-mapping-EMPTY.vtl")
-  response_template = file("./AppSync/resolvers/user-resolvers/register/pipeline/response-mapping.vtl")
+  response_template = file("./AppSync/resolvers/_generic/generic-response-mapping-USER+TOKEN.vtl")
   pipeline_config {
     functions = [
       // 1) setup COGNITO user

@@ -16,7 +16,7 @@ resource "aws_appsync_resolver" "login_pipeline_resolver" {
   field             = "login"
   type              = "Mutation"
   request_template  = file("./AppSync/resolvers/_generic/generic-request-mapping-EMPTY.vtl")
-  response_template = file("./AppSync/resolvers/user-resolvers/login/pipeline/response-mapping.vtl")
+  response_template = file("./AppSync/resolvers/_generic/generic-response-mapping-USER+TOKEN.vtl")
   pipeline_config {
     functions = [
       "${module.login.appsync_function_id}",

@@ -61,16 +61,6 @@
 			]
 		},
 		{
-			"path": "libs/multi-cart-iac/AppSync/functions/addUser/response-mapping.vtl",
-			"bookmarks": [
-				{
-					"line": 3,
-					"column": 53,
-					"label": "8) add_user_fn resp VTL (adds token)"
-				}
-			]
-		},
-		{
 			"path": "libs/multi-cart-iac/tf-pipeline-functions.tf",
 			"bookmarks": [
 				{

@@ -1,4 +1,3 @@
-## if NO token OR no user, return nulls!
 #if($util.isNullOrBlank($context.stash.token) || $util.isNullOrBlank($context.result))
     #set($result = {
     "data": {
