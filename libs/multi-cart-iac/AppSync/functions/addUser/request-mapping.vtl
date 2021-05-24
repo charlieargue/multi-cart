@@ -2,7 +2,7 @@
 #set($freshUserId = $util.autoId() )
 #set($nowTime = $util.time.nowISO8601() )
 
-$utils.error($util.toJson($ctx.prev.result))
+## $utils.error($util.toJson($ctx.prev.result))
 
 
 ## NOTE: this is a manual "UNIQUE CONSTRAINT" since DDB doesn't natively support them, sigh

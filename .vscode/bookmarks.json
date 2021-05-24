@@ -6,17 +6,7 @@
 				{
 					"line": 10,
 					"column": 4,
-					"label": "1) PIPELINE resolver"
-				}
-			]
-		},
-		{
-			"path": "libs/multi-cart-iac/AppSync/resolvers/user-resolvers/register/pipeline/response-mapping.vtl",
-			"bookmarks": [
-				{
-					"line": 0,
-					"column": 20,
-					"label": "9) PIPELINE resp VTL"
+					"label": "🧠 1 - REGISTER PIPELINE"
 				}
 			]
 		},
@@ -25,8 +15,8 @@
 			"bookmarks": [
 				{
 					"line": 2,
-					"column": 17,
-					"label": "4) Invoke lambda req VTL"
+					"column": 10,
+					"label": "🧠 3 - ƛ BEFORE"
 				}
 			]
 		},
@@ -36,17 +26,7 @@
 				{
 					"line": 0,
 					"column": 8,
-					"label": "5) lambda resp VTL"
-				}
-			]
-		},
-		{
-			"path": "libs/multi-cart-iac/Modules/register/main.tf",
-			"bookmarks": [
-				{
-					"line": 42,
-					"column": 65,
-					"label": "3) lambda_register_appsync_function"
+					"label": "🧠 4 - ƛ AFTER"
 				}
 			]
 		},
@@ -54,19 +34,19 @@
 			"path": "libs/multi-cart-iac/AppSync/functions/addUser/request-mapping.vtl",
 			"bookmarks": [
 				{
-					"line": 7,
-					"column": 25,
-					"label": "7) add_user_fn PutItem req VTL"
+					"line": 5,
+					"column": 0,
+					"label": "🧠 7 - BEFORE [add_user_fn]"
 				}
 			]
 		},
 		{
-			"path": "libs/multi-cart-iac/tf-pipeline-functions.tf",
+			"path": "libs/multi-cart-iac/AppSync/functions/addUser/response-mapping.vtl",
 			"bookmarks": [
 				{
-					"line": 15,
-					"column": 50,
-					"label": "6) add_user_function"
+					"line": 0,
+					"column": 30,
+					"label": "🧠 8 - AFTER [add_user_fn]"
 				}
 			]
 		},
@@ -76,7 +56,37 @@
 				{
 					"line": 0,
 					"column": 2,
-					"label": "2) empty PIPELINE req VTL"
+					"label": "🧠 2 - BEFORE [PIPELINE]"
+				}
+			]
+		},
+		{
+			"path": "libs/multi-cart-iac/AppSync/functions/getUser/request-mapping.vtl",
+			"bookmarks": [
+				{
+					"line": 9,
+					"column": 21,
+					"label": "🧠 5 - BEFORE [get_user_fn]"
+				}
+			]
+		},
+		{
+			"path": "libs/multi-cart-iac/AppSync/resolvers/_generic/generic-response-mapping-items-NULL-OR-FIRST.vtl",
+			"bookmarks": [
+				{
+					"line": 4,
+					"column": 5,
+					"label": "🧠 6 - AFTER [get_user_fn]"
+				}
+			]
+		},
+		{
+			"path": "libs/multi-cart-iac/AppSync/resolvers/_generic/generic-response-mapping-USER+TOKEN.vtl",
+			"bookmarks": [
+				{
+					"line": 4,
+					"column": 8,
+					"label": "🧠 9 - AFTER [PIPELINE]"
 				}
 			]
 		}
