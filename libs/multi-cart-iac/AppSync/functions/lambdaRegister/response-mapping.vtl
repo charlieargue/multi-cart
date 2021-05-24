@@ -1,2 +1,7 @@
+## HANDLING COGNITO DUPE username or EMAIL error
+## $context.result
+$utils.error('💎 dupa COGNITO DUPE error handling')
+## #if($util.isNullOrBlank($util.toJson($ctx.prev.result)))
+
 $util.qr($context.stash.put('token', $context.result.token))
 {}
