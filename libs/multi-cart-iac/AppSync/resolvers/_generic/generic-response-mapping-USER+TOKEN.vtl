@@ -1,16 +1,17 @@
 ## handle errors
 ## -------------------------------------
-#if(!$util.isNullOrBlank($context.stash.error))
-{
-    "errors": [
-        {
-            "message": $util.toJson($context.stash.error)
-        }
-    ]
-}
-## handle missing user or token
-## -------------------------------------
-#elseif($util.isNullOrBlank($context.stash.token) || $util.isNullOrBlank($context.result))
+#if($ctx.error)
+    $util.error($ctx.error.message, $ctx.error.type)
+    ## {
+    ##     "errors": [
+    ##         {
+    ##             "message": $util.toJson($context.stash.error)
+    ##         }
+    ##     ]
+    ## }
+    ## handle missing user or token
+    ## -------------------------------------
+    #elseif($util.isNullOrBlank($context.stash.token) || $util.isNullOrBlank($context.result))
     #set($result = {
     "data": {
             "login": {

@@ -5,7 +5,7 @@
 ## NOTE: this is a manual "UNIQUE CONSTRAINT" since DDB doesn't natively support them, sigh
 ## if we get back null, we proceed
 ## otherwise, return an error
-#if($util.isNullOrBlank($ctx.prev.result))
+#if($util.isNullOrBlank($util.toJson($ctx.prev.result)))
     $utils.error('💎 dupa - 2')
 
     { "version": "2018-05-29", "operation" : "PutItem", "key" : { "id" : { "S": "$freshUserId"} },
@@ -16,5 +16,5 @@
   #else 
     $utils.error('💎 dupa - 3')
     $utils.error('Unique constraint violation', 'UNIQUE_CONSTRAINT', 'That username or email has already been registered')
-    $util.qr($context.stash.put('error', 'That username or email has already been registered'))
+    ## NO NEED FOR THIS: $util.qr($context.stash.put('error', 'That username or email has already been registered'))
 #end
