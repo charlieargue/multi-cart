@@ -1,6 +1,7 @@
 ## handle errors
 ## -------------------------------------
 #if($ctx.error)
+    $utils.error('💎 dupa FOUND THE ERROR YAY!')
     $util.error($ctx.error.message, $ctx.error.type)
     ## {
     ##     "errors": [
