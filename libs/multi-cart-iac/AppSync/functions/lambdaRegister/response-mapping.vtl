@@ -1,9 +1,21 @@
 ## HANDLING COGNITO DUPE username or EMAIL error (from lambda)
-$utils.error($util.toJson($context.result.errors))
-#if(!$util.isNullOrBlank($util.toJson($context.result.errors))) 
-    ## TODO: more robust error handling
-    $utils.error('User Validation Failed', 'UNIQUE CONSTRAINT VIOLATION', {})
-#else
+## Eg. [
+##   {
+##     "message": "User account already exists",
+##     "code": "UsernameExistsException",
+##     "time": "2021-05-25T00:17:21.555Z",
+##     "requestId": "1de84af6-e741-4fc6-a352-38a7d4c531b8",
+##     "statusCode": 400,
+##     "retryable": false,
+##     "retryDelay": 16.38043756088623
+##   }
+## ]
+
+## No errors? we proceed...
+#if($util.isNullOrBlank($util.toJson($context.result.errors))) 
     $util.qr($context.stash.put('token', $context.result.token))
     {}
+#else
+    ## TODO: more robust error handling
+    $utils.error('User Validation Failed', 'UNIQUE CONSTRAINT VIOLATION', {})
     #end
