@@ -3,6 +3,7 @@
 # thx: https://github.com/mineiros-io/terraform-aws-cognito-user-pool/blob/master/examples/complete/main.tf
 # thx: STANDARD ATTRIBUTES for USERS in POOL: 
 #       - https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-settings-attributes.html#cognito-user-pools-standard-attributes
+# thx: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_UserPoolType.html
 ## ------------------------------
 resource "aws_cognito_user_pool" "multicart_app_user_pool" {
   # This is choosen when creating a user pool in the console
@@ -24,15 +25,15 @@ resource "aws_cognito_user_pool" "multicart_app_user_pool" {
   mfa_configuration        = "OFF"
   auto_verified_attributes = ["email"]
 
-  # MESSAGE CUSTOMIZATIONS
-  verification_message_template {
-    default_email_option  = "CONFIRM_WITH_LINK"
-    email_message_by_link = "💎 Register with 🛍 Multi Cart: {##Click Here##}"
-    email_subject_by_link = "💎 Register Link for 🛍 Multi Cart"
-  }
-  email_configuration {
-    reply_to_email_address = "karl@multicart.app"
-  }
+  # # MESSAGE CUSTOMIZATIONS
+  # verification_message_template {
+  #   default_email_option  = "CONFIRM_WITH_LINK"
+  #   email_message_by_link = "💎 Register with 🛍 Multi Cart: {##Click Here##}"
+  #   email_subject_by_link = "💎 Register Link for 🛍 Multi Cart"
+  # }
+  # email_configuration {
+  #   reply_to_email_address = "karl@multicart.app"
+  # }
 
   # DEVICES
   device_configuration {
@@ -64,6 +65,7 @@ resource "aws_cognito_user_pool_client" "multicart_app_user_pool_client" {
   allowed_oauth_scopes                 = ["aws.cognito.signin.user.admin"]
   allowed_oauth_flows                  = ["implicit"]
   explicit_auth_flows                  = ["ADMIN_NO_SRP_AUTH"] # prolly don't need the U_P one, and don't YET want the Server-Side one
+  
   # NO! generate_secret                      = true
 
   refresh_token_validity = 30 # in days
