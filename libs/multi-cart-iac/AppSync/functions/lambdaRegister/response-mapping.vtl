@@ -12,7 +12,7 @@
 ## ]
 
 ## stuck
-$utils.error($util.toJson($context.result))
+$utils.error($util.isNullOrBlank($util.toJson($context.result.errors)))
 
 
 ## No errors? we proceed...
