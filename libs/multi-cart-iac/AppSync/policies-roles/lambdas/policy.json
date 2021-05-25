@@ -27,7 +27,8 @@
         "cognito-idp:AdminInitiateAuth",
         "cognito-idp:AdminCreateUser",
         "cognito-idp:AdminRespondToAuthChallenge",
-        "cognito-idp:AdminAddUserToGroup"
+        "cognito-idp:AdminAddUserToGroup",
+        "cognito-idp:AdminUpdateUserAttributes"
 
       ],
       "Resource": ["${USER_POOL_ARN}", "${USER_POOL_ARN}/*"]

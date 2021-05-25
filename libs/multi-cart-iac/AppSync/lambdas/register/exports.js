@@ -44,6 +44,18 @@ exports.handler = async (event, context, callback) => {
             Username: username
         }).promise()
 
+        // mark their EMAIL as VERIFIED (would not work without this) so that can login with username OR email
+        const verifiedEmailResult = await cognito.adminUpdateUserAttributes({
+            UserAttributes: [{
+                Name: 'email_verified',
+                Value: 'true'
+            }
+            ],
+            UserPoolId: POOL_ID,
+            Username: username
+        }).promise()
+
+
 
         // ATTEMPT to AUTHENTICATE (will get new-password-required CHALLENGE)
         // default 3600 second (1 hr) expiration and then needs REFRESHING! 86400 seconds = max 24 hours
