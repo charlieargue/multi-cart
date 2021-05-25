@@ -18,8 +18,8 @@
     "expression": "email = :usernameOrEmail or username = :usernameOrEmail or email = :email or username = :username",
         "expressionValues" : {
             ":usernameOrEmail" : $util.dynamodb.toDynamoDBJson($eitherOr),
-            ":email" : $util.dynamodb.toDynamoDBJson($username),
-            ":usernameOrEmail" : $util.dynamodb.toDynamoDBJson($email),
+            ":username" : $util.dynamodb.toDynamoDBJson($username),
+            ":email" : $util.dynamodb.toDynamoDBJson($email),
         }
   }
 
