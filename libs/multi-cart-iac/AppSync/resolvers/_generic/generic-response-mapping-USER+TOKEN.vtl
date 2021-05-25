@@ -1,21 +1,7 @@
 ## ASSUMES: $ctx.prev.result   ==========> USER or null
 
-## handle missing token or user
-## -------------------------------------
 #if($util.isNullOrBlank($ctx.stash.token) || $util.isNull($ctx.prev.result))
-    #set($result = {
-    "data": {
-            $ctx.info.fieldName: {
-                "user": $null,
-                "token": $null,
-                "hello": "world"
-            }
-        }
-    })
-    $util.toJson($result)
-
-## return health response
-## -------------------------------------
+    {}
 #else
 {
     "user": $utils.toJson($ctx.prev.result),
