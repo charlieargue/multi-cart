@@ -9,9 +9,11 @@
     ##         }
     ##     ]
     ## }
-    ## handle missing token or user
-    ## -------------------------------------
-    #elseif($util.isNullOrBlank($context.stash.token) || $util.isNull($context.result))
+
+
+## handle missing token or user
+## -------------------------------------
+#elseif($util.isNullOrBlank($context.stash.token) || $util.isNull($context.result))
     #set($result = {
     "data": {
             "login": {
