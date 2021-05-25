@@ -1,8 +1,8 @@
-## HANDLING COGNITO DUPE username or EMAIL error
+## HANDLING COGNITO DUPE username or EMAIL error (from lambda)
+$utils.error($util.toJson($context.result.errors))
 #if(!$util.isNullOrBlank($util.toJson($context.result.errors))) 
     ## TODO: more robust error handling
     $utils.error('User Validation Failed', 'UNIQUE CONSTRAINT VIOLATION',
-    $util.toJson($context.result.errors))
 #else
     $util.qr($context.stash.put('token', $context.result.token))
     {}
