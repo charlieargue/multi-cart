@@ -1,5 +1,7 @@
 #if($ctx.result.items.isEmpty())
+    $utils.error('💎 NULL 🔴 no user found in DB')
     $utils.toJson(null)
 #else
+    $utils.error('💎 👍 Found User!', 'SWEET', $utils.toJson($ctx.result.items[0]))
     $utils.toJson($ctx.result.items[0])
 #end 
