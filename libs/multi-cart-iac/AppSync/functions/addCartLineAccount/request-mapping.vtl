@@ -2,10 +2,10 @@
 
 ## VIP: $ctx.prev.result   ==========> ACCOUNT 
 ## VIP: $ctx.stash.cart    ==========> CART (w/ lines)
-#set($cart = $context.stash.cart)
+#set($cart = $ctx.stash.cart)
 #set($freshCartLineAccountId = $util.autoId() )
 #set($nowTime = $util.time.nowISO8601() )
-$util.qr($context.stash.put("freshCartLineAccountId", $freshCartLineAccountId))
+$util.qr($ctx.stash.put("freshCartLineAccountId", $freshCartLineAccountId))
 
 ## get INDEX of this cartLine 
 #foreach ($item in $cart.cartLines)

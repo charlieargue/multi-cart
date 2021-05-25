@@ -1,6 +1,6 @@
 #set($freshCartLineId = $util.autoId() )
 #set($nowTime = $util.time.nowISO8601() )
-$util.qr($context.stash.put("freshCartLineId", $freshCartLineId))
+$util.qr($ctx.stash.put("freshCartLineId", $freshCartLineId))
 
 
 ## thx? https://stackoverflow.com/questions/44219664/inserting-a-nested-attributes-array-element-in-dynamodb-table-without-retrieving

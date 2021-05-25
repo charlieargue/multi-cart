@@ -9,7 +9,7 @@
     "update" : {
         "expression" : "SET currentCartId = :cartId",
         "expressionValues": {
-            ":cartId" : $util.dynamodb.toDynamoDBJson($context.arguments.currentCartId)
+            ":cartId" : $util.dynamodb.toDynamoDBJson($ctx.arguments.currentCartId)
         }
     }
 }

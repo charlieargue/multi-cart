@@ -2,7 +2,7 @@
     "version" : "2017-02-28",
     "operation" : "UpdateItem",
     "key" : {
-        "id" : { "S" : "$context.arguments.cart.id" }
+        "id" : { "S" : "$ctx.arguments.cart.id" }
     },
     "update" : {
         "expression" : "SET #name = :name",
@@ -10,7 +10,7 @@
             "#name": "name"
         },
         "expressionValues": {
-            ":name" : $util.dynamodb.toDynamoDBJson($context.arguments.cart.name)
+            ":name" : $util.dynamodb.toDynamoDBJson($ctx.arguments.cart.name)
         }
     }
 }

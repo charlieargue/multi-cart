@@ -1,8 +1,8 @@
 ## NOTE: the UpdateItem for inserting a blank cart LINE returns the entire CART w/ cartLines... 
 ##       so have to filter down to return just the one new fresh cart LINE
 
-#set($freshCartLineId = $context.stash.freshCartLineId)
-#foreach($item in $context.result.cartLines)
+#set($freshCartLineId = $ctx.stash.freshCartLineId)
+#foreach($item in $ctx.result.cartLines)
     #if($item.id == "$freshCartLineId")
         #set($data = $item)
     #end

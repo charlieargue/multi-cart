@@ -2,7 +2,7 @@
 ##       so have to filter down to return just the one new fresh cart line ACCOUNT
 
 ## cart LINES
-#foreach($cl in $context.result.cartLines)
+#foreach($cl in $ctx.result.cartLines)
     #if($cl.id == "$ctx.args.cartLineId")
 
         ## cart line ACCOUNTS

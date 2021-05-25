@@ -2,7 +2,7 @@
 
 ## VIP: $ctx.prev.result   ==========> ACCOUNT 
 ## VIP: $ctx.stash.cart    ==========> CART (w/ lines)
-#set($cart = $context.stash.cart)
+#set($cart = $ctx.stash.cart)
 #set($nowTime = $util.time.nowISO8601() )
 
 ## TODO: how to break out of these foreach, and can they be nested and .count still works as expected?

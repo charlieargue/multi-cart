@@ -11,9 +11,9 @@
 ##   }
 ## ]
 
-#if($util.isNull($context.result.errors)) 
+#if($util.isNull($ctx.result.errors)) 
     ## No errors? we proceed...
-    $util.qr($context.stash.put('token', $context.result.token))
+    $util.qr($ctx.stash.put('token', $ctx.result.token))
     {}
 #else
     ## TODO: more robust error handling
