@@ -1,7 +1,7 @@
 ## GAMEPLAN:
 ## -------------------------------------
-##  1) hit cognito and create the user via Lambda
-##  2) do unique constraints "manually" with get user call(s)
+##  1) hit cognito and create the user via Lambda (COGNITO will do unique check on BOTH username and email)
+##  2) do unique constraints "manually" with get user call
 ##  3) return new DDB user + token
 
 
