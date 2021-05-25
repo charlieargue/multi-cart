@@ -7,10 +7,10 @@
 #end
 
 ## REGISTER:
-#if( $ctx.args.username ) 
+#if( $ctx.args.options.username ) 
   #set( $username = $ctx.args.options.username )
 #end
-#if( $ctx.args.email ) 
+#if( $ctx.args.options.email ) 
   #set( $email = $ctx.args.options.email )
 #end
 
