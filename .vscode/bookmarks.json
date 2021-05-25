@@ -6,7 +6,7 @@
 				{
 					"line": 10,
 					"column": 4,
-					"label": "🧠 1 - REGISTER PIPELINE"
+					"label": "🚥 1 - PIPELINE for register"
 				}
 			]
 		},
@@ -16,7 +16,7 @@
 				{
 					"line": 2,
 					"column": 10,
-					"label": "🧠 3 - ƛ BEFORE"
+					"label": "ƛ🧮 3 - LAMBDA before"
 				}
 			]
 		},
@@ -26,7 +26,7 @@
 				{
 					"line": 0,
 					"column": 8,
-					"label": "🧠 4 - ƛ AFTER"
+					"label": "ƛ🧮 4 - LAMBDA after"
 				}
 			]
 		},
@@ -36,7 +36,7 @@
 				{
 					"line": 5,
 					"column": 0,
-					"label": "🧠 7 - BEFORE [add_user_fn]"
+					"label": "🧩 7 - ADD_USER before"
 				}
 			]
 		},
@@ -46,7 +46,7 @@
 				{
 					"line": 0,
 					"column": 30,
-					"label": "🧠 8 - AFTER [add_user_fn]"
+					"label": "🧩 8 - ADD_USER after"
 				}
 			]
 		},
@@ -56,7 +56,7 @@
 				{
 					"line": 0,
 					"column": 2,
-					"label": "🧠 2 - BEFORE [PIPELINE]"
+					"label": "🚥 2 - PIPELINE before"
 				}
 			]
 		},
@@ -66,7 +66,7 @@
 				{
 					"line": 9,
 					"column": 21,
-					"label": "🧠 5 - BEFORE [get_user_fn]"
+					"label": "🔎 5 - GET_USER before"
 				}
 			]
 		},
@@ -76,7 +76,7 @@
 				{
 					"line": 4,
 					"column": 5,
-					"label": "🧠 6 - AFTER [get_user_fn]"
+					"label": "🔎 6 - GET_USER after"
 				}
 			]
 		},
@@ -86,7 +86,7 @@
 				{
 					"line": 4,
 					"column": 8,
-					"label": "🧠 9 - AFTER [PIPELINE]"
+					"label": "🚥 9 - PIPELINE after"
 				}
 			]
 		}

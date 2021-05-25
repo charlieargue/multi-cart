@@ -15,7 +15,7 @@ resource "aws_appsync_resolver" "register_pipeline_resolver" {
   response_template = file("./AppSync/resolvers/_generic/generic-response-mapping-USER+TOKEN.vtl")
   pipeline_config {
     functions = [
-      "${module.register.appsync_function_id}",
+      # "${module.register.appsync_function_id}",
       "${aws_appsync_function.get_user_function.function_id}",
       "${aws_appsync_function.add_user_function.function_id}",
     ]

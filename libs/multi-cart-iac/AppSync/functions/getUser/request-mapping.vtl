@@ -1,23 +1,25 @@
 ## NOTE: THERE ARE NO "OR"s in dynamodb QUERIES!!! but YES in SCANS ... in expression logic
+## NOTE: flexible to handle both LOGIN and REGISTER flows
 
-## NOTE: flexible to handle both login and register flows
 #if( $ctx.args.usernameOrEmail ) 
-  #set( $normalized = $ctx.args.usernameOrEmail )
+  #set( $eitherOr = $ctx.args.usernameOrEmail )
 #end
 #if( $ctx.args.username ) 
-  #set( $normalized = $ctx.args.username )
+  #set( $username = $ctx.args.username )
 #end
 #if( $ctx.args.email ) 
-  #set( $normalized = $ctx.args.email )
+  #set( $email = $ctx.args.email )
 #end
 
 {
   "version": "2017-02-28",
   "operation": "Scan",
   "filter" : {
-    "expression": "email = :usernameOrEmail or username = :usernameOrEmail",
+    "expression": "email = :usernameOrEmail or username = :usernameOrEmail or email = :email or username = :username",
         "expressionValues" : {
-            ":usernameOrEmail" : $util.dynamodb.toDynamoDBJson($normalized)
+            ":usernameOrEmail" : $util.dynamodb.toDynamoDBJson($eitherOr),
+            ":email" : $util.dynamodb.toDynamoDBJson($username),
+            ":usernameOrEmail" : $util.dynamodb.toDynamoDBJson($email),
         }
   }
 
