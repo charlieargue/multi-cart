@@ -7,19 +7,26 @@
 ## if we get back null, we proceed
 ## -------------------------------------
 #if($util.isNull($ctx.prev.result))
-    $utils.error('💎 dupa - 👍 ALL CLEAR, we proceed')
 
-    { "version": "2018-05-29", "operation" : "PutItem", "key" : { "id" : { "S": "$freshUserId"} },
-    "attributeValues" : { "email" : $util.dynamodb.toDynamoDBJson($ctx.args.options.email), "username" :
-    $util.dynamodb.toDynamoDBJson($ctx.args.options.username), "currentCartId" :
-    $util.dynamodb.toDynamoDBJson(""), "createdAt": $util.dynamodb.toDynamoDBJson($nowTime),
-    "updatedAt": $util.dynamodb.toDynamoDBJson($nowTime) } }
+    {
+      "version": "2018-05-29",
+      "operation" : "PutItem",
+      "key" : {
+        "id" : { "S": "$freshUserId"}
+      },
+      "attributeValues" : {
+          "email" :  $util.dynamodb.toDynamoDBJson($ctx.args.options.email),
+          "username" :  $util.dynamodb.toDynamoDBJson($ctx.args.options.username),
+          "currentCartId" :  $util.dynamodb.toDynamoDBJson(""),
+          "createdAt": $util.dynamodb.toDynamoDBJson($nowTime),
+          "updatedAt": $util.dynamodb.toDynamoDBJson($nowTime)
+      }
+    }
 
-  #else 
 ## otherwise, return an error
 ## -------------------------------------
-  
-    $utils.error('💎 dupa - 🔴 USER EXISTS in DB already')
-    ## $utils.error('Unique constraint violation', 'UNIQUE_CONSTRAINT', 'That username or email has already been registered')
-    ## NO NEED FOR THIS: $util.qr($context.stash.put('error', 'That username or email has already been registered'))
+#else 
+    $utils.error("Unique constraint violation", "UNIQUE_CONSTRAINT", {}, {
+      "message": "That username or email has already been registered"
+    })
 #end
