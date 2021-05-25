@@ -3,7 +3,7 @@ import { withUrqlClient } from 'next-urql';
 import React from 'react';
 import { RegisterContainer } from '../appViews/auth/RegisterContainer';
 import 'regenerator-runtime/runtime';
-import { createUrqlClient } from '../urql/createUrqlClient';
+import { createUrqlClient } from '@multi-cart/react-data-access';
 
 // -------------------
 const RegisterPage: NextPage = () => {

@@ -4,7 +4,7 @@
 import { devtoolsExchange } from '@urql/devtools';
 import { dedupExchange, Exchange, fetchExchange } from 'urql';
 import { pipe, tap } from 'wonka'; // part of urql!
-import { cache } from '@multi-cart/react-data-access';
+import { cache } from './cache';
 
 const NEXT_PUBLIC_API_URL = process.env.NEXT_PUBLIC_API_URL;
 console.log(`🚀 ~ NEXT_PUBLIC_API_URL`, NEXT_PUBLIC_API_URL);

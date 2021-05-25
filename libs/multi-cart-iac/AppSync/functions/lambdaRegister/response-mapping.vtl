@@ -17,7 +17,13 @@
     {}
 #else
     ## TODO: more robust error handling (not hard-coded)
-    $utils.error("Unique constraint violation", "UNIQUE_CONSTRAINT", {}, {
-      "message": "That username or email has already been registered with the authentication service"
-    })
-    #end
+  $utils.error(
+    $ctx.result.errors[0].message, 
+    $ctx.result.errors[0].code, 
+    {}, 
+    $ctx.result.errors)
+
+    ## $utils.error("Unique constraint violation", "UNIQUE_CONSTRAINT", {}, {
+    ##   "message": "That username or email has already been registered with the authentication service"
+    ## })
+#end
