@@ -2,7 +2,7 @@
 $utils.error($util.toJson($context.result.errors))
 #if(!$util.isNullOrBlank($util.toJson($context.result.errors))) 
     ## TODO: more robust error handling
-    $utils.error('User Validation Failed', 'UNIQUE CONSTRAINT VIOLATION',
+    $utils.error('User Validation Failed', 'UNIQUE CONSTRAINT VIOLATION', {})
 #else
     $util.qr($context.stash.put('token', $context.result.token))
     {}
