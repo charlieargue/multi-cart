@@ -1,6 +1,6 @@
 #if($ctx.result.items.isEmpty())
     $utils.toJson(null)
 #else
-    $utils.error('💎 👍 Found User!', 'SWEET', {"wtf" : " candy"}, {"errorInfo": "goes here"})
+    $utils.error('💎 👍 Found User!', 'SWEET', {"wtf" : " candy"}, $utils.toJson($ctx.result.items[0]))
     $utils.toJson($ctx.result.items[0])
 #end 
