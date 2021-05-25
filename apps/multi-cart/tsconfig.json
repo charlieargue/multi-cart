@@ -21,7 +21,7 @@
     "**/*.js",
     "**/*.jsx",
     "next-env.d.ts"
-  ],
+, "../../libs/react-data-access/src/lib/urql-customizations/createUrqlClient.tsx"  ],
   "exclude": [
     "node_modules"
   ]

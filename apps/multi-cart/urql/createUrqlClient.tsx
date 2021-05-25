@@ -34,6 +34,9 @@ const getToken = () =>
         ? localStorage.getItem("token")
         : null;
 
+console.log(`🚀 ~ getToken`, getToken());
+
+
 // [ ] TODO: global error handling goes here (unauth redirects/verifies)
 export const createUrqlClient = (ssrExchange: any) => ({
 
@@ -46,9 +49,10 @@ export const createUrqlClient = (ssrExchange: any) => ({
         // VIP: session cookies will NOT work with AppSync AFAIK
         // NOTE: we only need x-api-key when we are calling login/register
         const token = getToken();
+        console.log(`🚀 ~ token`, token);
         return token ?
             { headers: { Authorization: `${token}` } } :
-            { "x-api-key": process.env.NEXT_PUBLIC_API_KEY };
+            { headers: { "x-api-key": process.env.NEXT_PUBLIC_API_KEY } };
     },
     exchanges: [
         devtoolsExchange,
