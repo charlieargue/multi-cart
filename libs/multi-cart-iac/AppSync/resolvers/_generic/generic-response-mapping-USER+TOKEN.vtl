@@ -14,7 +14,7 @@
 ## -------------------------------------z
 #else
 {
-    "user": $utils.toJson($context.result),
+    "user": $utils.toJson($context.prev.result),
     "token": $utils.toJson($context.stash.token)
 }
 #end
