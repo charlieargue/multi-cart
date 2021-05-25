@@ -14,12 +14,11 @@
 ## stuck
 ## $utils.error($util.toJson($context.result.errors))
 
-
-## No errors? we proceed...
 #if($util.toJson($context.result.errors)) 
-    $util.qr($context.stash.put('token', $context.result.token))
-    {}
-#else
     ## TODO: more robust error handling
     $utils.error('User Validation Failed', 'UNIQUE CONSTRAINT VIOLATION', {})
+#else
+    ## No errors? we proceed...
+    $util.qr($context.stash.put('token', $context.result.token))
+    {}
     #end
