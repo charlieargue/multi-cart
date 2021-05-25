@@ -1,14 +1,17 @@
 ## NOTE: THERE ARE NO "OR"s in dynamodb QUERIES!!! but YES in SCANS ... in expression logic
 ## NOTE: flexible to handle both LOGIN and REGISTER flows
 
+## LOGIN:
 #if( $ctx.args.usernameOrEmail ) 
   #set( $eitherOr = $ctx.args.usernameOrEmail )
 #end
+
+## REGISTER:
 #if( $ctx.args.username ) 
-  #set( $username = $ctx.args.username )
+  #set( $username = $ctx.args.options.username )
 #end
 #if( $ctx.args.email ) 
-  #set( $email = $ctx.args.email )
+  #set( $email = $ctx.args.options.email )
 #end
 
 {
