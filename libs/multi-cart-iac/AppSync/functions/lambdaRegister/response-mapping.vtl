@@ -1,17 +1,8 @@
 ## HANDLING COGNITO DUPE username or EMAIL error
 #if(!$util.isNullOrBlank($util.toJson($context.result.errors))) 
-    #set($result = {
-    "data": {
-            "register": {
-                "user": $null,
-                "token": $null,
-                "errors": [{
-                    "message": $context.result.errors[0].message
-                }]
-            }
-        }
-    })
-    #return($result)
+    ## TODO: more robust error handling
+    $utils.error('User Validation Failed', 'UNIQUE CONSTRAINT VIOLATION',
+    $util.toJson($context.result.errors))
 #else
     $util.qr($context.stash.put('token', $context.result.token))
     {}
