@@ -10,7 +10,12 @@ resource "aws_cognito_user_pool" "multicart_app_user_pool" {
   name = "${local.common_tags.AppPrefix}cognito_user_pool_${local.common_tags.Environment}"
 
   # ATTRIBUTES
-  username_attributes = ["email"]
+  # username_attributes = ["email"] # NO, not like this! we still want a username (this makes a GUID username and you can login with your email)
+
+  # DOCS: The email address, phone number, and preferred username attributes can be marked as aliases. 
+  # For example, if email and phone are selected as aliases for a user pool, 
+  # users in that user pool can sign in using their username, email address, or phone number, along with their password.
+  alias_attributes = ["email"]
 
   # POLICY
   password_policy {
@@ -25,21 +30,6 @@ resource "aws_cognito_user_pool" "multicart_app_user_pool" {
   mfa_configuration        = "OFF"
   auto_verified_attributes = ["email"]
 
-  # # MESSAGE CUSTOMIZATIONS
-  # verification_message_template {
-  #   default_email_option  = "CONFIRM_WITH_LINK"
-  #   email_message_by_link = "💎 Register with 🛍 Multi Cart: {##Click Here##}"
-  #   email_subject_by_link = "💎 Register Link for 🛍 Multi Cart"
-  # }
-  # email_configuration {
-  #   reply_to_email_address = "karl@multicart.app"
-  # }
-
-  # DEVICES
-  device_configuration {
-    challenge_required_on_new_device      = true
-    device_only_remembered_on_user_prompt = true
-  }
 }
 
 
