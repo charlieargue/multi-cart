@@ -10,7 +10,7 @@ resource "aws_cognito_user_pool" "multicart_app_user_pool" {
   name = "${local.common_tags.AppPrefix}cognito_user_pool_${local.common_tags.Environment}"
 
   # ATTRIBUTES
-  alias_attributes = ["email"]
+  username_attributes = ["email"]
 
   # POLICY
   password_policy {
@@ -65,7 +65,7 @@ resource "aws_cognito_user_pool_client" "multicart_app_user_pool_client" {
   allowed_oauth_scopes                 = ["aws.cognito.signin.user.admin"]
   allowed_oauth_flows                  = ["implicit"]
   explicit_auth_flows                  = ["ADMIN_NO_SRP_AUTH"] # prolly don't need the U_P one, and don't YET want the Server-Side one
-  
+
   # NO! generate_secret                      = true
 
   refresh_token_validity = 30 # in days
