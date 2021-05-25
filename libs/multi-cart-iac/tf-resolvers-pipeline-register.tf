@@ -2,6 +2,7 @@
 ## -------------------------------------
 ##  1) hit cognito and create the user via Lambda (COGNITO will do unique check on BOTH username and email)
 ##  2) do unique constraints "manually" with get user call
+#       🧠 ATTENTION: DDB does not natively support UNIQUE CONSTRAINTS (well, it does if you PK or multi-record it)
 ##  3) return new DDB user + token
 
 

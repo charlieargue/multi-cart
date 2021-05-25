@@ -88,7 +88,7 @@ input CartLineInput {
   id: ID!
   cartId: ID!
   categoryId: ID!
-  quantity: Int!
+  quantity: ID!
   price: Float!
   itemId: String!
   description: String!

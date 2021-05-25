@@ -1,4 +1,4 @@
-mutation UpdateUser($currentCartId: Int!) {
+mutation UpdateUser($currentCartId: ID!) {
   updateUser(currentCartId: $currentCartId) {
     ...RegularUserResponse
   }

@@ -1,7 +1,7 @@
 mutation UpdateCartLineAccount(
-  $cartId: Int!
-  $cartLineId: Int!
-  $id: Int!
+  $cartId: ID!
+  $cartLineId: ID!
+  $id: ID!
   $amount: Float!
 ) {
   updateCartLineAccount(

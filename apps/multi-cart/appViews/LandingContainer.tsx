@@ -42,7 +42,7 @@ export const LandingContainer = () => {
             ctaLink="/register"
         />
 
-        <Divider />
+        <Box minW="60vw" pt="82px" ><Divider  /></Box>
 
         {/* Features */}
         <Box as="section" py="24">

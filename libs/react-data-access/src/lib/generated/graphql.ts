@@ -18,6 +18,7 @@ export type Scalars = {
 
 export type Account = {
   __typename?: 'Account';
+  id: Scalars['ID'];
   accountNumber: Scalars['String'];
   accountName: Scalars['String'];
   amountRemaining: Scalars['Float'];
@@ -27,31 +28,29 @@ export type Account = {
 
 export type Cart = {
   __typename?: 'Cart';
-  id: Scalars['Float'];
+  id: Scalars['ID'];
   name: Scalars['String'];
-  userId: Scalars['Int'];
+  userId: Scalars['ID'];
   cartLines: Array<CartLine>;
-  user: User;
   createdAt: Scalars['String'];
   updatedAt: Scalars['String'];
 };
 
 export type CartInput = {
-  id: Scalars['Int'];
+  id: Scalars['ID'];
   name: Scalars['String'];
 };
 
 export type CartLine = {
   __typename?: 'CartLine';
-  id: Scalars['Int'];
+  id: Scalars['ID'];
   itemId?: Maybe<Scalars['String']>;
   description?: Maybe<Scalars['String']>;
   uom?: Maybe<Scalars['String']>;
   quantity?: Maybe<Scalars['Int']>;
-  categoryId?: Maybe<Scalars['Int']>;
+  categoryId?: Maybe<Scalars['ID']>;
   price: Scalars['Float'];
-  cartId: Scalars['Int'];
-  cart?: Maybe<Cart>;
+  cartId: Scalars['ID'];
   cartLineAccounts?: Maybe<Array<CartLineAccount>>;
   createdAt: Scalars['String'];
   updatedAt: Scalars['String'];
@@ -59,19 +58,19 @@ export type CartLine = {
 
 export type CartLineAccount = {
   __typename?: 'CartLineAccount';
-  id: Scalars['Float'];
+  id: Scalars['ID'];
   amount: Scalars['Float'];
   accountNumber: Scalars['String'];
-  cartLineId: Scalars['Float'];
+  cartLineId: Scalars['ID'];
   createdAt: Scalars['String'];
   updatedAt: Scalars['String'];
 };
 
 export type CartLineInput = {
-  id: Scalars['Int'];
-  cartId: Scalars['Int'];
-  categoryId: Scalars['Int'];
-  quantity: Scalars['Int'];
+  id: Scalars['ID'];
+  cartId: Scalars['ID'];
+  categoryId: Scalars['ID'];
+  quantity: Scalars['ID'];
   price: Scalars['Float'];
   itemId: Scalars['String'];
   description: Scalars['String'];
@@ -87,36 +86,42 @@ export type FieldError = {
 export type Mutation = {
   __typename?: 'Mutation';
   blankCart: Cart;
-  blankCartLine: CartLine;
   deleteCart: Scalars['Boolean'];
+  blankCartLine: CartLine;
   deleteCartLine: Scalars['Boolean'];
-  updateCartLine?: Maybe<CartLine>;
   updateCart?: Maybe<Cart>;
+  updateCartLine?: Maybe<CartLine>;
+  addCartLineAccount: CartLineAccount;
+  deleteCartLineAccount: Scalars['Boolean'];
+  updateCartLineAccount: CartLineAccount;
+  hydrateAccounts: Scalars['Boolean'];
   register: UserResponse;
   login: UserResponse;
+  logout: Scalars['Boolean'];
   forgotPassword: Scalars['Boolean'];
   changePassword: UserResponse;
-  logout: Scalars['Boolean'];
   updateUser: UserResponse;
-  addCartLineAccount: CartLineAccount;
-  updateCartLineAccount: CartLineAccount;
-  deleteCartLineAccount: Scalars['Boolean'];
-};
-
-
-export type MutationBlankCartLineArgs = {
-  cartId: Scalars['Int'];
 };
 
 
 export type MutationDeleteCartArgs = {
-  id: Scalars['Int'];
+  id: Scalars['ID'];
+};
+
+
+export type MutationBlankCartLineArgs = {
+  cartId: Scalars['ID'];
 };
 
 
 export type MutationDeleteCartLineArgs = {
-  cartLineId: Scalars['Int'];
-  cartId: Scalars['Int'];
+  cartLineId: Scalars['ID'];
+  cartId: Scalars['ID'];
+};
+
+
+export type MutationUpdateCartArgs = {
+  cart: CartInput;
 };
 
 
@@ -125,8 +130,26 @@ export type MutationUpdateCartLineArgs = {
 };
 
 
-export type MutationUpdateCartArgs = {
-  cart: CartInput;
+export type MutationAddCartLineAccountArgs = {
+  amount: Scalars['Float'];
+  accountNumber: Scalars['String'];
+  cartLineId: Scalars['ID'];
+  cartId: Scalars['ID'];
+};
+
+
+export type MutationDeleteCartLineAccountArgs = {
+  cartId: Scalars['ID'];
+  cartLineId: Scalars['ID'];
+  cartLineAccountId: Scalars['ID'];
+};
+
+
+export type MutationUpdateCartLineAccountArgs = {
+  cartId: Scalars['ID'];
+  cartLineId: Scalars['ID'];
+  amount: Scalars['Float'];
+  id: Scalars['ID'];
 };
 
 
@@ -153,51 +176,29 @@ export type MutationChangePasswordArgs = {
 
 
 export type MutationUpdateUserArgs = {
-  currentCartId: Scalars['Int'];
-};
-
-
-export type MutationAddCartLineAccountArgs = {
-  amount: Scalars['Float'];
-  accountNumber: Scalars['String'];
-  cartLineId: Scalars['Int'];
-  cartId: Scalars['Int'];
-};
-
-
-export type MutationUpdateCartLineAccountArgs = {
-  cartId: Scalars['Int'];
-  cartLineId: Scalars['Int'];
-  amount: Scalars['Float'];
-  id: Scalars['Int'];
-};
-
-
-export type MutationDeleteCartLineAccountArgs = {
-  cartId: Scalars['Int'];
-  cartLineId: Scalars['Int'];
-  cartLineAccountId: Scalars['Int'];
+  currentCartId: Scalars['ID'];
 };
 
 export type Query = {
   __typename?: 'Query';
-  carts: Array<Cart>;
   cart?: Maybe<Cart>;
+  carts: Array<Cart>;
+  users: Array<User>;
+  accounts?: Maybe<Array<Maybe<Account>>>;
   me?: Maybe<User>;
-  accounts: Array<Account>;
 };
 
 
 export type QueryCartArgs = {
-  id: Scalars['Int'];
+  id: Scalars['ID'];
 };
 
 export type User = {
   __typename?: 'User';
-  id: Scalars['Float'];
+  id: Scalars['ID'];
   username: Scalars['String'];
   email: Scalars['String'];
-  currentCartId?: Maybe<Scalars['Int']>;
+  currentCartId?: Maybe<Scalars['ID']>;
   createdAt: Scalars['String'];
   updatedAt: Scalars['String'];
 };
@@ -206,6 +207,7 @@ export type UserResponse = {
   __typename?: 'UserResponse';
   errors?: Maybe<Array<FieldError>>;
   user?: Maybe<User>;
+  token?: Maybe<Scalars['String']>;
 };
 
 export type UsernamePasswordInput = {
@@ -249,6 +251,7 @@ export type RegularUserFragment = (
 
 export type RegularUserResponseFragment = (
   { __typename?: 'UserResponse' }
+  & Pick<UserResponse, 'token'>
   & { errors?: Maybe<Array<(
     { __typename?: 'FieldError' }
     & RegularErrorFragment
@@ -315,7 +318,7 @@ export type BlankCartMutation = (
 );
 
 export type BlankCartLineMutationVariables = Exact<{
-  cartId: Scalars['Int'];
+  cartId: Scalars['ID'];
 }>;
 
 
@@ -328,7 +331,7 @@ export type BlankCartLineMutation = (
 );
 
 export type DeleteCartMutationVariables = Exact<{
-  id: Scalars['Int'];
+  id: Scalars['ID'];
 }>;
 
 
@@ -338,8 +341,8 @@ export type DeleteCartMutation = (
 );
 
 export type DeleteCartLineMutationVariables = Exact<{
-  cartId: Scalars['Int'];
-  cartLineId: Scalars['Int'];
+  cartId: Scalars['ID'];
+  cartLineId: Scalars['ID'];
 }>;
 
 
@@ -349,8 +352,8 @@ export type DeleteCartLineMutation = (
 );
 
 export type AddCartLineAccountMutationVariables = Exact<{
-  cartId: Scalars['Int'];
-  cartLineId: Scalars['Int'];
+  cartId: Scalars['ID'];
+  cartLineId: Scalars['ID'];
   accountNumber: Scalars['String'];
   amount: Scalars['Float'];
 }>;
@@ -365,9 +368,9 @@ export type AddCartLineAccountMutation = (
 );
 
 export type DeleteCartLineAccountMutationVariables = Exact<{
-  cartId: Scalars['Int'];
-  cartLineId: Scalars['Int'];
-  cartLineAccountId: Scalars['Int'];
+  cartId: Scalars['ID'];
+  cartLineId: Scalars['ID'];
+  cartLineAccountId: Scalars['ID'];
 }>;
 
 
@@ -377,9 +380,9 @@ export type DeleteCartLineAccountMutation = (
 );
 
 export type UpdateCartLineAccountMutationVariables = Exact<{
-  cartId: Scalars['Int'];
-  cartLineId: Scalars['Int'];
-  id: Scalars['Int'];
+  cartId: Scalars['ID'];
+  cartLineId: Scalars['ID'];
+  id: Scalars['ID'];
   amount: Scalars['Float'];
 }>;
 
@@ -433,7 +436,7 @@ export type ChangePasswordMutation = (
 );
 
 export type UpdateUserMutationVariables = Exact<{
-  currentCartId: Scalars['Int'];
+  currentCartId: Scalars['ID'];
 }>;
 
 
@@ -450,14 +453,14 @@ export type AccountsQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type AccountsQuery = (
   { __typename?: 'Query' }
-  & { accounts: Array<(
+  & { accounts?: Maybe<Array<Maybe<(
     { __typename?: 'Account' }
     & Pick<Account, 'accountName' | 'accountNumber' | 'amountRemaining'>
-  )> }
+  )>>> }
 );
 
 export type CartQueryVariables = Exact<{
-  id: Scalars['Int'];
+  id: Scalars['ID'];
 }>;
 
 
@@ -552,6 +555,7 @@ export const RegularUserResponseFragmentDoc = gql`
   user {
     ...RegularUser
   }
+  token
 }
     ${RegularErrorFragmentDoc}
 ${RegularUserFragmentDoc}`;
@@ -607,7 +611,7 @@ export function useBlankCartMutation() {
   return Urql.useMutation<BlankCartMutation, BlankCartMutationVariables>(BlankCartDocument);
 };
 export const BlankCartLineDocument = gql`
-    mutation BlankCartLine($cartId: Int!) {
+    mutation BlankCartLine($cartId: ID!) {
   blankCartLine(cartId: $cartId) {
     ...CartLineSnippet
   }
@@ -618,7 +622,7 @@ export function useBlankCartLineMutation() {
   return Urql.useMutation<BlankCartLineMutation, BlankCartLineMutationVariables>(BlankCartLineDocument);
 };
 export const DeleteCartDocument = gql`
-    mutation DeleteCart($id: Int!) {
+    mutation DeleteCart($id: ID!) {
   deleteCart(id: $id)
 }
     `;
@@ -627,7 +631,7 @@ export function useDeleteCartMutation() {
   return Urql.useMutation<DeleteCartMutation, DeleteCartMutationVariables>(DeleteCartDocument);
 };
 export const DeleteCartLineDocument = gql`
-    mutation DeleteCartLine($cartId: Int!, $cartLineId: Int!) {
+    mutation DeleteCartLine($cartId: ID!, $cartLineId: ID!) {
   deleteCartLine(cartId: $cartId, cartLineId: $cartLineId)
 }
     `;
@@ -636,7 +640,7 @@ export function useDeleteCartLineMutation() {
   return Urql.useMutation<DeleteCartLineMutation, DeleteCartLineMutationVariables>(DeleteCartLineDocument);
 };
 export const AddCartLineAccountDocument = gql`
-    mutation AddCartLineAccount($cartId: Int!, $cartLineId: Int!, $accountNumber: String!, $amount: Float!) {
+    mutation AddCartLineAccount($cartId: ID!, $cartLineId: ID!, $accountNumber: String!, $amount: Float!) {
   addCartLineAccount(
     cartId: $cartId
     cartLineId: $cartLineId
@@ -652,7 +656,7 @@ export function useAddCartLineAccountMutation() {
   return Urql.useMutation<AddCartLineAccountMutation, AddCartLineAccountMutationVariables>(AddCartLineAccountDocument);
 };
 export const DeleteCartLineAccountDocument = gql`
-    mutation DeleteCartLineAccount($cartId: Int!, $cartLineId: Int!, $cartLineAccountId: Int!) {
+    mutation DeleteCartLineAccount($cartId: ID!, $cartLineId: ID!, $cartLineAccountId: ID!) {
   deleteCartLineAccount(
     cartId: $cartId
     cartLineId: $cartLineId
@@ -665,7 +669,7 @@ export function useDeleteCartLineAccountMutation() {
   return Urql.useMutation<DeleteCartLineAccountMutation, DeleteCartLineAccountMutationVariables>(DeleteCartLineAccountDocument);
 };
 export const UpdateCartLineAccountDocument = gql`
-    mutation UpdateCartLineAccount($cartId: Int!, $cartLineId: Int!, $id: Int!, $amount: Float!) {
+    mutation UpdateCartLineAccount($cartId: ID!, $cartLineId: ID!, $id: ID!, $amount: Float!) {
   updateCartLineAccount(
     cartId: $cartId
     cartLineId: $cartLineId
@@ -719,7 +723,7 @@ export function useChangePasswordMutation() {
   return Urql.useMutation<ChangePasswordMutation, ChangePasswordMutationVariables>(ChangePasswordDocument);
 };
 export const UpdateUserDocument = gql`
-    mutation UpdateUser($currentCartId: Int!) {
+    mutation UpdateUser($currentCartId: ID!) {
   updateUser(currentCartId: $currentCartId) {
     ...RegularUserResponse
   }
@@ -743,7 +747,7 @@ export function useAccountsQuery(options: Omit<Urql.UseQueryArgs<AccountsQueryVa
   return Urql.useQuery<AccountsQuery>({ query: AccountsDocument, ...options });
 };
 export const CartDocument = gql`
-    query Cart($id: Int!) {
+    query Cart($id: ID!) {
   cart(id: $id) {
     ...CartSnippet
   }
@@ -854,12 +858,13 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
   Account: ResolverTypeWrapper<Account>;
+  ID: ResolverTypeWrapper<Scalars['ID']>;
   String: ResolverTypeWrapper<Scalars['String']>;
   Float: ResolverTypeWrapper<Scalars['Float']>;
   Cart: ResolverTypeWrapper<Cart>;
-  Int: ResolverTypeWrapper<Scalars['Int']>;
   CartInput: CartInput;
   CartLine: ResolverTypeWrapper<CartLine>;
+  Int: ResolverTypeWrapper<Scalars['Int']>;
   CartLineAccount: ResolverTypeWrapper<CartLineAccount>;
   CartLineInput: CartLineInput;
   FieldError: ResolverTypeWrapper<FieldError>;
@@ -874,12 +879,13 @@ export type ResolversTypes = {
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
   Account: Account;
+  ID: Scalars['ID'];
   String: Scalars['String'];
   Float: Scalars['Float'];
   Cart: Cart;
-  Int: Scalars['Int'];
   CartInput: CartInput;
   CartLine: CartLine;
+  Int: Scalars['Int'];
   CartLineAccount: CartLineAccount;
   CartLineInput: CartLineInput;
   FieldError: FieldError;
@@ -892,6 +898,7 @@ export type ResolversParentTypes = {
 };
 
 export type AccountResolvers<ContextType = any, ParentType extends ResolversParentTypes['Account'] = ResolversParentTypes['Account']> = {
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   accountNumber?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   accountName?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   amountRemaining?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
@@ -901,26 +908,24 @@ export type AccountResolvers<ContextType = any, ParentType extends ResolversPare
 };
 
 export type CartResolvers<ContextType = any, ParentType extends ResolversParentTypes['Cart'] = ResolversParentTypes['Cart']> = {
-  id?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  userId?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  userId?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   cartLines?: Resolver<Array<ResolversTypes['CartLine']>, ParentType, ContextType>;
-  user?: Resolver<ResolversTypes['User'], ParentType, ContextType>;
   createdAt?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   updatedAt?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type CartLineResolvers<ContextType = any, ParentType extends ResolversParentTypes['CartLine'] = ResolversParentTypes['CartLine']> = {
-  id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   itemId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   uom?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   quantity?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  categoryId?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  categoryId?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
   price?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
-  cartId?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  cart?: Resolver<Maybe<ResolversTypes['Cart']>, ParentType, ContextType>;
+  cartId?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   cartLineAccounts?: Resolver<Maybe<Array<ResolversTypes['CartLineAccount']>>, ParentType, ContextType>;
   createdAt?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   updatedAt?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -928,10 +933,10 @@ export type CartLineResolvers<ContextType = any, ParentType extends ResolversPar
 };
 
 export type CartLineAccountResolvers<ContextType = any, ParentType extends ResolversParentTypes['CartLineAccount'] = ResolversParentTypes['CartLineAccount']> = {
-  id?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   amount?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
   accountNumber?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  cartLineId?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
+  cartLineId?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   createdAt?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   updatedAt?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
@@ -945,34 +950,36 @@ export type FieldErrorResolvers<ContextType = any, ParentType extends ResolversP
 
 export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
   blankCart?: Resolver<ResolversTypes['Cart'], ParentType, ContextType>;
-  blankCartLine?: Resolver<ResolversTypes['CartLine'], ParentType, ContextType, RequireFields<MutationBlankCartLineArgs, 'cartId'>>;
   deleteCart?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationDeleteCartArgs, 'id'>>;
+  blankCartLine?: Resolver<ResolversTypes['CartLine'], ParentType, ContextType, RequireFields<MutationBlankCartLineArgs, 'cartId'>>;
   deleteCartLine?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationDeleteCartLineArgs, 'cartLineId' | 'cartId'>>;
-  updateCartLine?: Resolver<Maybe<ResolversTypes['CartLine']>, ParentType, ContextType, RequireFields<MutationUpdateCartLineArgs, 'cartLine'>>;
   updateCart?: Resolver<Maybe<ResolversTypes['Cart']>, ParentType, ContextType, RequireFields<MutationUpdateCartArgs, 'cart'>>;
+  updateCartLine?: Resolver<Maybe<ResolversTypes['CartLine']>, ParentType, ContextType, RequireFields<MutationUpdateCartLineArgs, 'cartLine'>>;
+  addCartLineAccount?: Resolver<ResolversTypes['CartLineAccount'], ParentType, ContextType, RequireFields<MutationAddCartLineAccountArgs, 'amount' | 'accountNumber' | 'cartLineId' | 'cartId'>>;
+  deleteCartLineAccount?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationDeleteCartLineAccountArgs, 'cartId' | 'cartLineId' | 'cartLineAccountId'>>;
+  updateCartLineAccount?: Resolver<ResolversTypes['CartLineAccount'], ParentType, ContextType, RequireFields<MutationUpdateCartLineAccountArgs, 'cartId' | 'cartLineId' | 'amount' | 'id'>>;
+  hydrateAccounts?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   register?: Resolver<ResolversTypes['UserResponse'], ParentType, ContextType, RequireFields<MutationRegisterArgs, 'options'>>;
   login?: Resolver<ResolversTypes['UserResponse'], ParentType, ContextType, RequireFields<MutationLoginArgs, 'password' | 'usernameOrEmail'>>;
+  logout?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   forgotPassword?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationForgotPasswordArgs, 'email'>>;
   changePassword?: Resolver<ResolversTypes['UserResponse'], ParentType, ContextType, RequireFields<MutationChangePasswordArgs, 'newPassword' | 'token'>>;
-  logout?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   updateUser?: Resolver<ResolversTypes['UserResponse'], ParentType, ContextType, RequireFields<MutationUpdateUserArgs, 'currentCartId'>>;
-  addCartLineAccount?: Resolver<ResolversTypes['CartLineAccount'], ParentType, ContextType, RequireFields<MutationAddCartLineAccountArgs, 'amount' | 'accountNumber' | 'cartLineId' | 'cartId'>>;
-  updateCartLineAccount?: Resolver<ResolversTypes['CartLineAccount'], ParentType, ContextType, RequireFields<MutationUpdateCartLineAccountArgs, 'cartId' | 'cartLineId' | 'amount' | 'id'>>;
-  deleteCartLineAccount?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationDeleteCartLineAccountArgs, 'cartId' | 'cartLineId' | 'cartLineAccountId'>>;
 };
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
-  carts?: Resolver<Array<ResolversTypes['Cart']>, ParentType, ContextType>;
   cart?: Resolver<Maybe<ResolversTypes['Cart']>, ParentType, ContextType, RequireFields<QueryCartArgs, 'id'>>;
+  carts?: Resolver<Array<ResolversTypes['Cart']>, ParentType, ContextType>;
+  users?: Resolver<Array<ResolversTypes['User']>, ParentType, ContextType>;
+  accounts?: Resolver<Maybe<Array<Maybe<ResolversTypes['Account']>>>, ParentType, ContextType>;
   me?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
-  accounts?: Resolver<Array<ResolversTypes['Account']>, ParentType, ContextType>;
 };
 
 export type UserResolvers<ContextType = any, ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']> = {
-  id?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   username?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   email?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  currentCartId?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  currentCartId?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
   createdAt?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   updatedAt?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
@@ -981,6 +988,7 @@ export type UserResolvers<ContextType = any, ParentType extends ResolversParentT
 export type UserResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['UserResponse'] = ResolversParentTypes['UserResponse']> = {
   errors?: Resolver<Maybe<Array<ResolversTypes['FieldError']>>, ParentType, ContextType>;
   user?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
+  token?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 

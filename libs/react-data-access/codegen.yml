@@ -1,9 +1,9 @@
-overwrite: true
-# WHEN MOCKING BE:
-schema: 'libs/mock-api/src/lib/schema.graphql'
-# SERVERLESS APPSYNC:
-# schema: 'http://localhost:4000/graphql'
+
+# schema: 'libs/mock-api/src/lib/schema.graphql' # WHEN MOCKING BE:
+schema: 'libs/multi-cart-iac/AppSync/schema/schema.gql' # TERRAFORM + APPSYNC:
+
 documents: 'libs/react-data-access/src/lib/graphql/**/*.graphql'
+overwrite: true
 generates:
   # ---------------------------------------
   libs/react-data-access/src/lib/generated/graphql.ts:

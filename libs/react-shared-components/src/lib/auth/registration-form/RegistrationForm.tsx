@@ -23,7 +23,9 @@ export function RegistrationForm(props: RegistrationFormProps) {
           });
           if (response.data?.register.errors) {
             setErrors(toErrorMap(response.data?.register.errors))
-          } else if (response.data?.register.user) {
+          } else if (response.data?.register.user && response.data?.register.token) {
+            // save token(s) to localstorage
+            localStorage.setItem("token", response.data.register.token)
             router.push("/dashboard");
           }
         }}>

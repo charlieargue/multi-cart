@@ -75,7 +75,11 @@ export const NavBar = (props) => {
                             <MenuItem
                                 icon={<LogoutIcon />}
                                 onClick={async () => {
+                                    // clear token(s)
+                                    localStorage.removeItem("token");
                                     await logout();
+                                    
+                                    // TODO: how about purge all cache so don't have to reload?
                                     router.push("/login").finally(() => router.reload());
                                 }}>
                                 Logout</MenuItem>

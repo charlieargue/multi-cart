@@ -1,4 +1,4 @@
-query Cart($id: Int!) {
+query Cart($id: ID!) {
   cart(id: $id) {
     ...CartSnippet
   }

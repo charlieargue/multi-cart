@@ -1,7 +1,7 @@
 mutation DeleteCartLineAccount(
-  $cartId: Int!
-  $cartLineId: Int!
-  $cartLineAccountId: Int!
+  $cartId: ID!
+  $cartLineId: ID!
+  $cartLineAccountId: ID!
 ) {
   deleteCartLineAccount(
     cartId: $cartId

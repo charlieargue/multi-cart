@@ -3,7 +3,7 @@
 // workaround:
 export const graphqlSchema = `type Query {
     carts: [Cart!]!
-    cart(id: Int!): Cart
+    cart(id: ID!): Cart
     me: User
     accounts: [Account!]!
   }
@@ -11,7 +11,7 @@ export const graphqlSchema = `type Query {
   type Cart {
     id: Float!
     name: String!
-    userId: Int!
+    userId: ID!
     cartLines: [CartLine!]!
     user: User!
     createdAt: String!
@@ -19,14 +19,14 @@ export const graphqlSchema = `type Query {
   }
   
   type CartLine {
-    id: Int!
+    id: ID!
     itemId: String
     description: String
     uom: String
     quantity: Int
     categoryId: Int
     price: Float!
-    cartId: Int!
+    cartId: ID!
     cart: Cart
     cartLineAccounts: [CartLineAccount!]
     createdAt: String!
@@ -61,9 +61,9 @@ export const graphqlSchema = `type Query {
   
   type Mutation {
     blankCart: Cart!
-    blankCartLine(cartId: Int!): CartLine!
-    deleteCart(id: Int!): Boolean!
-    deleteCartLine(cartLineId: Int!, cartId: Int!): Boolean!
+    blankCartLine(cartId: ID!): CartLine!
+    deleteCart(id: ID!): Boolean!
+    deleteCartLine(cartLineId: ID!, cartId: ID!): Boolean!
     updateCartLine(cartLine: CartLineInput!): CartLine
     updateCart(cart: CartInput!): Cart
     register(options: UsernamePasswordInput!): UserResponse!
@@ -71,22 +71,22 @@ export const graphqlSchema = `type Query {
     forgotPassword(email: String!): Boolean!
     changePassword(newPassword: String!, token: String!): UserResponse!
     logout: Boolean!
-    updateUser(currentCartId: Int!): UserResponse!
+    updateUser(currentCartId: ID!): UserResponse!
     addCartLineAccount(
       amount: Float!
       accountNumber: String!
-      cartLineId: Int!
-      cartId: Int!
+      cartLineId: ID!
+      cartId: ID!
     ): CartLineAccount!
-    updateCartLineAccount(cartId: Int!, cartLineId: Int!, amount: Float!, id: Int!): CartLineAccount!
-    deleteCartLineAccount(cartId: Int!, cartLineId: Int!, cartLineAccountId: Int!): Boolean!
+    updateCartLineAccount(cartId: ID!, cartLineId: ID!, amount: Float!, id: ID!): CartLineAccount!
+    deleteCartLineAccount(cartId: ID!, cartLineId: ID!, cartLineAccountId: ID!): Boolean!
   }
   
   input CartLineInput {
-    id: Int!
-    cartId: Int!
-    categoryId: Int!
-    quantity: Int!
+    id: ID!
+    cartId: ID!
+    categoryId: ID!
+    quantity: ID!
     price: Float!
     itemId: String!
     description: String!
@@ -94,7 +94,7 @@ export const graphqlSchema = `type Query {
   }
   
   input CartInput {
-    id: Int!
+    id: ID!
     name: String!
   }
   
