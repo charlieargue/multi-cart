@@ -16,6 +16,8 @@
     $util.qr($ctx.stash.put('token', $ctx.result.token))
     {}
 #else
-    ## TODO: more robust error handling
-    $utils.error('User Validation Failed', 'UNIQUE CONSTRAINT VIOLATION', {})
+    ## TODO: more robust error handling (not hard-coded)
+    $utils.error("Unique constraint violation", "UNIQUE_CONSTRAINT", {}, {
+      "message": "That username or email has already been registered with the authentication service"
+    })
     #end
