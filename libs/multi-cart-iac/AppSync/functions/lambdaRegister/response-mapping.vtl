@@ -11,9 +11,6 @@
 ##   }
 ## ]
 
-## stuck
-## $utils.error($util.toJson($context.result.errors))
-
 #if($util.isNull($context.result.errors)) 
     ## No errors? we proceed...
     $util.qr($context.stash.put('token', $context.result.token))
