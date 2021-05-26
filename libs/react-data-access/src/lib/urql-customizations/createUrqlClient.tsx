@@ -7,7 +7,7 @@ import { pipe, tap } from 'wonka'; // part of urql!
 import { cache } from './cache';
 
 const NEXT_PUBLIC_API_URL = process.env.NEXT_PUBLIC_API_URL;
-console.log(`🚀 ~ NEXT_PUBLIC_API_URL`, NEXT_PUBLIC_API_URL);
+const NEXT_PUBLIC_API_KEY = process.env.NEXT_PUBLIC_API_KEY;
 
 // TODO: ditto for devtools
 // thx: https://github.com/FormidableLabs/urql/issues/225
@@ -34,7 +34,6 @@ const getToken = () =>
         ? localStorage.getItem("token")
         : null;
 
-console.log(`🚀 ~ getToken`, getToken());
 
 
 // [ ] TODO: global error handling goes here (unauth redirects/verifies)
@@ -49,10 +48,9 @@ export const createUrqlClient = (ssrExchange: any) => ({
         // VIP: session cookies will NOT work with AppSync AFAIK
         // NOTE: we only need x-api-key when we are calling login/register
         const token = getToken();
-        console.log(`🚀 ~ token`, token);
         return token ?
             { headers: { Authorization: `${token}` } } :
-            { headers: { "x-api-key": process.env.NEXT_PUBLIC_API_KEY } };
+            { headers: { "x-api-key": NEXT_PUBLIC_API_KEY } };
     },
     exchanges: [
         devtoolsExchange,

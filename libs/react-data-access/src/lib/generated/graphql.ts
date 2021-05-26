@@ -70,7 +70,7 @@ export type CartLineInput = {
   id: Scalars['ID'];
   cartId: Scalars['ID'];
   categoryId: Scalars['ID'];
-  quantity: Scalars['ID'];
+  quantity: Scalars['Int'];
   price: Scalars['Float'];
   itemId: Scalars['String'];
   description: Scalars['String'];
