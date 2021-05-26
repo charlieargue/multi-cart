@@ -15,6 +15,7 @@ import { HiPencilAlt } from 'react-icons/hi';
 import { ImPlus as PlusIcon } from 'react-icons/im';
 import styles from './EditCart.module.scss';
 import 'regenerator-runtime/runtime';
+import { toDaysAgo } from '@multi-cart/util';
 
 interface EditCartProps { id: string }
 
@@ -47,7 +48,7 @@ export const EditCart = ({ id }: EditCartProps) => {
     label: "Cart",
     href: "/cart/[id]",
     as: `/cart/${id}`,
-    id
+    id: data?.cart?.name
   }];
   const breadcrumbs = (<Breadcrumbs links={links} />);
 
@@ -107,7 +108,7 @@ export const EditCart = ({ id }: EditCartProps) => {
         <HStack spacing="5">
           <CartNameEditable name={data.cart.name} id={data.cart.id} />
           <Badge colorScheme="pink" style={{ "opacity": ".5" }}>
-            <strong>created on</strong> {data.cart.createdAt}
+            <strong>created </strong> {toDaysAgo(data.cart.createdAt)}
           </Badge>
         </HStack>
         <Box className="text-right">
