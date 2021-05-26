@@ -2,8 +2,8 @@
 #set($nowTime = $util.time.nowISO8601() )
 #set($friendlyTime = $nowTime.substring(0, 6))
 
-## $context.authorizer.claims.email
-$utils.error($util.toJson($ctx))
+## get from previous, ala ME
+$utils.error($utils.toJson($ctx.prev.result))
 
 {
  "version": "2018-05-29",

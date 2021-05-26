@@ -35,6 +35,14 @@ resource "aws_appsync_function" "me_function" {
 ## -------------------------------------
 
 
+resource "aws_appsync_function" "blank_cart_function" {
+  api_id                    = aws_appsync_graphql_api.MultiCart.id
+  data_source               = aws_appsync_datasource.multicart_dynamodb_cart_datasource.name
+  name                      = "blank_cart_function"
+  request_mapping_template  = file("./AppSync/functions/blankCart/request-mapping.vtl")
+  response_mapping_template = file("./AppSync/resolvers/_generic/generic-response-mapping-item-SINGULAR.vtl")
+}
+
 resource "aws_appsync_function" "get_cart_function" {
   api_id                    = aws_appsync_graphql_api.MultiCart.id
   data_source               = aws_appsync_datasource.multicart_dynamodb_cart_datasource.name
