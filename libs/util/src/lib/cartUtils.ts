@@ -54,14 +54,14 @@ export const getTotalAmounts = (lineAccounts: CartLineAccount[]): number => {
 }
 
 // ------------------
-export const getRemainingPercentage = (line: CartLine, excludeCartLineAccountId?: number): number => {
+export const getRemainingPercentage = (line: CartLine, excludeCartLineAccountId?: string): number => {
     // NOTE: at this stage, the current LA we're trying to compute will ALREADY be in line.cartLineAccounts, so need to be able to exclude it!
     const result = 100 - getTotalPercentages(line, excludeCartLineAccountId);
     return roundToTwo(result);
 }
 
 // ------------------
-export const getTotalPercentages = (line: CartLine, excludeCartLineAccountId?: number): number => {
+export const getTotalPercentages = (line: CartLine, excludeCartLineAccountId?: string): number => {
     if (!line?.cartLineAccounts) {
         return 0;
     }

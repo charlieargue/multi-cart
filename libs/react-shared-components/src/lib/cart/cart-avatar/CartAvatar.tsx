@@ -7,11 +7,11 @@ import { useRouter } from 'next/router';
 import React from 'react';
 import { CgChevronDown as ChevronDownIcon } from 'react-icons/cg';
 import { RiErrorWarningFill as WarningIcon } from 'react-icons/ri';
-import styles from './CartAvatar.module.scss';
+import styles from './CartAvatar.module.scss'; // NOTE: getting red-squiggly again, but ITS WORKING!?
 import 'regenerator-runtime/runtime';
 
 interface CartAvatarProps {
-  currentCartId?: number;
+  currentCartId?: string | null;
 }
 
 const noCartsMsg = (<HStack direction="row" mr={4} spacing={1}>
@@ -20,13 +20,15 @@ const noCartsMsg = (<HStack direction="row" mr={4} spacing={1}>
 </HStack>);
 
 // -------------------
-export const CartAvatar = ({ currentCartId = -1 }: CartAvatarProps) => {
+export const CartAvatar = ({ currentCartId = null }: CartAvatarProps) => {
   const router = useRouter();
   const [{ data, fetching }] = useCartsQuery();
+  console.log(`🚀 ~ data`, data);
+  // 12/31/1969, 4:00:02 PM
 
   // TODO: 🔴 NOT LIKE THIS: error (see issues) React has detected a change in the order of Hooks called by CartAvatar.
   const currentCart = (): Cart => {
-    if ((currentCartId !== -1) && !fetching && data?.carts) {
+    if (currentCartId && !fetching && data?.carts) {
       return data?.carts.find((c) => c.id === currentCartId) as Cart;
     }
     return null;
@@ -85,12 +87,12 @@ export const CartAvatar = ({ currentCartId = -1 }: CartAvatarProps) => {
                 >
                   {/* DEBUGGING */}
                   <Box>
-                    <strong>{c.name}</strong>
+                    <strong>{c.createdAt}</strong>
                     <br />
                     <Text color="gray.500" fontSize="xs" ml={.5}>{toDaysAgo(c.createdAt)}</Text>
                   </Box>
                   <Box>
-                    <CartAvatarInner cart={!c ? {} as any : c} />
+                    <CartAvatarInner cart={!c ? {} as Cart : c} />
                   </Box>
                 </Flex>
                 {/* dropdown CART GUTS */}

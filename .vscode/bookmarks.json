@@ -89,6 +89,16 @@
 					"label": "🚥 9 - PIPELINE after"
 				}
 			]
+		},
+		{
+			"path": "libs/react-shared-components/src/lib/cart/cart-avatar/CartAvatar.tsx",
+			"bookmarks": [
+				{
+					"line": 87,
+					"column": 40,
+					"label": ""
+				}
+			]
 		}
 	]
 }

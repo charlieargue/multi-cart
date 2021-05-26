@@ -1,3 +1,8 @@
+FYI AWS CAVEATS:
+- DDB and no native (nice) unique constraints
+- COGNITO and logout still lets you use those tokens until they expire 
+
+
 🔴 🔴 🔴 🔴 🔴 🔴
 🔴 TODO: work-in-progress... 🚧
 🔴 🔴 🔴 🔴 🔴 🔴
