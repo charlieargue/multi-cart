@@ -1,0 +1,12 @@
+## ASSUMES: $ctx.prev.result   ==========> USER/ME
+
+{
+  "version": "2018-05-29",
+  "operation": "Scan",
+  "filter" : {
+    "expression": "userId = :userId",
+        "expressionValues" : {
+            ":userId" : $util.dynamodb.toDynamoDBJson($ctx.prev.result.id)
+        }
+  }
+}

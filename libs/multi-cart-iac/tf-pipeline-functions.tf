@@ -60,6 +60,14 @@ resource "aws_appsync_function" "get_cart_function" {
   response_mapping_template = file("./AppSync/functions/getCart/response-mapping.vtl")
 }
 
+resource "aws_appsync_function" "list_carts_function" {
+  api_id                    = aws_appsync_graphql_api.MultiCart.id
+  data_source               = aws_appsync_datasource.multicart_dynamodb_cart_datasource.name
+  name                      = "list_carts_function"
+  request_mapping_template  = file("./AppSync/functions/carts/request-mapping.vtl") 
+  response_mapping_template = file("./AppSync/resolvers/_generic/generic-response-mapping-items.vtl")
+}
+
 resource "aws_appsync_function" "delete_cart_line_function" {
   api_id                    = aws_appsync_graphql_api.MultiCart.id
   data_source               = aws_appsync_datasource.multicart_dynamodb_cart_datasource.name
