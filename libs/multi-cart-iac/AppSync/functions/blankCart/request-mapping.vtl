@@ -2,7 +2,7 @@
 
 #set($freshCartId = $util.autoId() )
 #set($nowTime = $util.time.nowISO8601() )
-#set($friendlyTime = $nowTime.substring(0, 6))
+#set($friendlyTime = $nowTime.substring(0, 16)).replace("T", " ")
 
 {
  "version": "2018-05-29",
