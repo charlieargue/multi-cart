@@ -36,18 +36,7 @@ export const cache = cacheExchange({
         Account: data => (data as Account).accountNumber,
     },
 
-    resolvers: {
-        Cart: {
-            createdAt: (parent) => {
-                const niceCreatedAt = new Date(parseInt(parent.createdAt as any));
-                return niceCreatedAt.toLocaleString();
-            },
-            updatedAt: (parent) => {
-                const niceUpdatedAt = new Date(parseInt(parent.updatedAt as any));
-                return niceUpdatedAt.toLocaleString();
-            }
-        }
-    },
+    // NOTE: you can do field-resolvers with `resolvers: { Cart: { createdAt: (parent) => {` ... do stuff to date...
 
     updates: {
         Mutation: {

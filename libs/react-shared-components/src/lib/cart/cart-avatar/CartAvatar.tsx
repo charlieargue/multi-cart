@@ -23,8 +23,6 @@ const noCartsMsg = (<HStack direction="row" mr={4} spacing={1}>
 export const CartAvatar = ({ currentCartId = null }: CartAvatarProps) => {
   const router = useRouter();
   const [{ data, fetching }] = useCartsQuery();
-  console.log(`🚀 ~ data`, data);
-  // 12/31/1969, 4:00:02 PM
 
   // TODO: 🔴 NOT LIKE THIS: error (see issues) React has detected a change in the order of Hooks called by CartAvatar.
   const currentCart = (): Cart => {
