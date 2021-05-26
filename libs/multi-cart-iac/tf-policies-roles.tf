@@ -38,6 +38,7 @@ resource "aws_iam_role_policy" "iam_role_policy_for_lambda" {
     # VIP: don't forget to list all lambdas here
     GET_LAMBDA_SEND_EMAIL_ARN = module.send_email.function_arn,
     GET_LAMBDA_LOGIN_ARN      = module.login.function_arn,
+    GET_LAMBDA_LOGOUT_ARN      = module.logout.function_arn,
     GET_LAMBDA_REGISTER_ARN   = module.register.function_arn,
     USER_POOL_ARN             = aws_cognito_user_pool.multicart_app_user_pool.arn,
   })

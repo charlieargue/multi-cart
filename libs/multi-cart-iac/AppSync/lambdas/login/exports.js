@@ -29,8 +29,6 @@ exports.handler = async (event, context, callback) => {
                 PASSWORD: password,
             },
         }).promise();
-        console.log("✅ ✅ ✅ ✅ ✅ ✅ ✅  ~ GREAT SUCCESS!");
-        console.log(data);
         
        return {
            token: data.AuthenticationResult.AccessToken

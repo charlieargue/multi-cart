@@ -9,6 +9,8 @@
         "${GET_LAMBDA_SEND_EMAIL_ARN}/*",
         "${GET_LAMBDA_LOGIN_ARN}",
         "${GET_LAMBDA_LOGIN_ARN}/*",
+        "${GET_LAMBDA_LOGOUT_ARN}",
+        "${GET_LAMBDA_LOGOUT_ARN}/*",
         "${GET_LAMBDA_REGISTER_ARN}",
         "${GET_LAMBDA_REGISTER_ARN}/*"
       ]
@@ -28,7 +30,8 @@
         "cognito-idp:AdminCreateUser",
         "cognito-idp:AdminRespondToAuthChallenge",
         "cognito-idp:AdminAddUserToGroup",
-        "cognito-idp:AdminUpdateUserAttributes"
+        "cognito-idp:AdminUpdateUserAttributes",
+        "cognito-idp:GlobalSignOut"
 
       ],
       "Resource": ["${USER_POOL_ARN}", "${USER_POOL_ARN}/*"]
