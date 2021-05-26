@@ -57,8 +57,8 @@ resource "aws_cognito_user_pool_client" "multicart_app_user_pool_client" {
 
   # NO! generate_secret                      = true
   read_attributes        = ["email"] # DECOMISH: this did NOT help get email in $ctx.identity<.email>
-  refresh_token_validity = 30 # in days
-  access_token_validity  = 24 # in hours
+  refresh_token_validity = 30        # in days
+  access_token_validity  = 24        # in hours
 
   # TODO: 🛡 later lock down with prevent_user_existence_errors  = true
 }
