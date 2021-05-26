@@ -21,6 +21,14 @@ resource "aws_appsync_function" "add_user_function" {
   response_mapping_template = file("./AppSync/functions/addUser/response-mapping.vtl")
 }
 
+resource "aws_appsync_function" "me_function" {
+  api_id                    = aws_appsync_graphql_api.MultiCart.id
+  data_source               = aws_appsync_datasource.multicart_dynamodb_user_datasource.name
+  name                      = "me_function"
+  request_mapping_template  = file("./AppSync/resolvers/user-resolvers/me/request-mapping.vtl")
+  response_mapping_template = file("./AppSync/resolvers/_generic/generic-response-mapping-items-NULL-OR-FIRST.vtl")
+}
+
 
 ## -------------------------------------
 ## CARTS
