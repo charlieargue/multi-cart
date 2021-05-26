@@ -1,15 +1,4 @@
-
-#   data_source       = aws_appsync_datasource.multicart_dynamodb_cart_datasource.name
-#   request_template  = file("./AppSync/resolvers/cart-resolvers/blankCart/request-mapping.vtl")
-#   response_template = 
-#   depends_on = [
-#     aws_appsync_graphql_api.MultiCart,
-#     aws_appsync_datasource.multicart_dynamodb_cart_datasource,
-#   ]
-# }
-
-
-# # TODO: owner security!
+# TODO: owner security!
 # PIPELINE 
 resource "aws_appsync_resolver" "blank_cart_pipeline_resolver" {
   kind              = "PIPELINE"

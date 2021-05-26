@@ -1,9 +1,8 @@
+## ASSUMES: $ctx.prev.result   ==========> USER/ME
+
 #set($freshCartId = $util.autoId() )
 #set($nowTime = $util.time.nowISO8601() )
 #set($friendlyTime = $nowTime.substring(0, 6))
-
-## get from previous, ala ME
-$utils.error($utils.toJson($ctx.prev.result))
 
 {
  "version": "2018-05-29",
@@ -13,7 +12,7 @@ $utils.error($utils.toJson($ctx.prev.result))
  },
  "attributeValues" : {
     "name" : { "S" : "Cart $friendlyTime" },
-    "userId": $util.dynamodb.toDynamoDBJson(1), 
+    "userId": $util.dynamodb.toDynamoDBJson($ctx.prev.result.id), 
     "cartLines": $util.dynamodb.toDynamoDBJson([]), 
     "createdAt": $util.dynamodb.toDynamoDBJson($nowTime),
     "updatedAt": $util.dynamodb.toDynamoDBJson($nowTime)
