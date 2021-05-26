@@ -1,3 +1,7 @@
+##################################################################################
+# USERS
+##################################################################################
+
 
 # (LIST ALL) USERS
 resource "aws_appsync_resolver" "list_users_resolver" {
@@ -13,6 +17,13 @@ resource "aws_appsync_resolver" "list_users_resolver" {
   ]
 }
 
+
+
+##################################################################################
+# ACCOUNTS
+##################################################################################
+
+
 # (LIST ALL) ACCOUNTS
 resource "aws_appsync_resolver" "list_accounts_resolver" {
   api_id            = aws_appsync_graphql_api.MultiCart.id
@@ -26,6 +37,11 @@ resource "aws_appsync_resolver" "list_accounts_resolver" {
     aws_appsync_datasource.multicart_dynamodb_account_datasource,
   ]
 }
+
+
+##################################################################################
+# CARTS
+##################################################################################
 
 
 # (LIST ALL) CARTS 

@@ -1,10 +1,10 @@
-## TODO: bring in session current user ID (aka only owner allowed udpate)
+## ASSUMES: $ctx.prev.result   ==========> USER/ME    $ctx.prev.result.id
 
 {
     "version" : "2017-02-28",
     "operation" : "UpdateItem",
     "key" : {
-        "id" : { "S" : "9cb1b7e9-bbbe-416f-b205-5108bbfbbf9d" }
+        "id" : $util.dynamodb.toDynamoDBJson($ctx.prev.result.id)
     },
     "update" : {
         "expression" : "SET currentCartId = :cartId",

@@ -30,6 +30,15 @@ resource "aws_appsync_function" "me_function" {
 }
 
 
+resource "aws_appsync_function" "update_user_function" {
+  api_id                    = aws_appsync_graphql_api.MultiCart.id
+  data_source               = aws_appsync_datasource.multicart_dynamodb_user_datasource.name
+  name                      = "update_user_function"
+  request_mapping_template  = file("./AppSync/functions/updateUser/request-mapping.vtl")
+  response_mapping_template = file("./AppSync/functions/updateUser/response-mapping.vtl")
+}
+
+
 ## -------------------------------------
 ## CARTS
 ## -------------------------------------

@@ -1,8 +1,7 @@
 
-## -------------------------------------
-## CARTS
-## -------------------------------------
-
+##################################################################################
+# CARTS
+##################################################################################
 
 # (CREATE) BLANK CART LINE
 # TODO: security and other todos
@@ -50,10 +49,9 @@ resource "aws_appsync_resolver" "update_cart_resolver" {
 
 
 
-
-## -------------------------------------
-## ACCOUNTS
-## -------------------------------------
+##################################################################################
+# ACCOUNTS
+##################################################################################
 
 # TODO: security and other todos
 resource "aws_appsync_resolver" "hydrate_accounts_resolver" {
@@ -72,10 +70,9 @@ resource "aws_appsync_resolver" "hydrate_accounts_resolver" {
   ]
 }
 
-
-## -------------------------------------
-## USERS
-## -------------------------------------
+##################################################################################
+# USERS
+##################################################################################
 
 
 # TODO: security and other todos
@@ -89,20 +86,5 @@ resource "aws_appsync_resolver" "logout_resolver" {
   depends_on = [
     aws_appsync_graphql_api.MultiCart,
     aws_appsync_datasource.none_datasource,
-  ]
-}
-
-# (UPDATE) USER - just currentCartId
-# TODO: security and other todos
-resource "aws_appsync_resolver" "update_user_resolver" {
-  api_id            = aws_appsync_graphql_api.MultiCart.id
-  field             = "updateUser"
-  type              = "Mutation"
-  data_source       = aws_appsync_datasource.multicart_dynamodb_user_datasource.name
-  request_template  = file("./AppSync/resolvers/user-resolvers/updateUser/request-mapping.vtl")
-  response_template = file("./AppSync/resolvers/user-resolvers/updateUser/response-mapping.vtl")
-  depends_on = [
-    aws_appsync_graphql_api.MultiCart,
-    aws_appsync_datasource.multicart_dynamodb_user_datasource,
   ]
 }
