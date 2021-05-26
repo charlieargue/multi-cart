@@ -12,3 +12,11 @@ resource "aws_cognito_user_group" "multicart_app_user_group" {
   description  = "Default User group (all users must belong to this group)"
   role_arn     = aws_iam_role.multicart_app_user_group_role.arn
 }
+
+## ------------------------------
+resource "aws_cognito_user_group" "multicart_app_admin_group" {
+  name         = "Admin"
+  user_pool_id = aws_cognito_user_pool.multicart_app_user_pool.id
+  description  = "Admin group (only select users)"
+  role_arn     = aws_iam_role.multicart_app_user_group_role.arn
+}

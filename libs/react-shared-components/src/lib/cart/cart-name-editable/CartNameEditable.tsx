@@ -12,7 +12,7 @@ import styles from './CartNameEditable.module.scss';
 /* eslint-disable-next-line */
 export interface CartNameEditableProps {
   name: string;
-  id: number;
+  id: string;
 }
 
 const CartNameEditableFormSchema = Yup.object().shape({

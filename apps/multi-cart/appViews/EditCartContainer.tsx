@@ -9,10 +9,9 @@ interface EditCartContainerProps {
 
 export const EditCartContainer = () => {
     const router = useRouter();
-    const nId = typeof router.query.id === "string" ? parseInt(router.query.id) : -1;
     return (
         <AppLayout>
-            <EditCart id={nId} />
+            <EditCart id={router.query.id} />
         </AppLayout>
     );
 }

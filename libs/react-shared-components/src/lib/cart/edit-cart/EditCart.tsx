@@ -16,7 +16,7 @@ import { ImPlus as PlusIcon } from 'react-icons/im';
 import styles from './EditCart.module.scss';
 import 'regenerator-runtime/runtime';
 
-interface EditCartProps { id: number }
+interface EditCartProps { id: string }
 
 export const EditCart = ({ id }: EditCartProps) => {
   const router = useRouter();
@@ -31,9 +31,9 @@ export const EditCart = ({ id }: EditCartProps) => {
 
   // each load, no deps
   useEffect(() => {
-    // it's -1 until loaded fully apparently 
-    if (id !== -1) {
-      const asyncWorkAround = async (id: number) => {
+    if (id) {
+      // TODO: hacky? better way? decomish after switch to DDB/guids?
+      const asyncWorkAround = async (id: string) => {
         await updateUser({ currentCartId: id });
       };
       asyncWorkAround(id);
@@ -130,7 +130,7 @@ export const EditCart = ({ id }: EditCartProps) => {
             ml={2}
             size="sm"
             onClick={async () => {
-              if (typeof data.cart?.id === "number") {
+              if (data.cart?.id) {
                 const response = await deleteCart({
                   id: data.cart.id
                 });
@@ -179,9 +179,10 @@ export const EditCart = ({ id }: EditCartProps) => {
           data.cart.cartLines?.length ? (
 
             // TODO: switch to sort component, thx: https://stackoverflow.com/questions/48764203/how-to-sort-list-of-react-components-based-on-different-properties
+            // TODO: this won't work anymore: .sort((a, b) => a.id - b.id)
             <Tbody>
               {
-                data.cart.cartLines?.sort((a, b) => a.id - b.id).map((line, idx) => !line ? null : (
+                data.cart.cartLines?.map((line, idx) => !line ? null : (
                   <CartLineRow key={line.id} line={line} idx={idx}>
                     <Box
                       borderWidth="1px"
@@ -193,10 +194,13 @@ export const EditCart = ({ id }: EditCartProps) => {
                       mt={2}
                       mb={20}>
 
-                      {/* WRAP IT ALL TOGETHER */}
+                      {/* WRAP IT ALL TOGETHER 
+                      TODO: this won't work anymore: .sort((a, b) => a.id - b.id)
+                      */}
                       <Wrap spacing="5" align="center">
                         <WrapItem><LineAccountButtonRow line={line} idx={idx} /></WrapItem>
-                        {(line as CartLine)?.cartLineAccounts?.sort((a, b) => a.id - b.id).map((cla) => !cla ? null : (
+
+                        {(line as CartLine)?.cartLineAccounts?.map((cla) => !cla ? null : (
                           <WrapItem>
                             <LineAccount
                               key={cla.id}
