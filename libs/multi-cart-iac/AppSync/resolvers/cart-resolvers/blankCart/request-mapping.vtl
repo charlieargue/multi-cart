@@ -1,5 +1,6 @@
 #set($freshCartId = $util.autoId() )
 #set($nowTime = $util.time.nowISO8601() )
+#set($friendlyTime = $nowTime.substring(0, 6))
 
 $utils.error($util.toJson($ctx.identity))
 
@@ -10,7 +11,7 @@ $utils.error($util.toJson($ctx.identity))
    "id" : { "S": "$freshCartId"}
  },
  "attributeValues" : {
-    "name" : { "S" : "Cart $freshCartId" },
+    "name" : { "S" : "Cart $friendlyTime" },
     "userId": $util.dynamodb.toDynamoDBJson(1), 
     "cartLines": $util.dynamodb.toDynamoDBJson([]), 
     "createdAt": $util.dynamodb.toDynamoDBJson($nowTime),

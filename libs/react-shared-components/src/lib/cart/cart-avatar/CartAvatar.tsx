@@ -84,7 +84,6 @@ export const CartAvatar = ({ currentCartId = -1 }: CartAvatarProps) => {
                   justify="space-between"
                 >
                   {/* DEBUGGING */}
-                  <Badge>{c.id}</Badge>
                   <Box>
                     <strong>{c.name}</strong>
                     <br />
