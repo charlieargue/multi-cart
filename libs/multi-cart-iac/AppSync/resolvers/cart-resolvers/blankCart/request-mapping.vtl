@@ -1,6 +1,8 @@
 #set($freshCartId = $util.autoId() )
 #set($nowTime = $util.time.nowISO8601() )
 
+$utils.error($util.toJson($ctx.identity))
+
 {
  "version": "2018-05-29",
  "operation" : "PutItem",
