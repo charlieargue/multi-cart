@@ -85,7 +85,7 @@ export const CartAvatar = ({ currentCartId = null }: CartAvatarProps) => {
                 >
                   {/* DEBUGGING */}
                   <Box>
-                    <strong>{c.createdAt}</strong>
+                    <strong>{c.name}</strong>
                     <br />
                     <Text color="gray.500" fontSize="xs" ml={.5}>{toDaysAgo(c.createdAt)}</Text>
                   </Box>
