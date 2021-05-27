@@ -33,7 +33,8 @@
         "cognito-idp:AdminRespondToAuthChallenge",
         "cognito-idp:AdminAddUserToGroup",
         "cognito-idp:AdminUpdateUserAttributes",
-        "cognito-idp:GlobalSignOut"
+        "cognito-idp:GlobalSignOut",
+        "cognito-idp:ForgotPassword"
 
       ],
       "Resource": ["${USER_POOL_ARN}", "${USER_POOL_ARN}/*"]

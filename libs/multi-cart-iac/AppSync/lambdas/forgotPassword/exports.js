@@ -15,25 +15,27 @@ const cognito = new CognitoIdentityServiceProvider({
 
 // thx: https://github.com/aws/aws-appsync-community/issues/68
 exports.handler = async (event, context, callback) => {
-    
+
     /*
     Password Recover Flow
     --------------------------------------------------------------------------------------------------
     
     */
-    
+
     const email = event.email;
     console.log(`🚀 ~ email`, email);
 
     try {
 
-        // const data = await cognito.globalSignOut({
-        //     AccessToken: token
-        // }).promise();
-        
-       return true
+        const data = await cognito.forgotPassword({
+            ClientId: CLIENT_ID,
+            Username: 'karlgolka'
+        }).promise();
+        console.log(`🚀 ~ data`, data);
+
+        return true
 
     } catch (err) {
         console.log(err, err.stack);
-    }   
+    }
 }
