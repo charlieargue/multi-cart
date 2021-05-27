@@ -14,6 +14,6 @@ variable "client_id" { default = "" }
 # LOCALS
 ##################################################################################
 locals {
-  filename = "MultiCart_lambda_change_password.zip"
+  filename = "MultiCart_lambda_forgot_password.zip"
 }
 

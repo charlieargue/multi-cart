@@ -151,17 +151,15 @@ type Mutation @aws_api_key @aws_cognito_user_pools {
   # ACCOUNTS
   hydrateAccounts: Boolean! @aws_cognito_user_pools(cognito_groups: ["Admin"])
 
-  # USERS
-  register(options: UsernamePasswordInput!): UserResponse! # 👍 PUBLIC
-  login(password: String!, usernameOrEmail: String!): UserResponse! # 👍 PUBLIC
-  logout: Boolean! @aws_cognito_user_pools(cognito_groups: ["User"])
-
+  
+  # # USERS 👍 PUBLIC ------------------------------
+  register(options: UsernamePasswordInput!): UserResponse!
+  login(password: String!, usernameOrEmail: String!): UserResponse!
   forgotPassword(email: String!): Boolean!
-    @aws_cognito_user_pools(cognito_groups: ["User"])
-
   changePassword(newPassword: String!, token: String!): UserResponse!
-    @aws_cognito_user_pools(cognito_groups: ["User"])
 
+  # # USERS NOT PUBLIC!  ------------------------------
+  logout: Boolean! @aws_cognito_user_pools(cognito_groups: ["User"])
   updateUser(currentCartId: ID!): UserResponse!
     @aws_cognito_user_pools(cognito_groups: ["User"])
 }

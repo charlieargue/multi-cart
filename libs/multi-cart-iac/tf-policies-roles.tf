@@ -40,7 +40,7 @@ resource "aws_iam_role_policy" "iam_role_policy_for_lambda" {
     GET_LAMBDA_LOGIN_ARN           = module.login.function_arn,
     GET_LAMBDA_LOGOUT_ARN          = module.logout.function_arn,
     GET_LAMBDA_REGISTER_ARN        = module.register.function_arn,
-    GET_LAMBDA_CHANGE_PASSWORD_ARN = module.change_password.function_arn,
+    GET_LAMBDA_FORGOT_PASSWORD_ARN = module.forgot_password.function_arn,
     USER_POOL_ARN                  = aws_cognito_user_pool.multicart_app_user_pool.arn,
   })
 }
