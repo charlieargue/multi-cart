@@ -5,6 +5,7 @@
 ## ------------------------------ 
 # send email
 ## ------------------------------ 
+# DECOMISH? NOT USED RIGHT NOW
 module "send_email" {
   #   inputs:
   role_arn            = aws_iam_role.iam_role_for_lambda.arn
@@ -100,6 +101,24 @@ module "forgot_password" {
   client_id           = aws_cognito_user_pool_client.multicart_app_user_pool_client.id
 
   source = "./Modules/forgot-password"
+  depends_on = [
+    aws_appsync_graphql_api.MultiCart,
+    aws_iam_role_policy_attachment.lambda_logs,
+  ]
+}
+
+
+## ------------------------------ 
+# cognito email customizations
+## ------------------------------ 
+module "cognito_email_customizations" {
+  #   inputs:
+  role_arn    = aws_iam_role.iam_role_for_lambda.arn
+  aws_region  = var.AWS_REGION
+  app_id      = aws_appsync_graphql_api.MultiCart.id
+  common_tags = local.common_tags
+
+  source = "./Modules/cognito-email-customizations"
   depends_on = [
     aws_appsync_graphql_api.MultiCart,
     aws_iam_role_policy_attachment.lambda_logs,
