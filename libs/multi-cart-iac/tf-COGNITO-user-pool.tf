@@ -29,6 +29,17 @@ resource "aws_cognito_user_pool" "multicart_app_user_pool" {
   # MFA & VERIFICATIONS
   mfa_configuration        = "OFF"
   auto_verified_attributes = ["email"]
+
+  # MESSAGE CUSTOMIZATIONS
+  # verification_message_template {
+  #   default_email_option  = "CONFIRM_WITH_LINK"
+  #   email_message_by_link = "💎 Register with 🛍 Multi Cart: {##Click Here##}"
+  #   email_subject_by_link = "💎 Register Link for 🛍 Multi Cart"
+  # }
+  email_configuration {
+    reply_to_email_address = "karl@multicart.app"
+  }
+
 }
 
 
