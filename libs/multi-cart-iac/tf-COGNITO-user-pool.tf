@@ -31,12 +31,12 @@ resource "aws_cognito_user_pool" "multicart_app_user_pool" {
   auto_verified_attributes = ["email"]
 
   # MESSAGE CUSTOMIZATIONS via lambda triggers
-  # lambda_config {
-  #   custom_message = module.cognito_email_customizations.function_arn
-  # }
-  # depends_on = [
-  #   module.cognito_email_customizations.function_arn
-  # ]
+  lambda_config {
+    custom_message = module.cognito_email_customizations.function_arn
+  }
+  depends_on = [
+    module.cognito_email_customizations.function_arn
+  ]
 
 }
 

@@ -119,8 +119,4 @@ module "cognito_email_customizations" {
   common_tags = local.common_tags
 
   source = "./Modules/cognito-email-customizations"
-  depends_on = [
-    aws_appsync_graphql_api.MultiCart,
-    aws_iam_role_policy_attachment.lambda_logs,
-  ]
 }
