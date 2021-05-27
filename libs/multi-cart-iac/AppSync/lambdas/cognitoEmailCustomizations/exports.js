@@ -44,7 +44,7 @@ exports.handler = async (event, context, callback) => {
     */
 
     if (event.triggerSource === 'CustomMessage_ForgotPassword') {
-        event.response.emailSubject = "🛍 Multi Cart: Forgot Password Code";
+        event.response.emailSubject = "Multi Cart: Forgot Password Code";
         event.response.emailMessage = "Hi! <br/><br/>Your code is: " + event.request.codeParameter +
             "<br/><br/>Please visit this url and provide the requested information: https://www.multicart.app/change-password/1234";
     }
