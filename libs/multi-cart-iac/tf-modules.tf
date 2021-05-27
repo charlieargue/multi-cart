@@ -84,3 +84,24 @@ module "register" {
     aws_iam_role_policy_attachment.lambda_logs,
   ]
 }
+
+## ------------------------------ 
+# change password
+## ------------------------------ 
+module "change_password" {
+  #   inputs:
+  role_arn            = aws_iam_role.iam_role_for_lambda.arn
+  aws_region          = var.AWS_REGION
+  app_id              = aws_appsync_graphql_api.MultiCart.id
+  common_tags         = local.common_tags
+  lambda_request_vtl  = "./AppSync/functions/lambdaChangePassword/request-mapping.vtl"
+  lambda_response_vtl = "./AppSync/resolvers/_generic/generic-response-mapping-item-BOOLEAN.vtl"
+  pool_id             = aws_cognito_user_pool.multicart_app_user_pool.id
+  client_id           = aws_cognito_user_pool_client.multicart_app_user_pool_client.id
+
+  source = "./Modules/change-password"
+  depends_on = [
+    aws_appsync_graphql_api.MultiCart,
+    aws_iam_role_policy_attachment.lambda_logs,
+  ]
+}

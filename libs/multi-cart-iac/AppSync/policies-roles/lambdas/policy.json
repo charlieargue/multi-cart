@@ -12,7 +12,9 @@
         "${GET_LAMBDA_LOGOUT_ARN}",
         "${GET_LAMBDA_LOGOUT_ARN}/*",
         "${GET_LAMBDA_REGISTER_ARN}",
-        "${GET_LAMBDA_REGISTER_ARN}/*"
+        "${GET_LAMBDA_REGISTER_ARN}/*",
+        "${GET_LAMBDA_CHANGE_PASSWORD_ARN}",
+        "${GET_LAMBDA_CHANGE_PASSWORD_ARN}/*"
       ]
     },
     {
