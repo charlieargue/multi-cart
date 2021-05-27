@@ -7,7 +7,7 @@ resource "aws_appsync_resolver" "list_carts_pipeline_resolver" {
   field             = "carts"
   type              = "Query"
   request_template  = file("./AppSync/resolvers/_generic/generic-request-mapping-EMPTY.vtl")
-  response_template = file("./AppSync/resolvers/_generic/generic-response-mapping-items.vtl")
+  response_template = file("./AppSync/resolvers/_generic/generic-response-mapping-PREV-RESULT.vtl")
   pipeline_config {
     functions = [
       "${aws_appsync_function.me_function.function_id}",
