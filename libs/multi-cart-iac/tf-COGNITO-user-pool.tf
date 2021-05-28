@@ -57,6 +57,8 @@ resource "aws_cognito_user_pool_client" "multicart_app_user_pool_client" {
 
   # APP CLIENT SETTINGS
   supported_identity_providers         = ["COGNITO"]
+  callback_urls                        = ["https://www.multicart.app"]
+  logout_urls                          = ["https://www.multicart.app/login"]
   allowed_oauth_flows_user_pool_client = true
   allowed_oauth_scopes                 = ["aws.cognito.signin.user.admin"]
   allowed_oauth_flows                  = ["implicit"]
