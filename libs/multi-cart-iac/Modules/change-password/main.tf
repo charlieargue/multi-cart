@@ -14,11 +14,11 @@ resource "aws_lambda_function" "lambda_change_password_function" {
   filename         = "./build/${local.filename}"
   runtime          = "nodejs12.x"
   publish          = true
-  # environment {
-  #   variables = {
-  #     AWS_REGION_VAR = var.aws_region
-  #   }
-  # }
+  environment {
+    variables = {
+      AWS_REGION_VAR = var.aws_region
+    }
+  }
   # tags = merge(var.common_tags, {
   #   Description = "AWS lambda function for changing cognito passwords (step 2 of forgot password)"
   # })
