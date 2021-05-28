@@ -40,8 +40,11 @@ exports.handler = async (event, context, callback) => {
 
     
     // NOPE: const userPool = new AWS.AmazonCognitoIdentity.CognitoUserPool(poolData);
-    const userPool = new cognitoidentity.CognitoUserPool(poolData);
-    console.log(`🚀 ~ userPool`, userPool);
+    // const userPool = new cognitoidentity.CognitoUserPool(poolData);
+    
+    // var cognitoUser = new CognitoIdentityServiceProvider.CognitoUser(userData);
+
+    // console.log(`🚀 ~ userPool`, userPool);
 
     
     
@@ -59,7 +62,7 @@ exports.handler = async (event, context, callback) => {
 
     const cognitoUser = new AWS.CognitoIdentityServiceProvider.CognitoUser({
             Username: "karlgolka", // 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 
-            Pool: userPool
+            // Pool: userPool
         });
     console.log(`🚀 ~ cognitoUser`, cognitoUser);
 
