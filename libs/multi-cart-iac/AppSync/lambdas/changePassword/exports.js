@@ -9,6 +9,7 @@ const cognito = new CognitoIdentityServiceProvider({
     apiVersion: '2016-04-18',
     region: AWS_REGION_VAR
 });
+const AWS = require('aws-sdk');
 
 // thx: https://stackoverflow.com/questions/38110615/how-to-allow-my-user-to-reset-their-password-on-cognito-user-pools
 // thx: https://stackoverflow.com/questions/38110615/how-to-allow-my-user-to-reset-their-password-on-cognito-user-pools
@@ -23,8 +24,7 @@ exports.handler = async (event, context, callback) => {
     const token = event.arguments.token;
     const newPassword = event.arguments.newPassword;
     const poolData = { UserPoolId: POOL_ID, ClientId: CLIENT_ID };
-    // NOPE: const userPool = new cognito.CognitoUserPool(poolData);
-    const userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
+    const userPool = new AWS.AmazonCognitoIdentity.CognitoUserPool(poolData);
     
     console.log(`🚀 ~ token`, token);
     console.log(`🚀 ~ newPassword`, newPassword);
