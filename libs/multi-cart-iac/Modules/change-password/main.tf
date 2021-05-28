@@ -20,7 +20,7 @@ resource "aws_lambda_function" "lambda_change_password_function" {
     }
   }
   tags = merge(var.common_tags, {
-    Description = "AWS lambda function for changing cognito passwords (step 2 of forgot password)"
+    Description = "AWS lambda function for changing cognito passwords"
   })
 }
 
