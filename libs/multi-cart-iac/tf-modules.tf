@@ -112,11 +112,11 @@ module "forgot_password" {
 ## ------------------------------ 
 module "change_password" {
   #   inputs:
-  role_arn            = aws_iam_role.iam_role_for_lambda.arn
-  aws_region          = var.AWS_REGION
-  app_id              = aws_appsync_graphql_api.MultiCart.id
-  common_tags         = local.common_tags
-  
+  role_arn    = aws_iam_role.iam_role_for_lambda.arn
+  aws_region  = var.AWS_REGION
+  app_id      = aws_appsync_graphql_api.MultiCart.id
+  common_tags = local.common_tags
+
   source = "./Modules/change-password"
   depends_on = [
     aws_appsync_graphql_api.MultiCart,
