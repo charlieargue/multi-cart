@@ -23,13 +23,15 @@ exports.handler = async (event, context, callback) => {
     */
 
     const email = event.email;
+    const username = event.username;
     console.log(`🚀 ~ email`, email);
+    console.log(`🚀 ~ username`, username);
 
     try {
 
         const data = await cognito.forgotPassword({
             ClientId: CLIENT_ID,
-            Username: 'karlgolka'
+            Username: username
         }).promise();
         console.log(`🚀 ~ data`, data);
 

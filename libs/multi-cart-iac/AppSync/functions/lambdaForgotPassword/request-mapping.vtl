@@ -1,8 +1,11 @@
+## ASSUMES: $ctx.prev.result   ==========> USER who forget their email
+## NOTE: if no user found, or error during the next lambda, we DO NOT WANT to surface those errors! (so potential hackers do not get additional info on what accounts exist, etc.)
 {
     "version": "2018-05-29",
     "operation": "Invoke",
     "payload": {
         "field": "forgotPassword",
         "email":  $utils.toJson($ctx.args.email),
+        "username":  $utils.toJson($ctx.prev.result.username),
     }
 }

@@ -39,15 +39,28 @@ resource "aws_appsync_datasource" "lambda_forgot_password_datasource" {
   }
 }
 
+# DECOMISH
 # NOTE: still not sure if better to put aws_appsync_resolvers all into these modules, or leave them "out there" (see change-password.module.main.tf also)
 #       - same not-sure applies to the VTLs (should I put VTLs inside these modules?)
 # NOTE: no appsync wrapper function since this will be a DIRECT LAMBDA resolver
 # thx: https://github.com/hashicorp/terraform-provider-aws/issues/14488
-resource "aws_appsync_resolver" "forgot_password_resolver" {
-  api_id            = var.app_id
-  field             = "forgotPassword"
-  type              = "Mutation"
-  data_source       = aws_appsync_datasource.lambda_forgot_password_datasource.name
-  request_template  = file(var.lambda_request_vtl)
-  response_template = file(var.lambda_response_vtl)
+# resource "aws_appsync_resolver" "forgot_password_resolver" {
+#   api_id            = var.app_id
+#   field             = "forgotPassword"
+#   type              = "Mutation"
+#   data_source       = aws_appsync_datasource.lambda_forgot_password_datasource.name
+#   request_template  = file(var.lambda_request_vtl)
+#   response_template = file(var.lambda_response_vtl)
+# }
+
+
+## LAMBDA AppSync function WRAPPER
+resource "aws_appsync_function" "lambda_forgot_password_appsync_function" {
+  api_id                    = var.app_id
+  data_source               = aws_appsync_datasource.lambda_forgot_password_datasource.name
+  name                      = "lambda_forgot_password_appsync_function"
+  request_mapping_template  = file(var.lambda_request_vtl)
+  response_mapping_template = file(var.lambda_response_vtl)
 }
+
+
