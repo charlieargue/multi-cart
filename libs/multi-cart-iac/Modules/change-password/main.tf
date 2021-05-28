@@ -9,19 +9,19 @@ data "archive_file" "lambda_change_password_archive" {
 resource "aws_lambda_function" "lambda_change_password_function" {
   function_name    = "lambda_change_password_function_${var.common_tags.Environment}"
   role             = var.role_arn
-  handler          = "exports.handler"
-  source_code_hash = data.archive_file.lambda_change_password_archive.output_base64sha256
-  filename         = "./build/${local.filename}"
-  runtime          = "nodejs12.x"
-  publish          = true
-  environment {
-    variables = {
-      AWS_REGION_VAR = var.aws_region
-    }
-  }
-  tags = merge(var.common_tags, {
-    Description = "AWS lambda function for changing cognito passwords (step 2 of forgot password)"
-  })
+  # handler          = "exports.handler"
+  # source_code_hash = data.archive_file.lambda_change_password_archive.output_base64sha256
+  # filename         = "./build/${local.filename}"
+  # runtime          = "nodejs12.x"
+  # publish          = true
+  # environment {
+  #   variables = {
+  #     AWS_REGION_VAR = var.aws_region
+  #   }
+  # }
+  # tags = merge(var.common_tags, {
+  #   Description = "AWS lambda function for changing cognito passwords (step 2 of forgot password)"
+  # })
 }
 
 
