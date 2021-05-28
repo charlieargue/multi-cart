@@ -57,17 +57,15 @@ resource "aws_cognito_user_pool_client" "multicart_app_user_pool_client" {
 
   # APP CLIENT SETTINGS
   supported_identity_providers         = ["COGNITO"]
-  callback_urls                        = ["https://www.multicart.app"]
-  logout_urls                          = ["https://www.multicart.app/login"]
   allowed_oauth_flows_user_pool_client = true
   allowed_oauth_scopes                 = ["aws.cognito.signin.user.admin"]
   allowed_oauth_flows                  = ["implicit"]
-  explicit_auth_flows                  = ["ADMIN_NO_SRP_AUTH"] # prolly don't need the U_P one, and don't YET want the Server-Side one
+  explicit_auth_flows                  = ["ADMIN_NO_SRP_AUTH"]
 
   # NO! generate_secret                      = true
   read_attributes        = ["email"] # DECOMISH: this did NOT help get email in $ctx.identity<.email>
   refresh_token_validity = 30        # in days
-  access_token_validity  = 24        # in hours
+  access_token_validity  = 24 * 7        # in hours
 
-  # TODO: 🛡 later lock down with prevent_user_existence_errors  = true
+  # FYI: 🛡 later lock down with prevent_user_existence_errors  = true, but prolly wont matter since handling errors on our own afaik
 }

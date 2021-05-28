@@ -1,23 +1,21 @@
 // thx: (see code) https://pro.chakra-ui.com/components/application-ui/authentication
-import './PasswordField.module.scss';
 import {
   Box,
   Flex,
   FormControl,
   FormLabel,
   IconButton,
-  Input,
   InputGroup,
   InputProps,
   InputRightElement,
   useColorModeValue as mode,
-  useDisclosure,
-  useMergeRefs
-} from '@chakra-ui/react'
-import * as React from 'react'
-import { HiEye, HiEyeOff } from 'react-icons/hi'
-import NextLink from 'next/link';
+  useDisclosure
+} from '@chakra-ui/react';
 import { InputField } from '@multi-cart/react-ui';
+import NextLink from 'next/link';
+import * as React from 'react';
+import { HiEye, HiEyeOff } from 'react-icons/hi';
+import './PasswordField.module.scss';
 
 export const PasswordField = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
   const { isOpen, onToggle } = useDisclosure();

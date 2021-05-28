@@ -1,6 +1,6 @@
 export * from './lib/card/Card';
 export * from './lib/cart/uomdrop-down/UOMDropDown';
-export * from './lib/auth/change-password/ChangePassword';
+export * from './lib/auth/change-password-form/ChangePasswordForm';
 export * from './lib/auth/forgot-password-form/ForgotPasswordForm';
 export * from './lib/auth/login-form/LoginForm';
 export * from './lib/auth/registration-form/RegistrationForm';

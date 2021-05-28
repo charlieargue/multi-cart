@@ -170,8 +170,9 @@ export type MutationForgotPasswordArgs = {
 
 
 export type MutationChangePasswordArgs = {
-  newPassword: Scalars['String'];
+  username: Scalars['String'];
   token: Scalars['String'];
+  newPassword: Scalars['String'];
 };
 
 
@@ -422,6 +423,7 @@ export type UpdateCartLineMutation = (
 );
 
 export type ChangePasswordMutationVariables = Exact<{
+  username: Scalars['String'];
   token: Scalars['String'];
   newPassword: Scalars['String'];
 }>;
@@ -709,8 +711,8 @@ export function useUpdateCartLineMutation() {
   return Urql.useMutation<UpdateCartLineMutation, UpdateCartLineMutationVariables>(UpdateCartLineDocument);
 };
 export const ChangePasswordDocument = gql`
-    mutation ChangePassword($token: String!, $newPassword: String!) {
-  changePassword(token: $token, newPassword: $newPassword)
+    mutation ChangePassword($username: String!, $token: String!, $newPassword: String!) {
+  changePassword(username: $username, token: $token, newPassword: $newPassword)
 }
     `;
 
@@ -957,7 +959,7 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   register?: Resolver<ResolversTypes['UserResponse'], ParentType, ContextType, RequireFields<MutationRegisterArgs, 'options'>>;
   login?: Resolver<ResolversTypes['UserResponse'], ParentType, ContextType, RequireFields<MutationLoginArgs, 'password' | 'usernameOrEmail'>>;
   forgotPassword?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationForgotPasswordArgs, 'email'>>;
-  changePassword?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType, RequireFields<MutationChangePasswordArgs, 'newPassword' | 'token'>>;
+  changePassword?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType, RequireFields<MutationChangePasswordArgs, 'username' | 'token' | 'newPassword'>>;
   logout?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   updateUser?: Resolver<ResolversTypes['UserResponse'], ParentType, ContextType, RequireFields<MutationUpdateUserArgs, 'currentCartId'>>;
 };

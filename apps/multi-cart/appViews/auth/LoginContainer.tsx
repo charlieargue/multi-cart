@@ -1,18 +1,15 @@
 import {
   Box,
   Button,
-  Heading,
   SimpleGrid,
-  Text,
   useColorModeValue as mode,
   VisuallyHidden
 } from '@chakra-ui/react';
-import { LoginForm } from '@multi-cart/react-shared-components';
-import { DividerWithText, Logo } from '@multi-cart/react-ui';
+import { LoginForm, MicroLayout } from '@multi-cart/react-shared-components';
+import { DividerWithText } from '@multi-cart/react-ui';
+import NextLink from 'next/link';
 import React from 'react';
 import { FaFacebook, FaGithub, FaGoogle } from 'react-icons/fa';
-import NextLink from 'next/link';
-import { MicroLayout } from '@multi-cart/react-shared-components';
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface LoginContainerProps {
