@@ -29,8 +29,10 @@ export const ChangePasswordForm = () => {
         // handle errors
         if (response.error) {
           alert(response.error.message);
+          setTokenError("error");
         } else if ("errors" in response) {
           alert((response as any).errors[0].message);
+          setTokenError("error");
         } else if (response.data?.changePassword) {
           // consider them logged in? no, force them to login again with that new password
           // TODO: would be nice to display some kind of success toast! All set, now please login with that new password!
