@@ -27,12 +27,10 @@ export const ChangePasswordForm = () => {
         });
 
         // handle errors
-        if (response.data?.changePassword === null || ("errors" in response)) {
-          if ("errors" in response) {
-            alert((response as any).errors[0].message);
-          } else {
-            setTokenError("error");
-          }
+        if (response.error) {
+          alert(response.error.message);
+        } else if ("errors" in response) {
+          alert((response as any).errors[0].message);
         } else if (response.data?.changePassword) {
           // consider them logged in? no, force them to login again with that new password
           // TODO: would be nice to display some kind of success toast! All set, now please login with that new password!
@@ -67,7 +65,7 @@ export const ChangePasswordForm = () => {
           </Stack>
         </Form>
       )}
-    </Formik>
+    </Formik >
 
   );
 }

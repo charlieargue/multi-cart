@@ -8,10 +8,10 @@ export type ActionLinkProps = any & HTMLChakraProps<'a'> & { nextHref: string }
 
 export function ActionLink(props: ActionLinkProps) {
   return (
-    <NextLink href={props.nextHref}>
+    <NextLink href={props.nexthref}>
       <chakra.a
         {...props}
-        href="props.nextHref"
+        href="props.nexthref"
         px="4"
         py="1.5"
         textAlign="center"

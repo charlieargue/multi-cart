@@ -22,7 +22,7 @@ export function ForgotPasswordForm(props: ForgotPasswordFormProps) {
             {({ isSubmitting }) =>
                 complete ? (
                     <Banner
-                        actionLink={<ActionLink nextHref="/" w={{ base: 'full', sm: 'auto' }} flexShrink={0}>Go back to login.</ActionLink>}
+                        actionLink={<ActionLink nexthref="/" w={{ base: 'full', sm: 'auto' }} flexShrink={0}>Go back to homepage.</ActionLink>}
                         text="🛡 If an account with that email exists, we sent you an email!"></Banner>
                 ) : (
                         <MicroLayout heading="Forgot your password?" subHeading="🤗 &nbsp; Happens to everyone, we can help!" >
