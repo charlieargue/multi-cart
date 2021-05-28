@@ -20,7 +20,7 @@ resource "aws_lambda_function" "lambda_cognito_email_customizations_function" {
     }
   }
   tags = merge(var.common_tags, {
-    Description = "AWS lambda function for customiz cognito emails"
+    Description = "AWS lambda function for customizing cognito emails"
   })
 }
 

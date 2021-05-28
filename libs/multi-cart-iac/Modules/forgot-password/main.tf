@@ -39,7 +39,7 @@ resource "aws_appsync_datasource" "lambda_forgot_password_datasource" {
   }
 }
 
-# NOTE: still not sure if better to pu aws_appsync_resolvers all into these modules, or leave them "out there"
+# NOTE: still not sure if better to put aws_appsync_resolvers all into these modules, or leave them "out there" (see change-password.module.main.tf also)
 #       - same not-sure applies to the VTLs (should I put VTLs inside these modules?)
 # NOTE: no appsync wrapper function since this will be a DIRECT LAMBDA resolver
 # thx: https://github.com/hashicorp/terraform-provider-aws/issues/14488
