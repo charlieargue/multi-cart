@@ -15,6 +15,9 @@ const AWS = require('aws-sdk');
 // thx: https://stackoverflow.com/questions/38110615/how-to-allow-my-user-to-reset-their-password-on-cognito-user-pools
 exports.handler = async (event, context, callback) => {
 
+
+console.log(`🚀 ~ cognito`, cognito);
+
     /*
     Change Password Flow (step #2 of forgot password flow)
     --------------------------------------------------------------------------------------------------
@@ -31,8 +34,16 @@ exports.handler = async (event, context, callback) => {
     console.log(`🚀 ~ newPassword`, newPassword);
     // console.log(`🚀 ~ poolData`, poolData);
     // console.log(`🚀 ~ userPool`, userPool);
+    
+    
+    console.log(`🚀 ~ AWS.CognitoIdentityServiceProvider`, AWS.CognitoIdentityServiceProvider);
+
 
     // setup cognitoUser first
+    return;
+
+
+    
     const cognitoUser = new AWS.CognitoIdentityServiceProvider.CognitoUser({
         Username: "karlgolka", // 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 
         Pool: userPool
