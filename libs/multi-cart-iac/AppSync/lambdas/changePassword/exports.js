@@ -39,5 +39,6 @@ exports.handler = async (event, context, callback) => {
 
     } catch (err) {
         console.log(err, err.stack);
+        throw err
     }
 }
