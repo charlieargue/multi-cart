@@ -10,7 +10,7 @@ const cognito = new CognitoIdentityServiceProvider({
 
 // thx: https://stackoverflow.com/questions/58729214/how-to-use-forgot-password-custom-template-on-net-using-aws-cognito
 exports.handler = async (event, context, callback) => {
-    console.log(`🔴 🔴 🔴 🔴 🔴 🔴  ~ event`, event);
+    console.log(`~ event`, event);
 
     /*
     COGNITO EMAIL CUSTOMIZATIONS
