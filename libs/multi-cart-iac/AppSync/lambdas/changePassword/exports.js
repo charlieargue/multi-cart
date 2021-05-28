@@ -35,12 +35,12 @@ exports.handler = async (event, context, callback) => {
     
 
     
-
+    const cognitoidentity = new AWS.CognitoIdentity();
 
 
     
     // NOPE: const userPool = new AWS.AmazonCognitoIdentity.CognitoUserPool(poolData);
-    const userPool = new AWS.CognitoIdentityServiceProvider.CognitoUserPool(poolData);
+    const userPool = new cognitoidentity.CognitoUserPool(poolData);
     console.log(`🚀 ~ userPool`, userPool);
 
     
