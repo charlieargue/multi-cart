@@ -40,7 +40,7 @@ export const DashboardContainer = () => {
 
             <Box mx={8}>
                 <Stack spacing={0} align={'left'} my={4}>
-                    <Heading>Dashboard</Heading>
+                    <Heading>Welcome back!</Heading>
                     <Text>Recent Carts, Global Settings, Fake Stats, and lorem ipsum</Text>
                 </Stack>
                 <Divider />
