@@ -16,7 +16,6 @@ resource "aws_lambda_function" "lambda_change_password_function" {
   publish          = true
   environment {
     variables = {
-      POOL_ID = var.pool_id,
       CLIENT_ID = var.client_id,
       AWS_REGION_VAR = var.aws_region
     }

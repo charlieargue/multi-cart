@@ -1,6 +1,5 @@
 "use strict"
 const {
-    POOL_ID,
     CLIENT_ID,
     AWS_REGION_VAR
 } = process.env;
@@ -9,7 +8,6 @@ const cognito = new CognitoIdentityServiceProvider({
     apiVersion: '2016-04-18',
     region: AWS_REGION_VAR
 });
-const AWS = require('aws-sdk');
 
 // no thx: https://stackoverflow.com/questions/38110615/how-to-allow-my-user-to-reset-their-password-on-cognito-user-pools
 // thx looking thru the docs! https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_ConfirmForgotPassword.html
@@ -21,7 +19,8 @@ exports.handler = async (event, context, callback) => {
 
     const token = event.arguments.token;
     const newPassword = event.arguments.newPassword;
-    const poolData = { UserPoolId: POOL_ID, ClientId: CLIENT_ID };
+    const username = event.arguments.username;
+    console.log(`🚀 ~ username`, username);
 
 
     try {
@@ -31,7 +30,7 @@ exports.handler = async (event, context, callback) => {
             ClientId: CLIENT_ID,
             ConfirmationCode: token,
             Password: newPassword,
-            // Username: "karlgolka" //// 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 
+            Username: username
 
         }).promise();
         console.log(`🚀 ~ data`, data);
