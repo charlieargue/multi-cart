@@ -13,6 +13,10 @@
 #if( $ctx.args.options.email ) 
   #set( $email = $ctx.args.options.email )
 #end
+## FORGOT PASSWORD:
+#if( $ctx.args.email ) 
+  #set( $email = $ctx.args.email )
+#end
 
 {
   "version": "2018-05-29",
