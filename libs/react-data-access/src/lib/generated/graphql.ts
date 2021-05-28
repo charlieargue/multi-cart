@@ -97,9 +97,9 @@ export type Mutation = {
   hydrateAccounts: Scalars['Boolean'];
   register: UserResponse;
   login: UserResponse;
-  logout: Scalars['Boolean'];
   forgotPassword: Scalars['Boolean'];
-  changePassword: UserResponse;
+  changePassword: Scalars['Boolean'];
+  logout: Scalars['Boolean'];
   updateUser: UserResponse;
 };
 
@@ -429,10 +429,7 @@ export type ChangePasswordMutationVariables = Exact<{
 
 export type ChangePasswordMutation = (
   { __typename?: 'Mutation' }
-  & { changePassword: (
-    { __typename?: 'UserResponse' }
-    & RegularUserResponseFragment
-  ) }
+  & Pick<Mutation, 'changePassword'>
 );
 
 export type UpdateUserMutationVariables = Exact<{
@@ -713,11 +710,9 @@ export function useUpdateCartLineMutation() {
 };
 export const ChangePasswordDocument = gql`
     mutation ChangePassword($token: String!, $newPassword: String!) {
-  changePassword(token: $token, newPassword: $newPassword) {
-    ...RegularUserResponse
-  }
+  changePassword(token: $token, newPassword: $newPassword)
 }
-    ${RegularUserResponseFragmentDoc}`;
+    `;
 
 export function useChangePasswordMutation() {
   return Urql.useMutation<ChangePasswordMutation, ChangePasswordMutationVariables>(ChangePasswordDocument);
@@ -961,9 +956,9 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   hydrateAccounts?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   register?: Resolver<ResolversTypes['UserResponse'], ParentType, ContextType, RequireFields<MutationRegisterArgs, 'options'>>;
   login?: Resolver<ResolversTypes['UserResponse'], ParentType, ContextType, RequireFields<MutationLoginArgs, 'password' | 'usernameOrEmail'>>;
-  logout?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   forgotPassword?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationForgotPasswordArgs, 'email'>>;
-  changePassword?: Resolver<ResolversTypes['UserResponse'], ParentType, ContextType, RequireFields<MutationChangePasswordArgs, 'newPassword' | 'token'>>;
+  changePassword?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationChangePasswordArgs, 'newPassword' | 'token'>>;
+  logout?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   updateUser?: Resolver<ResolversTypes['UserResponse'], ParentType, ContextType, RequireFields<MutationUpdateUserArgs, 'currentCartId'>>;
 };
 

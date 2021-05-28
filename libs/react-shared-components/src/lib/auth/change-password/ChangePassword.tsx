@@ -28,11 +28,11 @@ export const ChangePassword = () => {
         // handle errors
         if (response.data?.changePassword.errors) {
           const errorMap = toErrorMap(response.data?.changePassword.errors);
-          if ('token' in errorMap) {
-            setTokenError(errorMap.token);
-          }
+          // if ('token' in errorMap) {
+          //   setTokenError(errorMap.token);
+          // }
           setErrors(errorMap);
-        } else if (response.data?.changePassword.user) {
+        } else if (response.data?.changePassword) {
           router.push("/dashboard");
         }
 
