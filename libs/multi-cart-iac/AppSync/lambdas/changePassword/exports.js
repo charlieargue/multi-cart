@@ -16,7 +16,9 @@ const AWS = require('aws-sdk');
 exports.handler = async (event, context, callback) => {
 
 
-console.log(`🚀 ~ cognito`, cognito);
+    // OK: console.log(`🚀 ~ cognito`, cognito);
+    // OK: console.log(`🚀 ~ AWS.CognitoIdentityServiceProvider`, AWS.CognitoIdentityServiceProvider);
+
 
     /*
     Change Password Flow (step #2 of forgot password flow)
@@ -26,32 +28,43 @@ console.log(`🚀 ~ cognito`, cognito);
 
     const token = event.arguments.token;
     const newPassword = event.arguments.newPassword;
-    // const poolData = { UserPoolId: POOL_ID, ClientId: CLIENT_ID };
-    // // NOPE: const userPool = new AWS.AmazonCognitoIdentity.CognitoUserPool(poolData);
-    // const userPool = new AWS.CognitoIdentityServiceProvider.CognitoUser({})
-
+    const poolData = { UserPoolId: POOL_ID, ClientId: CLIENT_ID };
     console.log(`🚀 ~ token`, token);
     console.log(`🚀 ~ newPassword`, newPassword);
-    // console.log(`🚀 ~ poolData`, poolData);
-    // console.log(`🚀 ~ userPool`, userPool);
+    console.log(`🚀 ~ poolData`, poolData);
+    
+
+    
+
+
+
+    
+    // NOPE: const userPool = new AWS.AmazonCognitoIdentity.CognitoUserPool(poolData);
+    const userPool = new AWS.CognitoIdentityServiceProvider.CognitoUserPool(poolData);
+    console.log(`🚀 ~ userPool`, userPool);
+
     
     
-    console.log(`🚀 ~ AWS.CognitoIdentityServiceProvider`, AWS.CognitoIdentityServiceProvider);
 
 
     // setup cognitoUser first
-    return;
-
-
-    
-    // const cognitoUser = new AWS.CognitoIdentityServiceProvider.CognitoUser({
+    // ✅ const cognitoUser = new AWS.CognitoIdentityServiceProvider.CognitoUser({
     //     Username: "karlgolka", // 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 
     //     Pool: userPool
     // });
-    // // const cognitoUser = new cognito.CognitoUser({
-    // //     Username: "karlgolka", // 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 
+    // // NO: const cognitoUser = new cognito.CognitoUser({
+    // //     Username: "karlgolka", 
     // //     Pool: userPool
     // // });
+
+    const cognitoUser = new AWS.CognitoIdentityServiceProvider.CognitoUser({
+            Username: "karlgolka", // 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 
+            Pool: userPool
+        });
+    console.log(`🚀 ~ cognitoUser`, cognitoUser);
+
+
+
     // console.log(`🚀 ~ cognitoUser`, cognitoUser);
 
     // cognitoUser.confirmPassword(token, newPassword, {
