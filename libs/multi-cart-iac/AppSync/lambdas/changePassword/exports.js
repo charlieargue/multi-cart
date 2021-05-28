@@ -42,7 +42,9 @@ exports.handler = async (event, context, callback) => {
     // NOPE: const userPool = new AWS.AmazonCognitoIdentity.CognitoUserPool(poolData);
     // const userPool = new cognitoidentity.CognitoUserPool(poolData);
     
-    // var cognitoUser = new CognitoIdentityServiceProvider.CognitoUser(userData);
+    // This worked for me
+    // https://github.com/amazon-archives/amazon-cognito-identity-js/issues/5
+    // var cognitoUser = new AWSCognito.CognitoIdentityServiceProvider.CognitoUser(userData);
 
     // console.log(`🚀 ~ userPool`, userPool);
 
@@ -60,7 +62,8 @@ exports.handler = async (event, context, callback) => {
     // //     Pool: userPool
     // // });
 
-    const cognitoUser = new AWS.CognitoIdentityServiceProvider.CognitoUser({
+    const cognitoUser = new AWSCognito.CognitoIdentityServiceProvider.CognitoUser({
+    // const cognitoUser = new AWS.CognitoIdentityServiceProvider.CognitoUser({
             Username: "karlgolka", // 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 
             // Pool: userPool
         });
