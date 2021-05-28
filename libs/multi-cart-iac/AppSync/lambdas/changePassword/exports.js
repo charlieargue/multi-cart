@@ -32,24 +32,24 @@ exports.handler = async (event, context, callback) => {
     console.log(`🚀 ~ token`, token);
     console.log(`🚀 ~ newPassword`, newPassword);
     console.log(`🚀 ~ poolData`, poolData);
-    
-
-    
-    const cognitoidentity = new AWS.CognitoIdentity();
 
 
-    
+
+    // const cognitoidentity = new AWS.CognitoIdentity();
+
+
+
     // NOPE: const userPool = new AWS.AmazonCognitoIdentity.CognitoUserPool(poolData);
     // const userPool = new cognitoidentity.CognitoUserPool(poolData);
-    
+
     // This worked for me
     // https://github.com/amazon-archives/amazon-cognito-identity-js/issues/5
     // var cognitoUser = new AWSCognito.CognitoIdentityServiceProvider.CognitoUser(userData);
 
     // console.log(`🚀 ~ userPool`, userPool);
 
-    
-    
+
+
 
 
     // setup cognitoUser first
@@ -62,12 +62,12 @@ exports.handler = async (event, context, callback) => {
     // //     Pool: userPool
     // // });
 
-    const cognitoUser = new CognitoIdentityServiceProvider.CognitoUser({
-    // const cognitoUser = new AWS.CognitoIdentityServiceProvider.CognitoUser({
-            Username: "karlgolka", // 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 
-            // Pool: userPool
-        });
-    console.log(`🚀 ~ cognitoUser`, cognitoUser);
+    // const cognitoUser = new CognitoIdentityServiceProvider.CognitoUser({
+    // // const cognitoUser = new AWS.CognitoIdentityServiceProvider.CognitoUser({
+    //         Username: "karlgolka", // 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 
+    //         // Pool: userPool
+    //     });
+    // console.log(`🚀 ~ cognitoUser`, cognitoUser);
 
 
 
@@ -89,14 +89,21 @@ exports.handler = async (event, context, callback) => {
 
 
 
-    // try {
+    try {
 
-    //     const data = await cognito.confirmPassword(token, newPassword).promise();
-    //     console.log(`🚀 ~ data`, data);
+        // VIP: add it to the policy
+        const data = await cognito.confirmForgotPassword({
+            ClientId: CLIENT_ID,
+            ConfirmationCode: token,
+            Password: newPassword,
+            Username: "karlgolka" //// 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 
 
-    //     return true
+        }).promise();
+        console.log(`🚀 ~ data`, data);
 
-    // } catch (err) {
-    //     console.log(err, err.stack);
-    // }
+        return true
+
+    } catch (err) {
+        console.log(err, err.stack);
+    }
 }
