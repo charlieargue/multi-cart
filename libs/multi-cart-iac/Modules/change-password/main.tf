@@ -26,23 +26,23 @@ resource "aws_lambda_function" "lambda_change_password_function" {
 
 
 # # # LAMBDA ƛ DATASOURCE
-# resource "aws_appsync_datasource" "lambda_change_password_datasource" {
-#   api_id           = var.app_id
-#   name             = "lambda_change_password_datasource"
-#   service_role_arn = var.role_arn
-#   type             = "AWS_LAMBDA"
-#   lambda_config {
-#     function_arn = aws_lambda_function.lambda_change_password_function.arn
-#   }
-# }
+resource "aws_appsync_datasource" "lambda_change_password_datasource" {
+  api_id           = var.app_id
+  name             = "lambda_change_password_datasource"
+  service_role_arn = var.role_arn
+  type             = "AWS_LAMBDA"
+  lambda_config {
+    function_arn = aws_lambda_function.lambda_change_password_function.arn
+  }
+}
 
 
 
 # # NOTE: this is a DIRECT LAMBDA (unit) resolver (with NO VTLs)
 # # thx: https://github.com/hashicorp/terraform-provider-aws/issues/14488
-# resource "aws_appsync_resolver" "change_password_resolver" {
-#   api_id            = var.app_id
-#   field             = "changePassword"
-#   type              = "Mutation"
-#   data_source       = aws_appsync_datasource.lambda_change_password_datasource.name
-# }
+resource "aws_appsync_resolver" "change_password_resolver" {
+  api_id            = var.app_id
+  field             = "changePassword"
+  type              = "Mutation"
+  data_source       = aws_appsync_datasource.lambda_change_password_datasource.name
+}

@@ -17,23 +17,22 @@ exports.handler = async (event, context, callback) => {
     
     */
 
-    // const token = event.arguments.token;
-    // const newPassword = event.arguments.newPassword;
+    const token = event.arguments.token;
+    const newPassword = event.arguments.newPassword;
 
-    // console.log(`🚀 ~ token`, token);
-    // console.log(`🚀 ~ newPassword`, newPassword);
+    console.log(`🚀 ~ token`, token);
+    console.log(`🚀 ~ newPassword`, newPassword);
 
 
 
-    // try {
+    try {
 
-    //     const data = await cognito.confirmPassword(token, newPassword).promise();
-    //     console.log(`🚀 ~ data`, data);
+        const data = await cognito.confirmPassword(token, newPassword).promise();
+        console.log(`🚀 ~ data`, data);
 
-    //     return true
+        return true
 
-    // } catch (err) {
-    //     console.log(err, err.stack);
-    // }
-    return true;
+    } catch (err) {
+        console.log(err, err.stack);
+    }
 }
