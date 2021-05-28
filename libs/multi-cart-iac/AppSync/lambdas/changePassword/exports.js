@@ -11,82 +11,17 @@ const cognito = new CognitoIdentityServiceProvider({
 });
 const AWS = require('aws-sdk');
 
-// thx: https://stackoverflow.com/questions/38110615/how-to-allow-my-user-to-reset-their-password-on-cognito-user-pools
-// thx: https://stackoverflow.com/questions/38110615/how-to-allow-my-user-to-reset-their-password-on-cognito-user-pools
+// no thx: https://stackoverflow.com/questions/38110615/how-to-allow-my-user-to-reset-their-password-on-cognito-user-pools
+// thx looking thru the docs! https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_ConfirmForgotPassword.html
 exports.handler = async (event, context, callback) => {
-
-
-    // OK: console.log(`🚀 ~ cognito`, cognito);
-    // OK: console.log(`🚀 ~ AWS.CognitoIdentityServiceProvider`, AWS.CognitoIdentityServiceProvider);
-
-
     /*
     Change Password Flow (step #2 of forgot password flow)
     --------------------------------------------------------------------------------------------------
-    
     */
 
     const token = event.arguments.token;
     const newPassword = event.arguments.newPassword;
     const poolData = { UserPoolId: POOL_ID, ClientId: CLIENT_ID };
-    console.log(`🚀 ~ token`, token);
-    console.log(`🚀 ~ newPassword`, newPassword);
-    console.log(`🚀 ~ poolData`, poolData);
-
-
-
-    // const cognitoidentity = new AWS.CognitoIdentity();
-
-
-
-    // NOPE: const userPool = new AWS.AmazonCognitoIdentity.CognitoUserPool(poolData);
-    // const userPool = new cognitoidentity.CognitoUserPool(poolData);
-
-    // This worked for me
-    // https://github.com/amazon-archives/amazon-cognito-identity-js/issues/5
-    // var cognitoUser = new AWSCognito.CognitoIdentityServiceProvider.CognitoUser(userData);
-
-    // console.log(`🚀 ~ userPool`, userPool);
-
-
-
-
-
-    // setup cognitoUser first
-    // ✅ const cognitoUser = new AWS.CognitoIdentityServiceProvider.CognitoUser({
-    //     Username: "karlgolka", // 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 
-    //     Pool: userPool
-    // });
-    // // NO: const cognitoUser = new cognito.CognitoUser({
-    // //     Username: "karlgolka", 
-    // //     Pool: userPool
-    // // });
-
-    // const cognitoUser = new CognitoIdentityServiceProvider.CognitoUser({
-    // // const cognitoUser = new AWS.CognitoIdentityServiceProvider.CognitoUser({
-    //         Username: "karlgolka", // 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 
-    //         // Pool: userPool
-    //     });
-    // console.log(`🚀 ~ cognitoUser`, cognitoUser);
-
-
-
-    // console.log(`🚀 ~ cognitoUser`, cognitoUser);
-
-    // cognitoUser.confirmPassword(token, newPassword, {
-    //     onFailure(err) {
-    //         console.log(err);
-    //     },
-    //     onSuccess() {
-    //         console.log("✅ ✅ ✅ ✅ ✅ ✅ Success");
-    //     },
-    // });
-
-
-
-
-
-
 
 
     try {
@@ -96,7 +31,7 @@ exports.handler = async (event, context, callback) => {
             ClientId: CLIENT_ID,
             ConfirmationCode: token,
             Password: newPassword,
-            Username: "karlgolka" //// 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 
+            // Username: "karlgolka" //// 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 
 
         }).promise();
         console.log(`🚀 ~ data`, data);
