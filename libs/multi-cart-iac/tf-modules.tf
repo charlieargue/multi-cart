@@ -116,6 +116,8 @@ module "change_password" {
   aws_region  = var.AWS_REGION
   app_id      = aws_appsync_graphql_api.MultiCart.id
   common_tags = local.common_tags
+  pool_id             = aws_cognito_user_pool.multicart_app_user_pool.id
+  client_id           = aws_cognito_user_pool_client.multicart_app_user_pool_client.id
 
   source = "./Modules/change-password"
   depends_on = [

@@ -16,11 +16,13 @@ resource "aws_lambda_function" "lambda_change_password_function" {
   publish          = true
   environment {
     variables = {
+      POOL_ID = var.pool_id,
+      CLIENT_ID = var.client_id,
       AWS_REGION_VAR = var.aws_region
     }
   }
   tags = merge(var.common_tags, {
-    Description = "AWS lambda function for changing cognito passwords"
+    Description = "AWS lambda function for changing passwords"
   })
 }
 
