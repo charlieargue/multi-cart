@@ -44,24 +44,24 @@ console.log(`🚀 ~ cognito`, cognito);
 
 
     
-    const cognitoUser = new AWS.CognitoIdentityServiceProvider.CognitoUser({
-        Username: "karlgolka", // 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 
-        Pool: userPool
-    });
-    // const cognitoUser = new cognito.CognitoUser({
+    // const cognitoUser = new AWS.CognitoIdentityServiceProvider.CognitoUser({
     //     Username: "karlgolka", // 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 
     //     Pool: userPool
     // });
-    console.log(`🚀 ~ cognitoUser`, cognitoUser);
+    // // const cognitoUser = new cognito.CognitoUser({
+    // //     Username: "karlgolka", // 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 
+    // //     Pool: userPool
+    // // });
+    // console.log(`🚀 ~ cognitoUser`, cognitoUser);
 
-    cognitoUser.confirmPassword(token, newPassword, {
-        onFailure(err) {
-            console.log(err);
-        },
-        onSuccess() {
-            console.log("✅ ✅ ✅ ✅ ✅ ✅ Success");
-        },
-    });
+    // cognitoUser.confirmPassword(token, newPassword, {
+    //     onFailure(err) {
+    //         console.log(err);
+    //     },
+    //     onSuccess() {
+    //         console.log("✅ ✅ ✅ ✅ ✅ ✅ Success");
+    //     },
+    // });
 
 
 
