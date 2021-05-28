@@ -62,7 +62,7 @@ exports.handler = async (event, context, callback) => {
     // //     Pool: userPool
     // // });
 
-    const cognitoUser = CognitoIdentityServiceProvider.CognitoUser({
+    const cognitoUser = new CognitoIdentityServiceProvider.CognitoUser({
     // const cognitoUser = new AWS.CognitoIdentityServiceProvider.CognitoUser({
             Username: "karlgolka", // 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴 
             // Pool: userPool
