@@ -23,7 +23,8 @@ exports.handler = async (event, context, callback) => {
     const token = event.arguments.token;
     const newPassword = event.arguments.newPassword;
     const poolData = { UserPoolId: POOL_ID, ClientId: CLIENT_ID };
-    const userPool = new cognito.CognitoUserPool(poolData);
+    // NOPE: const userPool = new cognito.CognitoUserPool(poolData);
+    const userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
     
     console.log(`🚀 ~ token`, token);
     console.log(`🚀 ~ newPassword`, newPassword);
