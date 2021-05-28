@@ -36,11 +36,11 @@ resource "aws_iam_role_policy" "iam_role_policy_for_lambda" {
   role = aws_iam_role.iam_role_for_lambda.id
   policy = templatefile("./AppSync/policies-roles/lambdas/policy.json", {
     # VIP: don't forget to list all lambdas here
-    GET_LAMBDA_SEND_EMAIL_ARN                   = module.send_email.function_arn,
-    GET_LAMBDA_LOGIN_ARN                        = module.login.function_arn,
-    GET_LAMBDA_LOGOUT_ARN                       = module.logout.function_arn,
-    GET_LAMBDA_REGISTER_ARN                     = module.register.function_arn,
-    GET_LAMBDA_FORGOT_PASSWORD_ARN              = module.forgot_password.function_arn,
+    GET_LAMBDA_SEND_EMAIL_ARN      = module.send_email.function_arn,
+    GET_LAMBDA_LOGIN_ARN           = module.login.function_arn,
+    GET_LAMBDA_LOGOUT_ARN          = module.logout.function_arn,
+    GET_LAMBDA_REGISTER_ARN        = module.register.function_arn,
+    GET_LAMBDA_FORGOT_PASSWORD_ARN = module.forgot_password.function_arn,
     # GET_LAMBDA_CHANGE_PASSWORD_ARN              = module.change_password.function_arn,
     GET_LAMBDA_COGNITO_EMAIL_CUSTOMIZATIONS_ARN = module.cognito_email_customizations.function_arn,
     USER_POOL_ARN                               = aws_cognito_user_pool.multicart_app_user_pool.arn,
