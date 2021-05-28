@@ -9,4 +9,4 @@ export const users: User[] = [{
         currentCartId: 1,
         createdAt: new Date().toLocaleDateString(),
         updatedAt: new Date().toLocaleDateString(),
-} as User];
+} as unknown as User];

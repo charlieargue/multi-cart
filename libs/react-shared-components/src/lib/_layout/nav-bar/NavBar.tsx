@@ -41,7 +41,7 @@ export const NavBar = (props) => {
 
                     {/* Cart Avatar */}
                     {data?.me && !fetching && (
-                        <CartAvatar currentCartId={data?.me?.currentCartId as number} />
+                        <CartAvatar currentCartId={data?.me?.currentCartId} />
                     )}
 
 

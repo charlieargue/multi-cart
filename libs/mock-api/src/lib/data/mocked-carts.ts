@@ -19,7 +19,7 @@ export const carts: Cart[] = [{
             cartLineAccounts: [],
             createdAt: "3/11/2021",
             updatedAt: "3/11/2021",
-        } as CartLine,
+        } as unknown as CartLine,
         {
             id: 2,
             cartId: 1,
@@ -32,6 +32,6 @@ export const carts: Cart[] = [{
             cartLineAccounts: [],
             createdAt: "3/11/2021",
             updatedAt: "3/11/2021",
-        } as CartLine,
+        } as unknown as CartLine,
     ]
-} as Cart];
+} as unknown as Cart];

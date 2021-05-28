@@ -11,7 +11,7 @@ export const EditCartContainer = () => {
     const router = useRouter();
     return (
         <AppLayout>
-            <EditCart id={router.query.id} />
+            <EditCart id={router.query.id as string} />
         </AppLayout>
     );
 }
