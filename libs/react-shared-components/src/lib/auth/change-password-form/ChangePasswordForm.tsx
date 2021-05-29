@@ -18,6 +18,8 @@ export const ChangePasswordForm = () => {
 
     <Formik initialValues={{ newPassword: "" }}
       onSubmit={async (values, { setErrors }) => {
+        // clear token(s)
+        localStorage.removeItem("token");
         // hit DB
         const response = await changePassword({
           username,

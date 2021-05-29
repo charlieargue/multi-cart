@@ -16,47 +16,49 @@ export function RegistrationForm(props: RegistrationFormProps) {
   const [, register] = useRegisterMutation()
 
   return (
-      <Formik initialValues={{ username: "", password: "", email: "" }}
-        onSubmit={async (values, { setErrors }) => {
-          const response = await register({
-            options: values
-          });
-          if (response.data?.register.errors) {
-            setErrors(toErrorMap(response.data?.register.errors))
-          } else if (response.data?.register.user && response.data?.register.token) {
-            // save token(s) to localstorage
-            localStorage.setItem("token", response.data.register.token)
-            router.push("/dashboard");
-          }
-        }}>
-
-        {({ isSubmitting }) => (
-          <Form>
-            <Stack spacing="6">
-              <InputField
-                label="Username"
-                name="username"
-                placeholder="username">
-              </InputField>
-
-              <InputField
-                label="Email"
-                name="email"
-                placeholder="email"
-                type="email"
-                muted="We'll never share your email.">
-              </InputField>
-              <InputField
-                label="Password"
-                name="password"
-                placeholder="password"
-                type="password">
-              </InputField>
-              <Button colorScheme="pink" size="lg" fontSize="md" type="submit">Register</Button>
-            </Stack>
-          </Form>
-        )
+    <Formik initialValues={{ username: "", password: "", email: "" }}
+      onSubmit={async (values, { setErrors }) => {
+        // clear token(s)
+        localStorage.removeItem("token");
+        const response = await register({
+          options: values
+        });
+        if (response.data?.register.errors) {
+          setErrors(toErrorMap(response.data?.register.errors))
+        } else if (response.data?.register.user && response.data?.register.token) {
+          // save token(s) to localstorage
+          localStorage.setItem("token", response.data.register.token)
+          router.push("/dashboard");
         }
-      </Formik >
+      }}>
+
+      {({ isSubmitting }) => (
+        <Form>
+          <Stack spacing="6">
+            <InputField
+              label="Username"
+              name="username"
+              placeholder="username">
+            </InputField>
+
+            <InputField
+              label="Email"
+              name="email"
+              placeholder="email"
+              type="email"
+              muted="We'll never share your email.">
+            </InputField>
+            <InputField
+              label="Password"
+              name="password"
+              placeholder="password"
+              type="password">
+            </InputField>
+            <Button colorScheme="pink" size="lg" fontSize="md" type="submit">Register</Button>
+          </Stack>
+        </Form>
+      )
+      }
+    </Formik >
   );
 }
