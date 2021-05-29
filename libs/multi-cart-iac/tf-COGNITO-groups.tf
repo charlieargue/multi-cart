@@ -17,6 +17,14 @@ resource "aws_cognito_user_group" "multicart_app_user_group" {
 resource "aws_cognito_user_group" "multicart_app_admin_group" {
   name         = "Admin"
   user_pool_id = aws_cognito_user_pool.multicart_app_user_pool.id
-  description  = "Admin group (only select users)"
+  description  = "Admin group for admin-only functions, like hydrating accounts (only select users)"
+  role_arn     = aws_iam_role.multicart_app_user_group_role.arn
+}
+
+## ------------------------------
+resource "aws_cognito_user_group" "multicart_app_app_client_group" {
+  name         = "AppClient"
+  user_pool_id = aws_cognito_user_pool.multicart_app_user_pool.id
+  description  = "AppClient group (allows applications/clients access the public API endpoints, like login/register/etc.)"
   role_arn     = aws_iam_role.multicart_app_user_group_role.arn
 }
