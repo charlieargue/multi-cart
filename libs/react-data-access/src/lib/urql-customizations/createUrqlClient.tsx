@@ -46,7 +46,9 @@ export const createUrqlClient = (ssrExchange: any) => ({
     fetchOptions: () => {
         // VIP: session cookies will NOT work with AppSync AFAIK
         const token = getToken();
-        return token ? { headers: { Authorization: `${token}` } } : null;
+        if (token) {
+            return { headers: { Authorization: `${token}` } };
+        }
     },
     exchanges: [
         devtoolsExchange,
