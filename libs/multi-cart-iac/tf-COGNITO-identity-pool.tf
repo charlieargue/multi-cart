@@ -38,22 +38,20 @@ resource "aws_cognito_identity_pool_roles_attachment" "multicart_app_identity_po
 
 ## ------------------------------ UNAUTHENTICATED ROLE
 resource "aws_iam_role" "unauth_iam_role" {
-  name               = "${local.common_tags.AppPrefix}unauth_iam_role_${local.common_tags.Environment}"
-  assume_role_policy = <<EOF
- {
-      "Version": "2012-10-17",
-      "Statement": [
-           {
-                "Action": "sts:AssumeRole",
-                "Principal": {
-                     "Federated": "cognito-identity.amazonaws.com"
-                },
-                "Effect": "Allow",
-                "Sid": ""
-           }
-      ]
- }
- EOF
+  name = "${local.common_tags.AppPrefix}unauth_iam_role_${local.common_tags.Environment}"
+  assume_role_policy = jsonencode({
+    Version : "2012-10-17",
+    Statement : [
+      {
+        Action : "sts:AssumeRole",
+        Principal : {
+          Federated : "cognito-identity.amazonaws.com"
+        },
+        Effect : "Allow",
+        Sid : ""
+      }
+    ]
+  })
 }
 
 ## ------------------------------ UNAUTHENTICATED POLICY
