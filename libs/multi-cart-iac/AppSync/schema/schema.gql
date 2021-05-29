@@ -38,7 +38,7 @@ type CartLineAccount @aws_cognito_user_pools {
 ## ------------------------------
 #  USER
 ## ------------------------------
-type User @aws_iam @aws_cognito_user_pools {
+type User @aws_iam @aws_api_key @aws_cognito_user_pools {
   id: ID!
   username: String!
   email: String!
@@ -47,13 +47,13 @@ type User @aws_iam @aws_cognito_user_pools {
   updatedAt: String!
 }
 
-type UserResponse @aws_iam @aws_cognito_user_pools {
+type UserResponse @aws_iam @aws_api_key @aws_cognito_user_pools {
   errors: [FieldError!]
   user: User
   token: String
 }
 
-type FieldError @aws_iam @aws_cognito_user_pools {
+type FieldError @aws_iam @aws_api_key @aws_cognito_user_pools {
   field: String!
   message: String!
 }
@@ -152,14 +152,16 @@ type Mutation {
   hydrateAccounts: Boolean! @aws_cognito_user_pools(cognito_groups: ["Admin"])
 
   # # USERS 👍 PUBLIC ------------------------------
-  register(options: UsernamePasswordInput!): UserResponse! @aws_iam
-  login(password: String!, usernameOrEmail: String!): UserResponse! @aws_iam
-  forgotPassword(email: String!): Boolean! @aws_iam
+  register(options: UsernamePasswordInput!): UserResponse! @aws_iam @aws_api_key
+  login(password: String!, usernameOrEmail: String!): UserResponse!
+    @aws_iam
+    @aws_api_key
+  forgotPassword(email: String!): Boolean! @aws_iam @aws_api_key
   changePassword(
     username: String!
     token: String!
     newPassword: String!
-  ): Boolean @aws_iam
+  ): Boolean @aws_iam @aws_api_key
 
   # # USERS NOT PUBLIC!  ------------------------------
   logout: Boolean! @aws_cognito_user_pools(cognito_groups: ["User"])
