@@ -11,6 +11,11 @@
 ## ------------------------------
 
 
+## ------------------------------
+# [ ] TRYING: https://github.com/bagubagu/terraform-aws-userpool/blob/cbb2a7b29bfaa9f0108d811e0210aac42ed636b7/identity_pool_unauthenticated.tf
+## ------------------------------
+
+
 ## ------------------------------ IDENTITY POOL
 resource "aws_cognito_identity_pool" "multicart_app_identity_pool" {
   identity_pool_name               = "${local.common_tags.AppPrefix}cognito_identity_pool_${local.common_tags.Environment}"
@@ -38,13 +43,13 @@ resource "aws_cognito_identity_pool_roles_attachment" "multicart_app_identity_po
 
 ## ------------------------------ UNAUTHENTICATED ROLE
 resource "aws_iam_role" "unauthenticated" {
-  name = "${local.common_tags.AppPrefix}unauth_iam_role_${local.common_tags.Environment}"
+  name               = "${local.common_tags.AppPrefix}unauth_iam_role_${local.common_tags.Environment}"
   assume_role_policy = data.aws_iam_policy_document.unauthenticated.json
 }
 
 ## ------------------------------ UNAUTHENTICATED POLICY
 resource "aws_iam_role_policy" "unauthenticated" {
-    name = "${local.common_tags.AppPrefix}unauth_iam_role_policy_${local.common_tags.Environment}"
+  name = "${local.common_tags.AppPrefix}unauth_iam_role_policy_${local.common_tags.Environment}"
   role = aws_iam_role.unauthenticated.id
 
   policy = data.aws_iam_policy_document.unauthenticated_policy.json
@@ -69,7 +74,6 @@ data "aws_iam_policy_document" "unauthenticated" {
     }
 
     principals {
-      # type        = "Service"
       type        = "Federated"
       identifiers = ["cognito-idp.amazonaws.com"]
     }
@@ -80,7 +84,7 @@ data "aws_iam_policy_document" "unauthenticated" {
 data "aws_iam_policy_document" "unauthenticated_policy" {
   statement {
     effect    = "Allow"
-    actions   = ["cognito-sync:*"]
+    actions   = ["appsync:GraphQL"]
     resources = ["*"]
   }
 }
