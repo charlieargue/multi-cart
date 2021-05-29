@@ -13,19 +13,14 @@ resource "aws_appsync_graphql_api" "MultiCart" {
     # The action that you want your GraphQL API to take when a request that uses Amazon Cognito User Pool authentication 
     # doesn't match the Amazon Cognito User Pool configuration. Valid: ALLOW and DENY
     # TODO: confusion on this setting and its effects, TBD... it doesn't work apparently, as you would imagine
-    default_action = "ALLOW" 
+    default_action = "ALLOW"
   }
 
-  # UN-AUTHENTICATED access for all PUBLIC endpoints:
-  additional_authentication_provider {
-    authentication_type = "AWS_IAM"
-  }
-
-  # TEMPORARY while sorting things out
+  # UN-AUTHENTICATED access for all PUBLIC endpoints: 
+  # NOTE: could NOT get AWS_IAM to work for unauthenticated, and turns out you can have API_KEYS valid for 1 year, so...
   additional_authentication_provider {
     authentication_type = "API_KEY"
   }
-
 
   log_config {
     cloudwatch_logs_role_arn = aws_iam_role.multicart_appsync_logging_role.arn

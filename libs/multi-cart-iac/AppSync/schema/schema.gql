@@ -38,7 +38,7 @@ type CartLineAccount @aws_cognito_user_pools {
 ## ------------------------------
 #  USER
 ## ------------------------------
-type User @aws_iam @aws_api_key @aws_cognito_user_pools {
+type User @aws_api_key @aws_cognito_user_pools {
   id: ID!
   username: String!
   email: String!
@@ -47,13 +47,13 @@ type User @aws_iam @aws_api_key @aws_cognito_user_pools {
   updatedAt: String!
 }
 
-type UserResponse @aws_iam @aws_api_key @aws_cognito_user_pools {
+type UserResponse @aws_api_key @aws_cognito_user_pools {
   errors: [FieldError!]
   user: User
   token: String
 }
 
-type FieldError @aws_iam @aws_api_key @aws_cognito_user_pools {
+type FieldError @aws_api_key @aws_cognito_user_pools {
   field: String!
   message: String!
 }
@@ -97,6 +97,7 @@ input CartLineInput {
 
 ## ------------------------------
 #  QUERIES
+#  🛡 NOTE: each query is implied to require authentication
 ## ------------------------------
 type Query @aws_cognito_user_pools(cognito_groups: ["User"]) {
   cart(id: ID!): Cart
@@ -108,6 +109,7 @@ type Query @aws_cognito_user_pools(cognito_groups: ["User"]) {
 
 ## ------------------------------
 #  MUTATIONS
+#  🛡 NOTE: everything should be explicitly locked down here unless PUBLIC
 ## ------------------------------
 type Mutation {
   # CARTS
@@ -152,16 +154,14 @@ type Mutation {
   hydrateAccounts: Boolean! @aws_cognito_user_pools(cognito_groups: ["Admin"])
 
   # # USERS 👍 PUBLIC ------------------------------
-  register(options: UsernamePasswordInput!): UserResponse! @aws_iam @aws_api_key
-  login(password: String!, usernameOrEmail: String!): UserResponse!
-    @aws_iam
-    @aws_api_key
-  forgotPassword(email: String!): Boolean! @aws_iam @aws_api_key
+  register(options: UsernamePasswordInput!): UserResponse! @aws_api_key
+  login(password: String!, usernameOrEmail: String!): UserResponse! @aws_api_key
+  forgotPassword(email: String!): Boolean! @aws_api_key
   changePassword(
     username: String!
     token: String!
     newPassword: String!
-  ): Boolean @aws_iam @aws_api_key
+  ): Boolean @aws_api_key
 
   # # USERS NOT PUBLIC!  ------------------------------
   logout: Boolean! @aws_cognito_user_pools(cognito_groups: ["User"])
