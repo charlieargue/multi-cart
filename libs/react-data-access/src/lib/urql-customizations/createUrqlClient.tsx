@@ -7,6 +7,7 @@ import { pipe, tap } from 'wonka'; // part of urql!
 import { cache } from './cache';
 
 const NEXT_PUBLIC_API_URL = process.env.NEXT_PUBLIC_API_URL;
+const NEXT_PUBLIC_API_KEY = process.env.NEXT_PUBLIC_API_KEY;
 
 // TODO: ditto for devtools
 // thx: https://github.com/FormidableLabs/urql/issues/225
@@ -45,8 +46,11 @@ export const createUrqlClient = (ssrExchange: any) => ({
     // and will always send an up-to-date authentication token to the server.
     fetchOptions: () => {
         // VIP: session cookies will NOT work with AppSync AFAIK
+        // NOTE: we only need x-api-key when we are calling login/register
         const token = getToken();
-        return token ? { headers: { Authorization: `${token}` } } : { headers: {} };
+        return token ?
+            { headers: { Authorization: `${token}` } } :
+            { headers: { "x-api-key": NEXT_PUBLIC_API_KEY } };
     },
     exchanges: [
         devtoolsExchange,
