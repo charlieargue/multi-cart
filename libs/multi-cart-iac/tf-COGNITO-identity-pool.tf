@@ -13,7 +13,7 @@ resource "aws_cognito_identity_pool" "multicart_app_identity_pool" {
     # or I would have to create a new user pool just for this identity pool? That kind of makes sense actually....
     # where will the AppClient "users" go if there isn't another pool???
     client_id               = aws_cognito_user_pool_client.multicart_app_user_pool_client.id
-    provider_name           = "cognito-idp.${var.AWS_REGION}.amazonaws.com/${var.AWS_REGION}_${aws_cognito_user_pool.multicart_app_user_pool.id}"
+    provider_name           = aws_cognito_user_pool.multicart_app_user_pool.endpoint
     server_side_token_check = true
   }
 }
