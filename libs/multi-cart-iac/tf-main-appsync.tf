@@ -20,7 +20,7 @@ resource "aws_appsync_graphql_api" "MultiCart" {
   additional_authentication_provider {
     authentication_type = "AWS_IAM"
   }
-  
+
   # TEMPORARY while sorting things out
   additional_authentication_provider {
     authentication_type = "API_KEY"
@@ -37,5 +37,5 @@ resource "aws_appsync_graphql_api" "MultiCart" {
 }
 
 resource "aws_appsync_api_key" "key" {
-  api_id  = aws_appsync_graphql_api.MultiCart.id
+  api_id = aws_appsync_graphql_api.MultiCart.id
 }

@@ -16,14 +16,14 @@ resource "aws_cognito_identity_pool" "multicart_app_identity_pool" {
   identity_pool_name               = "${local.common_tags.AppPrefix}cognito_identity_pool_${local.common_tags.Environment}"
   allow_unauthenticated_identities = true # this POOL is ONLY to allow client/web apps to access the PUBLIC ENDPOINTS
 
-  cognito_identity_providers {
-    # TODO: not sure if I should use the same user_pool_client or create a new one? CONFUSION: creating a new one still ties it to the old user_pool, 
-    # or I would have to create a new user pool just for this identity pool? That kind of makes sense actually....
-    # where will the AppClient "users" go if there isn't another pool???
-    client_id               = aws_cognito_user_pool_client.multicart_app_user_pool_client.id
-    provider_name           = aws_cognito_user_pool.multicart_app_user_pool.endpoint
-    server_side_token_check = true
-  }
+  # cognito_identity_providers {
+  #   # TODO: not sure if I should use the same user_pool_client or create a new one? CONFUSION: creating a new one still ties it to the old user_pool, 
+  #   # or I would have to create a new user pool just for this identity pool? That kind of makes sense actually....
+  #   # where will the AppClient "users" go if there isn't another pool???
+  #   client_id               = aws_cognito_user_pool_client.multicart_app_user_pool_client.id
+  #   provider_name           = aws_cognito_user_pool.multicart_app_user_pool.endpoint
+  #   server_side_token_check = true
+  # }
 }
 
 ## ------------------------------ ROLES ATTACHMENT
@@ -31,44 +31,93 @@ resource "aws_cognito_identity_pool_roles_attachment" "multicart_app_identity_po
   identity_pool_id = aws_cognito_identity_pool.multicart_app_identity_pool.id
 
   roles = {
-    unauthenticated = aws_iam_role.unauth_iam_role.arn
+    # unauthenticated = aws_iam_role.unauth_iam_role.arn
+    unauthenticated = aws_iam_role.unauthenticated.arn
   }
 }
 
-
 ## ------------------------------ UNAUTHENTICATED ROLE
-resource "aws_iam_role" "unauth_iam_role" {
+resource "aws_iam_role" "unauthenticated" {
   name = "${local.common_tags.AppPrefix}unauth_iam_role_${local.common_tags.Environment}"
-  assume_role_policy = jsonencode({
-    Version : "2012-10-17",
-    Statement : [
-      {
-        Action : "sts:AssumeRole",
-        Principal : {
-          Federated : "cognito-identity.amazonaws.com"
-        },
-        Effect : "Allow",
-        Sid : ""
-      }
-    ]
-  })
+  assume_role_policy = data.aws_iam_policy_document.unauthenticated.json
 }
 
 ## ------------------------------ UNAUTHENTICATED POLICY
-resource "aws_iam_role_policy" "web_iam_unauth_role_policy" {
-  name = "${local.common_tags.AppPrefix}web_iam_unauth_role_policy_${local.common_tags.Environment}"
-  role = aws_iam_role.unauth_iam_role.id
-  # Terraform's "jsonencode" function converts a
-  # Terraform expression result to valid JSON syntax.
-  policy = jsonencode({
-    Version : "2012-10-17",
-    Statement : [
-      {
-        Sid : "",
-        Action : "*",
-        Effect : "Deny",
-        Resource : "*"
-      }
-    ]
-  })
+resource "aws_iam_role_policy" "unauthenticated" {
+    name = "${local.common_tags.AppPrefix}unauth_iam_role_policy_${local.common_tags.Environment}"
+  role = aws_iam_role.unauthenticated.id
+
+  policy = data.aws_iam_policy_document.unauthenticated_policy.json
 }
+
+## ------------------------------ ASSUME ROLE POLICY document
+data "aws_iam_policy_document" "unauthenticated" {
+  statement {
+    effect  = "Allow"
+    actions = ["sts:AssumeRoleWithWebIdentity"]
+
+    condition {
+      test     = "StringEquals"
+      variable = "cognito-identity.amazonaws.com:aud"
+      values   = ["${aws_cognito_identity_pool.multicart_app_identity_pool.id}"]
+    }
+
+    condition {
+      test     = "ForAnyValue:StringLike"
+      variable = "cognito-identity.amazonaws.com:amr"
+      values   = ["unauthenticated"]
+    }
+
+    principals {
+      # type        = "Service"
+      type        = "Federated"
+      identifiers = ["cognito-idp.amazonaws.com"]
+    }
+  }
+}
+
+## ------------------------------ ROLE POLICY document
+data "aws_iam_policy_document" "unauthenticated_policy" {
+  statement {
+    effect    = "Allow"
+    actions   = ["cognito-sync:*"]
+    resources = ["*"]
+  }
+}
+
+# ## ------------------------------ UNAUTHENTICATED ROLE
+# resource "aws_iam_role" "unauth_iam_role" {
+#   name = "${local.common_tags.AppPrefix}unauth_iam_role_${local.common_tags.Environment}"
+#   assume_role_policy = jsonencode({
+#     Version : "2012-10-17",
+#     Statement : [
+#       {
+#         Action : "sts:AssumeRole",
+#         Principal : {
+#           Federated : "cognito-identity.amazonaws.com"
+#         },
+#         Effect : "Allow",
+#         Sid : ""
+#       }
+#     ]
+#   })
+# }
+
+# ## ------------------------------ UNAUTHENTICATED POLICY
+# resource "aws_iam_role_policy" "web_iam_unauth_role_policy" {
+#   name = "${local.common_tags.AppPrefix}web_iam_unauth_role_policy_${local.common_tags.Environment}"
+#   role = aws_iam_role.unauth_iam_role.id
+#   # Terraform's "jsonencode" function converts a
+#   # Terraform expression result to valid JSON syntax.
+#   policy = jsonencode({
+#     Version : "2012-10-17",
+#     Statement : [
+#       {
+#         Sid : "",
+#         Action : "*",
+#         Effect : "Deny",
+#         Resource : "*"
+#       }
+#     ]
+#   })
+# }
