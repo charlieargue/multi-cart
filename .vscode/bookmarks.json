@@ -1,16 +1,6 @@
 {
 	"files": [
 		{
-			"path": "libs/multi-cart-iac/tf-resolvers-pipeline-register.tf",
-			"bookmarks": [
-				{
-					"line": 10,
-					"column": 4,
-					"label": "🚥 1 - PIPELINE for register"
-				}
-			]
-		},
-		{
 			"path": "libs/multi-cart-iac/AppSync/functions/lambdaRegister/request-mapping.vtl",
 			"bookmarks": [
 				{
@@ -96,6 +86,61 @@
 				{
 					"line": 87,
 					"column": 40,
+					"label": ""
+				}
+			]
+		},
+		{
+			"path": "libs/react-shared-components/src/lib/line-accounts/line-account-button-row/LineAccountButtonRow.tsx",
+			"bookmarks": [
+				{
+					"line": 31,
+					"column": 12,
+					"label": ""
+				}
+			]
+		},
+		{
+			"path": "libs/react-shared-components/src/lib/auth/useIsAuth.ts",
+			"bookmarks": [
+				{
+					"line": 9,
+					"column": 11,
+					"label": ""
+				}
+			]
+		},
+		{
+			"path": "libs/react-shared-components/src/lib/auto-save/AutoSave.tsx",
+			"bookmarks": [
+				{
+					"line": 40,
+					"column": 12,
+					"label": ""
+				},
+				{
+					"line": 53,
+					"column": 12,
+					"label": ""
+				}
+			]
+		},
+		{
+			"path": "libs/react-shared-components/src/lib/cart/edit-cart/EditCart.tsx",
+			"bookmarks": [
+				{
+					"line": 33,
+					"column": 12,
+					"label": ""
+				}
+			]
+		},
+		{
+			"path": "libs/react-shared-components/src/lib/line-accounts/line-account/LineAccount.tsx",
+			"bookmarks": [
+				{
+					"line": 34,
+					"column": 12,
 					"label": ""
 				}
 			]

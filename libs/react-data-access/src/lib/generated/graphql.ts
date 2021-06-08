@@ -744,7 +744,7 @@ export function useAccountsQuery(options: Omit<Urql.UseQueryArgs<AccountsQueryVa
   return Urql.useQuery<AccountsQuery>({ query: AccountsDocument, ...options });
 };
 export const CartDocument = gql`
-    query Cart($id: ID!) {
+    query Cart($id: ID!) {  
   cart(id: $id) {
     ...CartSnippet
   }
