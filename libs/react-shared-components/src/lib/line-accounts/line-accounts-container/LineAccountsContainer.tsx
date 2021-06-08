@@ -1,21 +1,21 @@
 import { Box, Button, ButtonGroup, Divider, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerHeader, DrawerOverlay, HStack, IconButton, Input, Stack, Table, Tbody, Td, Text, Th, Thead, Tr, useColorModeValue as mode, useDisclosure } from '@chakra-ui/react';
 import { Account, CartLine, useAccountsQuery, useAddCartLineAccountMutation } from '@multi-cart/react-data-access';
+import { TextMuted } from '@multi-cart/react-ui';
 import { getRemainingAmount, getTotalAmounts, getTotalPercentages, toFriendlyCurrency } from '@multi-cart/util';
 import React, { ReactElement, useEffect } from 'react';
-import { FaDollarSign as DollarIcon, FaPercentage as PercentageIcon, FaRegCreditCard as LineAccountsIcon } from 'react-icons/fa';
-import { ImPlus as PlusIcon } from 'react-icons/im';
 import { BiSearchAlt as SearchIcon } from 'react-icons/bi';
-import { TextMuted } from '@multi-cart/react-ui';
+import { FaDollarSign as DollarIcon, FaPercentage as PercentageIcon, FaRegCreditCard as LineAccountsIcon } from 'react-icons/fa';
 import 'regenerator-runtime/runtime';
+import AddLineAccountButton from '../../add-line-account-button/AddLineAccountButton';
 
-export interface LineAccountButtonRowProps {
+export interface LineAccountsContainerProps {
   line?: CartLine;
   children?: ReactElement;
   idx: number;
   // TODO: to make this re-usable, want to have prop for Add.onClick() handler?
 }
 
-export function LineAccountButtonRow({ line, children, idx }: LineAccountButtonRowProps) {
+export function LineAccountsContainer({ line, children, idx }: LineAccountsContainerProps) {
   const [{ data, fetching }] = useAccountsQuery();
   const [, addCartLineAccount] = useAddCartLineAccountMutation();
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -29,6 +29,7 @@ export function LineAccountButtonRow({ line, children, idx }: LineAccountButtonR
   };
 
   // ------------------
+  // WRONG: filtered results SHOULD NOT be in here, can be computed!
   useEffect(() => {
     const results = data?.accounts.filter(account =>
       account.accountNumber.toLowerCase().includes(searchTerm.toLowerCase()) || account.accountName.toLowerCase().includes(searchTerm.toLowerCase())
@@ -131,14 +132,7 @@ export function LineAccountButtonRow({ line, children, idx }: LineAccountButtonR
         <Text fontWeight="bold" fontSize="md">
           Line Accounts
         </Text>
-        <Button
-          ref={btnRef}
-          onClick={onOpen}
-          size="xs"
-          colorScheme="green">
-          <PlusIcon />
-              &nbsp;Add&nbsp;<strong>account</strong>
-        </Button>
+        <AddLineAccountButton btnRef={btnRef} clickHandler={onOpen} />
         <ButtonGroup
           size="sm"
           isAttached
@@ -168,4 +162,4 @@ export function LineAccountButtonRow({ line, children, idx }: LineAccountButtonR
   );
 }
 
-export default LineAccountButtonRow;
+export default LineAccountsContainer;

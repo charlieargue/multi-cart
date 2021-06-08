@@ -6,7 +6,7 @@ import {
   Tr, useColorModeValue as mode, Wrap, WrapItem
 } from '@chakra-ui/react';
 import { Cart, CartLine, useBlankCartLineMutation, useCartQuery, useDeleteCartMutation, useUpdateUserMutation } from '@multi-cart/react-data-access';
-import { CartLineRow, CartNameEditable, LineAccount, LineAccountButtonRow } from '@multi-cart/react-shared-components';
+import { CartLineRow, CartNameEditable, LineAccount, LineAccountsContainer } from '@multi-cart/react-shared-components';
 import { BigAlert, Breadcrumbs, TextMuted } from '@multi-cart/react-ui';
 import { sumTotalCost, toFriendlyCurrency } from '@multi-cart/util';
 import { useRouter } from 'next/router';
@@ -199,7 +199,7 @@ export const EditCart = ({ id }: EditCartProps) => {
                       TODO: this won't work anymore: .sort((a, b) => a.id - b.id)
                       */}
                       <Wrap spacing="5" align="center">
-                        <WrapItem><LineAccountButtonRow line={line} idx={idx} /></WrapItem>
+                        <WrapItem><LineAccountsContainer line={line} idx={idx} /></WrapItem>
 
                         {(line as CartLine)?.cartLineAccounts?.map((cla) => !cla ? null : (
                           <WrapItem>

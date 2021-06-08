@@ -81,31 +81,11 @@
 			]
 		},
 		{
-			"path": "libs/react-shared-components/src/lib/cart/cart-avatar/CartAvatar.tsx",
-			"bookmarks": [
-				{
-					"line": 87,
-					"column": 40,
-					"label": ""
-				}
-			]
-		},
-		{
 			"path": "libs/react-shared-components/src/lib/line-accounts/line-account-button-row/LineAccountButtonRow.tsx",
 			"bookmarks": [
 				{
 					"line": 31,
 					"column": 12,
-					"label": ""
-				}
-			]
-		},
-		{
-			"path": "libs/react-shared-components/src/lib/auth/useIsAuth.ts",
-			"bookmarks": [
-				{
-					"line": 9,
-					"column": 11,
 					"label": ""
 				}
 			]
