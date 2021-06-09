@@ -70,6 +70,7 @@ export const CartAvatar = ({ currentCartId = null }: CartAvatarProps) => {
         {
           !data && fetching ? (<div>loading...</div>) : data?.carts?.map((c) => !c ? null : (
             <CartAvatarRow
+              key={c.id}
               c={c}
               currentCartId={currentCartId} />
           ))}

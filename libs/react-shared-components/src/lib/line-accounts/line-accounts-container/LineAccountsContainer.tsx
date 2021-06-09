@@ -1,8 +1,8 @@
-import { Divider, Stack, Table, Tbody, Td, Text, Th, Thead, Tr, useColorModeValue as mode, useDisclosure } from '@chakra-ui/react';
+import { Divider, Stack, Text, useDisclosure } from '@chakra-ui/react';
 import { Account, CartLine, useAccountsQuery, useAddCartLineAccountMutation } from '@multi-cart/react-data-access';
-import { DrawerContainer, TextMuted, SearchBar } from '@multi-cart/react-ui';
-import { getRemainingAmount, toFriendlyCurrency } from '@multi-cart/util';
-import React, { useEffect } from 'react';
+import { DrawerContainer, SearchBar } from '@multi-cart/react-ui';
+import { getRemainingAmount } from '@multi-cart/util';
+import React from 'react';
 import { FaRegCreditCard as LineAccountsIcon } from 'react-icons/fa';
 import 'regenerator-runtime/runtime';
 import AccountRow from '../account-row/AccountRow';
@@ -12,11 +12,9 @@ import LineAccountValidators from '../line-account-validators/LineAccountValidat
 
 export interface LineAccountsContainerProps {
   line?: CartLine;
-  children?: React.ReactNode;
-  idx: number;
 }
 
-export function LineAccountsContainer({ line, children, idx }: LineAccountsContainerProps) {
+export function LineAccountsContainer({ line }: LineAccountsContainerProps) {
   const [{ data, fetching }] = useAccountsQuery();
   const [, addCartLineAccount] = useAddCartLineAccountMutation();
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -96,9 +94,6 @@ export function LineAccountsContainer({ line, children, idx }: LineAccountsConta
             </FilterableAccountTable>
           )}
       </DrawerContainer>
-
-      {/* CHILDREN aka individual line accounts */}
-      {children}
 
     </>
   );

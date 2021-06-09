@@ -34,10 +34,10 @@ interface CategoriesDropDownProps {
 export const CategoriesDropDown = () => {
     const [selectedOption, setSelectedOption] = useState(null);
 
+    // REMOVED: inputId="aria-example-input"
     return (
         <form>
             <Select
-                inputId="aria-example-input"
                 name="aria-live-color"
                 defaultValue={selectedOption}
                 onChange={setSelectedOption}

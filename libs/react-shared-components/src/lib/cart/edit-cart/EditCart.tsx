@@ -17,7 +17,6 @@ import LineAccountsContainer from '../../line-accounts/line-accounts-container/L
 import { CartLineRow } from '../cart-line-row/CartLineRow';
 import CartNameEditable from '../cart-name-editable/CartNameEditable';
 import styles from './EditCart.module.scss';
-
 interface EditCartProps { id: string }
 
 export const EditCart = ({ id }: EditCartProps) => {
@@ -31,7 +30,6 @@ export const EditCart = ({ id }: EditCartProps) => {
   const [, blankCartLine] = useBlankCartLineMutation();
   const [, updateUser] = useUpdateUserMutation();
 
-  // each load, no deps
   useEffect(() => {
     if (id) {
       // TODO: hacky? better way? decomish after switch to DDB/guids?
@@ -183,6 +181,11 @@ export const EditCart = ({ id }: EditCartProps) => {
             // TODO: switch to sort component, thx: https://stackoverflow.com/questions/48764203/how-to-sort-list-of-react-components-based-on-different-properties
             // TODO: this won't work anymore: .sort((a, b) => a.id - b.id)
             <Tbody>
+              {/*
+               -------------------
+               CART LINES 
+               -------------------
+               */}
               {
                 data.cart.cartLines?.map((line, idx) => !line ? null : (
                   <CartLineRow key={line.id} line={line} idx={idx}>
@@ -200,12 +203,16 @@ export const EditCart = ({ id }: EditCartProps) => {
                       TODO: this won't work anymore: .sort((a, b) => a.id - b.id)
                       */}
                       <Wrap spacing="5" align="center">
-                        <WrapItem><LineAccountsContainer line={line} idx={idx} /></WrapItem>
+                        <WrapItem><LineAccountsContainer line={line} /></WrapItem>
 
+                        {/*
+                        -------------------
+                        CART LINE ACCOUNTS
+                        -------------------
+                        */}
                         {(line as CartLine)?.cartLineAccounts?.map((cla) => !cla ? null : (
-                          <WrapItem>
+                          <WrapItem key={cla.id}>
                             <LineAccount
-                              key={cla.id}
                               lineAccount={cla}
                               line={line} />
                           </WrapItem>
