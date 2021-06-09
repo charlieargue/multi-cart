@@ -37,7 +37,7 @@ export const EditCart = ({ id }: EditCartProps) => {
   }];
   const breadcrumbs = (<Breadcrumbs links={links} />);
 
-  const emptyCartTableBody = <Tbody>
+  const emptyCartTableBody = (<Tbody>
     <Tr>
       <Td colSpan={20}>
         <Alert variant="left-accent" status="info" colorScheme="pink">
@@ -46,7 +46,7 @@ export const EditCart = ({ id }: EditCartProps) => {
           </Alert>
       </Td>
     </Tr>
-  </Tbody>;
+  </Tbody>);
 
   // fetching?
   // TODO: loading indicator
@@ -102,7 +102,9 @@ export const EditCart = ({ id }: EditCartProps) => {
           <Tbody>
             {data.cart.cartLines?.map((line, idx) => !line ? null : (
               <CartLineRow key={line.id} line={line} idx={idx}>
-                {/* 💥 WARNING: this line causes ORDER-of-HOOKS ERROR: bg={mode('white', 'gray.700')} on <Box> */}
+                {/* 💥 WARNING: this line causes ORDER-of-HOOKS ERROR: bg={mode('white', 'gray.700')} on <Box> 
+                TODO: when doing dark mode, put this elswhere, maybe on Tbody? TBD
+                */}
                 <Box
                   borderWidth="1px"
                   borderRadius="lg"
@@ -128,11 +130,7 @@ export const EditCart = ({ id }: EditCartProps) => {
             ))}
           </Tbody>
 
-        ) : (
-          // ❌ empty cart 
-          { emptyCartTableBody }
-
-        )
+        ) : emptyCartTableBody
         }
 
         {/* FOOTER */}
