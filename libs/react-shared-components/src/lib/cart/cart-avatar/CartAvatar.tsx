@@ -1,14 +1,14 @@
-import { Badge, Box, Button, Flex, HStack, Menu, MenuButton, MenuDivider, MenuItem, MenuList, Text, useColorModeValue as mode } from '@chakra-ui/react';
+import { Button, Flex, HStack, Menu, MenuButton, MenuDivider, MenuList, useColorModeValue as mode } from '@chakra-ui/react';
 import { Cart, useCartsQuery } from '@multi-cart/react-data-access';
-import { CartAvatarInner, NewCartButton } from '@multi-cart/react-shared-components';
-import { toDaysAgo } from '@multi-cart/util';
-import NextLink from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
 import { CgChevronDown as ChevronDownIcon } from 'react-icons/cg';
 import { RiErrorWarningFill as WarningIcon } from 'react-icons/ri';
-import styles from './CartAvatar.module.scss'; // NOTE: getting red-squiggly again, but ITS WORKING!?
 import 'regenerator-runtime/runtime';
+import { CartAvatarInner } from '../cart-avatar-inner/CartAvatarInner';
+import CartAvatarRow from '../cart-avatar-row/CartAvatarRow';
+import NewCartButton from '../new-cart-button/NewCartButton';
+import styles from './CartAvatar.module.scss'; // NOTE: getting red-squiggly again, but ITS WORKING!?
 
 interface CartAvatarProps {
   currentCartId?: string | null;
@@ -32,7 +32,7 @@ export const CartAvatar = ({ currentCartId = null }: CartAvatarProps) => {
     return null;
   };
 
-
+  // TODO: make MenuContainer like DrawerContainer
   return (
     <Menu isLazy>
       <MenuButton
@@ -62,7 +62,6 @@ export const CartAvatar = ({ currentCartId = null }: CartAvatarProps) => {
         <Flex justifyContent={'flex-end'} px={3} py={2}>
           {!data?.carts?.length && noCartsMsg}
 
-
           <NewCartButton className="ml-3 align-baseline" />
         </Flex>
         <MenuDivider />
@@ -70,34 +69,9 @@ export const CartAvatar = ({ currentCartId = null }: CartAvatarProps) => {
         {/* if FETCHING and don't have DATA... */}
         {
           !data && fetching ? (<div>loading...</div>) : data?.carts?.map((c) => !c ? null : (
-            <MenuItem
-              key={c.id}
-              bgColor={c.id === currentCartId ? mode("green.50", "gray.900") : null}>
-
-              <NextLink
-                href="/cart/[id]"
-                as={`/cart/${c.id}`}>
-
-                {/* dropdown CART GUTS */}
-                <Flex
-                  minW="100%"
-                  justify="space-between"
-                >
-                  {/* DEBUGGING */}
-                  <Box>
-                    <strong>{c.name}</strong>
-                    <br />
-                    <Text color="gray.500" fontSize="xs" ml={.5}>{toDaysAgo(c.createdAt)}</Text>
-                  </Box>
-                  <Box>
-                    <CartAvatarInner cart={!c ? {} as Cart : c} />
-                  </Box>
-                </Flex>
-                {/* dropdown CART GUTS */}
-
-              </NextLink>
-              <MenuDivider />
-            </MenuItem>
+            <CartAvatarRow
+              c={c}
+              currentCartId={currentCartId} />
           ))}
       </MenuList>
     </Menu >

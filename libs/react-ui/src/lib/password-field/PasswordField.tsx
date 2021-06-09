@@ -11,10 +11,10 @@ import {
   useColorModeValue as mode,
   useDisclosure
 } from '@chakra-ui/react';
-import { InputField } from '@multi-cart/react-ui';
 import NextLink from 'next/link';
 import * as React from 'react';
 import { HiEye, HiEyeOff } from 'react-icons/hi';
+import InputField from '../input-field/InputField';
 import './PasswordField.module.scss';
 
 export const PasswordField = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {

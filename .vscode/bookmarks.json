@@ -81,16 +81,6 @@
 			]
 		},
 		{
-			"path": "libs/react-shared-components/src/lib/line-accounts/line-account-button-row/LineAccountButtonRow.tsx",
-			"bookmarks": [
-				{
-					"line": 31,
-					"column": 12,
-					"label": ""
-				}
-			]
-		},
-		{
 			"path": "libs/react-shared-components/src/lib/auto-save/AutoSave.tsx",
 			"bookmarks": [
 				{
@@ -122,6 +112,16 @@
 					"line": 34,
 					"column": 12,
 					"label": ""
+				}
+			]
+		},
+		{
+			"path": "libs/react-shared-components/src/lib/cart/cart-avatar/CartAvatar.tsx",
+			"bookmarks": [
+				{
+					"line": 27,
+					"column": 10,
+					"label": "🔴 change in the order of Hooks"
 				}
 			]
 		}

@@ -7,8 +7,8 @@ import {
 } from '@chakra-ui/react';
 import { Logo } from '@multi-cart/react-ui';
 import './MicroLayout.module.scss';
-import { DarkModeSwitch } from '@multi-cart/react-shared-components';
 import { Wrapper } from "@multi-cart/react-ui";
+import DarkModeSwitch from '../../dark-mode-switch/DarkModeSwitch';
 
 /* eslint-disable-next-line */
 export interface MicroLayoutProps {

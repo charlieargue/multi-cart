@@ -1,12 +1,11 @@
-import { Badge, Breadcrumb, BreadcrumbItem, BreadcrumbLink, HStack } from '@chakra-ui/react';
-import { TextMuted } from '@multi-cart/react-ui';
+import { Badge, Breadcrumb, BreadcrumbItem, BreadcrumbLink } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import React from 'react';
 import { CgChevronRight as ChevronRightIcon } from 'react-icons/cg';
 import { } from 'react-icons/fa';
-import { BiHomeSmile as HomeIcon } from 'react-icons/bi';
-import './Breadcrumbs.module.scss';
 import 'regenerator-runtime/runtime';
+import TextMuted from '../text-muted/TextMuted';
+import './Breadcrumbs.module.scss';
 
 /* eslint-disable-next-line */
 export interface BreadcrumbLink {

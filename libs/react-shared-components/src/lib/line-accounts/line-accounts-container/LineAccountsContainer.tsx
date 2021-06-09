@@ -1,11 +1,14 @@
 import { Divider, Stack, Table, Tbody, Td, Text, Th, Thead, Tr, useColorModeValue as mode, useDisclosure } from '@chakra-ui/react';
 import { Account, CartLine, useAccountsQuery, useAddCartLineAccountMutation } from '@multi-cart/react-data-access';
-import { AddLineAccountButton, LineAccountValidators, FilterableAccountTable, AccountRow } from '@multi-cart/react-shared-components';
 import { DrawerContainer, TextMuted, SearchBar } from '@multi-cart/react-ui';
 import { getRemainingAmount, toFriendlyCurrency } from '@multi-cart/util';
 import React, { useEffect } from 'react';
 import { FaRegCreditCard as LineAccountsIcon } from 'react-icons/fa';
 import 'regenerator-runtime/runtime';
+import AccountRow from '../account-row/AccountRow';
+import AddLineAccountButton from '../add-line-account-button/AddLineAccountButton';
+import FilterableAccountTable from '../filterable-account-table/FilterableAccountTable';
+import LineAccountValidators from '../line-account-validators/LineAccountValidators';
 
 export interface LineAccountsContainerProps {
   line?: CartLine;
@@ -20,18 +23,6 @@ export function LineAccountsContainer({ line, children, idx }: LineAccountsConta
   const btnRef = React.useRef();
   const [searchTerm, setSearchTerm] = React.useState("");
   const onSearchChange = event => setSearchTerm(event.target.value);
-
-  // ------------------
-  // ✅ DECOMISH! ;)
-  // ------------------
-  // WRONG: filtered results SHOULD NOT be in here, can be computed!
-  // DOUBLE WRONG: should NOT even be useEffect! just use unilateral data flow via props!
-  // useEffect(() => {
-  //   const results = data?.accounts.filter(account =>
-  //     account.accountNumber.toLowerCase().includes(searchTerm.toLowerCase()) || account.accountName.toLowerCase().includes(searchTerm.toLowerCase())
-  //   );
-  //   setSearchResults(results);
-  // }, [data?.accounts, searchTerm]);
 
   // ------------------
   const handleSelect = async (a: Account) => {
@@ -72,13 +63,14 @@ export function LineAccountsContainer({ line, children, idx }: LineAccountsConta
       searchResults.push(<AccountRow
         account={account}
         isAlreadySelected={isAlreadySelected(account.accountNumber)}
-        handleSelect={handleSelect} 
+        handleSelect={handleSelect}
         key={account.accountNumber}
-        />
+      />
       );
     }
   });
 
+  // -------------------
   return (
     <>
       {/* LABEL, BUTTONS, VALIDATORS */}

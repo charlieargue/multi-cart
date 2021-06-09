@@ -1,9 +1,9 @@
 import { Button, Stack } from '@chakra-ui/react';
 import { useForgotPasswordMutation } from '@multi-cart/react-data-access';
-import { MicroLayout } from '@multi-cart/react-shared-components';
 import { ActionLink, Banner, InputField } from '@multi-cart/react-ui';
 import { Form, Formik } from 'formik';
 import React, { useState } from 'react';
+import MicroLayout from '../../_layout/micro-layout/MicroLayout';
 import './ForgotPasswordForm.module.scss';
 
 /* eslint-disable-next-line */

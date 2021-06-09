@@ -1,7 +1,8 @@
-import { Box, Flex, useColorModeValue as mode } from '@chakra-ui/react';
-import { DarkModeSwitch, Footer, NavBar } from '@multi-cart/react-shared-components';
+import { Box, Flex } from '@chakra-ui/react';
 import { Wrapper } from "@multi-cart/react-ui";
 import React from 'react';
+import DarkModeSwitch from '../../dark-mode-switch/DarkModeSwitch';
+import { NavBar } from '../nav-bar/NavBar';
 import './AppLayout.module.scss';
 
 interface AppLayoutProps {

@@ -1,6 +1,5 @@
 import { Badge, Box, HStack, InputGroup, InputLeftAddon, InputRightAddon, Tooltip } from '@chakra-ui/react';
 import { CartLine, CartLineAccount, useAccountsQuery, useDeleteCartLineAccountMutation, useUpdateCartLineAccountMutation } from '@multi-cart/react-data-access';
-import { AutoSave } from '@multi-cart/react-shared-components';
 import { InputField } from '@multi-cart/react-ui';
 import { computeAmountGivenPercentage, getRemainingPercentage, toFriendlyCurrency } from '@multi-cart/util';
 import { Form, Formik } from "formik";
@@ -9,6 +8,7 @@ import { FaPercentage as PercentageIcon } from 'react-icons/fa';
 import { TiDelete as DeleteIcon } from 'react-icons/ti';
 import 'regenerator-runtime/runtime';
 import * as Yup from 'yup';
+import { AutoSave } from '../../auto-save/AutoSave';
 
 /* eslint-disable-next-line */
 export interface LineAccountProps {

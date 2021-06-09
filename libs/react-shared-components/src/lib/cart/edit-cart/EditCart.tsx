@@ -1,21 +1,22 @@
 import {
-  Alert, AlertIcon, Badge, Box, Button, Divider, Flex, HStack, Stat, StatHelpText, StatLabel, StatNumber, Table,
+  Alert, AlertIcon, Badge, Box, Button, Flex, HStack, Stat, StatHelpText, StatLabel, StatNumber, Table,
   TableCaption, Tbody,
   Td, Tfoot, Thead,
-  Tooltip, Text,
+  Tooltip,
   Tr, useColorModeValue as mode, Wrap, WrapItem
 } from '@chakra-ui/react';
 import { Cart, CartLine, useBlankCartLineMutation, useCartQuery, useDeleteCartMutation, useUpdateUserMutation } from '@multi-cart/react-data-access';
-import { CartLineRow, CartNameEditable, LineAccount, LineAccountsContainer } from '@multi-cart/react-shared-components';
-import { BigAlert, Breadcrumbs, TextMuted } from '@multi-cart/react-ui';
-import { sumTotalCost, toFriendlyCurrency } from '@multi-cart/util';
+import { BigAlert, Breadcrumbs } from '@multi-cart/react-ui';
+import { sumTotalCost, toDaysAgo, toFriendlyCurrency } from '@multi-cart/util';
 import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
-import { HiPencilAlt } from 'react-icons/hi';
 import { ImPlus as PlusIcon } from 'react-icons/im';
-import styles from './EditCart.module.scss';
 import 'regenerator-runtime/runtime';
-import { toDaysAgo } from '@multi-cart/util';
+import LineAccount from '../../line-accounts/line-account/LineAccount';
+import LineAccountsContainer from '../../line-accounts/line-accounts-container/LineAccountsContainer';
+import { CartLineRow } from '../cart-line-row/CartLineRow';
+import CartNameEditable from '../cart-name-editable/CartNameEditable';
+import styles from './EditCart.module.scss';
 
 interface EditCartProps { id: string }
 
@@ -219,19 +220,19 @@ export const EditCart = ({ id }: EditCartProps) => {
             </Tbody>
 
           ) : (
-              // ❌ empty cart 
-              <Tbody>
-                <Tr>
-                  <Td colSpan={20}>
-                    <Alert variant="left-accent" status="info" colorScheme="pink">
-                      <AlertIcon />
+            // ❌ empty cart 
+            <Tbody>
+              <Tr>
+                <Td colSpan={20}>
+                  <Alert variant="left-accent" status="info" colorScheme="pink">
+                    <AlertIcon />
                         This cart is empty — <strong>please add a line</strong>!
                     </Alert>
-                  </Td>
-                </Tr>
-              </Tbody>
+                </Td>
+              </Tr>
+            </Tbody>
 
-            )
+          )
         }
 
         {/* FOOTER */}

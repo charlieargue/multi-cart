@@ -1,12 +1,14 @@
 import { Badge, Button, Td, Text, Tr } from '@chakra-ui/react';
 import { CartLine, useDeleteCartLineMutation, useUpdateCartLineMutation } from '@multi-cart/react-data-access';
-import { AutoSave, CategoriesDropDown, UOMDropDown } from '@multi-cart/react-shared-components';
 import { InputField } from '@multi-cart/react-ui';
 import { toFriendlyCurrency } from '@multi-cart/util';
 import { Form, Formik } from "formik";
 import React, { useRef } from 'react';
-import './CartLineRow.module.scss';
 import { CgClose as CloseIcon } from 'react-icons/cg';
+import { AutoSave } from '../../auto-save/AutoSave';
+import { CategoriesDropDown } from '../categories-drop-down/CategoriesDropDown';
+import UOMDropDown from '../uomdrop-down/UOMDropDown';
+import './CartLineRow.module.scss';
 
 interface CartLineRowProps {
   line: CartLine;
@@ -49,12 +51,12 @@ export const CartLineRow = ({ line, children, idx }: CartLineRowProps) => {
                 cartLine: {
                   id: line.id,
                   cartId: line.cartId,
-                  categoryId: line.categoryId as any,
-                  uom: line.uom as any,
-                  itemId: values.itemId as any,
-                  description: values.description as any,
-                  quantity: parseInt(values.quantity as any),
-                  price: parseFloat(values.price as any),
+                  categoryId: line.categoryId,
+                  uom: line.uom,
+                  itemId: values.itemId,
+                  description: values.description,
+                  quantity: Number(values.quantity),
+                  price: Number(values.price),
                 }
               });
             }

@@ -1,11 +1,12 @@
 import { Alert, Box, Button, Stack, useColorModeValue as mode, } from '@chakra-ui/react';
-import { useChangePasswordMutation } from '@multi-cart/react-data-access';
+import { ChangePasswordMutation, Exact, useChangePasswordMutation } from '@multi-cart/react-data-access';
 import { InputField } from '@multi-cart/react-ui';
 import { Form, Formik } from 'formik';
 import NextLink from "next/link";
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import 'regenerator-runtime/runtime';
+import { OperationResult } from 'urql';
 import './ChangePasswordForm.module.scss';
 
 export const ChangePasswordForm = () => {
@@ -21,7 +22,11 @@ export const ChangePasswordForm = () => {
         // clear token(s)
         localStorage.removeItem("token");
         // hit DB
-        const response = await changePassword({
+        const response: OperationResult<ChangePasswordMutation, Exact<{
+          username: string;
+          token: string;
+          newPassword: string;
+        }>> & { errors?: unknown, data?: unknown} = await changePassword({
           username,
           newPassword: values.newPassword,
           token:
@@ -33,9 +38,9 @@ export const ChangePasswordForm = () => {
           alert(response.error.message);
           setTokenError("error");
         } else if ("errors" in response) {
-          alert((response as any).errors[0].message);
+          alert(response.errors[0].message);
           setTokenError("error");
-        } else if (response.data?.changePassword) {
+        } else if ("data" in response && response.data.changePassword) {
           // consider them logged in? no, force them to login again with that new password
           // TODO: would be nice to display some kind of success toast! All set, now please login with that new password!
           router.push("/login");

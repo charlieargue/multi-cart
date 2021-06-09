@@ -29,7 +29,7 @@ export const AutoSave = ({ debounceMs = 500 }) => {
   // -------------------
   const debouncedSubmit = useCallback(() => {
     const unsubscribeDebounceSubmit = debounce(() => {
-      return formik.submitForm().then(() => setIsSaved(true as any));
+      return formik.submitForm().then(() => setIsSaved(true));
     }, debounceMs);
     return unsubscribeDebounceSubmit();
   },

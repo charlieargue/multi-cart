@@ -1,22 +1,20 @@
 import {
     Avatar, Box,
     Button, Flex,
-    IconButton,
+
     Menu,
     MenuButton,
     MenuItem, MenuList,
     useColorModeValue as mode, useDisclosure
 } from '@chakra-ui/react';
 import { useLogoutMutation, useMeQuery } from '@multi-cart/react-data-access';
-import { CartAvatar, DarkModeSwitch } from '@multi-cart/react-shared-components';
 import { Logo } from "@multi-cart/react-ui";
 import { useRouter } from 'next/router';
 import React from 'react';
-import { CgClose as CloseIcon } from 'react-icons/cg';
 import { FiLogOut as LogoutIcon } from 'react-icons/fi';
-import { GiHamburgerMenu as HamburgerIcon } from 'react-icons/gi';
-import styles from './NavBar.module.scss';
 import 'regenerator-runtime/runtime';
+import { CartAvatar } from '../../cart/cart-avatar/CartAvatar';
+import styles from './NavBar.module.scss';
 
 // -------------------
 export const NavBar = (props) => {
@@ -28,7 +26,6 @@ export const NavBar = (props) => {
     return (
         <Box bg={mode('gray.200', 'gray.700')} color={mode('gray.700', 'gray.200')} px={[0, 10, 7, 14]} pr={[3, 0]}>
             <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
-
 
                 {/* Logo */}
                 <Box
@@ -43,7 +40,6 @@ export const NavBar = (props) => {
                     {data?.me && !fetching && (
                         <CartAvatar currentCartId={data?.me?.currentCartId} />
                     )}
-
 
                     {/* User Profile Avatar w/ DropDown Menu */}
                     <Menu>
@@ -78,7 +74,7 @@ export const NavBar = (props) => {
                                     // clear token(s)
                                     localStorage.removeItem("token");
                                     await logout();
-                                    
+
                                     // TODO: how about purge all cache so don't have to reload?
                                     router.push("/login").finally(() => router.reload());
                                 }}>
@@ -86,7 +82,6 @@ export const NavBar = (props) => {
                         </MenuList>
                     </Menu>
 
-                    
                 </Flex>
             </Flex>
         </Box >

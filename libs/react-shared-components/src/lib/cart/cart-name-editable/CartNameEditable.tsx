@@ -1,11 +1,10 @@
 import { Box, Button } from '@chakra-ui/react';
 import { useUpdateCartMutation } from '@multi-cart/react-data-access';
-import { AutoSave } from '@multi-cart/react-shared-components';
 import { InputField } from '@multi-cart/react-ui';
 import { Form, Formik } from "formik";
 import React, { useState } from 'react';
 import * as Yup from 'yup';
-import styles from './CartNameEditable.module.scss';
+import { AutoSave } from '../../auto-save/AutoSave';
 
 // TODO: UPDATE: NO, see Chakra Editable... abstract this cmpnt further (with color, size, nothing cart-related) so more re-usable, and move to react-ui... 
 

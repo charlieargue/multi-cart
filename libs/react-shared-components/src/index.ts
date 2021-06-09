@@ -1,3 +1,4 @@
+export * from './lib/cart/cart-avatar-row/CartAvatarRow';
 export * from './lib/auth/change-password-form/ChangePasswordForm';
 export * from './lib/auth/forgot-password-form/ForgotPasswordForm';
 export * from './lib/auth/login-form/LoginForm';
@@ -27,4 +28,3 @@ export * from './lib/_layout/header/Header';
 export * from './lib/_layout/landing-layout/LandingLayout';
 export * from './lib/_layout/micro-layout/MicroLayout';
 export * from './lib/_layout/nav-bar/NavBar';
-

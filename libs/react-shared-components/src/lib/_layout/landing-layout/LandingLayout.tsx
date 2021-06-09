@@ -1,7 +1,9 @@
 import { Flex } from "@chakra-ui/react";
-import { DarkModeSwitch, Footer, Header } from "@multi-cart/react-shared-components";
 import { Wrapper } from "@multi-cart/react-ui";
 import React from 'react';
+import DarkModeSwitch from "../../dark-mode-switch/DarkModeSwitch";
+import Footer from "../footer/Footer";
+import Header from "../header/Header";
 import './LandingLayout.module.scss';
 
 /* eslint-disable-next-line */
