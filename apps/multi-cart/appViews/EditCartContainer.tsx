@@ -12,10 +12,10 @@ export const EditCartContainer = () => {
     const id = router.query.id as string;
 
     // TODO: switch to suspence?
-    if (!id) {
+    if (id === undefined) {
         return (<div>Loading...</div>);
     }
-    
+
     return (
         <AppLayout>
             <EditCart id={id} />

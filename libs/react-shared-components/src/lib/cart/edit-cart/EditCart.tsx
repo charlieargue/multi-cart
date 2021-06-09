@@ -8,7 +8,7 @@ import React, { useEffect } from 'react';
 import 'regenerator-runtime/runtime';
 import LineAccount from '../../line-accounts/line-account/LineAccount';
 import LineAccountsContainer from '../../line-accounts/line-accounts-container/LineAccountsContainer';
-import { CartLineRow } from '../cart-line-row/CartLineRow';
+import CartLineRow from '../cart-line-row/CartLineRow';
 import EditCartHeader from '../edit-cart-header/EditCartHeader';
 import EditCartTableFooter from '../edit-cart-table-footer/EditCartTableFooter';
 import EditCartTableHeader from '../edit-cart-table-header/EditCartTableHeader';
@@ -27,7 +27,6 @@ export const EditCart = ({ id }: EditCartProps) => {
   useEffect(() => {
     updateUser({ currentCartId: id });
   }, [id, updateUser]);
-  // TODO: does this need a DEP ARRAY? Try making it NULL, won't it still run on cmpnt load? And does changing between load cmpnts? if so, ALL GOOD!
 
   const links = [{
     isActive: true,
@@ -102,29 +101,31 @@ export const EditCart = ({ id }: EditCartProps) => {
           // TODO: this won't work anymore: .sort((a, b) => a.id - b.id)
           <Tbody>
             {data.cart.cartLines?.map((line, idx) => !line ? null : (
-              <CartLineRow key={line.id} line={line} idx={idx}>
-                <Box
-                  borderWidth="1px"
-                  borderRadius="lg"
-                  p={3}
-                  rounded={{ md: 'lg' }}
-                  bg={mode('white', 'gray.700')}
-                  shadow="base"
-                  mt={2}
-                  mb={20}>
-                  <Wrap spacing="5" align="center">
-                    <WrapItem>
-                      <LineAccountsContainer line={line} />
-                    </WrapItem>
-                    {/*   TODO: this won't work anymore: .sort((a, b) => a.id - b.id) */}
-                    {(line as CartLine)?.cartLineAccounts?.map((cla) => !cla ? null : (
-                      <WrapItem key={cla.id}>
-                        <LineAccount lineAccount={cla} line={line} />
-                      </WrapItem>
-                    ))}
-                  </Wrap>
-                </Box>
-              </CartLineRow>
+              <Tr key={line.id}><Td>dupa</Td></Tr>
+              // <CartLineRow key={line.id} line={line} idx={idx}>
+              //   <Box
+              //     borderWidth="1px"
+              //     borderRadius="lg"
+              //     p={3}
+              //     rounded={{ md: 'lg' }}
+              //     bg={mode('white', 'gray.700')}
+              //     shadow="base"
+              //     mt={2}
+              //     mb={20}>
+              //     <Wrap spacing="5" align="center">
+              //       <WrapItem>
+              //         {/* TODO: poorly named, does not actually contain line accounts! perhaps LineAccountsHeader??? */}
+              //         <LineAccountsContainer line={line} />
+              //       </WrapItem>
+              //       {/*   TODO: this won't work anymore: .sort((a, b) => a.id - b.id) */}
+              //       {(line as CartLine)?.cartLineAccounts?.map((cla) => !cla ? null : (
+              //         <WrapItem key={cla.id}>
+              //           <LineAccount lineAccount={cla} line={line} />
+              //         </WrapItem>
+              //       ))}
+              //     </Wrap>
+              //   </Box>
+              // </CartLineRow>
             ))
             }
           </Tbody>

@@ -146,3 +146,5 @@ export const CartLineRow = ({ line, children, idx }: CartLineRowProps) => {
     </>
   );
 }
+
+export default CartLineRow;
