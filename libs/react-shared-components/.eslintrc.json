@@ -14,7 +14,10 @@
           "libs/react-shared-components/.storybook/tsconfig.json"
         ]
       },
-      "rules": {}
+      "rules": {
+        "react-hooks/rules-of-hooks": "error",
+        "react-hooks/exhaustive-deps": "warn"
+      }
     },
     {
       "files": ["*.ts", "*.tsx"],

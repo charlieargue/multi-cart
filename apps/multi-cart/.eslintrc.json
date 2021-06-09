@@ -11,7 +11,10 @@
       "parserOptions": {
         "project": ["apps/multi-cart/tsconfig(.*)?.json"]
       },
-      "rules": {}
+      "rules": {
+        "react-hooks/rules-of-hooks": "error",
+        "react-hooks/exhaustive-deps": "warn"
+      }
     },
     {
       "files": ["*.ts", "*.tsx"],
