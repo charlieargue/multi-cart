@@ -9,9 +9,16 @@ interface EditCartContainerProps {
 
 export const EditCartContainer = () => {
     const router = useRouter();
+    const id = router.query.id as string;
+
+    // TODO: switch to suspence?
+    if (!id) {
+        return (<div>Loading...</div>);
+    }
+    
     return (
         <AppLayout>
-            <EditCart id={router.query.id as string} />
+            <EditCart id={id} />
         </AppLayout>
     );
 }

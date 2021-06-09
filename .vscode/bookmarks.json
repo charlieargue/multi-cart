@@ -106,16 +106,6 @@
 			]
 		},
 		{
-			"path": "libs/react-shared-components/src/lib/line-accounts/line-account/LineAccount.tsx",
-			"bookmarks": [
-				{
-					"line": 34,
-					"column": 12,
-					"label": ""
-				}
-			]
-		},
-		{
 			"path": "libs/react-shared-components/src/lib/cart/cart-avatar/CartAvatar.tsx",
 			"bookmarks": [
 				{

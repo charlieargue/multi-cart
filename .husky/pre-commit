@@ -8,7 +8,7 @@ terraform -chdir=libs/multi-cart-iac fmt
 # how to get my api tests to run with just npm test??
 # npm test
 # npx nx run multi-cart-api:test
-# npx nx affected --target=lint  --base=origin/main
+# yarn affected:lint
 # export NODE_OPTIONS="--max-old-space-size=8192" && npx nx affected --target=lint  --base=origin/kg-2021-04-16-finishing-mocked-api
 
 

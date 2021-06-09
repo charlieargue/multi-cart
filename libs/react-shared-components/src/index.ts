@@ -1,3 +1,5 @@
+export * from './lib/cart/edit-cart-table-header/EditCartTableHeader';
+export * from './lib/cart/edit-cart-table-footer/EditCartTableFooter';
 export * from './lib/cart/cart-avatar-row/CartAvatarRow';
 export * from './lib/auth/change-password-form/ChangePasswordForm';
 export * from './lib/auth/forgot-password-form/ForgotPasswordForm';
