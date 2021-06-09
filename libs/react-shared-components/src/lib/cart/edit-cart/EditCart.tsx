@@ -101,33 +101,31 @@ export const EditCart = ({ id }: EditCartProps) => {
           // TODO: this won't work anymore: .sort((a, b) => a.id - b.id)
           <Tbody>
             {data.cart.cartLines?.map((line, idx) => !line ? null : (
-              <Tr key={line.id}><Td>dupa</Td></Tr>
-              // <CartLineRow key={line.id} line={line} idx={idx}>
-              //   <Box
-              //     borderWidth="1px"
-              //     borderRadius="lg"
-              //     p={3}
-              //     rounded={{ md: 'lg' }}
-              //     bg={mode('white', 'gray.700')}
-              //     shadow="base"
-              //     mt={2}
-              //     mb={20}>
-              //     <Wrap spacing="5" align="center">
-              //       <WrapItem>
-              //         {/* TODO: poorly named, does not actually contain line accounts! perhaps LineAccountsHeader??? */}
-              //         <LineAccountsContainer line={line} />
-              //       </WrapItem>
-              //       {/*   TODO: this won't work anymore: .sort((a, b) => a.id - b.id) */}
-              //       {(line as CartLine)?.cartLineAccounts?.map((cla) => !cla ? null : (
-              //         <WrapItem key={cla.id}>
-              //           <LineAccount lineAccount={cla} line={line} />
-              //         </WrapItem>
-              //       ))}
-              //     </Wrap>
-              //   </Box>
-              // </CartLineRow>
-            ))
-            }
+              <CartLineRow key={line.id} line={line} idx={idx}>
+                {/* 💥 WARNING: this line causes ORDER-of-HOOKS ERROR: bg={mode('white', 'gray.700')} on <Box> */}
+                <Box
+                  borderWidth="1px"
+                  borderRadius="lg"
+                  p={3}
+                  rounded={{ md: 'lg' }}
+                  shadow="base"
+                  mt={2}
+                  mb={20}>
+                  <Wrap spacing="5" align="center">
+                    <WrapItem>
+                      {/* TODO: poorly named, does not actually contain line accounts! perhaps LineAccountsHeader??? */}
+                      <LineAccountsContainer line={line} />
+                    </WrapItem>
+                    {/*   TODO: this won't work anymore: .sort((a, b) => a.id - b.id) */}
+                    {(line as CartLine)?.cartLineAccounts?.map((cla) => !cla ? null : (
+                      <WrapItem key={cla.id}>
+                        <LineAccount lineAccount={cla} line={line} />
+                      </WrapItem>
+                    ))}
+                  </Wrap>
+                </Box>
+              </CartLineRow>
+            ))}
           </Tbody>
 
         ) : (
