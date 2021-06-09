@@ -3,7 +3,7 @@
 // - https://formidable.com/open-source/urql/docs/advanced/server-side-rendering/#nextjs
 import { devtoolsExchange } from '@urql/devtools';
 import { dedupExchange, Exchange, fetchExchange } from 'urql';
-import { pipe, tap } from 'wonka'; // part of urql!
+import { pipe, tap, filter } from 'wonka'; // part of urql!
 import { cache } from './cache';
 
 const NEXT_PUBLIC_API_URL = process.env.NEXT_PUBLIC_API_URL;
@@ -18,13 +18,14 @@ const errorExchange: Exchange = ({ forward }) => ops$ => {
     return pipe(
         forward(ops$),
         tap(({ error }) => {
-            console.log(`🚀 ~ error`, error);
+            if (error !== undefined) {
+                console.log(`🚀 ~ error`, error);
 
-            // TODO: anytime there's an error in anything we run..
-            // 🛡 sentry fire-and-forget CALL would go here!
+                // TODO: anytime there's an error in anything we run..
+                // 🛡 sentry fire-and-forget CALL would go here!
 
-            // TODO: display a toast! but how? cant just include useToast() in here... TBD
-
+                // TODO: display a toast! but how? cant just include useToast() in here... TBD
+            }
         })
     );
 };

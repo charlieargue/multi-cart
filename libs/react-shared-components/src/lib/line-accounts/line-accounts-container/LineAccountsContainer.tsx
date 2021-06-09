@@ -1,16 +1,15 @@
-import { Box, Button, ButtonGroup, Divider, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerHeader, DrawerOverlay, HStack, IconButton, Input, Stack, Table, Tbody, Td, Text, Th, Thead, Tr, useColorModeValue as mode, useDisclosure } from '@chakra-ui/react';
+import { Divider, Stack, Table, Tbody, Td, Text, Th, Thead, Tr, useColorModeValue as mode, useDisclosure } from '@chakra-ui/react';
 import { Account, CartLine, useAccountsQuery, useAddCartLineAccountMutation } from '@multi-cart/react-data-access';
-import { TextMuted } from '@multi-cart/react-ui';
-import { getRemainingAmount, getTotalAmounts, getTotalPercentages, toFriendlyCurrency } from '@multi-cart/util';
-import React, { ReactElement, useEffect } from 'react';
-import { BiSearchAlt as SearchIcon } from 'react-icons/bi';
-import { FaDollarSign as DollarIcon, FaPercentage as PercentageIcon, FaRegCreditCard as LineAccountsIcon } from 'react-icons/fa';
+import { AddLineAccountButton, LineAccountValidators } from '@multi-cart/react-shared-components';
+import { DrawerContainer, TextMuted, SearchBar } from '@multi-cart/react-ui';
+import { getRemainingAmount, toFriendlyCurrency } from '@multi-cart/util';
+import React, { useEffect } from 'react';
+import { FaRegCreditCard as LineAccountsIcon } from 'react-icons/fa';
 import 'regenerator-runtime/runtime';
-import AddLineAccountButton from '../../add-line-account-button/AddLineAccountButton';
 
 export interface LineAccountsContainerProps {
   line?: CartLine;
-  children?: ReactElement;
+  children?: React.ReactNode;
   idx: number;
   // TODO: to make this re-usable, want to have prop for Add.onClick() handler?
 }
@@ -24,12 +23,11 @@ export function LineAccountsContainer({ line, children, idx }: LineAccountsConta
   // TODO: if works, componentize this DRAWER!
   const [searchResults, setSearchResults] = React.useState([]);
   const [searchTerm, setSearchTerm] = React.useState("");
-  const handleChange = event => {
-    setSearchTerm(event.target.value);
-  };
+  const onSearchChange = event => setSearchTerm(event.target.value);
 
   // ------------------
   // WRONG: filtered results SHOULD NOT be in here, can be computed!
+  // DOUBLE WRONG: should NOT even be useEffect! just use unilateral data flow via props!
   useEffect(() => {
     const results = data?.accounts.filter(account =>
       account.accountNumber.toLowerCase().includes(searchTerm.toLowerCase()) || account.accountName.toLowerCase().includes(searchTerm.toLowerCase())
@@ -55,107 +53,64 @@ export function LineAccountsContainer({ line, children, idx }: LineAccountsConta
     return line.cartLineAccounts ? line.cartLineAccounts.filter((a) => a.accountNumber === accountNumber).length !== 0 : false;
   }
 
-  // -------------------
-  const drawerSelectLineAccounts = (
-    <Drawer
-      size="xl"
-      isOpen={isOpen}
-      placement="right"
-      onClose={onClose}
-      finalFocusRef={btnRef}
-    >
-      <DrawerOverlay>
-        <DrawerContent>
-          <DrawerCloseButton />
-          <DrawerHeader>
-            {/* SEARCH FORM */}
-            <HStack><SearchIcon /><Box>Search by account number or name</Box></HStack>
-            <Input
-              mt={2}
-              type="text"
-              placeholder="Search here..."
-              value={searchTerm}
-              onChange={handleChange} />
-          </DrawerHeader>
-
-          <DrawerBody>
-
-            <Divider />
-
-            {/* RESULTS TABLE */}
-            {
-              !searchResults && fetching ? (<div>loading...</div>) : (
-                <Table
-                  variant="simple"
-                  colorScheme="gray">
-                  <Thead>
-                    <Tr>
-                      <Th><TextMuted style={{ "textAlign": "left" }}>Account #</TextMuted></Th>
-                      <Th><TextMuted style={{ "textAlign": "left" }}>Name</TextMuted></Th>
-                      <Th><TextMuted style={{ "textAlign": "left" }}>Amount Remaining</TextMuted></Th>
-                    </Tr>
-                  </Thead>
-                  <Tbody>
-                    {searchResults?.map((a, idx) => !a ? null : (
-                      // className={clsx("cursor-hand",  "bg-warning text-muted" : null)}
-                      <Tr
-                        cursor={'pointer'}
-                        backgroundColor={isAlreadySelected(a.accountNumber) ? "yellow.100" : "inherit"}
-                        _hover={{
-                          "backgroundColor": mode("gray.100", "gray.900"),
-                        }}
-                        key={a.accountNumber}
-
-                        onClick={() => isAlreadySelected(a.accountNumber) ? null : handleSelect(a as Account)}>
-                        <Td>{a.accountNumber}</Td>
-                        <Td>{a.accountName}</Td>
-                        <Td>{toFriendlyCurrency(a.amountRemaining)}</Td>
-                      </Tr>
-                    ))}
-                  </Tbody>
-                </Table>
-              )}
-
-          </DrawerBody>
-
-        </DrawerContent>
-      </DrawerOverlay>
-    </Drawer>
-  );
-
+  const label = <>
+    <LineAccountsIcon />
+    <Text fontWeight="bold" fontSize="md">Line Accounts</Text>
+  </>
 
   return (
-
     <>
+      {/* LABEL, BUTTONS, VALIDATORS */}
       <Stack direction="row" spacing={4} align="center" mt={1} bg="green.50" px={4} py={2} rounded="md" shadow="unset">
-        <LineAccountsIcon />
-        <Text fontWeight="bold" fontSize="md">
-          Line Accounts
-        </Text>
+        {label}
         <AddLineAccountButton btnRef={btnRef} clickHandler={onOpen} />
-        <ButtonGroup
-          size="sm"
-          isAttached
-          variant="outline"
-          colorScheme={getTotalPercentages(line) === 100 ? "green" : "red"}>
-          <Button mr="-px">Percentages: <Text ml={2} fontWeight="bolder">{getTotalPercentages(line)}</Text></Button>
-          <IconButton aria-label="Percentage Icon" icon={<PercentageIcon />} />
-        </ButtonGroup>
-        <ButtonGroup
-          size="sm"
-          isAttached
-          variant="outline"
-          colorScheme={getTotalPercentages(line) === 100 ? "green" : "red"}>
-          <Button mr="-px">Line Total w/ Tax: <Text ml={2} fontWeight="bolder">{getTotalAmounts(line.cartLineAccounts)}</Text></Button>
-          <IconButton aria-label="Line Total with Tax" icon={<DollarIcon />} />
-        </ButtonGroup>
+        <LineAccountValidators line={line} />
       </Stack>
 
-
       {/* DRAWER */}
-      {drawerSelectLineAccounts}
+      <DrawerContainer
+        isOpen={isOpen}
+        onClose={onClose}
+        btnRef={btnRef}
+        drawerHeader={<SearchBar searchTerm={searchTerm} onSearchChange={onSearchChange} />}
+      >
+        <Divider />
+        {/* RESULTS TABLE */}
+        {
+          !searchResults && fetching ? (<div>loading...</div>) : (
+            <Table
+              variant="simple"
+              colorScheme="gray">
+              <Thead>
+                <Tr>
+                  <Th><TextMuted style={{ "textAlign": "left" }}>Account #</TextMuted></Th>
+                  <Th><TextMuted style={{ "textAlign": "left" }}>Name</TextMuted></Th>
+                  <Th><TextMuted style={{ "textAlign": "left" }}>Amount Remaining</TextMuted></Th>
+                </Tr>
+              </Thead>
+              <Tbody>
+                {searchResults?.map((a, idx) => !a ? null : (
+                  // className={clsx("cursor-hand",  "bg-warning text-muted" : null)}
+                  <Tr
+                    cursor={'pointer'}
+                    backgroundColor={isAlreadySelected(a.accountNumber) ? "yellow.100" : "inherit"}
+                    _hover={{
+                      "backgroundColor": mode("gray.100", "gray.900"),
+                    }}
+                    key={a.accountNumber}
 
-      {/* CHILDREN */}
+                    onClick={() => isAlreadySelected(a.accountNumber) ? null : handleSelect(a as Account)}>
+                    <Td>{a.accountNumber}</Td>
+                    <Td>{a.accountName}</Td>
+                    <Td>{toFriendlyCurrency(a.amountRemaining)}</Td>
+                  </Tr>
+                ))}
+              </Tbody>
+            </Table>
+          )}
+      </DrawerContainer>
+
+      {/* CHILDREN aka individual line accounts */}
       {children}
 
     </>

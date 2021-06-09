@@ -11,7 +11,7 @@ export interface BigAlertProps {
 }
 
 export type BigAlertMessageProps = {
-  children: React.ReactNode;
+  children?: React.ReactNode;
 };
 
 

@@ -60,7 +60,7 @@ export const getRemainingPercentage = (line: CartLine, excludeCartLineAccountId?
     return roundToTwo(result);
 }
 
-// ------------------
+// ------------------ TODO: memoize all these?
 export const getTotalPercentages = (line: CartLine, excludeCartLineAccountId?: string): number => {
     if (!line?.cartLineAccounts) {
         return 0;
