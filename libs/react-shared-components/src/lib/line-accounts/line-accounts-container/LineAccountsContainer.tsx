@@ -1,6 +1,6 @@
 import { Divider, Stack, Table, Tbody, Td, Text, Th, Thead, Tr, useColorModeValue as mode, useDisclosure } from '@chakra-ui/react';
 import { Account, CartLine, useAccountsQuery, useAddCartLineAccountMutation } from '@multi-cart/react-data-access';
-import { AddLineAccountButton, LineAccountValidators } from '@multi-cart/react-shared-components';
+import { AddLineAccountButton, LineAccountValidators, FilterableAccountTable, AccountRow } from '@multi-cart/react-shared-components';
 import { DrawerContainer, TextMuted, SearchBar } from '@multi-cart/react-ui';
 import { getRemainingAmount, toFriendlyCurrency } from '@multi-cart/util';
 import React, { useEffect } from 'react';
@@ -11,7 +11,6 @@ export interface LineAccountsContainerProps {
   line?: CartLine;
   children?: React.ReactNode;
   idx: number;
-  // TODO: to make this re-usable, want to have prop for Add.onClick() handler?
 }
 
 export function LineAccountsContainer({ line, children, idx }: LineAccountsContainerProps) {
@@ -19,21 +18,20 @@ export function LineAccountsContainer({ line, children, idx }: LineAccountsConta
   const [, addCartLineAccount] = useAddCartLineAccountMutation();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = React.useRef();
-
-  // TODO: if works, componentize this DRAWER!
-  const [searchResults, setSearchResults] = React.useState([]);
   const [searchTerm, setSearchTerm] = React.useState("");
   const onSearchChange = event => setSearchTerm(event.target.value);
 
   // ------------------
+  // ✅ DECOMISH! ;)
+  // ------------------
   // WRONG: filtered results SHOULD NOT be in here, can be computed!
   // DOUBLE WRONG: should NOT even be useEffect! just use unilateral data flow via props!
-  useEffect(() => {
-    const results = data?.accounts.filter(account =>
-      account.accountNumber.toLowerCase().includes(searchTerm.toLowerCase()) || account.accountName.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-    setSearchResults(results);
-  }, [data?.accounts, searchTerm]);
+  // useEffect(() => {
+  //   const results = data?.accounts.filter(account =>
+  //     account.accountNumber.toLowerCase().includes(searchTerm.toLowerCase()) || account.accountName.toLowerCase().includes(searchTerm.toLowerCase())
+  //   );
+  //   setSearchResults(results);
+  // }, [data?.accounts, searchTerm]);
 
   // ------------------
   const handleSelect = async (a: Account) => {
@@ -44,11 +42,15 @@ export function LineAccountsContainer({ line, children, idx }: LineAccountsConta
       accountNumber: a.accountNumber,
       amount: remainingAmount,
     });
-    // TODO:  cache will auto-refresh so behind modal will already show newest CLA
+    // TODO: cache will auto-refresh so behind modal will already show newest CLA (so? confused by this note, TBD)
     onClose();
   };
 
-  // ------------------
+  // ------------------ TODO: useMemo this?
+  // BUT HOW? 
+  // const isAlreadySelected = useMemo((accountNumber: string) =>line.cartLineAccounts ? line.cartLineAccounts.filter((a) => a.accountNumber === accountNumber).length !== 0 : false,
+  // [accountNumber, line.cartLineAccounts]) as boolean;
+  //  
   const isAlreadySelected = (accountNumber: string): boolean => {
     return line.cartLineAccounts ? line.cartLineAccounts.filter((a) => a.accountNumber === accountNumber).length !== 0 : false;
   }
@@ -57,6 +59,25 @@ export function LineAccountsContainer({ line, children, idx }: LineAccountsConta
     <LineAccountsIcon />
     <Text fontWeight="bold" fontSize="md">Line Accounts</Text>
   </>
+
+
+  const searchResults = [];
+  data?.accounts.forEach((account: Account) => {
+
+    // filter search results
+    if (account.accountNumber.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      account.accountName.toLowerCase().includes(searchTerm.toLowerCase())) {
+
+      // NOTE: re-computing this each render, no need for state/useEffect
+      searchResults.push(<AccountRow
+        account={account}
+        isAlreadySelected={isAlreadySelected(account.accountNumber)}
+        handleSelect={handleSelect} 
+        key={account.accountNumber}
+        />
+      );
+    }
+  });
 
   return (
     <>
@@ -77,36 +98,10 @@ export function LineAccountsContainer({ line, children, idx }: LineAccountsConta
         <Divider />
         {/* RESULTS TABLE */}
         {
-          !searchResults && fetching ? (<div>loading...</div>) : (
-            <Table
-              variant="simple"
-              colorScheme="gray">
-              <Thead>
-                <Tr>
-                  <Th><TextMuted style={{ "textAlign": "left" }}>Account #</TextMuted></Th>
-                  <Th><TextMuted style={{ "textAlign": "left" }}>Name</TextMuted></Th>
-                  <Th><TextMuted style={{ "textAlign": "left" }}>Amount Remaining</TextMuted></Th>
-                </Tr>
-              </Thead>
-              <Tbody>
-                {searchResults?.map((a, idx) => !a ? null : (
-                  // className={clsx("cursor-hand",  "bg-warning text-muted" : null)}
-                  <Tr
-                    cursor={'pointer'}
-                    backgroundColor={isAlreadySelected(a.accountNumber) ? "yellow.100" : "inherit"}
-                    _hover={{
-                      "backgroundColor": mode("gray.100", "gray.900"),
-                    }}
-                    key={a.accountNumber}
-
-                    onClick={() => isAlreadySelected(a.accountNumber) ? null : handleSelect(a as Account)}>
-                    <Td>{a.accountNumber}</Td>
-                    <Td>{a.accountName}</Td>
-                    <Td>{toFriendlyCurrency(a.amountRemaining)}</Td>
-                  </Tr>
-                ))}
-              </Tbody>
-            </Table>
+          searchResults.length === 0 && fetching ? (<div>loading...</div>) : (
+            <FilterableAccountTable>
+              {searchResults}
+            </FilterableAccountTable>
           )}
       </DrawerContainer>
 

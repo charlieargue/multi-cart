@@ -1,15 +1,29 @@
+import { Table, Tbody, Th, Thead, Tr } from '@chakra-ui/react';
+import { TextMuted } from '@multi-cart/react-ui';
 import React from 'react';
-
 import './FilterableAccountTable.module.scss';
 
 /* eslint-disable-next-line */
-export interface FilterableAccountTableProps {}
+export interface FilterableAccountTableProps {
+  children?: React.ReactNode;
+}
 
-export function FilterableAccountTable(props: FilterableAccountTableProps) {
+export function FilterableAccountTable({ children }: FilterableAccountTableProps) {
   return (
-    <div>
-      <h1>Welcome to FilterableAccountTable!</h1>
-    </div>
+    <Table
+      variant="simple"
+      colorScheme="gray">
+      <Thead>
+        <Tr>
+          <Th><TextMuted style={{ "textAlign": "left" }}>Account #</TextMuted></Th>
+          <Th><TextMuted style={{ "textAlign": "left" }}>Name</TextMuted></Th>
+          <Th><TextMuted style={{ "textAlign": "left" }}>Amount Remaining</TextMuted></Th>
+        </Tr>
+      </Thead>
+      <Tbody>
+        {children}
+      </Tbody>
+    </Table>
   );
 }
 
