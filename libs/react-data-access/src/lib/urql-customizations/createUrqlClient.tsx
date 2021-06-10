@@ -1,9 +1,8 @@
 // NOTE: moved here from data-access project since needed window.localstorage!
-
 // - https://formidable.com/open-source/urql/docs/advanced/server-side-rendering/#nextjs
 import { devtoolsExchange } from '@urql/devtools';
 import { dedupExchange, Exchange, fetchExchange } from 'urql';
-import { pipe, tap, filter } from 'wonka'; // part of urql!
+import { pipe, tap } from 'wonka'; // part of urql!
 import { cache } from './cache';
 
 const NEXT_PUBLIC_API_URL = process.env.NEXT_PUBLIC_API_URL;
@@ -24,7 +23,7 @@ const errorExchange: Exchange = ({ forward }) => ops$ => {
                 // TODO: anytime there's an error in anything we run..
                 // 🛡 sentry fire-and-forget CALL would go here!
 
-                // TODO: display a toast! but how? cant just include useToast() in here... TBD
+                // can't use HOOKS here, so can't use useToast
             }
         })
     );
@@ -36,12 +35,10 @@ const getToken = () =>
         : null;
 
 
-
 // [ ] TODO: global error handling goes here (unauth redirects/verifies)
 export const createUrqlClient = (ssrExchange: any) => ({
 
     url: NEXT_PUBLIC_API_URL,
-
     // NOTE: The fetchOptions method can accept a function or an object. 
     // We will use a function so it will be executed every time we make a fetch request, 
     // and will always send an up-to-date authentication token to the server.

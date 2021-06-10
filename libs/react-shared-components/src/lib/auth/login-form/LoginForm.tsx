@@ -60,6 +60,7 @@ export function LoginForm(props: LoginFormProps) {
         <Form>
           <Stack spacing="6">
             <InputField
+              required
               label="Username or Email"
               name="usernameOrEmail"
               placeholder="username or email">
