@@ -2,7 +2,7 @@
 // - https://formidable.com/open-source/urql/docs/advanced/server-side-rendering/#nextjs
 import { devtoolsExchange } from '@urql/devtools';
 import { dedupExchange, Exchange, fetchExchange } from 'urql';
-import { pipe, tap } from 'wonka'; // part of urql!
+import { pipe, tap, onPush } from 'wonka'; // part of urql!
 import { cache } from './cache';
 
 const NEXT_PUBLIC_API_URL = process.env.NEXT_PUBLIC_API_URL;
@@ -27,6 +27,54 @@ const errorExchange: Exchange = ({ forward }) => ops$ => {
             }
         })
     );
+};
+
+let inflightCount = 0;
+
+// A callback that fires whenever a query or mutation is sent.
+const onStart = (key: string, operationName: string) => {
+    inflightCount += 1;
+    // operationName: the type of operation (query or mutation)
+    // key: a unique internal identifier used by urql to track the operation
+    console.log(`🟢 ${operationName} op ${key} send: ${inflightCount} ops in-flight`);
+};
+
+// A callback that fires whenever a query or mutation has been responded to with
+// data or an error. Note: this includes immediate cache hits. You may want to
+// debounce your UI state changes if you're displaying a global fetching state.
+const onEnd = (key: string, operationName: string) => {
+    inflightCount -= 1;
+    console.log(`🔴 ${operationName} op ${key} receive: ${inflightCount} ops in-flight`);
+};
+
+// thx: https://gist.github.com/earksiinni/42e842014db56253e41ca5d1437cf1a3
+const globalFetchingExchange = (onStart: any, onEnd: any) => ({ client, forward }: any) => {
+    return (operations$: any) => {
+        const operationResult$ = forward(
+            pipe(
+                operations$,
+                onPush((op) => {
+                    const { key, kind }: any = op;
+                    if (kind === 'query' || kind === 'mutation')
+                        onStart(key, kind);
+                })
+            )
+        );
+
+        return pipe(
+            operationResult$,
+            onPush((op) => {
+                const {
+                    data,
+                    error,
+                    operation: { key, kind },
+                }: any = op;
+
+                if ((data || error) && (kind === 'query' || kind === 'mutation'))
+                    onEnd(key, kind);
+            })
+        );
+    };
 };
 
 const getToken = () =>
@@ -56,5 +104,6 @@ export const createUrqlClient = (ssrExchange: any) => ({
         cache,
         errorExchange,
         ssrExchange,
+        globalFetchingExchange(onStart, onEnd),
         fetchExchange],
 })
