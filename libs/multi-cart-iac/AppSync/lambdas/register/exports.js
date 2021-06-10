@@ -27,38 +27,13 @@ exports.handler = async (event, context, callback) => {
         const existingUserByEmail = await cognito.listUsers({
             UserPoolId: POOL_ID,
             AttributesToGet: ["email"], // NOTE: case insensitive
-            Filter: `email = \"${email}\"`,
+            Filter: `email = "${email}"`
         }).promise()
         console.log(`🚀 ~ existingUserByEmail`, existingUserByEmail);
-        /* 
-        RETURNS:
-        {
-            "PaginationToken": "string",
-            "Users": [ 
-                { 
-                    "Attributes": [ 
-                        { 
-                        "Name": "string",
-                        "Value": "string"
-                        }
-                    ],
-                    "Enabled": boolean,
-                    "MFAOptions": [ 
-                        { 
-                        "AttributeName": "string",
-                        "DeliveryMedium": "string"
-                        }
-                    ],
-                    "UserCreateDate": number,
-                    "UserLastModifiedDate": number,
-                    "Username": "string",
-                    "UserStatus": "string"
-                }
-            ]
-            }
-
-        
-        */
+        if (existingUserByEmail && existingUserByEmail.Users.length > 0) {
+            // TODO: security-wise, is it better to NOT provide this information, right?
+            throw new Error("User with that email exists already")
+        }
 
         // CREATE USER in COGNITO
         const createdUser = await cognito.adminCreateUser({
