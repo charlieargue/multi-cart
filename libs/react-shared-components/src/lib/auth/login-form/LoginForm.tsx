@@ -6,12 +6,13 @@ import { Form, Formik } from 'formik';
 import { useRouter } from "next/router";
 import React from 'react';
 import 'regenerator-runtime/runtime';
+import useMyToasts from '../../_hooks/useMyToasts';
 
 /* eslint-disable-next-line */
 export interface LoginFormProps { }
 
 export function LoginForm(props: LoginFormProps) {
-  const toast = useToast();
+  const { toastError, toastSuccess } = useMyToasts();
   const router = useRouter();
   const [, login] = useLoginMutation();
 
@@ -22,22 +23,12 @@ export function LoginForm(props: LoginFormProps) {
         localStorage.removeItem("token");
         const response = await login(values);
         if (response.data?.login.errors) {
-          toast({
-            title: response.data?.login.errors[0].message,
-            status: "error",
-            isClosable: true,
-          });
           setErrors(toErrorMap(response.data?.login.errors))
+          toastError(response.data?.login.errors[0].message);
         } else if (response.data?.login.user && response.data?.login.token) {
           // save token(s) to localstorage
           localStorage.setItem("token", response.data.login.token)
-          toast({
-            title: "Welcome back!",
-            variant: "top-accent",
-            position: "top",
-            status: "success",
-            isClosable: true,
-          });
+          toastSuccess("Welcome back!");
           // got return url?
           if (typeof router.query.next === "string") {
             router.push(router.query.next);
@@ -45,14 +36,7 @@ export function LoginForm(props: LoginFormProps) {
             router.push("/dashboard");
           }
         } else {
-          // TODO: not sure if good idea, but on wrong login I just return null errors/token/user
-          toast({
-            title: "Incorrect credentials, please try again!",
-            variant: "top-accent",
-            position: "top-right",
-            status: "error",
-            isClosable: true,
-          });
+          toastError("Incorrect credentials, please try again!");
         }
 
       }}>

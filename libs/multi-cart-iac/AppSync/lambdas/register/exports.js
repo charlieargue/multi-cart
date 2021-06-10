@@ -19,9 +19,16 @@ exports.handler = async (event, context, callback) => {
     const username = event.username
     const email = event.email
     const password = event.password
-    let token;
+    let token
 
     try {
+
+        // SEE IF USER with that email ALREADY EXISTS (COGNITO does NOT do this for us)
+        const existingUserByEmail = await cognito.adminGetUser({
+            UserPoolId: POOL_ID,
+            Username: username
+        }).promise()
+        console.log(`🚀 ~ existingUserByEmail`, existingUserByEmail);
 
         // CREATE USER in COGNITO
         const createdUser = await cognito.adminCreateUser({

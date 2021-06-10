@@ -26,7 +26,7 @@
 ## otherwise, return an error
 ## -------------------------------------
 #else 
-    $utils.error("Unique constraint violation", "UNIQUE_CONSTRAINT", {}, {
+    $utils.error("That username or email has already been registered", "UNIQUE_CONSTRAINT_VIOLATION", {}, {
       "message": "That username or email has already been registered"
     })
 #end

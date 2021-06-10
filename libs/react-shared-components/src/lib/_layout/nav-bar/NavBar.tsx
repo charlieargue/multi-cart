@@ -5,16 +5,16 @@ import {
     Menu,
     MenuButton,
     MenuItem, MenuList,
-    useColorModeValue as mode, useDisclosure
+    useColorModeValue as mode, useDisclosure, useToast
 } from '@chakra-ui/react';
 import { useLogoutMutation, useMeQuery } from '@multi-cart/react-data-access';
 import { Logo } from "@multi-cart/react-ui";
 import { useRouter } from 'next/router';
 import React from 'react';
 import { FiLogOut as LogoutIcon } from 'react-icons/fi';
+import styles from './NavBar.module.scss'; // TODO: the red squiggly goes away if you don't use the styles, and just straight import the scss...
 import 'regenerator-runtime/runtime';
 import { CartAvatar } from '../../cart/cart-avatar/CartAvatar';
-import styles from './NavBar.module.scss';
 
 // -------------------
 export const NavBar = (props) => {
@@ -22,6 +22,7 @@ export const NavBar = (props) => {
     const router = useRouter();
     const [{ data, fetching }] = useMeQuery();
     const [_, logout] = useLogoutMutation();
+    const toast = useToast();
 
     return (
         <Box bg={mode('gray.200', 'gray.700')} color={mode('gray.700', 'gray.200')} px={[0, 10, 7, 14]} pr={[3, 0]}>
@@ -73,6 +74,13 @@ export const NavBar = (props) => {
                                 onClick={async () => {
                                     // clear token(s)
                                     localStorage.removeItem("token");
+                                    toast({
+                                        title: 'Logged out! Reloading...',
+                                        variant: 'top-accent',
+                                        position: 'top',
+                                        status: 'info',
+                                        isClosable: true,
+                                      });
                                     await logout();
 
                                     // TODO: how about purge all cache so don't have to reload?

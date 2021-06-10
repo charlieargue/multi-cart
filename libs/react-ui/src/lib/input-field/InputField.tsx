@@ -1,7 +1,6 @@
-import { Box, FormControl, FormHelperText, FormLabel, Input, InputProps, useColorModeValue as mode, } from '@chakra-ui/react';
-import { Form, useField } from "formik";
+import { FormControl, FormHelperText, FormLabel, Input, InputProps, useColorModeValue as mode } from '@chakra-ui/react';
+import { useField } from "formik";
 import React, { InputHTMLAttributes } from "react";
-import styles from './InputField.module.css';
 
 export type InputFieldProps = InputHTMLAttributes<HTMLInputElement> & {
   id?: string;
