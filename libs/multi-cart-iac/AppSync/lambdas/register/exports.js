@@ -24,11 +24,41 @@ exports.handler = async (event, context, callback) => {
     try {
 
         // SEE IF USER with that email ALREADY EXISTS (COGNITO does NOT do this for us)
-        const existingUserByEmail = await cognito.adminGetUser({
+        const existingUserByEmail = await cognito.listUsers({
             UserPoolId: POOL_ID,
-            Username: username
+            AttributesToGet: ["email"], // NOTE: case insensitive
+            Filter: `email = \"${email}\"`,
         }).promise()
         console.log(`🚀 ~ existingUserByEmail`, existingUserByEmail);
+        /* 
+        RETURNS:
+        {
+            "PaginationToken": "string",
+            "Users": [ 
+                { 
+                    "Attributes": [ 
+                        { 
+                        "Name": "string",
+                        "Value": "string"
+                        }
+                    ],
+                    "Enabled": boolean,
+                    "MFAOptions": [ 
+                        { 
+                        "AttributeName": "string",
+                        "DeliveryMedium": "string"
+                        }
+                    ],
+                    "UserCreateDate": number,
+                    "UserLastModifiedDate": number,
+                    "Username": "string",
+                    "UserStatus": "string"
+                }
+            ]
+            }
+
+        
+        */
 
         // CREATE USER in COGNITO
         const createdUser = await cognito.adminCreateUser({

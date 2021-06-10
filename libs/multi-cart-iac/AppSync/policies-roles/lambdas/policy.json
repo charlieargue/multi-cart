@@ -40,7 +40,7 @@
         "cognito-idp:GlobalSignOut",
         "cognito-idp:ForgotPassword",
         "cognito-idp:ConfirmForgotPassword",
-        "cognito-idp:AdminGetUser"
+        "cognito-idp:ListUsers"
 
       ],
       "Resource": ["${USER_POOL_ARN}", "${USER_POOL_ARN}/*"]
