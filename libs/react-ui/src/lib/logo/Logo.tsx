@@ -1,4 +1,4 @@
-import { Text, Box, Flex, useToken } from '@chakra-ui/react';
+import { Text, Box, Flex, useToken, Spinner } from '@chakra-ui/react';
 import * as React from 'react';
 import styles from './Logo.module.scss';
 import NextLink from 'next/link';
@@ -19,6 +19,14 @@ export function Logo(props) {
               <i>multi</i>&nbsp;<strong>cart</strong>
             </Text>
           </Box>
+          <Spinner
+            style={{marginTop: "11px"}}
+            ml={3}
+            size="md"
+            color="brand.pink"
+            thickness="2px"
+            speed="0.65s"
+            emptyColor="brand.yellow" />
         </Flex>
       </a>
     </NextLink>

@@ -46,6 +46,21 @@ export const DashboardContainer = () => {
                 <Divider />
             </Box>
 
+            {/* Stats */}
+            <Box as="section" bg={mode('gray.50', 'gray.800')} p="10">
+                <Box mr="auto" >
+                    <SimpleGrid columns={{ base: 1, md: 4 }} spacing="6">
+                        {data.map((stat, idx) => (
+                            <StatCard key={idx} data={stat} />
+                        ))}
+                    </SimpleGrid>
+                </Box>
+            </Box>
+
+            <Divider />
+
+
+
             <HStack>
                 {/* Settings Toggles */}
                 <Box mr="auto" p={{ md: '8' }} minW="50%">
@@ -84,7 +99,7 @@ export const DashboardContainer = () => {
                                                         <Text fontWeight="bold">
                                                             Susan Smith
                                                             <Badge ml="1" colorScheme="gray">
-                                                                Building 2
+                                                                Lab 516
                                                             </Badge>
                                                         </Text>
                                                         <Text fontSize="sm">Lab Mngr</Text>
@@ -195,10 +210,10 @@ export const DashboardContainer = () => {
                         <Flex justifyContent="space-between" align="flex-end">
                             <Stack spacing="0">
                                 <Text as="h4" fontWeight="bold" fontSize="md">
-                                    Switch to Text Messages
+                                    Show/hide line accounts by default
                             </Text>
                                 <Box as="span" color={mode("gray.600", "white")} fontSize="sm" >
-                                    No more pesky emails!
+                                    A more compact view of your lines
                             </Box>
                             </Stack>
                             <Switch colorScheme="pink" size="lg" defaultChecked={true} />
@@ -240,20 +255,7 @@ export const DashboardContainer = () => {
 
             <Divider />
 
-            {/* Stats */}
-            <Box as="section" bg={mode('gray.50', 'gray.800')} p="10">
-                <Box mr="auto" >
-                    <SimpleGrid columns={{ base: 1, md: 4 }} spacing="6">
-                        {data.map((stat, idx) => (
-                            <StatCard key={idx} data={stat} />
-                        ))}
-                        <Card />
-                    </SimpleGrid>
-                </Box>
-            </Box>
-
-            <Divider />
-
+            <Card />
 
 
 

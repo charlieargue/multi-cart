@@ -8,7 +8,7 @@ import { createUrqlClient } from '@multi-cart/react-data-access';
 
 const DashboardPage: NextPage = () => {
   useIsAuth(); // 🛡 session authentication
-
+  
   return (
     <DashboardContainer />
   );
