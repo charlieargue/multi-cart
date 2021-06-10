@@ -32,7 +32,14 @@ exports.handler = async (event, context, callback) => {
         console.log(`🚀 ~ existingUserByEmail`, existingUserByEmail);
         if (existingUserByEmail && existingUserByEmail.Users.length > 0) {
             // TODO: security-wise, is it better to NOT provide this information, right?
-            throw new Error("User with that email exists already")
+            // throw new Error("User with that email exists already")
+            return {
+                token: null,
+                errors: [{
+                    message: "User with that email exists already",
+                    "code": "EmailExistsException",
+                }]
+            }
         }
 
         // CREATE USER in COGNITO

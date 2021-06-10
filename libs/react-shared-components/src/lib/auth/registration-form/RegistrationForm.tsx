@@ -77,7 +77,7 @@ export function RegistrationForm(props: RegistrationFormProps) {
               label="Password"
               name="password"
               placeholder="password"
-              type="text"
+              type="password"
               muted="Include: a special symbol, an upper AND lowercase letter, and a number.">
             </InputField>
             <ErrorMessage component={ErrMsg} name="password" />
