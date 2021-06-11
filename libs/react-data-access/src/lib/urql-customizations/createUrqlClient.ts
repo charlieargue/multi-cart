@@ -5,6 +5,7 @@ import { dedupExchange, Exchange, fetchExchange } from 'urql';
 import { onPush, pipe, tap } from 'wonka'; // part of urql!
 import { actionFetchingStart, actionFetchingStop, store } from '../temp-app-redux-state';
 import { cache } from './cache';
+import debounce from 'just-debounce-it';
 
 const NEXT_PUBLIC_API_URL = process.env.NEXT_PUBLIC_API_URL;
 const NEXT_PUBLIC_API_KEY = process.env.NEXT_PUBLIC_API_KEY;
@@ -38,16 +39,10 @@ const errorExchange: Exchange = ({ forward }) => ops$ => {
 // -------------------
 // -------------------
 // -------------------
-let inflightCount = 0;
 
 // A callback that fires whenever a query or mutation is sent.
 const onStart = (key: string, operationName: string) => {
-    // initial state
     store.dispatch(actionFetchingStart);
-    inflightCount += 1;
-    // operationName: the type of operation (query or mutation)
-    // key: a unique internal identifier used by urql to track the operation
-    console.log(`🟢 ${operationName} op ${key} send: ${inflightCount} ops in-flight`);
 };
 
 // A callback that fires whenever a query or mutation has been responded to with
@@ -55,9 +50,11 @@ const onStart = (key: string, operationName: string) => {
 // debounce your UI state changes if you're displaying a global fetching state.
 const onEnd = (key: string, operationName: string) => {
     store.dispatch(actionFetchingStop);
-    inflightCount -= 1;
-    console.log(`🔴 ${operationName} op ${key} receive: ${inflightCount} ops in-flight`);
 };
+
+const debounceMs = 300; // VIP: without a debounce on the onSTART, it sometimes has a "badstate" error
+const debouncedOnStart = debounce(() => onStart("moot", "moot"), debounceMs);
+const debouncedOnEnd = debounce(() => onEnd("moot", "moot"), debounceMs);
 
 // thx: https://gist.github.com/earksiinni/42e842014db56253e41ca5d1437cf1a3
 const globalFetchingExchange = (onStart: any, onEnd: any) => ({ client, forward }: any) => {
@@ -67,8 +64,9 @@ const globalFetchingExchange = (onStart: any, onEnd: any) => ({ client, forward 
                 operations$,
                 onPush((op) => {
                     const { key, kind }: any = op;
-                    if (kind === 'query' || kind === 'mutation')
-                        onStart(key, kind);
+                    if (kind === 'query' || kind === 'mutation') {
+                        debouncedOnStart();
+                    }
                 })
             )
         );
@@ -82,8 +80,11 @@ const globalFetchingExchange = (onStart: any, onEnd: any) => ({ client, forward 
                     operation: { key, kind },
                 }: any = op;
 
-                if ((data || error) && (kind === 'query' || kind === 'mutation'))
-                    onEnd(key, kind);
+                if ((data || error) && (kind === 'query' || kind === 'mutation')) {
+                    // debounce these calls ONLY!
+                    debouncedOnEnd();
+
+                }
             })
         );
     };

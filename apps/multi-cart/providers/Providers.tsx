@@ -1,8 +1,9 @@
 import { ChakraProvider, ColorModeProvider } from '@chakra-ui/react';
 import React from 'react';
 import 'regenerator-runtime/runtime';
-import { AppStateContextController } from '../context/appState/AppStateContextController';
 import theme from '../_theme/theme';
+import { Provider } from 'react-redux'
+import { store } from '@multi-cart/react-data-access';
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface ProvidersProps {
@@ -17,9 +18,9 @@ export const Providers: React.FC<ProvidersProps> = ({ children }) => {
         options={{
           useSystemColorMode: false,
         }}>
-        <AppStateContextController>
+        <Provider store={store}>
           {children}
-        </AppStateContextController>
+        </Provider>
       </ColorModeProvider>
     </ChakraProvider >
   );

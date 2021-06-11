@@ -2,11 +2,11 @@ import { Box, Flex, Spinner, Text } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import * as React from 'react';
 import styles from './Logo.module.scss';
-import { store } from '@multi-cart/react-data-access';
+import { StateType } from '@multi-cart/react-data-access';
+import { useSelector } from 'react-redux';
 
 export function Logo(props) {
-  const test = !store.getState().isFetching;
-  console.log(`🚀 ~ hidden? ====> `, test);
+  const isFetching = useSelector((state: StateType) => state.isFetching);
 
   return (
     <NextLink href="/">
@@ -24,8 +24,7 @@ export function Logo(props) {
             </Text>
           </Box>
           <Spinner
-            hidden={!!store.getState().isFetching === false}
-            style={{ marginTop: "11px" }}
+            style={{ marginTop: "11px", display: isFetching ? "inline-block" : "none" }}
             ml={3}
             size="md"
             color="brand.pink"

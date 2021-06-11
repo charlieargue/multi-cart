@@ -1,8 +1,12 @@
 import { typeActionFetching } from "..";
 
 // keeping it simple, not combining reducers, simple one bstate, etc.
-const initialState = {
-    isFetching: null,
+export interface StateType {
+    isFetching: boolean;
+}
+
+const initialState: StateType = {
+    isFetching: false,
 };
 
 export const appStateReducer = (state = initialState, action: any) => {
@@ -11,7 +15,6 @@ export const appStateReducer = (state = initialState, action: any) => {
 
         // --------------
         case typeActionFetching.start:
-            console.log(`🚀 ~ action.type`, action.type);
             return {
                 ...state,
                 isFetching: true
@@ -19,7 +22,6 @@ export const appStateReducer = (state = initialState, action: any) => {
             break;
         // --------------
         case typeActionFetching.stop:
-            console.log(`🚀 ~ action.type`, action.type);
             return {
                 ...state,
                 isFetching: false
