@@ -1,7 +1,5 @@
 import React from 'react';
-// // import 'regenerator-runtime/runtime';
 import Providers from '../providers/Providers';
-
 
 function MyApp({ Component, pageProps }) {
   return (

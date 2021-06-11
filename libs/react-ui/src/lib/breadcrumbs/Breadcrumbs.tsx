@@ -3,7 +3,6 @@ import NextLink from 'next/link';
 import React from 'react';
 import { CgChevronRight as ChevronRightIcon } from 'react-icons/cg';
 import { } from 'react-icons/fa';
-// import 'regenerator-runtime/runtime';
 import TextMuted from '../text-muted/TextMuted';
 import './Breadcrumbs.module.scss';
 

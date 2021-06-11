@@ -1,12 +1,11 @@
-import React from 'react';
-import clsx from 'clsx';
-import { useBlankCartMutation } from '@multi-cart/react-data-access';
-import { useRouter } from 'next/router';
-import { ImPlus as PlusIcon } from 'react-icons/im';
-import './NewCartButton.module.scss';
 import { Button } from '@chakra-ui/react';
-// import 'regenerator-runtime/runtime';
+import { useBlankCartMutation } from '@multi-cart/react-data-access';
+import clsx from 'clsx';
+import { useRouter } from 'next/router';
+import React from 'react';
+import { ImPlus as PlusIcon } from 'react-icons/im';
 import { useIsAuth } from '../../auth/useIsAuth';
+import './NewCartButton.module.scss';
 
 /* eslint-disable-next-line */
 export interface NewCartButtonProps {

@@ -1,6 +1,5 @@
 import { Cart, CartLine, CartLineAccount } from "@multi-cart/react-data-access";
 import { roundToTwo } from './roundToTwo';
-// import 'regenerator-runtime/runtime';
 
 // ------------------------
 export const sumTotalItems = (cart?: Cart): number => {

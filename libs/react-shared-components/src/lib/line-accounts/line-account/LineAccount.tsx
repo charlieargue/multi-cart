@@ -6,7 +6,6 @@ import { Form, Formik } from "formik";
 import React, { useEffect, useRef } from 'react';
 import { FaPercentage as PercentageIcon } from 'react-icons/fa';
 import { TiDelete as DeleteIcon } from 'react-icons/ti';
-// import 'regenerator-runtime/runtime';
 import * as Yup from 'yup';
 import { AutoSave } from '../../auto-save/AutoSave';
 

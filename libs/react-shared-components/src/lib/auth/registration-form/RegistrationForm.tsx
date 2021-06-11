@@ -1,12 +1,10 @@
 import { Button, Stack } from '@chakra-ui/react';
 import { useRegisterMutation } from '@multi-cart/react-data-access';
 import { ErrMsg, InputField } from '@multi-cart/react-ui';
-import { passwordAttributes } from '@multi-cart/util';
-import { toCombinedErrorMap, toErrorMap } from '@multi-cart/util';
+import { passwordAttributes, toCombinedErrorMap, toErrorMap } from '@multi-cart/util';
 import { ErrorMessage, Form, Formik } from 'formik';
 import { useRouter } from "next/router";
 import React from 'react';
-// import 'regenerator-runtime/runtime';
 import { useMyToasts } from '../../_hooks/useMyToasts';
 import './RegistrationForm.module.scss';
 

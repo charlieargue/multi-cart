@@ -1,11 +1,10 @@
-import { Button, Stack, useToast } from '@chakra-ui/react';
+import { Button, Stack } from '@chakra-ui/react';
 import { useLoginMutation } from '@multi-cart/react-data-access';
 import { InputField, PasswordField } from '@multi-cart/react-ui';
 import { toErrorMap } from '@multi-cart/util';
 import { Form, Formik } from 'formik';
 import { useRouter } from "next/router";
 import React from 'react';
-// import 'regenerator-runtime/runtime';
 import useMyToasts from '../../_hooks/useMyToasts';
 
 /* eslint-disable-next-line */

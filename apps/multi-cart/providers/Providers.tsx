@@ -1,9 +1,8 @@
 import { ChakraProvider, ColorModeProvider } from '@chakra-ui/react';
-import React from 'react';
-// import 'regenerator-runtime/runtime';
-import theme from '../_theme/theme';
-import { Provider } from 'react-redux'
 import { store } from '@multi-cart/react-app-state';
+import React from 'react';
+import { Provider } from 'react-redux';
+import theme from '../_theme/theme';
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface ProvidersProps {
