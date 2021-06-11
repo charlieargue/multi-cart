@@ -42,9 +42,8 @@ export function Breadcrumbs<BreadcrumbsProps>({ links = [] }) {
         <BreadcrumbItem key={link.id || link.label} isCurrentPage={link.isActive}>
           <NextLink
             href={link.href}
-            as={link.as}
           >
-            <BreadcrumbLink href="link.href">
+            <BreadcrumbLink href={link.href}>
               <TextMuted  fontSize="14px">
                 {link.label}
                 {link.id && (

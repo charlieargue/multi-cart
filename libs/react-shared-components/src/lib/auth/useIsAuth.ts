@@ -2,7 +2,7 @@ import { useMeQuery } from "@multi-cart/react-data-access";
 import { useRouter } from "next/router";
 import { useEffect, useReducer } from "react";
 
-type Action = { type: 'replace', path: string }
+type Action = { type: 'replace' }
 
 export const useIsAuth = () => {
     const [{ data, fetching }] = useMeQuery();
@@ -10,10 +10,10 @@ export const useIsAuth = () => {
 
     // NOTE: using useReducer in order to NOT have entire router in effect dep array
     const initialState = undefined;
-    const reducer = (_: string, action: Action) => {
+    const reducer = (state: string, action: Action) => {
         if (action.type === "replace") {
-            router.replace("/login?next=" + action.path);
-            return action.path;
+            router.replace("/login?next=" + router.asPath);
+            return state; //hacky? not really using this state (yet)
         } else {
             throw new Error();
         }
@@ -22,7 +22,7 @@ export const useIsAuth = () => {
 
     useEffect(() => {
         if (!fetching && !data?.me) {
-            dispatch({ type: "replace", path: router.pathname });
+            dispatch({ type: "replace" });
         }
-    }, [fetching, data, router.pathname]);
+    }, [fetching, data,]);
 };

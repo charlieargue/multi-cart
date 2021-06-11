@@ -102,6 +102,11 @@
 					"line": 33,
 					"column": 12,
 					"label": ""
+				},
+				{
+					"line": 56,
+					"column": 15,
+					"label": ""
 				}
 			]
 		},
@@ -112,6 +117,41 @@
 					"line": 27,
 					"column": 10,
 					"label": "🔴 change in the order of Hooks"
+				},
+				{
+					"line": 69,
+					"column": 42,
+					"label": ""
+				}
+			]
+		},
+		{
+			"path": "libs/react-shared-components/src/lib/line-accounts/line-accounts-container/LineAccountsContainer.tsx",
+			"bookmarks": [
+				{
+					"line": 89,
+					"column": 59,
+					"label": ""
+				}
+			]
+		},
+		{
+			"path": "apps/multi-cart/appViews/EditCartContainer.tsx",
+			"bookmarks": [
+				{
+					"line": 15,
+					"column": 25,
+					"label": ""
+				}
+			]
+		},
+		{
+			"path": "libs/react-shared-components/src/lib/cart/cart-line-row/CartLineRow.tsx",
+			"bookmarks": [
+				{
+					"line": 27,
+					"column": 19,
+					"label": ""
 				}
 			]
 		}

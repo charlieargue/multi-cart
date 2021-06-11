@@ -31,8 +31,7 @@ export const EditCart = ({ id }: EditCartProps) => {
   const links = [{
     isActive: true,
     label: "Cart",
-    href: "/cart/[id]",
-    as: `/cart/${id}`,
+    href: `/cart/${id}`,
     id: data?.cart?.name
   }];
   const breadcrumbs = (<Breadcrumbs links={links} />);
