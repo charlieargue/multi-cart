@@ -4,6 +4,7 @@ import { sumTotalCost, toFriendlyCurrency } from '@multi-cart/util';
 import React from 'react';
 import './EditCartTableFooter.module.scss';
 import { useRouter } from 'next/router';
+import useMyToasts from '../../_hooks/useMyToasts';
 
 /* eslint-disable-next-line */
 export interface EditCartTableFooterProps {
@@ -13,6 +14,7 @@ export interface EditCartTableFooterProps {
 export function EditCartTableFooter({ cart }: EditCartTableFooterProps) {
   const router = useRouter();
   const [, deleteCart] = useDeleteCartMutation();
+  const { toastInfo } = useMyToasts();
 
   return (
     <>
@@ -27,6 +29,7 @@ export function EditCartTableFooter({ cart }: EditCartTableFooterProps) {
                 id: cart.id
               });
               if (response.data?.deleteCart === true) {
+                toastInfo("Deleted!");
                 router.push("/dashboard");
               }
             }

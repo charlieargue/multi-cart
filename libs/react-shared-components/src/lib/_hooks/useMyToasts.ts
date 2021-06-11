@@ -18,7 +18,15 @@ export const useMyToasts = () => {
         status: "success",
         isClosable: true,
     });
+    
+    const toastInfo = (message: string) => toast({
+        title: message,
+        variant: "top-accent",
+        position: "top",
+        status: "info",
+        isClosable: true,
+    });
 
-    return { toastError, toastSuccess };
+    return { toastInfo, toastError, toastSuccess };
 };
 export default useMyToasts;
