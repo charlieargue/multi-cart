@@ -1,9 +1,12 @@
-import { Text, Box, Flex, useToken, Spinner } from '@chakra-ui/react';
+import { Box, Flex, Spinner, Text } from '@chakra-ui/react';
+import NextLink from 'next/link';
 import * as React from 'react';
 import styles from './Logo.module.scss';
-import NextLink from 'next/link';
+import { AppStateContext, AppStateContextProps } from '@multi-cart/react-data-access';
 
 export function Logo(props) {
+  const { isFetching } = React.useContext(AppStateContext) as AppStateContextProps;
+
   return (
     <NextLink href="/">
       <a href="/">
@@ -20,7 +23,8 @@ export function Logo(props) {
             </Text>
           </Box>
           <Spinner
-            style={{marginTop: "11px"}}
+            hidden={!isFetching}
+            style={{ marginTop: "11px" }}
             ml={3}
             size="md"
             color="brand.pink"
