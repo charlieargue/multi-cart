@@ -3,7 +3,7 @@
 import { devtoolsExchange } from '@urql/devtools';
 import { dedupExchange, Exchange, fetchExchange } from 'urql';
 import { onPush, pipe, tap } from 'wonka'; // part of urql!
-import { actionFetchingStart, actionFetchingStop, store } from '../temp-app-redux-state';
+import { actionFetchingStart, actionFetchingStop, store } from '@multi-cart/react-app-state';
 import { cache } from './cache';
 import debounce from 'just-debounce-it';
 

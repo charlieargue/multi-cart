@@ -1,13 +1,18 @@
 {
   "implicitDependencies": {
     "workspace.json": "*",
-    "package.json": { "dependencies": "*", "devDependencies": "*" },
+    "package.json": {
+      "dependencies": "*",
+      "devDependencies": "*"
+    },
     "tsconfig.base.json": "*",
     "tslint.json": "*",
     ".eslintrc.json": "*",
     "nx.json": "*"
   },
-  "affected": { "defaultBase": "develop" },
+  "affected": {
+    "defaultBase": "develop"
+  },
   "npmScope": "multi-cart",
   "tasksRunnerOptions": {
     "default": {
@@ -24,18 +29,41 @@
     }
   },
   "projects": {
-    "multi-cart": { "tags": [] },
-    "multi-cart-e2e": { "tags": [], "implicitDependencies": ["multi-cart"] },
-    "react-ui": { "tags": [] },
-    "react-shared-components": { "tags": [] },
-    "react-data-access": { "tags": [] },
-    "react-ui-e2e": { "tags": [], "implicitDependencies": ["react-ui"] },
+    "multi-cart": {
+      "tags": []
+    },
+    "multi-cart-e2e": {
+      "tags": [],
+      "implicitDependencies": ["multi-cart"]
+    },
+    "react-ui": {
+      "tags": []
+    },
+    "react-shared-components": {
+      "tags": []
+    },
+    "react-data-access": {
+      "tags": []
+    },
+    "react-ui-e2e": {
+      "tags": [],
+      "implicitDependencies": ["react-ui"]
+    },
     "react-shared-components-e2e": {
       "tags": [],
       "implicitDependencies": ["react-shared-components"]
     },
-    "util": { "tags": [] },
-    "mock-api": { "tags": [] },
-    "multi-cart-iac": { "tags": [] }
+    "util": {
+      "tags": []
+    },
+    "mock-api": {
+      "tags": []
+    },
+    "multi-cart-iac": {
+      "tags": []
+    },
+    "react-app-state": {
+      "tags": []
+    }
   }
 }

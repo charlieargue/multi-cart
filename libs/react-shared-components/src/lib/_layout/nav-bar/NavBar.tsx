@@ -7,7 +7,8 @@ import {
     MenuItem, MenuList, Spinner,
     useColorModeValue as mode, useToast
 } from '@chakra-ui/react';
-import { StateType, useLogoutMutation, useMeQuery } from '@multi-cart/react-data-access';
+import { StateType } from '@multi-cart/react-app-state';
+import { useLogoutMutation, useMeQuery } from '@multi-cart/react-data-access';
 import { Logo } from "@multi-cart/react-ui";
 import { useRouter } from 'next/router';
 import React from 'react';

@@ -27,6 +27,9 @@ exports.handler = async (event, context, callback) => {
     const token = event.token;
     console.log(`🚀 ~ token`, token);
 
+    // TODO: there's room for improvement I'm sure, here,i.e. other tokens? actually prevent from using tokens after globalSignOut() --
+    // it doesn't fully do what expected to do, afaik... TBD
+
     try {
 
         const data = await cognito.globalSignOut({

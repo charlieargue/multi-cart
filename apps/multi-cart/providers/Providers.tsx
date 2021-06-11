@@ -3,7 +3,7 @@ import React from 'react';
 import 'regenerator-runtime/runtime';
 import theme from '../_theme/theme';
 import { Provider } from 'react-redux'
-import { store } from '@multi-cart/react-data-access';
+import { store } from '@multi-cart/react-app-state';
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface ProvidersProps {

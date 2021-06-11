@@ -1,10 +1,21 @@
 {
   "version": 2,
-  "cli": { "defaultCollection": "@nrwl/next" },
+  "cli": {
+    "defaultCollection": "@nrwl/next"
+  },
   "defaultProject": "multi-cart",
   "generators": {
-    "@nrwl/react": { "application": { "babel": true } },
-    "@nrwl/next": { "application": { "style": "scss", "linter": "eslint" } }
+    "@nrwl/react": {
+      "application": {
+        "babel": true
+      }
+    },
+    "@nrwl/next": {
+      "application": {
+        "style": "scss",
+        "linter": "eslint"
+      }
+    }
   },
   "projects": {
     "multi-cart": {
@@ -19,11 +30,16 @@
             "root": "apps/multi-cart",
             "outputPath": "dist/apps/multi-cart"
           },
-          "configurations": { "production": {} }
+          "configurations": {
+            "production": {}
+          }
         },
         "serve": {
           "executor": "@nrwl/next:server",
-          "options": { "buildTarget": "multi-cart:build", "dev": true },
+          "options": {
+            "buildTarget": "multi-cart:build",
+            "dev": true
+          },
           "configurations": {
             "production": {
               "buildTarget": "multi-cart:build:production",
@@ -33,7 +49,9 @@
         },
         "export": {
           "executor": "@nrwl/next:export",
-          "options": { "buildTarget": "multi-cart:build:production" }
+          "options": {
+            "buildTarget": "multi-cart:build:production"
+          }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
@@ -64,7 +82,9 @@
             "devServerTarget": "multi-cart:serve"
           },
           "configurations": {
-            "production": { "devServerTarget": "multi-cart:serve:production" }
+            "production": {
+              "devServerTarget": "multi-cart:serve:production"
+            }
           }
         },
         "lint": {
@@ -99,9 +119,15 @@
           "options": {
             "uiFramework": "@storybook/react",
             "port": 4400,
-            "config": { "configFolder": "libs/react-ui/.storybook" }
+            "config": {
+              "configFolder": "libs/react-ui/.storybook"
+            }
           },
-          "configurations": { "ci": { "quiet": true } }
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
         },
         "build-storybook": {
           "executor": "@nrwl/storybook:build",
@@ -109,9 +135,15 @@
           "options": {
             "uiFramework": "@storybook/react",
             "outputPath": "dist/storybook/react-ui",
-            "config": { "configFolder": "libs/react-ui/.storybook" }
+            "config": {
+              "configFolder": "libs/react-ui/.storybook"
+            }
           },
-          "configurations": { "ci": { "quiet": true } }
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
         }
       }
     },
@@ -145,7 +177,11 @@
               "configFolder": "libs/react-shared-components/.storybook"
             }
           },
-          "configurations": { "ci": { "quiet": true } }
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
         },
         "build-storybook": {
           "executor": "@nrwl/storybook:build",
@@ -157,7 +193,11 @@
               "configFolder": "libs/react-shared-components/.storybook"
             }
           },
-          "configurations": { "ci": { "quiet": true } }
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
         }
       }
     },
@@ -199,12 +239,16 @@
             "devServerTarget": "react-ui:storybook"
           },
           "configurations": {
-            "ci": { "devServerTarget": "react-ui:storybook:ci" }
+            "ci": {
+              "devServerTarget": "react-ui:storybook:ci"
+            }
           }
         },
         "lint": {
           "executor": "@nrwl/linter:eslint",
-          "options": { "lintFilePatterns": ["apps/react-ui-e2e/**/*.{js,ts}"] }
+          "options": {
+            "lintFilePatterns": ["apps/react-ui-e2e/**/*.{js,ts}"]
+          }
         }
       }
     },
@@ -221,7 +265,9 @@
             "devServerTarget": "react-shared-components:storybook"
           },
           "configurations": {
-            "ci": { "devServerTarget": "react-shared-components:storybook:ci" }
+            "ci": {
+              "devServerTarget": "react-shared-components:storybook:ci"
+            }
           }
         },
         "lint": {
@@ -241,7 +287,9 @@
       "targets": {
         "lint": {
           "executor": "@nrwl/linter:eslint",
-          "options": { "lintFilePatterns": ["libs/util/**/*.ts"] }
+          "options": {
+            "lintFilePatterns": ["libs/util/**/*.ts"]
+          }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
@@ -260,7 +308,9 @@
       "targets": {
         "lint": {
           "executor": "@nrwl/linter:eslint",
-          "options": { "lintFilePatterns": ["libs/mock-api/**/*.ts"] }
+          "options": {
+            "lintFilePatterns": ["libs/mock-api/**/*.ts"]
+          }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
@@ -277,6 +327,27 @@
       "sourceRoot": "libs/multi-cart-iac/src",
       "projectType": "library",
       "targets": {}
+    },
+    "react-app-state": {
+      "root": "libs/react-app-state",
+      "sourceRoot": "libs/react-app-state/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/react-app-state/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/react-app-state"],
+          "options": {
+            "jestConfig": "libs/react-app-state/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
     }
   }
 }

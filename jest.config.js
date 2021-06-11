@@ -7,5 +7,6 @@ module.exports = {
     '<rootDir>/libs/util',
     '<rootDir>/libs/mock-api',
     '<rootDir>/libs/multi-cart-iac',
+    '<rootDir>/libs/react-app-state',
   ],
 };
