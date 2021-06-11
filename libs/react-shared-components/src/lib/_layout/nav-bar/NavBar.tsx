@@ -1,38 +1,53 @@
 import {
     Avatar, Box,
     Button, Flex,
-
+    HStack,
     Menu,
     MenuButton,
-    MenuItem, MenuList,
-    useColorModeValue as mode, useDisclosure, useToast
+    MenuItem, MenuList, Spinner,
+    useColorModeValue as mode, useToast
 } from '@chakra-ui/react';
-import { useLogoutMutation, useMeQuery } from '@multi-cart/react-data-access';
+import { StateType, useLogoutMutation, useMeQuery } from '@multi-cart/react-data-access';
 import { Logo } from "@multi-cart/react-ui";
 import { useRouter } from 'next/router';
 import React from 'react';
 import { FiLogOut as LogoutIcon } from 'react-icons/fi';
-import styles from './NavBar.module.scss'; // TODO: the red squiggly goes away if you don't use the styles, and just straight import the scss...
+import { useSelector } from 'react-redux';
 import 'regenerator-runtime/runtime';
 import { CartAvatar } from '../../cart/cart-avatar/CartAvatar';
+import styles from './NavBar.module.scss'; // TODO: the red squiggly goes away if you don't use the styles, and just straight import the scss...
 
 // -------------------
-export const NavBar = (props) => {
-    const { isOpen, onOpen, onClose } = useDisclosure();
+export const NavBar = () => {
     const router = useRouter();
     const [{ data, fetching }] = useMeQuery();
     const [_, logout] = useLogoutMutation();
     const toast = useToast();
+    const isFetching = useSelector((state: StateType) => state.isFetching);
 
     return (
         <Box bg={mode('gray.200', 'gray.700')} color={mode('gray.700', 'gray.200')} px={[0, 10, 7, 14]} pr={[3, 0]}>
             <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
 
-                {/* Logo */}
-                <Box
-                    className={styles["nav-bar__scale-down"]}>
-                    <Logo />
-                </Box>
+
+                <HStack>
+                    {/* Logo */}
+                    <Box
+                        className={styles["nav-bar__scale-down"]}>
+                        <Logo />
+                    </Box>
+                    <Spinner
+                        style={{
+                            display: isFetching ? "inline-block" : "none",
+                            marginLeft: "-22px",
+                            marginTop: "-1px"
+                        }}
+                        size="sm"
+                        color="brand.pink"
+                        thickness="2px"
+                        speed="0.65s"
+                        emptyColor="brand.yellow" />
+                </HStack>
 
                 {/* Cart Avatar & Logout */}
                 <Flex alignItems={'center'}>
@@ -80,7 +95,7 @@ export const NavBar = (props) => {
                                         position: 'top',
                                         status: 'info',
                                         isClosable: true,
-                                      });
+                                    });
                                     await logout();
 
                                     // TODO: how about purge all cache so don't have to reload?
