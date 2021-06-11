@@ -1,4 +1,5 @@
 import { typeActionFetching } from "..";
+import { Action } from 'redux';
 
 // keeping it simple, not combining reducers, simple one bstate, etc.
 export interface StateType {
@@ -9,7 +10,8 @@ const initialState: StateType = {
     isFetching: false,
 };
 
-export const appStateReducer = (state = initialState, action: any) => {
+// TODO: more strongly-typed actions using this IAction method? https://stackoverflow.com/a/53412235/6200791 (or is there a newer/better way?)
+export const appStateReducer = (state = initialState, action: Action) => {
     // AKA DISPATCHER!
     switch (action.type) {
 
