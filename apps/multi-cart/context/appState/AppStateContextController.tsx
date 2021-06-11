@@ -1,5 +1,5 @@
-import React, { useState, useCallback, useEffect } from 'react';
-import { AppStateContext } from '@multi-cart/react-data-access'; // TMP 🔴 🔴 🔴 🔴 🔴 
+import React, { useState } from 'react';
+import AppStateContext from './AppStateContext';
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface AppStateContextControllerProps {

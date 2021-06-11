@@ -1,12 +1,9 @@
 // NOTE: moved here from data-access project since needed window.localstorage!
 // - https://formidable.com/open-source/urql/docs/advanced/server-side-rendering/#nextjs
 import { devtoolsExchange } from '@urql/devtools';
-import { useContext } from 'react';
 import { dedupExchange, Exchange, fetchExchange } from 'urql';
 import { onPush, pipe, tap } from 'wonka'; // part of urql!
-import AppStateContext, { AppStateContextProps } from '../temp-app-state-context/AppStateContext';
 import { cache } from './cache';
-import { render, RenderOptions } from '@testing-library/react';
 
 const NEXT_PUBLIC_API_URL = process.env.NEXT_PUBLIC_API_URL;
 const NEXT_PUBLIC_API_KEY = process.env.NEXT_PUBLIC_API_KEY;
@@ -44,11 +41,9 @@ let inflightCount = 0;
 
 // A callback that fires whenever a query or mutation is sent.
 const onStart = (key: string, operationName: string) => {
-    const { setIsFetching } = useContext(AppStateContext) as AppStateContextProps;
     inflightCount += 1;
     // operationName: the type of operation (query or mutation)
     // key: a unique internal identifier used by urql to track the operation
-    setIsFetching(true);
     console.log(`🟢 ${operationName} op ${key} send: ${inflightCount} ops in-flight`);
 };
 
@@ -56,9 +51,7 @@ const onStart = (key: string, operationName: string) => {
 // data or an error. Note: this includes immediate cache hits. You may want to
 // debounce your UI state changes if you're displaying a global fetching state.
 const onEnd = (key: string, operationName: string) => {
-    const { setIsFetching } = useContext(AppStateContext) as AppStateContextProps;
     inflightCount -= 1;
-    setIsFetching(false);
     console.log(`🔴 ${operationName} op ${key} receive: ${inflightCount} ops in-flight`);
 };
 
