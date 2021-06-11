@@ -3,6 +3,7 @@
 import { devtoolsExchange } from '@urql/devtools';
 import { dedupExchange, Exchange, fetchExchange } from 'urql';
 import { onPush, pipe, tap } from 'wonka'; // part of urql!
+import { actionFetchingStart, actionFetchingStop, store } from '../temp-app-redux-state';
 import { cache } from './cache';
 
 const NEXT_PUBLIC_API_URL = process.env.NEXT_PUBLIC_API_URL;
@@ -41,6 +42,8 @@ let inflightCount = 0;
 
 // A callback that fires whenever a query or mutation is sent.
 const onStart = (key: string, operationName: string) => {
+    // initial state
+    store.dispatch(actionFetchingStart);
     inflightCount += 1;
     // operationName: the type of operation (query or mutation)
     // key: a unique internal identifier used by urql to track the operation
@@ -51,6 +54,7 @@ const onStart = (key: string, operationName: string) => {
 // data or an error. Note: this includes immediate cache hits. You may want to
 // debounce your UI state changes if you're displaying a global fetching state.
 const onEnd = (key: string, operationName: string) => {
+    store.dispatch(actionFetchingStop);
     inflightCount -= 1;
     console.log(`🔴 ${operationName} op ${key} receive: ${inflightCount} ops in-flight`);
 };

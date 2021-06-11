@@ -1,5 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import AppStateContext from './AppStateContext';
+
+// -------------------------------------
+// DECOMISH (or re-name & use for global settings like compace/large view, etc..)
+// -------------------------------------
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface AppStateContextControllerProps {
@@ -7,7 +11,7 @@ interface AppStateContextControllerProps {
 }
 
 export const AppStateContextController = ({ children }: AppStateContextControllerProps) => {
-  const [isFetching, setIsFetching] = useState(false);
+  // const [isFetching, setIsFetching] = useState(false);
 
-  return <AppStateContext.Provider value={{ isFetching, setIsFetching }}>{children}</AppStateContext.Provider>;
+  return <AppStateContext.Provider value={{ /* isFetching, setIsFetching */ }}>{children}</AppStateContext.Provider>;
 };
