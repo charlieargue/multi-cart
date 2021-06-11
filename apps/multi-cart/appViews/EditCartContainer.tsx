@@ -13,7 +13,7 @@ export const EditCartContainer = () => {
 
     // TODO: switch to suspence?
     if (id === undefined) {
-        return (<div>Loading...</div>);
+        return (<div>🟢 Loading...</div>);
     }
 
     return (

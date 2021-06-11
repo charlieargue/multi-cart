@@ -53,7 +53,7 @@ export const EditCart = ({ id }: EditCartProps) => {
     return (
       <>
         {breadcrumbs}
-        <div>Loading...</div>
+        <div>🟡 Loading...</div>
       </>
     );
   }

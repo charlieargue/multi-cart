@@ -1,4 +1,4 @@
-import { Button, Flex, HStack, Menu, MenuButton, MenuDivider, MenuList, useColorModeValue as mode } from '@chakra-ui/react';
+import { Box, Button, Flex, HStack, Menu, MenuButton, MenuDivider, MenuItem, MenuList, SkeletonCircle, SkeletonText, useColorModeValue as mode } from '@chakra-ui/react';
 import { Cart, useCartsQuery } from '@multi-cart/react-data-access';
 import { useRouter } from 'next/router';
 import React from 'react';
@@ -18,12 +18,33 @@ const noCartsMsg = (<HStack direction="row" mr={4} spacing={1}>
   <span>You have no carts!</span>
 </HStack>);
 
+// TODO: clear up this object VS JSX confusing approach I've got going here (including the && AND syntax VS ternary syntax ... or all good?)
+// TODO: ideally, everything would be done so that I could pass in one function call and get back a proper CartAvatarRow, and another
+// call and get back one with skeletons, so DRY!
+// TODO: un-hard code this
+const CartSkeleton = ((idx:string) => {
+  return (<MenuItem
+    key={idx}>
+    <Flex
+      minW="100%"
+      justify="space-between"
+    >
+      <HStack width="100%" spacing="4">
+        <Box width="80%"><SkeletonText noOfLines={2} /></Box>
+        <Box><SkeletonCircle size="10" /></Box>
+      </HStack>
+    </Flex>
+    <MenuDivider />
+  </MenuItem>);
+});
+const cartSkeletons = [1, 2, 3, 4].map((idx) => CartSkeleton(idx.toString()));
+
+
 // -------------------
 export const CartAvatar = ({ currentCartId = null }: CartAvatarProps) => {
   const router = useRouter();
   const [{ data, fetching }] = useCartsQuery();
 
-  // TODO: 🔴 NOT LIKE THIS: error (see issues) React has detected a change in the order of Hooks called by CartAvatar.
   const currentCart = (): Cart => {
     if (currentCartId && !fetching && data?.carts) {
       return data?.carts.find((c) => c.id === currentCartId) as Cart;
@@ -67,7 +88,7 @@ export const CartAvatar = ({ currentCartId = null }: CartAvatarProps) => {
 
         {/* if FETCHING and don't have DATA... */}
         {
-          !data && fetching ? (<div>loading...</div>) : data?.carts?.map((c) => !c ? null : (
+          !data && fetching ? cartSkeletons : data?.carts?.map((c) => !c ? null : (
             <CartAvatarRow
               key={c.id}
               c={c}
