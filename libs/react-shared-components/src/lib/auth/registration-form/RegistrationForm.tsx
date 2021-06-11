@@ -1,12 +1,13 @@
 import { Button, Stack } from '@chakra-ui/react';
 import { useRegisterMutation } from '@multi-cart/react-data-access';
 import { ErrMsg, InputField } from '@multi-cart/react-ui';
+import { passwordAttributes } from '@multi-cart/util';
 import { toCombinedErrorMap, toErrorMap } from '@multi-cart/util';
 import { ErrorMessage, Form, Formik } from 'formik';
 import { useRouter } from "next/router";
 import React from 'react';
 import 'regenerator-runtime/runtime';
-import useMyToasts from '../../_hooks/useMyToasts';
+import { useMyToasts } from '../../_hooks/useMyToasts';
 import './RegistrationForm.module.scss';
 
 // ATTN: there's Chakra's FormErrorMessage, formik's ErrorMessage, and now my react-ui component ErrMsg
@@ -38,6 +39,7 @@ export function RegistrationForm(props: RegistrationFormProps) {
           } else if (response.data?.register.user && response.data?.register.token) {
             // save token(s) to localstorage
             localStorage.setItem("token", response.data.register.token)
+            toastSuccess("👍 All set, welcome aboard!");
             router.push("/dashboard");
           }
         } catch (err) {
@@ -71,14 +73,11 @@ export function RegistrationForm(props: RegistrationFormProps) {
             {/* NOTE: confusing that I am not using the PasswordField here, I know... TODO:/TBD: */}
             <InputField
               required
-              minLength="8"
-              title="Password needs to have atleast one: special character, upper AND lowercase letters, and a number"
-              // pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])"
+              {...passwordAttributes}
               label="Password"
               name="password"
               placeholder="password"
-              type="password"
-              muted="Include: a special symbol, an upper AND lowercase letter, and a number.">
+              type="password">
             </InputField>
             <ErrorMessage component={ErrMsg} name="password" />
 

@@ -75,7 +75,7 @@ export const NavBar = (props) => {
                                     // clear token(s)
                                     localStorage.removeItem("token");
                                     toast({
-                                        title: 'Logged out! Reloading...',
+                                        title: '👋  Bye, come back soon!',
                                         variant: 'top-accent',
                                         position: 'top',
                                         status: 'info',

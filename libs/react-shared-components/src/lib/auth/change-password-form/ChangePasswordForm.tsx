@@ -8,12 +8,15 @@ import React, { useState } from 'react';
 import 'regenerator-runtime/runtime';
 import { OperationResult } from 'urql';
 import './ChangePasswordForm.module.scss';
+import { passwordAttributes } from '@multi-cart/util';
+import { useMyToasts } from '../../_hooks/useMyToasts';
 
 export const ChangePasswordForm = () => {
   const router = useRouter();
   const username = router.query.username as string;
   const [, changePassword] = useChangePasswordMutation();
   const [tokenError, setTokenError] = useState("");
+  const { toastError, toastSuccess } = useMyToasts();
 
   return (
 
@@ -26,7 +29,7 @@ export const ChangePasswordForm = () => {
           username: string;
           token: string;
           newPassword: string;
-        }>> & { errors?: unknown, data?: unknown} = await changePassword({
+        }>> & { errors?: unknown, data?: unknown } = await changePassword({
           username,
           newPassword: values.newPassword,
           token:
@@ -35,14 +38,14 @@ export const ChangePasswordForm = () => {
 
         // handle errors
         if (response.error) {
-          alert(response.error.message);
           setTokenError("error");
+          toastError(response.error.message);
         } else if ("errors" in response) {
-          alert(response.errors[0].message);
           setTokenError("error");
+          toastError(response.errors[0].message);
         } else if ("data" in response && response.data.changePassword) {
-          // consider them logged in? no, force them to login again with that new password
           // TODO: would be nice to display some kind of success toast! All set, now please login with that new password!
+          toastSuccess("👍 All set, now please 🙏 login with that new password!");
           router.push("/login");
         }
 
@@ -52,10 +55,20 @@ export const ChangePasswordForm = () => {
           <Stack spacing="6">
             <InputField
               required
+              disabled
+              name="username"
+              placeholder="username"
+              value={router.query.username}>
+            </InputField>
+
+            <InputField
+              required
               label="New Password "
               name="newPassword"
               placeholder="new password"
-              type="password">
+              type="password"
+              {...passwordAttributes}
+            >
             </InputField>
             {tokenError ?
               <div>

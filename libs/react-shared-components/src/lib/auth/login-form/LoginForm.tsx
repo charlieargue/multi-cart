@@ -45,6 +45,7 @@ export function LoginForm(props: LoginFormProps) {
           <Stack spacing="6">
             <InputField
               required
+              // NO! since can be username too... type="email"
               label="Username or Email"
               name="usernameOrEmail"
               placeholder="username or email">
