@@ -81,7 +81,13 @@ export function RegistrationForm(props: RegistrationFormProps) {
             </InputField>
             <ErrorMessage component={ErrMsg} name="password" />
 
-            <Button colorScheme="pink" size="lg" fontSize="md" type="submit">Register</Button>
+            <Button
+              isLoading={isSubmitting}
+              loadingText="Registering..."
+              colorScheme="pink"
+              size="lg"
+              fontSize="md"
+              type="submit">Register</Button>
           </Stack>
         </Form>
       )

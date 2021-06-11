@@ -37,7 +37,13 @@ export function ForgotPasswordForm(props: ForgotPasswordFormProps) {
                                     placeholder="email"
                                     type="email">
                                 </InputField>
-                                <Button type="submit" colorScheme="pink" size="lg" fontSize="md">Reset Password</Button>
+                                <Button
+                                    isLoading={isSubmitting}
+                                    loadingText="Resetting..."
+                                    type="submit"
+                                    colorScheme="pink"
+                                    size="lg"
+                                    fontSize="md">Reset Password</Button>
                             </Stack>
                         </Form>
                     </MicroLayout>

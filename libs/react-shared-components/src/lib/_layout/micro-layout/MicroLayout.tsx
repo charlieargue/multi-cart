@@ -27,9 +27,9 @@ export interface MicroLayoutProps {
 export function MicroLayout({ heading, subHeading, children }: MicroLayoutProps) {
   return (
     <Wrapper>
-      <Box bg={mode('gray.50', 'inherit')} minH="100vh" minWidth="100vw" py="12" px={{ sm: '6', lg: '8' }}>
+      <Box bg={mode('gray.50', 'inherit')} minH="100vh" minWidth="100vw" py="20" px={{ sm: '6', lg: '8' }}>
         <Box maxW={{ sm: 'md' }} mx={{ sm: 'auto' }} w={{ sm: 'full' }}>
-          <Box mb={{ base: '10', md: '24' }}>
+          <Box mb={{ base: '8', md: '16' }}>
             <Logo />
           </Box>
           <Heading mt="6" textAlign="center" size="xl" fontWeight="extrabold">
