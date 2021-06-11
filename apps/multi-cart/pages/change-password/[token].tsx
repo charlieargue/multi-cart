@@ -1,7 +1,7 @@
 import { NextPage } from 'next';
 import { withUrqlClient } from 'next-urql';
 import React from 'react';
-import 'regenerator-runtime/runtime';
+// import 'regenerator-runtime/runtime';
 import { createUrqlClient } from '@multi-cart/react-data-access';
 import { ChangePasswordContainer } from '../../appViews/auth/ChangePasswordContainer';
 

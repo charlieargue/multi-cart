@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 import { ImPlus as PlusIcon } from 'react-icons/im';
 import './NewCartButton.module.scss';
 import { Button } from '@chakra-ui/react';
-import 'regenerator-runtime/runtime';
+// import 'regenerator-runtime/runtime';
 import { useIsAuth } from '../../auth/useIsAuth';
 
 /* eslint-disable-next-line */

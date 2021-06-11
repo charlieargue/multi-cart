@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import React from 'react';
 import { CgChevronDown as ChevronDownIcon } from 'react-icons/cg';
 import { RiErrorWarningFill as WarningIcon } from 'react-icons/ri';
-import 'regenerator-runtime/runtime';
+// import 'regenerator-runtime/runtime';
 import { CartAvatarInner } from '../cart-avatar-inner/CartAvatarInner';
 import CartAvatarRow from '../cart-avatar-row/CartAvatarRow';
 import NewCartButton from '../new-cart-button/NewCartButton';

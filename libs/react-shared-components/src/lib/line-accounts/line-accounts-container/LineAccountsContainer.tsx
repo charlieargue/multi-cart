@@ -4,7 +4,7 @@ import { DrawerContainer, SearchBar } from '@multi-cart/react-ui';
 import { getRemainingAmount } from '@multi-cart/util';
 import React from 'react';
 import { FaRegCreditCard as LineAccountsIcon } from 'react-icons/fa';
-import 'regenerator-runtime/runtime';
+// import 'regenerator-runtime/runtime';
 import AccountRow from '../account-row/AccountRow';
 import AddLineAccountButton from '../add-line-account-button/AddLineAccountButton';
 import FilterableAccountTable from '../filterable-account-table/FilterableAccountTable';

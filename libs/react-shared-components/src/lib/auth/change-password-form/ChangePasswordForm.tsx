@@ -5,7 +5,7 @@ import { Form, Formik } from 'formik';
 import NextLink from "next/link";
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
-import 'regenerator-runtime/runtime';
+// import 'regenerator-runtime/runtime';
 import { OperationResult } from 'urql';
 import './ChangePasswordForm.module.scss';
 import { passwordAttributes } from '@multi-cart/util';

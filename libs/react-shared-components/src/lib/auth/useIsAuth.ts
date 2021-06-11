@@ -1,7 +1,7 @@
 import { useMeQuery } from "@multi-cart/react-data-access";
 import { useRouter } from "next/router";
 import { useEffect, useReducer } from "react";
-import 'regenerator-runtime/runtime';
+// import 'regenerator-runtime/runtime';
 
 type Action = { type: 'replace', path: string }
 

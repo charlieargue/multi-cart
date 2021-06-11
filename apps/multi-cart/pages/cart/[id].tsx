@@ -3,7 +3,7 @@ import { NextPage } from 'next';
 import { withUrqlClient } from 'next-urql';
 import React from 'react';
 import { EditCartContainer } from '../../appViews/EditCartContainer';
-import 'regenerator-runtime/runtime';
+// import 'regenerator-runtime/runtime';
 import { createUrqlClient } from '@multi-cart/react-data-access';
 
 // -------------------

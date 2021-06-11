@@ -6,7 +6,7 @@ import { toCombinedErrorMap, toErrorMap } from '@multi-cart/util';
 import { ErrorMessage, Form, Formik } from 'formik';
 import { useRouter } from "next/router";
 import React from 'react';
-import 'regenerator-runtime/runtime';
+// import 'regenerator-runtime/runtime';
 import { useMyToasts } from '../../_hooks/useMyToasts';
 import './RegistrationForm.module.scss';
 

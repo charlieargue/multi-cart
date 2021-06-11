@@ -28,7 +28,7 @@ resource "aws_dynamodb_table" "account_dynamo_table" {
     name = "accountNumber"
     type = "S"
   }
-  
+
   attribute {
     name = "accountName"
     type = "S"
@@ -41,7 +41,7 @@ resource "aws_dynamodb_table" "account_dynamo_table" {
     read_capacity   = 1
     projection_type = "ALL"
   }
-  
+
   global_secondary_index {
     name            = "AccountNameIndex"
     hash_key        = "accountName"

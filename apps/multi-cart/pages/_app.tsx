@@ -1,5 +1,5 @@
 import React from 'react';
-import 'regenerator-runtime/runtime';
+// // import 'regenerator-runtime/runtime';
 import Providers from '../providers/Providers';
 
 

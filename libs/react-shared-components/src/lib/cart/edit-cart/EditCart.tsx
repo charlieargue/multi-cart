@@ -5,7 +5,7 @@ import {
 import { CartLine, useCartQuery, useUpdateUserMutation } from '@multi-cart/react-data-access';
 import { BigAlert, Breadcrumbs } from '@multi-cart/react-ui';
 import React, { useEffect } from 'react';
-import 'regenerator-runtime/runtime';
+// import 'regenerator-runtime/runtime';
 import LineAccount from '../../line-accounts/line-account/LineAccount';
 import LineAccountsContainer from '../../line-accounts/line-accounts-container/LineAccountsContainer';
 import CartLineRow from '../cart-line-row/CartLineRow';

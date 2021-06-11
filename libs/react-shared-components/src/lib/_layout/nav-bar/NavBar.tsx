@@ -14,7 +14,7 @@ import { useRouter } from 'next/router';
 import React from 'react';
 import { FiLogOut as LogoutIcon } from 'react-icons/fi';
 import { useSelector } from 'react-redux';
-import 'regenerator-runtime/runtime';
+// import 'regenerator-runtime/runtime';
 import { CartAvatar } from '../../cart/cart-avatar/CartAvatar';
 import styles from './NavBar.module.scss'; // TODO: the red squiggly goes away if you don't use the styles, and just straight import the scss...
 

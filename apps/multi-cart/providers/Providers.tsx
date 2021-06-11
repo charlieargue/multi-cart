@@ -1,6 +1,6 @@
 import { ChakraProvider, ColorModeProvider } from '@chakra-ui/react';
 import React from 'react';
-import 'regenerator-runtime/runtime';
+// import 'regenerator-runtime/runtime';
 import theme from '../_theme/theme';
 import { Provider } from 'react-redux'
 import { store } from '@multi-cart/react-app-state';
