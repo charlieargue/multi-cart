@@ -23,6 +23,32 @@ resource "aws_dynamodb_table" "account_dynamo_table" {
     name = "id"
     type = "S"
   }
+
+  attribute {
+    name = "accountNumber"
+    type = "S"
+  }
+  
+  attribute {
+    name = "accountName"
+    type = "S"
+  }
+
+  global_secondary_index {
+    name            = "AccountNumberIndex"
+    hash_key        = "accountNumber"
+    write_capacity  = 1
+    read_capacity   = 1
+    projection_type = "ALL"
+  }
+  
+  global_secondary_index {
+    name            = "AccountNameIndex"
+    hash_key        = "accountName"
+    write_capacity  = 1
+    read_capacity   = 1
+    projection_type = "ALL"
+  }
 }
 
 
