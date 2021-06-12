@@ -19,6 +19,8 @@ export function LoginForm(props: LoginFormProps) {
   const handleGuestLogin = async () => {
     // TODO: DRY more!
     setIsGuestSubmitting(true);
+    // clear token(s)
+    localStorage.removeItem("token"); // VIP, otherwise will not send x-api-key
     const response = await login({
       "usernameOrEmail": "guest",
       "password": "mcGUEST_DEV_1#"
@@ -51,7 +53,7 @@ export function LoginForm(props: LoginFormProps) {
       borderRadius="4px"
       shadow="md"
       p={3}>
-      <Avatar src="apps/multi-cart/public/guest.png" />
+      <Avatar src="/guest.png" />
       <Box ml="3">
         <Text fontWeight="bold">
           Guest Login
@@ -68,7 +70,7 @@ export function LoginForm(props: LoginFormProps) {
     <Formik initialValues={{ usernameOrEmail: "", password: "" }}
       onSubmit={async (values, { setErrors }) => {
         // clear token(s)
-        localStorage.removeItem("token");
+        localStorage.removeItem("token"); // VIP, otherwise will not send x-api-key
         const response = await login(values);
         if (response.data?.login.errors) {
           setErrors(toErrorMap(response.data?.login.errors))

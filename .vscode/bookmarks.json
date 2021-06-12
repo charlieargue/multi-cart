@@ -79,6 +79,26 @@
 					"label": "🚥 9 - PIPELINE after"
 				}
 			]
+		},
+		{
+			"path": "libs/multi-cart-iac/AppSync/schema/schema.gql",
+			"bookmarks": [
+				{
+					"line": 153,
+					"column": 3,
+					"label": ""
+				}
+			]
+		},
+		{
+			"path": "libs/multi-cart-iac/tf-COGNITO-groups.tf",
+			"bookmarks": [
+				{
+					"line": 16,
+					"column": 20,
+					"label": ""
+				}
+			]
 		}
 	]
 }
