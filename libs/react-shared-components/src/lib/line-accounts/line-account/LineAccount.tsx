@@ -29,6 +29,7 @@ export const LineAccount = ({ lineAccount, line }: LineAccountProps) => {
   const [, updateCartLineAccount] = useUpdateCartLineAccountMutation();
   const [{ data: dataAccount, fetching: fetchingAccount }] = useAccountsQuery(); // NOTE: this is instead of adding in one more leftJoinAndSelect() to all the cart/carts queries, etc...
   const percentage = useRef(getRemainingPercentage(line, lineAccount.id));
+  const initializing = useRef(true);
 
   // ------------------- update LA.AMOUNT when line.price|qty changes!
   useEffect(() => {
@@ -61,22 +62,26 @@ export const LineAccount = ({ lineAccount, line }: LineAccountProps) => {
       }}
       validationSchema={LineAccountFormSchema}
       onSubmit={async (values) => {
-        // 1. calculate new AMOUNT based on this NEW percentage
-        // 2. and must update the actual percentage ref (our "view model")
-        // 3. update the DB 
-        const newAmount = computeAmountGivenPercentage({
-          linePrice: line.price,
-          lineQuantity: line.quantity,
-          lineTax: 0,
-          lineAccountPercentage: values.percentage
-        });
-        percentage.current = values.percentage;
-        await updateCartLineAccount({
-          id: lineAccount.id,
-          amount: newAmount,
-          cartId: line.cartId,
-          cartLineId: line.id,
-        });
+        // don't over fire when Formik hydrates form
+        if (!initializing.current) {
+          // 1. calculate new AMOUNT based on this NEW percentage
+          // 2. and must update the actual percentage ref (our "view model")
+          // 3. update the DB 
+          const newAmount = computeAmountGivenPercentage({
+            linePrice: line.price,
+            lineQuantity: line.quantity,
+            lineTax: 0,
+            lineAccountPercentage: values.percentage
+          });
+          percentage.current = values.percentage;
+          await updateCartLineAccount({
+            id: lineAccount.id,
+            amount: newAmount,
+            cartId: line.cartId,
+            cartLineId: line.id,
+          });
+        }
+        initializing.current = false;
 
       }}>
       {({ /*isSubmitting, values, setValues,*/ errors, touched }) => (
@@ -111,6 +116,7 @@ export const LineAccount = ({ lineAccount, line }: LineAccountProps) => {
             <Box minW="60px" maxW="80px">
               {/* style={(errors.percentage && touched.percentage) ? { "border": "2px dotted red" } : null} */}
               <InputField
+                required
                 type="number"
                 aria-label="percentage"
                 name="percentage"

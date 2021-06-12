@@ -16,7 +16,7 @@ interface CartLineRowProps {
   children?: React.ReactNode;
 }
 
-// - thx:https://itnext.io/formik-introduction-autosave-react-19d4c15cfb90
+// - thx: https://itnext.io/formik-introduction-autosave-react-19d4c15cfb90
 // - thx: https://github.com/benawad/lireddit/tree/master/web/src/pages/post/edit
 // - thx: https://gist.github.com/jaredpalmer/56e10cabe839747b84b81410839829be
 export const CartLineRow = ({ line, children, idx }: CartLineRowProps) => {
@@ -29,8 +29,6 @@ export const CartLineRow = ({ line, children, idx }: CartLineRowProps) => {
   }
 
   return (
-    // TODO: clean up the css/shared w/ editCart issue...
-
     <>
       <Formik
         initialValues={{
