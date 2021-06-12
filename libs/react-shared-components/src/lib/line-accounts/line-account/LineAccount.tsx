@@ -1,7 +1,7 @@
 import { Badge, Box, HStack, InputGroup, InputLeftAddon, InputRightAddon } from '@chakra-ui/react';
 import { CartLine, CartLineAccount, useUpdateCartLineAccountMutation } from '@multi-cart/react-data-access';
 import { InputField } from '@multi-cart/react-ui';
-import { computeAmountGivenPercentage, getRemainingPercentage, getTotalPercentages, toFriendlyCurrency } from '@multi-cart/util';
+import { computeAmountGivenPercentage, computePercentageGivenAmount, getTotalPercentages, toFriendlyCurrency } from '@multi-cart/util';
 import { Form, Formik } from "formik";
 import React, { useCallback, useEffect, useRef } from 'react';
 import { FaPercentage as PercentageIcon } from 'react-icons/fa';
@@ -34,8 +34,11 @@ const LineAccountFormSchema = Yup.object().shape({
 // -------------------
 export const LineAccount = ({ lineAccount, line }: LineAccountProps) => {
   const [, updateCartLineAccount] = useUpdateCartLineAccountMutation();
-  const percentage = useRef(getRemainingPercentage(line, lineAccount.id)); // CULPRIT 🔴 and NOT DRY
-  const initializing = useRef(true); // 🔴 NOT sure
+  const initializingForUseEffect = useRef(true);
+  const initializingForFormik = useRef(true);
+  // NOTE: using useRef because don't want changes to percentage to trigger re-renders (afaik)
+  // NOTE: auto-computing remaining percentage done implicitly on New CLA Button Side (see LineAccountsCOntainer), const remainingAmount = getRemainingAmount(line)
+  const percentage = useRef(computePercentageGivenAmount(lineAccount, line));
 
   const saveLineAccount = useCallback(async () => {
     const newAmount = computeAmountGivenPercentage({
@@ -51,7 +54,7 @@ export const LineAccount = ({ lineAccount, line }: LineAccountProps) => {
       amount: newAmount
     });
   },
-    [line.cartId, line.id, line.price, line.quantity, lineAccount.id, updateCartLineAccount], // 🔴 NOT SURE
+    [line.cartId, line.id, line.price, line.quantity, lineAccount.id, updateCartLineAccount],
   )
 
   // ------------------- update LA.AMOUNT when line.price|qty changes!
@@ -60,8 +63,12 @@ export const LineAccount = ({ lineAccount, line }: LineAccountProps) => {
   // • and hit the DB saving that!
   // CONFIRMED: graphe-cache IS automatically updating lineAccount.amount after database update!
   useEffect(() => {
-    console.log(`🟡 🟡 🟡 🟡  ~ USE EFFECT!`);
-    saveLineAccount();
+    // need to skip first call during loading
+    if (initializingForUseEffect.current === false) {
+      console.log(`🟡 🟡 🟡 🟡  ~ USE EFFECT!`);
+      saveLineAccount();
+    }
+    initializingForUseEffect.current = false; // but now that skipped, make sure not initializing anymore
   }, [line.price, line.quantity, saveLineAccount]);
 
 
@@ -73,7 +80,7 @@ export const LineAccount = ({ lineAccount, line }: LineAccountProps) => {
       validationSchema={LineAccountFormSchema}
       onSubmit={async (values) => {
         // don't over fire when Formik hydrates form
-        if (!initializing.current) {
+        if (!initializingForFormik.current) {
           console.log(`🔵 🔵 🔵 🔵 🔵 🔵  ~ FORMIK onSubmit!`);
           // 1. calculate new AMOUNT based on this NEW percentage
           // 2. and must update the actual percentage ref (our "view model")
@@ -81,7 +88,7 @@ export const LineAccount = ({ lineAccount, line }: LineAccountProps) => {
           percentage.current = values.percentage;
           await saveLineAccount()
         }
-        initializing.current = false;
+        initializingForFormik.current = false;
       }}>
       {({ /*isSubmitting, values, setValues,*/ errors, touched }) => (
         <Form>
