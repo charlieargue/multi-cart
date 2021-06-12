@@ -9,14 +9,9 @@ import React, { useCallback, useEffect, useState } from 'react';
 // -------------------
 export const AutoSave = ({ debounceMs = 1000 }) => {
   const formik = useFormikContext();
-  const [, setIsSaved] = useState(null);
 
   const debouncedSubmit = useCallback(
-    debounce(
-      () =>
-        formik.submitForm().then(() => setIsSaved(true)),
-      debounceMs
-    ),
+    debounce(() => formik.submitForm(), debounceMs),
     [debounceMs, formik.submitForm]
   );
 
