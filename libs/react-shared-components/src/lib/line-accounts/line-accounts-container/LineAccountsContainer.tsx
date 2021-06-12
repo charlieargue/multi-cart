@@ -1,7 +1,7 @@
 import { Divider, Stack, Text, useDisclosure } from '@chakra-ui/react';
 import { Account, CartLine, useAccountsQuery, useAddCartLineAccountMutation } from '@multi-cart/react-data-access';
 import { DrawerContainer, SearchBar } from '@multi-cart/react-ui';
-import { getRemainingAmount } from '@multi-cart/util';
+import { getRemainingAmount, getTotalPercentages } from '@multi-cart/util';
 import React from 'react';
 import { FaRegCreditCard as LineAccountsIcon } from 'react-icons/fa';
 import AccountRow from '../account-row/AccountRow';
@@ -71,7 +71,16 @@ export function LineAccountsContainer({ line }: LineAccountsContainerProps) {
   return (
     <>
       {/* LABEL, BUTTONS, VALIDATORS */}
-      <Stack direction="row" spacing={4} align="center" mt={1} bg="green.50" px={4} py={2} rounded="md" shadow="unset">
+      <Stack
+        direction="row"
+        spacing={4}
+        align="center"
+        mt={1}
+        bg={getTotalPercentages(line) === 100 ? "green.50" : "red.100"}
+        px={4}
+        py={2}
+        rounded="md"
+        shadow="unset">
         {label}
         <AddLineAccountButton btnRef={btnRef} clickHandler={onOpen} />
         <LineAccountValidators line={line} />

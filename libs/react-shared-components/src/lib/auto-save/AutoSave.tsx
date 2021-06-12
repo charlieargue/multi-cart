@@ -4,8 +4,6 @@ import { useFormikContext } from 'formik';
 import debounce from 'just-debounce-it';
 import React, { useCallback, useEffect, useState } from 'react';
 
-// TODO: put this in it's own custom hook! see `react-debounce-over-rendering.ISSUE.md` does NOT need to be a component
-
 // thx: https://itnext.io/formik-introduction-autosave-react-19d4c15cfb90
 // thx: https://codesandbox.io/s/formik-autosave-example-wfcb6?file=/src/AutoSavingForm.tsx:124-242
 // -------------------
