@@ -17,7 +17,7 @@ export const AppLayout = (props: AppLayoutProps) => {
   return (
     <>
       <NavBar />
-      <Wrapper>
+      <Wrapper pt="60px">
         <Flex
           direction="column"
           align="center"

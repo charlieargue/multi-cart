@@ -26,8 +26,20 @@ export const NavBar = () => {
     const isFetching = useSelector((state: StateType) => state.isFetching);
 
     return (
-        <Box bg={mode('gray.200', 'gray.700')} color={mode('gray.700', 'gray.200')} px={[0, 10, 7, 14]} pr={[3, 0]}>
-            <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
+        <Box
+            position="fixed"
+            minW="100vw"
+            zIndex="100"
+            shadow="sm"
+            bgGradient="linear(to-b, gray.200, gray.300)"
+            // bg={mode('gray.200', 'gray.700')}
+            color={mode('gray.700', 'gray.200')}
+            px={[0, 10, 7, 14]}
+            pr={[3, 0]}>
+            <Flex
+                h={16}
+                alignItems={'center'}
+                justifyContent={'space-between'}>
 
 
                 <HStack>
