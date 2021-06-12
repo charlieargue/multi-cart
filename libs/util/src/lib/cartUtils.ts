@@ -56,6 +56,7 @@ export const getTotalAmounts = (lineAccounts: CartLineAccount[]): number => {
 export const getRemainingPercentage = (line: CartLine, excludeCartLineAccountId?: string): number => {
     // NOTE: at this stage, the current LA we're trying to compute will ALREADY be in line.cartLineAccounts, so need to be able to exclude it!
     const result = 100 - getTotalPercentages(line, excludeCartLineAccountId);
+    console.log('2 💎 result = ', result);
     return roundToTwo(result);
 }
 
@@ -78,9 +79,11 @@ export const getTotalPercentages = (line: CartLine, excludeCartLineAccountId?: s
 export const computePercentageGivenAmount = (la: CartLineAccount, line: CartLine) => {
     const ltwt: number = getLineTotalWithTax(line.price, line.quantity, 0);
     if (ltwt === 0) {
+        console.log('1 💎');
         return 100;
     } else {
         const nicelyRoundedPercentage = roundToTwo((la.amount / ltwt) * 100); // NOTE: cannot do Math.round() because I want to allow .1 percent, which will round incorrectly to zero
+        console.log('3 💎, nicelyRoundedPercentage = ', nicelyRoundedPercentage);
         return nicelyRoundedPercentage;
     }
 }

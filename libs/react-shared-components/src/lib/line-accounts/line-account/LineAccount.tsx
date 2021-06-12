@@ -28,12 +28,19 @@ export const LineAccount = ({ lineAccount, line }: LineAccountProps) => {
   const [, deleteCartLineAccount] = useDeleteCartLineAccountMutation();
   const [, updateCartLineAccount] = useUpdateCartLineAccountMutation();
   const [{ data: dataAccount, fetching: fetchingAccount }] = useAccountsQuery(); // NOTE: this is instead of adding in one more leftJoinAndSelect() to all the cart/carts queries, etc...
+  
+  // CULPRIT 🔴 and NOT DRY
   const percentage = useRef(getRemainingPercentage(line, lineAccount.id));
-  const initializing = useRef(true);
+  const initializingTrigger1 = useRef(true);
+  const initializingTrigger2 = useRef(true);
+
+  // DRY THIS WITH A useReducer (and can you call async calls in)
 
   // ------------------- update LA.AMOUNT when line.price|qty changes!
   useEffect(() => {
+
     async function saveCLA() {
+      console.log(`🟢 🟢 🟢 🟢 🟢 🟢  ~ useEffect saveCLA() based on EVERYTHING!, initializing.current = ${initializingTrigger1.current}`);
       // • anytime line.price or line.quantity changes
       // • need to hit a) calculate new AMOUNT for this LA
       // • and hit the DB saving that!
@@ -51,7 +58,10 @@ export const LineAccount = ({ lineAccount, line }: LineAccountProps) => {
         amount: newAmount
       });
     }
-    saveCLA();
+    if (!initializingTrigger1.current) {
+      saveCLA();
+    }
+    initializingTrigger1.current = false;
   }, [line.id, line.cartId, line.price, line.quantity, updateCartLineAccount, lineAccount.id]);
 
 
@@ -63,7 +73,8 @@ export const LineAccount = ({ lineAccount, line }: LineAccountProps) => {
       validationSchema={LineAccountFormSchema}
       onSubmit={async (values) => {
         // don't over fire when Formik hydrates form
-        if (!initializing.current) {
+        if (!initializingTrigger2.current) {
+          console.log(`🔵 🔵 🔵 🔵 🔵 🔵  ~ FORMIK onSubmit!`);
           // 1. calculate new AMOUNT based on this NEW percentage
           // 2. and must update the actual percentage ref (our "view model")
           // 3. update the DB 
@@ -73,6 +84,8 @@ export const LineAccount = ({ lineAccount, line }: LineAccountProps) => {
             lineTax: 0,
             lineAccountPercentage: values.percentage
           });
+
+          // // CULPRIT 🔴 and NOT DRY and CONFUSING... TODO
           percentage.current = values.percentage;
           await updateCartLineAccount({
             id: lineAccount.id,
@@ -81,7 +94,7 @@ export const LineAccount = ({ lineAccount, line }: LineAccountProps) => {
             cartLineId: line.id,
           });
         }
-        initializing.current = false;
+        initializingTrigger2.current = false;
 
       }}>
       {({ /*isSubmitting, values, setValues,*/ errors, touched }) => (
