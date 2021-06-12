@@ -78,7 +78,7 @@ export function LineAccountsContainer({ line }: LineAccountsContainerProps) {
         mt={1}
         bg={getTotalPercentages(line) === 100 ? "green.50" : "red.100"}
         px={4}
-        py={2}
+        py={3}
         rounded="md"
         shadow="unset">
         {label}

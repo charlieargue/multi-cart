@@ -41,20 +41,24 @@ export function LoginForm(props: LoginFormProps) {
   };
 
   const guestModeLogin = <TooltipMC
-    label="You won't have to register, but other guests can edit/break your cart at any time! And we're not responsible for any content you may see."
-    placement="top">
+    label="You won't have to register, but other guests can edit/break your carts at any time! 🙏 &nbsp;And we're not responsible for any content you may see."
+    placement="right">
     <Flex
       onClick={handleGuestLogin}
       className="cursor-pointer"
-      bgGradient="linear(to-t, brand.yellow, brand.pink)"
+      bgGradient="linear(to-t, orange, brand.yellow)"
       borderRadius="4px"
+      _hover={{
+        shadow: "xl",
+        bgGradient: "linear(to-t, brand.yellow, orange)"
+      }}
       shadow="md"
       p={3}>
       <Avatar src="/guest.png" />
       <Box ml="3">
         <Text fontWeight="bold">
           Guest Login
-      <Badge ml="1" colorScheme="green">
+      <Badge mb="1" ml="1" colorScheme="pink">
             New
       </Badge>
         </Text>

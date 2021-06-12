@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 import React from 'react';
 import { ImPlus as PlusIcon } from 'react-icons/im';
 import { useIsAuth } from '../../_hooks/useIsAuth';
+import useMyToasts from '../../_hooks/useMyToasts';
 import './NewCartButton.module.scss';
 
 /* eslint-disable-next-line */
@@ -17,6 +18,7 @@ export function NewCartButton({ className }: NewCartButtonProps) {
 
   const [, blankCart] = useBlankCartMutation();
   const router = useRouter();
+  const { toastError, toastSuccess } = useMyToasts();
 
 
   return (
@@ -27,9 +29,12 @@ export function NewCartButton({ className }: NewCartButtonProps) {
       onClick={async () => {
         const { error, data } = await blankCart();
         if (!error && data?.blankCart?.id) {
+          toastSuccess("Successfully created new cart!")
           router.push(`/cart/${data.blankCart.id}`);
+        } else if(error) {
+          toastError(error.message);
         }
-        // TODO: error handling
+        
       }}
       size="xs"
       className={clsx(className)}

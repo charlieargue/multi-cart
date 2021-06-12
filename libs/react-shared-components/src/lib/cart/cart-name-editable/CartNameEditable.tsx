@@ -31,7 +31,7 @@ export function CartNameEditable({ name, id }: CartNameEditableProps) {
       <Button
         colorScheme="pink"
         size="lg"
-        shadow="lg"
+        shadow="md"
         borderColor="gray.100"
         height="55px"
         borderWidth="3px"

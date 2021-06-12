@@ -26,9 +26,9 @@ export function Breadcrumbs<BreadcrumbsProps>({ links = [] }) {
       fontWeight="medium"
       mb={10}
       spacing="8px"
-      separator={<ChevronRightIcon style={{ "marginTop": "7px" }} 
-      size={14} 
-      color="gray.400" />}>
+      separator={<ChevronRightIcon style={{ "marginTop": "7px" }}
+        size={14}
+        color="gray.400" />}>
 
       {/* Home */}
       <BreadcrumbItem>
@@ -44,10 +44,10 @@ export function Breadcrumbs<BreadcrumbsProps>({ links = [] }) {
             href={link.href}
           >
             <BreadcrumbLink href={link.href}>
-              <TextMuted  fontSize="14px">
+              <TextMuted fontSize="14px">
                 {link.label}
                 {link.id && (
-                  <Badge mb={.5} colorScheme="pink" ml={2}>{link.id}</Badge>
+                  <Badge textTransform="none" mb={.5} colorScheme="pink" ml={2}>{link.id}</Badge>
                 )}
               </TextMuted>
             </BreadcrumbLink>
