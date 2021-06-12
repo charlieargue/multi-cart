@@ -1,5 +1,9 @@
 // NOTE: see FYI/fe/graphql-ERROR-OBJECTS.md
-export const toCombinedErrorMap = (errors: any[]) => {
+interface CombinedError {
+    message: string;
+};
+
+export const toCombinedErrorMap = (errors: CombinedError[]) => {
 
     const errorMap: Record<string, string> = {};
     errors.forEach(({ message }) => {
@@ -8,12 +12,12 @@ export const toCombinedErrorMap = (errors: any[]) => {
         if (message.includes("password")) {
             errorMap["password"] = message;
         } else
-         if (message.includes("username")) {
-            errorMap["username"] = message;
-        } else {
-            // handle unexpected errors
-            throw new Error(message);
-        }
+            if (message.includes("username")) {
+                errorMap["username"] = message;
+            } else {
+                // handle unexpected errors
+                throw new Error(message);
+            }
     });
 
     return errorMap;

@@ -19,16 +19,12 @@ const noCartsMsg = (<HStack direction="row" mr={4} spacing={1}>
 </HStack>);
 
 // TODO: clear up this object VS JSX confusing approach I've got going here (including the && AND syntax VS ternary syntax ... or all good?)
-// TODO: ideally, everything would be done so that I could pass in one function call and get back a proper CartAvatarRow, and another
-// call and get back one with skeletons, so DRY!
-// TODO: un-hard code this
 const CartSkeleton = ((idx:string) => {
   return (<MenuItem
     key={idx}>
     <Flex
       minW="100%"
-      justify="space-between"
-    >
+      justify="space-between">
       <HStack width="100%" spacing="4">
         <Box width="80%"><SkeletonText noOfLines={2} /></Box>
         <Box><SkeletonCircle size="10" /></Box>

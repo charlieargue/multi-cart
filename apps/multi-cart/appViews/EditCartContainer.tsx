@@ -1,6 +1,7 @@
-import React from 'react';
 import { AppLayout, EditCart } from '@multi-cart/react-shared-components';
+import { FullScreenSpinner } from '@multi-cart/react-ui';
 import { useRouter } from 'next/router';
+import React from 'react';
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface EditCartContainerProps {
@@ -11,9 +12,8 @@ export const EditCartContainer = () => {
     const router = useRouter();
     const id = router.query.id as string;
 
-    // TODO: switch to suspence?
     if (id === undefined) {
-        return (<div>🟢 Loading...</div>);
+        return (<FullScreenSpinner />);
     }
 
     return (
