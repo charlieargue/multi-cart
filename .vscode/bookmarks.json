@@ -79,21 +79,6 @@
 					"label": "🚥 9 - PIPELINE after"
 				}
 			]
-		},
-		{
-			"path": "libs/react-shared-components/src/lib/auto-save/AutoSave.tsx",
-			"bookmarks": [
-				{
-					"line": 40,
-					"column": 12,
-					"label": ""
-				},
-				{
-					"line": 53,
-					"column": 12,
-					"label": ""
-				}
-			]
 		}
 	]
 }
