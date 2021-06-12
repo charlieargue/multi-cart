@@ -25,7 +25,7 @@ export const CartLineRow = ({ line, children, idx }: CartLineRowProps) => {
   const initializing = useRef(true);
 
   if (!line) {
-    return <div>Loading line..</div>;
+    return <div>Loading...</div>;
   }
 
   return (

@@ -94,46 +94,6 @@
 					"label": ""
 				}
 			]
-		},
-		{
-			"path": "libs/react-shared-components/src/lib/cart/edit-cart/EditCart.tsx",
-			"bookmarks": [
-				{
-					"line": 56,
-					"column": 15,
-					"label": "🟡 Loading..."
-				}
-			]
-		},
-		{
-			"path": "libs/react-shared-components/src/lib/line-accounts/line-accounts-container/LineAccountsContainer.tsx",
-			"bookmarks": [
-				{
-					"line": 89,
-					"column": 59,
-					"label": "loading..."
-				}
-			]
-		},
-		{
-			"path": "apps/multi-cart/appViews/EditCartContainer.tsx",
-			"bookmarks": [
-				{
-					"line": 15,
-					"column": 25,
-					"label": "🟢 Loading..."
-				}
-			]
-		},
-		{
-			"path": "libs/react-shared-components/src/lib/cart/cart-line-row/CartLineRow.tsx",
-			"bookmarks": [
-				{
-					"line": 27,
-					"column": 19,
-					"label": "loading..."
-				}
-			]
 		}
 	]
 }

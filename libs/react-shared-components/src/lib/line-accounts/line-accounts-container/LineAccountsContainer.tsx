@@ -87,7 +87,7 @@ export function LineAccountsContainer({ line }: LineAccountsContainerProps) {
         <Divider />
         {/* RESULTS TABLE */}
         {
-          searchResults.length === 0 && fetching ? (<div>loading...</div>) : (
+          searchResults.length === 0 && fetching ? (<div>Loading...</div>) : (
             <FilterableAccountTable>
               {searchResults}
             </FilterableAccountTable>

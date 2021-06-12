@@ -1,5 +1,5 @@
 import {
-  Alert, AlertIcon, Box, Table, Tbody,
+  Alert, AlertIcon, Box, Fade, Flex, HStack, SkeletonCircle, SkeletonText, Table, Tbody,
   Td, Tr, useColorModeValue as mode, Wrap, WrapItem
 } from '@chakra-ui/react';
 import { CartLine, useCartQuery, useUpdateUserMutation } from '@multi-cart/react-data-access';
@@ -47,13 +47,29 @@ export const EditCart = ({ id }: EditCartProps) => {
     </Tr>
   </Tbody>);
 
+
+  const cartSkeleton = (<Fade in={true}>
+    <Box padding="6" boxShadow="lg" bg="white">
+      <SkeletonCircle size="10" />
+      <SkeletonText mt="4" noOfLines={4} spacing="4" />
+    </Box>
+    <Box padding="6" boxShadow="lg" bg="white" mt={8}>
+      <SkeletonCircle size="10" />
+      <SkeletonText mt="4" noOfLines={4} spacing="4" />
+    </Box>
+    <Box padding="6" boxShadow="lg" bg="white" mt={8}>
+      <SkeletonCircle size="10" />
+      <SkeletonText mt="4" noOfLines={4} spacing="4" />
+    </Box>
+  </Fade>);
+
   // fetching?
   // TODO: loading indicator
   if (fetching) {
     return (
       <>
         {breadcrumbs}
-        <div>🟡 Loading...</div>
+        {cartSkeleton}
       </>
     );
   }
