@@ -4,7 +4,7 @@ import clsx from 'clsx';
 import { useRouter } from 'next/router';
 import React from 'react';
 import { ImPlus as PlusIcon } from 'react-icons/im';
-import { useIsAuth } from '../../auth/useIsAuth';
+import { useIsAuth } from '../../_hooks/useIsAuth';
 import './NewCartButton.module.scss';
 
 /* eslint-disable-next-line */
