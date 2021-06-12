@@ -1,3 +1,4 @@
+export * from './lib/line-accounts/line-account-tooltip/LineAccountTooltip';
 export * from './lib/cart/edit-cart-header/EditCartHeader';
 export * from './lib/cart/edit-cart-table-header/EditCartTableHeader';
 export * from './lib/cart/edit-cart-table-footer/EditCartTableFooter';

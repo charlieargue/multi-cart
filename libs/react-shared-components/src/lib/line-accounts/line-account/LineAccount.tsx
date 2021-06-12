@@ -1,6 +1,6 @@
 import { Badge, Box, HStack, InputGroup, InputLeftAddon, InputRightAddon } from '@chakra-ui/react';
-import { CartLine, CartLineAccount, useAccountsQuery, useDeleteCartLineAccountMutation, useUpdateCartLineAccountMutation } from '@multi-cart/react-data-access';
-import { InputField, TooltipMC } from '@multi-cart/react-ui';
+import { CartLine, CartLineAccount, useDeleteCartLineAccountMutation, useUpdateCartLineAccountMutation } from '@multi-cart/react-data-access';
+import { InputField } from '@multi-cart/react-ui';
 import { computeAmountGivenPercentage, getRemainingPercentage, getTotalPercentages, toFriendlyCurrency } from '@multi-cart/util';
 import { Form, Formik } from "formik";
 import React, { useEffect, useRef } from 'react';
@@ -8,6 +8,7 @@ import { FaPercentage as PercentageIcon } from 'react-icons/fa';
 import { TiDelete as DeleteIcon } from 'react-icons/ti';
 import * as Yup from 'yup';
 import { AutoSave } from '../../auto-save/AutoSave';
+import LineAccountTooltip from '../line-account-tooltip/LineAccountTooltip';
 
 /* eslint-disable-next-line */
 export interface LineAccountProps {
@@ -26,8 +27,8 @@ const LineAccountFormSchema = Yup.object().shape({
 export const LineAccount = ({ lineAccount, line }: LineAccountProps) => {
   const [, deleteCartLineAccount] = useDeleteCartLineAccountMutation();
   const [, updateCartLineAccount] = useUpdateCartLineAccountMutation();
-  const [{ data, fetching }] = useAccountsQuery(); // NOTE: this is instead of adding in one more leftJoinAndSelect() to all the cart/carts queries, etc...
-  
+
+
   // CULPRIT 🔴 and NOT DRY
   const percentage = useRef(getRemainingPercentage(line, lineAccount.id));
   const initializingTrigger1 = useRef(true);
@@ -101,10 +102,7 @@ export const LineAccount = ({ lineAccount, line }: LineAccountProps) => {
           <InputGroup maxWidth="400px">
 
             {/* LEFT PART */}
-            <TooltipMC
-
-              label={data?.accounts && data.accounts.find(a => a.accountNumber === lineAccount.accountNumber).accountName}
-              >
+            <LineAccountTooltip accountNumber={lineAccount.accountNumber}>
               <InputLeftAddon children={<HStack cursor={'help'} >
                 <Box><strong>#</strong> {lineAccount.accountNumber}</Box>
                 <Badge
@@ -120,7 +118,7 @@ export const LineAccount = ({ lineAccount, line }: LineAccountProps) => {
                   cartLineAccountId: lineAccount.id
                 })} />
               </HStack >} />
-            </TooltipMC>
+            </LineAccountTooltip>
 
             {/* INPUT for PERCENTAGE */}
             <Box minW="60px" maxW="80px">
