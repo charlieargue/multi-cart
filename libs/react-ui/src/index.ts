@@ -1,3 +1,4 @@
+export * from './lib/tooltip-mc/TooltipMC';
 export * from './lib/action-link/ActionLink';
 export * from './lib/banner/Banner';
 export * from './lib/big-alert/BigAlert';
@@ -12,4 +13,3 @@ export * from './lib/password-field/PasswordField';
 export * from './lib/search-bar/SearchBar';
 export * from './lib/text-muted/TextMuted';
 export * from './lib/wrapper/Wrapper';
-

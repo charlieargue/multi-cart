@@ -1,6 +1,6 @@
-import { Avatar, Badge, Box, Button, Flex, Stack, Text, Tooltip } from '@chakra-ui/react';
+import { Avatar, Badge, Box, Button, Flex, Stack, Text } from '@chakra-ui/react';
 import { useLoginMutation } from '@multi-cart/react-data-access';
-import { DividerWithText, InputField, PasswordField } from '@multi-cart/react-ui';
+import { DividerWithText, InputField, PasswordField, TooltipMC } from '@multi-cart/react-ui';
 import { toErrorMap } from '@multi-cart/util';
 import { Form, Formik } from 'formik';
 import { useRouter } from "next/router";
@@ -40,11 +40,8 @@ export function LoginForm(props: LoginFormProps) {
     setIsGuestSubmitting(false);
   };
 
-  const guestModeLogin = <Tooltip
-    hasArrow
+  const guestModeLogin = <TooltipMC
     label="You won't have to register, but other guests can edit/break your cart at any time! And we're not responsible for any content you may see."
-    bg="gray.300"
-    color="black"
     placement="top">
     <Flex
       onClick={handleGuestLogin}
@@ -64,7 +61,7 @@ export function LoginForm(props: LoginFormProps) {
         <Text fontSize="sm" color="gray.900">No registration required!</Text>
       </Box>
     </Flex>
-  </Tooltip>;
+  </TooltipMC>;
 
   return (
     <Formik initialValues={{ usernameOrEmail: "", password: "" }}
