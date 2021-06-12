@@ -1,7 +1,7 @@
 import { Divider, Stack, Text, useDisclosure } from '@chakra-ui/react';
 import { Account, CartLine, useAccountsQuery, useAddCartLineAccountMutation } from '@multi-cart/react-data-access';
 import { DrawerContainer, SearchBar } from '@multi-cart/react-ui';
-import { getRemainingAmount, getTotalPercentages } from '@multi-cart/util';
+import { getRemainingAmount, getTotalPercentages, hasNegativeAmounts } from '@multi-cart/util';
 import React from 'react';
 import { FaRegCreditCard as LineAccountsIcon } from 'react-icons/fa';
 import AccountRow from '../account-row/AccountRow';
@@ -76,7 +76,7 @@ export function LineAccountsContainer({ line }: LineAccountsContainerProps) {
         spacing={4}
         align="center"
         mt={1}
-        bg={getTotalPercentages(line) === 100 ? "green.50" : "red.100"}
+        bg={(getTotalPercentages(line) === 100 && !hasNegativeAmounts(line)) ? "green.50" : "red.100"}
         px={4}
         py={3}
         rounded="md"

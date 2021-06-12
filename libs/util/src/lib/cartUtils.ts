@@ -100,4 +100,14 @@ export const computeAmountGivenPercentage = (input: {
     }
 }
 
+// ------------------------
+export const hasNegativeAmounts = (line: CartLine): boolean => {
+    // thru hacks you can get over 100 and then it'll compute negative numbers and you still equal 100, but can't have negative numbers
+    // need to force error and make the UI reflect that
+    if (line?.cartLineAccounts?.length && line.cartLineAccounts.some((account) => account.amount < 0)) {
+        return true;
+    }
+    return false;
+}
+
 
