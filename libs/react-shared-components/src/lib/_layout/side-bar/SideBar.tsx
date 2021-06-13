@@ -2,6 +2,7 @@ import {
   Divider,
   List
 } from '@chakra-ui/react';
+import { useRouter } from 'next/router';
 import React from 'react';
 import { BiHelpCircle as HelpIcon } from 'react-icons/bi';
 import {
@@ -25,7 +26,9 @@ export interface SideBarProps {
 export function SideBar({ logoutFunction }: SideBarProps) {
   const { toastWarning } = useMyToasts();
   const soonFn = () => toastWarning("🤘 Coming soon!");
+  const routeName = useRouter().route.replace("/", "");
 
+  // TODO: link over (aka with onClick) breaks the gray _hover, WIP
   const mainLinks: SideBarItemType[] = [
     { name: "Dashboard", icon: DashboardIcon, href: "/dashboard" },
     { name: "Products", icon: ProductsIcon, href: "/products", onClick: soonFn },
@@ -42,13 +45,13 @@ export function SideBar({ logoutFunction }: SideBarProps) {
       <Divider mt={2} mb={3} />
       <List spacing={2} ml={3}>
         {mainLinks.map((m) => (
-          <SideBarItem item={m} key={m.name} />
+          <SideBarItem item={m} key={m.name} isCurrent={routeName === m.name.toLowerCase()} />
         ))}
       </List>
       <Divider mt={2} mb={3} />
       <List spacing={2} ml={3}>
         {secondaryLinks.map((s) => (
-          <SideBarItem item={s} key={s.name} />
+          <SideBarItem item={s} key={s.name} isCurrent={routeName === s.name.toLowerCase()}/>
         ))}
       </List>
     </>

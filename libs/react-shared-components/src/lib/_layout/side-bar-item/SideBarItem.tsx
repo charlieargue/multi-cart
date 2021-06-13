@@ -20,9 +20,10 @@ export interface SideBarItemType {
 /* eslint-disable-next-line */
 export interface SideBarItemProps {
   item: SideBarItemType;
+  isCurrent?: boolean;
 }
 
-export const SideBarItem = ({ item }: SideBarItemProps) => {
+export const SideBarItem = ({ item, isCurrent }: SideBarItemProps) => {
   return (
     <LinkBox cursor="pointer">
       <NextLink
@@ -35,7 +36,9 @@ export const SideBarItem = ({ item }: SideBarItemProps) => {
             cursor="pointer"
             px={3}
             py={2}
-            _hover={{ bg: "gray.100" }}>
+            _hover={{ bg: "gray.100" }}
+            bg={isCurrent ? "pink.100" : null}
+          >
             <ListIcon as={item.icon} color="brand.pink" />{item.name}
           </ListItem>
         </a>
