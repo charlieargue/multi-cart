@@ -2,7 +2,6 @@
 #set($nowTime = $util.time.nowISO8601() )
 $util.qr($ctx.stash.put("freshCartLineId", $freshCartLineId))
 
-
 ## NOTE: cannot do "returnValues": "ALL_NEW|etc..."... it's that way by default!
 ## NOTE: not doing a pipeline, not fetching cart first, can add that later
 ## -------------------------------------
@@ -25,12 +24,12 @@ $util.qr($ctx.stash.put("freshCartLineId", $freshCartLineId))
                     { "M" : { 
                         "id": { "S":  "$freshCartLineId"},
                         "cartId": { "S":  "$ctx.args.cartLine.cartId"},
-                        "itemId": { "S": "$ctx.args.cartLine.itemId},
-                        "description": { "S": "$ctx.args.cartLine.description},
-                        "uom": { "S": "$ctx.args.cartLine.uom},
+                        "itemId": { "S": "$ctx.args.cartLine.itemId"},
+                        "description": { "S": "$ctx.args.cartLine.description"},
+                        "uom": { "S": "$ctx.args.cartLine.uom"},
                         "categoryId": { "N": 1},
-                        "quantity": { "N": "$ctx.args.cartLine.quantity},
-                        "price": { "N": "$ctx.args.cartLine.price},
+                        "quantity": { "N": "$ctx.args.cartLine.quantity"},
+                        "price": { "N": "$ctx.args.cartLine.price"},
                         "cartLineAccounts": $util.dynamodb.toDynamoDBJson([]), 
                         "createdAt": { "S": "$nowTime"},
                         "updatedAt": { "S": "$nowTime"}
