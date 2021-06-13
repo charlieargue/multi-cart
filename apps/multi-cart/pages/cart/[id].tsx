@@ -5,13 +5,10 @@ import { withUrqlClient } from 'next-urql';
 import React from 'react';
 import { EditCartContainer } from '../../appViews/EditCartContainer';
 
-// -------------------
 const EditCartPage: NextPage = () => {
     useIsAuth(); // 🛡 session authentication
 
-    return (
-        <EditCartContainer />
-    );
+    return (<EditCartContainer />);
 };
 
 export default withUrqlClient(createUrqlClient, { ssr: false })(EditCartPage);

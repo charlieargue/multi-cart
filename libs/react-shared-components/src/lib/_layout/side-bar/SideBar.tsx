@@ -31,7 +31,7 @@ export function SideBar({ logoutFunction }: SideBarProps) {
   // TODO: link over (aka with onClick) breaks the gray _hover, WIP
   const mainLinks: SideBarItemType[] = [
     { name: "Dashboard", icon: DashboardIcon, href: "/dashboard" },
-    { name: "Products", icon: ProductsIcon, href: "/products", onClick: soonFn },
+    { name: "Products", icon: ProductsIcon, href: "/products" },
     { name: "Search", icon: SearchIcon, href: "/search", onClick: soonFn },
     { name: "User Profile", icon: UserIcon, href: "/profile", onClick: soonFn },
   ];
