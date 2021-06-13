@@ -1,6 +1,7 @@
 import { Box, Flex, LinkBox, LinkOverlay, Text } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import * as React from 'react';
+import { SyntheticEvent } from 'react';
 import styles from './Logo.module.scss';
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
@@ -9,13 +10,14 @@ interface LogoProps {
 }
 
 export const Logo = ({ clickHandler = null }: LogoProps) => {
+  const logoClickFixer = clickHandler ? { onClick: (e: SyntheticEvent) => { clickHandler(); e.stopPropagation(); e.preventDefault(); } } : {};
 
   return (
     <LinkBox cursor="pointer">
       <NextLink href="/">
-        <a href="/" style={{outline: "none"}}>
+        <a href="/" style={{ outline: "none" }}>
           <Flex justifyContent="center">
-            <Box className={styles["logo__scale-up"]}>🛍</Box>
+            <Box {...logoClickFixer} className={styles["logo__scale-up"]}>🛍</Box>
             <Box>
               <Text
                 color="brand.pink"

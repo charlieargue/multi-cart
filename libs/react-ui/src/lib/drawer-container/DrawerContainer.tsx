@@ -32,8 +32,7 @@ export function DrawerContainer({
       isOpen={isOpen}
       onClose={onClose}
       placement={placement}
-      size={size}
-    >
+      size={size}>
       <DrawerOverlay>
         <DrawerContent>
           {showCloseButton && <DrawerCloseButton />}

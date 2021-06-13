@@ -15,6 +15,7 @@ import React from 'react';
 import { FiLogOut as LogoutIcon } from 'react-icons/fi';
 import { useSelector } from 'react-redux';
 import { CartAvatar } from '../../cart/cart-avatar/CartAvatar';
+import useMyToasts from '../../_hooks/useMyToasts';
 import SideBar from '../side-bar/SideBar';
 import styles from './NavBar.module.scss'; // TODO: the red squiggly goes away if you don't use the styles, and just straight import the scss...
 
@@ -24,9 +25,19 @@ export const NavBar = () => {
     const router = useRouter();
     const [{ data, fetching }] = useMeQuery();
     const [_, logout] = useLogoutMutation();
-    const toast = useToast();
+    const { toastInfo } = useMyToasts();
     const isFetching = useSelector((state: StateType) => state.isFetching);
     const { isOpen, onOpen, onClose } = useDisclosure();
+
+    const logoutFunction = async () => {
+        // clear token(s)
+        localStorage.removeItem("token");
+        toastInfo("👋  Bye, come back soon!");
+        await logout();
+
+        // TODO: how about purge all cache so don't have to reload?
+        router.push("/login").finally(() => router.reload());
+    };
 
     return (
         <Box
@@ -100,21 +111,7 @@ export const NavBar = () => {
                             {/* Logout */}
                             <MenuItem
                                 icon={<LogoutIcon />}
-                                onClick={async () => {
-                                    // clear token(s)
-                                    localStorage.removeItem("token");
-                                    toast({
-                                        title: '👋  Bye, come back soon!',
-                                        variant: 'top-accent',
-                                        position: 'top',
-                                        status: 'info',
-                                        isClosable: true,
-                                    });
-                                    await logout();
-
-                                    // TODO: how about purge all cache so don't have to reload?
-                                    router.push("/login").finally(() => router.reload());
-                                }}>
+                                onClick={logoutFunction}>
                                 Logout</MenuItem>
                         </MenuList>
                     </Menu>
@@ -137,7 +134,7 @@ export const NavBar = () => {
                         <Logo clickHandler={onClose} />
                     </Box>
                 }>
-                <SideBar />
+                <SideBar logoutFunction={logoutFunction} />
             </DrawerContainer>
 
         </Box>
