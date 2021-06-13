@@ -1,3 +1,4 @@
+export * from './lib/_layout/side-bar/SideBar';
 export * from './lib/line-accounts/delete-line-account-button/DeleteLineAccountButton';
 export * from './lib/auth/change-password-form/ChangePasswordForm';
 export * from './lib/auth/forgot-password-form/ForgotPasswordForm';

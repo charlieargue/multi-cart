@@ -13,7 +13,7 @@ export const Logo = ({ clickHandler = null }: LogoProps) => {
   return (
     <LinkBox cursor="pointer">
       <NextLink href="/">
-        <a href="/">
+        <a href="/" style={{outline: "none"}}>
           <Flex justifyContent="center">
             <Box className={styles["logo__scale-up"]}>🛍</Box>
             <Box>

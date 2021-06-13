@@ -1,10 +1,7 @@
 import {
     Avatar, Box,
-    Button, Divider, Flex,
+    Button, Flex,
     HStack,
-    List,
-    ListIcon,
-    ListItem,
     Menu,
     MenuButton,
     MenuItem, MenuList, Spinner,
@@ -18,6 +15,7 @@ import React from 'react';
 import { FiLogOut as LogoutIcon } from 'react-icons/fi';
 import { useSelector } from 'react-redux';
 import { CartAvatar } from '../../cart/cart-avatar/CartAvatar';
+import SideBar from '../side-bar/SideBar';
 import styles from './NavBar.module.scss'; // TODO: the red squiggly goes away if you don't use the styles, and just straight import the scss...
 
 // TODO: this was built early, and not componentized very well by me, do that please!
@@ -139,23 +137,7 @@ export const NavBar = () => {
                         <Logo clickHandler={onClose} />
                     </Box>
                 }>
-                <Divider mt={2} mb={4} />
-
-                {/* SIDEBAR  */}
-                <List spacing={3} ml={3}>
-                    <ListItem
-                        borderRadius="5px"
-                        cursor="pointer"
-                        px={3}
-                        py={2}
-                        _hover={{ bg: "red" }}><ListIcon as={LogoutIcon} color="green.500" />Dashboard</ListItem>
-                    <ListItem><ListIcon as={LogoutIcon} color="green.500" />Dashboard</ListItem>
-                    <ListItem><ListIcon as={LogoutIcon} color="green.500" />Dashboard</ListItem>
-                    <ListItem><ListIcon as={LogoutIcon} color="green.500" />Dashboard</ListItem>
-                </List>
-                {/* SIDEBAR  */}
-
-
+                <SideBar />
             </DrawerContainer>
 
         </Box>
