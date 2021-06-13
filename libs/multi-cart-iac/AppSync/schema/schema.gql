@@ -85,7 +85,7 @@ input CartInput {
 }
 
 input CartLineInput {
-  id: ID!
+  id: ID
   cartId: ID!
   categoryId: ID!
   quantity: Int!
@@ -128,6 +128,9 @@ type Mutation {
     @aws_cognito_user_pools(cognito_groups: ["User"])
 
   updateCartLine(cartLine: CartLineInput!): CartLine
+    @aws_cognito_user_pools(cognito_groups: ["User"])
+  
+  addCartLine(cartLine: CartLineInput!): CartLine
     @aws_cognito_user_pools(cognito_groups: ["User"])
 
   addCartLineAccount(
