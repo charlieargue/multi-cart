@@ -71,7 +71,7 @@ export const getTotalPercentages = (line: CartLine, excludeCartLineAccountId?: s
         })
         .reduce((prev, curr) => prev + curr, 0);
 
-    return result;
+    return roundToTwo(result);
 }
 
 // ------------------------
