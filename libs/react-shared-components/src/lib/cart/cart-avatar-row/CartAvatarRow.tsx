@@ -21,24 +21,25 @@ export function CartAvatarRow({ c, currentCartId }: CartAvatarRowProps) {
       <NextLink
         href="/cart/[id]"
         as={`/cart/${c.id}`}>
+        <a href={`/cart/${c.id}`}>
 
-        {/* dropdown CART GUTS */}
-        <Flex
-          minW="100%"
-          justify="space-between"
-        >
-          {/* DEBUGGING */}
-          <Box>
-            <strong>{c.name}</strong>
-            <br />
-            <Text color="gray.500" fontSize="xs" ml={.5}>{toDaysAgo(c.createdAt)}</Text>
-          </Box>
-          <Box>
-            <CartAvatarInner cart={!c ? {} as Cart : c} />
-          </Box>
-        </Flex>
-        {/* dropdown CART GUTS */}
-
+          {/* dropdown CART GUTS */}
+          <Flex
+            minW="100%"
+            justify="space-between"
+          >
+            {/* DEBUGGING */}
+            <Box>
+              <strong>{c.name}</strong>
+              <br />
+              <Text color="gray.500" fontSize="xs" ml={.5}>{toDaysAgo(c.createdAt)}</Text>
+            </Box>
+            <Box>
+              <CartAvatarInner cart={!c ? {} as Cart : c} />
+            </Box>
+          </Flex>
+          {/* dropdown CART GUTS */}
+        </a>
       </NextLink>
       <MenuDivider />
     </MenuItem>

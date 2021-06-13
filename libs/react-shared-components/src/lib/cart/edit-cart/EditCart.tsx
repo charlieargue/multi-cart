@@ -39,7 +39,7 @@ export const EditCart = ({ id }: EditCartProps) => {
   const emptyCartTableBody = (<Tbody>
     <Tr>
       <Td colSpan={20}>
-        <Alert variant="left-accent" status="info" colorScheme="pink">
+        <Alert borderRadius="4px" variant="left-accent" status="info" colorScheme="pink">
           <AlertIcon />
               This cart is empty — <strong>please add a line</strong>!
           </Alert>

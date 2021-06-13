@@ -71,7 +71,7 @@ export const ChangePasswordForm = () => {
             </InputField>
             {tokenError ?
               <div>
-                <Alert status="error">
+                <Alert borderRadius="4px" status="error">
                   <span role='img' aria-label='emoji'>❗️</span><strong>Error: &nbsp;</strong>
                   <NextLink href="/forgot-password">
                     <Box href="/forgot-password" as="a" color={mode('pink.600', 'pink.200')} fontWeight="semibold" fontSize="sm">
