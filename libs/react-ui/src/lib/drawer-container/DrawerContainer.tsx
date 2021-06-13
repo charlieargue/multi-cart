@@ -9,11 +9,11 @@ export interface DrawerContainerProps {
   children?: React.ReactNode;
   isOpen: boolean;
   onClose();
-  btnRef: React.MutableRefObject<undefined>;
+  btnRef?: React.MutableRefObject<undefined>;
   drawerHeader: React.ReactElement;
 }
 
-export function DrawerContainer({ children, isOpen, onClose, btnRef, drawerHeader }: DrawerContainerProps) {
+export function DrawerContainer({ children, isOpen, onClose, btnRef = null, drawerHeader }: DrawerContainerProps) {
   return (
     <Drawer
       size="xl"

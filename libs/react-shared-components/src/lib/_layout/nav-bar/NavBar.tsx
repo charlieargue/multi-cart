@@ -1,15 +1,15 @@
 import {
     Avatar, Box,
-    Button, Flex,
+    Button, Divider, Flex,
     HStack,
     Menu,
     MenuButton,
     MenuItem, MenuList, Spinner,
-    useColorModeValue as mode, useToast
+    useColorModeValue as mode, useDisclosure, useToast
 } from '@chakra-ui/react';
 import { StateType } from '@multi-cart/react-app-state';
 import { useLogoutMutation, useMeQuery } from '@multi-cart/react-data-access';
-import { Logo } from "@multi-cart/react-ui";
+import { DrawerContainer, Logo } from "@multi-cart/react-ui";
 import { useRouter } from 'next/router';
 import React from 'react';
 import { FiLogOut as LogoutIcon } from 'react-icons/fi';
@@ -17,6 +17,7 @@ import { useSelector } from 'react-redux';
 import { CartAvatar } from '../../cart/cart-avatar/CartAvatar';
 import styles from './NavBar.module.scss'; // TODO: the red squiggly goes away if you don't use the styles, and just straight import the scss...
 
+// TODO: this was built early, and not componentized very well by me, do that please!
 // -------------------
 export const NavBar = () => {
     const router = useRouter();
@@ -24,6 +25,7 @@ export const NavBar = () => {
     const [_, logout] = useLogoutMutation();
     const toast = useToast();
     const isFetching = useSelector((state: StateType) => state.isFetching);
+    const { isOpen, onOpen, onClose } = useDisclosure();
 
     return (
         <Box
@@ -32,7 +34,6 @@ export const NavBar = () => {
             zIndex="100"
             shadow="sm"
             bgGradient="linear(to-b, gray.200, gray.300)"
-            // bg={mode('gray.200', 'gray.700')}
             color={mode('gray.700', 'gray.200')}
             px={[0, 10, 7, 14]}
             pr={[3, 0]}>
@@ -46,7 +47,7 @@ export const NavBar = () => {
                     {/* Logo */}
                     <Box
                         className={styles["nav-bar__scale-down"]}>
-                        <Logo />
+                        <Logo clickHandler={onOpen} />
                     </Box>
                     <Spinner
                         style={{
@@ -116,9 +117,18 @@ export const NavBar = () => {
                                 Logout</MenuItem>
                         </MenuList>
                     </Menu>
-
                 </Flex>
             </Flex>
-        </Box >
+
+            {/* DRAWER */}
+            <DrawerContainer
+                isOpen={isOpen}
+                onClose={onClose}
+                drawerHeader={<div>Hello Header</div>}>
+                <Divider />
+                Hello Sidebar!
+            </DrawerContainer>
+
+        </Box>
     );
 }
