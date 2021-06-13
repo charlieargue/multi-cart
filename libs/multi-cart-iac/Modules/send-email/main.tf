@@ -13,7 +13,7 @@ resource "aws_lambda_function" "lambda_send_email_function" {
   role             = var.role_arn
   handler          = "exports.handler"
   source_code_hash = data.archive_file.lambda_send_email_archive.output_base64sha256
-  filename         = "./build/${local.filename}"
+  filename         = data.archive_file.lambda_send_email_archive.output_path
   runtime          = "nodejs12.x"
   publish          = true
   environment {
