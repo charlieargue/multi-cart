@@ -5,6 +5,7 @@ data "archive_file" "lambda_send_email_archive" {
   # ATTN: this module will be collapsed/flattened by terraform, so PATHS are from root directory, not from nested module!
   source_dir  = "./AppSync/lambdas/sendEmail"
   output_path = "./build/${local.filename}"
+  output_file_mode = "0666" # solution for unecessarily recyling of lambdas
 }
 
 # AWS LAMBDA ƛ FUNCTION

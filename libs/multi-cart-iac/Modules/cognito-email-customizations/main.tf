@@ -3,6 +3,7 @@ data "archive_file" "lambda_cognito_email_customizations_archive" {
   type        = "zip"
   source_dir  = "./AppSync/lambdas/cognitoEmailCustomizations"
   output_path = "./build/${local.filename}"
+  output_file_mode = "0666" # solution for unecessarily recyling of lambdas
 }
 
 # AWS LAMBDA ƛ FUNCTION
