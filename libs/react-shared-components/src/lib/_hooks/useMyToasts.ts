@@ -3,30 +3,37 @@ import { useToast } from '@chakra-ui/react';
 export const useMyToasts = () => {
     const toast = useToast();
 
-    const toastError = (message: string) => toast({
-        title: message,
-        status: 'error',
+    // TODO: could use a factory approach here on all these
+    const toastAttribs = (message: string) => ({
         isClosable: true,
         variant: "top-accent",
+        title: message,
+    });
+
+    const toastError = (message: string) => toast({
+        status: 'error',
         position: "top-right",
+        ...toastAttribs(message)
     });
 
     const toastSuccess = (message: string) => toast({
-        title: message,
-        variant: "top-accent",
-        position: "top",
         status: "success",
-        isClosable: true,
-    });
-    
-    const toastInfo = (message: string) => toast({
-        title: message,
-        variant: "top-accent",
         position: "top",
-        status: "info",
-        isClosable: true,
+        ...toastAttribs(message)
     });
 
-    return { toastInfo, toastError, toastSuccess };
+    const toastInfo = (message: string) => toast({
+        status: "info",
+        position: "top",
+        ...toastAttribs(message)
+    });
+
+    const toastWarning = (message: string) => toast({
+        status: "warning",
+        position: "top",
+        ...toastAttribs(message)
+    });
+
+    return { toastInfo, toastWarning, toastError, toastSuccess };
 };
 export default useMyToasts;

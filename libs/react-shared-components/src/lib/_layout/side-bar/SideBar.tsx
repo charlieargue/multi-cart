@@ -11,6 +11,7 @@ import {
 } from 'react-icons/fa';
 import { FiLogOut as LogoutIcon } from 'react-icons/fi';
 import { GoDashboard as DashboardIcon } from 'react-icons/go';
+import { useMyToasts } from '../../..';
 import { SideBarItem, SideBarItemType } from '../side-bar-item/SideBarItem';
 import './SideBar.module.scss';
 
@@ -22,15 +23,18 @@ export interface SideBarProps {
 
 // -------------------
 export function SideBar({ logoutFunction }: SideBarProps) {
+  const { toastWarning } = useMyToasts();
+  const soonFn = () => toastWarning("🤘 Coming soon!");
+
   const mainLinks: SideBarItemType[] = [
     { name: "Dashboard", icon: DashboardIcon, href: "/dashboard" },
-    { name: "Products", icon: ProductsIcon, href: "/products" },
-    { name: "Search", icon: SearchIcon, href: "/search" },
-    { name: "User Profile", icon: UserIcon, href: "/profile" },
+    { name: "Products", icon: ProductsIcon, href: "/products", onClick: soonFn },
+    { name: "Search", icon: SearchIcon, href: "/search", onClick: soonFn },
+    { name: "User Profile", icon: UserIcon, href: "/profile", onClick: soonFn },
   ];
   const secondaryLinks: SideBarItemType[] = [
-    { name: "Logout", icon: LogoutIcon, href: "/", onClick: logoutFunction },
-    { name: "Help Center", icon: HelpIcon, href: "/" },
+    { name: "Logout", icon: LogoutIcon, href: "", onClick: logoutFunction },
+    { name: "Help Center", icon: HelpIcon, href: "", onClick: soonFn },
   ];
 
   return (
