@@ -22,6 +22,14 @@ resource "aws_lambda_function" "lambda_forgot_password_function" {
       AWS_REGION_VAR = var.aws_region
     }
   }
+  lifecycle {
+    ignore_changes = [
+      filename,
+      last_modified,
+      qualified_arn,
+      version,
+    ]
+  }
   tags = merge(var.common_tags, {
     Description = "AWS lambda function for starting recover of Forgotten Password"
   })

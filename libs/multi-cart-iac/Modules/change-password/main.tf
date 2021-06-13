@@ -1,6 +1,6 @@
 ## ARCHIVE/ZIP
 data "archive_file" "lambda_change_password_archive" {
-  type = "zip"
+  type        = "zip"
   source_dir  = "./AppSync/lambdas/changePassword"
   output_path = "./build/${local.filename}"
 }
@@ -16,9 +16,17 @@ resource "aws_lambda_function" "lambda_change_password_function" {
   publish          = true
   environment {
     variables = {
-      CLIENT_ID = var.client_id,
+      CLIENT_ID      = var.client_id,
       AWS_REGION_VAR = var.aws_region
     }
+  }
+  lifecycle {
+    ignore_changes = [
+      filename,
+      last_modified,
+      qualified_arn,
+      version,
+    ]
   }
   tags = merge(var.common_tags, {
     Description = "AWS lambda function for changing passwords"
@@ -42,8 +50,8 @@ resource "aws_appsync_datasource" "lambda_change_password_datasource" {
 # # NOTE: this is a DIRECT LAMBDA (unit) resolver (with NO VTLs)
 # # thx: https://github.com/hashicorp/terraform-provider-aws/issues/14488
 resource "aws_appsync_resolver" "change_password_resolver" {
-  api_id            = var.app_id
-  field             = "changePassword"
-  type              = "Mutation"
-  data_source       = aws_appsync_datasource.lambda_change_password_datasource.name
+  api_id      = var.app_id
+  field       = "changePassword"
+  type        = "Mutation"
+  data_source = aws_appsync_datasource.lambda_change_password_datasource.name
 }

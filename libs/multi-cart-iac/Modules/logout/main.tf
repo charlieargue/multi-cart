@@ -1,6 +1,6 @@
 ## ARCHIVE/ZIP
 data "archive_file" "lambda_logout_archive" {
-  type = "zip"
+  type        = "zip"
   source_dir  = "./AppSync/lambdas/logout"
   output_path = "./build/${local.filename}"
 }
@@ -17,10 +17,18 @@ resource "aws_lambda_function" "lambda_logout_function" {
   environment {
     variables = {
       # DECOMISH:
-      POOL_ID = var.pool_id,
-      CLIENT_ID = var.client_id,
+      POOL_ID        = var.pool_id,
+      CLIENT_ID      = var.client_id,
       AWS_REGION_VAR = var.aws_region
     }
+  }
+  lifecycle {
+    ignore_changes = [
+      filename,
+      last_modified,
+      qualified_arn,
+      version,
+    ]
   }
   tags = merge(var.common_tags, {
     Description = "AWS lambda function for Logging Out"

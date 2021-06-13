@@ -1,6 +1,6 @@
 ## ARCHIVE/ZIP
 data "archive_file" "lambda_register_archive" {
-  type = "zip"
+  type        = "zip"
   source_dir  = "./AppSync/lambdas/register"
   output_path = "./build/${local.filename}"
 }
@@ -16,10 +16,18 @@ resource "aws_lambda_function" "lambda_register_function" {
   publish          = true
   environment {
     variables = {
-      POOL_ID = var.pool_id,
-      CLIENT_ID = var.client_id,
+      POOL_ID        = var.pool_id,
+      CLIENT_ID      = var.client_id,
       AWS_REGION_VAR = var.aws_region
     }
+  }
+  lifecycle {
+    ignore_changes = [
+      filename,
+      last_modified,
+      qualified_arn,
+      version,
+    ]
   }
   tags = merge(var.common_tags, {
     Description = "AWS lambda function for Registering new users"

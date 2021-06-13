@@ -1,6 +1,6 @@
 ## ARCHIVE/ZIP
 data "archive_file" "lambda_cognito_email_customizations_archive" {
-  type = "zip"
+  type        = "zip"
   source_dir  = "./AppSync/lambdas/cognitoEmailCustomizations"
   output_path = "./build/${local.filename}"
 }
@@ -18,6 +18,14 @@ resource "aws_lambda_function" "lambda_cognito_email_customizations_function" {
     variables = {
       AWS_REGION_VAR = var.aws_region
     }
+  }
+  lifecycle {
+    ignore_changes = [
+      filename,
+      last_modified,
+      qualified_arn,
+      version,
+    ]
   }
   tags = merge(var.common_tags, {
     Description = "AWS lambda function for customizing cognito emails"
