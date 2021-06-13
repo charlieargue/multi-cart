@@ -1,11 +1,11 @@
 ## VIP: $ctx.stash.cart    ==========> CART (w/ lines)
 #set($cart = $ctx.stash.cart)
 
-## TODO: how to break out of these foreach, and can they be nested and .count still works as expected?
 ## get INDEX of this cartLine 
 #foreach ($cl in $cart.cartLines)
     #if($cl.id == "$ctx.args.cartLineId")
         #set($clIdx = $foreach.count)
+        #break
     #end
 #end
 #set ($clIdxZeroBased = $clIdx - 1)
@@ -13,6 +13,7 @@
 #foreach ($cla in $cart.cartLines[$clIdxZeroBased].cartLineAccounts)
     #if($cla.id == "$ctx.args.cartLineAccountId")
         #set($claIdx = $foreach.count)
+        #break
     #end
 #end
 #set ($claIdxZeroBased = $claIdx - 1)

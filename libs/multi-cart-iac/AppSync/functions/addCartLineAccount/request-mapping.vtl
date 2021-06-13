@@ -11,6 +11,7 @@ $util.qr($ctx.stash.put("freshCartLineAccountId", $freshCartLineAccountId))
 #foreach ($item in $cart.cartLines)
     #if($item.id == "$ctx.args.cartLineId")
         #set($idx = $foreach.count)
+        #break
     #end
 #end
 #set ($idxZeroBased = $idx - 1)

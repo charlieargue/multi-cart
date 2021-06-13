@@ -5,6 +5,7 @@
 #foreach($item in $ctx.result.cartLines)
     #if($item.id == "$freshCartLineId")
         #set($data = $item)
+        #break
     #end
 #end
 

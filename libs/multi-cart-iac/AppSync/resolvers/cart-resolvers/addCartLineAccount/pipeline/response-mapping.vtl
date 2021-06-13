@@ -10,8 +10,11 @@
         #foreach($cla in $cl.cartLineAccounts)
             #if($cla.id == "$freshCartLineAccountId")
                 #set($data = $cla)
+                #break
             #end
         #end
+        
+        #break
     #end
 #end
 

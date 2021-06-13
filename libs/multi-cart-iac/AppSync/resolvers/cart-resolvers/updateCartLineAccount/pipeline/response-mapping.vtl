@@ -9,8 +9,11 @@
         #foreach($cla in $cl.cartLineAccounts)
             #if($cla.id == "$ctx.args.id")
                 #set($data = $cla)
+                #break
             #end
         #end
+
+        #break
     #end
 #end
 
