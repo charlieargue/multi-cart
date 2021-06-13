@@ -111,3 +111,9 @@ export const hasNegativeAmounts = (line: CartLine): boolean => {
 }
 
 
+// ------------------------
+export const areLineAccountsValid = (line: CartLine): boolean => {
+    return (getTotalPercentages(line) === 100 && !hasNegativeAmounts(line));
+}
+
+

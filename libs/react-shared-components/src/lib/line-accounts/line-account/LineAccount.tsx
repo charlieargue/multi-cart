@@ -1,7 +1,7 @@
 import { Badge, Box, HStack, InputGroup, InputLeftAddon, InputRightAddon } from '@chakra-ui/react';
 import { CartLine, CartLineAccount, useUpdateCartLineAccountMutation } from '@multi-cart/react-data-access';
 import { InputField } from '@multi-cart/react-ui';
-import { computeAmountGivenPercentage, computePercentageGivenAmount, getTotalPercentages, hasNegativeAmounts, toFriendlyCurrency } from '@multi-cart/util';
+import { areLineAccountsValid, computeAmountGivenPercentage, computePercentageGivenAmount, toFriendlyCurrency } from '@multi-cart/util';
 import { Form, Formik } from "formik";
 import React, { useCallback, useEffect, useRef } from 'react';
 import { FaPercentage as PercentageIcon } from 'react-icons/fa';
@@ -113,7 +113,7 @@ export const LineAccount = ({ lineAccount, line }: LineAccountProps) => {
             {/* INPUT for PERCENTAGE */}
             <Box minW="60px" maxW="80px">
               <InputField
-                style={(getTotalPercentages(line) === 100 && !hasNegativeAmounts(line)) ? { "border": "1px solid green" } : { "border": "1px solid red" }}
+                style={areLineAccountsValid(line) ? { "border": "1px solid green" } : { "border": "1px solid red" }}
                 required
                 type="number"
                 aria-label="percentage"

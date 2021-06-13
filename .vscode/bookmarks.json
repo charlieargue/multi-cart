@@ -99,6 +99,26 @@
 					"label": ""
 				}
 			]
+		},
+		{
+			"path": "libs/react-shared-components/src/lib/line-accounts/add-line-account-button/AddLineAccountButton.tsx",
+			"bookmarks": [
+				{
+					"line": 14,
+					"column": 12,
+					"label": "🗄 DRAWER"
+				}
+			]
+		},
+		{
+			"path": "libs/react-shared-components/src/lib/line-accounts/line-accounts-container/LineAccountsContainer.tsx",
+			"bookmarks": [
+				{
+					"line": 89,
+					"column": 11,
+					"label": "🗄 DRAWER"
+				}
+			]
 		}
 	]
 }

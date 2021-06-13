@@ -1,7 +1,7 @@
 import { Divider, Stack, Text, useDisclosure } from '@chakra-ui/react';
 import { Account, CartLine, useAccountsQuery, useAddCartLineAccountMutation } from '@multi-cart/react-data-access';
 import { DrawerContainer, SearchBar } from '@multi-cart/react-ui';
-import { getRemainingAmount, getTotalPercentages, hasNegativeAmounts } from '@multi-cart/util';
+import { areLineAccountsValid, getRemainingAmount } from '@multi-cart/util';
 import React from 'react';
 import { FaRegCreditCard as LineAccountsIcon } from 'react-icons/fa';
 import AccountRow from '../account-row/AccountRow';
@@ -24,11 +24,12 @@ export function LineAccountsContainer({ line }: LineAccountsContainerProps) {
   // ------------------
   const handleSelect = async (a: Account) => {
     const remainingAmount = getRemainingAmount(line); // NOTE: since line is updated super-fast, it already has the NEW CLA in there,  somehow??
+    // NOTE: possible to hack sums and get negative amounts, need to prohibit that (so setting it to .01, so yup doesn't jank things and make it so cannot update a negative auto-poplated amount)
     await addCartLineAccount({
       cartId: line.cartId,
       cartLineId: line.id,
       accountNumber: a.accountNumber,
-      amount: remainingAmount,
+      amount: remainingAmount > 0 ? remainingAmount : .01,
     });
     // TODO: cache will auto-refresh so behind modal will already show newest CLA (so? confused by this note, TBD)
     onClose();
@@ -76,7 +77,7 @@ export function LineAccountsContainer({ line }: LineAccountsContainerProps) {
         spacing={4}
         align="center"
         mt={1}
-        bg={(getTotalPercentages(line) === 100 && !hasNegativeAmounts(line)) ? "green.50" : "red.100"}
+        bg={areLineAccountsValid(line) ? "green.50" : "red.100"}
         px={4}
         py={3}
         rounded="md"

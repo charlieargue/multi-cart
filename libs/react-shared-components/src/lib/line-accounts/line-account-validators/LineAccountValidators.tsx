@@ -1,9 +1,9 @@
-import { ButtonGroup, Button, IconButton, Text } from '@chakra-ui/react';
-import React from 'react';
-import { getTotalPercentages, getTotalAmounts, hasNegativeAmounts } from '@multi-cart/util';
-import './LineAccountValidators.module.scss';
+import { Button, ButtonGroup, IconButton, Text } from '@chakra-ui/react';
 import { CartLine } from '@multi-cart/react-data-access';
-import { FaPercentage as PercentageIcon, FaDollarSign as DollarIcon } from 'react-icons/fa';
+import { areLineAccountsValid, getTotalAmounts, getTotalPercentages } from '@multi-cart/util';
+import React from 'react';
+import { FaDollarSign as DollarIcon, FaPercentage as PercentageIcon } from 'react-icons/fa';
+import './LineAccountValidators.module.scss';
 
 /* eslint-disable-next-line */
 export interface LineAccountValidatorsProps {
@@ -17,7 +17,7 @@ export function LineAccountValidators({ line }: LineAccountValidatorsProps) {
         size="sm"
         isAttached
         variant="outline"
-        colorScheme={(getTotalPercentages(line) === 100 && !hasNegativeAmounts(line)) ? "green" : "red"}>
+        colorScheme={areLineAccountsValid(line) ? "green" : "red"}>
         <Button mr="-px">Percentages:
           <Text ml={2} fontWeight="bolder">{getTotalPercentages(line)}</Text>
         </Button>
@@ -27,7 +27,7 @@ export function LineAccountValidators({ line }: LineAccountValidatorsProps) {
         size="sm"
         isAttached
         variant="outline"
-        colorScheme={(getTotalPercentages(line) === 100 && !hasNegativeAmounts(line)) ? "green" : "red"}>
+        colorScheme={areLineAccountsValid(line) ? "green" : "red"}>
         <Button mr="-px">Line Total w/ Tax:
           <Text ml={2} fontWeight="bolder">{getTotalAmounts(line.cartLineAccounts)}</Text>
         </Button>
