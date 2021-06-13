@@ -7,7 +7,7 @@
   "license": "MIT",
   "scripts": {
     "nx": "nx",
-    "start": "nx serve",
+    "start": "export NODE_OPTIONS=\"--max-old-space-size=8192\"&& echo $NODE_OPTIONS && nx serve",
     "build": "nx build",
     "test": "nx test",
     "lint": "nx workspace-lint && nx lint",
