@@ -2,6 +2,9 @@ import {
     Avatar, Box,
     Button, Divider, Flex,
     HStack,
+    List,
+    ListIcon,
+    ListItem,
     Menu,
     MenuButton,
     MenuItem, MenuList, Spinner,
@@ -122,11 +125,37 @@ export const NavBar = () => {
 
             {/* DRAWER */}
             <DrawerContainer
+                placement="left"
+                size="xs"
                 isOpen={isOpen}
                 onClose={onClose}
-                drawerHeader={<div>Hello Header</div>}>
-                <Divider />
-                Hello Sidebar!
+                showCloseButton={false}
+                drawerHeader={
+                    <Box
+                        ml="-20"
+                        mb="-5"
+                        textAlign="left"
+                        className={styles["nav-bar__scale-down"]}>
+                        <Logo clickHandler={onClose} />
+                    </Box>
+                }>
+                <Divider mt={2} mb={4} />
+
+                {/* SIDEBAR  */}
+                <List spacing={3} ml={3}>
+                    <ListItem
+                        borderRadius="5px"
+                        cursor="pointer"
+                        px={3}
+                        py={2}
+                        _hover={{ bg: "red" }}><ListIcon as={LogoutIcon} color="green.500" />Dashboard</ListItem>
+                    <ListItem><ListIcon as={LogoutIcon} color="green.500" />Dashboard</ListItem>
+                    <ListItem><ListIcon as={LogoutIcon} color="green.500" />Dashboard</ListItem>
+                    <ListItem><ListIcon as={LogoutIcon} color="green.500" />Dashboard</ListItem>
+                </List>
+                {/* SIDEBAR  */}
+
+
             </DrawerContainer>
 
         </Box>
