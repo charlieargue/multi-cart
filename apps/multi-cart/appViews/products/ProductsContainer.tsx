@@ -1,5 +1,5 @@
-import { Alert, Divider, SimpleGrid } from '@chakra-ui/react';
-import { AppLayout, Product, ProductCard } from '@multi-cart/react-shared-components';
+import { Alert, AlertIcon, SimpleGrid, Text } from '@chakra-ui/react';
+import { AppLayout, ProductCard } from '@multi-cart/react-shared-components';
 import { Breadcrumbs } from '@multi-cart/react-ui';
 import React from 'react';
 import { ProductsMockData as products } from './ProductsMockData';
@@ -19,12 +19,15 @@ export function ProductsContainer(props: ProductsContainerProps) {
   return (
     <AppLayout>
       {breadcrumbs}
-      <SimpleGrid minChildWidth="420px" spacing="20px">
+      <Alert borderRadius="4px" variant="left-accent" status="info" colorScheme="pink" mb="8">
+        <AlertIcon />
+        <Text>These are all <strong>mocked</strong> products <strong>&nbsp;and the images change</strong> because they're dynamically generated ... <span role='img' aria-label='emoji'>🛍</span> &nbsp;but you can still <strong>add them to your cart</strong>!</Text>
+      </Alert>
+      <SimpleGrid minChildWidth="320px" spacing="40px">
         {products.map((product) => (
           <ProductCard key={product.slug} product={product} />
         ))}
       </SimpleGrid>
-
     </AppLayout>
   );
 }

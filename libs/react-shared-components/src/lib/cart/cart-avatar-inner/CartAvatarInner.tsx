@@ -1,9 +1,8 @@
-import { HStack, Tag, TagLabel, TagLeftIcon, TagRightIcon } from '@chakra-ui/react';
+import { HStack, Tag, TagLabel, TagLeftIcon } from '@chakra-ui/react';
 import { Cart } from '@multi-cart/react-data-access';
-import React from 'react';
-import { CgClose as CloseIcon } from 'react-icons/cg';
-import { FaShoppingCart as ShoppingCartIcon, FaDollarSign as DollarIcon } from 'react-icons/fa';
 import { sumTotalCost, sumTotalItems, toFriendlyCurrency } from '@multi-cart/util';
+import React from 'react';
+import { FaDollarSign as DollarIcon, FaShoppingCart as ShoppingCartIcon } from 'react-icons/fa';
 import './CartAvatarInner.module.scss';
 
 interface CartAvatarInnerProps {

@@ -10,6 +10,8 @@ import React, { useCallback, useEffect, useState } from 'react';
 export const AutoSave = ({ debounceMs = 1000 }) => {
   const formik = useFormikContext();
 
+  // TODO: not sure about this, was getting error: React Hook useCallback received a function whose dependencies are unknown. Pass an inline function instead
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const debouncedSubmit = useCallback(
     debounce(() => formik.submitForm(), debounceMs),
     [debounceMs, formik.submitForm]

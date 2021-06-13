@@ -6,8 +6,8 @@ import { CartLine, useCartQuery, useUpdateUserMutation } from '@multi-cart/react
 import { BigAlert, Breadcrumbs } from '@multi-cart/react-ui';
 import React, { useEffect } from 'react';
 // DECOMISH: afaik: import 'regenerator-runtime/runtime';
-import LineAccount from '../../line-accounts/line-account/LineAccount';
-import LineAccountsContainer from '../../line-accounts/line-accounts-container/LineAccountsContainer';
+import LineAccount from '../../line-account/line-account/LineAccount';
+import LineAccountsContainer from '../../line-account/line-accounts-container/LineAccountsContainer';
 import CartLineRow from '../cart-line-row/CartLineRow';
 import EditCartHeader from '../edit-cart-header/EditCartHeader';
 import EditCartTableFooter from '../edit-cart-table-footer/EditCartTableFooter';

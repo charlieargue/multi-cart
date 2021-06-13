@@ -26,8 +26,9 @@ export * from './lib/line-account/line-account-tooltip/LineAccountTooltip';
 export * from './lib/line-account/line-account-validators/LineAccountValidators';
 export * from './lib/line-account/line-account/LineAccount';
 export * from './lib/line-account/line-accounts-container/LineAccountsContainer';
-export * from './lib/product/product-card/ProductCard'; // mocked
+export * from './lib/product/product-card/ProductCard'; // tmp/mocked
 export * from './lib/product/product-card/ProductTypes'; // temp/mocked
+export * from './lib/product/product-details/ProductDetails'; // tmp/mocked
 export * from './lib/_hooks/useIsAuth';
 export * from './lib/_hooks/useMyToasts';
 export * from './lib/_layout/app-layout/AppLayout';
