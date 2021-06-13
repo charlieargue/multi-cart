@@ -16,7 +16,7 @@
     $util.qr($ctx.stash.put('token', $ctx.result.token))
     {}
 #else
-    ## TODO: more robust error handling (not hard-coded)
+    ## error handling
   $utils.error(
     $ctx.result.errors[0].message, 
     $ctx.result.errors[0].code, 
