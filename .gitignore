@@ -70,3 +70,6 @@ libs/mock-api/mock-database.json
 
 # .tfvars files
 **/*.tfvars
+
+# postman newman env. variables
+libs/multi-cart-iac-tests/src/env-variables/*.json

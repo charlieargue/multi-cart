@@ -64,6 +64,9 @@
     },
     "react-app-state": {
       "tags": []
+    },
+    "multi-cart-iac-tests": {
+      "tags": []
     }
   }
 }

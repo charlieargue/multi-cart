@@ -1,0 +1,491 @@
+{
+	"id": "2afb0501-8c40-48cd-aa97-3c408cd0a18a",
+	"name": "🛍 Multi-Cart ⚙️ DEV",
+	"timestamp": "2021-06-14T19:14:28.415Z",
+	"collection_id": "aa1d53ad-188a-40cb-abf5-b723c642df7a",
+	"folder_id": 0,
+	"environment_id": "e35734cf-336c-4bbf-9854-8f3f217b67c4",
+	"totalPass": 33,
+	"totalFail": 0,
+	"results": [
+		{
+			"id": "2ec01689-2ae5-42a2-b3fa-ed79044c639c",
+			"name": "🧪  (1) ✅   me (session)",
+			"url": "https://pcuynwb3tfbbzjfygrljfoej3q.appsync-api.us-west-2.amazonaws.com/graphql",
+			"time": 196,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"✔️ 🧪 me ENDPOINT returns 200": true,
+				"✔️ 🧪 me ENDPOINT doesn't return errors": true,
+				"✔️ 🧪 me ENDPOINT works correctly": true
+			},
+			"testPassFailCounts": {
+				"✔️ 🧪 me ENDPOINT returns 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"✔️ 🧪 me ENDPOINT doesn't return errors": {
+					"pass": 1,
+					"fail": 0
+				},
+				"✔️ 🧪 me ENDPOINT works correctly": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				196
+			],
+			"allTests": [
+				{
+					"✔️ 🧪 me ENDPOINT returns 200": true,
+					"✔️ 🧪 me ENDPOINT doesn't return errors": true,
+					"✔️ 🧪 me ENDPOINT works correctly": true
+				}
+			]
+		},
+		{
+			"id": "ac9fe115-9106-422e-8ef4-5449e854a9f1",
+			"name": "🧪  (2) ✅   cart (BLANK)",
+			"url": "https://pcuynwb3tfbbzjfygrljfoej3q.appsync-api.us-west-2.amazonaws.com/graphql",
+			"time": 209,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"✔️ 🧪 blankCart ENDPOINT returns 200": true,
+				"✔️ 🧪 blankCart ENDPOINT doesn't return errors": true,
+				"✔️ 🧪 blankCart ENDPOINT works correctly": true
+			},
+			"testPassFailCounts": {
+				"✔️ 🧪 blankCart ENDPOINT returns 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"✔️ 🧪 blankCart ENDPOINT doesn't return errors": {
+					"pass": 1,
+					"fail": 0
+				},
+				"✔️ 🧪 blankCart ENDPOINT works correctly": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				209
+			],
+			"allTests": [
+				{
+					"✔️ 🧪 blankCart ENDPOINT returns 200": true,
+					"✔️ 🧪 blankCart ENDPOINT doesn't return errors": true,
+					"✔️ 🧪 blankCart ENDPOINT works correctly": true
+				}
+			]
+		},
+		{
+			"id": "b4a60950-db92-4d51-a38f-eb837677a261",
+			"name": "🧪 (3) ✅   cart line (BLANK)",
+			"url": "https://pcuynwb3tfbbzjfygrljfoej3q.appsync-api.us-west-2.amazonaws.com/graphql",
+			"time": 201,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"✔️ 🧪 blankCartLine ENDPOINT returns 200": true,
+				"✔️ 🧪 blankCartLine ENDPOINT doesn't return errors": true,
+				"✔️ 🧪 blankCartLine ENDPOINT works correctly": true
+			},
+			"testPassFailCounts": {
+				"✔️ 🧪 blankCartLine ENDPOINT returns 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"✔️ 🧪 blankCartLine ENDPOINT doesn't return errors": {
+					"pass": 1,
+					"fail": 0
+				},
+				"✔️ 🧪 blankCartLine ENDPOINT works correctly": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				201
+			],
+			"allTests": [
+				{
+					"✔️ 🧪 blankCartLine ENDPOINT returns 200": true,
+					"✔️ 🧪 blankCartLine ENDPOINT doesn't return errors": true,
+					"✔️ 🧪 blankCartLine ENDPOINT works correctly": true
+				}
+			]
+		},
+		{
+			"id": "6a02316d-c085-4626-aa78-f04421083b0c",
+			"name": "🧪 (4) ✅   cart line (ADD)",
+			"url": "https://pcuynwb3tfbbzjfygrljfoej3q.appsync-api.us-west-2.amazonaws.com/graphql",
+			"time": 172,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"✔️ 🧪 addCartLine ENDPOINT returns 200": true,
+				"✔️ 🧪 addCartLine ENDPOINT doesn't return errors": true,
+				"✔️ 🧪 addCartLine ENDPOINT works correctly": true
+			},
+			"testPassFailCounts": {
+				"✔️ 🧪 addCartLine ENDPOINT returns 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"✔️ 🧪 addCartLine ENDPOINT doesn't return errors": {
+					"pass": 1,
+					"fail": 0
+				},
+				"✔️ 🧪 addCartLine ENDPOINT works correctly": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				172
+			],
+			"allTests": [
+				{
+					"✔️ 🧪 addCartLine ENDPOINT returns 200": true,
+					"✔️ 🧪 addCartLine ENDPOINT doesn't return errors": true,
+					"✔️ 🧪 addCartLine ENDPOINT works correctly": true
+				}
+			]
+		},
+		{
+			"id": "633d359d-4b0a-4105-b8ff-80a5f804d054",
+			"name": "🧪 (5) ✅   cart line (DELETE)",
+			"url": "https://pcuynwb3tfbbzjfygrljfoej3q.appsync-api.us-west-2.amazonaws.com/graphql",
+			"time": 175,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"✔️ 🧪 deleteCartLine ENDPOINT returns 200": true,
+				"✔️ 🧪 deleteCartLine ENDPOINT doesn't return errors": true,
+				"✔️ 🧪 deleteCartLine ENDPOINT works correctly": true
+			},
+			"testPassFailCounts": {
+				"✔️ 🧪 deleteCartLine ENDPOINT returns 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"✔️ 🧪 deleteCartLine ENDPOINT doesn't return errors": {
+					"pass": 1,
+					"fail": 0
+				},
+				"✔️ 🧪 deleteCartLine ENDPOINT works correctly": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				175
+			],
+			"allTests": [
+				{
+					"✔️ 🧪 deleteCartLine ENDPOINT returns 200": true,
+					"✔️ 🧪 deleteCartLine ENDPOINT doesn't return errors": true,
+					"✔️ 🧪 deleteCartLine ENDPOINT works correctly": true
+				}
+			]
+		},
+		{
+			"id": "2ab2a92d-613f-4f12-bd74-277c290b8eb2",
+			"name": "🧪 (6) ✅   cart line (UPDATE)",
+			"url": "https://pcuynwb3tfbbzjfygrljfoej3q.appsync-api.us-west-2.amazonaws.com/graphql",
+			"time": 238,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"✔️ 🧪 updateCartLine ENDPOINT returns 200": true,
+				"✔️ 🧪 updateCartLine ENDPOINT doesn't return errors": true,
+				"✔️ 🧪 updateCartLine ENDPOINT works correctly": true
+			},
+			"testPassFailCounts": {
+				"✔️ 🧪 updateCartLine ENDPOINT returns 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"✔️ 🧪 updateCartLine ENDPOINT doesn't return errors": {
+					"pass": 1,
+					"fail": 0
+				},
+				"✔️ 🧪 updateCartLine ENDPOINT works correctly": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				238
+			],
+			"allTests": [
+				{
+					"✔️ 🧪 updateCartLine ENDPOINT returns 200": true,
+					"✔️ 🧪 updateCartLine ENDPOINT doesn't return errors": true,
+					"✔️ 🧪 updateCartLine ENDPOINT works correctly": true
+				}
+			]
+		},
+		{
+			"id": "b5f0a951-6185-4873-bf6b-224aeec6d9d5",
+			"name": "🧪 (7) ✅   account (ADD TO CART LINE)",
+			"url": "https://pcuynwb3tfbbzjfygrljfoej3q.appsync-api.us-west-2.amazonaws.com/graphql",
+			"time": 133,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"✔️ 🧪 addCartLineAccount ENDPOINT returns 200": true,
+				"✔️ 🧪 addCartLineAccount ENDPOINT doesn't return errors": true,
+				"✔️ 🧪 addCartLineAccount ENDPOINT works correctly": true
+			},
+			"testPassFailCounts": {
+				"✔️ 🧪 addCartLineAccount ENDPOINT returns 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"✔️ 🧪 addCartLineAccount ENDPOINT doesn't return errors": {
+					"pass": 1,
+					"fail": 0
+				},
+				"✔️ 🧪 addCartLineAccount ENDPOINT works correctly": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				133
+			],
+			"allTests": [
+				{
+					"✔️ 🧪 addCartLineAccount ENDPOINT returns 200": true,
+					"✔️ 🧪 addCartLineAccount ENDPOINT doesn't return errors": true,
+					"✔️ 🧪 addCartLineAccount ENDPOINT works correctly": true
+				}
+			]
+		},
+		{
+			"id": "8f7a95e6-2400-4f6a-bc2d-2f6c5e3e1007",
+			"name": "🧪 (8) ✅   account (UPDATE on CART LINE)",
+			"url": "https://pcuynwb3tfbbzjfygrljfoej3q.appsync-api.us-west-2.amazonaws.com/graphql",
+			"time": 136,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"✔️ 🧪 updateCartLineAccount ENDPOINT returns 200": true,
+				"✔️ 🧪 updateCartLineAccount ENDPOINT doesn't return errors": true,
+				"✔️ 🧪 updateCartLineAccount ENDPOINT works correctly": true
+			},
+			"testPassFailCounts": {
+				"✔️ 🧪 updateCartLineAccount ENDPOINT returns 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"✔️ 🧪 updateCartLineAccount ENDPOINT doesn't return errors": {
+					"pass": 1,
+					"fail": 0
+				},
+				"✔️ 🧪 updateCartLineAccount ENDPOINT works correctly": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				136
+			],
+			"allTests": [
+				{
+					"✔️ 🧪 updateCartLineAccount ENDPOINT returns 200": true,
+					"✔️ 🧪 updateCartLineAccount ENDPOINT doesn't return errors": true,
+					"✔️ 🧪 updateCartLineAccount ENDPOINT works correctly": true
+				}
+			]
+		},
+		{
+			"id": "7a8603af-82a6-4de3-aa8b-ff9065986da2",
+			"name": "🧪 (9) ✅   account (DELETE from CART LINE)",
+			"url": "https://pcuynwb3tfbbzjfygrljfoej3q.appsync-api.us-west-2.amazonaws.com/graphql",
+			"time": 135,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"✔️ 🧪 deleteCartLineAccount ENDPOINT returns 200": true,
+				"✔️ 🧪 deleteCartLineAccount ENDPOINT doesn't return errors": true,
+				"✔️ 🧪 deleteCartLineAccount ENDPOINT works correctly": true
+			},
+			"testPassFailCounts": {
+				"✔️ 🧪 deleteCartLineAccount ENDPOINT returns 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"✔️ 🧪 deleteCartLineAccount ENDPOINT doesn't return errors": {
+					"pass": 1,
+					"fail": 0
+				},
+				"✔️ 🧪 deleteCartLineAccount ENDPOINT works correctly": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				135
+			],
+			"allTests": [
+				{
+					"✔️ 🧪 deleteCartLineAccount ENDPOINT returns 200": true,
+					"✔️ 🧪 deleteCartLineAccount ENDPOINT doesn't return errors": true,
+					"✔️ 🧪 deleteCartLineAccount ENDPOINT works correctly": true
+				}
+			]
+		},
+		{
+			"id": "e32d0105-aa23-4683-b3ac-a02ae61fa4e1",
+			"name": "🧪 (10) ✅   cart (GET SINGLE)",
+			"url": "https://pcuynwb3tfbbzjfygrljfoej3q.appsync-api.us-west-2.amazonaws.com/graphql",
+			"time": 124,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"✔️ 🧪 cart ENDPOINT returns 200": true,
+				"✔️ 🧪 cart ENDPOINT doesn't return errors": true,
+				"✔️ 🧪 cart ENDPOINT works correctly": true
+			},
+			"testPassFailCounts": {
+				"✔️ 🧪 cart ENDPOINT returns 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"✔️ 🧪 cart ENDPOINT doesn't return errors": {
+					"pass": 1,
+					"fail": 0
+				},
+				"✔️ 🧪 cart ENDPOINT works correctly": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				124
+			],
+			"allTests": [
+				{
+					"✔️ 🧪 cart ENDPOINT returns 200": true,
+					"✔️ 🧪 cart ENDPOINT doesn't return errors": true,
+					"✔️ 🧪 cart ENDPOINT works correctly": true
+				}
+			]
+		},
+		{
+			"id": "987c05b5-943a-4788-8a81-a2fb1bdfd6fe",
+			"name": "🧪 (11) ✅   cart (DELETE)",
+			"url": "https://pcuynwb3tfbbzjfygrljfoej3q.appsync-api.us-west-2.amazonaws.com/graphql",
+			"time": 125,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"✔️ 🧪 deleteCart ENDPOINT returns 200": true,
+				"✔️ 🧪 deleteCart ENDPOINT doesn't return errors": true,
+				"✔️ 🧪 deleteCart ENDPOINT works correctly": true
+			},
+			"testPassFailCounts": {
+				"✔️ 🧪 deleteCart ENDPOINT returns 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"✔️ 🧪 deleteCart ENDPOINT doesn't return errors": {
+					"pass": 1,
+					"fail": 0
+				},
+				"✔️ 🧪 deleteCart ENDPOINT works correctly": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				125
+			],
+			"allTests": [
+				{
+					"✔️ 🧪 deleteCart ENDPOINT returns 200": true,
+					"✔️ 🧪 deleteCart ENDPOINT doesn't return errors": true,
+					"✔️ 🧪 deleteCart ENDPOINT works correctly": true
+				}
+			]
+		}
+	],
+	"count": 1,
+	"totalTime": 1844,
+	"collection": {
+		"requests": [
+			{
+				"id": "2ec01689-2ae5-42a2-b3fa-ed79044c639c",
+				"method": "POST"
+			},
+			{
+				"id": "ac9fe115-9106-422e-8ef4-5449e854a9f1",
+				"method": "POST"
+			},
+			{
+				"id": "b4a60950-db92-4d51-a38f-eb837677a261",
+				"method": "POST"
+			},
+			{
+				"id": "6a02316d-c085-4626-aa78-f04421083b0c",
+				"method": "POST"
+			},
+			{
+				"id": "633d359d-4b0a-4105-b8ff-80a5f804d054",
+				"method": "POST"
+			},
+			{
+				"id": "2ab2a92d-613f-4f12-bd74-277c290b8eb2",
+				"method": "POST"
+			},
+			{
+				"id": "b5f0a951-6185-4873-bf6b-224aeec6d9d5",
+				"method": "POST"
+			},
+			{
+				"id": "8f7a95e6-2400-4f6a-bc2d-2f6c5e3e1007",
+				"method": "POST"
+			},
+			{
+				"id": "7a8603af-82a6-4de3-aa8b-ff9065986da2",
+				"method": "POST"
+			},
+			{
+				"id": "e32d0105-aa23-4683-b3ac-a02ae61fa4e1",
+				"method": "POST"
+			},
+			{
+				"id": "987c05b5-943a-4788-8a81-a2fb1bdfd6fe",
+				"method": "POST"
+			}
+		]
+	}
+}
