@@ -52,5 +52,3 @@ resource "aws_lambda_permission" "allow_cognito_to_invoke_lambda_email_customiza
   function_name = aws_lambda_function.lambda_cognito_email_customizations_function.function_name
   principal     = "cognito-idp.amazonaws.com"
 }
-
-
