@@ -1,24 +1,32 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-# terraform commands
+## ------------------------------
+#  TERRAFORM (validate & format)
+## ------------------------------
 terraform -chdir=libs/multi-cart-iac validate
 terraform -chdir=libs/multi-cart-iac fmt
 
+## ------------------------------
+#  LINT
+## ------------------------------
+yarn affected:lint
+
+
+## ------------------------------
+#  TEST (wip)
+## ------------------------------
+
 # NOT READY YET: yarn affected:test
-
-
 # test API only if changes made to iac stuff
-exit
 if (git status | grep "libs/multi-cart-iac/") 
 then
      yarn test-iac
-# else 
-#     echo "🔴 not found"
+else 
+    exit
 fi
 
-yarn affected:lint
 
-# export NODE_OPTIONS="--max-old-space-size=8192" && npx nx affected --target=lint  --base=origin/kg-2021-04-16-finishing-mocked-api
+# export NODE_OPTIONS="--max-old-space-size=8192"
 
 
