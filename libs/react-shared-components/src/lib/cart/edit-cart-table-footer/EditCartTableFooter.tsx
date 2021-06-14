@@ -1,5 +1,5 @@
 import { Box, Button, Flex, Stat, StatHelpText, StatLabel, StatNumber, TableCaption, Td, Tfoot, Tr } from '@chakra-ui/react';
-import { Cart, useDeleteCartMutation } from '@multi-cart/react-data-access';
+import { Cart, useDeleteCartMutation, useUpdateUserMutation } from '@multi-cart/react-data-access';
 import { sumTotalCost, toFriendlyCurrency } from '@multi-cart/util';
 import React from 'react';
 import './EditCartTableFooter.module.scss';
@@ -14,7 +14,8 @@ export interface EditCartTableFooterProps {
 export function EditCartTableFooter({ cart }: EditCartTableFooterProps) {
   const router = useRouter();
   const [, deleteCart] = useDeleteCartMutation();
-  const { toastInfo } = useMyToasts();
+  const [, updateUser] = useUpdateUserMutation();
+  const { toastInfo, toastError } = useMyToasts();
 
   return (
     <>
@@ -29,8 +30,15 @@ export function EditCartTableFooter({ cart }: EditCartTableFooterProps) {
                 id: cart.id
               });
               if (response.data?.deleteCart === true) {
-                toastInfo("Deleted!");
-                router.push("/dashboard");
+                // and update so NO current cart for this user
+                const { error, data: updatedUser } = await updateUser({ currentCartId: "" }); // VIP: empty string, just like on iac-side
+                if (!error && updatedUser?.updateUser?.user?.currentCartId === "") {
+                  toastInfo("Deleted!");
+                  router.push("/dashboard");
+                } else if (error) {
+                  toastError(error.message);
+                }
+
               }
             }
           }}>

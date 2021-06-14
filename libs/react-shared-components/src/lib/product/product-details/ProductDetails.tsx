@@ -130,28 +130,30 @@ export function ProductDetails({ product }: ProductDetailsProps) {
 
             // 1) confirm that this user has a current cart
             if (!!data.me.currentCartId === false) {
-              toastError("🛍 You do not have an active shopping cart!")
-            }
-            // 2) add this product to the user's current cart
-            const { error, data: newlyAddedProduct } = await addCartLine({
-              "cartLine": {
-                "cartId": data.me.currentCartId,
-                "itemId": product.sku,
-                "description": product.name + ": " + product.description,
-                "price": product.price,
-                "uom": "EACH",
-                "categoryId": "1",
-                "quantity": 1
-              }
-            });
+              toastError("You do not have an active 🛒  shopping cart!")
+            } else {
 
-            if (!error && newlyAddedProduct?.addCartLine?.id) {
-              toastSuccess("Successfully added product to your current cart!")
-              router.push(`/cart/${data.me.currentCartId}`);
-            } else if (error) {
-              toastError(error.message);
+              // 2) add this product to the user's current cart
+              const { error, data: newlyAddedProduct } = await addCartLine({
+                "cartLine": {
+                  "cartId": data.me.currentCartId,
+                  "itemId": product.sku,
+                  "description": product.name + ": " + product.description,
+                  "price": product.price,
+                  "uom": "EACH",
+                  "categoryId": "1",
+                  "quantity": 1
+                }
+              });
+
+              if (!error && newlyAddedProduct?.addCartLine?.id) {
+                toastSuccess("Successfully added product to your current cart!")
+                router.push(`/cart/${data.me.currentCartId}`);
+              } else if (error) {
+                toastError(error.message);
+              }
+              // TODO: deduping w/ existing cart LINES!
             }
-            // TODO: deduping w/ existing cart LINES!
 
           }}>
           <ShoppingCartIcon />&nbsp;&nbsp;Add to Cart

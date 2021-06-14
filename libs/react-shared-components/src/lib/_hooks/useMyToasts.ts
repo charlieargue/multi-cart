@@ -12,7 +12,7 @@ export const useMyToasts = () => {
 
     const toastError = (message: string) => toast({
         status: 'error',
-        position: "top-right",
+        position: "top",
         ...toastAttribs(message)
     });
 
