@@ -34,6 +34,7 @@ exports.handler = async (event, context, callback) => {
            token: data.AuthenticationResult.AccessToken
        }
     } catch (err) {
+        console.log(`🚀 ✅ 🧪 🔥 ~ err`, err);
         console.log(err, err.stack);
     }   
 }
