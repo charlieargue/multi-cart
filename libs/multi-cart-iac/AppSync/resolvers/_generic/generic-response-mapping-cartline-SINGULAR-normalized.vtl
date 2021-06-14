@@ -1,13 +1,22 @@
 ## NOTE: the UpdateItem for updating/appending cart line ACCOUNTS returns the entire CART w/ cartLines w/ cartLineAccounts... 
 ##       so have to filter down to return just the one new fresh cart line ACCOUNT
 
+// ADD:    ✅ stash & ❌ ID
+// UPDATE: ❌ stash & ✅ ID
+
+#if( $ctx.stash.freshCartLineAccountId ) 
+    #set($normalized = $ctx.stash.freshCartLineAccountId)
+#elseif( $ctx.args.id ) 
+    #set( $normalized = $ctx.args.id )
+#end
+
 ## cart LINES
 #foreach($cl in $ctx.result.cartLines)
     #if($cl.id == "$ctx.args.cartLineId")
 
         ## cart line ACCOUNTS
         #foreach($cla in $cl.cartLineAccounts)
-            #if($cla.id == "$ctx.args.id")
+            #if($cla.id == "$normalized")
                 #set($data = $cla)
                 #break
             #end

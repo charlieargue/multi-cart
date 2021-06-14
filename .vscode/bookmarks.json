@@ -134,6 +134,26 @@
 					"label": ""
 				}
 			]
+		},
+		{
+			"path": "libs/multi-cart-iac/tf-pipeline-add-cart-line-account.tf",
+			"bookmarks": [
+				{
+					"line": 23,
+					"column": 111,
+					"label": ""
+				}
+			]
+		},
+		{
+			"path": "libs/multi-cart-iac/tf-pipeline-update-cart-line-account.tf",
+			"bookmarks": [
+				{
+					"line": 14,
+					"column": 114,
+					"label": ""
+				}
+			]
 		}
 	]
 }
