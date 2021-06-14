@@ -2,21 +2,22 @@ import {
     Account,
     AddCartLineAccountMutation,
     AddCartLineAccountMutationVariables,
-    BlankCartLineMutation,
+    AddCartLineMutation, BlankCartLineMutation,
     Cart,
     CartLine,
     CartsDocument,
     CartsQuery,
     DeleteCartLineAccountMutationVariables,
     DeleteCartLineMutationVariables,
-    DeleteCartMutationVariables, LoginMutation,
+    DeleteCartMutationVariables,
+    LoginMutation,
     LogoutMutation,
     MeDocument,
     MeQuery,
     RegisterMutation,
     UpdateCartLineMutation,
     UpdateCartLineMutationVariables
-} from "@multi-cart/react-data-access";
+} from "../generated/graphql";
 import { Cache, cacheExchange } from "@urql/exchange-graphcache";
 import { betterUpdateQuery } from "./betterUpdateQuery";
 
@@ -62,6 +63,16 @@ export const cache = cacheExchange({
                     // add this result.blankCartLine to our cart's lines
                     const foundCachedCart = (data as any).carts.find((c: Cart) => c.id === (result as BlankCartLineMutation).blankCartLine.cartId)
                     foundCachedCart.cartLines.push((result as any).blankCartLine);
+                    return data;
+                });
+            },
+            
+            addCartLine: (result, args, cache) => {
+                cache.updateQuery({ query: CartsDocument }, (data: CartsQuery | null) => {
+                    // GAMEPLAN: find our data.carts cart
+                    // add this result.blankCartLine to our cart's lines
+                    const foundCachedCart = (data as any).carts.find((c: Cart) => c.id === (result as AddCartLineMutation).addCartLine?.id)
+                    foundCachedCart.cartLines.push((result as any).addCartLine);
                     return data;
                 });
             },
