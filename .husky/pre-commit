@@ -9,6 +9,7 @@ terraform -chdir=libs/multi-cart-iac fmt
 
 
 # test API only if changes made to iac stuff
+exit
 if (git status | grep "libs/multi-cart-iac/") 
 then
      yarn test-iac
