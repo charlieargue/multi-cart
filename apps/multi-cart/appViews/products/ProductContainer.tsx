@@ -16,11 +16,13 @@ export function ProductContainer(props: ProductContainerProps) {
       isActive: false,
       label: "Products",
       href: `/products`
-    }, {
+    },
+    {
       isActive: true,
-      label: product?.name,
+      label: (product) ? product.name : "...",
       href: `/product/${router.query?.slug}`
-    }];
+    }
+  ];
   const breadcrumbs = (<Breadcrumbs links={links} />);
   return (
     <AppLayout>
