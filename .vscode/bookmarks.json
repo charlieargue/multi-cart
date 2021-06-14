@@ -119,6 +119,21 @@
 					"label": "🗄 DRAWER"
 				}
 			]
+		},
+		{
+			"path": "libs/multi-cart-iac/tf-resolvers-mutations.tf",
+			"bookmarks": [
+				{
+					"line": 13,
+					"column": 97,
+					"label": ""
+				},
+				{
+					"line": 28,
+					"column": 95,
+					"label": ""
+				}
+			]
 		}
 	]
 }

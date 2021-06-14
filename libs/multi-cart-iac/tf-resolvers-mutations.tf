@@ -11,7 +11,7 @@ resource "aws_appsync_resolver" "blank_cart_line_resolver" {
   type              = "Mutation"
   data_source       = aws_appsync_datasource.multicart_dynamodb_cart_datasource.name
   request_template  = file("./AppSync/resolvers/cart-resolvers/blankCartLine/request-mapping.vtl")
-  response_template = file("./AppSync/resolvers/cart-resolvers/blankCartLine/response-mapping.vtl")
+  response_template = file("./AppSync/resolvers/_generic/generic-response-mapping-cart-SINGULAR-by-stash.vtl")
   depends_on = [
     aws_appsync_graphql_api.MultiCart,
     aws_appsync_datasource.multicart_dynamodb_cart_datasource,
@@ -26,7 +26,7 @@ resource "aws_appsync_resolver" "add_cart_line_resolver" {
   type              = "Mutation"
   data_source       = aws_appsync_datasource.multicart_dynamodb_cart_datasource.name
   request_template  = file("./AppSync/resolvers/cart-resolvers/addCartLine/request-mapping.vtl")
-  response_template = file("./AppSync/resolvers/cart-resolvers/addCartLine/response-mapping.vtl")
+  response_template = file("./AppSync/resolvers/_generic/generic-response-mapping-cart-SINGULAR-by-stash.vtl")
   depends_on = [
     aws_appsync_graphql_api.MultiCart,
     aws_appsync_datasource.multicart_dynamodb_cart_datasource,

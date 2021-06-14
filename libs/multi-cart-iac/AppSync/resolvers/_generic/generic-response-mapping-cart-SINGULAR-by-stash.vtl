@@ -1,7 +1,8 @@
-## NOTE: the UpdateItem for add a cart LINE returns the entire CART w/ cartLines... 
+## NOTE: the UpdateItem for add|blank a cart LINE returns the entire CART w/ cartLines... 
 ##       so have to filter down to return just the one new fresh cart LINE
 
 #if($util.isNull($ctx.result.errors)) 
+    
     ## No errors? we proceed...
     #set($freshCartLineId = $ctx.stash.freshCartLineId)
     #foreach($item in $ctx.result.cartLines)
