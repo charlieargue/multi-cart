@@ -1,10 +1,11 @@
 import { Box, Button, Flex, Stat, StatHelpText, StatLabel, StatNumber, TableCaption, Td, Tfoot, Tr } from '@chakra-ui/react';
+import { actionIsDeletingCart, store } from '@multi-cart/react-app-state';
 import { Cart, useDeleteCartMutation, useUpdateUserMutation } from '@multi-cart/react-data-access';
 import { sumTotalCost, toFriendlyCurrency } from '@multi-cart/util';
-import React from 'react';
-import './EditCartTableFooter.module.scss';
 import { useRouter } from 'next/router';
+import React from 'react';
 import useMyToasts from '../../_hooks/useMyToasts';
+import './EditCartTableFooter.module.scss';
 
 /* eslint-disable-next-line */
 export interface EditCartTableFooterProps {
@@ -26,19 +27,24 @@ export function EditCartTableFooter({ cart }: EditCartTableFooterProps) {
           size="sm"
           onClick={async () => {
             if (cart?.id) {
-              const response = await deleteCart({
-                id: cart.id
-              });
-              if (response.data?.deleteCart === true) {
-                // and update so NO current cart for this user
-                const { error, data: updatedUser } = await updateUser({ currentCartId: "" }); // VIP: empty string, just like on iac-side
-                if (!error && updatedUser?.updateUser?.user?.currentCartId === "") {
-                  toastInfo("Deleted!");
-                  router.push("/dashboard");
-                } else if (error) {
-                  toastError(error.message);
+              // TODO: hacky, do we need a setDeleting and unsetDeleting instead of just toggle? or ok... TBD
+              store.dispatch(actionIsDeletingCart); // TOGGLE ON
+              try {
+                const response = await deleteCart({
+                  id: cart.id
+                });
+                if (response.data?.deleteCart === true) {
+                  // and update so NO current cart for this user
+                  const { error, data: updatedUser } = await updateUser({ currentCartId: "" }); // VIP: empty string, just like on iac-side
+                  if (!error && updatedUser?.updateUser?.user?.currentCartId === "") {
+                    toastInfo("Deleted!");
+                    router.push("/dashboard");
+                  } else if (error) {
+                    toastError(error.message);
+                  }
                 }
-
+              } finally {
+                store.dispatch(actionIsDeletingCart);  // TOGGLE OFF
               }
             }
           }}>

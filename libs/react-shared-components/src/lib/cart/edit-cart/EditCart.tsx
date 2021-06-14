@@ -1,11 +1,12 @@
 import {
-  Alert, AlertIcon, Box, Fade, Flex, HStack, SkeletonCircle, SkeletonText, Table, Tbody,
-  Td, Tr, useColorModeValue as mode, Wrap, WrapItem
+  Alert, AlertIcon, Box, Fade, SkeletonCircle, SkeletonText, Table, Tbody,
+  Td, Tr, Wrap, WrapItem
 } from '@chakra-ui/react';
+import { StateType } from '@multi-cart/react-app-state';
 import { CartLine, useCartQuery, useUpdateUserMutation } from '@multi-cart/react-data-access';
 import { BigAlert, Breadcrumbs } from '@multi-cart/react-ui';
 import React, { useEffect } from 'react';
-// DECOMISH: afaik: import 'regenerator-runtime/runtime';
+import { useSelector } from 'react-redux';
 import LineAccount from '../../line-account/line-account/LineAccount';
 import LineAccountsContainer from '../../line-account/line-accounts-container/LineAccountsContainer';
 import CartLineRow from '../cart-line-row/CartLineRow';
@@ -17,6 +18,7 @@ import EditCartTableHeader from '../edit-cart-table-header/EditCartTableHeader';
 interface EditCartProps { id: string }
 
 export const EditCart = ({ id }: EditCartProps) => {
+  const isDeletingCart = useSelector((state: StateType) => state.isFetching);
   const [{ data, error, fetching }] = useCartQuery({
     variables: {
       id
@@ -90,7 +92,7 @@ export const EditCart = ({ id }: EditCartProps) => {
   }
 
   // bad cart ID?
-  if (!data?.cart) {
+  if (!data?.cart && !isDeletingCart) {
     return (
       <>
         {breadcrumbs}

@@ -1,14 +1,5 @@
-import { typeActionFetching } from "..";
 import { Action } from 'redux';
-
-// keeping it simple, not combining reducers, simple one bstate, etc.
-export interface StateType {
-    isFetching: boolean;
-}
-
-const initialState: StateType = {
-    isFetching: false,
-};
+import { typeActionFetching, typeActionIsDeletingCart, initialState } from "..";
 
 // TODO: more strongly-typed actions using this IAction method? https://stackoverflow.com/a/53412235/6200791 (or is there a newer/better way?)
 export const appStateReducer = (state = initialState, action: Action) => {
@@ -22,11 +13,20 @@ export const appStateReducer = (state = initialState, action: Action) => {
                 isFetching: true
             };
             break;
+
         // --------------
         case typeActionFetching.stop:
             return {
                 ...state,
                 isFetching: false
+            };
+            break;
+
+        // --------------
+        case typeActionIsDeletingCart.toggle:
+            return {
+                ...state,
+                isDeletingCart: !state.isDeletingCart
             };
             break;
 

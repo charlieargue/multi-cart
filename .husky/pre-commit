@@ -18,13 +18,6 @@ yarn affected:lint
 ## ------------------------------
 
 # NOT READY YET: yarn affected:test
-# test API only if changes made to iac stuff
-if (git status | grep "libs/multi-cart-iac/") 
-then
-     yarn test-iac
-else 
-    exit
-fi
 
 
 # export NODE_OPTIONS="--max-old-space-size=8192"
