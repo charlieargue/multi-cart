@@ -1,0 +1,1467 @@
+{
+	"info": {
+		"_postman_id": "aa1d53ad-188a-40cb-abf5-b723c642df7a",
+		"name": "🛍 Multi-Cart ⚙️ DEV",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "✅   users (list)",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"user-agent": true,
+							"content-type": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "x-api-key",
+								"value": "{{APP_SYNC_API_KEY_DEV}}\t",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "{{APP_SYNC_COGNITO_TOKEN_DEV}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "{\n    users {\n        id\n        username\n        currentCartId\n        email\n        createdAt\n        updatedAt\n    }\n}",
+								"variables": ""
+							}
+						},
+						"url": {
+							"raw": "{{APP_SYNC_URL_DEV}}",
+							"host": [
+								"{{APP_SYNC_URL_DEV}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "✅   user (REGISTER)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "x-api-key",
+								"value": "{{APP_SYNC_API_KEY_DEV}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "\nmutation Register($options: UsernamePasswordInput!) {\n    register(options: $options) {\n        user {\n            id\n            username\n            currentCartId\n        }\n        token\n    }\n}\n",
+								"variables": "{\n    \"options\": {\n        \"username\": \"charlie3\",\n        \"email\": \"charlie@karlgolka.com33\",\n        \"password\": \"33423423/#sF4\"\n    }\n}"
+							}
+						},
+						"url": {
+							"raw": "{{APP_SYNC_URL_DEV}}",
+							"host": [
+								"{{APP_SYNC_URL_DEV}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "✅   user (UPDATE)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "x-api-key",
+								"type": "text",
+								"value": "{{APP_SYNC_API_KEY_DEV}}\t",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "{{APP_SYNC_COGNITO_TOKEN_DEV}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation UpdateUser($currentCartId: ID!) {\n  updateUser(currentCartId: $currentCartId) {\n    user {\n        id\n        username\n        email\n        currentCartId\n        createdAt\n        updatedAt\n\n    }\n  }\n}\n",
+								"variables": "{\n    \"currentCartId\": \"663c8ef2-8a0d-4b38-a58a-8fdeac6ba85a\"\n}"
+							}
+						},
+						"url": {
+							"raw": "{{APP_SYNC_URL_DEV}}",
+							"host": [
+								"{{APP_SYNC_URL_DEV}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "✅   user (LOGOUT)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "{{APP_SYNC_COGNITO_TOKEN_DEV}}"
+							}
+						],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation  {\n  logout\n  }\n\n",
+								"variables": ""
+							}
+						},
+						"url": {
+							"raw": "{{APP_SYNC_URL_DEV}}",
+							"host": [
+								"{{APP_SYNC_URL_DEV}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "✅   step #1 (FORGOT PWD)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Auth",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation ForgotPassword($email: String!) {\n  forgotPassword( email: $email )\n}\n",
+								"variables": "{\n    \"email\": \"webstruments@gmail.com\"\n}"
+							}
+						},
+						"url": {
+							"raw": "{{APP_SYNC_URL_DEV}}",
+							"host": [
+								"{{APP_SYNC_URL_DEV}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "✅  step #2 - CHANGE PWD)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Auth",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation ChangePassword($username: String!, $token: String!, $newPassword: String!) {\n  changePassword(username: $username, token: $token, newPassword: $newPassword) \n}",
+								"variables": "{\n    \"username\": \"karlgolka\",\n    \"token\": \"351905\",\n    \"newPassword\": \"2!2@3#alphaBETA\"\n}"
+							}
+						},
+						"url": {
+							"raw": "{{APP_SYNC_URL_DEV}}",
+							"host": [
+								"{{APP_SYNC_URL_DEV}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Cart",
+			"item": [
+				{
+					"name": "✅   carts (list)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "x-api-key",
+								"type": "text",
+								"value": "{{APP_SYNC_API_KEY_DEV}}\t",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "{{APP_SYNC_COGNITO_TOKEN_DEV}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "{\n    carts {\n        id\n        name\n        createdAt\n        updatedAt\n        cartLines {\n             id\n            itemId\n            description\n            quantity\n            price\n            cartId\n            createdAt\n            updatedAt\n            cartLineAccounts {\n                id\n                amount\n                accountNumber\n                cartLineId\n                createdAt\n                updatedAt\n            }\n        }\n    }\n}",
+								"variables": ""
+							}
+						},
+						"url": {
+							"raw": "{{APP_SYNC_URL_DEV}}",
+							"host": [
+								"{{APP_SYNC_URL_DEV}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "✅   cart (UPDATE)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "x-api-key",
+								"type": "text",
+								"value": "{{APP_SYNC_API_KEY_DEV}}\t",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "{{APP_SYNC_COGNITO_TOKEN_DEV}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation UpdateCart($cart: CartInput!) {\n  updateCart(cart: $cart) {\n    id\n    name\n    createdAt\n    updatedAt\n        cartLines {\n             id\n            itemId\n            cartId\n            createdAt\n            updatedAt\n        }\n  }\n}\n",
+								"variables": "{\n    \"cart\": {\n        \"id\": \"2b5c9901-b751-4446-9ddb-c0959223fdc5\",\n        \"name\": \"Pupa 2️⃣\"\n    }\n}"
+							}
+						},
+						"url": {
+							"raw": "{{APP_SYNC_URL_DEV}}",
+							"host": [
+								"{{APP_SYNC_URL_DEV}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Account",
+			"item": [
+				{
+					"name": "✅   accounts (HYDRATE) ⚠️ ADMIN ONLY",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "x-api-key",
+								"type": "text",
+								"value": "{{APP_SYNC_API_KEY_DEV}}\t",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "{{APP_SYNC_COGNITO_TOKEN_DEV}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation HydrateAccounts {\n    hydrateAccounts \n}",
+								"variables": ""
+							}
+						},
+						"url": {
+							"raw": "{{APP_SYNC_URL_DEV}}",
+							"host": [
+								"{{APP_SYNC_URL_DEV}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "✅   accounts (list)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{APP_SYNC_COGNITO_TOKEN_DEV}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "{\n    accounts {\n        id\n        accountName\n        accountNumber\n        amountRemaining\n        createdAt\n        updatedAt\n    }\n}",
+								"variables": ""
+							}
+						},
+						"url": {
+							"raw": "{{APP_SYNC_URL_DEV}}",
+							"host": [
+								"{{APP_SYNC_URL_DEV}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "API-tests",
+			"item": [
+				{
+					"name": "🧪 (0) ✅   user (LOGIN)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// ##################################################################################",
+									"// (0) login",
+									"// ##################################################################################",
+									"",
+									"const prefix = '🧪 login ENDPOINT';",
+									"const path = 'data.login';",
+									"",
+									"pm.test(`✔️ ${prefix} returns 200`, function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(`✔️ ${prefix} doesn't return errors`, function () {",
+									"    pm.response.to.not.have.jsonBody('error');",
+									"    pm.response.to.have.jsonBody(path);",
+									"});",
+									"",
+									"// fancy prep",
+									"const jsonData = pm.response.json();",
+									"const result = resolve(path, jsonData);",
+									"",
+									"// --------------------------------",
+									"pm.test(`✔️ ${prefix} works correctly`, function () {",
+									"",
+									"    // TEST the results:",
+									"    // user",
+									"    pm.expect(result.user.id).to.exist;",
+									"    pm.expect(result.user.username).to.exist;",
+									"    pm.expect(result.user.currentCartId).to.exist;",
+									"    pm.expect(result.user.createdAt).to.exist;",
+									"    pm.expect(result.user.updatedAt).to.exist;",
+									"    ",
+									"    pm.expect(result.token).to.exist;",
+									"",
+									"    // SAVE access token for other tests:",
+									"    pm.environment.set('APP_SYNC_COGNITO_TOKEN_DEV', result.token); ",
+									"",
+									"});",
+									"// --------------------------------",
+									"",
+									"// thx: https://stackoverflow.com/a/22129960/6200791",
+									"// NOTE: leave as function since HOISTED up so can reference up above!",
+									"function resolve(path, obj = self, separator = '.') {",
+									"    var properties = Array.isArray(path) ? path : path.split(separator)",
+									"    return properties.reduce((prev, curr) => prev && prev[curr], obj)",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "x-api-key",
+								"value": "{{APP_SYNC_API_KEY_DEV}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation Login($usernameOrEmail: String!, $password: String!) {\n  login( usernameOrEmail: $usernameOrEmail, password: $password ) {\n    user {\n        currentCartId\n        email\n        id\n        username\n        createdAt\n        updatedAt\n        __typename\n    }\n    token\n  }\n}\n",
+								"variables": "{\n    \"usernameOrEmail\": \"{{TESTING_username}}\",\n    \"password\": \"{{TESTING_password}}\"\n}"
+							}
+						},
+						"url": {
+							"raw": "{{APP_SYNC_URL_DEV}}",
+							"host": [
+								"{{APP_SYNC_URL_DEV}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "🧪  (1) ✅   me (session)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// ##################################################################################",
+									"// (1) me",
+									"// ##################################################################################",
+									"",
+									"const prefix = '🧪 me ENDPOINT';",
+									"const path = 'data.me';",
+									"",
+									"pm.test(`✔️ ${prefix} returns 200`, function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(`✔️ ${prefix} doesn't return errors`, function () {",
+									"    pm.response.to.not.have.jsonBody('error');",
+									"    pm.response.to.have.jsonBody(path);",
+									"});",
+									"",
+									"// fancy prep",
+									"const jsonData = pm.response.json();",
+									"const result = resolve(path, jsonData);",
+									"",
+									"// --------------------------------",
+									"pm.test(`✔️ ${prefix} works correctly`, function () {",
+									"",
+									"    // TEST the results:",
+									"    pm.expect(result.id).to.exist;",
+									"    pm.expect(result.username).to.exist;",
+									"    pm.expect(result.email).to.exist;",
+									"    pm.expect(result.currentCartId).to.exist;",
+									"    pm.expect(result.createdAt).to.exist;",
+									"    pm.expect(result.updatedAt).to.exist;",
+									"",
+									"    // SAVE user ID for other tests:",
+									"    // NOTE: in the currently selected (postman) environment",
+									"    pm.environment.set('TESTING_meId', result.id); ",
+									"",
+									"});",
+									"// --------------------------------",
+									"",
+									"// thx: https://stackoverflow.com/a/22129960/6200791",
+									"// NOTE: leave as function since HOISTED up so can reference up above!",
+									"function resolve(path, obj = self, separator = '.') {",
+									"    var properties = Array.isArray(path) ? path : path.split(separator)",
+									"    return properties.reduce((prev, curr) => prev && prev[curr], obj)",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "x-api-key",
+								"type": "text",
+								"value": "{{APP_SYNC_API_KEY_DEV}}\t",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "{{APP_SYNC_COGNITO_TOKEN_DEV}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "{\n    me {\n        id\n        username\n        email\n        currentCartId\n        createdAt\n        updatedAt\n        \n    }\n}",
+								"variables": ""
+							}
+						},
+						"url": {
+							"raw": "{{APP_SYNC_URL_DEV}}",
+							"host": [
+								"{{APP_SYNC_URL_DEV}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "🧪  (2) ✅   cart (BLANK)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// ##################################################################################",
+									"// (2) blank Cart",
+									"// ##################################################################################",
+									"",
+									"const prefix = '🧪 blankCart ENDPOINT';",
+									"const path = 'data.blankCart';",
+									"const meId = pm.environment.get('TESTING_meId');",
+									"",
+									"pm.test(`✔️ ${prefix} returns 200`, function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(`✔️ ${prefix} doesn't return errors`, function () {",
+									"    pm.response.to.not.have.jsonBody('error');",
+									"    pm.response.to.have.jsonBody(path);",
+									"});",
+									"",
+									"// fancy prep",
+									"const jsonData = pm.response.json();",
+									"const result = resolve(path, jsonData);",
+									"",
+									"// --------------------------------",
+									"pm.test(`✔️ ${prefix} works correctly`, function () {",
+									"",
+									"    // TEST the results:",
+									"    pm.expect(result.id).to.exist;",
+									"    pm.expect(result.name).to.exist;",
+									"    pm.expect(result.createdAt).to.exist;",
+									"    pm.expect(result.updatedAt).to.exist;",
+									"    pm.expect(result.userId).to.eql(meId);",
+									"    pm.expect(result.cartLines).to.eql([]); // blank cart gets empty array for cart lines",
+									"",
+									"    // SAVE cart ID for other tests:",
+									"    pm.environment.set('TESTING_cartId', result.id);",
+									"",
+									"",
+									"});",
+									"// --------------------------------",
+									"",
+									"// thx: https://stackoverflow.com/a/22129960/6200791",
+									"// NOTE: leave as function since HOISTED up so can reference up above!",
+									"function resolve(path, obj=self, separator='.') {",
+									"    var properties = Array.isArray(path) ? path : path.split(separator)",
+									"    return properties.reduce((prev, curr) => prev && prev[curr], obj)",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "x-api-key",
+								"type": "text",
+								"value": "{{APP_SYNC_API_KEY_DEV}}\t",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "{{APP_SYNC_COGNITO_TOKEN_DEV}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation {\n    blankCart {\n        id\n        name\n        userId\n        createdAt\n        updatedAt\n        cartLines {\n             id\n            itemId\n            cartId\n            createdAt\n            updatedAt\n        }\n    }\n}",
+								"variables": ""
+							}
+						},
+						"url": {
+							"raw": "{{APP_SYNC_URL_DEV}}",
+							"host": [
+								"{{APP_SYNC_URL_DEV}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "🧪 (3) ✅   cart line (BLANK)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// ##################################################################################",
+									"// (3) blank Cart Line",
+									"// ##################################################################################",
+									"",
+									"const prefix = '🧪 blankCartLine ENDPOINT';",
+									"const path = 'data.blankCartLine';",
+									"const cartId = pm.environment.get('TESTING_cartId');",
+									"",
+									"pm.test(`✔️ ${prefix} returns 200`, function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(`✔️ ${prefix} doesn't return errors`, function () {",
+									"    pm.response.to.not.have.jsonBody('error');",
+									"    pm.response.to.have.jsonBody(path);",
+									"});",
+									"",
+									"// fancy prep",
+									"const jsonData = pm.response.json();",
+									"const result = resolve(path, jsonData);",
+									"",
+									"// --------------------------------",
+									"pm.test(`✔️ ${prefix} works correctly`, function () {",
+									"",
+									"    // TEST the results:",
+									"    pm.expect(result.id).to.exist;",
+									"    pm.expect(result.itemId).to.eql(\"\");",
+									"    pm.expect(result.cartId).to.eql(cartId);",
+									"    pm.expect(result.createdAt).to.exist;",
+									"    pm.expect(result.updatedAt).to.exist;",
+									"",
+									"    // SAVE cart line ID for other tests:",
+									"    pm.environment.set('TESTING_blankCartLineId', result.id);",
+									"",
+									"});",
+									"// --------------------------------",
+									"",
+									"// thx: https://stackoverflow.com/a/22129960/6200791",
+									"// NOTE: leave as function since HOISTED up so can reference up above!",
+									"function resolve(path, obj=self, separator='.') {",
+									"    var properties = Array.isArray(path) ? path : path.split(separator)",
+									"    return properties.reduce((prev, curr) => prev && prev[curr], obj)",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "x-api-key",
+								"type": "text",
+								"value": "{{APP_SYNC_API_KEY_DEV}}\t",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "{{APP_SYNC_COGNITO_TOKEN_DEV}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation BlankCartLine($cartId: ID!){\n  blankCartLine(cartId: $cartId) {\n    id\n    itemId\n    cartId\n    createdAt\n    updatedAt\n  }\n}\n",
+								"variables": "{\n    \"cartId\": \"{{TESTING_cartId}}\"\n}"
+							}
+						},
+						"url": {
+							"raw": "{{APP_SYNC_URL_DEV}}",
+							"host": [
+								"{{APP_SYNC_URL_DEV}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "🧪 (4) ✅   cart line (ADD)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// ##################################################################################",
+									"// (4) add Cart Line",
+									"// ##################################################################################",
+									"",
+									"const prefix = '🧪 addCartLine ENDPOINT';",
+									"const path = 'data.addCartLine';",
+									"const cartId = pm.environment.get('TESTING_cartId');",
+									"",
+									"pm.test(`✔️ ${prefix} returns 200`, function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(`✔️ ${prefix} doesn't return errors`, function () {",
+									"    pm.response.to.not.have.jsonBody('error');",
+									"    pm.response.to.have.jsonBody(path);",
+									"});",
+									"",
+									"// fancy prep",
+									"const jsonData = pm.response.json();",
+									"const result = resolve(path, jsonData);",
+									"",
+									"// --------------------------------",
+									"pm.test(`✔️ ${prefix} works correctly`, function () {",
+									"",
+									"    // TEST the results:",
+									"    pm.expect(result.id).to.exist;",
+									"    pm.expect(result.itemId).to.eql(\"POSTMAN\");",
+									"    pm.expect(result.description).to.include(cartId);",
+									"    pm.expect(result.cartId).to.eql(cartId);",
+									"    pm.expect(result.price).to.eql(420.69);",
+									"    pm.expect(result.uom).to.eql(\"EACH\");",
+									"    pm.expect(result.quantity).to.eql(3);",
+									"    pm.expect(result.categoryId).to.exist;",
+									"    pm.expect(result.createdAt).to.exist;",
+									"    pm.expect(result.updatedAt).to.exist;",
+									"",
+									"    // SAVE cart line ID for other tests:",
+									"    pm.environment.set('TESTING_cartLineId', result.id);",
+									"    ",
+									"});",
+									"// --------------------------------",
+									"",
+									"// thx: https://stackoverflow.com/a/22129960/6200791",
+									"// NOTE: leave as function since HOISTED up so can reference up above!",
+									"function resolve(path, obj=self, separator='.') {",
+									"    var properties = Array.isArray(path) ? path : path.split(separator)",
+									"    return properties.reduce((prev, curr) => prev && prev[curr], obj)",
+									"}",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{APP_SYNC_COGNITO_TOKEN_DEV}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation AddCartLine($cartLine: CartLineInput!) {\n  addCartLine(cartLine: $cartLine) {\n    id\n    itemId\n    description\n    price\n    uom\n    categoryId\n    quantity\n    cartId\n    createdAt\n    updatedAt\n  }\n}\n",
+								"variables": "{\n    \"cartLine\": {\n        \"cartId\": \"{{TESTING_cartId}}\",\n        \"itemId\": \"POSTMAN\",\n        \"description\": \"added this cart line to cart #{{TESTING_cartId}}\",\n        \"price\": \"420.69\",\n        \"uom\": \"EACH\",\n        \"categoryId\": \"TBD\",\n        \"quantity\": \"3\"\n    }\n}"
+							}
+						},
+						"url": {
+							"raw": "{{APP_SYNC_URL_DEV}}",
+							"host": [
+								"{{APP_SYNC_URL_DEV}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "🧪 (5) ✅   cart line (DELETE)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// ##################################################################################",
+									"// (5) delete Cart Line",
+									"// ##################################################################################",
+									"",
+									"const prefix = '🧪 deleteCartLine ENDPOINT';",
+									"const path = 'data.deleteCartLine';",
+									"",
+									"pm.test(`✔️ ${prefix} returns 200`, function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(`✔️ ${prefix} doesn't return errors`, function () {",
+									"    pm.response.to.not.have.jsonBody('error');",
+									"    pm.response.to.have.jsonBody(path);",
+									"});",
+									"",
+									"// fancy prep",
+									"const jsonData = pm.response.json();",
+									"const result = resolve(path, jsonData);",
+									"",
+									"// --------------------------------",
+									"pm.test(`✔️ ${prefix} works correctly`, function () {",
+									"",
+									"    // TEST the results:",
+									"    pm.expect(result).to.eql(true);",
+									"});",
+									"// --------------------------------",
+									"",
+									"// thx: https://stackoverflow.com/a/22129960/6200791",
+									"// NOTE: leave as function since HOISTED up so can reference up above!",
+									"function resolve(path, obj=self, separator='.') {",
+									"    var properties = Array.isArray(path) ? path : path.split(separator)",
+									"    return properties.reduce((prev, curr) => prev && prev[curr], obj)",
+									"}",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{APP_SYNC_COGNITO_TOKEN_DEV}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation DeleteCartLine($cartId: ID!, $cartLineId: ID!) {\n  deleteCartLine(cartId: $cartId, cartLineId: $cartLineId)\n}\n",
+								"variables": "{\n    \"cartId\": \"{{TESTING_cartId}}\",\n    \"cartLineId\": \"{{TESTING_blankCartLineId}}\"\n}"
+							}
+						},
+						"url": {
+							"raw": "{{APP_SYNC_URL_DEV}}",
+							"host": [
+								"{{APP_SYNC_URL_DEV}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "🧪 (6) ✅   cart line (UPDATE)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// ##################################################################################",
+									"// (6) update Cart Line",
+									"// ##################################################################################",
+									"",
+									"const prefix = '🧪 updateCartLine ENDPOINT';",
+									"const path = 'data.updateCartLine';",
+									"const cartId = pm.environment.get('TESTING_cartId');",
+									"const cartLineId = pm.environment.get('TESTING_cartLineId'); // this is NOT the blank cart line (which we deleted)",
+									"",
+									"pm.test(`✔️ ${prefix} returns 200`, function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(`✔️ ${prefix} doesn't return errors`, function () {",
+									"    pm.response.to.not.have.jsonBody('error');",
+									"    pm.response.to.have.jsonBody(path);",
+									"});",
+									"",
+									"// fancy prep",
+									"const jsonData = pm.response.json();",
+									"const result = resolve(path, jsonData);",
+									"",
+									"// --------------------------------",
+									"pm.test(`✔️ ${prefix} works correctly`, function () {",
+									"",
+									"    // TEST the results:",
+									"    pm.expect(result.id).to.exist;",
+									"    pm.expect(result.itemId).to.eql(\"🎟 UPDATED\");",
+									"    pm.expect(result.description).to.include(\"🤘\");",
+									"    pm.expect(result.cartId).to.eql(cartId);",
+									"    pm.expect(result.price).to.eql(4.33);",
+									"    pm.expect(result.uom).to.eql(\"EACH\");",
+									"    pm.expect(result.quantity).to.eql(3);",
+									"    pm.expect(result.categoryId).to.exist; // TODO: standardize and FINISH once this is done (mocked)",
+									"    ",
+									"    // ⏰ timestamps",
+									"    pm.expect(result.createdAt).to.exist;",
+									"    pm.expect(result.updatedAt).to.exist;",
+									"",
+									"});",
+									"// --------------------------------",
+									"",
+									"// thx: https://stackoverflow.com/a/22129960/6200791",
+									"// NOTE: leave as function since HOISTED up so can reference up above!",
+									"function resolve(path, obj=self, separator='.') {",
+									"    var properties = Array.isArray(path) ? path : path.split(separator)",
+									"    return properties.reduce((prev, curr) => prev && prev[curr], obj)",
+									"}",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "x-api-key",
+								"type": "text",
+								"value": "{{APP_SYNC_API_KEY_DEV}}\t",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "{{APP_SYNC_COGNITO_TOKEN_DEV}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation UpdateCartLine($cartLine: CartLineInput!) {\n  updateCartLine(cartLine: $cartLine) {\n    id\n    itemId\n    description\n    price\n    uom\n    categoryId\n    quantity\n    cartId\n    createdAt\n    updatedAt\n  }\n}\n",
+								"variables": "{\n    \"cartLine\": {\n        \"id\": \"{{TESTING_cartLineId}}\",\n        \"cartId\": \"{{TESTING_cartId}}\",\n        \"itemId\": \"🎟 UPDATED\",\n        \"description\": \"🤘 description, look for old PRICE\",\n        \"uom\": \"EACH\",\n        \"categoryId\": \"TBD\",\n        \"quantity\": \"3\",\n        \"price\": 4.33\n    }\n}"
+							}
+						},
+						"url": {
+							"raw": "{{APP_SYNC_URL_DEV}}",
+							"host": [
+								"{{APP_SYNC_URL_DEV}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "🧪 (7) ✅   account (ADD TO CART LINE)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// ##################################################################################",
+									"// (7) add Cart Line Account",
+									"// ##################################################################################",
+									"",
+									"const prefix = '🧪 addCartLineAccount ENDPOINT';",
+									"const path = 'data.addCartLineAccount';",
+									"const cartId = pm.environment.get('TESTING_cartId');",
+									"const cartLineId = pm.environment.get('TESTING_cartLineId'); // this is NOT the blank cart line (which we deleted)",
+									"",
+									"pm.test(`✔️ ${prefix} returns 200`, function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(`✔️ ${prefix} doesn't return errors`, function () {",
+									"    pm.response.to.not.have.jsonBody('error');",
+									"    pm.response.to.have.jsonBody(path);",
+									"});",
+									"",
+									"// fancy prep",
+									"const jsonData = pm.response.json();",
+									"const result = resolve(path, jsonData);",
+									"",
+									"// --------------------------------",
+									"pm.test(`✔️ ${prefix} works correctly`, function () {",
+									"",
+									"    // TEST the results:",
+									"    pm.expect(result.id).to.exist;",
+									"    pm.expect(result.amount).to.eql(6.69);",
+									"    pm.expect(result.accountNumber).to.eql(\"36987-1018\");",
+									"    pm.expect(result.accountNumber).to.eql(\"36987-1018\");",
+									"    pm.expect(result.cartLineId).to.eql(cartLineId);",
+									"    ",
+									"    // ⏰ timestamps",
+									"    pm.expect(result.createdAt).to.exist;",
+									"    pm.expect(result.updatedAt).to.exist;",
+									"",
+									"    // SAVE cart line *account* ID for other tests:",
+									"    pm.environment.set('TESTING_cartLineAccountId', result.id);",
+									"",
+									"});",
+									"// --------------------------------",
+									"",
+									"// thx: https://stackoverflow.com/a/22129960/6200791",
+									"// NOTE: leave as function since HOISTED up so can reference up above!",
+									"function resolve(path, obj=self, separator='.') {",
+									"    var properties = Array.isArray(path) ? path : path.split(separator)",
+									"    return properties.reduce((prev, curr) => prev && prev[curr], obj)",
+									"}",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "x-api-key",
+								"type": "text",
+								"value": "{{APP_SYNC_API_KEY_DEV}}\t",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "{{APP_SYNC_COGNITO_TOKEN_DEV}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation AddCartLineAccount(\n  $cartId: ID!\n  $cartLineId: ID!\n  $accountNumber: String!\n  $amount: Float!\n) {\n  addCartLineAccount(\n    cartId: $cartId\n    cartLineId: $cartLineId\n    accountNumber: $accountNumber\n    amount: $amount\n  ) {\n    id\n    amount\n    accountNumber\n    cartLineId\n    createdAt\n    updatedAt\n  }\n}\n",
+								"variables": "{\n  \"cartId\": \"{{TESTING_cartId}}\",\n  \"cartLineId\": \"{{TESTING_cartLineId}}\",\n  \"accountNumber\": \"36987-1018\",\n  \"amount\": 6.69\n}"
+							}
+						},
+						"url": {
+							"raw": "{{APP_SYNC_URL_DEV}}",
+							"host": [
+								"{{APP_SYNC_URL_DEV}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "🧪 (8) ✅   account (UPDATE on CART LINE)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// ##################################################################################",
+									"// (8) update Cart Line Account",
+									"// ##################################################################################",
+									"",
+									"const prefix = '🧪 updateCartLineAccount ENDPOINT';",
+									"const path = 'data.updateCartLineAccount';",
+									"const cartId = pm.environment.get('TESTING_cartId');",
+									"const cartLineId = pm.environment.get('TESTING_cartLineId'); // this is NOT the blank cart line (which we deleted)",
+									"const cartLineAccountId = pm.environment.get('TESTING_cartLineAccountId'); // this is NOT the blank cart line (which we deleted)",
+									"",
+									"pm.test(`✔️ ${prefix} returns 200`, function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(`✔️ ${prefix} doesn't return errors`, function () {",
+									"    pm.response.to.not.have.jsonBody('error');",
+									"    pm.response.to.have.jsonBody(path);",
+									"});",
+									"",
+									"// fancy prep",
+									"const jsonData = pm.response.json();",
+									"const result = resolve(path, jsonData);",
+									"",
+									"// --------------------------------",
+									"pm.test(`✔️ ${prefix} works correctly`, function () {",
+									"",
+									"    // TEST the results:",
+									"    pm.expect(result.id).to.eql(cartLineAccountId);",
+									"    pm.expect(result.amount).to.eql(7.5); // 🔥",
+									"    pm.expect(result.accountNumber).to.eql(\"36987-1018\");",
+									"    pm.expect(result.cartLineId).to.eql(cartLineId);",
+									"    ",
+									"    // ⏰ timestamps",
+									"    pm.expect(result.createdAt).to.exist;",
+									"    pm.expect(result.updatedAt).to.exist;",
+									"",
+									"});",
+									"// --------------------------------",
+									"",
+									"// thx: https://stackoverflow.com/a/22129960/6200791",
+									"// NOTE: leave as function since HOISTED up so can reference up above!",
+									"function resolve(path, obj=self, separator='.') {",
+									"    var properties = Array.isArray(path) ? path : path.split(separator)",
+									"    return properties.reduce((prev, curr) => prev && prev[curr], obj)",
+									"}",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "x-api-key",
+								"type": "text",
+								"value": "{{APP_SYNC_API_KEY_DEV}}\t",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "{{APP_SYNC_COGNITO_TOKEN_DEV}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation UpdateCartLineAccount(\n  $cartId: ID!\n  $cartLineId: ID!\n  $id: ID!\n  $amount: Float!\n) {\n  updateCartLineAccount(\n    cartId: $cartId\n    cartLineId: $cartLineId\n    id: $id\n    amount: $amount\n  ) {\n    id\n    amount\n    accountNumber\n    cartLineId\n    createdAt\n    updatedAt\n  }\n}\n",
+								"variables": "{\n    \"cartId\": \"{{TESTING_cartId}}\",\n    \"cartLineId\": \"{{TESTING_cartLineId}}\",\n    \"id\": \"{{TESTING_cartLineAccountId}}\",\n    \"amount\": 7.5\n}"
+							}
+						},
+						"url": {
+							"raw": "{{APP_SYNC_URL_DEV}}",
+							"host": [
+								"{{APP_SYNC_URL_DEV}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "🧪 (9) ✅   account (DELETE from CART LINE)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// ##################################################################################",
+									"// (9) delete Cart Line Account",
+									"// ##################################################################################",
+									"",
+									"const prefix = '🧪 deleteCartLineAccount ENDPOINT';",
+									"const path = 'data.deleteCartLineAccount';",
+									"",
+									"pm.test(`✔️ ${prefix} returns 200`, function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(`✔️ ${prefix} doesn't return errors`, function () {",
+									"    pm.response.to.not.have.jsonBody('error');",
+									"    pm.response.to.have.jsonBody(path);",
+									"});",
+									"",
+									"// fancy prep",
+									"const jsonData = pm.response.json();",
+									"const result = resolve(path, jsonData);",
+									"",
+									"// --------------------------------",
+									"pm.test(`✔️ ${prefix} works correctly`, function () {",
+									"",
+									"    // TEST the results:",
+									"    pm.expect(result).to.eql(true);",
+									"});",
+									"// --------------------------------",
+									"",
+									"// thx: https://stackoverflow.com/a/22129960/6200791",
+									"// NOTE: leave as function since HOISTED up so can reference up above!",
+									"function resolve(path, obj=self, separator='.') {",
+									"    var properties = Array.isArray(path) ? path : path.split(separator)",
+									"    return properties.reduce((prev, curr) => prev && prev[curr], obj)",
+									"}",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "x-api-key",
+								"type": "text",
+								"value": "{{APP_SYNC_API_KEY_DEV}}\t",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "{{APP_SYNC_COGNITO_TOKEN_DEV}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation DeleteCartLineAccount(\n  $cartId: ID!\n  $cartLineId: ID!\n  $cartLineAccountId: ID!\n) {\n  deleteCartLineAccount(\n    cartId: $cartId\n    cartLineId: $cartLineId\n    cartLineAccountId: $cartLineAccountId\n  )\n}\n",
+								"variables": "{\n  \"cartId\": \"{{TESTING_cartId}}\",\n  \"cartLineId\": \"{{TESTING_cartLineId}}\",\n  \"cartLineAccountId\": \"{{TESTING_cartLineAccountId}}\"\n}"
+							}
+						},
+						"url": {
+							"raw": "{{APP_SYNC_URL_DEV}}",
+							"host": [
+								"{{APP_SYNC_URL_DEV}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "🧪 (10) ✅   cart (GET SINGLE)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// ##################################################################################",
+									"// (10) get Cart",
+									"// ##################################################################################",
+									"",
+									"const prefix = '🧪 cart ENDPOINT';",
+									"const path = 'data.cart';",
+									"",
+									"const cartId = pm.environment.get('TESTING_cartId');",
+									"const cartLineId = pm.environment.get('TESTING_cartLineId'); // this is NOT the blank cart line (which we deleted)",
+									"const meId = pm.environment.get('TESTING_meId');",
+									"",
+									"pm.test(`✔️ ${prefix} returns 200`, function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(`✔️ ${prefix} doesn't return errors`, function () {",
+									"    pm.response.to.not.have.jsonBody('error');",
+									"    pm.response.to.have.jsonBody(path);",
+									"});",
+									"",
+									"// fancy prep",
+									"const jsonData = pm.response.json();",
+									"const result = resolve(path, jsonData);",
+									"",
+									"// --------------------------------",
+									"pm.test(`✔️ ${prefix} works correctly`, function () {",
+									"",
+									"    // TEST the results:",
+									"    pm.expect(result.id).to.eql(cartId);",
+									"    pm.expect(result.userId).to.eql(meId);",
+									"    pm.expect(result.cartLines.length).to.eql(1);",
+									"    pm.expect(result.cartLines[0].id).to.eql(cartLineId);",
+									"    pm.expect(result.cartLines[0].itemId).to.include(\"🎟\");",
+									"    pm.expect(result.cartLines[0].price).to.eql(4.33);",
+									"    pm.expect(result.cartLines[0].cartLineAccounts).to.eql([]); //  no line accounts after tests",
+									"    pm.expect(result.cartLines[0].cartLineAccounts.length).to.eql(0); //  no line accounts after tests",
+									"",
+									"});",
+									"// --------------------------------",
+									"",
+									"// thx: https://stackoverflow.com/a/22129960/6200791",
+									"// NOTE: leave as function since HOISTED up so can reference up above!",
+									"function resolve(path, obj=self, separator='.') {",
+									"    var properties = Array.isArray(path) ? path : path.split(separator)",
+									"    return properties.reduce((prev, curr) => prev && prev[curr], obj)",
+									"}",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "x-api-key",
+								"type": "text",
+								"value": "{{APP_SYNC_API_KEY_DEV}}\t",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "{{APP_SYNC_COGNITO_TOKEN_DEV}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query Cart($id: ID!){\n  cart(id: $id) {\n    id\n    name\n    userId\n    createdAt\n    updatedAt\n    cartLines {\n        id\n        itemId\n        price\n        description\n        cartLineAccounts {\n            id\n            amount\n        }\n    }\n  }\n}\n",
+								"variables": "{\n    \"id\": \"{{TESTING_cartId}}\"\n}"
+							}
+						},
+						"url": {
+							"raw": "{{APP_SYNC_URL_DEV}}",
+							"host": [
+								"{{APP_SYNC_URL_DEV}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "🧪 (11) ✅   cart (DELETE)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// ##################################################################################",
+									"// (11) delete Cart",
+									"// ##################################################################################",
+									"",
+									"const prefix = '🧪 deleteCart ENDPOINT';",
+									"const path = 'data.deleteCart';",
+									"",
+									"pm.test(`✔️ ${prefix} returns 200`, function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(`✔️ ${prefix} doesn't return errors`, function () {",
+									"    pm.response.to.not.have.jsonBody('error');",
+									"    pm.response.to.have.jsonBody(path);",
+									"});",
+									"",
+									"// fancy prep",
+									"const jsonData = pm.response.json();",
+									"const result = resolve(path, jsonData);",
+									"",
+									"// --------------------------------",
+									"pm.test(`✔️ ${prefix} works correctly`, function () {",
+									"",
+									"    // TEST the results:",
+									"    pm.expect(result).to.eql(true);",
+									"});",
+									"// --------------------------------",
+									"",
+									"// thx: https://stackoverflow.com/a/22129960/6200791",
+									"// NOTE: leave as function since HOISTED up so can reference up above!",
+									"function resolve(path, obj=self, separator='.') {",
+									"    var properties = Array.isArray(path) ? path : path.split(separator)",
+									"    return properties.reduce((prev, curr) => prev && prev[curr], obj)",
+									"}",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "x-api-key",
+								"type": "text",
+								"value": "{{APP_SYNC_API_KEY_DEV}}\t",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "{{APP_SYNC_COGNITO_TOKEN_DEV}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation DeleteCart($id: ID!) {\n    deleteCart(id: $id) \n}",
+								"variables": "{\n    \"id\": \"{{TESTING_cartId}}\"\n}"
+							}
+						},
+						"url": {
+							"raw": "{{APP_SYNC_URL_DEV}}",
+							"host": [
+								"{{APP_SYNC_URL_DEV}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
