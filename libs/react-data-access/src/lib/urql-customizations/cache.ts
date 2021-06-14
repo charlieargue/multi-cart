@@ -71,7 +71,7 @@ export const cache = cacheExchange({
                 cache.updateQuery({ query: CartsDocument }, (data: CartsQuery | null) => {
                     // GAMEPLAN: find our data.carts cart
                     // add this result.blankCartLine to our cart's lines
-                    const foundCachedCart = (data as any).carts.find((c: Cart) => c.id === (result as AddCartLineMutation).addCartLine?.id)
+                    const foundCachedCart = (data as any).carts.find((c: Cart) => c.id === (result as AddCartLineMutation).addCartLine?.cartId)
                     foundCachedCart.cartLines.push((result as any).addCartLine);
                     return data;
                 });
