@@ -14,14 +14,14 @@ export interface CartAvatarRowProps {
 
 export function CartAvatarRow({ c, currentCartId }: CartAvatarRowProps) {
   return (
-    <MenuItem
+    <NextLink
       key={c.id}
-      bgColor={c.id === currentCartId ? mode("green.50", "gray.900") : null}>
+      href="/cart/[id]"
+      as={`/cart/${c.id}`}>
+      <a href={`/cart/${c.id}`}>
+        <MenuItem
+          bgColor={c.id === currentCartId ? mode("green.50", "gray.900") : null}>
 
-      <NextLink
-        href="/cart/[id]"
-        as={`/cart/${c.id}`}>
-        <a href={`/cart/${c.id}`}>
 
           {/* dropdown CART GUTS */}
           <Flex
@@ -39,10 +39,10 @@ export function CartAvatarRow({ c, currentCartId }: CartAvatarRowProps) {
             </Box>
           </Flex>
           {/* dropdown CART GUTS */}
-        </a>
-      </NextLink>
-      <MenuDivider />
-    </MenuItem>
+          <MenuDivider />
+        </MenuItem>
+      </a>
+    </NextLink>
   );
 }
 

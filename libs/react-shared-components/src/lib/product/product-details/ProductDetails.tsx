@@ -137,7 +137,7 @@ export function ProductDetails({ product }: ProductDetailsProps) {
               "cartLine": {
                 "cartId": data.me.currentCartId,
                 "itemId": product.sku,
-                "description": product.description,
+                "description": product.name + ": " + product.description,
                 "price": product.price,
                 "uom": "EACH",
                 "categoryId": "1",
