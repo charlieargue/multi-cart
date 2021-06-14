@@ -12,6 +12,9 @@ import React from 'react';
 import { HiCheckCircle } from 'react-icons/hi';
 import { Product } from '../product-card/ProductTypes';
 import { FaShoppingCart as ShoppingCartIcon } from 'react-icons/fa';
+import { useAddCartLineMutation, useMeQuery } from '@multi-cart/react-data-access';
+import useMyToasts from '../../_hooks/useMyToasts';
+import { useRouter } from 'next/router';
 
 /* eslint-disable-next-line */
 export interface ProductDetailsProps {
@@ -19,6 +22,11 @@ export interface ProductDetailsProps {
 }
 
 export function ProductDetails({ product }: ProductDetailsProps) {
+  const [{ data, fetching }] = useMeQuery();
+  const [, addCartLine] = useAddCartLineMutation();
+  const { toastError, toastSuccess } = useMyToasts();
+  const router = useRouter();
+
   return (
     <HStack spacing={8} alignItems="stretch">
 
@@ -110,7 +118,42 @@ export function ProductDetails({ product }: ProductDetailsProps) {
           </ListItem>
         </List>
 
-        <Button mt="8" as="a" href="#" size="lg" colorScheme="pink" fontWeight="bold">
+        {/* 🛍 MOCKED: add to cart BUTTON */}
+        <Button
+          mt="8"
+          as="a"
+          href="#"
+          size="lg"
+          colorScheme="pink"
+          fontWeight="bold"
+          onClick={async () => {
+
+            // 1) confirm that this user has a current cart
+            if (!!data.me.currentCartId === false) {
+              toastError("🛍 You do not have an active shopping cart!")
+            }
+            // 2) add this product to the user's current cart
+            const { error, data: newlyAddedProduct } = await addCartLine({
+              "cartLine": {
+                "cartId": data.me.currentCartId,
+                "itemId": product.sku,
+                "description": product.description,
+                "price": product.price,
+                "uom": "EACH",
+                "categoryId": "1",
+                "quantity": 1
+              }
+            });
+
+            if (!error && newlyAddedProduct?.addCartLine?.id) {
+              toastSuccess("Successfully added product to your current cart!")
+              router.push(`/cart/${data.me.currentCartId}`);
+            } else if (error) {
+              toastError(error.message);
+            }
+            // TODO: deduping w/ existing cart LINES!
+
+          }}>
           <ShoppingCartIcon />&nbsp;&nbsp;Add to Cart
           </Button>
       </Box>
