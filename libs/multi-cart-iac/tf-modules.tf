@@ -5,7 +5,7 @@
 ## ------------------------------ 
 # send email
 ## ------------------------------ 
-# DECOMISH? NOT USED RIGHT NOW
+# DECOMISH: NOT USED RIGHT NOW
 module "send_email" {
   #   inputs:
   role_arn            = aws_iam_role.iam_role_for_lambda.arn

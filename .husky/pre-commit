@@ -5,10 +5,19 @@
 terraform -chdir=libs/multi-cart-iac validate
 terraform -chdir=libs/multi-cart-iac fmt
 
-# how to get my api tests to run with just npm test??
-# npm test
-# npx nx run multi-cart-api:test
+# NOT READY YET: yarn affected:test
+
+
+# test API only if changes made to iac stuff
+if (git status | grep "libs/multi-cart-iac/") 
+then
+     yarn test-iac
+# else 
+#     echo "🔴 not found"
+fi
+
 yarn affected:lint
+
 # export NODE_OPTIONS="--max-old-space-size=8192" && npx nx affected --target=lint  --base=origin/kg-2021-04-16-finishing-mocked-api
 
 
