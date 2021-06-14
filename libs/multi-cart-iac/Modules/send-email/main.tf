@@ -23,7 +23,7 @@ resource "aws_lambda_function" "lambda_send_email_function" {
     }
   }
   lifecycle {
-    ignore_changes = [
+    ignore_changes = [source_code_hash,
       filename,
       last_modified,
       qualified_arn,

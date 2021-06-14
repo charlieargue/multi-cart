@@ -1,8 +1,8 @@
 ## ARCHIVE/ZIP
 data "archive_file" "lambda_cognito_email_customizations_archive" {
-  type        = "zip"
-  source_dir  = "./AppSync/lambdas/cognitoEmailCustomizations"
-  output_path = "./build/${local.filename}"
+  type             = "zip"
+  source_dir       = "./AppSync/lambdas/cognitoEmailCustomizations"
+  output_path      = "./build/${local.filename}"
   output_file_mode = "0666" # solution for unecessarily recyling of lambdas
 }
 
@@ -21,7 +21,7 @@ resource "aws_lambda_function" "lambda_cognito_email_customizations_function" {
     }
   }
   lifecycle {
-    ignore_changes = [
+    ignore_changes = [source_code_hash,
       filename,
       last_modified,
       qualified_arn,
