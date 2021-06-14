@@ -14,13 +14,13 @@ export const EditCartContainer = () => {
     const [isSplashing, setIsSplashing] = useState(true);
 
     if (id !== undefined && isSplashing === true) {
-        setTimeout(() => setIsSplashing(false), 1000);
+        setTimeout(() => setIsSplashing(false), 600);
     }
     
-    // TODO: make this a global settings!
-    // if (isSplashing) {
-    //     return (<FullScreenSpinner />);
-    // }
+    // TODO: make this toggleable as a global settings!
+    if (isSplashing) {
+        return (<FullScreenSpinner />);
+    }
 
     return (
         <AppLayout>
