@@ -38,6 +38,7 @@ export const CategoriesDropDown = () => {
     return (
         <form>
             <Select
+                isDisabled
                 name="aria-live-color"
                 defaultValue={selectedOption}
                 onChange={setSelectedOption}

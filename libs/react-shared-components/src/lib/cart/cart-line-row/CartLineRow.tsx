@@ -72,6 +72,7 @@ export const CartLineRow = ({ line, children, idx }: CartLineRowProps) => {
             <Td>
               <Form>
                 <InputField
+                  disabled={true}
                   bg="white"
                   name="itemId"
                   id={`itemId_${line.id}`}
@@ -85,6 +86,7 @@ export const CartLineRow = ({ line, children, idx }: CartLineRowProps) => {
             <Td>
               <Form>
                 <InputField
+                  disabled={true}
                   bg="white"
                   name="description"
                   id={`description_${line.id}`}
