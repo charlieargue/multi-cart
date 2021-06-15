@@ -26,28 +26,23 @@ export const Sort: React.FC<SortProps> = ({ children, by, keyToSortBy = "id" }) 
     }
   }
 
+  if (!children) {
+    return (<></>);
+  }
+
   if (!by) {
     // If no 'sort by property' provided, return original list
     // ✅ WORKS! 
     return (<>{children}</>);
   } else {
 
-    // ✅ WORKS! 
-    return (<>{
-      React.Children
-        .toArray(children)
-        .sort(compare as any)
-        .map((child) => (
-          // <React.Fragment key={(child as any)[keyToSortBy]}>{child}</React.Fragment>
-          <React.Fragment key={(child as any).id}>{child}</React.Fragment>
-        ))
-    }</>
-    );
-
-    //   {React.Children
-    //     .toArray(children)
-    //     .sort(compare as any)
-    //     .map((child) => (
+    // trying to workaround error: Each child in a list should have a unique "key" prop.
+    const elements: any[] = React.Children.toArray(children);
+    const keyed: any[] = elements.map((child) => {
+      // React.cloneElement(elements[0], { className: 'top bottom' })
+      return React.cloneElement(child, { key: (child as any).id });
+    });
+    return (<>{keyed}</>);
 
   }
 }
