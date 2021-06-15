@@ -11,6 +11,7 @@ export interface SortProps {
 }
 
 // thx: https://stackoverflow.com/a/55996695/6200791
+// thx: https://frontarm.com/james-k-nelson/passing-data-props-children/
 // -------------------
 export const Sort: React.FC<SortProps> = ({ children, by, keyToSortBy = "id" }) => {
 
@@ -33,47 +34,21 @@ export const Sort: React.FC<SortProps> = ({ children, by, keyToSortBy = "id" }) 
 
     // ✅ WORKS! 
     return (<>{
-      React.Children.map(children, (child) => (
-        <>{child}</>
-      ))
+      React.Children
+        .toArray(children)
+        .sort(compare as any)
+        .map((child) => (
+          // <React.Fragment key={(child as any)[keyToSortBy]}>{child}</React.Fragment>
+          <React.Fragment key={(child as any).id}>{child}</React.Fragment>
+        ))
     }</>
     );
 
-    // // thx: https://frontarm.com/james-k-nelson/passing-data-props-children/
-    // let elements: any = React.Children.toArray(children);
-
-    // if (elements.length === 1) {
-    //   elements = React.cloneElement(elements[0], null);
-    // }
-    // else if (elements.length > 0) {
-    //   // let lastElement = elements[elements.length - 1];
-    //   // elements =
-    //   //   [React.cloneElement(elements[0], { className: 'top' })]
-    //   //     .concat(elements.slice(1, -1))
-    //   //     .concat(React.cloneElement(lastElement, { className: 'bottom' }))
-    // }
-
-    // return (
-    //   <div className="List">
-    //     {elements}
-    //   </div>
-    // )
-
-    // ❌ DOESN'T WORK: every item needs a keyToSortBy ERROR... but look? so then DIV cannot be child of TR error... sigh...
-    // return (
-    // otherwise, sort it, and then return each child for further rendering...
-    // <>
     //   {React.Children
     //     .toArray(children)
     //     .sort(compare as any)
     //     .map((child) => (
 
-    // 🔥experimenting:
-    //       <>{React.cloneElement(children, { className: "top bottom" })}</>;
-    //       // <div keyToSortBy={(child as any).id}>{child}</div>
-    //     ))}
-    // </>
-    // );
   }
 }
 
