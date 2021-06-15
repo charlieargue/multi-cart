@@ -117,8 +117,7 @@ export const EditCart = ({ id }: EditCartProps) => {
           // TODO: switch to sort component, thx: https://stackoverflow.com/questions/48764203/how-to-sort-list-of-react-components-based-on-different-properties
           // TODO: this won't work anymore: .sort((a, b) => a.id - b.id)
           <Tbody>
-            {/* <Sort by='createdAt'> */}
-            <Sort by="description" childType="line">
+            <Sort by="createdAt" childType="line">
               {data.cart.cartLines?.map((line, idx) => !line ? null : (
                 <CartLineRow key={line.id} line={line} idx={idx}>
                   {/* 💥 WARNING: this line causes ORDER-of-HOOKS ERROR: bg={mode('white', 'gray.700')} on <Box> 
@@ -137,12 +136,13 @@ export const EditCart = ({ id }: EditCartProps) => {
                         {/* TODO: poorly named, does not actually contain line accounts! perhaps LineAccountsHeader??? */}
                         <LineAccountsContainer line={line} />
                       </WrapItem>
-                      {/*   TODO: this won't work anymore: .sort((a, b) => a.id - b.id) */}
+                      <Sort by="createdAt" childType="cla">
                       {(line as CartLine)?.cartLineAccounts?.map((cla) => !cla ? null : (
                         <WrapItem key={cla.id}>
                           <LineAccount lineAccount={cla} line={line} />
                         </WrapItem>
                       ))}
+                      </Sort>
                     </Wrap>
                   </Box>
                 </CartLineRow>

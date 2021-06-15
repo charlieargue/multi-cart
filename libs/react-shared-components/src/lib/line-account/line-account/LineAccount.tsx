@@ -65,7 +65,7 @@ export const LineAccount = ({ lineAccount, line }: LineAccountProps) => {
   useEffect(() => {
     // need to skip first call during loading
     if (initializingForUseEffect.current === false) {
-      console.log(`🟡 🟡 🟡 🟡  ~ USE EFFECT!`);
+      // console.log(`🟡 🟡 🟡 🟡  ~ USE EFFECT!`);
       saveLineAccount();
     }
     initializingForUseEffect.current = false; // but now that skipped, make sure not initializing anymore
@@ -81,7 +81,7 @@ export const LineAccount = ({ lineAccount, line }: LineAccountProps) => {
       onSubmit={async (values) => {
         // don't over fire when Formik hydrates form
         if (!initializingForFormik.current) {
-          console.log(`🔵 🔵 🔵 🔵 🔵 🔵  ~ FORMIK onSubmit!`);
+          // console.log(`🔵 🔵 🔵 🔵 🔵 🔵  ~ FORMIK onSubmit!`);
           // 1. calculate new AMOUNT based on this NEW percentage
           // 2. and must update the actual percentage ref (our "view model")
           // 3. update the DB 

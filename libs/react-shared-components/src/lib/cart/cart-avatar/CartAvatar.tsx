@@ -1,5 +1,6 @@
 import { Box, Button, Flex, HStack, Menu, MenuButton, MenuDivider, MenuItem, MenuList, SkeletonCircle, SkeletonText, useColorModeValue as mode } from '@chakra-ui/react';
 import { Cart, useCartsQuery } from '@multi-cart/react-data-access';
+import { Sort } from '@multi-cart/react-ui';
 import { useRouter } from 'next/router';
 import React from 'react';
 import { CgChevronDown as ChevronDownIcon } from 'react-icons/cg';
@@ -19,7 +20,7 @@ const noCartsMsg = (<HStack direction="row" mr={4} spacing={1}>
 </HStack>);
 
 // TODO: clear up this object VS JSX confusing approach I've got going here (including the && AND syntax VS ternary syntax ... or all good?)
-const CartSkeleton = ((idx:string) => {
+const CartSkeleton = ((idx: string) => {
   return (<MenuItem
     key={idx}>
     <Flex
@@ -82,14 +83,16 @@ export const CartAvatar = ({ currentCartId = null }: CartAvatarProps) => {
         </Flex>
         <MenuDivider />
 
-        {/* if FETCHING and don't have DATA... */}
-        {
-          !data && fetching ? cartSkeletons : data?.carts?.map((c) => !c ? null : (
-            <CartAvatarRow
-              key={c.id}
-              c={c}
-              currentCartId={currentCartId} />
-          ))}
+        {/* USERS CART LIST */}
+        <Sort by="createdAt" childType="c">
+          {
+            !data && fetching ? cartSkeletons : data?.carts?.map((c) => !c ? null : (
+              <CartAvatarRow
+                key={c.id}
+                c={c}
+                currentCartId={currentCartId} />
+            ))}
+        </Sort>
       </MenuList>
     </Menu >
   );

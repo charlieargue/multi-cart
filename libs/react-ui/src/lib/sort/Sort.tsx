@@ -16,6 +16,9 @@ export interface SortProps {
 // -------------------
 export const Sort: React.FC<SortProps> = ({ children, childType, by, keyWith = "id" }) => {
 
+  // ##################################################################################
+  // # COMPARISON FUNCTION
+  // ##################################################################################
   const compare = (aRaw: any, bRaw: any): any => {
     const a = aRaw.props[childType];
     const b = bRaw.props[childType];
@@ -23,17 +26,22 @@ export const Sort: React.FC<SortProps> = ({ children, childType, by, keyWith = "
     // Compare function needed by the Sort component
     // you can access the relevant property like this a.props[by]
     // depending whether you are sorting by tilte or year, you can write a compare function here, 
-    switch (by) {
+    if (!!a && !!b) {
+      switch (by) {
 
-      case "createdAt":
-        return b[by] > a[by] ? 1 : -1;
-        break;
+        case "createdAt":
+          return b[by] > a[by] ? 1 : -1;
+          break;
 
-      case "description":
-        return a[by].localeCompare(b[by]);
-        break;
+        case "description":
+          return a[by].localeCompare(b[by]);
+          break;
+      }
     }
   }
+  // ##################################################################################
+  // # /end COMPARISON FN
+  // ##################################################################################
 
   if (!children) {
     return (<></>);
@@ -43,8 +51,8 @@ export const Sort: React.FC<SortProps> = ({ children, childType, by, keyWith = "
     // If no 'sort by property' provided, return original list
     // ✅ WORKS! 
     return (<>{children}</>);
+  
   } else {
-
     // trying to workaround error: Each child in a list should have a unique "key" prop. holy shit this worked
     const elements: any[] = React.Children.toArray(children);
     const keyed: any[] = elements
