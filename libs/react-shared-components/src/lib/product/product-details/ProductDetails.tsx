@@ -8,7 +8,7 @@ import {
   ListItem, Stack, Text,
   useColorModeValue
 } from '@chakra-ui/react';
-import React from 'react';
+import React, { useState } from 'react';
 import { HiCheckCircle } from 'react-icons/hi';
 import { Product } from '../product-card/ProductTypes';
 import { FaShoppingCart as ShoppingCartIcon } from 'react-icons/fa';
@@ -28,6 +28,7 @@ export function ProductDetails({ product }: ProductDetailsProps) {
   const [, updateCartLine] = useUpdateCartLineMutation();
   const { toastError, toastSuccess } = useMyToasts();
   const router = useRouter();
+  const [isProcessing, setIsProcessing] = useState(false);
 
   // -------------------
   const handleAddToCart = async () => {
@@ -37,71 +38,76 @@ export function ProductDetails({ product }: ProductDetailsProps) {
     // 1) confirm that this user has a current cart
     // ##################################################################################
     // TODO: DRY THIS! use also in CartAvatar
-    const getCurrentCart = (): Cart => {
-      if (data?.me?.currentCartId && !fetchingCarts && dataCarts?.carts) {
-        return dataCarts?.carts.find((c) => c.id === data?.me?.currentCartId) as Cart;
-      }
-      return null;
-    };
-    const currentCart = getCurrentCart();
+    setIsProcessing(true);
+    try {
+      const getCurrentCart = (): Cart => {
+        if (data?.me?.currentCartId && !fetchingCarts && dataCarts?.carts) {
+          return dataCarts?.carts.find((c) => c.id === data?.me?.currentCartId) as Cart;
+        }
+        return null;
+      };
+      const currentCart = getCurrentCart();
 
-    if (!!data.me.currentCartId === false || !currentCart) {
-      toastError("You do not have an active 🛒  shopping cart!")
-    } else {
-
-      const existingCartLine: CartLine = currentCart.cartLines.find((cl) => cl.itemId === product.sku);
-
-      // ##################################################################################
-      // 2) if EXISTS already, just update quantity + 1 (updateCartLine)
-      // ##################################################################################
-      // 🔴 and will this trigger a LINE ACCOUNT percent/amount RECALC ??? (or moot since routing to EditCart page?)
-      let error, dataCartLine;
-      if (existingCartLine) {
-        // NOTE: not using ...existingCartLine syntax because extra fields causing trouble, and who knows about FUTURE extra fields
-        const { error: errorUpdate, data: dataUpdate } = await updateCartLine({
-          cartLine: {
-            id: existingCartLine.id,
-            cartId: existingCartLine.cartId,
-            itemId: existingCartLine.itemId,
-            description: existingCartLine.description,
-            uom: existingCartLine.uom,
-            categoryId: existingCartLine.categoryId,
-            quantity: existingCartLine.quantity + 1,
-            price: existingCartLine.price,
-          } as CartLineInput
-        });
-        error = errorUpdate;
-        dataCartLine = dataUpdate;
-
+      if (!!data.me.currentCartId === false || !currentCart) {
+        toastError("You do not have an active 🛒  shopping cart!")
       } else {
 
-        // ##################################################################################
-        // 3) if this product (by SKU) does NOT exist in current cart already, add it normally (addCartLine)
-        // ##################################################################################
-        const { error: errorAdd, data: dataAdd } = await addCartLine({
-          cartLine: {
-            cartId: data.me.currentCartId,
-            itemId: product.sku,
-            description: product.name,
-            price: product.price,
-            uom: "EACH",
-            categoryId: "1",
-            quantity: 1
-          }
-        });
-        error = errorAdd;
-        dataCartLine = dataAdd;
-      }
+        const existingCartLine: CartLine = currentCart.cartLines.find((cl) => cl.itemId === product.sku);
 
-      // ##################################################################################
-      // 4) handle errors for either endpoint
-      // ##################################################################################
-      if (!error && (dataCartLine?.addCartLine?.id) || (dataCartLine?.updateCartLine?.id)) {
-        (dataCartLine?.addCartLine?.id) ? toastSuccess("Product added successfully!") : toastSuccess("Product quantity incremented!");
-        router.push(`/cart/${data.me.currentCartId}`);
-      } else if (error) {
-        toastError(error.message);
+        // ##################################################################################
+        // 2) if EXISTS already, just update quantity + 1 (updateCartLine)
+        // ##################################################################################
+        // 🔴 and will this trigger a LINE ACCOUNT percent/amount RECALC ??? (or moot since routing to EditCart page?)
+        let error, dataCartLine;
+        if (existingCartLine) {
+          // NOTE: not using ...existingCartLine syntax because extra fields causing trouble, and who knows about FUTURE extra fields
+          const { error: errorUpdate, data: dataUpdate } = await updateCartLine({
+            cartLine: {
+              id: existingCartLine.id,
+              cartId: existingCartLine.cartId,
+              itemId: existingCartLine.itemId,
+              description: existingCartLine.description,
+              uom: existingCartLine.uom,
+              categoryId: existingCartLine.categoryId,
+              quantity: existingCartLine.quantity + 1,
+              price: existingCartLine.price,
+            } as CartLineInput
+          });
+          error = errorUpdate;
+          dataCartLine = dataUpdate;
+
+        } else {
+
+          // ##################################################################################
+          // 3) if this product (by SKU) does NOT exist in current cart already, add it normally (addCartLine)
+          // ##################################################################################
+          const { error: errorAdd, data: dataAdd } = await addCartLine({
+            cartLine: {
+              cartId: data.me.currentCartId,
+              itemId: product.sku,
+              description: product.name,
+              price: product.price,
+              uom: "EACH",
+              categoryId: "1",
+              quantity: 1
+            }
+          });
+          error = errorAdd;
+          dataCartLine = dataAdd;
+        }
+
+        // ##################################################################################
+        // 4) handle errors for either endpoint
+        // ##################################################################################
+        if (!error && (dataCartLine?.addCartLine?.id) || (dataCartLine?.updateCartLine?.id)) {
+          (dataCartLine?.addCartLine?.id) ? toastSuccess("Product added successfully!") : toastSuccess("Product quantity incremented!");
+          router.push(`/cart/${data.me.currentCartId}`);
+        } else if (error) {
+          toastError(error.message);
+        }
       }
+    } finally {
+      setIsProcessing(false);
     }
   };
 
@@ -199,6 +205,8 @@ export function ProductDetails({ product }: ProductDetailsProps) {
 
         {/* 🛍 MOCKED: add to cart BUTTON */}
         <Button
+          isLoading={isProcessing}
+          loadingText="Processing..."
           mt="8"
           as="a"
           href="#"
