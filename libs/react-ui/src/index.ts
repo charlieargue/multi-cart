@@ -1,3 +1,4 @@
+export * from './lib/sort/Sort';
 export * from './lib/tooltip-mc/TooltipMC';
 export * from './lib/action-link/ActionLink';
 export * from './lib/banner/Banner';

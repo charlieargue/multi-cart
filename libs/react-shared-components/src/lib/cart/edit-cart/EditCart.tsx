@@ -4,7 +4,7 @@ import {
 } from '@chakra-ui/react';
 import { StateType } from '@multi-cart/react-app-state';
 import { CartLine, useCartQuery, useUpdateUserMutation } from '@multi-cart/react-data-access';
-import { BigAlert, Breadcrumbs } from '@multi-cart/react-ui';
+import { BigAlert, Breadcrumbs, Sort } from '@multi-cart/react-ui';
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import LineAccount from '../../line-account/line-account/LineAccount';
@@ -117,34 +117,37 @@ export const EditCart = ({ id }: EditCartProps) => {
           // TODO: switch to sort component, thx: https://stackoverflow.com/questions/48764203/how-to-sort-list-of-react-components-based-on-different-properties
           // TODO: this won't work anymore: .sort((a, b) => a.id - b.id)
           <Tbody>
-            {data.cart.cartLines?.map((line, idx) => !line ? null : (
-              <CartLineRow key={line.id} line={line} idx={idx}>
-                {/* 💥 WARNING: this line causes ORDER-of-HOOKS ERROR: bg={mode('white', 'gray.700')} on <Box> 
+            {/* <Sort by='createdAt'> */}
+            <Sort>
+              {data.cart.cartLines?.map((line, idx) => !line ? null : (
+                <CartLineRow key={line.id} line={line} idx={idx}>
+                  {/* 💥 WARNING: this line causes ORDER-of-HOOKS ERROR: bg={mode('white', 'gray.700')} on <Box> 
                 TODO: when doing dark mode, put this elswhere, maybe on Tbody? TBD
                 */}
-                <Box
-                  borderWidth="1px"
-                  borderRadius="lg"
-                  p={3}
-                  rounded={{ md: 'lg' }}
-                  shadow="base"
-                  mt={2}
-                  mb={20}>
-                  <Wrap spacing="5" align="center">
-                    <WrapItem>
-                      {/* TODO: poorly named, does not actually contain line accounts! perhaps LineAccountsHeader??? */}
-                      <LineAccountsContainer line={line} />
-                    </WrapItem>
-                    {/*   TODO: this won't work anymore: .sort((a, b) => a.id - b.id) */}
-                    {(line as CartLine)?.cartLineAccounts?.map((cla) => !cla ? null : (
-                      <WrapItem key={cla.id}>
-                        <LineAccount lineAccount={cla} line={line} />
+                  <Box
+                    borderWidth="1px"
+                    borderRadius="lg"
+                    p={3}
+                    rounded={{ md: 'lg' }}
+                    shadow="base"
+                    mt={2}
+                    mb={20}>
+                    <Wrap spacing="5" align="center">
+                      <WrapItem>
+                        {/* TODO: poorly named, does not actually contain line accounts! perhaps LineAccountsHeader??? */}
+                        <LineAccountsContainer line={line} />
                       </WrapItem>
-                    ))}
-                  </Wrap>
-                </Box>
-              </CartLineRow>
-            ))}
+                      {/*   TODO: this won't work anymore: .sort((a, b) => a.id - b.id) */}
+                      {(line as CartLine)?.cartLineAccounts?.map((cla) => !cla ? null : (
+                        <WrapItem key={cla.id}>
+                          <LineAccount lineAccount={cla} line={line} />
+                        </WrapItem>
+                      ))}
+                    </Wrap>
+                  </Box>
+                </CartLineRow>
+              ))}
+            </Sort>
           </Tbody>
 
         ) : emptyCartTableBody
