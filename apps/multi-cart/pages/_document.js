@@ -8,7 +8,7 @@ export default class Document extends NextDocument {
     return (
       <Html>
         <Head>
-          <title>How to pass data to a React component's props.children – Frontend Armory</title>
+          {/* <title>TODO: </title> */}
           <meta charset="utf-8" />
           <meta name="robots" content="noodp" />
           <meta name="description" content="TODO: ..." />

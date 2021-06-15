@@ -43,6 +43,7 @@ export function LoginForm(props: LoginFormProps) {
   const guestModeLogin = <TooltipMC
     label="You won't have to register, but other guests can edit/break your carts at any time! 🙏 &nbsp;And we're not responsible for any content you may see."
     placement="right">
+    {/* TODO: prevent double-taps here with change to button with isLoading and state var */}
     <Flex
       onClick={handleGuestLogin}
       className="cursor-pointer"
