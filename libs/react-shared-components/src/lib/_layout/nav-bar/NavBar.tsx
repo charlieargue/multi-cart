@@ -26,7 +26,7 @@ export const NavBar = () => {
     const [{ data, fetching }] = useMeQuery();
     const [_, logout] = useLogoutMutation();
     const { toastInfo } = useMyToasts();
-    const isFetching = useSelector((state: StateType) => state.isFetching);
+    const isFetching = useSelector((state: StateType) => state?.isFetching);
     const { isOpen, onOpen, onClose } = useDisclosure();
 
     const logoutFunction = async () => {
@@ -65,7 +65,6 @@ export const NavBar = () => {
                         style={{
                             display: isFetching ? "inline-block" : "none",
                             marginLeft: "-22px",
-                            marginTop: "-1px"
                         }}
                         size="sm"
                         color="brand.pink"

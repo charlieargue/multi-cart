@@ -18,7 +18,7 @@ import EditCartTableHeader from '../edit-cart-table-header/EditCartTableHeader';
 interface EditCartProps { id: string }
 
 export const EditCart = ({ id }: EditCartProps) => {
-  const isDeletingCart = useSelector((state: StateType) => state.isFetching);
+  const isDeletingCart = useSelector((state: StateType) => state?.isDeletingCart);
   const [{ data, error, fetching }] = useCartQuery({
     variables: {
       id
@@ -113,7 +113,7 @@ export const EditCart = ({ id }: EditCartProps) => {
 
       <Table variant="simple" colorScheme="pink" id="cart-table" size="lg" marginBottom={10}>
         <EditCartTableHeader />
-        {data.cart.cartLines?.length ? (
+        {data.cart?.cartLines?.length ? (
           // TODO: switch to sort component, thx: https://stackoverflow.com/questions/48764203/how-to-sort-list-of-react-components-based-on-different-properties
           // TODO: this won't work anymore: .sort((a, b) => a.id - b.id)
           <Tbody>

@@ -44,7 +44,7 @@ export function EditCartTableFooter({ cart }: EditCartTableFooterProps) {
                   }
                 }
               } finally {
-                store.dispatch(actionIsDeletingCart);  // TOGGLE OFF
+                setTimeout(() => store.dispatch(actionIsDeletingCart), 2000);  // TOGGLE OFF (with delay)
               }
             }
           }}>

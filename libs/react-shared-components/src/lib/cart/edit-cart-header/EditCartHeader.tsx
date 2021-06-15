@@ -20,9 +20,9 @@ export function EditCartHeader({ cart }: EditCartHeaderProps) {
       justify="space-between"
       py={6}>
       <HStack spacing="5">
-        <CartNameEditable name={cart.name} id={cart.id} />
+        <CartNameEditable name={cart?.name} id={cart?.id} />
         <Badge colorScheme="pink" style={{ "opacity": ".5" }}>
-          <strong>created </strong> {toDaysAgo(cart.createdAt)}
+          <strong>created </strong> {toDaysAgo(cart?.createdAt)}
         </Badge>
       </HStack>
       <Box className="text-right">
@@ -30,7 +30,7 @@ export function EditCartHeader({ cart }: EditCartHeaderProps) {
           data-testid="btnAddCartLine"
           size="sm"
           colorScheme="green"
-          onClick={() => blankCartLine({ cartId: cart.id })}>
+          onClick={() => blankCartLine({ cartId: cart?.id })}>
           <PlusIcon />
           &nbsp;Add&nbsp;<strong>line</strong>
         </Button>
