@@ -118,7 +118,7 @@ export const EditCart = ({ id }: EditCartProps) => {
           // TODO: this won't work anymore: .sort((a, b) => a.id - b.id)
           <Tbody>
             {/* <Sort by='createdAt'> */}
-            <Sort>
+            <Sort by='createdAt' keyToSortBy="description">
               {data.cart.cartLines?.map((line, idx) => !line ? null : (
                 <CartLineRow key={line.id} line={line} idx={idx}>
                   {/* 💥 WARNING: this line causes ORDER-of-HOOKS ERROR: bg={mode('white', 'gray.700')} on <Box> 

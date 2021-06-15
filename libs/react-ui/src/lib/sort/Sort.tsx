@@ -6,13 +6,13 @@ import './Sort.module.scss';
 /* eslint-disable-next-line */
 export interface SortProps {
   children?: React.ReactNode;
-  key?: string;
+  keyToSortBy?: string;
   by?: any;
 }
 
 // thx: https://stackoverflow.com/a/55996695/6200791
 // -------------------
-export const Sort: React.FC<SortProps> = ({ children, by, key = "id" }) => {
+export const Sort: React.FC<SortProps> = ({ children, by, keyToSortBy = "id" }) => {
 
   const compare = (a, b): any => {
     // Compare function needed by the Sort component
@@ -25,20 +25,19 @@ export const Sort: React.FC<SortProps> = ({ children, by, key = "id" }) => {
     }
   }
 
-  // ✅ WORKS! return (<>{ children }</>); but w/ DISABLE LINT!
-  // ✅ WORKS! return (<div><strong>Children:</strong>{children}</div>);
-  // ❌ DOESN'T WORK :( return ({children});
-
   if (!by) {
     // If no 'sort by property' provided, return original list
     // ✅ WORKS! 
     return (<>{children}</>);
-  } 
-  // else {
+  } else {
 
-    // {React.Children.map(children, (child) => (
-    //   <div className={styles.childContainer}>{child}</div>
-    // ))}
+    // ✅ WORKS! 
+    return (<>{
+      React.Children.map(children, (child) => (
+        <>{child}</>
+      ))
+    }</>
+    );
 
     // // thx: https://frontarm.com/james-k-nelson/passing-data-props-children/
     // let elements: any = React.Children.toArray(children);
@@ -53,29 +52,29 @@ export const Sort: React.FC<SortProps> = ({ children, by, key = "id" }) => {
     //   //     .concat(elements.slice(1, -1))
     //   //     .concat(React.cloneElement(lastElement, { className: 'bottom' }))
     // }
-    
+
     // return (
     //   <div className="List">
     //     {elements}
     //   </div>
     // )
 
-    // ❌ DOESN'T WORK: every item needs a key ERROR... but look? so then DIV cannot be child of TR error... sigh...
+    // ❌ DOESN'T WORK: every item needs a keyToSortBy ERROR... but look? so then DIV cannot be child of TR error... sigh...
     // return (
+    // otherwise, sort it, and then return each child for further rendering...
+    // <>
+    //   {React.Children
+    //     .toArray(children)
+    //     .sort(compare as any)
+    //     .map((child) => (
 
-      
-      // otherwise, sort it, and then return each child for further rendering...
-      // <>
-      //   {React.Children
-      //     .toArray(children)
-      //     .sort(compare as any)
-      //     .map((child) => (
-      //       <>{React.cloneElement(children, { className: "top bottom" })}</>;
-      //       // <div key={(child as any).id}>{child}</div>
-      //     ))}
-      // </>
+    // 🔥experimenting:
+    //       <>{React.cloneElement(children, { className: "top bottom" })}</>;
+    //       // <div keyToSortBy={(child as any).id}>{child}</div>
+    //     ))}
+    // </>
     // );
-  // }
+  }
 }
 
 export default Sort;
