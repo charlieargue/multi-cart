@@ -53,6 +53,7 @@ export const CartAvatar = ({ currentCartId = null }: CartAvatarProps) => {
   return (
     <Menu isLazy>
       <MenuButton
+        data-testid="btnMyCarts"
         rightIcon={<ChevronDownIcon />}
         ml={2}
         as={Button}

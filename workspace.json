@@ -93,8 +93,12 @@
           "options": {
             "cypressConfig": "apps/multi-cart-e2e/cypress.json",
             "tsConfig": "apps/multi-cart-e2e/tsconfig.e2e.json",
-            "baseUrl": "https://localhost:4200",
-            "devServerTarget": "multi-cart:serve"
+            "baseUrl": "http://localhost:4200/",
+            "devServerTarget": "multi-cart:serve",
+            "exit": false,
+            "record": false,
+            "skipServe": true,
+            "watch": true
           },
           "configurations": {
             "production": {

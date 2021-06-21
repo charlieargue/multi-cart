@@ -30,7 +30,7 @@ Cypress.Commands.add('login', (email, password) => {
   (cy as any).findByText('Login').click();
   // eslint-disable-next-line cypress/no-unnecessary-waiting
   cy.wait(2000); // must wait for carts query to complete so btn has carts behind it!
-  cy.contains('Dashboard');
+  cy.contains('Welcome back!');
 });
 
 Cypress.Commands.add('showCarts', () => {

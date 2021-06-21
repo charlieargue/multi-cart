@@ -10,9 +10,9 @@ context('Edit Cart Functionality', () => {
   // 💎 https://github.com/abhinaba-ghosh/cypress-react-selector
 
 
-  // it('can add blank cart and navigate to it', () => {
-  //   cy.addBlankCart();
-  // });
+  it('can add blank cart and navigate to it', () => {
+    cy.addBlankCart();
+  });
 
   // it('can add cart lines [from dashboard]', () => {
   //   cy.visit('/');
