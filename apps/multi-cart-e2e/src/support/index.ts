@@ -17,3 +17,4 @@
 import './commands';
 import '@testing-library/cypress/add-commands';
 import 'cypress-plugin-tab';
+import 'cypress-localstorage-commands';

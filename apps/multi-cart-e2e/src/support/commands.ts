@@ -28,9 +28,8 @@ Cypress.Commands.add('login', (email, password) => {
   cy.get('#usernameOrEmail').type(email);
   cy.get('#password').type(password);
   (cy as any).findByText('Login').click();
-  // eslint-disable-next-line cypress/no-unnecessary-waiting
-  cy.wait(2000); // must wait for carts query to complete so btn has carts behind it!
   cy.contains('Welcome back!');
+  (cy as any).findByTestId('btnMyCarts').should("exist");
 });
 
 Cypress.Commands.add('showCarts', () => {

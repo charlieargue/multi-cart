@@ -85,6 +85,7 @@
     "class-validator": "^0.13.1",
     "css-loader": "^5.2.0",
     "cypress": "^6.8.0",
+    "cypress-localstorage-commands": "^1.4.5",
     "cypress-plugin-tab": "^1.0.5",
     "dotenv": "8.2.0",
     "eslint": "7.10.0",

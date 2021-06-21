@@ -1,7 +1,13 @@
 context('Edit Cart Functionality', () => {
   before(() => {
     cy.login('karlgolka', 'rsRKs39HbeaZLMJ#');
+    cy.saveLocalStorage();
   });
+  beforeEach(() => {
+    cy.restoreLocalStorage()
+  });
+  
+
 
   // FYI:
   // • Tip: I recommend using the cy.contains command to find elements by text or by regular expression.
@@ -10,17 +16,16 @@ context('Edit Cart Functionality', () => {
   // 💎 https://github.com/abhinaba-ghosh/cypress-react-selector
 
 
-  it('can add blank cart and navigate to it', () => {
+  it.skip('can add blank CART and navigate to it', () => {
     cy.addBlankCart();
   });
 
-  // it('can add cart lines [from dashboard]', () => {
-  //   cy.visit('/');
-  //   cy.addBlankCart();
-  //   // TODO: why am I not getting typings for the cypress testinglibary add DOM commands?
-  //   (cy as any).findByTestId('btnAddCartLine').click().click().click();
-  //   const rows = cy.get('tbody > tr').should('have.length', '3');
-  // });
+  it.skip('can add cart lines', () => {
+    cy.addBlankCart();
+    // TODO: why am I not getting typings for the cypress testinglibary add DOM commands?
+    (cy as any).findByTestId('btnAddCartLine').click({force: true}).click({force: true}).click({force: true});
+    cy.get('tbody > tr').should('have.length', '6');
+  });
 
   // // BRITTLE: depends on previous test
   // it('correctly sums line quantities in current cart avatar [already on edit cart page]', () => {
