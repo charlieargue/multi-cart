@@ -79,6 +79,21 @@
           "options": {
             "cypressConfig": "apps/multi-cart-e2e/cypress.json",
             "tsConfig": "apps/multi-cart-e2e/tsconfig.e2e.json",
+            "baseUrl": "https://dev.multicart.app",
+            "devServerTarget": ""
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": ""
+            }
+          }
+        },
+        "e2e-local": {
+          "executor": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/multi-cart-e2e/cypress.json",
+            "tsConfig": "apps/multi-cart-e2e/tsconfig.e2e.json",
+            "baseUrl": "https://localhost:4200",
             "devServerTarget": "multi-cart:serve"
           },
           "configurations": {
