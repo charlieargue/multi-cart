@@ -28,7 +28,7 @@ interface DashboardContainerProps {
 export const DashboardContainer = () => {
 
     const data = [
-        { label: 'Total Open Carts', value: '$71,887' },
+        { label: 'Open Carts', value: '$71,887' },
         { label: 'Avg. Closed Cart', value: '$560.87' },
         { label: 'Avg. Abandon', value: '12.87%' },
     ]
@@ -41,7 +41,7 @@ export const DashboardContainer = () => {
             <Box>
                 <Stack spacing={0} align={'left'} my={4}>
                     <Heading>Welcome back!</Heading>
-                    <Text>Recent Carts, Global Settings, Mocked Stats, and lorem ipsum</Text>
+                    <Text>Recent Carts, Global Settings, Mocked Stats, and other place holders</Text>
                 </Stack>
                 <Divider />
             </Box>
