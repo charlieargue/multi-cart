@@ -106,6 +106,23 @@
             }
           }
         },
+        "e2e-local-cicd": {
+          "executor": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/multi-cart-e2e/cypress.json",
+            "tsConfig": "apps/multi-cart-e2e/tsconfig.e2e.json",
+            "baseUrl": "http://localhost:4200/",
+            "devServerTarget": "multi-cart:serve",
+            "record": false,
+            "headless": true,
+            "skipServe": true
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "multi-cart:serve:production"
+            }
+          }
+        },
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {

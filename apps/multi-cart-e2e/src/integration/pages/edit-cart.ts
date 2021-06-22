@@ -60,13 +60,11 @@ context('Edit Cart Functionality', () => {
 
     // start at first line input and tab way to first line quantity
     cy.findAllByTestId('inputQuantity').first().clear().type('4');
-    cy.confirmSaved();
     cy.findByTestId('currentCartTotalItems').should('have.text', '5');
 
 
     // and enter some quantities on the 2nd line
     cy.findAllByTestId('inputQuantity').eq(1).clear().type('3');
-    cy.confirmSaved();
     cy.findByTestId('currentCartTotalItems').should('have.text', '7');
   });
 
