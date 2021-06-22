@@ -68,25 +68,29 @@ context('Edit Cart Functionality', () => {
     cy.findByTestId('currentCartTotalItems').should('have.text', '7');
   });
 
-  // it('correctly sums line prices in current cart avatar', () => {
-  //   cy.addBlankCart();
-  //   cy.clickOutside(); // because already on edit page
-  //   cy.findByTestId('btnAddCartLine').click().click();
-  //   cy.get('tbody > tr').should('have.length', '2');
-  //   cy.findByTestId('currentCartTotalCost').should('have.text', '0.00');
+  
+  it('correctly SUMS LINE PRICES in current cart avatar', () => {
+    cy.visit('/dashboard');
+    cy.addBlankCart();
+    cy.findByTestId('btnAddCartLine').click();
+    cy.get('tbody > tr').should('have.length', '2');
+    cy.findByTestId('btnAddCartLine').click();
+    cy.get('tbody > tr').should('have.length', '4');
+    cy.findByTestId('currentCartTotalCost').should('have.text', '0.00');
 
-  //   // EXERCISE QUANTITY in avatar
+    // EXERCISE PRICES in avatar
 
-  //   // start at first line input and tab way to first line price
-  //   cy.get('input').first().focus().tab().tab().tab().tab().tab().type('3.18').as('lastFocused').tab();
-  //   cy.wait(2000);
-  //   cy.clickOutside().wait(1000);
-  //   cy.findByTestId('currentCartTotalCost').should('have.text', '3.18');
+    // start at first line input and tab way to first line price
+    cy.findAllByTestId('inputQuantity').first().tab().clear().focus().type('3.18').wait(500);
+    cy.findAllByTestId('inputQuantity').first().tab().focus().type('3.18').wait(500); // NOTE: needed to do it twice here, for some reason, prolly because Cypress is so much faster than the autosave debounce...?
+    cy.confirmNotSaving();
+    cy.findByTestId('currentCartTotalCost').should('have.text', '3.18');
 
-  //   // and enter some prices on the 2nd line
-  //   cy.get('@lastFocused').focus().tab().tab().tab().tab().tab().tab().tab().type('100.01').wait(1000);
-  //   cy.findByTestId('currentCartTotalCost').should('have.text', '103.19');
-  // });
+    // and enter some prices on the 2nd line
+    cy.findAllByTestId('inputQuantity').eq(1).tab().focus().type('100.01').wait(2000);
+    cy.confirmNotSaving();
+    cy.findByTestId('currentCartTotalCost').should('have.text', '103.19');
+  });
 
   // it('autosave works correctly', () => {
   //   cy.addBlankCart();

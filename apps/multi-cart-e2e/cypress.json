@@ -9,5 +9,5 @@
   "videosFolder": "../../dist/cypress/apps/multi-cart-e2e/videos",
   "screenshotsFolder": "../../dist/cypress/apps/multi-cart-e2e/screenshots",
   "chromeWebSecurity": false,
-  "viewportWidth": 1200
+  "viewportWidth": 1400
 }
