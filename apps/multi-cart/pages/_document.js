@@ -9,7 +9,7 @@ export default class Document extends NextDocument {
       <Html>
         <Head>
           {/* <title>TODO: </title> */}
-          <meta charset="utf-8" />
+          <meta charSet="utf-8" />
           <meta name="robots" content="noodp" />
           <meta name="description" content="TODO: ..." />
           <meta name="theme-color" content="#1976d2" />

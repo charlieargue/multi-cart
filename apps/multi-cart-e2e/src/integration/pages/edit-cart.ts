@@ -51,9 +51,8 @@ context('Edit Cart Functionality', () => {
     cy.addBlankCart();
     // NOTE: temporarily I hope, I need to click anywhere to hide the dropdown, because it messes things up
     cy.findByTestId('btnAddCartLine').click();
-    cy.confirmSaved();
+    cy.get('tbody > tr').should('have.length', '2');
     cy.findByTestId('btnAddCartLine').click();
-    cy.confirmSaved();
     cy.get('tbody > tr').should('have.length', '4');
     cy.findByTestId('currentCartTotalItems').should('have.text', '2');
 
