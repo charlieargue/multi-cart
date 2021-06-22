@@ -34,6 +34,7 @@ export const InputField = ({
   const [field, meta] = useField(props);
   const jsxLabel = (<FormLabel>{label}</FormLabel>);
   const jsxField = (<Input
+    p={2}
     color={mode("inherit", "gray.900")}
     borderRadius={radius}
     {...field}

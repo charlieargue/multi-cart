@@ -25,28 +25,35 @@ context('Edit Cart Functionality', () => {
 
 
   // ------------------------
-  it.skip('can add blank CART and navigate to it', () => {
+  it('can add blank CART and navigate to it', () => {
     cy.addBlankCart();
   });
 
   // ------------------------
   it('can add blank cart LINES', () => {
+    cy.visit('/dashboard');
     cy.addBlankCart();
+
     cy.findByTestId('btnAddCartLine').click();
-    cy.confirmSaved();
+    cy.get('tbody > tr').should('have.length', '2');
+
     cy.findByTestId('btnAddCartLine').click();
-    cy.confirmSaved();
+    cy.get('tbody > tr').should('have.length', '4');
+
     cy.findByTestId('btnAddCartLine').click();
-    cy.confirmSaved();
     cy.get('tbody > tr').should('have.length', '6');
+
   });
 
   // ------------------------
-  it.skip('correctly SUMS LINE QUANTITIES in current cart avatar', () => {
+  it('correctly SUMS LINE QUANTITIES in current cart avatar', () => {
+    cy.visit('/dashboard');
     cy.addBlankCart();
     // NOTE: temporarily I hope, I need to click anywhere to hide the dropdown, because it messes things up
-    cy.clickOutside();
-    cy.findByTestId('btnAddCartLine').click({ force: true }).click({ force: true });
+    cy.findByTestId('btnAddCartLine').click();
+    cy.confirmSaved();
+    cy.findByTestId('btnAddCartLine').click();
+    cy.confirmSaved();
     cy.get('tbody > tr').should('have.length', '4');
     cy.findByTestId('currentCartTotalItems').should('have.text', '2');
 

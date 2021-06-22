@@ -20,6 +20,8 @@ declare namespace Cypress {
     addBlankCart(): Cypress.Chainable<void>;
     clickOutside(): Cypress.Chainable<void>;
     confirmSaved(): Cypress.Chainable<void>;
+    confirmSaving(): Cypress.Chainable<void>;
+    confirmNotSaving(): Cypress.Chainable<void>;
   }
 }
 
@@ -46,7 +48,7 @@ Cypress.Commands.add('addBlankCart', () => {
 });
 
 // ------------------------
-Cypress.Commands.add('clickOutside', function (): Cypress.Chainable<any> {
+Cypress.Commands.add('clickOutside', () => {
   return cy.get('body').click(0, 0); //0,0 here are the x and y coordinates
 });
 
@@ -54,5 +56,16 @@ Cypress.Commands.add('clickOutside', function (): Cypress.Chainable<any> {
 // ------------------------
 Cypress.Commands.add('confirmSaved', () => {
   cy.findByTestId('fetchingStatus').invoke('attr', 'data-value').should('eq', 'fetching');
+  cy.findByTestId('fetchingStatus').invoke('attr', 'data-value').should('eq', '');
+});
+
+
+// ------------------------
+Cypress.Commands.add('confirmSaving', () => {
+  cy.findByTestId('fetchingStatus').invoke('attr', 'data-value').should('eq', '');
+});
+
+// ------------------------
+Cypress.Commands.add('confirmNotSaving', () => {
   cy.findByTestId('fetchingStatus').invoke('attr', 'data-value').should('eq', '');
 });
