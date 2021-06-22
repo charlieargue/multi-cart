@@ -13,7 +13,6 @@ export default class Document extends NextDocument {
           <meta name="robots" content="noodp" />
           <meta name="description" content="TODO: ..." />
           <meta name="theme-color" content="#1976d2" />
-          <meta name="viewport" content="width=device-width, initial-scale=1.0" />
           <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png" />
           <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png" />
           <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png" />

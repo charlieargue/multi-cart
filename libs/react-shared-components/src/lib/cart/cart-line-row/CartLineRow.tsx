@@ -104,6 +104,7 @@ export const CartLineRow = ({ line, children, idx }: CartLineRowProps) => {
             </Td>
             <Td>
               <InputField
+                data-testid="inputQuantity"
                 bg="white"
                 id={`quantity_${line.id}`}
                 name="quantity"

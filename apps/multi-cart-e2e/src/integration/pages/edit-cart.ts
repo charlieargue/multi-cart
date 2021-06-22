@@ -1,4 +1,12 @@
+/* eslint-disable cypress/no-unnecessary-waiting */
+// ##################################################################################
+// # EDIT CART tests
+// ##################################################################################
 context('Edit Cart Functionality', () => {
+
+  // -------------------------------------
+  // LOGIN and LOCALSTORAGE
+  // -------------------------------------
   before(() => {
     cy.login('karlgolka', 'rsRKs39HbeaZLMJ#');
     cy.saveLocalStorage();
@@ -6,7 +14,7 @@ context('Edit Cart Functionality', () => {
   beforeEach(() => {
     cy.restoreLocalStorage()
   });
-  
+
 
 
   // FYI:
@@ -16,45 +24,52 @@ context('Edit Cart Functionality', () => {
   // 💎 https://github.com/abhinaba-ghosh/cypress-react-selector
 
 
+  // ------------------------
   it.skip('can add blank CART and navigate to it', () => {
     cy.addBlankCart();
   });
 
-  it.skip('can add cart lines', () => {
+  // ------------------------
+  it('can add blank cart LINES', () => {
     cy.addBlankCart();
-    // TODO: why am I not getting typings for the cypress testinglibary add DOM commands?
-    (cy as any).findByTestId('btnAddCartLine').click({force: true}).click({force: true}).click({force: true});
+    cy.findByTestId('btnAddCartLine').click();
+    cy.confirmSaved();
+    cy.findByTestId('btnAddCartLine').click();
+    cy.confirmSaved();
+    cy.findByTestId('btnAddCartLine').click();
+    cy.confirmSaved();
     cy.get('tbody > tr').should('have.length', '6');
   });
 
-  // // BRITTLE: depends on previous test
-  // it('correctly sums line quantities in current cart avatar [already on edit cart page]', () => {
-  //   cy.addBlankCart();
-  //   // NOTE: temporarily I hope, I need to click anywhere to hide the dropdown, because it messes things up
-  //   cy.clickOutside();
-  //   (cy as any).findByTestId('btnAddCartLine').click().click();
-  //   cy.get('tbody > tr').should('have.length', '2');
-  //   (cy as any).findByTestId('currentCartTotalItems').should('have.text', '2');
+  // ------------------------
+  it.skip('correctly SUMS LINE QUANTITIES in current cart avatar', () => {
+    cy.addBlankCart();
+    // NOTE: temporarily I hope, I need to click anywhere to hide the dropdown, because it messes things up
+    cy.clickOutside();
+    cy.findByTestId('btnAddCartLine').click({ force: true }).click({ force: true });
+    cy.get('tbody > tr').should('have.length', '4');
+    cy.findByTestId('currentCartTotalItems').should('have.text', '2');
 
-  //   // EXERCISE QUANTITY in avatar
+    // EXERCISE QUANTITY in avatar
 
-  //   // start at first line input and tab way to first line quantity
-  //   cy.get('input').first().focus().tab().tab().tab().tab().type('4').as('lastFocused');
-  //   cy.wait(2000);
-  //   cy.clickOutside().wait(1000);
-  //   (cy as any).findByTestId('currentCartTotalItems').should('have.text', '5');
-  //   // and enter some quantities on the 2nd line
-  //   cy.get('@lastFocused').focus().tab().tab().tab().tab().tab().tab().tab().focus().type('3').as('lastFocused').wait(1000);
-  //   cy.clickOutside().wait(1000);
-  //   (cy as any).findByTestId('currentCartTotalItems').should('have.text', '7');
-  // });
+    // start at first line input and tab way to first line quantity
+    cy.findAllByTestId('inputQuantity').first().clear().type('4');
+    cy.confirmSaved();
+    cy.findByTestId('currentCartTotalItems').should('have.text', '5');
+
+
+    // and enter some quantities on the 2nd line
+    cy.findAllByTestId('inputQuantity').eq(1).clear().type('3');
+    cy.confirmSaved();
+    cy.findByTestId('currentCartTotalItems').should('have.text', '7');
+  });
 
   // it('correctly sums line prices in current cart avatar', () => {
   //   cy.addBlankCart();
   //   cy.clickOutside(); // because already on edit page
-  //   (cy as any).findByTestId('btnAddCartLine').click().click();
+  //   cy.findByTestId('btnAddCartLine').click().click();
   //   cy.get('tbody > tr').should('have.length', '2');
-  //   (cy as any).findByTestId('currentCartTotalCost').should('have.text', '0.00');
+  //   cy.findByTestId('currentCartTotalCost').should('have.text', '0.00');
 
   //   // EXERCISE QUANTITY in avatar
 
@@ -62,17 +77,17 @@ context('Edit Cart Functionality', () => {
   //   cy.get('input').first().focus().tab().tab().tab().tab().tab().type('3.18').as('lastFocused').tab();
   //   cy.wait(2000);
   //   cy.clickOutside().wait(1000);
-  //   (cy as any).findByTestId('currentCartTotalCost').should('have.text', '3.18');
+  //   cy.findByTestId('currentCartTotalCost').should('have.text', '3.18');
 
   //   // and enter some prices on the 2nd line
   //   cy.get('@lastFocused').focus().tab().tab().tab().tab().tab().tab().tab().type('100.01').wait(1000);
-  //   (cy as any).findByTestId('currentCartTotalCost').should('have.text', '103.19');
+  //   cy.findByTestId('currentCartTotalCost').should('have.text', '103.19');
   // });
 
   // it('autosave works correctly', () => {
   //   cy.addBlankCart();
   //   cy.clickOutside();
-  //   (cy as any).findByTestId('btnAddCartLine').click().click();
+  //   cy.findByTestId('btnAddCartLine').click().click();
   //   cy.get('tbody > tr').should('have.length', '2');
 
   //   // 💪 EXERCISE ALL CART LINE FIELDS for auto-saving
@@ -89,8 +104,8 @@ context('Edit Cart Functionality', () => {
   //   cy.get('@lastFocused').focus().tab().type('9.49').as('lastFocused').wait(600);
 
   //   // check the math just in case
-  //   (cy as any).findByTestId('currentCartTotalCost').should('have.text', '97.35');
-  //   (cy as any).findByTestId('currentCartTotalItems').should('have.text', '15');
+  //   cy.findByTestId('currentCartTotalCost').should('have.text', '97.35');
+  //   cy.findByTestId('currentCartTotalItems').should('have.text', '15');
 
   //   // now how to reload or navigate away without losing the cookie?
   //   cy.reload();

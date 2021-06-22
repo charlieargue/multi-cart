@@ -66,6 +66,8 @@ export const NavBar = () => {
                             display: isFetching ? "inline-block" : "none",
                             marginLeft: "-22px",
                         }}
+                        data-testid="fetchingStatus"
+                        data-value={isFetching ? "fetching" : ""}
                         size="sm"
                         color="brand.pink"
                         thickness="2px"
