@@ -74,7 +74,11 @@ export const CartAvatar = ({ currentCartId = null }: CartAvatarProps) => {
       </MenuButton>
 
       {/*  Dropdown */}
-      <MenuList minW="440px" maxH="85vh" className={styles['cart-avatar__scrollable']}>
+      <MenuList
+        data-testid="myCarts"
+        minW="440px"
+        maxH="85vh"
+        className={styles['cart-avatar__scrollable']}>
 
         {/* dropdown HEADER */}
         <Flex justifyContent={'flex-end'} px={3} py={2}>

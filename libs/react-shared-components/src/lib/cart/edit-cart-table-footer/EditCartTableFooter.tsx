@@ -23,6 +23,7 @@ export function EditCartTableFooter({ cart }: EditCartTableFooterProps) {
       <TableCaption>
         Prices are estimates and subject to change
             <Button
+            data-testid="btnDeleteCart"
           ml={2}
           size="sm"
           onClick={async () => {

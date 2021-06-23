@@ -30,7 +30,8 @@ Cypress.Commands.add('login', (email, password) => {
   cy.visit('/login');
   cy.get('#usernameOrEmail').type(email);
   cy.get('#password').type(password);
-  cy.findByText('Login').click();
+  cy.get('#password').type('{enter}');
+  // cy.findByText('Login').click(); // FLAKY
   cy.contains('Welcome back!');
   cy.findByTestId('btnMyCarts').should("exist");
 });

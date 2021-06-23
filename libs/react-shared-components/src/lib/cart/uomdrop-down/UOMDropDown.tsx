@@ -14,10 +14,10 @@ export function UOMDropDown(props: UOMDropDownProps) {
         UOMs
     </MenuButton>
       <MenuList>
-        <MenuItem isDisabled>Each</MenuItem>
-        <MenuItem isDisabled>Case</MenuItem>
-        <MenuItem isDisabled>Box</MenuItem>
-        <MenuItem isDisabled>Service</MenuItem>
+        <MenuItem>Each</MenuItem>
+        <MenuItem>Case</MenuItem>
+        <MenuItem>Box</MenuItem>
+        <MenuItem>Service</MenuItem>
       </MenuList>
     </Menu>
   );
