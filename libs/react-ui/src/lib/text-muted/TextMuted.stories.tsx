@@ -1,5 +1,7 @@
+import { Divider } from '@chakra-ui/react';
 import { text } from '@storybook/addon-knobs';
-import React from 'react';
+import React, { CSSProperties, ReactNode } from 'react';
+import { Wrapper } from '../wrapper/Wrapper';
 import { TextMuted, TextMutedProps } from './TextMuted';
 
 export default {
@@ -7,21 +9,35 @@ export default {
   title: 'TextMuted'
 };
 
+const TextMutedWrapper = ({ children, title }: { children: ReactNode; title?: string; }) => (
+  <Wrapper>
+    {title && <p style={{ marginBottom: 10 }}>{title}</p>}
+    <Divider />
+    <div style={{ marginBottom: 20, display: 'block' }}>
+      {React.Children.map(children, (child) => (
+        <div style={{ marginRight: 20 }}>{child}</div>
+      ))}
+    </div>
+  </Wrapper>
+);
+
 
 // -------------------
 export const withDefaultState = () => {
-  return <TextMuted children="default" />;
+  return <TextMutedWrapper title="Default Style">
+    <TextMuted children="default" />
+    <TextMuted children="just muted text" />
+  </TextMutedWrapper>;
 }
 
 // -------------------
 export const withFontSize = () => {
 
-  const props: TextMutedProps = {
-    children: "hello world",
-    fontSize: "45px",
-  };
-
-  return <TextMuted children={props.children} fontSize={props.fontSize} />;
+  return <TextMutedWrapper title="Font Sizes">
+    <TextMuted fontSize="45px">45 px size</TextMuted>
+    <TextMuted fontSize="25px">25 px size</TextMuted>
+    <TextMuted fontSize="15px">15 px size</TextMuted>
+  </TextMutedWrapper>;
 };
 
 // -------------------
