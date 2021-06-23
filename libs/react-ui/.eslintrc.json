@@ -21,5 +21,13 @@
       "files": ["*.js", "*.jsx"],
       "rules": {}
     }
-  ]
+  ],
+  "rules": {
+    "@nrwl/nx/enforce-module-boundaries": [
+      "error",
+      {
+        "allow": ["@multi-cart/react-shared-components"]
+      }
+    ]
+  }
 }

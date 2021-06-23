@@ -1,6 +1,5 @@
 import { Divider } from '@chakra-ui/react';
-import { text } from '@storybook/addon-knobs';
-import React, { CSSProperties, ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 import { Wrapper } from '../wrapper/Wrapper';
 import { TextMuted, TextMutedProps } from './TextMuted';
 
