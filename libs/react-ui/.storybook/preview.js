@@ -4,10 +4,9 @@ import { store } from '@multi-cart/react-app-state';
 import React from 'react';
 import { Provider } from 'react-redux';
 import { withKnobs } from '@storybook/addon-knobs';
-
 import { theme } from '@multi-cart/react-shared-components';
 
-
+// <ChakraProvider resetCSS theme={theme} mode="dupa">
 addDecorator((storyFn) => (
     <ChakraProvider resetCSS>
         <ColorModeScript initialColorMode={theme.config.initialColorMode} />
