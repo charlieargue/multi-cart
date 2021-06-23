@@ -39,4 +39,5 @@ export * from './lib/_layout/micro-layout/MicroLayout';
 export * from './lib/_layout/nav-bar/NavBar';
 export * from './lib/_layout/side-bar-item/SideBarItem';
 export * from './lib/_layout/side-bar/SideBar';
+export * from './lib/_layout/theme';
 

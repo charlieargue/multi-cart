@@ -10,7 +10,7 @@ const breakpoints = createBreakpoints({
   xl: '80em',
 })
 
-const theme = extendTheme({
+export const theme = extendTheme({
   initialColorMode: "light",
   useSystemColorMode: false,
   colors: {
@@ -22,4 +22,4 @@ const theme = extendTheme({
   // thx: https://chakra-ui.com/docs/theming/customize-theme#customizing-component-styles
 });
 
-export default theme
+export default theme;

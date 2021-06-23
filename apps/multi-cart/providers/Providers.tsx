@@ -2,7 +2,7 @@ import { ChakraProvider, ColorModeProvider } from '@chakra-ui/react';
 import { store } from '@multi-cart/react-app-state';
 import React from 'react';
 import { Provider } from 'react-redux';
-import theme from '../_theme/theme';
+import { theme } from '@multi-cart/react-shared-components';
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface ProvidersProps {

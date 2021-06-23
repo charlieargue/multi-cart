@@ -1,12 +1,9 @@
-
-import { storiesOf } from "@storybook/react";
 import { text } from '@storybook/addon-knobs';
 import React from 'react';
-import { InputField, InputFieldProps } from './InputField';
 import withFormik from 'storybook-formik';
+import { InputField, InputFieldProps } from './InputField';
 
 
-// CSF:
 export default {
   title: 'InputField',
   component: InputField,
@@ -38,7 +35,7 @@ withDefaultState.story = config;
 
 
 // -------------------
-export const secondary = () => {
+export const withSecondary = () => {
   const props: InputFieldProps = {
     name: text("name", ""),
     label: text("label", "secondary label: "),
@@ -47,6 +44,6 @@ export const secondary = () => {
   return <InputField value={props.value} label={props.label} name={props.name} />;
 };
 
-secondary.story = config;
+withSecondary.story = config;
 
 
