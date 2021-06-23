@@ -41,8 +41,6 @@ export const withOneLink = () => {
 
   return <BreadcrumbsWrapper title="One Link">
     <Breadcrumbs {...props} />
-    <Badge textTransform="none" mb={.5} color="pink" ml={2}>This works (is pink)</Badge>
-    <Badge textTransform="none" mb={.5} colorScheme="pink" ml={2}>This doesn't work (where's the pink?)</Badge>
   </BreadcrumbsWrapper>;
 };
 
