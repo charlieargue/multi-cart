@@ -15,18 +15,18 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@multi-cart/react-ui": ["libs/react-ui/src/index.ts"],
+      "@multi-cart/mock-api": ["libs/mock-api/src/index.ts"],
+      "@multi-cart/multi-cart-iac": ["libs/multi-cart-iac/src/index.ts"],
+      "@multi-cart/multi-cart-iac-tests": [
+        "libs/multi-cart-iac-tests/src/index.ts"
+      ],
+      "@multi-cart/react-app-state": ["libs/react-app-state/src/index.ts"],
+      "@multi-cart/react-data-access": ["libs/react-data-access/src/index.ts"],
       "@multi-cart/react-shared-components": [
         "libs/react-shared-components/src/index.ts"
       ],
-      "@multi-cart/react-data-access": ["libs/react-data-access/src/index.ts"],
-      "@multi-cart/util": ["libs/util/src/index.ts"],
-      "@multi-cart/mock-api": ["libs/mock-api/src/index.ts"],
-      "@multi-cart/multi-cart-iac": ["libs/multi-cart-iac/src/index.ts"],
-      "@multi-cart/react-app-state": ["libs/react-app-state/src/index.ts"],
-      "@multi-cart/multi-cart-iac-tests": [
-        "libs/multi-cart-iac-tests/src/index.ts"
-      ]
+      "@multi-cart/react-ui": ["libs/react-ui/src/index.ts"],
+      "@multi-cart/util": ["libs/util/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

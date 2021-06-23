@@ -29,6 +29,9 @@
     }
   },
   "projects": {
+    "mock-api": {
+      "tags": []
+    },
     "multi-cart": {
       "tags": []
     },
@@ -36,36 +39,33 @@
       "tags": [],
       "implicitDependencies": ["multi-cart"]
     },
-    "react-ui": {
+    "multi-cart-iac": {
+      "tags": []
+    },
+    "multi-cart-iac-tests": {
+      "tags": []
+    },
+    "react-app-state": {
+      "tags": []
+    },
+    "react-data-access": {
       "tags": []
     },
     "react-shared-components": {
       "tags": []
     },
-    "react-data-access": {
+    "react-shared-components-e2e": {
+      "tags": [],
+      "implicitDependencies": ["react-shared-components"]
+    },
+    "react-ui": {
       "tags": []
     },
     "react-ui-e2e": {
       "tags": [],
       "implicitDependencies": ["react-ui"]
     },
-    "react-shared-components-e2e": {
-      "tags": [],
-      "implicitDependencies": ["react-shared-components"]
-    },
     "util": {
-      "tags": []
-    },
-    "mock-api": {
-      "tags": []
-    },
-    "multi-cart-iac": {
-      "tags": []
-    },
-    "react-app-state": {
-      "tags": []
-    },
-    "multi-cart-iac-tests": {
       "tags": []
     }
   }
