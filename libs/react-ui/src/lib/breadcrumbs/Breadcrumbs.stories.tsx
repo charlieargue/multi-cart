@@ -41,7 +41,7 @@ export const withOneLink = () => {
 
   return <BreadcrumbsWrapper title="One Link">
     <Breadcrumbs {...props} />
-    <Badge textTransform="none" mb={.5} colorScheme="pink" ml={2}>where's the pink?</Badge>
+    {/* <Badge textTransform="none" mb={.5} colorScheme="pink" ml={2}>where's the pink?</Badge> */}
   </BreadcrumbsWrapper>;
 };
 
@@ -64,6 +64,6 @@ export const withMultipleLinks = () => {
     }]
   };
 
-  return <Breadcrumbs {...props} />;
+  return <BreadcrumbsWrapper title="Multiple Links"><Breadcrumbs {...props} /></BreadcrumbsWrapper>;
 };
 

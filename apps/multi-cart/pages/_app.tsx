@@ -1,5 +1,5 @@
 import React from 'react';
-import Providers from '../providers/Providers';
+import { Providers } from '@multi-cart/react-shared-components';
 import '../styles/styles.scss';
 
 function MyApp({ Component, pageProps }) {
