@@ -22,6 +22,7 @@ export const Sort: React.FC<SortProps> = ({ children, childType, by, keyWith = "
   const compare = (aRaw: any, bRaw: any): any => {
     const a = aRaw.props[childType];
     const b = bRaw.props[childType];
+    console.log(`🚀 ~ aRaw.props`, aRaw.props);
 
     // Compare function needed by the Sort component
     // you can access the relevant property like this a.props[by]
@@ -53,7 +54,7 @@ export const Sort: React.FC<SortProps> = ({ children, childType, by, keyWith = "
     return (<>{children}</>);
   
   } else {
-    // trying to workaround error: Each child in a list should have a unique "key" prop. holy shit this worked
+    // trying to workaround error: Each child in a list should have a unique "key" prop
     const elements: any[] = React.Children.toArray(children);
     const keyed: any[] = elements
       .sort(compare)
