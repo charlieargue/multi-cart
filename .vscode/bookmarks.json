@@ -169,6 +169,16 @@
 					"label": ""
 				}
 			]
+		},
+		{
+			"path": "apps/react-ui-e2e/cypress.json",
+			"bookmarks": [
+				{
+					"line": 3,
+					"column": 52,
+					"label": ""
+				}
+			]
 		}
 	]
 }
