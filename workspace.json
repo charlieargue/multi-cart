@@ -285,7 +285,11 @@
           "options": {
             "cypressConfig": "apps/react-shared-components-e2e/cypress.json",
             "tsConfig": "apps/react-shared-components-e2e/tsconfig.e2e.json",
-            "devServerTarget": "react-shared-components:storybook"
+            "devServerTarget": "react-shared-components:storybook",
+            "exit": false,
+            "record": false,
+            "skipServe": true,
+            "watch": true
           },
           "configurations": {
             "ci": {
@@ -365,11 +369,7 @@
           "options": {
             "cypressConfig": "apps/react-ui-e2e/cypress.json",
             "tsConfig": "apps/react-ui-e2e/tsconfig.e2e.json",
-            "devServerTarget": "react-ui:storybook",
-            "exit": false,
-            "record": false,
-            "skipServe": true,
-            "watch": true
+            "devServerTarget": "react-ui:storybook"
           },
           "configurations": {
             "ci": {

@@ -11,15 +11,25 @@ import React from "react";
 import './Hero.module.scss';
 import { TextMuted } from '@multi-cart/react-ui';
 
+
+/* eslint-disable-next-line */
+export interface HeroProps {
+  title: string;
+  subtitle: string;
+  image: string;
+  ctaText: string;
+  ctaLink: string;
+}
+
 // -------------------
-export function Hero({
+export const Hero = ({
   title,
   subtitle,
   image,
   ctaLink,
   ctaText,
   ...rest
-}) {
+}: HeroProps) => {
   return (
     <Flex
       align="center"
@@ -75,21 +85,7 @@ export function Hero({
   );
 }
 
-Hero.propTypes = {
-  title: PropTypes.string,
-  subtitle: PropTypes.string,
-  image: PropTypes.string,
-  ctaText: PropTypes.string,
-  ctaLink: PropTypes.string
-};
 
-Hero.defaultProps = {
-  title: "React landing page with Chakra UI",
-  subtitle:
-    "This is the subheader section where you describe the basic benefits of your product",
-  image: "https://source.unsplash.com/collection/404339/800x600",
-  ctaText: "Create your account now",
-  ctaLink: "/signup"
-};
+
 
 export default Hero;

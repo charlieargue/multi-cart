@@ -12,6 +12,7 @@ export function DarkModeSwitch(props: DarkModeSwitchProps) {
 
   return (
     <Switch
+      data-testid="darkModeSwitch"
       position="fixed"
       bottom="5rem"
       right="1.5rem"

@@ -5,7 +5,7 @@ import DarkModeSwitch from '../../dark-mode-switch/DarkModeSwitch';
 import { NavBar } from '../nav-bar/NavBar';
 import './AppLayout.module.scss';
 
-interface AppLayoutProps {
+export interface AppLayoutProps {
   children?: React.ReactNode
 }
 
@@ -17,7 +17,7 @@ export const AppLayout = (props: AppLayoutProps) => {
   return (
     <>
       <NavBar />
-      <Wrapper pt="60px">
+      <Wrapper pt="60px" data-testid="bkgndAppLayout">
         <Flex
           direction="column"
           align="center"

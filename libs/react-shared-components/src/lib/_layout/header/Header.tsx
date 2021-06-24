@@ -14,7 +14,6 @@ const MenuItem = ({ children, isLast = false, to = "/", ...rest }) => {
       display="block"
       {...rest}
     >
-
       <NextLink href={to}>{children}</NextLink>
     </Text>
   );

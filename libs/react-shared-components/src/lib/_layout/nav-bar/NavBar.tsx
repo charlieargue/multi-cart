@@ -87,6 +87,7 @@ export const NavBar = () => {
                     <Menu>
                         <MenuButton
                             ml={2}
+                            data-testid="btnUserProfile"
                             as={Button}
                             rounded={'full'}
                             variant={'solid'}
