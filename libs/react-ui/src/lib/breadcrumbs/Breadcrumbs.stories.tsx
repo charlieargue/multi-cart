@@ -36,13 +36,13 @@ export const withMultipleLinks = () => {
   /* eslint-disable-next-line */
   const props: BreadcrumbsProps = {
     links: [{
-      isActive: true,
+      isActive: false,
       label: "Carts",
       href: "/carts",
       as: "/carts"
     },
     {
-      isActive: false,
+      isActive: true,
       label: "Cart",
       id: 5,
       href: "/cart",

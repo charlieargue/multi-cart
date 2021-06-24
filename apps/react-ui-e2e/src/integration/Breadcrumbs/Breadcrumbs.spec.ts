@@ -1,24 +1,23 @@
 describe('react-ui: Breadcrumbs component', () => {
 
 
-  it('default state shows just home icon', () => {
+  it('default state shows just home link', () => {
     cy.visit('/iframe.html?id=breadcrumbs--with-default-state');
-    cy.get('[data-test-id="icon-home"]').should('be.visible')
-    cy.get('.breadcrumb-item').should('have.length', 1);
+    cy.get('ol.chakra-breadcrumb__list > li').should('be.visible')
+    cy.get('ol.chakra-breadcrumb__list > li').should('have.length', 1);
     
   });
   
   it('breadcrumb with one link ', () => {
     cy.visit('/iframe.html?id=breadcrumbs--with-one-link');
-    cy.get('[data-test-id="icon-home"]').should('be.visible');
-    cy.get('.active').should('be.visible');
-    cy.get('.breadcrumb-item').should('have.length', 2);
+    cy.get('ol.chakra-breadcrumb__list > li').should('be.visible')
+    cy.get('ol.chakra-breadcrumb__list > li').should('have.length', 2);
   });
   
   it('breadcrumb with multiple links ', () => {
     cy.visit('/iframe.html?id=breadcrumbs--with-multiple-links');
-    cy.get('[data-test-id="icon-home"]').should('be.visible');
-    cy.get('.active').should('be.visible');
-    cy.get('.breadcrumb-item').should('have.length', 3);
+    cy.get('ol.chakra-breadcrumb__list > li').should('be.visible')
+    cy.get('ol.chakra-breadcrumb__list > li').should('have.length', 3);
+    cy.get('ol.chakra-breadcrumb__list > li').eq(2).should('contain', '5');
   });
 });
