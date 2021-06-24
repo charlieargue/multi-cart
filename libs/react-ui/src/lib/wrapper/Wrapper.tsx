@@ -18,4 +18,5 @@ export const Wrapper = (props) => {
             {...props}
         />
     );
-}
+};
+export default Wrapper;

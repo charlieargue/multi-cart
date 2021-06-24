@@ -22,7 +22,6 @@ export const Sort: React.FC<SortProps> = ({ children, childType, by, keyWith = "
   const compare = (aRaw: any, bRaw: any): any => {
     const a = aRaw.props[childType];
     const b = bRaw.props[childType];
-    console.log(`🚀 ~ aRaw.props`, aRaw.props);
 
     // Compare function needed by the Sort component
     // you can access the relevant property like this a.props[by]
