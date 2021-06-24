@@ -8,7 +8,7 @@ export default {
 
 export const primary = () => {
   const props: TooltipMCProps = {
-    label: "45px",
+    label: "45pxAbraCadabra",
   };
 
   return <TooltipMC label={props.label}>Sample Child</TooltipMC>;
