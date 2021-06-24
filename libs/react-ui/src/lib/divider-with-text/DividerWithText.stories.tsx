@@ -7,5 +7,5 @@ export default {
 };
 
 export const primary = () => {
-  return <DividerWithText />;
+  return <DividerWithText mt="6">coming soon...</DividerWithText>;
 };

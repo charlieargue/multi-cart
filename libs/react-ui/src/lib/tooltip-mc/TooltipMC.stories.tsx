@@ -1,5 +1,5 @@
 import React from 'react';
-import { TooltipMC } from './TooltipMC';
+import { TooltipMC, TooltipMCProps } from './TooltipMC';
 
 export default {
   component: TooltipMC,
@@ -7,5 +7,9 @@ export default {
 };
 
 export const primary = () => {
-  return <TooltipMC />;
+  const props: TooltipMCProps = {
+    label: "45px",
+  };
+
+  return <TooltipMC label={props.label}>Sample Child</TooltipMC>;
 };

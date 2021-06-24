@@ -8,22 +8,11 @@ export default {
   title: 'Breadcrumbs',
 };
 
-const BreadcrumbsWrapper = ({ children, title }: { children: ReactNode; title?: string; }) => (
-  <Wrapper>
-    {title && <p style={{ marginBottom: 10 }}>{title}</p>}
-    <Divider mb={9} />
-    <div style={{ marginBottom: 20, display: 'block' }}>
-      {React.Children.map(children, (child) => (
-        <div style={{ marginRight: 20 }}>{child}</div>
-      ))}
-    </div>
-  </Wrapper>
-);
 
 // -------------------
 export const withDefaultState = () => {
   /* eslint-disable-next-line */
-  return <BreadcrumbsWrapper title="Default"><Breadcrumbs /></BreadcrumbsWrapper>;
+  return <Breadcrumbs />;
 };
 
 // -------------------
@@ -39,9 +28,7 @@ export const withOneLink = () => {
     }]
   };
 
-  return <BreadcrumbsWrapper title="One Link">
-    <Breadcrumbs {...props} />
-  </BreadcrumbsWrapper>;
+  return <Breadcrumbs {...props} />;
 };
 
 // -------------------
@@ -63,6 +50,6 @@ export const withMultipleLinks = () => {
     }]
   };
 
-  return <BreadcrumbsWrapper title="Multiple Links"><Breadcrumbs {...props} /></BreadcrumbsWrapper>;
+  return <Breadcrumbs {...props} />;
 };
 

@@ -7,5 +7,5 @@ export default {
 };
 
 export const primary = () => {
-  return <ErrMsg />;
+  return <ErrMsg>Sample Error</ErrMsg>;
 };
