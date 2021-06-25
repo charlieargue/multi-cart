@@ -9,7 +9,7 @@ export interface ProductContainerProps { }
 
 export function ProductContainer(props: ProductContainerProps) {
   const router = useRouter();
-  const product: Product = products.find(p => p.slug === router.query.slug);
+  const product: Product = products.find(p => (p as Product).slug === router.query.slug) as Product;
 
   const links = [
     {
