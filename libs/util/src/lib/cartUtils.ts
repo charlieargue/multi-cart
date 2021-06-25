@@ -1,7 +1,7 @@
 import { Cart, CartLine, CartLineAccount } from "@multi-cart/react-data-access";
 import { roundToTwo } from './roundToTwo';
 
-// ------------------------
+// ------------------------ ✅ JEST
 export const sumTotalItems = (cart?: Cart): number => {
     if (cart && cart.cartLines) {
         return cart.cartLines.reduce((sum, cl) => {
@@ -14,7 +14,7 @@ export const sumTotalItems = (cart?: Cart): number => {
     return 0;
 };
 
-// ------------------
+// ------------------ ✅ JEST
 export const sumTotalCost = (cart?: Cart): number => {
     if (cart && cart.cartLines) {
         return cart.cartLines.reduce((sum, cl) => {
@@ -28,12 +28,12 @@ export const sumTotalCost = (cart?: Cart): number => {
 };
 
 
-// ------------------
+// ------------------ ✅ JEST
 export const getRemainingAmount = (line: CartLine): number => {
     return roundToTwo(getLineTotalWithTax(line.price, line.quantity, 0) - getTotalAmounts(line.cartLineAccounts));
 }
 
-// ------------------
+// ------------------ ✅ JEST
 export const getLineTotalWithTax = (linePrice: number, lineQuantity: number, lineTax: number): number => {
     let totalCost: number = linePrice * lineQuantity;
     if (lineTax !== 0) {
@@ -42,7 +42,7 @@ export const getLineTotalWithTax = (linePrice: number, lineQuantity: number, lin
     return totalCost;
 }
 
-// ------------------
+// ------------------  ✅ JEST
 export const getTotalAmounts = (lineAccounts: CartLineAccount[]): number => {
     if (!lineAccounts) {
         return 0;
@@ -86,7 +86,7 @@ export const computePercentageGivenAmount = (la: CartLineAccount, line: CartLine
     }
 }
 
-// ------------------------
+// ------------------------ ✅ JEST
 export const computeAmountGivenPercentage = (input: {
     linePrice: number,
     lineQuantity: number,
@@ -101,7 +101,7 @@ export const computeAmountGivenPercentage = (input: {
     }
 }
 
-// ------------------------
+// ------------------------ ✅ JEST
 export const hasNegativeAmounts = (line: CartLine): boolean => {
     // thru hacks you can get over 100 and then it'll compute negative numbers and you still equal 100, but can't have negative numbers
     // need to force error and make the UI reflect that
@@ -112,7 +112,7 @@ export const hasNegativeAmounts = (line: CartLine): boolean => {
 }
 
 
-// ------------------------
+// ------------------------ ✅ JEST
 export const areLineAccountsValid = (line: CartLine): boolean => {
     return (getTotalPercentages(line) === 100 && !hasNegativeAmounts(line));
 }

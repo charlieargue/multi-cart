@@ -1,7 +1,7 @@
 import { toDaysAgo } from './toDaysAgo';
 
 // -------------------
-describe.skip('To Days Ago UNIT TESTS', () => {
+describe('To Days Ago UNIT TESTS', () => {
   it('toDaysAgo conversion working as expected', () => {
     const dateObj = new Date();
 

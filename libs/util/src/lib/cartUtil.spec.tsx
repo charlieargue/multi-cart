@@ -1,7 +1,7 @@
-import { CartLine, CartLineAccount } from '@multi-cart/react-data-access';
-import { computePercentageGivenAmount, getRemainingPercentage, getTotalPercentages } from './cartUtils';
+import { Cart, CartLine, CartLineAccount } from '@multi-cart/react-data-access';
+import { areLineAccountsValid, computeAmountGivenPercentage, computePercentageGivenAmount, getLineTotalWithTax, getRemainingAmount, getRemainingPercentage, getTotalAmounts, getTotalPercentages, hasNegativeAmounts, sumTotalCost, sumTotalItems } from './cartUtils';
 
-// KISS test data
+// test data
 const CL = {
   id: "658",
   cartId: "770",
@@ -126,5 +126,115 @@ describe('Cart Utils UNIT TESTS', () => {
     expect(result).toEqual(0);
   });
 
+  it('can sum Total Items', () => {
+
+    const cart = {
+      id: "N/A",
+      cartLines: [CL]
+    } as Cart;
+    let result = sumTotalItems(cart);
+    expect(result).toEqual(1);
+    const cl_clone = JSON.parse(JSON.stringify(CL));
+    cl_clone.quantity = 7;
+    cart.cartLines.push(cl_clone);
+    result = sumTotalItems(cart);
+    expect(result).toEqual(8);
+  });
+
+  it('can sum Total Cost', () => {
+
+    const cart = {
+      id: "N/A",
+      cartLines: [CL]
+    } as Cart;
+    let result = sumTotalCost(cart);
+    expect(result).toEqual(34);
+    const cl_clone = JSON.parse(JSON.stringify(CL));
+    cl_clone.quantity = 7;
+    cart.cartLines.push(cl_clone);
+    result = sumTotalCost(cart);
+    expect(result).toEqual(272);
+  });
+
+  it('can get Remaining Amount', () => {
+
+    let result = getRemainingAmount(CL);
+    expect(result).toEqual(34);
+
+    const cl_clone = JSON.parse(JSON.stringify(CL));
+    cl_clone.cartLineAccounts.push(CLA);
+    result = getRemainingAmount(cl_clone);
+    expect(result).toEqual(0);
+  });
+
+  it('can get Line Total With Tax', () => {
+
+    let result = getLineTotalWithTax(CL.price, CL.quantity, 0);
+    expect(result).toEqual(34);
+
+    const cl_clone = JSON.parse(JSON.stringify(CL));
+    cl_clone.quantity = 5;
+    result = getLineTotalWithTax(cl_clone.price, cl_clone.quantity, 0);
+    expect(result).toEqual(170);
+  });
+
+  it('can get Total Amounts', () => {
+
+    let result = getTotalAmounts([CLA]);
+    expect(result).toEqual(34);
+
+    const cla_clone = JSON.parse(JSON.stringify(CLA));
+    cla_clone.amount = 5;
+    result = getTotalAmounts([CLA, cla_clone])
+    expect(result).toEqual(39);
+  });
+
+  it('can compute Amount Given Percentage', () => {
+
+    let result = computeAmountGivenPercentage({
+      linePrice: CL.price,
+      lineQuantity: CL.quantity,
+      lineTax: 0,
+      lineAccountPercentage: 50
+    });
+    expect(result).toEqual(17);
+
+    result = computeAmountGivenPercentage({
+      linePrice: 0,
+      lineQuantity: CL.quantity,
+      lineTax: 0,
+      lineAccountPercentage: 50
+    });
+    expect(result).toEqual(0);
+  });
+
+  it('can check if has Negative Amounts', () => {
+
+    let result = hasNegativeAmounts(CL);
+    expect(result).toEqual(false);
+
+    const cla_clone = JSON.parse(JSON.stringify(CLA));
+    cla_clone.amount = -5;
+    result = hasNegativeAmounts({ cartLineAccounts: [CLA, cla_clone] } as CartLine)
+    expect(result).toEqual(true);
+  });
+
+  it('can check if Line Accounts are Valid', () => {
+
+    let result = areLineAccountsValid(CL);
+    expect(result).toEqual(false);
+
+    const cl_clone = JSON.parse(JSON.stringify(CL));
+    cl_clone.cartLineAccounts = [CLA];
+    result = areLineAccountsValid(cl_clone);
+    expect(result).toEqual(true);
+
+    const cla_clone = JSON.parse(JSON.stringify(CLA));
+    cla_clone.amount = -5;
+    cl_clone.cartLineAccounts.push(cla_clone);
+    result = areLineAccountsValid(cl_clone);
+    expect(result).toEqual(false);
+
+  });
 
 });
