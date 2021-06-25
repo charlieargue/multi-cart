@@ -2,7 +2,7 @@ import { Alert, AlertIcon, SimpleGrid, Text } from '@chakra-ui/react';
 import { AppLayout, ProductCard } from '@multi-cart/react-shared-components';
 import { Breadcrumbs } from '@multi-cart/react-ui';
 import React from 'react';
-import { ProductsMockData as products } from './ProductsMockData';
+import { ProductsMockData as products } from '@multi-cart/mock-api';
 
 /* eslint-disable-next-line */
 export interface ProductsContainerProps { }

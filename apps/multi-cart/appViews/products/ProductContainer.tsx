@@ -2,7 +2,7 @@ import { AppLayout, Product, ProductDetails } from '@multi-cart/react-shared-com
 import { Breadcrumbs } from '@multi-cart/react-ui';
 import { useRouter } from 'next/router';
 import React from 'react';
-import { ProductsMockData as products } from './ProductsMockData';
+import { ProductsMockData as products } from '@multi-cart/mock-api';
 
 /* eslint-disable-next-line */
 export interface ProductContainerProps { }
