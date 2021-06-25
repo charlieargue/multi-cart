@@ -5,7 +5,7 @@ import React from 'react';
 import { FaDollarSign as DollarIcon, FaShoppingCart as ShoppingCartIcon } from 'react-icons/fa';
 import './CartAvatarInner.module.scss';
 
-interface CartAvatarInnerProps {
+export interface CartAvatarInnerProps {
   cart?: Cart
 }
 
