@@ -12,10 +12,10 @@ import './ChangePasswordForm.module.scss';
 
 export const ChangePasswordForm = () => {
   const router = useRouter();
-  const username = router.query.username as string;
   const [, changePassword] = useChangePasswordMutation();
   const [tokenError, setTokenError] = useState("");
   const { toastError, toastSuccess } = useMyToasts();
+  const username = router.query.username as string;
 
   return (
     <>
