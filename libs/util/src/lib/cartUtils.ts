@@ -52,14 +52,15 @@ export const getTotalAmounts = (lineAccounts: CartLineAccount[]): number => {
         .reduce((prev, curr) => prev + curr, 0);
 }
 
-// ------------------
+// ------------------ ✅ JEST
 export const getRemainingPercentage = (line: CartLine, excludeCartLineAccountId?: string): number => {
     // NOTE: at this stage, the current LA we're trying to compute will ALREADY be in line.cartLineAccounts, so need to be able to exclude it!
     const result = 100 - getTotalPercentages(line, excludeCartLineAccountId);
     return roundToTwo(result);
 }
 
-// ------------------ TODO: memoize all these?
+// ------------------ ✅ JEST
+// TODO: memoize all these?
 export const getTotalPercentages = (line: CartLine, excludeCartLineAccountId?: string): number => {
     if (!line?.cartLineAccounts) {
         return 0;
@@ -74,7 +75,7 @@ export const getTotalPercentages = (line: CartLine, excludeCartLineAccountId?: s
     return roundToTwo(result);
 }
 
-// ------------------------
+// ------------------------ ✅ JEST
 export const computePercentageGivenAmount = (la: CartLineAccount, line: CartLine) => {
     const ltwt: number = getLineTotalWithTax(line.price, line.quantity, 0);
     if (ltwt === 0) {
