@@ -5,6 +5,7 @@ import { withKnobs } from '@storybook/addon-knobs';
 import { addDecorator } from '@storybook/react';
 import React from 'react';
 import { withNextRouter } from 'storybook-addon-next-router';
+import '../../../apps/multi-cart/styles/styles.scss';
 
 addDecorator(
     withNextRouter({

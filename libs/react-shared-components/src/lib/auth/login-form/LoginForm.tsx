@@ -47,6 +47,7 @@ export function LoginForm(props: LoginFormProps) {
     <Flex
       onClick={handleGuestLogin}
       className="cursor-pointer"
+      data-testid="btnGuestLogin"
       bgGradient="linear(to-t, orange, brand.yellow)"
       borderRadius="4px"
       _hover={{
