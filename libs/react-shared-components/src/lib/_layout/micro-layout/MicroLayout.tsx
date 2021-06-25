@@ -25,7 +25,7 @@ export interface MicroLayoutProps {
  */
 export function MicroLayout({ heading, subHeading, children }: MicroLayoutProps) {
   return (
-    <Wrapper>
+    <Wrapper data-testid="bkgndAppLayout">
       <Box bg={mode('gray.50', 'inherit')} minH="100vh" minWidth="100vw" py="20" px={{ sm: '6', lg: '8' }}>
         <Box maxW={{ sm: 'md' }} mx={{ sm: 'auto' }} w={{ sm: 'full' }}>
           <Box mb={{ base: '8', md: '16' }}>

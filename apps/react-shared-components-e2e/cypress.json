@@ -1,7 +1,7 @@
 {
   "fileServerFolder": ".",
   "fixturesFolder": "./src/fixtures",
-  "integrationFolder": "./src/integration",
+  "integrationFolder": "./src/integration/_layout",
   "modifyObstructiveCode": false,
   "pluginsFile": "./src/plugins/index",
   "supportFile": "./src/support/index.ts",

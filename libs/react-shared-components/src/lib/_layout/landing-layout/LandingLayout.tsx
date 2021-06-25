@@ -19,9 +19,9 @@ export interface LandingLayoutProps {
  * @return {*} 
  */
 export function LandingLayout(props: LandingLayoutProps) {
-  
+
   return (
-    <Wrapper>
+    <Wrapper data-testid="bkgndAppLayout">
       <Flex
         direction="column"
         align="center"
