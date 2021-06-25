@@ -12,7 +12,7 @@ export function DeleteLineAccountButton({ lineAccount, line }: DeleteLineAccount
   const [, deleteCartLineAccount] = useDeleteCartLineAccountMutation();
 
   return (
-    <DeleteIcon size="16" cursor={'pointer'} color="red" onClick={() => deleteCartLineAccount({
+    <DeleteIcon data-testid="btnDeleteCartLineAccount" size="16" cursor={'pointer'} color="red" onClick={() => deleteCartLineAccount({
       cartId: line.cartId,
       cartLineId: line.id,
       cartLineAccountId: lineAccount.id

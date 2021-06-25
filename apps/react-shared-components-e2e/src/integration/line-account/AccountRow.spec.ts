@@ -3,11 +3,6 @@ describe('react-shared-components: AccountRow component', () => {
 
   it('should render the component', () => {
 
-    // check headings
-    cy.get('#root table th').should('have.length', 3);
-    cy.get('#root table th').eq(0).should('have.text', 'Account #');
-    cy.get('#root table th').eq(1).should('have.text', 'Name');
-    cy.get('#root table th').eq(2).should('have.text', 'Amount Remaining');
     
     cy.get('#root table tbody tr').should('have.length', 2);
     

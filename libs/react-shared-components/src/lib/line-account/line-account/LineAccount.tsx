@@ -96,13 +96,14 @@ export const LineAccount = ({ lineAccount, line }: LineAccountProps) => {
             {/* LEFT PART */}
             <LineAccountTooltip accountNumber={lineAccount.accountNumber}>
               <InputLeftAddon children={<HStack cursor={'help'} >
-                <Box><strong>#</strong> {lineAccount.accountNumber}</Box>
+                <Box data-testid="lineAccountNumber"><strong>#</strong> {lineAccount.accountNumber}</Box>
                 <Badge
                   rounded="md"
                   shadow="xs"
                   ml={2}
                   mt={-.5}
                   variant="warning"
+                  data-testid="lineAccountAmount"
                   bg="yellow.100">{toFriendlyCurrency(lineAccount.amount)}</Badge>
                 <DeleteLineAccountButton lineAccount={lineAccount} line={line} />
 
