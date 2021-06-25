@@ -10,5 +10,6 @@
   "screenshotsFolder": "../../dist/cypress/apps/react-shared-components-e2e/screenshots",
   "chromeWebSecurity": false,
   "baseUrl": "http://localhost:4400",
-  "viewportWidth": 1400
+  "viewportWidth": 1400,
+  "projectId": "w6cn2v"
 }

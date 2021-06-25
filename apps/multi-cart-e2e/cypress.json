@@ -9,5 +9,6 @@
   "videosFolder": "../../dist/cypress/apps/multi-cart-e2e/videos",
   "screenshotsFolder": "../../dist/cypress/apps/multi-cart-e2e/screenshots",
   "chromeWebSecurity": false,
-  "viewportWidth": 1400
+  "viewportWidth": 1400,
+  "projectId": "4gvf8g"
 }

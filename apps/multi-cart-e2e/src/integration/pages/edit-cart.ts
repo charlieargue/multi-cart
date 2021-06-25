@@ -45,7 +45,7 @@ context('Edit Cart Functionality', () => {
         // grab each cart list row and the first cart
         cy.findByTestId('myCarts').find('a').first().click();
         cy.findByTestId('btnDeleteCart').should('not.be.disabled');
-        cy.findByTestId('btnDeleteCart').click({force:true});
+        cy.findByTestId('btnDeleteCart').click({ force: true });
 
         // confirm deleted toast
         // <div class=" css-tidvy5">Deleted!</div>
@@ -99,7 +99,9 @@ context('Edit Cart Functionality', () => {
     // EXERCISE QUANTITY in avatar
 
     // start at first line input and tab way to first line quantity
-    cy.findAllByTestId('inputQuantity').first().clear().focus().type('4', { delay: 1000 }).should('have.value', '4'); // NOTE: was super flaky, and needed the tab after!
+    cy.findAllByTestId('inputQuantity').first().focus().clear().type('4', { delay: 2000 }).tab();
+    cy.findAllByTestId('inputQuantity').first().focus().clear().type('4', { delay: 2000 }).tab(); // hacky: was NOT saving damnit! needed to do it twice wtf
+    cy.findAllByTestId('inputQuantity').first().should('have.value', '4'); // NOTE: was super flaky, and needed the tab after!
     cy.confirmNotSaving();
     cy.findByTestId('currentCartTotalItems').should('have.text', '5');
 
