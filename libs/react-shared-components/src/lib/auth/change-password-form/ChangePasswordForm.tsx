@@ -18,80 +18,81 @@ export const ChangePasswordForm = () => {
   const { toastError, toastSuccess } = useMyToasts();
 
   return (
-
-    <Formik initialValues={{ newPassword: "" }}
-      onSubmit={async (values, { setErrors }) => {
-        // clear token(s)
-        localStorage.removeItem("token");
-        // hit DB
-        const response: OperationResult<ChangePasswordMutation, Exact<{
-          username: string;
-          token: string;
-          newPassword: string;
-        }>> & { errors?: unknown, data?: unknown } = await changePassword({
-          username,
-          newPassword: values.newPassword,
-          token:
-            typeof router.query.token === "string" ? router.query.token : ""
-        });
-
-        // handle errors
-        if (response.error) {
-          setTokenError("error");
-          toastError(response.error.message);
-        } else if ("errors" in response) {
-          setTokenError("error");
-          toastError(response.errors[0].message);
-        } else if ("data" in response && response.data.changePassword) {
-          toastSuccess("👍 All set, now please login with that new password!");
-          router.push("/login");
-        }
-
-      }}>
-      {({ isSubmitting }) => (
-        <Form>
-          <Stack spacing="6">
-            <InputField
-              required
-              disabled
-              name="username"
-              placeholder="username"
-              value={router.query.username || ''}>
-            </InputField>
-
-            <InputField
-              required
-              label="New Password "
-              name="newPassword"
-              placeholder="new password"
-              type="password"
-              {...passwordAttributes}
-            >
-            </InputField>
-            {tokenError ?
-              <div>
-                <Alert borderRadius="4px" status="error">
-                  <span role='img' aria-label='emoji'>❗️</span><strong>Error: &nbsp;</strong>
-                  <NextLink href="/forgot-password">
-                    <Box href="/forgot-password" as="a" color={mode('pink.600', 'pink.200')} fontWeight="semibold" fontSize="sm">
-                      Please try a fresh token
+    <>
+      {tokenError &&
+        <Box mb={2}>
+          <Alert borderRadius="4px" status="error">
+            <span role='img' aria-label='emoji'>❗️</span><strong>Error: &nbsp;</strong>
+            <NextLink href="/forgot-password">
+              <Box href="/forgot-password" as="a" color={mode('pink.600', 'pink.200')} fontWeight="semibold" fontSize="sm">
+                Please try a fresh token
                     </Box>
-                  </NextLink>
-                </Alert>
-              </div>
-              : null}
+            </NextLink>
+          </Alert>
+        </Box>}
+      <Formik initialValues={{ newPassword: "" }}
+        onSubmit={async (values, { setErrors }) => {
+          // clear token(s)
+          localStorage.removeItem("token");
+          // hit DB
+          const response: OperationResult<ChangePasswordMutation, Exact<{
+            username: string;
+            token: string;
+            newPassword: string;
+          }>> & { errors?: unknown, data?: unknown } = await changePassword({
+            username,
+            newPassword: values.newPassword,
+            token:
+              typeof router.query.token === "string" ? router.query.token : ""
+          });
 
-            <Button
-            isLoading={isSubmitting}
-            loadingText="Saving new password..."
-              type="submit"
-              colorScheme="pink"
-              size="lg"
-              fontSize="md">Change Password</Button>
-          </Stack>
-        </Form>
-      )}
-    </Formik >
+          // handle errors
+          if (response.error) {
+            // NOTE: 🔴 BUG: order of hooks error because of next line, not sure why:
+            setTokenError("error");
+            toastError(response.error.message);
+          }
+          else if ("errors" in response) {
+            setTokenError("error");
+            toastError(response.errors[0].message);
+          }
+          else if ("data" in response && response.data.changePassword) {
+            toastSuccess("👍 All set, now please login with that new password!");
+            router.push("/login");
+          }
 
+        }}>
+        {({ isSubmitting }) => (
+          <Form>
+            <Stack spacing="6">
+              <InputField
+                required
+                disabled
+                name="username"
+                placeholder="username"
+                value={router.query.username || ''}>
+              </InputField>
+
+              <InputField
+                required
+                label="New Password "
+                name="newPassword"
+                placeholder="new password"
+                type="password"
+                {...passwordAttributes}
+              >
+              </InputField>
+              <Button
+                isLoading={isSubmitting}
+                loadingText="Saving new password..."
+                type="submit"
+                colorScheme="pink"
+                size="lg"
+                fontSize="md">Change Password</Button>
+            </Stack>
+          </Form>
+        )}
+      </Formik >
+    </>
   );
 }
