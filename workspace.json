@@ -101,7 +101,11 @@
             "cypressConfig": "apps/multi-cart-e2e/cypress.json",
             "tsConfig": "apps/multi-cart-e2e/tsconfig.e2e.json",
             "baseUrl": "https://dev.multicart.app",
-            "devServerTarget": ""
+            "devServerTarget": "",
+            "record": false,
+            "watch": false,
+            "headless": true,
+            "parallel": true
           },
           "configurations": {
             "production": {
@@ -285,7 +289,11 @@
           "options": {
             "cypressConfig": "apps/react-shared-components-e2e/cypress.json",
             "tsConfig": "apps/react-shared-components-e2e/tsconfig.e2e.json",
-            "devServerTarget": "react-shared-components:storybook"
+            "devServerTarget": "react-shared-components:storybook",
+            "record": false,
+            "watch": false,
+            "headless": true,
+            "parallel": true
           },
           "configurations": {
             "ci": {
@@ -382,7 +390,11 @@
           "options": {
             "cypressConfig": "apps/react-ui-e2e/cypress.json",
             "tsConfig": "apps/react-ui-e2e/tsconfig.e2e.json",
-            "devServerTarget": "react-ui:storybook"
+            "devServerTarget": "react-ui:storybook",
+            "record": false,
+            "watch": false,
+            "headless": true,
+            "parallel": true
           },
           "configurations": {
             "ci": {
