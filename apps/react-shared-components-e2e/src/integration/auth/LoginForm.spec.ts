@@ -7,6 +7,9 @@ describe('react-shared-components: LoginForm component', () => {
     cy.get('#root form button[type=submit]').should('have.length', 1);
     cy.findAllByTestId('btnGuestLogin').should('be.visible');
 
+    // make sure we got a register link
+    cy.findAllByText('Register an account.').should('be.visible');
+
     // confirm that email and passord fields are required
     cy.get('#root form input:invalid').should('have.length', 2);
 

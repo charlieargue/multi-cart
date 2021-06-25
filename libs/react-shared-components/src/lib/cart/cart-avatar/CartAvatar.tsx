@@ -10,7 +10,7 @@ import CartAvatarRow from '../cart-avatar-row/CartAvatarRow';
 import NewCartButton from '../new-cart-button/NewCartButton';
 import styles from './CartAvatar.module.scss'; // NOTE: getting red-squiggly again, but ITS WORKING!?
 
-interface CartAvatarProps {
+export interface CartAvatarProps {
   currentCartId?: string | null;
 }
 
