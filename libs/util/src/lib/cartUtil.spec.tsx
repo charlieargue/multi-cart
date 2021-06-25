@@ -26,7 +26,7 @@ const CLA = {
 } as CartLineAccount;
 
 // -------------------
-describe.skip('Cart Utils UNIT TESTS', () => {
+describe('Cart Utils UNIT TESTS', () => {
   it('can compute percentage - 100%', () => {
     const result = computePercentageGivenAmount(CLA, CL);
     expect(result).toEqual(100);

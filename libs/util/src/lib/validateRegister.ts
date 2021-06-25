@@ -1,5 +1,6 @@
 import { UsernamePasswordInput } from "@multi-cart/react-data-access";
 
+// TODO: needs some updating
 export const validateRegister = (options: UsernamePasswordInput) => {
 
     if (options.username.includes("@")) {
@@ -12,7 +13,7 @@ export const validateRegister = (options: UsernamePasswordInput) => {
     if (!options.email.includes("@")) {
         return [{
             field: "email",
-            message: "invalid email KISS"
+            message: "invalid email"
         }]
     }
     if (options.username.length <= 2) {
