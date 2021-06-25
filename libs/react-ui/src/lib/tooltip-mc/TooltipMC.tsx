@@ -2,7 +2,6 @@ import { Placement, Tooltip } from '@chakra-ui/react';
 import React from 'react';
 import './TooltipMC.module.scss';
 
-/* eslint-disable-next-line */
 export interface TooltipMCProps {
   label: string;
   children?: React.ReactNode;

@@ -4,7 +4,6 @@ import {
 } from "@chakra-ui/react";
 import './TextMuted.module.scss';
 
-/* eslint-disable-next-line */
 export interface TextMutedProps {
   children?: React.ReactNode;
   style?: unknown;

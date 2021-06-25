@@ -3,7 +3,6 @@ import React from 'react';
 import './BigAlert.module.scss';
 
 
-/* eslint-disable-next-line */
 export interface BigAlertProps {
   title: string;
   type: "error" | "warning" | "info" | "success";

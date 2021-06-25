@@ -6,7 +6,6 @@ import { ImPlus as PlusIcon } from 'react-icons/im';
 import CartNameEditable from '../cart-name-editable/CartNameEditable';
 import './EditCartHeader.module.scss';
 
-/* eslint-disable-next-line */
 export interface EditCartHeaderProps {
   cart: Cart
 }

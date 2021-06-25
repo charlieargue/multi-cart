@@ -9,7 +9,6 @@ import React from 'react';
 import { IconType } from 'react-icons/lib';
 import './SideBarItem.module.scss';
 
-/* eslint-disable-next-line */
 export interface SideBarItemType {
   name: string;
   icon: IconType;
@@ -17,7 +16,6 @@ export interface SideBarItemType {
   onClick?();
 }
 
-/* eslint-disable-next-line */
 export interface SideBarItemProps {
   item: SideBarItemType;
   isCurrent?: boolean;

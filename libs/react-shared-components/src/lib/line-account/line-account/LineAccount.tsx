@@ -18,7 +18,6 @@ import LineAccountTooltip from '../line-account-tooltip/LineAccountTooltip';
 // - on the db we store the computed amount (an actual field, not vm))
 // -------------------
 
-/* eslint-disable-next-line */
 export interface LineAccountProps {
   lineAccount: CartLineAccount;
   line: CartLine;

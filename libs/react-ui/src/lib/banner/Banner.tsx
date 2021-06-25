@@ -3,7 +3,6 @@ import { FaBell } from 'react-icons/fa';
 import { Box, Stack, HStack, Text, useColorModeValue } from '@chakra-ui/react';
 import './Banner.module.scss';
 
-/* eslint-disable-next-line */
 export interface BannerProps {
   text: string | React.ReactElement;
   actionLink: React.ReactElement;

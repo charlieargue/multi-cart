@@ -3,7 +3,6 @@ import React from 'react';
 import { ImPlus as PlusIcon } from 'react-icons/im';
 import './AddLineAccountButton.module.scss';
 
-/* eslint-disable-next-line */
 export interface AddLineAccountButtonProps {
   btnRef: React.MutableRefObject<undefined>
   clickHandler()

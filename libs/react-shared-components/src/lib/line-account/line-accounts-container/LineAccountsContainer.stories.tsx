@@ -10,7 +10,6 @@ export default {
 };
 
 export const withDefaultState = () => {
-  /* eslint-disable-next-line */
   const props: LineAccountsContainerProps = {};
 
   return <LineAccountsContainer />;

@@ -16,7 +16,6 @@ import { Cart, CartLine, CartLineInput, useAddCartLineMutation, useCartsQuery, u
 import useMyToasts from '../../_hooks/useMyToasts';
 import { useRouter } from 'next/router';
 
-/* eslint-disable-next-line */
 export interface ProductDetailsProps {
   product: Product;
 }

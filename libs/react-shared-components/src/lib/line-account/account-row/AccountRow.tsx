@@ -5,7 +5,6 @@ import clsx from 'clsx';
 import React from 'react';
 import './AccountRow.module.scss';
 
-/* eslint-disable-next-line */
 export interface AccountRowProps {
   account: Account,
   isAlreadySelected: boolean;

@@ -14,8 +14,7 @@ import EditCartHeader from '../edit-cart-header/EditCartHeader';
 import EditCartTableFooter from '../edit-cart-table-footer/EditCartTableFooter';
 import EditCartTableHeader from '../edit-cart-table-header/EditCartTableHeader';
 
-/* eslint-disable-next-line */
-interface EditCartProps { id: string }
+export interface EditCartProps { id: string }
 
 export const EditCart = ({ id }: EditCartProps) => {
   const isDeletingCart = useSelector((state: StateType) => state?.isDeletingCart);

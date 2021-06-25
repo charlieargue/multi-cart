@@ -12,7 +12,6 @@ import './Hero.module.scss';
 import { TextMuted } from '@multi-cart/react-ui';
 
 
-/* eslint-disable-next-line */
 export interface HeroProps {
   title: string;
   subtitle: string;

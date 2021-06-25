@@ -7,7 +7,6 @@ import React from 'react';
 import useMyToasts from '../../_hooks/useMyToasts';
 import './EditCartTableFooter.module.scss';
 
-/* eslint-disable-next-line */
 export interface EditCartTableFooterProps {
   cart: Cart
 }

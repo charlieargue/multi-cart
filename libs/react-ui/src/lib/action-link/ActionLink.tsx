@@ -3,7 +3,7 @@ import { chakra, HTMLChakraProps } from '@chakra-ui/react'
 import NextLink from 'next/link';
 import './ActionLink.module.scss';
 
-/* eslint-disable-next-line */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type ActionLinkProps = any & HTMLChakraProps<'a'> & { nextHref: string }
 
 export function ActionLink(props: ActionLinkProps) {

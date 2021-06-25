@@ -4,7 +4,6 @@ import './DrawerContainer.module.scss';
 
 
 
-/* eslint-disable-next-line */
 export interface DrawerContainerProps {
   btnRef?: React.MutableRefObject<undefined>;
   children?: React.ReactNode;

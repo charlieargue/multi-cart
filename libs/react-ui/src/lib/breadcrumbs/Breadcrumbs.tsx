@@ -6,7 +6,6 @@ import { } from 'react-icons/fa';
 import TextMuted from '../text-muted/TextMuted';
 import './Breadcrumbs.module.scss';
 
-/* eslint-disable-next-line */
 export interface BreadcrumbLink {
   isActive: boolean;
   label: string;

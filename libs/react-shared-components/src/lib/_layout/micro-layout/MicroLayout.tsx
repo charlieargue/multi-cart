@@ -10,7 +10,6 @@ import './MicroLayout.module.scss';
 import { Wrapper } from "@multi-cart/react-ui";
 import DarkModeSwitch from '../../dark-mode-switch/DarkModeSwitch';
 
-/* eslint-disable-next-line */
 export interface MicroLayoutProps {
   heading: string | React.ReactElement;
   subHeading?: string | React.ReactElement;

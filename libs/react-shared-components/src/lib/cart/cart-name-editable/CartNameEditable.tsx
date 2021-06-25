@@ -7,8 +7,6 @@ import * as Yup from 'yup';
 import { AutoSave } from '../../auto-save/AutoSave';
 
 // TODO: UPDATE: NO, see Chakra Editable... abstract this cmpnt further (with color, size, nothing cart-related) so more re-usable, and move to react-ui... 
-
-/* eslint-disable-next-line */
 export interface CartNameEditableProps {
   name: string;
   id: string;

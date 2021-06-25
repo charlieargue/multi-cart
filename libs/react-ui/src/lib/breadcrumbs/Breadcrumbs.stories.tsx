@@ -11,13 +11,11 @@ export default {
 
 // -------------------
 export const withDefaultState = () => {
-  /* eslint-disable-next-line */
   return <Breadcrumbs />;
 };
 
 // -------------------
 export const withOneLink = () => {
-  /* eslint-disable-next-line */
   const props: BreadcrumbsProps = {
     links: [{
       isActive: true,
@@ -33,7 +31,6 @@ export const withOneLink = () => {
 
 // -------------------
 export const withMultipleLinks = () => {
-  /* eslint-disable-next-line */
   const props: BreadcrumbsProps = {
     links: [{
       isActive: false,

@@ -7,6 +7,10 @@ import React from 'react';
 import { withNextRouter } from 'storybook-addon-next-router';
 import '../../../apps/multi-cart/styles/styles.scss';
 
+// ERROR: r.parameters.urql is not a function
+// import { urqlDecorator } from '@urql/storybook-addon';
+// addDecorator(urqlDecorator);
+
 addDecorator(
     withNextRouter({
         path: '/', // defaults to `/`

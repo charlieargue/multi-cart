@@ -16,8 +16,6 @@ import { useMyToasts } from '../../..';
 import { SideBarItem, SideBarItemType } from '../side-bar-item/SideBarItem';
 import './SideBar.module.scss';
 
-
-/* eslint-disable-next-line */
 export interface SideBarProps {
   logoutFunction?();
 }

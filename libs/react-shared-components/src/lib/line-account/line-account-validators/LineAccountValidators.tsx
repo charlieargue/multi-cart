@@ -5,7 +5,6 @@ import React from 'react';
 import { FaDollarSign as DollarIcon, FaPercentage as PercentageIcon } from 'react-icons/fa';
 import './LineAccountValidators.module.scss';
 
-/* eslint-disable-next-line */
 export interface LineAccountValidatorsProps {
   line: CartLine
 }

@@ -3,7 +3,6 @@
 import React from 'react';
 import './Sort.module.scss';
 
-/* eslint-disable-next-line */
 export interface SortProps {
   children: React.ReactNode;
   childType: string;

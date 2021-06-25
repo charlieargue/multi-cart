@@ -3,7 +3,6 @@ import { TooltipMC } from '@multi-cart/react-ui';
 import React from 'react';
 import './LineAccountTooltip.module.scss';
 
-/* eslint-disable-next-line */
 export interface LineAccountTooltipProps {
   accountNumber: string;
   children?: React.ReactNode;

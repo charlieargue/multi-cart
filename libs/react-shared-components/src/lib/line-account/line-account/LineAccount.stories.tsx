@@ -7,7 +7,6 @@ export default {
 };
 
 export const primary = () => {
-  /* eslint-disable-next-line */
   const props: LineAccountProps = {
     line: null,
     lineAccount: null

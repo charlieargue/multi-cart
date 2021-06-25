@@ -3,7 +3,6 @@ import { TextMuted } from '@multi-cart/react-ui';
 import React from 'react';
 import './FilterableAccountTable.module.scss';
 
-/* eslint-disable-next-line */
 export interface FilterableAccountTableProps {
   children?: React.ReactNode;
 }

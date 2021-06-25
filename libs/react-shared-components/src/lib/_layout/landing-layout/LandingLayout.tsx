@@ -6,7 +6,6 @@ import Footer from "../footer/Footer";
 import Header from "../header/Header";
 import './LandingLayout.module.scss';
 
-/* eslint-disable-next-line */
 export interface LandingLayoutProps {
   children?: React.ReactNode;
 }

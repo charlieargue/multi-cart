@@ -6,7 +6,6 @@ import { Cart } from '@multi-cart/react-data-access';
 import './CartAvatarRow.module.scss';
 import { CartAvatarInner } from '../cart-avatar-inner/CartAvatarInner';
 
-/* eslint-disable-next-line */
 export interface CartAvatarRowProps {
   c: Cart,
   currentCartId?: string | null;

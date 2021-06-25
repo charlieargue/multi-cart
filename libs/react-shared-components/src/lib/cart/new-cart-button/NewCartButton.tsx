@@ -8,7 +8,6 @@ import { useIsAuth } from '../../_hooks/useIsAuth';
 import useMyToasts from '../../_hooks/useMyToasts';
 import './NewCartButton.module.scss';
 
-/* eslint-disable-next-line */
 export interface NewCartButtonProps {
   className?: string;
 }

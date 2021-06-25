@@ -3,7 +3,6 @@ import React from 'react';
 import { TiDelete as DeleteIcon } from 'react-icons/ti';
 import './DeleteLineAccountButton.module.scss';
 
-/* eslint-disable-next-line */
 export interface DeleteLineAccountButtonProps {
   lineAccount: CartLineAccount;
   line: CartLine;
