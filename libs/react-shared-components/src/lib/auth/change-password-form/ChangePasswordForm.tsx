@@ -43,7 +43,6 @@ export const ChangePasswordForm = () => {
           setTokenError("error");
           toastError(response.errors[0].message);
         } else if ("data" in response && response.data.changePassword) {
-          // TODO: would be nice to display some kind of success toast! All set, now please login with that new password!
           toastSuccess("👍 All set, now please login with that new password!");
           router.push("/login");
         }
@@ -57,7 +56,7 @@ export const ChangePasswordForm = () => {
               disabled
               name="username"
               placeholder="username"
-              value={router.query.username}>
+              value={router.query.username || ''}>
             </InputField>
 
             <InputField
