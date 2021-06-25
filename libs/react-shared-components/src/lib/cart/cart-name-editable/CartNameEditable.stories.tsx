@@ -8,7 +8,10 @@ export default {
 
 export const primary = () => {
   /* eslint-disable-next-line */
-  const props: CartNameEditableProps = {};
+  const props: CartNameEditableProps = {
+    name: "Initial Name",
+    id: "12345"
+  };
 
-  return <CartNameEditable />;
+  return <CartNameEditable name={props.name} id={props.id} />;
 };

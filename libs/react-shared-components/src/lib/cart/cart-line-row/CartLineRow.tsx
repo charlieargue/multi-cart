@@ -10,7 +10,7 @@ import { CategoriesDropDown } from '../categories-drop-down/CategoriesDropDown';
 import UOMDropDown from '../uomdrop-down/UOMDropDown';
 import './CartLineRow.module.scss';
 
-interface CartLineRowProps {
+export interface CartLineRowProps {
   line: CartLine;
   idx: number;
   children?: React.ReactNode;
@@ -125,6 +125,7 @@ export const CartLineRow = ({ line, children, idx }: CartLineRowProps) => {
 
             <Td>
               <Button
+                data-testid="btnDeleteCartLine"
                 rounded="lg"
                 colorScheme="pink"
                 p="1"

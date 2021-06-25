@@ -114,8 +114,6 @@ export const EditCart = ({ id }: EditCartProps) => {
       <Table variant="simple" colorScheme="pink" id="cart-table" size="lg" marginBottom={10}>
         <EditCartTableHeader />
         {data.cart?.cartLines?.length ? (
-          // TODO: switch to sort component, thx: https://stackoverflow.com/questions/48764203/how-to-sort-list-of-react-components-based-on-different-properties
-          // TODO: this won't work anymore: .sort((a, b) => a.id - b.id)
           <Tbody>
             <Sort by="createdAt" childType="line">
               {data.cart.cartLines?.map((line, idx) => !line ? null : (
