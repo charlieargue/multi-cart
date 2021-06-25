@@ -204,11 +204,11 @@ export function ProductDetails({ product }: ProductDetailsProps) {
 
         {/* 🛍 MOCKED: add to cart BUTTON */}
         <Button
+          className="cursor-pointer"
           isLoading={isProcessing}
           loadingText="Processing..."
           mt="8"
           as="a"
-          href="#"
           size="lg"
           colorScheme="pink"
           fontWeight="bold"

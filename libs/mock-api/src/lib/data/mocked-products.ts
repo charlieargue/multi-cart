@@ -1,6 +1,4 @@
-import { Product } from '@multi-cart/react-shared-components';
-
-export const ProductsMockData: Product[] = [{
+export const ProductsMockData: unknown[] = [{
     "id": "db3f67f2-7203-49af-a253-ac3f9b2385ec",
     "name": "Non-fiction",
     "description": "Duis bibendum. Morbi non quam nec dui luctus rutrum. Nulla tellus.",

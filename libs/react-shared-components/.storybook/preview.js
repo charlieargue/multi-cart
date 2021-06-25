@@ -5,7 +5,7 @@ import { withKnobs } from '@storybook/addon-knobs';
 import { addDecorator } from '@storybook/react';
 import React from 'react';
 import { withNextRouter } from 'storybook-addon-next-router';
-import '../../../apps/multi-cart/styles/styles.scss';
+// import '../../../apps/multi-cart/styles/styles.scss';
 
 // ERROR: r.parameters.urql is not a function
 // import { urqlDecorator } from '@urql/storybook-addon';
