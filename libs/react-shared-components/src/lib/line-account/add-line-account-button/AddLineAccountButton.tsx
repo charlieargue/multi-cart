@@ -11,13 +11,14 @@ export interface AddLineAccountButtonProps {
 export function AddLineAccountButton(props: AddLineAccountButtonProps) {
   return (
     <Button
-          ref={props.btnRef}
-          onClick={props.clickHandler}
-          size="xs"
-          colorScheme="green">
-          <PlusIcon />
+      data-testid="btnAddLineAccount"
+      ref={props.btnRef}
+      onClick={props.clickHandler}
+      size="xs"
+      colorScheme="green">
+      <PlusIcon />
               &nbsp;Add&nbsp;<strong>account</strong>
-        </Button>
+    </Button>
   );
 }
 

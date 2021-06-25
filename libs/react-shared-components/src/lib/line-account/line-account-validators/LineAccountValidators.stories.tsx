@@ -1,26 +1,23 @@
-import { Box, Flex } from '@chakra-ui/react';
+
+import { Box, Flex, Stack } from '@chakra-ui/react';
 import { CartLine } from '@multi-cart/react-data-access';
 import React, { ReactNode } from 'react';
-import {
-  LineAccountsContainer
-} from './LineAccountsContainer';
+import LineAccountValidators from './LineAccountValidators';
 
 export default {
-  component: LineAccountsContainer,
-  title: 'LineAccountsContainer',
+  component: LineAccountValidators,
+  title: 'LineAccountValidators',
 };
 
 const StoryBookWrapper = ({ children, label }: { children: ReactNode; label: string }) => (
-  <Flex direction="column" mr={4} mb={10}>
+  <Flex direction="column" mr={4}>
     <Box>{label}</Box>
     <Box>{children}</Box>
   </Flex>
 );
 
 
-
-export const withDefaultState = () => {
-  // TODO: all this mocked data needs to be centralized plz!
+export const primary = () => {
   const lines: CartLine[] = [{
     id: "ab1d457a-2610-4753-8026-754838d79286",
     cartId: "32fce68b-865d-48ea-b5c0-9935f01b5cf1",
@@ -74,13 +71,20 @@ export const withDefaultState = () => {
     ]
   }];
 
-  return <>
+  return <Stack
+    direction="row"
+    spacing={4}
+    align="center"
+    mt={1}
+    px={4}
+    py={3}
+    rounded="md"
+    shadow="unset">
     <StoryBookWrapper label="Not Valid">
-      <LineAccountsContainer line={lines[0]} />
-  </StoryBookWrapper>
+      <LineAccountValidators line={lines[0]} />
+    </StoryBookWrapper>
     <StoryBookWrapper label="Valid">
-      <LineAccountsContainer line={lines[1]} />
-  </StoryBookWrapper>
-  </>
-
+      <LineAccountValidators line={lines[1]} />
+    </StoryBookWrapper>
+  </Stack>;
 };

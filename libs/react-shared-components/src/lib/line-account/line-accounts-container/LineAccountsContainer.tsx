@@ -81,7 +81,8 @@ export function LineAccountsContainer({ line }: LineAccountsContainerProps) {
         px={4}
         py={3}
         rounded="md"
-        shadow="unset">
+        shadow="unset"
+        data-testid="stackOneLineAccountsContainer">
         {label}
         <AddLineAccountButton btnRef={btnRef} clickHandler={onOpen} />
         <LineAccountValidators line={line} />

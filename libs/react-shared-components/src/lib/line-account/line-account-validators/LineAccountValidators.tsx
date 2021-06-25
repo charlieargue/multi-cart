@@ -26,13 +26,13 @@ export function LineAccountValidators({ line }: LineAccountValidatorsProps) {
       <Badge {...badgeAttribs}>
         <HStack>
           <Text>Percentages:</Text>
-          <Text ml={2} fontWeight="bolder">{getTotalPercentages(line)}%</Text>
+          <Text data-testid="lineAccountTotalPercentages" ml={2} fontWeight="bolder">{getTotalPercentages(line)}%</Text>
         </HStack>
       </Badge>
       <Badge {...badgeAttribs}>
         <HStack>
           <Text>Line Total w/ Tax:</Text>
-          <Text ml={2} fontWeight="bolder">{toFriendlyCurrency(getTotalAmounts(line.cartLineAccounts))}</Text>
+          <Text data-testid="lineAccountLineTotal" ml={2} fontWeight="bolder">{toFriendlyCurrency(getTotalAmounts(line.cartLineAccounts))}</Text>
         </HStack>
       </Badge>
     </>
