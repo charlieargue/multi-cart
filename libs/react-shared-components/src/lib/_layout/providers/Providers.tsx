@@ -15,7 +15,7 @@ export const Providers: React.FC<ProvidersProps> = ({ children }) => {
     <ChakraProvider resetCSS theme={theme}>
       <ColorModeProvider
         options={{
-          useSystemColorMode: false,
+          useSystemColorMode: false
         }}>
         <Provider store={store}>
           {children}

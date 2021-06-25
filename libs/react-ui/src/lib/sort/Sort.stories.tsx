@@ -1,6 +1,13 @@
 import React from 'react';
 import Sort from './Sort';
 
+type CartModified = {
+  description: string;
+  id: number;
+  name: string;
+  createdAt: string;
+}
+
 export default {
   component: Sort,
   title: 'Sort',
@@ -10,9 +17,9 @@ const carts = [
   { id: 3, name: "3rd", createdAt: "2021-05-23T23:27:51.943Z", description: "b" },
   { id: 1, name: "1st", createdAt: "2021-03-23T23:27:51.943Z", description: "c" },
   { id: 4, name: "4th", createdAt: "2021-06-23T23:27:51.943Z", description: "a" },
-];
+] as CartModified[];
 
-const TestItem: React.FC<{ c: any }> = ({ c }) => {
+const TestItem: React.FC<{ c: CartModified }> = ({ c }) => {
   return <div>
       {c.name} # {c.id} - {c.createdAt} ({c.description})
   </div>;
