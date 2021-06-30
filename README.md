@@ -1,3 +1,6 @@
+![Feature-Promotion-STATUS](https://github.com/github/docs/actions/workflows/feature-promotion.yml/badge.svg)
+
+
 FYI AWS CAVEATS:
 - DDB and no native (nice) unique constraints
 - COGNITO and logout still lets you use those tokens until they expire 
