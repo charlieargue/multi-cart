@@ -2,6 +2,7 @@
 # Feature -> develop, AND ON SUCCESS, 🔥 develop -> main (including testing pyramid)
 # ###################################################################################################
 # thx: https://docs.github.com/en/actions/guides/building-and-testing-nodejs
+# thx: https://jestjs.io/docs/cli
 
 name: cicd-pipeline
 on:
@@ -41,6 +42,7 @@ jobs:
       - name: Install dependencies
         run: yarn --frozen-lockfile
 
+      # FYI: Run tests related to changed files based on hg/git (uncommitted files): jest -o
       - name: Jest unit tests
         run: yarn nx run util:test
 
