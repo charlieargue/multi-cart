@@ -175,14 +175,6 @@
           "options": {
             "lintFilePatterns": ["libs/react-app-state/**/*.ts"]
           }
-        },
-        "test": {
-          "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/react-app-state"],
-          "options": {
-            "jestConfig": "libs/react-app-state/jest.config.js",
-            "passWithNoTests": true
-          }
         }
       }
     },
@@ -214,14 +206,6 @@
             "lintFilePatterns": [
               "libs/react-shared-components/**/*.{ts,tsx,js,jsx}"
             ]
-          }
-        },
-        "test": {
-          "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/react-shared-components"],
-          "options": {
-            "jestConfig": "libs/react-shared-components/jest.config.js",
-            "passWithNoTests": true
           }
         },
         "storybook": {
@@ -317,14 +301,6 @@
           "executor": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": ["libs/react-ui/**/*.{ts,tsx,js,jsx}"]
-          }
-        },
-        "test": {
-          "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/react-ui"],
-          "options": {
-            "jestConfig": "libs/react-ui/jest.config.js",
-            "passWithNoTests": true
           }
         },
         "storybook": {
