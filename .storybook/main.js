@@ -5,7 +5,7 @@ const toPath = (_path) => path.join(process.cwd(), _path);
 
 module.exports = {
   stories: [],
-  addons: ['@storybook/addon-knobs/register'],
+  addons: ['@storybook/addon-essentials', '@storybook/addon-knobs'],
   webpackFinal: async (config, { configType }) => {
     // `configType` has a value of 'DEVELOPMENT' or 'PRODUCTION'
     // You can change the configuration based on that.
@@ -25,10 +25,10 @@ module.exports = {
         ...config.resolve,
         alias: {
           ...config.resolve.alias,
-          "@emotion/core": toPath("node_modules/@emotion/react"),
-          "emotion-theming": toPath("node_modules/@emotion/react"),
+          '@emotion/core': toPath('node_modules/@emotion/react'),
+          'emotion-theming': toPath('node_modules/@emotion/react'),
         },
       },
-    }
+    };
   },
 };

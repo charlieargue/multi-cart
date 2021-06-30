@@ -107,7 +107,7 @@
             "headless": true,
             "parallel": true,
             "ciBuildId": "multi-cart-e2e-CI-03",
-            "key":  "5fb2e603-db6d-4aa1-9d35-d34afc70689f"
+            "key": "5fb2e603-db6d-4aa1-9d35-d34afc70689f"
           },
           "configurations": {
             "production": {
@@ -297,7 +297,7 @@
             "headless": true,
             "parallel": true,
             "ciBuildId": "react-shared-components-e2e-CI-00",
-            "key":  "296299f4-0d1d-4b87-8738-afeb1226e9ae"
+            "key": "296299f4-0d1d-4b87-8738-afeb1226e9ae"
           },
           "configurations": {
             "ci": {
@@ -400,7 +400,7 @@
             "headless": true,
             "parallel": true,
             "ciBuildId": "react-ui-e2e-CI-00",
-            "key":  "6b6d4144-811f-4c38-a741-ffea2012ddee"
+            "key": "6b6d4144-811f-4c38-a741-ffea2012ddee"
           },
           "configurations": {
             "ci": {
