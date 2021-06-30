@@ -39,10 +39,26 @@ jobs:
         with:
           node-version: '14.x'
 
+      # CACHE npm/node modules for faster yarn installs
+      - name: Cache node modules
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-node-modules
+        with:
+          # npm cache files are stored in `~/.npm` on Linux/macOS
+          path: ~/.npm
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+
+      # INSTALL dependencies (need both dev and prod deps for jest)              
       - name: Install dependencies
-        run: yarn --frozen-lockfile
+        run: yarn --frozen-lockfile # don't update lock file
 
       # FYI: Run tests related to changed files based on hg/git (uncommitted files): jest -o
+      # RUN UNIT TESTS (jest), 🔴 ABORT ON FAIL
       - name: Jest unit tests
         run: yarn nx run util:test
 
