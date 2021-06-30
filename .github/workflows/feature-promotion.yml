@@ -3,6 +3,7 @@
 # ###################################################################################################
 # thx: https://docs.github.com/en/actions/guides/building-and-testing-nodejs
 # thx: https://jestjs.io/docs/cli
+# thx: https://www.karltarvas.com/2020/12/09/github-actions-cache-yarn-install.html
 
 name: cicd-pipeline
 on:
@@ -15,7 +16,31 @@ jobs:
   # ###################################################################################################
   featureTestingAndPromotion:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [14.x]
+
     steps:
+      # NODE VERSION
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      # CACHE npm/node modules for faster yarn installs
+      - name: Cache node modules
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-node-modules
+        with:
+          # npm cache files are stored in `~/.npm` on Linux/macOS
+          path: ~/.npm
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+      
       # CHECKOUT feature branch
       - name: Checkout Feature Branch
         uses: actions/checkout@v2
@@ -34,28 +59,22 @@ jobs:
       # • run FE unit tests (util jest tests + react library storybooks via cypress)
       # • ABORT JOB if fail on either
       # --------------------------------------
-      - name: Use Node.js
-        uses: actions/setup-node@v1
-        with:
-          node-version: '14.x'
+      
+      # See: https://github.com/actions/cache/blob/main/examples.md#node---yarn
+      - name: Get Yarn cache directory
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
 
-      # CACHE npm/node modules for faster yarn installs
-      - name: Cache node modules
+      - name: Use Yarn cache
         uses: actions/cache@v2
-        env:
-          cache-name: cache-node-modules
+        id: yarn-cache
         with:
-          # npm cache files are stored in `~/.npm` on Linux/macOS
-          path: ~/.npm
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-build-${{ env.cache-name }}-
-            ${{ runner.os }}-build-
-            ${{ runner.os }}-
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ matrix.node-version }}-${{ hashFiles('**/yarn.lock') }}
 
-      # INSTALL dependencies (need both dev and prod deps for jest)              
+      # `--prefer-offline` gives cache priority
       - name: Install dependencies
-        run: npm ci
+        run: yarn install --prefer-offline --frozen-lockfile
 
       # FYI: Run tests related to changed files based on hg/git (uncommitted files): jest -o
       # RUN UNIT TESTS (jest), 🔴 ABORT ON FAIL
