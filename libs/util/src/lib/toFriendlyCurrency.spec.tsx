@@ -7,8 +7,8 @@ describe('To Friendly Currency UNIT TESTS', () => {
     expect(result).toEqual("$1.23");
 
     result = toFriendlyCurrency(1.699445, true);
-    // expect(result).toEqual("1.70");
-    expect(result).toEqual("1.71");
+    expect(result).toEqual("1.70"); // ✅ 
+    // expect(result).toEqual("1.71"); // 🔴 testing failure
   });
 
 
