@@ -14,9 +14,9 @@ on:
 jobs:
   
   # ###################################################################################################
-  # Feature -> develop
+  # Feature BUILDING
   # ###################################################################################################
-  featureTestingAndPromotion:
+  featureBuilding:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -47,15 +47,6 @@ jobs:
       - name: Checkout Feature Branch
         uses: actions/checkout@v2
 
-      # SAVE current branch name to variable [[short_ref]]
-      - name: Set output
-        id: vars
-        run: echo ::set-output name=short_ref::${GITHUB_REF#refs/*/}
-
-      # PRINT/DISPLAY [[short_ref]] for debugging/trouble-shooting ease
-      - name: Check output
-        run: echo ${{ steps.vars.outputs.short_ref }} ✊
-
       # --------------------------------------
       # If there are any changes to FE code (we ignore unit testing if BE-only code changes)
       # • run FE unit tests (util jest tests + react library storybooks via cypress)
@@ -82,6 +73,29 @@ jobs:
       - name: Install dependencies
         run: yarn install --prefer-offline --frozen-lockfile
 
+      
+  
+  # ###################################################################################################
+  # Feature TESTING
+  # ###################################################################################################
+  featureTesting:
+    needs: featureBuilding
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [14.x]
+
+    steps:
+      # NODE VERSION
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      # CHECKOUT feature branch
+      - name: Checkout Feature Branch
+        uses: actions/checkout@v2
+
       # RUN UNIT TESTS (jest), 🔴 ABORT ON FAIL
       - name: Jest unit tests 🔥
         run: yarn nx run util:test
@@ -93,7 +107,37 @@ jobs:
       - name: Cypress/Storybook UI unit tests - react-ui 🔥
         run: yarn nx run react-ui-e2e:e2e
 
-        
+
+  
+  # ###################################################################################################
+  # Feature PROMOTION (to DEV)
+  # ###################################################################################################
+  featurePromotion:
+    needs: [featureTesting, featureBuilding]
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [14.x]
+
+    steps:
+      # NODE VERSION
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      # CHECKOUT feature branch
+      - name: Checkout Feature Branch
+        uses: actions/checkout@v2
+
+      # SAVE current branch name to variable [[short_ref]]
+      - name: Set output
+        id: vars
+        run: echo ::set-output name=short_ref::${GITHUB_REF#refs/*/}
+
+      # PRINT/DISPLAY [[short_ref]] for debugging/trouble-shooting ease
+      - name: Check output
+        run: echo ${{ steps.vars.outputs.short_ref }} ✊
 
       # --------------------------------------
       # ✅ Upon success...
@@ -106,11 +150,14 @@ jobs:
           base: ${{ steps.vars.outputs.short_ref }}
           branch: develop
 
+
+
+
   # ###################################################################################################
   # develop -> PRODUCTION
   # ###################################################################################################
   developPromotion:
-    needs: featureTestingAndPromotion
+    needs: [featureTesting, featureBuilding, featurePromotion]
     runs-on: ubuntu-latest
     steps:
       # thx: https://github.com/actions/checkout
