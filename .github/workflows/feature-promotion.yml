@@ -58,12 +58,18 @@ jobs:
         with:
           path: |
             **/node_modules
+            /home/runner/.cache/Cypress
             **/.eslintcache
             ${{ steps.yarn-cache-dir-path.outputs.dir }}
           key: ${{ runner.os }}-yarn-${{ matrix.node-version }}-${{ hashFiles('**/yarn.lock') }}
 
+
+      # --------------------------------------
+      # Install dependencies
+      # --------------------------------------
+
       # `--prefer-offline` gives cache priority
-      - name: Install dependencies
+      - name: Install dependencies 🔥
         run: yarn install --prefer-offline --frozen-lockfile
 
   # ###################################################################################################
@@ -113,9 +119,11 @@ jobs:
         with:
           path: |
             **/node_modules
+            /home/runner/.cache/Cypress
             **/.eslintcache
             ${{ steps.yarn-cache-dir-path.outputs.dir }}
           key: ${{ runner.os }}-yarn-${{ matrix.node-version }}-${{ hashFiles('**/yarn.lock') }}
+      
       # --------------------------------------
       # If there are any changes to FE code (we ignore unit testing if BE-only code changes)
       # • run FE unit tests (util jest tests + react library storybooks via cypress)
