@@ -12,6 +12,7 @@ on:
     branches:
       - 'kg-**'
 jobs:
+  
   # ###################################################################################################
   # Feature -> develop
   # ###################################################################################################
@@ -81,10 +82,27 @@ jobs:
       - name: Install dependencies
         run: yarn install --prefer-offline --frozen-lockfile
 
-      # FYI: Run tests related to changed files based on hg/git (uncommitted files): jest -o
-      # RUN UNIT TESTS (jest), 🔴 ABORT ON FAIL
-      - name: Jest unit tests 🔥
-        run: yarn nx run util:test
+      # only run FE jest and UI unit tests if FE code changed
+      - name: Get specific changed files
+        id: changed-files-specific
+        uses: tj-actions/changed-files@v8.4
+        with:
+          files: |
+            apps/multi-cart
+            apps/multi-cart-e2e
+            apps/react-shared-components-e2e
+            apps/react-ui-e2e
+            libs/react-app-state
+            libs/react-data-access
+            libs/react-shared-components
+            libs/react-ui
+            libs/util
+       
+      - name: RUN UNIT TESTS (jest), 🔴 ABORT ON FAIL (Run step if any of the listed files above change)
+        if: steps.changed-files-specific.outputs.any_changed == 'true'
+        run: |
+          echo "Jest unit tests 🔥"
+          yarn nx run util:test
 
       # --------------------------------------
       # ✅ Upon success...
