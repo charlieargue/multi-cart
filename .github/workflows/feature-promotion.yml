@@ -4,6 +4,7 @@
 # thx: https://docs.github.com/en/actions/guides/building-and-testing-nodejs
 # thx: https://jestjs.io/docs/cli
 # thx: https://www.karltarvas.com/2020/12/09/github-actions-cache-yarn-install.html
+# thx: https://stackoverflow.com/questions/67136614/cache-node-modules-in-github-actions
 
 name: cicd-pipeline
 on:
@@ -70,7 +71,10 @@ jobs:
         uses: actions/cache@v2
         id: yarn-cache
         with:
-          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          path: |
+            **/node_modules
+            **/.eslintcache
+            ${{ steps.yarn-cache-dir-path.outputs.dir }}
           key: ${{ runner.os }}-yarn-${{ matrix.node-version }}-${{ hashFiles('**/yarn.lock') }}
 
       # `--prefer-offline` gives cache priority
