@@ -55,7 +55,7 @@ jobs:
 
       # INSTALL dependencies (need both dev and prod deps for jest)              
       - name: Install dependencies
-        run: yarn --frozen-lockfile # don't update lock file
+        run: npm ci
 
       # FYI: Run tests related to changed files based on hg/git (uncommitted files): jest -o
       # RUN UNIT TESTS (jest), 🔴 ABORT ON FAIL
