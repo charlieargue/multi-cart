@@ -83,7 +83,7 @@ jobs:
 
       # FYI: Run tests related to changed files based on hg/git (uncommitted files): jest -o
       # RUN UNIT TESTS (jest), 🔴 ABORT ON FAIL
-      - name: Jest unit tests
+      - name: Jest unit tests 🔥
         run: yarn nx run util:test
 
       # --------------------------------------

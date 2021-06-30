@@ -28,14 +28,6 @@
           "options": {
             "lintFilePatterns": ["libs/mock-api/**/*.ts"]
           }
-        },
-        "test": {
-          "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/mock-api"],
-          "options": {
-            "jestConfig": "libs/mock-api/jest.config.js",
-            "passWithNoTests": true
-          }
         }
       }
     },
@@ -72,14 +64,6 @@
           "executor": "@nrwl/next:export",
           "options": {
             "buildTarget": "multi-cart:build:production"
-          }
-        },
-        "test": {
-          "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/multi-cart"],
-          "options": {
-            "jestConfig": "apps/multi-cart/jest.config.js",
-            "passWithNoTests": true
           }
         },
         "lint": {
@@ -207,14 +191,6 @@
       "sourceRoot": "libs/react-data-access/src",
       "projectType": "library",
       "targets": {
-        "test": {
-          "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/react-data-access"],
-          "options": {
-            "jestConfig": "libs/react-data-access/jest.config.js",
-            "passWithNoTests": true
-          }
-        },
         "generate": {
           "executor": "@nrwl/workspace:run-commands",
           "options": {
