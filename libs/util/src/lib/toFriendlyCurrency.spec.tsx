@@ -1,7 +1,7 @@
 import { toFriendlyCurrency } from "./toFriendlyCurrency";
 
 // -------------------
-describe('To Friendly Currency UNIT TESTS', () => {
+describe('Conversion To Friendly Currency UNIT TESTS', () => {
   it('toFriendlyCurrency working as expected', () => {
     let result = toFriendlyCurrency(1.23445);
     expect(result).toEqual("$1.23");
