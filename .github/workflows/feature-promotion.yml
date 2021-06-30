@@ -16,7 +16,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       # CHECKOUT feature branch
-      - uses: actions/checkout@v2
+      - name: Checkout Feature Branch
+        uses: actions/checkout@v2
 
       # SAVE current branch name to variable [[short_ref]]
       - name: Set output
@@ -36,10 +37,16 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: '14.x'
-      
+
       - name: Install dependencies
-      - run: yarn --frozen-lockfile
-      - run: yarn nx run util:test
+        run: yarn --frozen-lockfile
+
+      - name: Jest unit tests
+        run: yarn nx run util:test
+
+      # --------------------------------------
+      # ✅ Upon success...
+      # --------------------------------------
 
       # CREATE/MERGE Pull Request (w/ dev)
       - name: Create Pull Request
