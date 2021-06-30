@@ -1,0 +1,5 @@
+apps/multi-cart-e2e
+apps/react-shared-components-e2e
+apps/react-ui-e2e
+libs/multi-cart-iac
+libs/multi-cart-iac-tests
