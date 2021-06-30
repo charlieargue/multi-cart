@@ -59,7 +59,7 @@ jobs:
   # develop -> PRODUCTION
   # ###################################################################################################
   developPromotion:
-    needs: featurePromotion
+    needs: featureTestingAndPromotion
     runs-on: ubuntu-latest
     steps:
       # thx: https://github.com/actions/checkout
