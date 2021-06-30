@@ -12,7 +12,6 @@ on:
     branches:
       - 'kg-**'
 jobs:
-  
   # ###################################################################################################
   # Feature BUILDING
   # ###################################################################################################
@@ -42,17 +41,11 @@ jobs:
             ${{ runner.os }}-build-${{ env.cache-name }}-
             ${{ runner.os }}-build-
             ${{ runner.os }}-
-      
+
       # CHECKOUT feature branch
       - name: Checkout Feature Branch
         uses: actions/checkout@v2
 
-      # --------------------------------------
-      # If there are any changes to FE code (we ignore unit testing if BE-only code changes)
-      # • run FE unit tests (util jest tests + react library storybooks via cypress)
-      # • ABORT JOB if fail on either
-      # --------------------------------------
-      
       # See: https://github.com/actions/cache/blob/main/examples.md#node---yarn
       - name: Get Yarn cache directory
         id: yarn-cache-dir-path
@@ -73,8 +66,6 @@ jobs:
       - name: Install dependencies
         run: yarn install --prefer-offline --frozen-lockfile
 
-      
-  
   # ###################################################################################################
   # Feature TESTING
   # ###################################################################################################
@@ -92,23 +83,56 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
+      # CACHE npm/node modules for faster yarn installs
+      - name: Cache node modules
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-node-modules
+        with:
+          # npm cache files are stored in `~/.npm` on Linux/macOS
+          path: ~/.npm
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+
       # CHECKOUT feature branch
       - name: Checkout Feature Branch
         uses: actions/checkout@v2
 
+      # See: https://github.com/actions/cache/blob/main/examples.md#node---yarn
+      - name: Get Yarn cache directory
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+
+      # TROUBLE saving/using cache key...
+      - name: Use Yarn cache
+        uses: actions/cache@v2
+        id: yarn-cache
+        with:
+          path: |
+            **/node_modules
+            **/.eslintcache
+            ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ matrix.node-version }}-${{ hashFiles('**/yarn.lock') }}
+      # --------------------------------------
+      # If there are any changes to FE code (we ignore unit testing if BE-only code changes)
+      # • run FE unit tests (util jest tests + react library storybooks via cypress)
+      # • ABORT JOB if fail on either
+      # --------------------------------------
+
       # RUN UNIT TESTS (jest), 🔴 ABORT ON FAIL
       - name: Jest unit tests 🔥
         run: yarn nx run util:test
-      
+
       # RUN CYPRESS STORYBOOK TESTS (react-ui & react-shared-components), 🔴 ABORT ON FAIL
       - name: Cypress/Storybook UI unit tests - react-shared-components 🔥
         run: yarn nx run react-shared-components-e2e:e2e
-      
+
       - name: Cypress/Storybook UI unit tests - react-ui 🔥
         run: yarn nx run react-ui-e2e:e2e
 
-
-  
   # ###################################################################################################
   # Feature PROMOTION (to DEV)
   # ###################################################################################################
@@ -149,9 +173,6 @@ jobs:
         with:
           base: ${{ steps.vars.outputs.short_ref }}
           branch: develop
-
-
-
 
   # ###################################################################################################
   # develop -> PRODUCTION
