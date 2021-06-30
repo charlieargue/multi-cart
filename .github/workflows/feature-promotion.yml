@@ -5,6 +5,7 @@
 # thx: https://jestjs.io/docs/cli
 # thx: https://www.karltarvas.com/2020/12/09/github-actions-cache-yarn-install.html
 # thx: https://stackoverflow.com/questions/67136614/cache-node-modules-in-github-actions
+# thx: https://github.com/cypress-io/cypress-realworld-app/blob/develop/.github/workflows/main.yml
 
 name: cicd-pipeline
 on:
@@ -12,6 +13,35 @@ on:
     branches:
       - 'kg-**'
 jobs:
+  # ###################################################################################################
+  # Cypress CONTAINER IMAGE setup/installation
+  # ###################################################################################################
+  install:
+    runs-on: ubuntu-latest
+    container: cypress/browsers:node14.15.0-chrome86-ff82
+    steps:
+      - name: Checkout Feature Branch
+        uses: actions/checkout@v2
+
+      - name: Cypress install
+        uses: cypress-io/github-action@v2
+        with:
+          runTests: false
+      # report machine parameters
+      - run: yarn cypress info
+      - run: node -p 'os.cpus()'
+      - run: yarn types
+      - run: yarn lint
+      - run: yarn test:unit:ci
+      - run: yarn build:ci
+
+      - name: Save build folder
+        uses: actions/upload-artifact@v2
+        with:
+          name: build
+          if-no-files-found: error
+          path: build
+
   # ###################################################################################################
   # Feature BUILDING
   # ###################################################################################################
@@ -62,7 +92,6 @@ jobs:
             **/.eslintcache
             ${{ steps.yarn-cache-dir-path.outputs.dir }}
           key: ${{ runner.os }}-yarn-${{ matrix.node-version }}-${{ hashFiles('**/yarn.lock') }}
-
 
       # --------------------------------------
       # Install dependencies
@@ -123,7 +152,7 @@ jobs:
             **/.eslintcache
             ${{ steps.yarn-cache-dir-path.outputs.dir }}
           key: ${{ runner.os }}-yarn-${{ matrix.node-version }}-${{ hashFiles('**/yarn.lock') }}
-      
+
       # --------------------------------------
       # If there are any changes to FE code (we ignore unit testing if BE-only code changes)
       # • run FE unit tests (util jest tests + react library storybooks via cypress)
@@ -134,12 +163,56 @@ jobs:
       - name: Jest unit tests 🔥
         run: yarn nx run util:test
 
-      # RUN CYPRESS STORYBOOK TESTS (react-ui & react-shared-components), 🔴 ABORT ON FAIL
-      - name: Cypress/Storybook UI unit tests - react-shared-components 🔥
-        run: yarn nx run react-shared-components-e2e:e2e
+      # DECOMISH: RUN CYPRESS STORYBOOK TESTS (react-ui & react-shared-components), 🔴 ABORT ON FAIL
+      # DECOMISH: - name: Cypress/Storybook UI unit tests - react-shared-components 🔥
+      # DECOMISH:   run: yarn nx run react-shared-components-e2e:e2e
+      # DECOMISH: - name: Cypress/Storybook UI unit tests - react-ui 🔥
+      # DECOMISH:   run: yarn nx run react-ui-e2e:e2e
 
-      - name: Cypress/Storybook UI unit tests - react-ui 🔥
-        run: yarn nx run react-ui-e2e:e2e
+  # ###################################################################################################
+  # Cypress CONTAINER PARALLELIZATION
+  # ###################################################################################################
+  ui-chrome-tests-react-ui:
+    timeout-minutes: 15
+    runs-on: ubuntu-latest
+    container: cypress/browsers:node14.15.0-chrome86-ff82
+    needs: [install, featureTesting]
+    strategy:
+      # when one test fails, DO NOT cancel the other
+      # containers, because this will kill Cypress processes
+      # leaving the Dashboard hanging ...
+      # https://github.com/cypress-io/github-action/issues/48
+      fail-fast: false
+      matrix:
+        # run copies of the current job in parallel
+        containers: [1, 2, 3, 4, 5]
+    steps:
+      - name: Checkout Feature Branch
+        uses: actions/checkout@v2
+
+      - name: Download the build folders
+        uses: actions/download-artifact@v2
+        with:
+          name: build
+          path: build
+
+      - name: 'UI Tests - Chrome'
+        uses: cypress-io/github-action@v2
+        with:
+          start: yarn start:ci
+          wait-on: 'http://localhost:3000'
+          wait-on-timeout: 120
+          browser: chrome
+          record: true
+          parallel: true
+          group: 'UI - Chrome'
+          spec: ./apps/react-ui-e2e/src/integration/*
+        env:
+          CYPRESS_PROJECT_ID: ${{ secrets.CYPRESS_PROJECT_ID_REACT_UI }}
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY_REACT_UI }}
+          # Recommended: pass the GitHub token lets this action correctly
+          # determine the unique run id necessary to re-run the checks
+          # GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   # ###################################################################################################
   # Feature PROMOTION (to DEV)
