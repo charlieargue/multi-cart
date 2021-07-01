@@ -113,7 +113,7 @@ jobs:
           parallel: true
           group: 'UI - Chrome'
           install: false
-          spec: src/integration/*
+          spec: src/integration/**/*
           config-file: cypress.json
           working-directory: apps/react-ui-e2e/
 
