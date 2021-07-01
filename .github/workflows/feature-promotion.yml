@@ -50,7 +50,7 @@ jobs:
       #   run: yarn nx run util:test
 
       - name: Build react-ui Storybook 🔥 (quietly)
-      - run: yarn nx run react-ui:build-storybook:ci
+        run: yarn nx run react-ui:build-storybook:ci
 
       - name: Save dist folder
         uses: actions/upload-artifact@v2
