@@ -17,9 +17,6 @@ module.exports = (on, config) => {
   // `on` is used to hook into various events Cypress emits
   // `config` is the resolved Cypress config
 
-  // Preprocess Typescript file using Nx helper
-  // on('file:preprocessor', preprocessTypescript(config));
-
   on('file:preprocessor', () => {
     // config.env.tsConfig = config.fileServerFolder + '/tsconfig.e2e.json'
     config.env.tsConfig = '/__w/multi-cart/multi-cart/apps/react-ui-e2e/tsconfig.e2e.json';
