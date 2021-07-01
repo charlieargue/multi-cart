@@ -102,6 +102,14 @@ jobs:
       - run: yarn install --prefer-offline --frozen-lockfile
 
       # --------------------------------------
+      # DEBUGGING
+      # --------------------------------------
+      - name: Cypress debug logs 📝
+        uses: ./
+        env:
+          DEBUG: '@cypress/github-action'
+
+      # --------------------------------------
       # run FE Storybook build + Cypress react-ui SPECS!
       # --------------------------------------
       - name: 'UI Tests - react-ui - Chrome'
@@ -120,3 +128,4 @@ jobs:
         env:
           CYPRESS_PROJECT_ID: ${{ secrets.CYPRESS_PROJECT_ID_REACT_UI }}
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY_REACT_UI }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

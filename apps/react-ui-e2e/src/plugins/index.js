@@ -23,9 +23,7 @@ module.exports = (on, config) => {
     // if (!config.env.tsConfig) {
     //   config.env.tsConfig = config.fileServerFolder + '/tsconfig.e2e.json';
     // }
-    // config.env.webpackFilename = './cypress/webpack.config.js' // or path to your webpack.config.js
-    // require('cypress-react-unit-test/plugins/load-webpack')(on, config)
-    // return config
+    
     return preprocessTypescript(config);
   });
 };
