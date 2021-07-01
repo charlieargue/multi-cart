@@ -40,21 +40,14 @@ jobs:
         uses: cypress-io/github-action@v2
         with:
           runTests: false
-      # report machine parameters
-      - run: yarn cypress info
+      - run: yarn cypress info # report machine parameters
       - run: yarn install --prefer-offline --frozen-lockfile
 
-      # RUN UNIT TESTS (jest), 🔴 ABORT ON FAIL
-      # - name: Jest unit tests 🔥
-      #   run: yarn nx run util:test
-
+      # BUILD STORYBOOK build
       - name: Build react-ui Storybook 🔥 (quietly)
         run: yarn nx run react-ui:build-storybook:ci
 
-      - name: Get Yarn cache directory
-        id: yarn-cache-dir-path
-        run: echo "::set-output name=dir::$(yarn cache dir)"
-
+      # SAVE dist folder as ARTIFACT
       - name: Save dist olders
         uses: actions/upload-artifact@v2
         with:
@@ -93,10 +86,7 @@ jobs:
       - name: Checkout Feature Branch
         uses: actions/checkout@v2
 
-      - name: Get Yarn cache directory
-        id: yarn-cache-dir-path
-        run: echo "::set-output name=dir::$(yarn cache dir)"
-
+      # DOWNLOAD ARTIFACTS (dist folder, storybok build)
       - name: Download the dist folder
         uses: actions/download-artifact@v2
         with:
@@ -104,9 +94,8 @@ jobs:
           path: dist
 
       # --------------------------------------
-      # run FE Storybook + Cypress react-ui SPECS!
+      # run FE Storybook build + Cypress react-ui SPECS!
       # --------------------------------------
-
       - name: 'UI Tests - react-ui - Chrome'
         uses: cypress-io/github-action@v2
         with:
@@ -120,6 +109,3 @@ jobs:
         env:
           CYPRESS_PROJECT_ID: ${{ secrets.CYPRESS_PROJECT_ID_REACT_UI }}
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY_REACT_UI }}
-          # Recommended: pass the GitHub token lets this action correctly
-          # determine the unique run id necessary to re-run the checks
-          # GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
