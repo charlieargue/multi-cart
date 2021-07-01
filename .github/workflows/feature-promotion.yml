@@ -42,8 +42,7 @@ jobs:
           runTests: false
       # report machine parameters
       - run: yarn cypress info
-      - run:
-          yarn install --prefer-offline --frozen-lockfile
+      - run: yarn install --prefer-offline --frozen-lockfile
 
       # RUN UNIT TESTS (jest), 🔴 ABORT ON FAIL
       # - name: Jest unit tests 🔥
@@ -52,16 +51,20 @@ jobs:
       - name: Build react-ui Storybook 🔥 (quietly)
         run: yarn nx run react-ui:build-storybook:ci
 
-      - name: Save dist folder
+      - name: Get Yarn cache directory
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+
+      - name: Save dist and dependencies folders
         uses: actions/upload-artifact@v2
         with:
-          name: storybook-artifact
+          name: my-artifacts
           if-no-files-found: error
-          path: dist
-
-
-
-
+          path: |
+            dist
+            node_modules
+            .npm
+            ${{ steps.yarn-cache-dir-path.outputs.dir }}
 
   # ###################################################################################################
   # 💎 (2)
@@ -94,11 +97,19 @@ jobs:
       - name: Checkout Feature Branch
         uses: actions/checkout@v2
 
-      - name: Download the dist folders
+      - name: Get Yarn cache directory
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+
+      - name: Download the dist and dependencies folders
         uses: actions/download-artifact@v2
         with:
-          name: storybook-artifact
-          path: dist
+          name: my-artifacts
+          path: |
+            dist
+            node_modules
+            .npm
+            ${{ steps.yarn-cache-dir-path.outputs.dir }}
 
       # --------------------------------------
       # run FE Storybook + Cypress react-ui SPECS!
@@ -107,7 +118,7 @@ jobs:
       - name: 'UI Tests - react-ui - Chrome'
         uses: cypress-io/github-action@v2
         with:
-          start:  npx http-server dist/storybook/react-ui -p 4400 & yarn nx run react-ui-e2e:e2e:ci
+          start: npx http-server dist/storybook/react-ui -p 4400 & yarn nx run react-ui-e2e:e2e:ci
           browser: chrome
           record: true
           parallel: true
