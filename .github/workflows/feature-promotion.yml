@@ -212,6 +212,7 @@ jobs:
           record: true
           parallel: true
           group: 'UI - Chrome'
+          working-directory: ./apps/react-ui-e2e
           spec: ./apps/react-ui-e2e/src/integration/*
         env:
           CYPRESS_PROJECT_ID: ${{ secrets.CYPRESS_PROJECT_ID_REACT_UI }}
@@ -224,7 +225,7 @@ jobs:
   # Feature PROMOTION (to DEV)
   # ###################################################################################################
   featurePromotion:
-    needs: [featureJestUnitTesting, featureBuilding]
+    needs: [ui-chrome-tests-react-ui, featureJestUnitTesting, featureBuilding]
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -265,7 +266,7 @@ jobs:
   # develop -> PRODUCTION
   # ###################################################################################################
   developPromotion:
-    needs: [featureJestUnitTesting, featureBuilding, featurePromotion]
+    needs: [featurePromotion]
     runs-on: ubuntu-latest
     steps:
       # thx: https://github.com/actions/checkout
