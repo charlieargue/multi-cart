@@ -138,8 +138,6 @@ jobs:
       # DECOMISH: RUN CYPRESS STORYBOOK TESTS (react-ui & react-shared-components), 🔴 ABORT ON FAIL
       # DECOMISH: - name: Cypress/Storybook UI unit tests - react-shared-components 🔥
       # DECOMISH:   run: yarn nx run react-shared-components-e2e:e2e
-      # DECOMISH: - name: Cypress/Storybook UI unit tests - react-ui 🔥
-      # DECOMISH:   run: yarn nx run react-ui-e2e:e2e
 
   # ###################################################################################################
   # Cypress PARALLELIZATION
@@ -212,9 +210,8 @@ jobs:
           record: true
           parallel: true
           group: 'UI - Chrome'
-          working-directory: apps/react-ui-e2e
           install: false
-          spec: ./apps/react-ui-e2e/src/integration/*
+          spec: apps/react-ui-e2e/src/integration/*
         env:
           CYPRESS_PROJECT_ID: ${{ secrets.CYPRESS_PROJECT_ID_REACT_UI }}
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY_REACT_UI }}
