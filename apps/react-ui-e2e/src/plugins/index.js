@@ -19,4 +19,12 @@ module.exports = (on, config) => {
 
   // Preprocess Typescript file using Nx helper
   on('file:preprocessor', preprocessTypescript(config));
+
+  on('file:preprocessor', () => {
+    if (!config.env.tsConfig) {
+      config.env.tsConfig = config.fileServerFolder + '/tsconfig.e2e.json';
+    }
+    return preprocessTypescript(config);
+  });
 };
+
