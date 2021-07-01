@@ -55,14 +55,12 @@ jobs:
         id: yarn-cache-dir-path
         run: echo "::set-output name=dir::$(yarn cache dir)"
 
-      - name: Save dist and dependencies folders
+      - name: Save dist olders
         uses: actions/upload-artifact@v2
         with:
           name: my-artifacts
           if-no-files-found: error
-          path: |
-            dist
-            ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          path: dist
 
   # ###################################################################################################
   # 💎 (2)
@@ -99,13 +97,11 @@ jobs:
         id: yarn-cache-dir-path
         run: echo "::set-output name=dir::$(yarn cache dir)"
 
-      - name: Download the dist and dependencies folders
+      - name: Download the dist folder
         uses: actions/download-artifact@v2
         with:
           name: my-artifacts
-          path: |
-            dist
-            ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          path: dist
 
       # --------------------------------------
       # run FE Storybook + Cypress react-ui SPECS!
