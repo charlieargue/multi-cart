@@ -21,9 +21,10 @@ module.exports = (on, config) => {
   on('file:preprocessor', preprocessTypescript(config));
 
   on('file:preprocessor', () => {
-    if (!config.env.tsConfig) {
-      config.env.tsConfig = config.fileServerFolder + '/tsconfig.e2e.json';
-    }
+    config.env.tsConfig = config.fileServerFolder + '/tsconfig.e2e.json'
+    // if (!config.env.tsConfig) {
+    //   config.env.tsConfig = config.fileServerFolder + '/tsconfig.e2e.json';
+    // }
     return preprocessTypescript(config);
   });
 };
