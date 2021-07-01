@@ -21,7 +21,8 @@ module.exports = (on, config) => {
   on('file:preprocessor', preprocessTypescript(config));
 
   on('file:preprocessor', () => {
-    config.env.tsConfig = config.fileServerFolder + '/tsconfig.e2e.json'
+    // config.env.tsConfig = config.fileServerFolder + '/tsconfig.e2e.json'
+    config.env.tsConfig = '/__w/multi-cart/multi-cart/apps/react-ui-e2e/tsconfig.e2e.json';
     // if (!config.env.tsConfig) {
     //   config.env.tsConfig = config.fileServerFolder + '/tsconfig.e2e.json';
     // }
