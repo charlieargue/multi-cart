@@ -62,8 +62,6 @@ jobs:
           if-no-files-found: error
           path: |
             dist
-            node_modules
-            .npm
             ${{ steps.yarn-cache-dir-path.outputs.dir }}
 
   # ###################################################################################################
@@ -107,8 +105,6 @@ jobs:
           name: my-artifacts
           path: |
             dist
-            node_modules
-            .npm
             ${{ steps.yarn-cache-dir-path.outputs.dir }}
 
       # --------------------------------------
