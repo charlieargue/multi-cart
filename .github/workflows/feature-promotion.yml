@@ -77,6 +77,7 @@ jobs:
   # Feature JEST UNIT TESTING
   # ###################################################################################################
   featureJestUnitTesting:
+    if: "!contains(github.event.commits[0].message, '[skip jest]')"
     needs: featureBuilding
     runs-on: ubuntu-latest
     strategy:
@@ -212,7 +213,8 @@ jobs:
           record: true
           parallel: true
           group: 'UI - Chrome'
-          working-directory: ./apps/react-ui-e2e
+          working-directory: apps/react-ui-e2e
+          install: false
           spec: ./apps/react-ui-e2e/src/integration/*
         env:
           CYPRESS_PROJECT_ID: ${{ secrets.CYPRESS_PROJECT_ID_REACT_UI }}
