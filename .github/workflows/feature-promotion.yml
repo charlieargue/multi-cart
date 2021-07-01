@@ -14,7 +14,6 @@ on:
     branches:
       - 'kg-**'
 jobs:
-
   # ###################################################################################################
   # Feature INSTALLING DEPENDENCIES
   # ###################################################################################################
@@ -47,6 +46,7 @@ jobs:
         with:
           path: |
             **/node_modules
+            ~/.npm
             /home/runner/.cache/Cypress
             **/.eslintcache
             ${{ steps.yarn-cache-dir-path.outputs.dir }}
@@ -93,6 +93,7 @@ jobs:
         with:
           path: |
             **/node_modules
+            ~/.npm
             /home/runner/.cache/Cypress
             **/.eslintcache
             ${{ steps.yarn-cache-dir-path.outputs.dir }}
@@ -119,7 +120,7 @@ jobs:
     timeout-minutes: 15
     runs-on: ubuntu-latest
     container: cypress/browsers:node14.15.0-chrome86-ff82
-    needs: [featureJestUnitTesting]
+    needs: [featureInstallingDeps, featureJestUnitTesting]
     strategy:
       # when one test fails, DO NOT cancel the other
       # containers, because this will kill Cypress processes
@@ -152,10 +153,20 @@ jobs:
         with:
           path: |
             **/node_modules
+            ~/.npm
             /home/runner/.cache/Cypress
             **/.eslintcache
             ${{ steps.yarn-cache-dir-path.outputs.dir }}
           key: ${{ runner.os }}-yarn-${{ matrix.node-version }}-${{ hashFiles('**/yarn.lock') }}
+
+      # --------------------------------------
+      # Install dependencies 💥 PRODUCTION DEPS ONLY
+      # NOTE: after moving to parallel/containers, was getting error:  Cannot find module 'cypress'
+      # --------------------------------------
+
+      # `--prefer-offline` gives cache priority
+      - name: Install dependencies 🔥
+        run: yarn install --prefer-offline --frozen-lockfile --production
 
       # --------------------------------------
       # run FE Storybook + Cypress react-ui SPECS!
@@ -182,7 +193,8 @@ jobs:
   # Feature PROMOTION (to DEV)
   # ###################################################################################################
   featurePromotion:
-    needs: [ui-chrome-tests-react-ui, featureJestUnitTesting, featureInstallingDeps]
+    needs:
+      [ui-chrome-tests-react-ui, featureJestUnitTesting, featureInstallingDeps]
     runs-on: ubuntu-latest
     strategy:
       matrix:
