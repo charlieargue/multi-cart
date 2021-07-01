@@ -6,6 +6,7 @@
 # thx: https://www.karltarvas.com/2020/12/09/github-actions-cache-yarn-install.html
 # thx: https://stackoverflow.com/questions/67136614/cache-node-modules-in-github-actions
 # thx: https://github.com/cypress-io/cypress-realworld-app/blob/develop/.github/workflows/main.yml
+# thx: https://github.com/marketplace/actions/cypress-io
 
 name: cicd-pipeline
 on:
@@ -29,20 +30,6 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
-
-      # CACHE npm/node modules for faster yarn installs
-      - name: Cache node modules
-        uses: actions/cache@v2
-        env:
-          cache-name: cache-node-modules
-        with:
-          # npm cache files are stored in `~/.npm` on Linux/macOS
-          path: ~/.npm
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-build-${{ env.cache-name }}-
-            ${{ runner.os }}-build-
-            ${{ runner.os }}-
 
       # CHECKOUT feature branch
       - name: Checkout Feature Branch
@@ -89,20 +76,6 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
-
-      # CACHE npm/node modules for faster yarn installs
-      - name: Cache node modules
-        uses: actions/cache@v2
-        env:
-          cache-name: cache-node-modules
-        with:
-          # npm cache files are stored in `~/.npm` on Linux/macOS
-          path: ~/.npm
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-build-${{ env.cache-name }}-
-            ${{ runner.os }}-build-
-            ${{ runner.os }}-
 
       # CHECKOUT feature branch
       - name: Checkout Feature Branch
@@ -162,20 +135,6 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
-
-      # CACHE npm/node modules for faster yarn installs
-      - name: Cache node modules
-        uses: actions/cache@v2
-        env:
-          cache-name: cache-node-modules
-        with:
-          # npm cache files are stored in `~/.npm` on Linux/macOS
-          path: ~/.npm
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-build-${{ env.cache-name }}-
-            ${{ runner.os }}-build-
-            ${{ runner.os }}-
 
       # CHECKOUT feature branch
       - name: Checkout Feature Branch
