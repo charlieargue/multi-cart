@@ -114,7 +114,7 @@ jobs:
           group: 'UI - Chrome'
           install: false
           spec: apps/react-ui-e2e/src/integration/*
-          config-file: apps/react-ui-e2e/cypress.json
+          config-file: cypress.json
           working-directory: apps/react-ui-e2e/
 
         env:
