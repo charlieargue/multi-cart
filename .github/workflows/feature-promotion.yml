@@ -121,4 +121,4 @@ jobs:
           CYPRESS_PROJECT_ID: ${{ secrets.CYPRESS_PROJECT_ID_REACT_UI }}
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY_REACT_UI }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          DEBUG: '@cypress/github-action'
+          DEBUG: ${{ secrets.CYPRESS_DEBUG }}
