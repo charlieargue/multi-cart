@@ -356,7 +356,8 @@
           },
           "configurations": {
             "ci": {
-              "devServerTarget": "react-ui:storybook:ci"
+              "devServerTarget": "",
+              "skipServe": true
             }
           }
         },

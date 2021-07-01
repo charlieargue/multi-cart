@@ -14,15 +14,17 @@ on:
     branches:
       - 'kg-**'
 jobs:
-  # ###################################################################################################
-  # Feature INSTALLING DEPENDENCIES
-  # ###################################################################################################
-  featureInstallingDeps:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [14.x]
 
+  # ###################################################################################################
+  # 💎 (1)
+  # Doing things the non-NX way since:
+  # • multiple cypress container running in parellel
+  # • working example used artifacts of the build uploaded/downloaded instead of cache
+  # • we need the entire app up and running, all dependencies
+  # ###################################################################################################
+  install-everything-and-save:
+    runs-on: ubuntu-latest
+    container: cypress/browsers:node14.15.0-chrome86-ff82
     steps:
       # NODE VERSION
       - name: Use Node.js ${{ matrix.node-version }}
@@ -34,93 +36,48 @@ jobs:
       - name: Checkout Feature Branch
         uses: actions/checkout@v2
 
-      # See: https://github.com/actions/cache/blob/main/examples.md#node---yarn
-      - name: Get Yarn cache directory
-        id: yarn-cache-dir-path
-        run: echo "::set-output name=dir::$(yarn cache dir)"
-
-      # TROUBLE saving/using cache key...
-      - name: Use Yarn cache
-        uses: actions/cache@v2
-        id: yarn-cache
+      # INSTALL dependencies
+      - name: Install dependencies
+        uses: cypress-io/github-action@v2
         with:
-          path: |
-            **/node_modules
-            ~/.npm
-            /home/runner/.cache/Cypress
-            **/.eslintcache
-            ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ matrix.node-version }}-${{ hashFiles('**/yarn.lock') }}
-
-      # --------------------------------------
-      # Install dependencies
-      # --------------------------------------
-
-      # `--prefer-offline` gives cache priority
-      - name: Install dependencies 🔥
-        run: yarn install --prefer-offline --frozen-lockfile
-
-  # ###################################################################################################
-  # Feature JEST UNIT TESTING
-  # ###################################################################################################
-  featureJestUnitTesting:
-    needs: featureInstallingDeps
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [14.x]
-
-    steps:
-      # NODE VERSION
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v2
-        with:
-          node-version: ${{ matrix.node-version }}
-
-      # CHECKOUT feature branch
-      - name: Checkout Feature Branch
-        uses: actions/checkout@v2
-
-      # See: https://github.com/actions/cache/blob/main/examples.md#node---yarn
-      - name: Get Yarn cache directory
-        id: yarn-cache-dir-path
-        run: echo "::set-output name=dir::$(yarn cache dir)"
-
-      # TROUBLE saving/using cache key...
-      - name: Use Yarn cache
-        uses: actions/cache@v2
-        id: yarn-cache
-        with:
-          path: |
-            **/node_modules
-            ~/.npm
-            /home/runner/.cache/Cypress
-            **/.eslintcache
-            ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ matrix.node-version }}-${{ hashFiles('**/yarn.lock') }}
-
-      # --------------------------------------
-      # If there are any changes to FE code (we ignore unit testing if BE-only code changes)
-      # • run FE unit tests (util jest tests + react library storybooks via cypress)
-      # • ABORT JOB if fail on either
-      # --------------------------------------
+          runTests: false
+      # report machine parameters
+      - run: yarn cypress info
+      - run:
+          yarn install --prefer-offline --frozen-lockfile
 
       # RUN UNIT TESTS (jest), 🔴 ABORT ON FAIL
-      - name: Jest unit tests 🔥
-        run: yarn nx run util:test
+      # - name: Jest unit tests 🔥
+      #   run: yarn nx run util:test
 
-      # DECOMISH: RUN CYPRESS STORYBOOK TESTS (react-ui & react-shared-components), 🔴 ABORT ON FAIL
-      # DECOMISH: - name: Cypress/Storybook UI unit tests - react-shared-components 🔥
-      # DECOMISH:   run: yarn nx run react-shared-components-e2e:e2e
+      - name: Build react-ui Storybook 🔥 (quietly)
+      - run: yarn nx run react-ui:build-storybook:ci
+
+      - name: Save dist folder
+        uses: actions/upload-artifact@v2
+        with:
+          name: storybook-artifact
+          if-no-files-found: error
+          path: dist
+
+
+
+
+
+
+
 
   # ###################################################################################################
-  # Cypress PARALLELIZATION
-  # ###################################################################################################
+  # 💎 (2)
+  # Each container will now pull storybook build from ARTIFACTS
+  # • and spin it up with http-server manually
+  # • and then run cypress against that storybook
+  # # ###################################################################################################
   ui-chrome-tests-react-ui:
     timeout-minutes: 15
     runs-on: ubuntu-latest
     container: cypress/browsers:node14.15.0-chrome86-ff82
-    needs: [featureInstallingDeps, featureJestUnitTesting]
+    needs: [install-everything-and-save]
     strategy:
       # when one test fails, DO NOT cancel the other
       # containers, because this will kill Cypress processes
@@ -141,32 +98,11 @@ jobs:
       - name: Checkout Feature Branch
         uses: actions/checkout@v2
 
-      # See: https://github.com/actions/cache/blob/main/examples.md#node---yarn
-      - name: Get Yarn cache directory
-        id: yarn-cache-dir-path
-        run: echo "::set-output name=dir::$(yarn cache dir)"
-
-      # TROUBLE saving/using cache key...
-      - name: Use Yarn cache
-        uses: actions/cache@v2
-        id: yarn-cache
+      - name: Download the dist folders
+        uses: actions/download-artifact@v2
         with:
-          path: |
-            **/node_modules
-            ~/.npm
-            /home/runner/.cache/Cypress
-            **/.eslintcache
-            ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ matrix.node-version }}-${{ hashFiles('**/yarn.lock') }}
-
-      # --------------------------------------
-      # Install dependencies
-      # NOTE: after moving to parallel/containers, was getting error:  Cannot find module 'cypress'
-      # --------------------------------------
-
-      # `--prefer-offline` gives cache priority
-      - name: Install dependencies 🔥
-        run: yarn install --prefer-offline --frozen-lockfile
+          name: storybook-artifact
+          path: dist
 
       # --------------------------------------
       # run FE Storybook + Cypress react-ui SPECS!
@@ -175,7 +111,7 @@ jobs:
       - name: 'UI Tests - react-ui - Chrome'
         uses: cypress-io/github-action@v2
         with:
-          start: yarn nx run react-ui-e2e:e2e
+          start:  npx http-server dist/storybook/react-ui -p 4400 & yarn nx run react-ui-e2e:e2e:ci
           browser: chrome
           record: true
           parallel: true
@@ -188,64 +124,3 @@ jobs:
           # Recommended: pass the GitHub token lets this action correctly
           # determine the unique run id necessary to re-run the checks
           # GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-  # ###################################################################################################
-  # Feature PROMOTION (to DEV)
-  # ###################################################################################################
-  featurePromotion:
-    needs:
-      [ui-chrome-tests-react-ui, featureJestUnitTesting, featureInstallingDeps]
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [14.x]
-
-    steps:
-      # NODE VERSION
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v2
-        with:
-          node-version: ${{ matrix.node-version }}
-
-      # CHECKOUT feature branch
-      - name: Checkout Feature Branch
-        uses: actions/checkout@v2
-
-      # SAVE current branch name to variable [[short_ref]]
-      - name: Set output
-        id: vars
-        run: echo ::set-output name=short_ref::${GITHUB_REF#refs/*/}
-
-      # PRINT/DISPLAY [[short_ref]] for debugging/trouble-shooting ease
-      - name: Check output
-        run: echo ${{ steps.vars.outputs.short_ref }} ✊
-
-      # --------------------------------------
-      # ✅ Upon success...
-      # --------------------------------------
-
-      # CREATE/MERGE Pull Request (w/ dev)
-      - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v3
-        with:
-          base: ${{ steps.vars.outputs.short_ref }}
-          branch: develop
-
-  # ###################################################################################################
-  # develop -> PRODUCTION
-  # ###################################################################################################
-  developPromotion:
-    needs: [featurePromotion]
-    runs-on: ubuntu-latest
-    steps:
-      # thx: https://github.com/actions/checkout
-      - uses: actions/checkout@v2
-        with:
-          ref: 'develop'
-
-      - name: Create PROD Pull Request
-        uses: peter-evans/create-pull-request@v3
-        with:
-          # CONFUSING: backwards from githubs "comparing changes" syntax, sigh
-          base: develop
-          branch: main
