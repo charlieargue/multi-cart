@@ -160,13 +160,13 @@ jobs:
           key: ${{ runner.os }}-yarn-${{ matrix.node-version }}-${{ hashFiles('**/yarn.lock') }}
 
       # --------------------------------------
-      # Install dependencies 💥 PRODUCTION DEPS ONLY
+      # Install dependencies
       # NOTE: after moving to parallel/containers, was getting error:  Cannot find module 'cypress'
       # --------------------------------------
 
       # `--prefer-offline` gives cache priority
       - name: Install dependencies 🔥
-        run: yarn install --prefer-offline --frozen-lockfile --production
+        run: yarn install --prefer-offline --frozen-lockfile
 
       # --------------------------------------
       # run FE Storybook + Cypress react-ui SPECS!
