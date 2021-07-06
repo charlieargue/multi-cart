@@ -35,14 +35,6 @@ jobs:
       - name: Checkout Feature Branch
         uses: actions/checkout@v2
 
-      # INSTALL dependencies
-      - name: Install dependencies
-        uses: cypress-io/github-action@v2
-        with:
-          runTests: false
-      - run: yarn cypress info # report machine parameters
-      - run: yarn install --prefer-offline --frozen-lockfile
-
       # TRY AGAIN: cache for each container
       - name: Get Yarn cache directory
         id: yarn-cache-dir-path
@@ -60,6 +52,14 @@ jobs:
             **/.eslintcache
             ${{ steps.yarn-cache-dir-path.outputs.dir }}
           key: ${{ runner.os }}-yarn-${{ matrix.node-version }}-${{ hashFiles('**/yarn.lock') }}
+
+      # INSTALL dependencies
+      - name: Install dependencies
+        uses: cypress-io/github-action@v2
+        with:
+          runTests: false
+      - run: yarn cypress info # report machine parameters
+      - run: yarn install --prefer-offline --frozen-lockfile
 
       # BUILD STORYBOOK build
       - name: Build react-ui Storybook 🔥 (quietly)
@@ -139,7 +139,6 @@ jobs:
       # launch storybook
       - name: Start-up Storybook
         run: npx http-server dist/storybook/react-ui -p 4400 &
-
 
       - name: 'UI Tests - react-ui - Chrome'
         uses: cypress-io/github-action@v2
