@@ -1,5 +1,5 @@
 {
-  "fileServerFolder": "/__w/multi-cart/multi-cart/apps/react-ui-e2e",
+  "fileServerFolder": ".",
   "fixturesFolder": "./src/fixtures",
   "integrationFolder": "./src/integration",
   "modifyObstructiveCode": false,
