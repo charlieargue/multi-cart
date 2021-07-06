@@ -147,7 +147,6 @@ jobs:
           start: yarn nx run react-ui-e2e:e2e:ci
           wait-on: 'http://127.0.0.1:4400'
           wait-on-timeout: 600
-          browser: chrome
           record: true
           parallel: true
           group: 'UI - Chrome'

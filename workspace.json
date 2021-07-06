@@ -357,7 +357,8 @@
           "configurations": {
             "ci": {
               "devServerTarget": "",
-              "skipServe": true
+              "skipServe": true,
+              "browser": "chrome"
             }
           }
         },
