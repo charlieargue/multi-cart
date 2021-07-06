@@ -58,11 +58,9 @@ jobs:
       - run: yarn cypress info # report machine parameters
       - run: yarn install --prefer-offline --frozen-lockfile
 
-      # BUILD STORYBOOK build(s)
-      - name: Build react-ui Storybook 🔥 (quietly)
-        run: |
-          yarn nx run react-ui:build-storybook:ci &
-          yarn nx run react-shared-components:build-storybook:ci
+      # BUILD STORYBOOKs
+      - name: Build Storybooks 🔥 (quietly)
+        run: yarn nx run react-ui:build-storybook:ci, yarn nx run react-shared-components:build-storybook:ci
 
       # SAVE dist folder as ARTIFACT
       - name: Save dist olders
@@ -125,7 +123,7 @@ jobs:
   # ###################################################################################################
   # cypress of storybook (react-ui)
   # # ###################################################################################################
-  ui-unit-tests-cypress-storybook-react-ui:
+  ui-unit-tests-react-ui:
     timeout-minutes: 15
     runs-on: ubuntu-latest
     container: cypress/browsers:node14.15.0-chrome86-ff82
@@ -214,7 +212,7 @@ jobs:
   # ###################################################################################################
   # cypress of storybook (react-shared-components 🛍 )
   # # ###################################################################################################
-  ui-unit-tests-cypress-storybook-react-shared-components:
+  ui-unit-tests-react-shared-components:
     timeout-minutes: 15
     runs-on: ubuntu-latest
     container: cypress/browsers:node14.15.0-chrome86-ff82
