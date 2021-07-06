@@ -61,7 +61,7 @@ jobs:
       # BUILD STORYBOOKs
       - name: Build Storybooks 🔥 (quietly)
         run: |
-          yarn nx run react-ui:build-storybook:ci
+          yarn nx run react-ui:build-storybook:ci &
           yarn nx run react-shared-components:build-storybook:ci
 
       # SAVE dist folder as ARTIFACT
@@ -299,3 +299,46 @@ jobs:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY_REACT_SHARED_COMPONENTS }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEBUG: ${{ secrets.CYPRESS_DEBUG }}
+
+  # ###################################################################################################
+  # Feature PROMOTION (to DEV)
+  # ###################################################################################################
+  featurePromotion:
+    # 🧠 TODO: make this all separate ACTIONS, and then can easily filter based on FILE PATH CHANGES (so only for FE/BE, etc...)
+    needs:
+      [featureJestUnitTesting, ui-unit-tests-react-ui, ui-unit-tests-react-shared-components]
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [14.x]
+
+    steps:
+      # NODE VERSION
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      # CHECKOUT feature branch
+      - name: Checkout Feature Branch
+        uses: actions/checkout@v2
+
+      # SAVE current branch name to variable [[short_ref]]
+      - name: Set output
+        id: vars
+        run: echo ::set-output name=short_ref::${GITHUB_REF#refs/*/}
+
+      # PRINT/DISPLAY [[short_ref]] for debugging/trouble-shooting ease
+      - name: Check output
+        run: echo ${{ steps.vars.outputs.short_ref }} ✊
+
+      # --------------------------------------
+      # ✅ Upon success...
+      # --------------------------------------
+
+      # CREATE/MERGE Pull Request (w/ dev)
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v3
+        with:
+          base: ${{ steps.vars.outputs.short_ref }}
+          branch: develop
