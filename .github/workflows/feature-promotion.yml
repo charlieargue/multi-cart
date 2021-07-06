@@ -51,8 +51,9 @@ jobs:
           key: ${{ runner.os }}-yarn-${{ matrix.node-version }}-${{ hashFiles('**/yarn.lock') }}
 
       # https://github.com/cypress-io/cypress/issues/9056
+      # https://github.com/tianon/docker-brew-ubuntu-core/issues/48
       - name: Add emoji font 🛍
-        run: apt-get install fonts-noto-color-emoji -y
+        run: apt-get update && apt-get install -y sudo && sudo apt-get install fonts-noto-color-emoji -y
 
       # INSTALL dependencies
       - name: Install dependencies
