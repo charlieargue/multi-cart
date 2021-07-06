@@ -61,8 +61,8 @@ jobs:
       # BUILD STORYBOOKs
       - name: Build Storybooks 🔥 (quietly)
         run: |
-          yarn nx run react-ui:build-storybook:ci &
-          yarn nx run react-shared-components:build-storybook:ci &
+          yarn nx run react-ui:build-storybook:ci
+          yarn nx run react-shared-components:build-storybook:ci
 
       # SAVE dist folder as ARTIFACT
       - name: Save dist olders
