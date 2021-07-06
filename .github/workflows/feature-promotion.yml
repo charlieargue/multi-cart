@@ -60,10 +60,9 @@ jobs:
 
       # BUILD STORYBOOK build(s)
       - name: Build react-ui Storybook 🔥 (quietly)
-        run: yarn nx run react-ui:build-storybook:ci
-
-      - name: Build react-shared-components Storybook 🔥 (quietly)
-        run: yarn nx run react-shared-components:build-storybook:ci
+        run: |
+          yarn nx run react-ui:build-storybook:ci &
+          yarn nx run react-shared-components:build-storybook:ci
 
       # SAVE dist folder as ARTIFACT
       - name: Save dist olders
@@ -124,9 +123,9 @@ jobs:
         run: yarn nx run util:test
 
   # ###################################################################################################
-  # cypress of storybook (react-ui & react-shared-components)
+  # cypress of storybook (react-ui)
   # # ###################################################################################################
-  ui-unit-tests-cypress-storybook:
+  ui-unit-tests-cypress-storybook-react-ui:
     timeout-minutes: 15
     runs-on: ubuntu-latest
     container: cypress/browsers:node14.15.0-chrome86-ff82
@@ -211,6 +210,66 @@ jobs:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY_REACT_UI }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEBUG: ${{ secrets.CYPRESS_DEBUG }}
+
+  # ###################################################################################################
+  # cypress of storybook (react-shared-components 🛍 )
+  # # ###################################################################################################
+  ui-unit-tests-cypress-storybook-react-shared-components:
+    timeout-minutes: 15
+    runs-on: ubuntu-latest
+    container: cypress/browsers:node14.15.0-chrome86-ff82
+    needs: [install-everything-and-save]
+    strategy:
+      fail-fast: false
+      matrix:
+        # run copies of the current job in parallel
+        containers: [1, 2, 3, 4, 5]
+        node-version: [14.x]
+    steps:
+      # NODE VERSION
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      # CHECKOUT feature branch
+      - name: Checkout Feature Branch
+        uses: actions/checkout@v2
+
+      # cache for each container
+      # See: https://github.com/actions/cache/blob/main/examples.md#node---yarn
+      - name: Get Yarn cache directory
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+
+      # cache for each container
+      - name: Use Yarn cache
+        uses: actions/cache@v2
+        id: yarn-cache
+        with:
+          path: |
+            **/node_modules
+            ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ matrix.node-version }}-${{ hashFiles('**/yarn.lock') }}
+
+      # https://github.com/cypress-io/cypress/issues/9056
+      - name: Add emoji font 🛍
+        run: apt-get install fonts-noto-color-emoji -y
+
+      # DOWNLOAD ARTIFACTS (dist folder, storybok build)
+      - name: Download the dist folder
+        uses: actions/download-artifact@v2
+        with:
+          name: my-artifacts
+          path: dist
+
+      # INSTALL dependencies
+      - name: Install dependencies
+        uses: cypress-io/github-action@v2
+        with:
+          runTests: false
+      - run: yarn cypress info # report machine parameters
+      - run: yarn install --prefer-offline --frozen-lockfile
 
       # --------------------------------------
       # react-shared-components
