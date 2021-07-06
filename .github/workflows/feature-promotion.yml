@@ -107,7 +107,7 @@ jobs:
           key: ${{ runner.os }}-yarn-${{ matrix.node-version }}-${{ hashFiles('**/yarn.lock') }}
 
       # --------------------------------------
-      # If there are any changes to FE code (we ignore unit testing if BE-only code changes)
+      # TODO: If there are any changes to FE code (we ignore unit testing if BE-only code changes)
       # • run FE unit tests (util jest tests + react library storybooks via cypress)
       # • ABORT JOB if fail on either
       # --------------------------------------
@@ -121,9 +121,9 @@ jobs:
         run: yarn nx run util:test
 
   # ###################################################################################################
-  # cypress test storybook
+  # cypress of storybook (react-ui)
   # # ###################################################################################################
-  ui-chrome-tests-react-ui:
+  ui-unit-tests-cypress-storybook-react-ui:
     timeout-minutes: 15
     runs-on: ubuntu-latest
     container: cypress/browsers:node14.15.0-chrome86-ff82
