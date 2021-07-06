@@ -11,12 +11,21 @@
 // This function is called when a project is opened or re-opened (e.g. due to
 // the project's config changing)
 
-const { preprocessTypescript } = require('@nrwl/cypress/plugins/preprocessor');
+// const { preprocessTypescript } = require('@nrwl/cypress/plugins/preprocessor');
 
 module.exports = (on, config) => {
   // `on` is used to hook into various events Cypress emits
   // `config` is the resolved Cypress config
 
-  // Preprocess Typescript file using Nx helper
-  on('file:preprocessor', preprocessTypescript(config));
+  // on('file:preprocessor', () => {
+  //   config.env.tsConfig = config.fileServerFolder + '/tsconfig.e2e.json'
+    
+  //   // CYPRESS.JSON: // "fileServerFolder": "/__w/multi-cart/multi-cart/apps/react-ui-e2e",
+  //   // config.env.tsConfig = '/__w/multi-cart/multi-cart/apps/react-ui-e2e/tsconfig.e2e.json';
+  //   // if (!config.env.tsConfig) {
+  //   //   config.env.tsConfig = config.fileServerFolder + '/tsconfig.e2e.json';
+  //   // }
+  //   return preprocessTypescript(config);
+  // });
 };
+
