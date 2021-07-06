@@ -52,7 +52,7 @@ jobs:
 
       # https://github.com/cypress-io/cypress/issues/9056
       - name: Add emoji font 🛍
-        run: sudo apt-get install fonts-noto-color-emoji -y
+        run: apt-get install fonts-noto-color-emoji -y
 
       # INSTALL dependencies
       - name: Install dependencies
