@@ -9,7 +9,7 @@
   "videosFolder": "../../dist/cypress/apps/react-shared-components-e2e/videos",
   "screenshotsFolder": "../../dist/cypress/apps/react-shared-components-e2e/screenshots",
   "chromeWebSecurity": false,
-  "baseUrl": "http://localhost:4400",
+  "baseUrl": "http://localhost:4401",
   "viewportWidth": 1400,
   "projectId": "w6cn2v"
 }

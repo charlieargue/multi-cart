@@ -35,12 +35,12 @@ jobs:
       - name: Checkout Feature Branch
         uses: actions/checkout@v2
 
-      # TRY AGAIN: cache for each container
+      # cache for each container
       - name: Get Yarn cache directory
         id: yarn-cache-dir-path
         run: echo "::set-output name=dir::$(yarn cache dir)"
 
-      # TRY AGAIN: cache for each container
+      # cache for each container
       - name: Use Yarn cache
         uses: actions/cache@v2
         id: yarn-cache
@@ -58,9 +58,12 @@ jobs:
       - run: yarn cypress info # report machine parameters
       - run: yarn install --prefer-offline --frozen-lockfile
 
-      # BUILD STORYBOOK build
+      # BUILD STORYBOOK build(s)
       - name: Build react-ui Storybook 🔥 (quietly)
         run: yarn nx run react-ui:build-storybook:ci
+
+      - name: Build react-shared-components Storybook 🔥 (quietly)
+        run: yarn nx run react-shared-components:build-storybook:ci
 
       # SAVE dist folder as ARTIFACT
       - name: Save dist olders
@@ -91,12 +94,12 @@ jobs:
       - name: Checkout Feature Branch
         uses: actions/checkout@v2
 
-      # TRY AGAIN: cache for each container
+      # cache for each container
       - name: Get Yarn cache directory
         id: yarn-cache-dir-path
         run: echo "::set-output name=dir::$(yarn cache dir)"
 
-      # TRY AGAIN: cache for each container
+      # cache for each container
       - name: Use Yarn cache
         uses: actions/cache@v2
         id: yarn-cache
@@ -121,9 +124,9 @@ jobs:
         run: yarn nx run util:test
 
   # ###################################################################################################
-  # cypress of storybook (react-ui)
+  # cypress of storybook (react-ui & react-shared-components)
   # # ###################################################################################################
-  ui-unit-tests-cypress-storybook-react-ui:
+  ui-unit-tests-cypress-storybook:
     timeout-minutes: 15
     runs-on: ubuntu-latest
     container: cypress/browsers:node14.15.0-chrome86-ff82
@@ -145,13 +148,13 @@ jobs:
       - name: Checkout Feature Branch
         uses: actions/checkout@v2
 
-      # TRY AGAIN: cache for each container
+      # cache for each container
       # See: https://github.com/actions/cache/blob/main/examples.md#node---yarn
       - name: Get Yarn cache directory
         id: yarn-cache-dir-path
         run: echo "::set-output name=dir::$(yarn cache dir)"
 
-      # TRY AGAIN: cache for each container
+      # cache for each container
       - name: Use Yarn cache
         uses: actions/cache@v2
         id: yarn-cache
@@ -172,8 +175,7 @@ jobs:
           name: my-artifacts
           path: dist
 
-      # 🔴 TEMP DEBUGGING: INSTALL dependencies
-      # 🔴 NOTE: in all this, stuck on how to spread cache into each container from initial dep install, TBD
+      # INSTALL dependencies
       - name: Install dependencies
         uses: cypress-io/github-action@v2
         with:
@@ -182,12 +184,13 @@ jobs:
       - run: yarn install --prefer-offline --frozen-lockfile
 
       # --------------------------------------
-      # run FE Storybook build + Cypress react-ui SPECS!
+      # react-ui
       # --------------------------------------
       # launch storybook
       - name: Start-up Storybook
         run: npx http-server dist/storybook/react-ui -p 4400 &
 
+      # run FE Storybook build + Cypress
       - name: 'UI Tests - react-ui - Chrome'
         uses: cypress-io/github-action@v2
         with:
@@ -206,5 +209,34 @@ jobs:
         env:
           CYPRESS_PROJECT_ID: ${{ secrets.CYPRESS_PROJECT_ID_REACT_UI }}
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY_REACT_UI }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEBUG: ${{ secrets.CYPRESS_DEBUG }}
+
+      # --------------------------------------
+      # react-shared-components
+      # --------------------------------------
+      # launch storybook
+      - name: Start-up Storybook
+        run: npx http-server dist/storybook/react-shared-components -p 4401 &
+
+      # run FE Storybook build + Cypress
+      - name: 'UI Tests - react-shared-components - Chrome'
+        uses: cypress-io/github-action@v2
+        with:
+          start: yarn nx run react-shared-components-e2e:e2e:ci
+          wait-on: 'http://localhost:4401'
+          wait-on-timeout: 600
+          browser: chrome
+          record: true
+          parallel: true
+          group: 'UI - Chrome'
+          install: false
+          spec: src/integration/**/*
+          config-file: cypress.json
+          working-directory: apps/react-shared-components-e2e/
+
+        env:
+          CYPRESS_PROJECT_ID: ${{ secrets.CYPRESS_PROJECT_ID_REACT_SHARED_COMPONENTS }}
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY_REACT_SHARED_COMPONENTS }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEBUG: ${{ secrets.CYPRESS_DEBUG }}
