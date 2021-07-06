@@ -46,10 +46,6 @@ jobs:
         id: yarn-cache
         with:
           path: |
-            **/node_modules
-            ~/.npm
-            /home/runner/.cache/Cypress
-            **/.eslintcache
             ${{ steps.yarn-cache-dir-path.outputs.dir }}
           key: ${{ runner.os }}-yarn-${{ matrix.node-version }}-${{ hashFiles('**/yarn.lock') }}
 
@@ -110,10 +106,6 @@ jobs:
         id: yarn-cache
         with:
           path: |
-            **/node_modules
-            ~/.npm
-            /home/runner/.cache/Cypress
-            **/.eslintcache
             ${{ steps.yarn-cache-dir-path.outputs.dir }}
           key: ${{ runner.os }}-yarn-${{ matrix.node-version }}-${{ hashFiles('**/yarn.lock') }}
 
