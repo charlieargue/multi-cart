@@ -142,7 +142,7 @@ jobs:
         uses: cypress-io/github-action@v2
         with:
           start: yarn nx run react-ui-e2e:e2e:ci
-          wait-on: 'http://127.0.0.1:4400'
+          wait-on: 'http://localhost:4400'
           wait-on-timeout: 600
           browser: chrome
           record: true
