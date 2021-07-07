@@ -263,7 +263,7 @@
             "ci": {
               "devServerTarget": "",
               "skipServe": true,
-              "browser": "electron"
+              "browser": "chrome"
             }
           }
         },
