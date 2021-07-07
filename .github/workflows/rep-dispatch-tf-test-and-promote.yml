@@ -174,7 +174,7 @@ jobs:
           DEBUG: ${{ secrets.CYPRESS_DEBUG }}
 
   # ###################################################################################################
-  # develop -> PRODUCTION
+  # develop -> PRODUCTION (requires POSTMAN and E2E tests success)
   # ###################################################################################################
   developPromotion:
     needs: [devPostmanTestingAPI, e2e-tests-multi-cart]
