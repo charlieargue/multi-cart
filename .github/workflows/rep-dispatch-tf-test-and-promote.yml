@@ -1,17 +1,15 @@
 # ###################################################################################################
 # ... so at this point, cicd-pipeline has completed, github has merged feature into DEV, ...
 # ... triggering Vercel to start the 5 minute countdown towards DEV being ready🔥
-# ... 
+# ...
 # ... terraform is planning/applying DEV  (how long does that take?) ????? 🔥 1 min/2 mins?
 # ...
 # Terraform-triggered Action (after TF DEV Apply completes)
 # • will run POSTMAN tests against (newly deployed) DEV ... 4 minutes! 🔥 UNCACHED!
 # • will abort on fail
 
-
 #   ...🔥🔥🔥🔥🔥 it's too close, GOTTA USE preview branch! that started way, way, back
 #   ...🔥🔥🔥🔥🔥 upon my local commit!
-
 
 # • will run CYPRESS E2E tests against wut??? can we assume vercel DEV has been deployed at this stage?
 #   -> so 5 minutes after we merge  feature -> DEV, vercel deployment of DEV will be ready
@@ -79,6 +77,11 @@ jobs:
       # RUN POSTMAN TESTS (against DEV backend)
       - name: 🎾 POSTMAN tests 🎾 (via newman)
         run: yarn test-iac
+
+  # ###################################################################################################
+  # cypress E2E tests (multi-cart front-end, against preview.multicart.app FE / DEV BE)
+  # # ###################################################################################################
+  # NOTE: ok to be sequential, we don't want to do this if POSTMAN tests failed
 
   # ###################################################################################################
   # develop -> PRODUCTION
