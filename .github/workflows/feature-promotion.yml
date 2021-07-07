@@ -118,9 +118,18 @@ jobs:
       - name: Install dependencies
         run: yarn install --prefer-offline --frozen-lockfile
 
+      # SAVE current branch name to variable [[short_ref]]
+      - name: Set output
+        id: vars
+        run: echo ::set-output name=short_ref::${GITHUB_REF#refs/*/}
+
+      # PRINT/DISPLAY [[short_ref]] for debugging/trouble-shooting ease
+      - name: Check output
+        run: echo ${{ steps.vars.outputs.short_ref }} ✊
+
       # RUN UNIT TESTS (jest), 🔴 ABORT ON FAIL
       - name: Jest unit tests 🔥
-        run: yarn nx affected:test
+        run: yarn nx affected:test --base=${{ steps.vars.outputs.short_ref }}
         # DECOMISH: run: yarn nx run util:test
 
   # ###################################################################################################
@@ -306,7 +315,11 @@ jobs:
   featurePromotion:
     # 🧠 TODO: make this all separate ACTIONS, and then can easily filter based on FILE PATH CHANGES (so only for FE/BE, etc...)
     needs:
-      [featureJestUnitTesting, ui-unit-tests-react-ui, ui-unit-tests-react-shared-components]
+      [
+        featureJestUnitTesting,
+        ui-unit-tests-react-ui,
+        ui-unit-tests-react-shared-components,
+      ]
     runs-on: ubuntu-latest
     strategy:
       matrix:
