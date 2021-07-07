@@ -298,7 +298,7 @@ jobs:
         env:
           CYPRESS_PROJECT_ID: ${{ secrets.CYPRESS_PROJECT_ID_REACT_SHARED_COMPONENTS }}
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY_REACT_SHARED_COMPONENTS }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}-rsc
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEBUG: ${{ secrets.CYPRESS_DEBUG }}
 
   # ###################################################################################################
