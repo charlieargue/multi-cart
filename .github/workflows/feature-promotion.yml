@@ -109,7 +109,8 @@ jobs:
           key: ${{ runner.os }}-yarn-${{ matrix.node-version }}-${{ hashFiles('**/yarn.lock') }}
 
       # --------------------------------------
-      # DONE: If there are any changes to FE code (we ignore unit testing if BE-only code changes) ... see nx affected BELOW:
+      # TODO: If there are any changes to FE code (we ignore unit testing if BE-only code changes) ...
+      # - NOTE: abandoned trying to use nx affected so need to change to multiple action/workflow files
       # • run FE unit tests (util jest tests + react library storybooks via cypress)
       # • ABORT JOB if fail on either
       # --------------------------------------
@@ -117,15 +118,6 @@ jobs:
       # INSTALL dependencies
       - name: Install dependencies
         run: yarn install --prefer-offline --frozen-lockfile
-
-      # DECOMISH: # SAVE current branch name to variable [[short_ref]]
-      # - name: Set output
-      #   id: vars
-      #   run: echo ::set-output name=short_ref::${GITHUB_REF#refs/*/}
-
-      # DECOMISH:  # PRINT/DISPLAY [[short_ref]] for debugging/trouble-shooting ease
-      # - name: Check output
-      #   run: echo ${{ steps.vars.outputs.short_ref }} ✊
 
       # RUN UNIT TESTS (jest), 🔴 ABORT ON FAIL
       - name: Jest unit tests 🔥
@@ -234,7 +226,7 @@ jobs:
       fail-fast: false
       matrix:
         # run copies of the current job in parallel
-        containers: [1, 2, 3, 4, 5, 6]
+        containers: [1, 2, 3, 4, 5]
         node-version: [14.x]
     steps:
       # NODE VERSION
@@ -357,3 +349,51 @@ jobs:
         with:
           base: ${{ steps.vars.outputs.short_ref }}
           branch: develop
+
+  # ###################################################################################################
+  # DEV POSTMAN API/BE TESTING
+  # ###################################################################################################
+  devPostmanAPITesting:
+    needs: [featurePromotion]
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [14.x]
+
+    steps:
+      # NODE VERSION
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      # CHECKOUT feature branch
+      - name: Checkout Feature Branch
+        uses: actions/checkout@v2
+
+      # cache for each container
+      - name: Get Yarn cache directory
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+
+      # cache for each container
+      - name: Use Yarn cache
+        uses: actions/cache@v2
+        id: yarn-cache
+        with:
+          path: |
+            **/node_modules
+            ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ matrix.node-version }}-${{ hashFiles('**/yarn.lock') }}
+
+      # --------------------------------------
+      # TODO: ONLY if code changes to BE/IAC/API code (TODO: when split out into other workflow action files)
+      # --------------------------------------
+
+      # INSTALL dependencies
+      - name: Install dependencies
+        run: yarn install --prefer-offline --frozen-lockfile
+
+      # RUN POSTMAN TESTS (against DEV backend)
+      - name: Jest 🎾 POSTMAN tests 🎾 
+        run: yarn test-iac

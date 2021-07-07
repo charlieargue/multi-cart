@@ -16,7 +16,6 @@ export const sumTotalItems = (cart?: Cart): number => {
 
 // ------------------ ✅ JEST
 export const sumTotalCost = (cart?: Cart): number => {
-    console.log('change forced so can text nx affected');
     if (cart && cart.cartLines) {
         return cart.cartLines.reduce((sum, cl) => {
             if (cl && typeof cl.price === "number" && typeof cl.quantity == "number") {
