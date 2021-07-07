@@ -117,7 +117,8 @@ jobs:
       - name: Install dependencies
         run: yarn install --prefer-offline --frozen-lockfile
 
-      # # DECOMISH:           # echo API_KEY=${{ secrets.POSTMAN_SECRETS }} >> libs/multi-cart-iac-tests/src/env-variables/Multi-Cart.postman_environment.json
+      # WAIT, WUT?
+        # # DECOMISH:           # echo API_KEY=${{ secrets.POSTMAN_SECRETS }} >> libs/multi-cart-iac-tests/src/env-variables/Multi-Cart.postman_environment.json
       # - name: Create POSTMAN env file
       #   run: |
       #     echo '${{ secrets.POSTMAN_SECRETS }}' > libs/multi-cart-iac-tests/src/env-variables/Multi-Cart.postman_environment.json
