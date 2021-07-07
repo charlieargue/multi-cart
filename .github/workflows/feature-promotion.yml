@@ -280,16 +280,16 @@ jobs:
         run: npx http-server dist/storybook/react-shared-components -p 4401 &
 
       # run FE Storybook build + Cypress
-      - name: 'UI Tests - react-shared-components - Chrome'
+      - name: 'UI Tests - react-shared-components - electron'
         uses: cypress-io/github-action@v2
         with:
           start: yarn nx run react-shared-components-e2e:e2e:ci
           wait-on: 'http://localhost:4401'
           wait-on-timeout: 600
-          browser: chrome
+          browser: electron
           record: true
           parallel: true
-          group: 'UI - Chrome'
+          group: 'UI - electron'
           install: false
           spec: src/integration/**/*
           config-file: cypress.json
