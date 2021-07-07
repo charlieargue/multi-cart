@@ -105,19 +105,9 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      # CHECKOUT feature branch 🔥 ATTN: we are running the multicart e2e tests against the locally-committed to feature branches of IC
-      #                         🔥 ATTN: this way, we know that branch has been updated and is freshest (DEV FE might not be ready yet!)
+      # CHECKOUT dev branch 🔥 ATTN: this is dev branch! (why?)
       - name: Checkout Feature Branch
         uses: actions/checkout@v2
-
-      # SAVE current branch name to variable [[short_ref]]
-      - name: Set output
-        id: vars
-        run: echo ::set-output name=short_ref::${GITHUB_REF#refs/*/}
-
-      # PRINT/DISPLAY [[short_ref]] for debugging/trouble-shooting ease
-      - name: Check output
-        run: echo ${{ steps.vars.outputs.short_ref }} ✊
 
       # cache for each container
       # See: https://github.com/actions/cache/blob/main/examples.md#node---yarn
@@ -151,12 +141,13 @@ jobs:
       # multi-cart FE E2E tests (NOT Storybook!)
       # --------------------------------------
       # run FE Cypress (will automatically serve up FE)
+      # TODO: replace HARD-CODED kg-2021-06... branch name! (afaik will need to save from github action #1 and pick up stash here)
       - name: 'UI Tests - multi-cart FE E2E - Chrome'
         uses: cypress-io/github-action@v2
         with:
           start: yarn nx run multi-cart-e2e:e2e:ci
-          config: baseUrl=https://multi-cart-git-${{ steps.vars.outputs.short_ref }}-charlieargue.vercel.app/
-          wait-on: 'https://multi-cart-git-${{ steps.vars.outputs.short_ref }}-charlieargue.vercel.app/'
+          config: baseUrl=https://multi-cart-git-kg-2021-06-12-final-revisions-charlieargue.vercel.app/
+          wait-on: 'https://multi-cart-git-kg-2021-06-12-final-revisions-charlieargue.vercel.app/'
           wait-on-timeout: 600
           browser: chrome
           record: true

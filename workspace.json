@@ -89,7 +89,6 @@
             "watch": false,
             "headless": true,
             "parallel": false,
-            "ciBuildId": "multi-cart-e2e-CI-03",
             "key": "5fb2e603-db6d-4aa1-9d35-d34afc70689f"
           },
           "configurations": {
