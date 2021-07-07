@@ -3,7 +3,7 @@
     "resolveSourceMapLocations": ["${workspaceFolder}/**", "!**/node_modules/**"],
     "configurations": [
       {
-        "name": "multicart-webapp",
+        "name": "🔴 DECOMISH: multicart-webapp",
         "type": "node",
         "request": "launch",
         "runtimeExecutable": "yarn",

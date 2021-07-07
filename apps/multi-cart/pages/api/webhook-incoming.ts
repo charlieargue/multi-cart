@@ -1,5 +1,5 @@
-// thx: https://dmitripavlutin.com/timeout-fetch-request/
 import { NextApiRequest, NextApiResponse } from 'next'
+import axios from 'axios'
 
 // ##################################################################################
 // # INCOMING WEBHOOK (for terraform only, for now)
@@ -11,23 +11,8 @@ import { NextApiRequest, NextApiResponse } from 'next'
 // ##################################################################################
 const NEXT_PUBLIC_WEBHOOK_TOKEN_DEV = process.env.NEXT_PUBLIC_WEBHOOK_TOKEN_DEV
 const NEXT_PUBLIC_WEBHOOK_TOKEN_PROD = process.env.NEXT_PUBLIC_WEBHOOK_TOKEN_PROD
+const NEXT_PUBLIC_GITHUB_PAT = process.env.NEXT_PUBLIC_GITHUB_PAT
 const URL_OUTGOING = 'https://api.github.com/repos/charlieargue/multi-cart/dispatches'
-
-// ------------------------
-async function fetchWithTimeout(resource, options) {
-    const { timeout = 8000 } = options // 8 second default
-
-    const controller = new AbortController()
-    const id = setTimeout(() => controller.abort(), timeout)
-
-    const response = await fetch(resource, {
-        ...options,
-        signal: controller.signal
-    })
-    clearTimeout(id)
-
-    return response
-}
 
 // ------------------------
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -59,24 +44,19 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     }
 
     // NOTE: this is the github actions webhook (one for DEV, one for PROD TODO:🔥 )
-    // try {
-    //     const res = await fetch(URL_OUTGOING)
-    //     return await res.json()
-    // } catch (error) {
-    //     console.log(error)
-    // }
+    const options = {
+        headers: { 'authorization': `Bearer ${NEXT_PUBLIC_GITHUB_PAT}` }
+    };
     try {
-        const response = await fetchWithTimeout(URL_OUTGOING, {
-            timeout: 1000
-        })
-        const result = await response.json()
+        const result = await axios.post(URL_OUTGOING, { 'event_type': 'tf-test-dev-and-promote-to-prod' }, options)
         return result
     } catch (error) {
-        console.log(`🚀 ~ error`, error);
-        // Timeouts if the request takes too long
-        console.log(error.name === 'AbortError')
-        throw new Error('Invalid request, took too long')
+        console.log(error)
+        throw new Error('Invalid request made by webhook')
     }
+
+
+
 }
 
 export default handler
