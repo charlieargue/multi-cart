@@ -213,11 +213,12 @@ jobs:
 
   # ###################################################################################################
   # cypress of storybook (react-shared-components 🛍 )
+  # ATTN: on different container since parallel+video errors ffmeg, https://github.com/cypress-io/cypress/issues/9128
   # # ###################################################################################################
   ui-unit-tests-react-shared-components:
     timeout-minutes: 15
     runs-on: ubuntu-latest
-    container: cypress/browsers:node14.15.0-chrome86-ff82
+    container: cypress/browsers:node14.16.0-chrome89-ff77
     needs: [install-everything-and-save]
     strategy:
       fail-fast: false
