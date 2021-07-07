@@ -13,6 +13,6 @@ describe('react-shared-components: CartAvatar component', () => {
     // can click new cart button
     cy.findByTestId('btnNewCart').should('be.visible');
     cy.findByTestId('btnNewCart').click();
-    cy.get('.chakra-alert__title').should('contain', '[Network] Not Found');
+    cy.get('.chakra-alert__title').should('contain', '[Network]');
   });
 });

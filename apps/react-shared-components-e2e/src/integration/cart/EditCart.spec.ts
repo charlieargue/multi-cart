@@ -16,7 +16,7 @@ describe('react-shared-components: EditCart component', () => {
       // and since no network, should be 
       // NOTE: tried storybook urql addon, but got error
       cy.get('#root').should('contain', 'Ooops, sorry! An error occurred:');
-      cy.get('#root').should('contain', '[Network] Not Found');
+      cy.get('#root').should('contain', '[Network]');
       
 
     });
