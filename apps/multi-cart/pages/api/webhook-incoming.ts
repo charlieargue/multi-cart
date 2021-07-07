@@ -1,5 +1,5 @@
+import axios, { AxiosResponse } from 'axios'
 import { NextApiRequest, NextApiResponse } from 'next'
-import axios from 'axios'
 
 // ##################################################################################
 // # INCOMING WEBHOOK (for terraform only, for now)
@@ -8,17 +8,16 @@ import axios from 'axios'
 //   • will authenticate token against env token saved in NextJS
 //   • fire & forget CURL-equivalent (prolly via fetch, or axios)
 //      - TODO: add sentry here instead of just throwing errors
+
+//   • DEV URL:  https://dev.multicart.app/api/webhook-incoming?token=15196545-0fed-46ed-9973-1230e5d4e591&env=dev
 // ##################################################################################
 const NEXT_PUBLIC_WEBHOOK_TOKEN_DEV = process.env.NEXT_PUBLIC_WEBHOOK_TOKEN_DEV
-const NEXT_PUBLIC_WEBHOOK_TOKEN_PROD = process.env.NEXT_PUBLIC_WEBHOOK_TOKEN_PROD
 const NEXT_PUBLIC_GITHUB_PAT = process.env.NEXT_PUBLIC_GITHUB_PAT
 const URL_OUTGOING = 'https://api.github.com/repos/charlieargue/multi-cart/dispatches'
 
 // ------------------------
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     const { token, env } = req.query
-    console.log(`🚀 ~ env`, env)
-    console.log(`🚀 ~ token`, token)
     if (!token || !env) {
         throw new Error('Missing query parameters for incoming webhook')
     }
@@ -26,15 +25,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         case 'dev':
             if (token !== NEXT_PUBLIC_WEBHOOK_TOKEN_DEV) {
                 throw new Error('Invalid token for incoming webhook')
-            }
-            break
-
-        // -------------------------------------
-        // 🔥 PRODUCTION
-        // -------------------------------------
-        case 'prod':
-            if (token !== NEXT_PUBLIC_WEBHOOK_TOKEN_PROD) {
-                throw new Error('Invalid Token for incoming webhook')
             }
             break
 
@@ -48,11 +38,20 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         headers: { 'authorization': `Bearer ${NEXT_PUBLIC_GITHUB_PAT}` }
     };
     try {
-        const result = await axios.post(URL_OUTGOING, { 'event_type': 'tf-test-dev-and-promote-to-prod' }, options)
-        return result
+        const result: AxiosResponse<unknown> = await axios.post(URL_OUTGOING, { 'event_type': 'tf-test-dev-and-promote-to-prod' }, options)
+        if (result.status === 204) {
+            res.status(200).json({ status: '✅  Success' })
+        } else {
+            console.log('Did not get 204 from OUTGOING URL')
+            throw new Error('Did not get 204 from OUTGOING URL')
+        }
     } catch (error) {
         console.log(error)
-        throw new Error('Invalid request made by webhook')
+        if (error.message) {
+            throw new Error(error.message)
+        } else {
+            throw new Error('Invalid request made by webhook')
+        }
     }
 
 
