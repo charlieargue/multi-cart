@@ -126,7 +126,7 @@ jobs:
 
       # 🛡 use GITHUB SECRET to create POSTMAN environment file (SECURITY FYI: without sending sensitive keys to LOG, aka the *** replacements)
       - name: Create POSTMAN env file
-      - run: "echo '$POSTMAN_ENV' > libs/multi-cart-iac-tests/src/env-variables/Multi-Cart.postman_environment.json"
+        run: "echo '$POSTMAN_ENV' > libs/multi-cart-iac-tests/src/env-variables/Multi-Cart.postman_environment.json"
         shell: bash
         env:
           POSTMAN_ENV: ${{secrets.POSTMAN_SECRETS}}
