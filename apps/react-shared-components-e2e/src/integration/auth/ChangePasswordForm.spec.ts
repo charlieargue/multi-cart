@@ -31,7 +31,7 @@ describe('react-shared-components: ChangePasswordForm component', () => {
     cy.get('#root form button').click();
     cy.get('#root').should('contain', 'Error');
     cy.get('#root').should('contain', 'Please try a fresh token');
-    cy.get('.chakra-alert__title').should('contain', '[Network] Not Found');
+    cy.get('.chakra-alert__title').should('contain', '[Network]');
     
   });
 });
