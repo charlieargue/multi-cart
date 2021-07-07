@@ -78,10 +78,100 @@ jobs:
       - name: 🎾 POSTMAN tests 🎾 (via newman)
         run: yarn test-iac
 
-  # ###################################################################################################
-  # cypress E2E tests (multi-cart front-end, against preview.multicart.app FE / DEV BE)
-  # # ###################################################################################################
   # NOTE: ok to be sequential, we don't want to do this if POSTMAN tests failed
+
+  # ###################################################################################################
+  # cypress E2E tests
+  # • multi-cart front-end
+  # • against DEV BE
+  # • against FE: https://multi-cart-git-kg-2021-06-12-final-revisions-charlieargue.vercel.app (vercel preview from local feature branch commit)
+  # • TODO: https://multi-cart-git-<<FEATURE-BRANCH-NAME-HERE>>-charlieargue.vercel.app/ FE
+
+  # • BRANCH NAME: kg-2021-06-12-final-revisions
+  # # ###################################################################################################
+  e2e-tests-multi-cart:
+    timeout-minutes: 15
+    runs-on: ubuntu-latest
+    container: cypress/browsers:node14.15.0-chrome86-ff82
+    needs: [devPostmanTestingAPI] # NOTE: for now, since always running everything
+    # strategy: NOTE: this CANNOT be run in parallel, not designed for that unfortunately (would need different isolated login accounts, so not deleting each others carts, WISHLIST:)
+    strategy:
+      matrix:
+        node-version: [14.x]
+    steps:
+      # NODE VERSION
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      # CHECKOUT feature branch 🔥 ATTN: we are running the multicart e2e tests against the locally-committed to feature branches of IC
+      #                         🔥 ATTN: this way, we know that branch has been updated and is freshest (DEV FE might not be ready yet!)
+      - name: Checkout Feature Branch
+        uses: actions/checkout@v2
+
+      # SAVE current branch name to variable [[short_ref]]
+      - name: Set output
+        id: vars
+        run: echo ::set-output name=short_ref::${GITHUB_REF#refs/*/}
+
+      # PRINT/DISPLAY [[short_ref]] for debugging/trouble-shooting ease
+      - name: Check output
+        run: echo ${{ steps.vars.outputs.short_ref }} ✊
+
+      # cache for each container
+      # See: https://github.com/actions/cache/blob/main/examples.md#node---yarn
+      - name: Get Yarn cache directory
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+
+      # cache for each container
+      - name: Use Yarn cache
+        uses: actions/cache@v2
+        id: yarn-cache
+        with:
+          path: |
+            **/node_modules
+            ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ matrix.node-version }}-${{ hashFiles('**/yarn.lock') }}
+
+      # https://github.com/cypress-io/cypress/issues/9056
+      - name: Add emoji font 🛍
+        run: apt-get install fonts-noto-color-emoji -y
+
+      # INSTALL dependencies
+      - name: Install dependencies
+        uses: cypress-io/github-action@v2
+        with:
+          runTests: false
+      - run: yarn cypress info # report machine parameters
+      - run: yarn install --prefer-offline --frozen-lockfile
+
+      # --------------------------------------
+      # multi-cart FE E2E tests (NOT Storybook!)
+      # --------------------------------------
+      # run FE Cypress (will automatically serve up FE)
+      - name: 'UI Tests - multi-cart FE E2E - Chrome'
+        uses: cypress-io/github-action@v2
+        with:
+          start: yarn nx run multi-cart-e2e:e2e:ci
+          config: baseUrl=https://multi-cart-git-${{ steps.vars.outputs.short_ref }}-charlieargue.vercel.app/
+          wait-on: 'https://multi-cart-git-${{ steps.vars.outputs.short_ref }}-charlieargue.vercel.app/'
+          wait-on-timeout: 600
+          browser: chrome
+          record: true
+          parallel: false
+          group: 'UI - E2E - Chrome'
+          install: false
+          spec: src/integration/**/*
+          config-file: cypress.json
+          working-directory: apps/multi-cart-e2e/
+
+        env:
+          CYPRESS_PROJECT_ID: ${{ secrets.CYPRESS_PROJECT_ID_MULTICART_E2E }}
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY_MULTICART_E2E }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEBUG: ${{ secrets.CYPRESS_DEBUG }}
 
   # ###################################################################################################
   # develop -> PRODUCTION
