@@ -209,6 +209,7 @@ jobs:
           browser: chrome
           record: true
           parallel: true
+          group: 'UI - Chrome'
           install: false
           spec: src/integration/**/*
           config-file: cypress.json
@@ -298,6 +299,7 @@ jobs:
           browser: electron
           record: true
           parallel: true
+          group: 'UI - Chrome'
           install: false
           spec: src/integration/**/*
           config-file: cypress.json
