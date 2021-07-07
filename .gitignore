@@ -17,7 +17,7 @@
 .settings/
 *.sublime-workspace
 
-# IDE - VSCode
+# IDE - VSCode (just because I am the only developer for now, normally not-like-this)
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
