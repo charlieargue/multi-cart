@@ -170,7 +170,8 @@ context('Edit Cart Functionality', () => {
 
     // line 1
     cy.confirmSaved();
-    cy.get('input').first().should('have.value', 'TestItem#1').as('lastFocused');
+    // FIX for cypress CICD, was accidentally picking up DARK-MODE-SWITCH-input instead
+    cy.get('input[name="itemId"]').first().should('have.value', 'TestItem#1').as('lastFocused');
     cy.get('@lastFocused').focus().tab().should('have.value', 'TestDescription #1').as('lastFocused');
     cy.get('@lastFocused').focus().tab().tab().tab().should('have.value', '6').as('lastFocused');
     cy.get('@lastFocused').focus().tab().should('have.value', '1.99').as('lastFocused');
