@@ -1,11 +1,30 @@
+# ###################################################################################################
+# ... so at this point, cicd-pipeline has completed, github has merged feature into DEV, ...
+# ... triggering Vercel to start the 5 minute countdown towards DEV being ready🔥
+# ... 
+# ... terraform is planning/applying DEV  (how long does that take?) ????? 🔥 1 min/2 mins?
+# ...
+# Terraform-triggered Action (after TF DEV Apply completes)
+# • will run POSTMAN tests against (newly deployed) DEV ... 4 minutes! 🔥 UNCACHED!
+# • will abort on fail
+
+
+#   ...🔥🔥🔥🔥🔥 it's too close, GOTTA USE preview branch! that started way, way, back
+#   ...🔥🔥🔥🔥🔥 upon my local commit!
+
+
+# • will run CYPRESS E2E tests against wut??? can we assume vercel DEV has been deployed at this stage?
+#   -> so 5 minutes after we merge  feature -> DEV, vercel deployment of DEV will be ready
+#   •• we can assume the preview has, can't we? or do we need another incoming webhook + action? sigh...
+# ✅ SOLUTION: we have to run it against the preview, and so the preview needs a custom domain!
+# ###################################################################################################
 # thx: https://dev.to/rikurouvila/how-to-trigger-a-github-action-with-an-htt-request-545
+# ###################################################################################################
 
 name: tf-test-and-promote
-
 on:
   repository_dispatch:
     types: tf-test-dev-and-promote-to-prod
-
 jobs:
   # ###################################################################################################
   # DEV POSTMAN API/BE TESTING
