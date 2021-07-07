@@ -109,7 +109,7 @@ jobs:
           key: ${{ runner.os }}-yarn-${{ matrix.node-version }}-${{ hashFiles('**/yarn.lock') }}
 
       # --------------------------------------
-      # TODO: If there are any changes to FE code (we ignore unit testing if BE-only code changes)
+      # DONE: If there are any changes to FE code (we ignore unit testing if BE-only code changes) ... see nx affected BELOW:
       # • run FE unit tests (util jest tests + react library storybooks via cypress)
       # • ABORT JOB if fail on either
       # --------------------------------------
@@ -120,7 +120,8 @@ jobs:
 
       # RUN UNIT TESTS (jest), 🔴 ABORT ON FAIL
       - name: Jest unit tests 🔥
-        run: yarn nx run util:test
+        run: yarn nx affected:test
+        # DECOMISH: run: yarn nx run util:test
 
   # ###################################################################################################
   # cypress of storybook (react-ui)
@@ -199,7 +200,6 @@ jobs:
           browser: chrome
           record: true
           parallel: true
-          group: 'UI - Chrome'
           install: false
           spec: src/integration/**/*
           config-file: cypress.json
@@ -289,7 +289,6 @@ jobs:
           browser: electron
           record: true
           parallel: true
-          group: 'UI - electron'
           install: false
           spec: src/integration/**/*
           config-file: cypress.json

@@ -10,7 +10,7 @@
     "start": "nx serve",
     "build": "nx build",
     "test": "nx test",
-    "test-iac": "yarn nx run multi-cart-iac-tests:test --skip-nx-cache",
+    "test-iac": "yarn nx run multi-cart-iac-tests:test-ci --skip-nx-cache",
     "lint": "nx workspace-lint && nx lint",
     "e2e": "nx e2e",
     "affected:apps": "nx affected:apps",
