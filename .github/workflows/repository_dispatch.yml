@@ -4,8 +4,7 @@ name: Node.js CI
 
 on:
   repository_dispatch:
-  schedule:
-    - cron: '5 12 * * 0'
+    types: tf-test-dev-and-promote-to-prod
 
 jobs:
   build:
