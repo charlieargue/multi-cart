@@ -117,6 +117,13 @@ jobs:
       - name: Install dependencies
         run: yarn install --prefer-offline --frozen-lockfile
 
+      # 
+      - name: Create POSTMAN env file
+        run: |
+          touch libs/multi-cart-iac-tests/src/env-variables/Multi-Cart.postman_environment.json
+          echo API_KEY=${{ secrets.POSTMAN_SECRETS }} >> libs/multi-cart-iac-tests/src/env-variables/Multi-Cart.postman_environment.json
+          cat libs/multi-cart-iac-tests/src/env-variables/Multi-Cart.postman_environment.json
+
       # RUN POSTMAN TESTS (against DEV backend)
       - name: Jest 🎾 POSTMAN tests 🎾
         run: yarn test-iac
