@@ -75,7 +75,7 @@ jobs:
   # ###################################################################################################
   # DEV POSTMAN API/BE TESTING
   # ###################################################################################################
-  devPostmanAPITesting:
+  devPostmanTestingAPI:
     needs: [install-everything-and-save]
     # needs: [featurePromotion]
     runs-on: ubuntu-latest
