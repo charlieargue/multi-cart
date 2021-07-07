@@ -118,19 +118,19 @@ jobs:
       - name: Install dependencies
         run: yarn install --prefer-offline --frozen-lockfile
 
-      # SAVE current branch name to variable [[short_ref]]
-      - name: Set output
-        id: vars
-        run: echo ::set-output name=short_ref::${GITHUB_REF#refs/*/}
+      # DECOMISH: # SAVE current branch name to variable [[short_ref]]
+      # - name: Set output
+      #   id: vars
+      #   run: echo ::set-output name=short_ref::${GITHUB_REF#refs/*/}
 
-      # PRINT/DISPLAY [[short_ref]] for debugging/trouble-shooting ease
-      - name: Check output
-        run: echo ${{ steps.vars.outputs.short_ref }} ✊
+      # DECOMISH:  # PRINT/DISPLAY [[short_ref]] for debugging/trouble-shooting ease
+      # - name: Check output
+      #   run: echo ${{ steps.vars.outputs.short_ref }} ✊
 
       # RUN UNIT TESTS (jest), 🔴 ABORT ON FAIL
       - name: Jest unit tests 🔥
-        run: yarn nx affected:test --base=${{ steps.vars.outputs.short_ref }}
-        # DECOMISH: run: yarn nx run util:test
+        run: yarn nx run util:test
+        # NOT WORKING AS EXPECTED (not running after console.log change) run: yarn nx affected:test --base=${{ steps.vars.outputs.short_ref }}
 
   # ###################################################################################################
   # cypress of storybook (react-ui)
