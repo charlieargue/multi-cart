@@ -177,7 +177,7 @@ jobs:
   # develop -> PRODUCTION
   # ###################################################################################################
   developPromotion:
-    needs: [devPostmanTestingAPI]
+    needs: [devPostmanTestingAPI, e2e-tests-multi-cart]
     runs-on: ubuntu-latest
     steps:
       # thx: https://github.com/actions/checkout
