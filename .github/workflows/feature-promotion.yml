@@ -402,5 +402,5 @@ jobs:
           POSTMAN_ENV: ${{secrets.POSTMAN_SECRETS}}
 
       # RUN POSTMAN TESTS (against DEV backend)
-      - name: Jest 🎾 POSTMAN tests 🎾
+      - name: 🎾 POSTMAN tests 🎾 (via newman)
         run: yarn test-iac
