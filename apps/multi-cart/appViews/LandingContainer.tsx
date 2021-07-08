@@ -68,9 +68,8 @@ export const LandingContainer = () => {
                         At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no
                         sea takimata sanctus.
                         </Feature>
-                    <Feature title="Always up to date" icon={<FcTimeline />}>
-                        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
-                        invidunt ut labore.
+                    <Feature title="Testing Pyramid in CICD" icon={<FcTimeline />}>
+                        Built a full testing pyramid executing in CICD environments, triggering github actions from Terraform (needs to be from Vercel), still not 100% but good enough.
                         </Feature>
                 </SimpleGrid>
             </Box>
