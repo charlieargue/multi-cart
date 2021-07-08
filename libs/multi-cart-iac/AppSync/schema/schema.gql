@@ -102,7 +102,7 @@ input CartLineInput {
 type Query @aws_cognito_user_pools(cognito_groups: ["User"]) {
   cart(id: ID!): Cart
   carts: [Cart!]!
-  users: [User!]!
+  users: [User!]! @aws_cognito_user_pools(cognito_groups: ["Admin"])
   accounts: [Account]
   me: User
 }
