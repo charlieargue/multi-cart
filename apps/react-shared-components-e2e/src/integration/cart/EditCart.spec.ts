@@ -10,7 +10,7 @@ describe('react-shared-components: EditCart component', () => {
       cy.findByTestId('bkgndAppLayout').should('be.visible');
       
       // confirm breadcrumbs
-      cy.get(':nth-child(1) > .chakra-breadcrumb__link > .chakra-text').should('have.text', 'Home');
+      cy.get(':nth-child(1) > .chakra-breadcrumb__link > .chakra-text').should('have.text', 'Dashboard');
       cy.get(':nth-child(2) > .chakra-breadcrumb__link > .chakra-text').should('have.text', 'Cart');
       
       // and since no network, should be 
