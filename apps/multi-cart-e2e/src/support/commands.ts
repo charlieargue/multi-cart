@@ -27,7 +27,7 @@ declare namespace Cypress {
 
 // ------------------------
 Cypress.Commands.add('login', (email, password) => {
-  cy.visit('/login');
+  cy.visit('login');
   cy.get('#usernameOrEmail').type(email);
   cy.get('#password').type(password);
   cy.get('#password').type('{enter}');
