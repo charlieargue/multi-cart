@@ -31,7 +31,7 @@ context('Edit Cart Functionality', () => {
   // CLEAN-UP
   // -------------------------------------
   after(() => {
-    cy.visit('/dashboard');
+    cy.visit('dashboard');
     cy.showCarts();
 
     // need to loop as many times as there are carts
@@ -71,7 +71,7 @@ context('Edit Cart Functionality', () => {
 
   // ------------------------
   it('can add blank cart LINES', () => {
-    cy.visit('/dashboard');
+    cy.visit('dashboard');
     cy.addBlankCart();
 
     cy.findByTestId('btnAddCartLine').click();
@@ -87,7 +87,7 @@ context('Edit Cart Functionality', () => {
 
   // ------------------------
   it('correctly SUMS LINE QUANTITIES in current cart avatar', () => {
-    cy.visit('/dashboard');
+    cy.visit('dashboard');
     cy.addBlankCart();
     // NOTE: temporarily I hope, I need to click anywhere to hide the dropdown, because it messes things up
     cy.findByTestId('btnAddCartLine').click();
@@ -114,7 +114,7 @@ context('Edit Cart Functionality', () => {
 
   // ------------------------
   it('correctly SUMS LINE PRICES in current cart avatar', () => {
-    cy.visit('/dashboard');
+    cy.visit('dashboard');
     cy.addBlankCart();
     cy.findByTestId('btnAddCartLine').click();
     cy.get('tbody > tr').should('have.length', '2');
@@ -137,7 +137,7 @@ context('Edit Cart Functionality', () => {
 
   // ------------------------
   it('autosave works correctly', () => {
-    cy.visit('/dashboard');
+    cy.visit('dashboard');
     cy.addBlankCart();
 
     cy.findByTestId('btnAddCartLine').click();

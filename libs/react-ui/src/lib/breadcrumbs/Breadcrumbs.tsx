@@ -32,7 +32,7 @@ export function Breadcrumbs<BreadcrumbsProps>({ links = [] }) {
       {/* Home */}
       <BreadcrumbItem>
         <NextLink href="/dashboard">
-          <BreadcrumbLink href="/dashboard"><TextMuted fontSize="14px">Home</TextMuted></BreadcrumbLink>
+          <BreadcrumbLink href="/dashboard"><TextMuted fontSize="14px">Dashboard</TextMuted></BreadcrumbLink>
         </NextLink>
       </BreadcrumbItem>
 
