@@ -27,6 +27,8 @@ declare namespace Cypress {
 
 // ------------------------
 Cypress.Commands.add('login', (email, password) => {
+  // eslint-disable-next-line cypress/no-unnecessary-waiting
+  cy.wait(2000);
   cy.visit('login');
   cy.get('#usernameOrEmail').type(email);
   cy.get('#password').type(password);
