@@ -1,9 +1,10 @@
 import React from 'react';
 import { LandingLayout, Hero } from '@multi-cart/react-shared-components';
-import { useColorModeValue as mode, Text, Box, SimpleGrid, Stack, Divider } from '@chakra-ui/react';
+import { useColorModeValue as mode, Text, Box, SimpleGrid, Stack, Divider, Link } from '@chakra-ui/react';
 import { FcPrivacy, FcTimeline, FcDoughnutChart, FcMultipleDevices } from 'react-icons/fc';
 import GridBlurredBackdrop from './_testimonials';
-
+import { GoMarkGithub as GithubIcon } from 'react-icons/go';
+import { FiExternalLink as ExternalLink } from 'react-icons/fi';
 
 interface FeatureProps {
     title: string
@@ -32,17 +33,20 @@ interface LandingContainerProps {
 
 }
 
+// Demo App built with React • Next.js • Nx • Chakra-UI • Storybook • urql • codegen • type-graphql • and more!
 export const LandingContainer = () => {
     return (<LandingLayout>
         <Hero
             title="Fancy Shopping Cart"
-            subtitle="Demo App built with React • Next.js • Nx • Chakra-UI • Storybook • urql • codegen • type-graphql • and more!"
+            subtitle={<p>This is a fake app built for demo purposes with React, GraphQL, Terraform, AppSync, and other tech.
+                <Link href="https://github.com/charlieargue/multi-cart" isExternal ml="2"><GithubIcon style={{ display: "inline", marginRight: "4px" }} />Code available on GitHub <ExternalLink style={{display: "inline"}} /></Link>
+            </p>}
             image="https://source.unsplash.com/collection/2451930/800x600"
             ctaText="Register your account now"
             ctaLink="/register"
         />
 
-        <Box minW="60vw" pt="82px" ><Divider  /></Box>
+        <Box minW="60vw" pt="82px" ><Divider /></Box>
 
         {/* Features */}
         <Box as="section" py="24">
@@ -54,7 +58,7 @@ export const LandingContainer = () => {
                         </Feature>
                     <Feature title="Always up to date" icon={<FcTimeline />}>
                         Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
-                        invidunt ut labore. no public directory... one more try... fingers crossed 
+                        invidunt ut labore. no public directory... one more try... fingers crossed
                         </Feature>
                     <Feature title="Incredible statistics" icon={<FcDoughnutChart />}>
                         At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no

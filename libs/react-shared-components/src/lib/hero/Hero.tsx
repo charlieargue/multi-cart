@@ -3,6 +3,8 @@ import {
   Button,
   Flex,
   Heading, Image,
+  Link,
+  SkeletonText,
   Stack
 } from "@chakra-ui/react";
 import NextLink from 'next/link';
@@ -10,11 +12,12 @@ import PropTypes from "prop-types";
 import React from "react";
 import './Hero.module.scss';
 import { TextMuted } from '@multi-cart/react-ui';
+import { FiExternalLink as ExternalLink } from 'react-icons/fi';
 
 
 export interface HeroProps {
   title: string;
-  subtitle: string;
+  subtitle: string | React.ReactElement;
   image: string;
   ctaText: string;
   ctaLink: string;
@@ -74,11 +77,13 @@ export const Hero = ({
             {ctaText}
           </Button>
         </NextLink>
-        <TextMuted>&nbsp;&nbsp;&nbsp;&nbsp;No credit card required</TextMuted>
+        <TextMuted style={{ marginLeft: '16px' }}>
+          {/* TODO: make this an ExternalLink cmnpt like this: https://richardhaines.dev/chakra-external-link-with-svg-icon/ */}
+          Built by <Link href="http://karlgolka.com" isExternal mr="1">Karl Golka <ExternalLink style={{display: "inline"}} /></Link>in 2021
+          </TextMuted>
       </Stack>
       <Box w={{ base: "80%", sm: "60%", md: "50%" }} mb={{ base: 12, md: 0 }}>
-        {/* TODO: Make this change every X secs */}
-        <Image src={image} size="100%" rounded="1rem" shadow="2xl" />
+        <Image src={image} size="100%" rounded="1rem" shadow="2xl" fallbackSrc="/blue-loading-spinner-transparent-bg.gif" />
       </Box>
     </Flex>
   );
