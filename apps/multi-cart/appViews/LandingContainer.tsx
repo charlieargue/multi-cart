@@ -1,7 +1,7 @@
 import { Box, chakra, Divider, Flex, Link, SimpleGrid, Stack, Text, useColorModeValue as mode } from '@chakra-ui/react';
 import { Hero, LandingLayout } from '@multi-cart/react-shared-components';
 import React from 'react';
-import { FcCollaboration, FcEnteringHeavenAlive, FcMindMap, FcPrivacy, FcTimeline, FcVip, FcWorkflow } from 'react-icons/fc';
+import { FcFlowChart, FcSportsMode, FcPositiveDynamic, FcCollaboration, FcEnteringHeavenAlive, FcMindMap, FcPrivacy, FcTimeline, FcVip, FcWorkflow } from 'react-icons/fc';
 import { FiExternalLink as ExternalLink } from 'react-icons/fi';
 import { GoMarkGithub as GithubIcon } from 'react-icons/go';
 import GridBlurredBackdrop from './_testimonials';
@@ -79,15 +79,15 @@ export const LandingContainer = () => {
                     </Feature>
                     <Feature title="Team-Ready" icon={<FcCollaboration />}>
                         <p>
-                            Robust GIT branching and deployment strategy, actions for creating and merging PRs after tests pass, re-usable <chakra.strong color="pink.500">nx</chakra.strong> libraries for easier collaboration, etc.
+                            GIT branching and deployment strategy, actions for creating and merging PRs after tests pass, re-usable <chakra.strong color="pink.500">nx mono-repo</chakra.strong> libraries for easier collaboration, automatic preview branches, etc.
                         </p>
                     </Feature>
                     <Feature title="FE/BE Automation" icon={<FcWorkflow />}>
                         <p>
-                            CICD workflows on each feature branch commit, utilizing <chakra.strong color="pink.500">Vercel, Terraform Cloud, and GitHub Actions</chakra.strong>.
+                            CICD workflows on each feature branch commit, utilizing <chakra.strong color="pink.500">Vercel, Terraform Cloud, and GitHub Actions</chakra.strong> with tests running in parallel.
                         </p>
                     </Feature>
-                    <Feature title="Infrastructure-as-Code (IAC)" icon={<FcMindMap />}>
+                    <Feature title="Serverless (IAC)" icon={<FcMindMap />}>
                         <p>
                             Terraform and AppSync power the back-end, including remote execution, state, and workpaces via <chakra.strong color="pink.500">Terraform Cloud</chakra.strong>.
                         </p>
@@ -97,16 +97,24 @@ export const LandingContainer = () => {
                             Utilizing Amazon's "cloud native" tech (VTL AppSync resolvers) as much as possible for performance-at-scale and <chakra.strong color="pink.500">no cold starts</chakra.strong>!
                         </p>
                     </Feature>
+                    <Feature title="Scalable" icon={<FcPositiveDynamic />}>
+                        <p>
+                            Built with highly-scalable tech, including Amazon's DynamoDB and Cognito (<chakra.strong color="pink.500">capable of handling millions of users</chakra.strong>) on the back-end, as well as the Vercel Edge Network for the front.
+                        </p>
+                    </Feature>
+                    <Feature title="Performant" icon={<FcSportsMode />}>
+                        <p>
+                        The FE is built with <chakra.strong color="pink.500">urql</chakra.strong>, a blazing-fast GraphQL client, and opts-in to  Graphcache normalized caching for added power! Lighthouse scores are in the upper-90s for Performance and Best Practices!
+                        </p>
+                    </Feature>
+                    <Feature title="Robust Testing Pyramid" icon={<FcFlowChart />}>
+                        <p>
+                        Tests of various granularity (UI/integration, service, &amp; unit tests), running <chakra.strong color="pink.500">in-parallel across multiple machines </chakra.strong> (via GitHub Actions), using Jest, Storybook, and Cypress &mdash; with testing times reduced to a couple minutes!
+                        </p>
+                    </Feature>
 
 
-                    {/*  */}
-                    <Feature title="Service Tests run Parallel Now" icon={<FcPrivacy />}>
-                        At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no
-                        sea takimata sanctus.
-                        </Feature>
-                    <Feature title="Testing Pyramid in CICD" icon={<FcTimeline />}>
-                        Built a full testing pyramid executing in CICD environments, triggering github actions from Terraform (needs to be from Vercel), still not 100% but good enough.
-                        </Feature>
+
                 </SimpleGrid>
             </Box>
         </Box>
