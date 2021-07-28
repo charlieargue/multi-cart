@@ -129,13 +129,6 @@ import React from 'react';
         width={'full'}
         mb={48}>
         <Box width={{ base: 'full', sm: 'lg', lg: 'xl' }} margin={'auto'}>
-          <chakra.h3
-            fontWeight={'bold'}
-            fontSize={20}
-            textTransform={'uppercase'}
-            color={'pink.400'}>
-            People love us
-          </chakra.h3>
           <chakra.h1
             py={5}
             fontSize={48}

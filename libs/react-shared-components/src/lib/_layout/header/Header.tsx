@@ -3,6 +3,7 @@ import { Box, Flex, Text, Button, useColorModeValue as mode } from "@chakra-ui/r
 import { Logo } from "@multi-cart/react-ui";
 import NextLink from 'next/link';
 import { CgClose as CloseIcon } from 'react-icons/cg';
+import { FiLogIn as LogInIcon } from 'react-icons/fi';
 
 // TODO: componentize
 const MenuItem = ({ children, isLast = false, to = "/", ...rest }) => {
@@ -73,14 +74,10 @@ export const Header = (props) => {
             <Button
               size="sm"
               rounded="md"
-              bg="pink"
-              color="#B53526"
-              _hover={{
-                bg: "pink.500",
-                color: "white"
-              }}
+              colorScheme="pink"
+              leftIcon={<LogInIcon />}
             >
-              <span role='img' aria-label='emoji'>🛡</span>&nbsp;&nbsp;Login
+              Login
             </Button>
           </MenuItem>
         </Flex>

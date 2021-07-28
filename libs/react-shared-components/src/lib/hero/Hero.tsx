@@ -4,15 +4,14 @@ import {
   Flex,
   Heading, Image,
   Link,
-  SkeletonText,
+
   Stack
 } from "@chakra-ui/react";
-import NextLink from 'next/link';
-import PropTypes from "prop-types";
-import React from "react";
-import './Hero.module.scss';
 import { TextMuted } from '@multi-cart/react-ui';
+import NextLink from 'next/link';
+import React from "react";
 import { FiExternalLink as ExternalLink } from 'react-icons/fi';
+import './Hero.module.scss';
 
 
 export interface HeroProps {
