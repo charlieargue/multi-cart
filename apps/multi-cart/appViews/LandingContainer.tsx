@@ -1,7 +1,7 @@
 import { Box, chakra, Divider, Flex, Link, SimpleGrid, Stack, Text, useColorModeValue as mode } from '@chakra-ui/react';
 import { Hero, LandingLayout } from '@multi-cart/react-shared-components';
 import React from 'react';
-import { FcFlowChart, FcSportsMode, FcPositiveDynamic, FcCollaboration, FcEnteringHeavenAlive, FcMindMap, FcPrivacy, FcTimeline, FcVip, FcWorkflow } from 'react-icons/fc';
+import { FcOk, FcFlowChart, FcSportsMode, FcPositiveDynamic, FcCollaboration, FcEnteringHeavenAlive, FcMindMap, FcPrivacy, FcTimeline, FcVip, FcWorkflow } from 'react-icons/fc';
 import { FiExternalLink as ExternalLink } from 'react-icons/fi';
 import { GoMarkGithub as GithubIcon } from 'react-icons/go';
 import GridBlurredBackdrop from './_testimonials';
@@ -112,9 +112,11 @@ export const LandingContainer = () => {
                         Tests of various granularity (UI/integration, service, &amp; unit tests), running <chakra.strong color="pink.500">in-parallel across multiple machines </chakra.strong> (via GitHub Actions), using Jest, Storybook, and Cypress &mdash; with testing times reduced to a couple minutes!
                         </p>
                     </Feature>
-
-
-
+                    <Feature title="UI Best Practices" icon={<FcOk />}>
+                        <p>
+                        Component-based development, custom design system based on <chakra.strong color="pink.500">Chakra-ui</chakra.strong>, a re-usable shared-components library, and stand-alone Storybooks with Cypress tests. Dark mode included as well!
+                        </p>
+                    </Feature>
                 </SimpleGrid>
             </Box>
         </Box>
