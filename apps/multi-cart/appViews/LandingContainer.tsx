@@ -38,7 +38,7 @@ export const LandingContainer = () => {
     return (<LandingLayout>
         <Hero
             title="Fancy Shopping Cart"
-            subtitle={<p>This is a fake app built for demo purposes with React, GraphQL, Terraform, AppSync, and other tech.
+            subtitle={<p>This is a fake app built for demo purposes with <chakra.strong color="pink.500">React</chakra.strong>, GraphQL, Terraform, AppSync, and other tech.
                 <Link color={'pink.700'} href="https://github.com/charlieargue/multi-cart" isExternal ml="2"><GithubIcon style={{ display: "inline", marginRight: "4px" }} />Code available on GitHub <ExternalLink style={{ display: "inline" }} /></Link>
             </p>}
             image="https://source.unsplash.com/collection/2451930/800x600"
