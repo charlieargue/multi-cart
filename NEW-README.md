@@ -9,11 +9,15 @@ A fake "**fancy shopping cart**" app built for demo purposes with:
 
 
 
+
+
 # Quick Demo
 
 ![multi-cart-overview]()
 
 🔴 TODO: keep it under 10 mb! for Github-issues trick!
+
+
 
 
 
@@ -27,21 +31,21 @@ This was built for purposes of `self-study as I was upskilling` from **angular &
 
 In addition to building the app, I also strove to include all-around modern web development **best practices**, that I had been wanting to learn and use for a long time, such as using:
 
-- React
-- nx mono-repo
+- React (urql, formik, redux, Context, etc.)
+- nx mono-repo (shared libraries)
 - Storybook
 - Jest
 - Cypress
 - Next.js
 - Terraform
 - AWS (AppSync, Cognito, DynamoDB, etc.)
-- and others...
+- and more.
 
-I also did my best to keep things as **Production-ready** as I could, for instance with multiple environments and safe key and secrets management (still a work-in-progress), as well as keeping the project **Team-ready** as well, so that other contributors could jump right in and pitch in development without much effort. 
+I also did my best to keep things as **Production-ready** as I could, for instance with multiple environments and safe secrets management, as well as keeping the project **Team-ready** as well, so that other contributors could jump right in and pitch in development into the CICD workflows. 
 
-The **CICD** is done built so as make full use of my testing pyramid, not merging PRs if tests fail, and keeping things as automated as possible. There's definitely room for improvement, see CICD notes below for more info, but it seems to work fine, and does not take too long (dozens of e2e tests running in parallel complete in a couple minutes).
+I designed the **CICD** workflows to make full use of my testing pyramid -- i.e. not merging PRs if tests fail, and keeping things as automated as possible. There's definitely room for improvement, see the CICD section below details, but it all works fine as-is and does not take too long (dozens of e2e tests running in parallel complete in a couple minutes, the entire pipeline taking less than 20 minutes).
 
-I tried to leverage **cloud technologies and go "Cloud-Native"** as much as possible, for example:
+Additionally, I tried to leverage **cloud** and  **"Cloud-Native"** technologies as much as possible, for example:
 
 * using Terraform Cloud, Cypress Dashboard, GitHub Actions, and Vercel
 
@@ -49,32 +53,76 @@ I tried to leverage **cloud technologies and go "Cloud-Native"** as much as poss
 
   * > to minimize cold start and latency due to network I/O for resolver invocation...
 
+Finally, one of my primary goals was to basically build a **enterprise-grade starter boilerplate** that I could use on future projects, that was also **scalable**. Using Terraform, AppSync, DynamoDB, and Cognito allow for that. Cognito apparently can handle millions of users for authentication out-of-the-gate with minimal adjustment. With DynamoDB, you would need to add some `autoscaling` configurations, and so forth.  On the front-end, the Vercel Edge Network handles most of that for us.
+
+Keep in mind this is a **work-in-progress**, many things are mocked (like Products and the dashboard), and incomplete (like UOMs and Categories). 
+
+This was **inspired by** the many shopping cart and e-commerce projects I have worked on in the past, and is a loose conglomeration of some of them.
 
 
 
+
+
+
+
+# 🔴 TODO: try this! PLUS AWS KEYS?! root user???
 
 # How to install
 
 ```sh
 
 # clone the repo
-git clone https://github.com/charlieargue/knowde-pos.git
+git clone https://github.com/charlieargue/multi-cart
 
 # change directory 
-cd knowde-pos
+cd multi-cart
 
-# install all libraries (can do npm i)
-yarn install
+# install libraries 
+yarn
+
+# 🔴 CURRENT KNOWN ISSUES:
+- you will need AWS credentials installed globally
+- I'm still using ROOT USER instead of a sub-AWS-user, WIP
+- assumes you have yarn installed
 ```
+
+
+
+
 
 # Quick Start
 
-## Setup environment variables and output files
+SO... try on LJI old laptop?
+
+- try with another/new user on this laptop?
+- hmmm......
+
+
+
+
+
+
+
+# Testing
+
+# CICD
+
+# Caveats/Issues
+
+
+
+
+
+
+
+**1. Setup environment variables and output files**
 
 You will need to grab a `.env` environment variable file:
 ```
 🛑 The back-end will not work without the correct .env files!
 ```
+
+
 
 ```sh
 # copy env file distribution version
@@ -88,6 +136,10 @@ Create your two output files:
 # output files
 touch output-LCD.txt && touch output-PRINTER.txt
 ```
+
+
+
+
 
 ## Setup database
 
