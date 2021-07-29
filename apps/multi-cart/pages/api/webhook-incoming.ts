@@ -34,7 +34,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
             break
     }
 
-    // NOTE: this is the github actions webhook (one for DEV, one for PROD TODO:🔥 )
+    // NOTE: this is the github actions webhook
     const options = {
         headers: { 'authorization': `Bearer ${NEXT_PUBLIC_GITHUB_PAT}` }
     };

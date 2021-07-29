@@ -47,7 +47,7 @@ const testimonials = [
     content:
       "I love React, and I especially love React + Next.js! Hybrid static & server-side rendering, great TypeScript support, smart bundling, route pre-fetching, and superb nx and urql integration!",
     avatar: '/logos/logo-vercel.png',
-    url: 'https://www.terraform.io/'
+    url: 'https://nextjs.org/'
   },
 ];
 
