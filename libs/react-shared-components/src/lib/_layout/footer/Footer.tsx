@@ -20,6 +20,7 @@ export const Footer = () => {
           direction={{ base: 'column', md: 'row' }}
           marginStart={{ md: '8' }}
           fontSize="sm"
+          textColor="gray.500"
           spacing={{ base: '2', md: '8' }}
           textAlign={{ base: 'center', md: 'start' }}
         >
@@ -27,10 +28,10 @@ export const Footer = () => {
           <Link>Privacy</Link>
           <Link>Terms and Conditions</Link>
         </Stack>
-        <ButtonGroup ml={8} color="gray.600" variant="ghost">
-          <IconButton as="a" href="www.google.com" aria-label="LinkedIn" icon={<FaLinkedin />} />
-          <IconButton as="a" href="www.google.com" aria-label="LinkedIn" icon={<FaGithub />} />
-          <IconButton as="a" href="www.google.com" aria-label="LinkedIn" icon={<FaTwitter />} />
+        <ButtonGroup ml={8} color="gray.400" variant="ghost">
+          <IconButton as="a" href="#" aria-label="LinkedIn" icon={<FaLinkedin />} />
+          <IconButton as="a" href="#" aria-label="LinkedIn" icon={<FaGithub />} />
+          <IconButton as="a" href="#" aria-label="LinkedIn" icon={<FaTwitter />} />
         </ButtonGroup>
       </Flex>
     </Box>

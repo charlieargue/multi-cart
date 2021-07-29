@@ -29,17 +29,18 @@ This was built for purposes of `self-study as I was upskilling` from **angular &
 * then **react** & a <u>mocked</u> GraphQL backend (for rapid UI development, using Next.js' public api pages)
 * and finally **react** & a <u>serverless</u> backend (with Terraform+AppSync+DynamoDB+Cognito)
 
-In addition to building the app, I also strove to include all-around modern web development **best practices**, that I had been wanting to learn and use for a long time, such as using:
+In addition to building the app, I also strove to include the latest web development **best practices and tools**, that I had been wanting to learn and use for a long time, such as using:
 
 - React (urql, formik, redux, Context, etc.)
 - nx mono-repo (shared libraries)
+- Chakra-UI
 - Storybook
 - Jest
 - Cypress
 - Next.js
 - Terraform
 - AWS (AppSync, Cognito, DynamoDB, etc.)
-- and more.
+- etc.
 
 I also did my best to keep things as **Production-ready** as I could, for instance with multiple environments and safe secrets management, as well as keeping the project **Team-ready** as well, so that other contributors could jump right in and pitch in development into the CICD workflows. 
 
@@ -101,13 +102,29 @@ SO... try on LJI old laptop?
 
 
 
+# Libraries Used
 
+(just list from package.json? why?...) or point to it... yes!
 
 # Testing
 
 # CICD
 
 # Caveats/Issues
+
+# License
+
+(unknown, add MIT one or something?)
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -176,99 +193,3 @@ yarn watch
 yarn dev
 ```
 
-# GraphQL Playground
-
-Open [http://localhost:4000/graphql](http://localhost:4000/graphql) to open the **GraphQL Playground** in the browser.
-
-
-## GraphQL Mutations
-
-To view all `products`, `users`, or `scans`, use:
-```graphql
-# view products
-{
-  products {
-    id
-    barcode
-    name
-    price
-    createdAt
-    
-  }
-}
-
-
-# view users
-{
-  users {
-    id
-    email
-    username
-    createdAt
-    
-  }
-}
-
-
-# view scans (with product data)
-{
-  scans {
-    id
-    userId
-    productId
-    price
-    createdAt
-    product {
-      id
-      name
-      price
-    }
-  }
-}
-
-```
-
-To make a `SALE` operation, for example:
-```graphql
-# example values
-mutation {
-  sale(
-    barcode: "68151-4146",
-    userId: 22) {
-    id
-    userId
-    productId
-    createdAt
-  }
-}
-
-```
-
-And to perform an `EXIT` operation:
-```graphql
-
-{
-  exit
-}
-```
-
-
-# Running Tests
-
-First, setup the test DB:
-```sh
-# change username!
-createdb knowde-pos-test -U 🟡karlgolka🟡
-
-# NOTE: you DO NOT need the server nor `yarn watch` running for tests to work!
-
-# run tests
-yarn test
-
-```
-
-# Output Files
-
-Output devices were mocked to be files, as per instructions. They can be viewed here:
-*  [🖥 LCD output file](output-LCD.txt)
-*  [🖨 PRINTER output file](output-PRINTER.txt)
