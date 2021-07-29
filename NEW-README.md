@@ -82,7 +82,7 @@ git clone https://github.com/charlieargue/multi-cart
 # change directory 
 cd multi-cart
 
-# install libraries 
+# install libraries (this can take a few minutes)
 yarn
 
 # 🔴 CURRENT KNOWN ISSUES:
@@ -98,6 +98,8 @@ yarn
 # Quick Start
 
 
+
+🛑🛑🛑🛑🛑🛑🛑 TODO 🛑🛑🛑🛑🛑🛑🛑🛑
 
 **1. Setup AWS credentials**
 
@@ -123,7 +125,7 @@ Create your two output files:
 touch output-LCD.txt && touch output-PRINTER.txt
 ```
 
-
+🛑🛑🛑🛑🛑🛑🛑 TODO 🛑🛑🛑🛑🛑🛑🛑🛑
 
 
 
@@ -131,26 +133,24 @@ touch output-LCD.txt && touch output-PRINTER.txt
 
 **2. Setup environment variables**
 
-You will need to grab a `.env` environment variable file:
+In order to run the front-end locally, you'll need a `.env.local` environment variable file in the `apps/multi-cart/` directory.
 
 ```
-🛑 The back-end will not work without the correct .env files!
+🛑 ATTENTION: The front-end will not work without the correct .env file!
 ```
 
-
+Run this command to create a blank file based on the distribution template:
 
 ```sh
-# copy env file distribution version
-cp .env.dist .env
-
-# make sure to fill it out with the PostgreSQL username/password, see below...
+# copy env file (this assumes you are in the root multi-cart directory)
+cp apps/multi-cart/.env.dist apps/multi-cart/.env.local
 ```
 
-Create your two output files:
+Fill it out only the top two variables with these values:
 
-```sh
-# output files
-touch output-LCD.txt && touch output-PRINTER.txt
+```
+NEXT_PUBLIC_API_URL=https://pcuynwb3tfbbzjfygrljfoej3q.appsync-api.us-west-2.amazonaws.com/graphql
+NEXT_PUBLIC_API_KEY=da2-zrexcuvmlvhj3oxbzp3nby7ipq
 ```
 
 
