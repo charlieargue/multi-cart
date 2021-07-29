@@ -7,7 +7,7 @@
 # thx: https://dev.to/rikurouvila/how-to-trigger-a-github-action-with-an-htt-request-545
 # ###################################################################################################
 
-name: tf-test-and-promote
+name: dev-promotion
 on:
   repository_dispatch:
     types: tf-test-dev-and-promote-to-prod

@@ -9,7 +9,7 @@
 # thx: https://github.com/marketplace/actions/cypress-io
 # ###################################################################################################
 
-name: cicd-pipeline
+name: feature-promotion
 on:
   push:
     branches:

@@ -97,10 +97,65 @@ yarn
 
 # Quick Start
 
-SO... try on LJI old laptop?
 
-- try with another/new user on this laptop?
-- hmmm......
+
+**1. Setup AWS credentials**
+
+You will need to grab a `.env` environment variable file:
+
+```
+🛑 The back-end will not work without the correct .env files!
+```
+
+
+
+```sh
+# copy env file distribution version
+cp .env.dist .env
+
+# make sure to fill it out with the PostgreSQL username/password, see below...
+```
+
+Create your two output files:
+
+```sh
+# output files
+touch output-LCD.txt && touch output-PRINTER.txt
+```
+
+
+
+
+
+
+
+**2. Setup environment variables**
+
+You will need to grab a `.env` environment variable file:
+
+```
+🛑 The back-end will not work without the correct .env files!
+```
+
+
+
+```sh
+# copy env file distribution version
+cp .env.dist .env
+
+# make sure to fill it out with the PostgreSQL username/password, see below...
+```
+
+Create your two output files:
+
+```sh
+# output files
+touch output-LCD.txt && touch output-PRINTER.txt
+```
+
+
+
+
 
 
 
@@ -149,32 +204,6 @@ SO... try on LJI old laptop?
 
 
 
-
-
-
-
-
-**1. Setup environment variables and output files**
-
-You will need to grab a `.env` environment variable file:
-```
-🛑 The back-end will not work without the correct .env files!
-```
-
-
-
-```sh
-# copy env file distribution version
-cp .env.dist .env
-
-# make sure to fill it out with the PostgreSQL username/password, see below...
-```
-
-Create your two output files:
-```sh
-# output files
-touch output-LCD.txt && touch output-PRINTER.txt
-```
 
 
 
