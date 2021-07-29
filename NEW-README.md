@@ -11,11 +11,43 @@ A fake "**fancy shopping cart**" app built for demo purposes with:
 
 # Quick Demo
 
-![multi-cart-overview](https://user-images.githubusercontent.com/16597829/127561294-3efbc2a2-adf5-4df6-b09e-78d60831a019.mov)
+![multi-cart-overview]()
+
+🔴 TODO: keep it under 10 mb! for Github-issues trick!
 
 
 
 # Purpose 
+
+This was built for purposes of `self-study as I was upskilling` from **angular & node/REST APIs** to **react** along with various GraphQL backends, namely:
+
+* first **react** & <u>PostgreSQL+TypeOrm+TypeGraphQL</u> (after diligently going thru [Ben Awad's 14-hour Full-Stack React Course](https://www.youtube.com/watch?v=I6ypD7qv3Z8))
+* then **react** & a <u>mocked</u> GraphQL backend (for rapid UI development, using Next.js' public api pages)
+* and finally **react** & a <u>serverless</u> backend (with Terraform+AppSync+DynamoDB+Cognito)
+
+In addition to building the app, I also strove to include all-around modern web development **best practices**, that I had been wanting to learn and use for a long time, such as using:
+
+- React
+- nx mono-repo
+- Storybook
+- Jest
+- Cypress
+- Next.js
+- Terraform
+- AWS (AppSync, Cognito, DynamoDB, etc.)
+- and others...
+
+I also did my best to keep things as **Production-ready** as I could, for instance with multiple environments and safe key and secrets management (still a work-in-progress), as well as keeping the project **Team-ready** as well, so that other contributors could jump right in and pitch in development without much effort. 
+
+The **CICD** is done built so as make full use of my testing pyramid, not merging PRs if tests fail, and keeping things as automated as possible. There's definitely room for improvement, see CICD notes below for more info, but it seems to work fine, and does not take too long (dozens of e2e tests running in parallel complete in a couple minutes).
+
+I tried to leverage **cloud technologies and go "Cloud-Native"** as much as possible, for example:
+
+* using Terraform Cloud, Cypress Dashboard, GitHub Actions, and Vercel
+
+* choosing AWS "Cloud Native" **VTL** template resolvers over Lambdas wherever possible
+
+  * > to minimize cold start and latency due to network I/O for resolver invocation...
 
 
 

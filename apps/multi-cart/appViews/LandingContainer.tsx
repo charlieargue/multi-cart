@@ -79,7 +79,7 @@ export const LandingContainer = () => {
                     </Feature>
                     <Feature title="Team-Ready" icon={<FcCollaboration />}>
                         <p>
-                            GIT branching and deployment strategy, actions for creating and merging PRs after tests pass, re-usable <chakra.strong color="pink.500">nx mono-repo</chakra.strong> libraries for easier collaboration, automatic preview branches, etc.
+                            Effective GIT branching and deployment strategies, actions for creating and merging PRs after tests pass, re-usable <chakra.strong color="pink.500">nx mono-repo</chakra.strong> libraries for easier collaboration, automatic preview branches, etc.
                         </p>
                     </Feature>
                     <Feature title="FE/BE Automation" icon={<FcWorkflow />}>
