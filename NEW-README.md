@@ -7,7 +7,9 @@ A fake "**fancy shopping cart**" app built for demo purposes with:
 * **AppSync**,
 * and other tech.
 
+👍**tldr:** is a full-stack serverless web application (not responsive or mobile-first design at this stage), that is very nearly production-ready and enterprise-grade, can be used as a starter project, and includes robust testing, CICD, shared libraries between the FE & BE, and is team-ready.
 
+🏛 NOTE: *I built this in approx. 4 months at the beginning of 2021, you can see all my GIT commits for more info.*
 
 
 
@@ -66,6 +68,8 @@ This was **inspired by** the many shopping cart and e-commerce projects I have w
 
 
 
+# 🔴 KISS PLZ! 💋
+
 # 🔴 TODO: try this! PLUS AWS KEYS?! root user???
 
 # How to install
@@ -102,15 +106,33 @@ SO... try on LJI old laptop?
 
 
 
-# Libraries Used
+# nx Projects Overview
 
-(just list from package.json? why?...) or point to it... yes!
+<img src="/Users/karlgolka/PROJECTS/FYI/_typora_images/image-20210729162309390.png" alt="image-20210729162309390" style="zoom:70%;" />
+
+### [ ] 🔥 Show Dependency Graph!
+
+
+
+
+
+
 
 # Testing
 
+[ ] 🔥 Show Testing pyramid
+
+
+
 # CICD
 
+[ ] 🔥 Show CICD diagram (update it plz!)
+
+
+
 # Caveats/Issues
+
+
 
 # License
 
