@@ -133,20 +133,14 @@ touch output-LCD.txt && touch output-PRINTER.txt
 
 **2. Setup environment variables**
 
-In order to run the front-end locally, you'll need a `.env.local` environment variable file in the `apps/multi-cart/` directory.
-
-```
-🛑 ATTENTION: The front-end will not work without the correct .env file!
-```
-
-Run this command to create a blank file based on the distribution template:
+In order to run the front-end locally, you'll need a `.env.local` environment variable file in the `apps/multi-cart/` directory:
 
 ```sh
 # copy env file (this assumes you are in the root multi-cart directory)
 cp apps/multi-cart/.env.dist apps/multi-cart/.env.local
 ```
 
-Fill it out only the top two variables with these values:
+You only need the top two keys:
 
 ```
 NEXT_PUBLIC_API_URL=https://pcuynwb3tfbbzjfygrljfoej3q.appsync-api.us-west-2.amazonaws.com/graphql
@@ -177,15 +171,33 @@ NEXT_PUBLIC_API_KEY=da2-zrexcuvmlvhj3oxbzp3nby7ipq
 
 [ ] 🔥 Show Testing pyramid
 
+[ ] show how to run ALL tests locally!
+
+
+
+# Serverless (Terraform Cloud & AWS):
+
+[ ] explain that remote execution, so need to setup TF CLoud, env vars, etc... (screen shots, or NO, SKIP ALL THAT< not the point here?!) just broadly, show settings screenshots quickly, it's easy maybe, ok?)
+
+[ ] explain that only DEV and PROD envs (no local, never tf plan/apply locally, etc... remote state)
+
 
 
 # CICD
 
 [ ] 🔥 Show CICD diagram (update it plz!)
 
+[ ] explain need to move KEYS up into TF Cloud,  
+
+[ ] explain TF notification -> GHA webhook
+
 
 
 # Caveats/Issues
+
+
+
+# Other helpful Commands
 
 
 
