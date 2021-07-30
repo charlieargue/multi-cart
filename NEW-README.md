@@ -15,7 +15,7 @@ It is built with:
 
 
 
-# Demo
+## Demo
 
 ![multi-cart-overview](https://github.com/charlieargue/readme-assets/blob/main/multi-cart/Multi-Cart-trimmed-xs-TEMP.gif?raw=true)
 
@@ -23,7 +23,7 @@ It is built with:
 
 
 
-# Purpose 
+## Purpose 
 
 This was built for purposes of `self-study as I was upskilling` from angular & node/REST APIs **to React**, and I incrementally changed the GraphQL backends along the way, namely:
 
@@ -68,7 +68,7 @@ This was **inspired by** the many shopping cart and e-commerce projects I have w
 
 
 
-# How to install
+## How to install
 
 You will need `yarn` and `node` installed on your machine for this to work:
 
@@ -87,7 +87,7 @@ yarn
 
 
 
-# Quick Start
+## Quick Start
 
 **1. Setup environment variables**
 
@@ -121,7 +121,7 @@ You can view the site at:
 
 
 
-# Project Overview
+## Project Overview
 
 This nx monorepo contains the following projects (screenshot taken of [nx console](https://marketplace.visualstudio.com/items?itemName=nrwl.angular-console)), in a flattened view:
 
@@ -176,7 +176,7 @@ Output from the `nx dep-graph` command:
 
 
 
-# Testing
+## Testing
 
 <img src="https://github.com/charlieargue/readme-assets/blob/main/multi-cart/testing-pyramid.png?raw=true" alt="testing-pyramid" style="zoom:70%;" />
 
@@ -279,7 +279,7 @@ Which should look something like this:
 
 
 
-# CICD
+## CICD
 
 The CICD workflows are composed of a few separate pieces:
 
@@ -308,13 +308,13 @@ In detailed steps, here's what happens when a developer makes a local commit to 
 
 1. Files are linted locally, and then pushed up to the repo origin
 2. That triggers **Vercel** to build and deploy a preview of my feature branch
-3. Also triggered by Step #1, GitHub Action #1, starts 
+3. Also triggered by Step #1, **GitHub Action #1**, starts 
    1. That GHA #1 will simultaneously run Jest Unit Tests and all the Cypress Storybook Tests, the latter being run in-parallel across multiple GitHub machines, with a little help from Cypress Dashboard
 4. If all those complete without errors, a pull-request (PR) will be created and automatically merged, merging this feature branch with the **develop** branch
 5. That merge triggers **Vercel** to build and deploy the **develop** branch
 6. That merge also simultaneously triggers **Terraform Cloud** to run and apply configuration changes (hackily, see note ➰, it always runs, even if no BE changes were made)
 7. Once applied, **Terraform Cloud** fires off a *Notification* to my custom incoming webhook (`webhook-incoming.ts`) which simply fires off a *Repository Dispatch* to my GitHub Action #2
-8. GHA #2 proceeds to simultaneously run the Service Tests (against the DEV API) and the Integration Cypress E2E tests (against the develop branch front-end)
+8. **GHA #2** proceeds to simultaneously run the Service Tests (against the DEV API) and the Integration Cypress E2E tests (against the develop branch front-end)
 9. If all those complete without errors, a PR will be created and automatically merge the develop branch with the **main** production branch
 10. That triggers **Vercel** to build and deploy the **main** production branch
 11. That merge simultaneously triggers **Terraform Cloud** to run and apply configuration changes to the **production** environment (but in this case, ONLY if there were any changes to the IAC code... this is a TF Cloud setting)
@@ -370,12 +370,6 @@ Service Tests running simultaneously with E2E Integration Tests:
 
 
 
-# Typical Development Workflow
-
-A. making FE change
-
-B. makeing BE change
-
 
 
 
@@ -402,19 +396,6 @@ Room for Improvement:
 
 
 
-# License
+# 📝 License
 
-(unknown, add MIT one or something?)
-
-
-
-
-
-
-
-
-
-
-
-
-
+[MIT]()
