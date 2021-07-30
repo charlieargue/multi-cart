@@ -195,7 +195,7 @@ I tried to follow the principles of a [Testing Pyramid](https://martinfowler.com
 ### Jest Unit Tests 
 
 ```shell
-# ⚡️ run JEST unit tests against utility library 
+# run JEST unit tests against utility library 
 yarn nx run util:test
 ```
 
@@ -208,16 +208,16 @@ Results should look something like this:
 ### UI Unit Tests 
 
 ```shell
-# ⚡️ UI unit tests (against 2 UI libraries)
+# UI unit tests (against 2 UI libraries)
 
 # react-ui STORYBOOK and CYPRESS specs against those stories
-# ⚠️ run the 2nd command in a separate terminal window!
+# run the 2nd command in a separate terminal window!
 yarn nx run react-ui:storybook
 yarn nx run react-ui-e2e:e2e-local                 
 
 
 # react-shared-components STORYBOOK and CYPRESS specs against those stories
-# ⚠️ run the 2nd command in a separate terminal window!
+# run the 2nd command in a separate terminal window!
 yarn nx run react-shared-components:storybook
 yarn nx run react-shared-components-e2e:e2e-local  
 
@@ -247,13 +247,13 @@ And when running the Cypress specs against those stories, it should look somethi
 ### Service Tests
 
 ```sh
-# ⚡️ run POSTMAN service tests against DEV API (via Newman and my Postman Collection of tests)
+# run POSTMAN service tests against DEV API (via Newman and my Postman Collection of tests)
 yarn test-iac
 ```
 
 These were first created in **Postman**, and then can be run locally or in CICD workflows via **Newman**. Your local output should look something like this:
 
-<img src="https://github.com/charlieargue/readme-assets/blob/main/multi-cart/testing-postman.png?raw=true" alt="testing-postman" style="zoom:50%;" />
+<img src="https://github.com/charlieargue/readme-assets/blob/main/multi-cart/testing-postman-sm.png?raw=true" alt="testing-postman" style="zoom:50%;" />
 
 
 
@@ -263,8 +263,9 @@ These were first created in **Postman**, and then can be run locally or in CICD 
 # you'll need to startup the front-end first:
 yarn start
 
-# ⚡️ run CYPRESS tests for multi-cart front-end locally
-yarn nx run multi-cart-e2e:e2e-local           # ⚠️ in a separate terminal window
+# run CYPRESS tests for multi-cart front-end locally
+# and then in a separate terminal window
+yarn nx run multi-cart-e2e:e2e-local           
 ```
 
 Which should look something like this:
@@ -273,38 +274,6 @@ Which should look something like this:
   - *NOTE: my network is a little sluggish in this video, things don't usually lag or take this long, but it does allow for a good showcase of my use of skeletons and loading artifacts :)*
 
 
-
-### 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-[ ] I'm imagiing one SECTION [like this](https://github.com/charlieargue/clickup-july-table#testing) for each of the pyramid LAYERS
-
-Storybook & Cypress UI Unit Testing:
-
-- [ ] screenshots from local successful runs (both SB alone and in cypress)
-- [ ] looms of running?
-- [ ] cypress dashboard screenshots
-
-Postman:
-
-- local
-- in CICD
-- a loom 
-
-Jest, ditto
 
 
 
@@ -356,83 +325,6 @@ B. makeing BE change
 
 
 
-# List of VS Code Extensions
-
-🔴 TODO: filter/prune this down!
-
-```js 
-code --install-extension 4ops.terraform
-code --install-extension adamvoss.vscode-languagetool
-code --install-extension ahmadalli.vscode-nginx-conf
-code --install-extension AlDuncanson.react-hooks-snippets
-code --install-extension alefragnani.Bookmarks
-code --install-extension bodil.prettier-toml
-code --install-extension bungcip.better-toml
-code --install-extension ChakrounAnas.turbo-console-log
-code --install-extension coddx.coddx-alpha
-code --install-extension CoenraadS.bracket-pair-colorizer-2
-code --install-extension cymonk.sql-formatter
-code --install-extension daylerees.rainglow
-code --install-extension dbaeumer.vscode-eslint
-code --install-extension donjayamanne.githistory
-code --install-extension DotJoshJohnson.xml
-code --install-extension dsznajder.es7-react-js-snippets
-code --install-extension dweber019.vscode-style-formatter
-code --install-extension eg2.tslint
-code --install-extension erd0s.terraform-autocomplete
-code --install-extension esbenp.prettier-vscode
-code --install-extension firsttris.vscode-jest-runner
-code --install-extension GraphQL.vscode-graphql
-code --install-extension hangxingliu.vscode-nginx-conf-hint
-code --install-extension hashicorp.terraform
-code --install-extension HexcodeTechnologies.vscode-prettydiff
-code --install-extension joekon.ssmacro
-code --install-extension joffreykern.markdown-toc
-code --install-extension kumar-harsh.graphql-for-vscode
-code --install-extension lkytal.FlatUI
-code --install-extension luqimin.velocity
-code --install-extension lyzerk.linecounter
-code --install-extension mgmcdermott.vscode-language-babel
-code --install-extension ms-azuretools.vscode-docker
-code --install-extension ms-mssql.mssql
-code --install-extension ms-vscode-remote.remote-containers
-code --install-extension ms-vscode.Theme-1337
-code --install-extension ms-vscode.Theme-TomorrowKit
-code --install-extension ms-vscode.vscode-typescript-tslint-plugin
-code --install-extension msjsdiag.debugger-for-chrome
-code --install-extension nobuhito.printcode
-code --install-extension nrwl.angular-console
-code --install-extension Nuuf.theme-hackershaze
-code --install-extension oouo-diogo-perdigao.docthis
-code --install-extension paulmolluzzo.convert-css-in-js
-code --install-extension pjmiravalle.terraform-advanced-syntax-highlighting
-code --install-extension plibither8.remove-comments
-code --install-extension QassimFarid.ejs-language-support
-code --install-extension Quidgest.vscode-velocity
-code --install-extension raynigon.nginx-formatter
-code --install-extension redhat.vscode-commons
-code --install-extension redhat.vscode-yaml
-code --install-extension robole.markdown-snippets
-code --install-extension run-at-scale.terraform-doc-snippets
-code --install-extension sallar.json-to-js-object
-code --install-extension Shan.code-settings-sync
-code --install-extension sodatea.velocity
-code --install-extension streetsidesoftware.code-spell-checker
-code --install-extension theBenForce.appsync-resolver-autocomplete
-code --install-extension viablelab.capitalize
-code --install-extension vscode-icons-team.vscode-icons
-code --install-extension WallabyJs.quokka-vscode
-code --install-extension whizkydee.material-palenight-theme
-code --install-extension wholroyd.HCL
-code --install-extension william-voyek.vscode-nginx
-code --install-extension xabikos.JavaScriptSnippets
-code --install-extension xabikos.ReactSnippets
-code --install-extension yycalm.linecount
-code --install-extension yzane.markdown-pdf
-```
-
-
-
 # License
 
 (unknown, add MIT one or something?)
@@ -448,43 +340,4 @@ code --install-extension yzane.markdown-pdf
 
 
 
-
-
-
-
-
-## Setup database
-
-To setup your PosgreSQL database, execute the following commands:
-```sh
-
-# install PosgreSQL (note doen the SA password you will be prompted to create)
-brew install postgresql
-
-# confirm installed correctly, check version:
-postgres -V
-
-# create a database user (🟡 change username):
-createuser -P --superuser 🟡myusername🟡
-# NOTE: you'll enter the same password THREE times
-
-# make a database 🔴  (you will need to enter the USER PASSWORD)
-createdb knowde-pos -U 🟡myusername🟡
-```
-
-## Update your ormconfig.json
-
-✅ Make sure to also update the `username` and `password` fields in the `ormconfig.json` file!
-
-## Start up the server
-
-```sh
-# start the typescript compiler (🟡 in one terminal window)
-yarn watch
-```
-
-```sh
-# start the server locally (🟡 in another terminal window)
-yarn dev
-```
 
