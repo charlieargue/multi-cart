@@ -41,7 +41,7 @@ export const DashboardContainer = () => {
             <Box>
                 <Stack spacing={0} align={'left'} my={4}>
                     <Heading>Welcome back!</Heading>
-                    <Text>Recent Carts, Global Settings, Mocked Stats, and other place holders</Text>
+                    <Text>Fake Carts, Mocked Settings, Not Real Stats, and other lorem ipsum</Text>
                 </Stack>
                 <Divider />
             </Box>

@@ -287,7 +287,7 @@ The CICD workflows are composed of a few separate pieces:
 * **GitHub action #2** triggered by a repository dispatch event (which comes from `webhook-incoming.ts`)
 * an **Incoming Webhook** on the multi-cart webiste (hosted thanks to Next.js' api pages)
 * **Vercel**'s automatic builds and deployments 
-* **Terraform Cloud**'s automatic planning and applying of configurations
+* **Terraform Cloud**'s automatic planning and applying of configurations and <u>notifications</u>
 * **Cypress Dashboard**'s <u>parallel testing</u> across multiple GitHub Action machines
 
 
@@ -296,17 +296,30 @@ This illustration tries to simplify and explain the workflow in its entirety:
 
 <img src="https://github.com/charlieargue/readme-assets/blob/main/multi-cart/MultiCart-CICD-Workflows-Updated.png?raw=true" alt="MultiCart-CICD-Workflows-Updated" style="zoom:100%;" />
 
+Hacky/Bad Implementations:
+
+- The DEV Terraform Cloud runs always detect lambda archive changes even when there are none, and so at the moment, even if no back-end IAC changes are made, Terraform Cloud will plan & apply the same series of un-expected changes (mostly because of lambda archive hashes changing). Because of that, I always count on that Apply event and have a TF Cloud Notification wired up kick-off the next GitHub action.
+
+Other Implementation Notes:
+
+* The main thing I was trying to achieve that forced me to use the overly-complicated `TFNotification->MyWebhook->GitHubAction` approach, was to run the Postman API tests against a freshly-applied DEV Terraform back-end! So I needed to wait until Terraform was done before running the next GitHub Action.
+* I think a better CICD workflow approach is to have two separate "channels" of triggers, one for FE and a separate one for BE:
+  * so if someone only makes changes to FE code, only applicable GitHub actions are triggered, and TF Cloud never enters the workflow
+  * or if someone only makes BE changes, no E2E or UI unit tests are run
+* Furthermore, Vercel was giving me a lot of trouble along the way and was never a consistent source of builds/deployments (I had to re-deploy a lot, and deal with regular errors) -- and that's too bad, because Vercel can also be a triggter of events and notifications. 
+* Obviously, complex workflows may outgrow these tools, and it might be time to upgrade to something like Azure Pipelines, etc.
+
 
 
 In detail, here's what happens when a developer makes a local commit to their feature branch:
 
+(*In this case, I'm making changes to both FE and BE code*)
+
 1. 
 
-[ ] 🔥 Show CICD workflows diagram (update it plz!)
+
 
 [ ] explain need to move KEYS up into TF Cloud,  
-
-[ ] explain TF notification -> GHA webhook
 
 [ ] screen shots from successful GHA
 
