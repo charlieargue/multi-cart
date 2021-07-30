@@ -281,6 +281,27 @@ Which should look something like this:
 
 # CICD
 
+The CICD workflows are composed of a few separate pieces:
+
+* **GitHub action #1** triggered both by commits to any feature branches (`01-feature-promotion.yml`)
+* **GitHub action #2** triggered by a repository dispatch event (which comes from `webhook-incoming.ts`)
+* an **Incoming Webhook** on the multi-cart webiste (hosted thanks to Next.js' api pages)
+* **Vercel**'s automatic builds and deployments 
+* **Terraform Cloud**'s automatic planning and applying of configurations
+* **Cypress Dashboard**'s <u>parallel testing</u> across multiple GitHub Action machines
+
+
+
+This illustration tries to simplify and explain the workflow in its entirety:
+
+<img src="https://github.com/charlieargue/readme-assets/blob/main/multi-cart/MultiCart-CICD-Workflows-Updated.png?raw=true" alt="MultiCart-CICD-Workflows-Updated" style="zoom:100%;" />
+
+
+
+In detail, here's what happens when a developer makes a local commit to their feature branch:
+
+1. 
+
 [ ] 🔥 Show CICD workflows diagram (update it plz!)
 
 [ ] explain need to move KEYS up into TF Cloud,  
@@ -292,6 +313,8 @@ Which should look something like this:
 
 
 # Serverless (Terraform Cloud & AWS):
+
+[ ] there are only 2 environments on the BE, where as there are atleast 3 (or an infinite dep on how you look at preview branches) on the FE... there's no localhost for the BE since it's serverless, and all local development and testing and all CICD testing is done against the DEV TF environment
 
 [ ] explain that remote execution, so need to setup TF CLoud, env vars, etc... (screen shots, or NO, SKIP ALL THAT< not the point here?!) just broadly, show settings screenshots quickly, it's easy maybe, ok?)
 
@@ -316,6 +339,12 @@ B. makeing BE change
 - I'm still using ROOT USER instead of a sub-AWS-user, WIP
 -  (not responsive or mobile-first design at this stage),
 - etc... see my GOOGLE DOC list
+
+Room for Improvement:
+
+- granularize the CICD workflows so more idempotent, i.e. only run UI unit tests if there are changes to front-end code, etc... (the next plan was to split up the GitHub Actions into separate workflows, and then they can easily be filtered to only run when FE/BE/relevant code is changed, as well as see if I can leverage the `nx affected` command for more efficient testing, etc.)
+- the `01-feature-promotion.yml` GitHub action is currently hard-coded for only my feature branches (see `'kg-**'`); the next thing to do would be to switch to a `feature/kg-2021-...` branch naming convetion to include the `feature/` prefix slug for every developer's branch
+- Add additional CICD step that runs smoke tests against PROD (a few e2e integration tests) once everything is complete
 
 
 
