@@ -7,17 +7,15 @@ A fake "**fancy shopping cart**" app built for demo purposes with:
 * **AppSync**,
 * and other tech.
 
-👍**tldr:** is a full-stack serverless web application (not responsive or mobile-first design at this stage), that is very nearly production-ready and enterprise-grade, can be used as a starter project, and includes robust testing, CICD, shared libraries between the FE & BE, and is team-ready.
+👍**tldr:** is a full-stack serverless web application that is very nearly production-ready and enterprise-grade, can be used as a starter project, includes robust testing, CICD, shared libraries between the FE & BE, and is team-ready.
 
 
 
 
 
-# Quick Demo
+# Demo
 
-![multi-cart-overview]()
-
-🔴 TODO: keep it under 10 mb! for Github-issues trick!
+![multi-cart-overview](https://github.com/charlieargue/readme-assets/blob/main/multi-cart/Multi-Cart-trimmed-xs-TEMP.gif?raw=true)
 
 
 
@@ -107,7 +105,7 @@ NEXT_PUBLIC_API_URL=https://pcuynwb3tfbbzjfygrljfoej3q.appsync-api.us-west-2.ama
 NEXT_PUBLIC_API_KEY=da2-zrexcuvmlvhj3oxbzp3nby7ipq
 ```
 
-**2. Start up front-end**
+**2. Start the front-end**
 
 Then you can start the local web development server and fire up the front-end with:
 
@@ -123,13 +121,56 @@ You can view the site at:
 
 
 
-# Monorepo Overview
+# Project Overview
 
-<img src="/Users/karlgolka/PROJECTS/FYI/_typora_images/image-20210729162309390.png" alt="image-20210729162309390" style="zoom:70%;" />
+This nx monorepo contains the following projects (screenshot taken of [nx console](https://marketplace.visualstudio.com/items?itemName=nrwl.angular-console)), in a flattened view:
 
-### [ ] 🔥 Show Dependency Graph!
+<img src="https://raw.githubusercontent.com/charlieargue/readme-assets/main/multi-cart/project-overview-all.png" alt="image-20210729162309390" style="zoom:70%;" />
 
 
+
+`nx NOTE`: Projects cannot be referenced, but Libraries can be referenced by other Projects and Libraries.
+
+
+
+**MAIN PROJECTS** `/apps`
+
+* **multi-cart**: main Next.js web application
+* **multi-cart-e2e**: Cypress e2e integration tests for main web app
+* **react-shared-components-e2e**: Cypress e2e UI unit tests for shared-components library
+* **react-ui-e2e**: Cypress e2e UI unit tests for the basic design system library
+
+
+
+**LIBRARIES** `/libs`
+
+* **mock-api**: a mocked GraphQL API (via Next.js' pages) that I used to quickly build up my front-end UI
+  * `NOTE`: would need some slight updating to work again, since originally was mocked up based on a PostgreSQL back-end, and then I switched to DynamoDB and AppSync, and never updated the mocked API accordingly, so there will be a mix up of GUID vs Integer primary keys used, etc.)
+* **multi-cart-iac**: all the back-end Infrastructure-as-Code (IAC) "code" for AWS (the only cloud provider used) lives here, namely: 
+  * my Terraform modules and configuration
+  * all the AppSync pipeline functions, lambdas, resolvers, and mapping templates (`.VTL`)
+  * the GraphQL schema
+  * as well as all the necessary roles and policies
+  * `NOTE`: this was created as a nx library and not a main project because the GraphQL schema needs to be referenced by other projects & libraries
+* **multi-cart-iac-tests**: this project can mostly be ignored, I was using this to run my Postman tests locally via Newman, and back-up Postman configs/tests as I was deciding whether or not I could use Postman+Newman for testing both locally and in CICD (I can!)
+* **react-app-state**: Redux application state lives here, including actions, reducers, and the store itself. I made this an agnostic nx library because I needed to access app state outside of the React ecosystem, namely during the urql global fetching exchange (part of the react-data-access library)
+* **react-data-access**: this project holds all the automatically-generated code from GraphQL Code Generator (strongly-typed custom mutation/query hooks, etc.); 
+  * it also contains all the GraphQL **documents** for fragments, input types, and queries/mutations used by the front-end (and which power the code generator) 
+  * urql customizations also live here
+  * this library is referenced by both the main multi-cart project, the mock-api project, and by other libraries
+* **react-shared-components**: these are "medium-level" components built upon the "low-level" design system (react-ui) that are then used in the main multi-cart web application
+  * this library also contains the main site layout, custom hooks, and styles
+  * Storybook stories are included with each component that is being tested
+* **react-ui**: a "low-level" design system that is very basic, built on top of and using Chakra-UI, with Storybook stories
+* **util**: a shared library with pure Typescript and JSX utility functions, with Jest unit tests
+
+
+
+**NX DEPENDENCY GRAPH**
+
+Out from the `nx dep-graph` command:
+
+<img src="https://github.com/charlieargue/readme-assets/blob/main/multi-cart/project-overview-depgraph.png?raw=true" alt="nx dep-graph" style="zoom:70%;" />
 
 
 
@@ -141,6 +182,34 @@ You can view the site at:
 
 [ ] show how to run ALL tests locally!
 
+[ ] I'm imagiing one SECTION [like this](https://github.com/charlieargue/clickup-july-table#testing) for each of the pyramid LAYERS
+
+Storybook & Cypress UI Unit Testing:
+
+- [ ] screenshots from local successful runs (both SB alone and in cypress)
+- [ ] looms of running?
+- [ ] cypress dashboard screenshots
+
+Postman:
+
+- local
+- in CICD
+- a loom 
+
+Jest, ditto
+
+
+
+# CICD
+
+[ ] 🔥 Show CICD workflows diagram (update it plz!)
+
+[ ] explain need to move KEYS up into TF Cloud,  
+
+[ ] explain TF notification -> GHA webhook
+
+[ ] screen shots from successful GHA
+
 
 
 # Serverless (Terraform Cloud & AWS):
@@ -151,13 +220,13 @@ You can view the site at:
 
 
 
-# CICD
+# Typical Development Workflow
 
-[ ] 🔥 Show CICD diagram (update it plz!)
+A. making FE change
 
-[ ] explain need to move KEYS up into TF Cloud,  
+B. makeing BE change
 
-[ ] explain TF notification -> GHA webhook
+
 
 
 
@@ -166,6 +235,12 @@ You can view the site at:
 ### 🔴 CURRENT KNOWN ISSUES:
 - you will need AWS credentials installed globally
 - I'm still using ROOT USER instead of a sub-AWS-user, WIP
+-  (not responsive or mobile-first design at this stage),
+- etc... see my GOOGLE DOC list
+
+
+
+
 
 # Other helpful Commands
 
