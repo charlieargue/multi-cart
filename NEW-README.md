@@ -1,13 +1,15 @@
-# 🛍 Multi-Cart
+# 🛍 Multi-Cart — a fake fancy shopping cart
 
-A fake "**fancy shopping cart**" app built for demo purposes with:
-* **React**, 
-* **GraphQL** (urql), 
-* **Terraform**,
-* **AppSync**,
-* and other tech.
+![Feature-Promotion-STATUS](https://github.com/charlieargue/multi-cart/actions/workflows/feature-promotion.yml/badge.svg)
 
-👍**tldr:** is a full-stack serverless web application that is very nearly production-ready and enterprise-grade, can be used as a starter project, includes robust testing, CICD, shared libraries between the FE & BE, and is team-ready.
+This is a demo full-stack serverless web application (built for self-study purposes) that is very nearly production-ready and enterprise-grade, can be used as a starter project, includes robust testing, CICD, shared libraries between the FE & BE, and is team-ready.
+
+It is built with:
+
+* **React**
+* **GraphQL**
+* **Terraform** + **AppSync**
+* and other tech...
 
 
 
@@ -23,7 +25,7 @@ A fake "**fancy shopping cart**" app built for demo purposes with:
 
 # Purpose 
 
-This was built for purposes of `self-study as I was upskilling` from **angular & node/REST APIs** to **react** along with various GraphQL backends, namely:
+This was built for purposes of `self-study as I was upskilling` from angular & node/REST APIs **to React**, and I incrementally changed the GraphQL backends along the way, namely:
 
 * first **react** & <u>PostgreSQL+TypeOrm+TypeGraphQL</u> (after diligently going thru [Ben Awad's 14-hour Full-Stack React Course](https://www.youtube.com/watch?v=I6ypD7qv3Z8))
 * then **react** & a <u>mocked</u> GraphQL backend (for rapid UI development, using Next.js' public api pages)
@@ -60,9 +62,7 @@ Keep in mind this is a **work-in-progress**, many things are mocked (like Produc
 
 This was **inspired by** the many shopping cart and e-commerce projects I have worked on in the past, and is a loose conglomeration of some of them.
 
-NOTE: *I built this in approx. 4 months at the beginning of 2021, you can see all my GIT commits for more info.*
-
-
+*NOTE: I built this in approx. 4 months at the beginning of 2021, you can see all my GIT commits for more info.*
 
 
 
@@ -129,11 +129,11 @@ This nx monorepo contains the following projects (screenshot taken of [nx consol
 
 
 
-`nx NOTE`: Projects cannot be referenced, but Libraries can be referenced by other Projects and Libraries.
+`nx FYI`: Projects cannot be referenced, but **Libraries** can be referenced by other Libraries or Projects.
 
 
 
-**MAIN PROJECTS** `/apps`
+### **MAIN PROJECTS** `/apps`
 
 * **multi-cart**: main Next.js web application
 * **multi-cart-e2e**: Cypress e2e integration tests for main web app
@@ -142,7 +142,7 @@ This nx monorepo contains the following projects (screenshot taken of [nx consol
 
 
 
-**LIBRARIES** `/libs`
+### **LIBRARIES** `/libs`
 
 * **mock-api**: a mocked GraphQL API (via Next.js' pages) that I used to quickly build up my front-end UI
   * `NOTE`: would need some slight updating to work again, since originally was mocked up based on a PostgreSQL back-end, and then I switched to DynamoDB and AppSync, and never updated the mocked API accordingly, so there will be a mix up of GUID vs Integer primary keys used, etc.)
@@ -166,9 +166,9 @@ This nx monorepo contains the following projects (screenshot taken of [nx consol
 
 
 
-**NX DEPENDENCY GRAPH**
+### **NX DEPENDENCY GRAPH**
 
-Out from the `nx dep-graph` command:
+Output from the `nx dep-graph` command:
 
 <img src="https://github.com/charlieargue/readme-assets/blob/main/multi-cart/project-overview-depgraph.png?raw=true" alt="nx dep-graph" style="zoom:70%;" />
 
@@ -178,9 +178,117 @@ Out from the `nx dep-graph` command:
 
 # Testing
 
-[ ] 🔥 Show Testing pyramid
+<img src="https://github.com/charlieargue/readme-assets/blob/main/multi-cart/testing-pyramid.png?raw=true" alt="testing-pyramid" style="zoom:70%;" />
 
-[ ] show how to run ALL tests locally!
+
+
+I tried to follow the principles of a [Testing Pyramid](https://martinfowler.com/articles/practical-test-pyramid.html#:~:text=The%20%22Test%20Pyramid%22%20is%20a,put%20it%20into%20practice%20properly.) as closely as I could, and hence there are three types/layers of tests for this app:
+
+1. **UI & Integration Tests**: these tests require the most integration and are the slowest; they include only the Cypress E2E from the multi-cart-e2e project
+2. **Service Tests**: These are Postman tests that exercise the AppSync GraphQL API endpoints
+3. **Unit Tests**: these are the fastest, require the least integration, and include both pure Jest unit tests as well as UI unit tests (Cypress exercising Storybook stories); this would be the place to (in the future) include some kind of visual regression tests
+
+*NOTE:* these tests can be run both locally, or in CICD workflows. The commands to run them locally are listed below.
+
+
+
+### Jest Unit Tests 
+
+```shell
+# ⚡️ run JEST unit tests against utility library 
+yarn nx run util:test
+```
+
+Results should look something like this:
+
+<img src="https://github.com/charlieargue/readme-assets/blob/main/multi-cart/testing-jest.png?raw=true" alt="testing-jest" />
+
+
+
+### UI Unit Tests 
+
+```shell
+# ⚡️ UI unit tests (against 2 UI libraries)
+
+# react-ui STORYBOOK and CYPRESS specs against those stories
+# ⚠️ run the 2nd command in a separate terminal window!
+yarn nx run react-ui:storybook
+yarn nx run react-ui-e2e:e2e-local                 
+
+
+# react-shared-components STORYBOOK and CYPRESS specs against those stories
+# ⚠️ run the 2nd command in a separate terminal window!
+yarn nx run react-shared-components:storybook
+yarn nx run react-shared-components-e2e:e2e-local  
+
+# FYI: nx can combine these two commands for you easily, I just chose to have them separated out
+```
+
+
+
+So for example, the `react-ui` **Storybook** should look something like this:
+
+<img src="https://github.com/charlieargue/readme-assets/blob/main/multi-cart/storybook-react-ui.png?raw=true" alt="storybook-react-ui" />
+
+
+
+And the `react-shared-components` **Storybook** should look something like this:
+
+<img src="https://github.com/charlieargue/readme-assets/blob/main/multi-cart/storybook-shared-cmpnts-sm.png?raw=true" alt="storybook-shared-cmpnts.png" />
+
+
+
+And when running the Cypress specs against those stories, it should look something like this:
+
+- 🎦 https://www.loom.com/share/bdf725f3aae04b52af7936cb85cf02c4 (react-shared-components)
+
+
+
+### Service Tests
+
+```sh
+# ⚡️ run POSTMAN service tests against DEV API (via Newman and my Postman Collection of tests)
+yarn test-iac
+```
+
+These were first created in **Postman**, and then can be run locally or in CICD workflows via **Newman**. Your local output should look something like this:
+
+<img src="https://github.com/charlieargue/readme-assets/blob/main/multi-cart/testing-postman.png?raw=true" alt="testing-postman" style="zoom:50%;" />
+
+
+
+### UI & Integration Tests
+
+```sh
+# you'll need to startup the front-end first:
+yarn start
+
+# ⚡️ run CYPRESS tests for multi-cart front-end locally
+yarn nx run multi-cart-e2e:e2e-local           # ⚠️ in a separate terminal window
+```
+
+Which should look something like this:
+
+- 🎦 https://www.loom.com/share/465f5b69c7724ffd94574566d2fa2a46
+  - *NOTE: my network is a little sluggish in this video, things don't usually lag or take this long, but it does allow for a good showcase of my use of skeletons and loading artifacts :)*
+
+
+
+### 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 [ ] I'm imagiing one SECTION [like this](https://github.com/charlieargue/clickup-july-table#testing) for each of the pyramid LAYERS
 
@@ -197,6 +305,8 @@ Postman:
 - a loom 
 
 Jest, ditto
+
+
 
 
 
