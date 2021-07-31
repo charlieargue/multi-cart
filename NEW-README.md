@@ -2,6 +2,8 @@
 
 ![Feature-Promotion-STATUS](https://github.com/charlieargue/multi-cart/actions/workflows/01-feature-promotion.yml/badge.svg) ![Feature-Promotion-STATUS](https://github.com/charlieargue/multi-cart/actions/workflows/02-dev-promotion.yml/badge.svg)
 
+https://multicart.app/
+
 This is a demo full-stack serverless web application (built for self-study purposes) that is very nearly production-ready and enterprise-grade, can be used as a starter project, includes robust testing, CICD, shared libraries between the FE & BE, and is team-ready.
 
 It is built with:
@@ -271,7 +273,7 @@ yarn nx run multi-cart-e2e:e2e-local
 Which should look something like this:
 
 - 🎦 https://www.loom.com/share/465f5b69c7724ffd94574566d2fa2a46
-  - *NOTE: my network is a little sluggish in this video, things don't usually lag or take this long, but it does allow for a good showcase of my use of skeletons and loading artifacts :)*
+- *NOTE: my network is a little sluggish in this video, things don't usually lag or take this long, but it does allow for a good showcase of my use of skeletons and loading spinners :)*
 
 
 
@@ -344,7 +346,7 @@ The whole build and test and deployment process for both the FE and BE takes und
 
 
 
-#### GitHub Action Screenshots
+### GitHub Action Screenshots
 
 UI Unit Tests running in-parallel (via Cypress Dashboard) while simultaneously running Jest Unit Tests as well:
 
