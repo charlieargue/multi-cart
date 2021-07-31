@@ -525,35 +525,40 @@ yarn nx migrate --run-migrations=migrations.json
 
 ## 👾 Code Samples
 
-React / Next.js
+**React / Next.js / Custom HOC and Hooks**
 
 * [Register](apps/multi-cart/pages/register.tsx) Next Page, [RegisterContainer](apps/multi-cart/appViews/auth/RegisterContainer.tsx), and [RegistrationForm](libs/react-shared-components/src/lib/auth/registration-form/RegistrationForm.tsx)
 * [EditCartContainer](apps/multi-cart/appViews/EditCartContainer.tsx),  [EditCart](libs/react-shared-components/src/lib/cart/edit-cart/EditCart.tsx) component (good example of component composition to avoid prop-drilling)
+* [NavBar](libs/react-shared-components/src/lib/_layout/nav-bar/NavBar.tsx) component, [LineAccount](libs/react-shared-components/src/lib/line-account/line-account/LineAccount.tsx) component, 
 * Custom [incoming webhook](apps/multi-cart/pages/api/webhook-incoming.ts) (devops glue between Terraform Cloud and GitHub Actions)
 
-Redux
-
-Context (coming soon!)
-
-Custom HOC and Hooks
-
-* AutoSave (formik inputs)
+* [AutoSave](libs/react-shared-components/src/lib/auto-save/AutoSave.tsx) (for formik inputs)
 * [useIsAuth](libs/react-shared-components/src/lib/_hooks/useIsAuth.ts), [useMyToasts](libs/react-shared-components/src/lib/_hooks/useMyToasts.ts)
+* UI Library / Design system: [Breadcrumbs component](libs/react-ui/src/lib/breadcrumbs/Breadcrumbs.tsx) with [stories](libs/react-ui/src/lib/breadcrumbs/Breadcrumbs.stories.tsx) and [E2E specs](apps/react-ui-e2e/src/integration/Breadcrumbs/Breadcrumbs.spec.ts)
 
-urql Graphcache
+**urql**
 
-Schema
+* [Graphcache Custom Exchange](libs/react-data-access/src/lib/urql-customizations/cache.ts)
+* [Custom GlobalFetching Exchange](libs/react-data-access/src/lib/urql-customizations/createUrqlClient.ts) (uses redux, for logo spinner state)
 
-* [GraphQL AppSync Schema](libs/multi-cart-iac/AppSync/schema/schema.gql)
+Context
 
-YML CICD Workflows
+* (coming soon!)
 
-Cypress E2E Tests:
+**GraphQL Schema**
+
+* [AppSync Schema](libs/multi-cart-iac/AppSync/schema/schema.gql)
+
+**CICD / DevOps**
+
+* [Feature Promotion](.github/workflows/01-feature-promotion.yml) (YML)
+
+**Cypress E2E Tests:**
 
 - [Custom commands](apps/multi-cart-e2e/src/support/commands.ts)
 - [EDIT CART tests](apps/multi-cart-e2e/src/integration/pages/edit-cart.ts)
 
-Terraform / AppSync / AWS
+**Terraform / AppSync / AWS**
 
 * TF [Register Module](libs/multi-cart-iac/Modules/register), module [definition](libs/multi-cart-iac/tf-modules.tf), [Register Pipeline](libs/multi-cart-iac/tf-pipeline-register.tf) resolver
 * TF [Roles and Policies](libs/multi-cart-iac/tf-policies-roles.tf)
@@ -562,9 +567,22 @@ Terraform / AppSync / AWS
 
 
 
+
+
 ## ✉️ Contact Me
 
 My personal website is https://karlgolka.com/ and you can email me at contact@karlgolka.com 
+
+
+
+
+
+## 🌥 Cloud Provider Helpful Links:
+
+Multi-Cart:
+
+| [Vercel](https://vercel.com/charlieargue/multi-cart/deployments) deployments | [GitHub](https://github.com/charlieargue/multi-cart/actions)  actions | [Terraform Cloud](https://app.terraform.io/app/multi-cart/workspaces/multi-cart-dev/runs) dev runs | [Cypress](https://dashboard.cypress.io/organizations/d27854b3-693d-41fe-8fb8-55bac52ed996/projects) dashboard | [AWS](https://console.aws.amazon.com/) console |
+| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ---------------------------------------------- |
 
 
 
