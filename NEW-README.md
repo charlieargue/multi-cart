@@ -398,4 +398,5 @@ Room for Improvement:
 
 # 📝 License
 
-[MIT]()
+[MIT](https://github.com/charlieargue/multi-cart/blob/develop/LICENSE)
+
