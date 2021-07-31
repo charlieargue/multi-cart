@@ -4,7 +4,7 @@
 
 https://multicart.app/
 
-This is a demo full-stack serverless web application (built for self-study purposes) that is very nearly production-ready and enterprise-grade, can be used as a starter project, includes robust testing, CICD, shared libraries between the FE & BE, and is team-ready.
+This is a full-stack **serverless** web application (built for demo & self-study purposes) that is very nearly production-ready and enterprise-grade, can be used as a starter project, includes robust testing, CICD, shared libraries between the FE & BE, and is team-ready.
 
 It is built with:
 
@@ -437,7 +437,7 @@ In addition to the Implementation Notes above, some other things to be aware of:
 
 - I'm still using the ROOT AWS USER, instead of a creating a new IAM user just for Terraform.
 - I probably exposed secrets in this repo along the way (don't worry, I have since destroyed all those).
-- I didn't detail all the separate settings in all cloud services (like Vercel, Terraform), but [contact me](#contact-me) and I can send you sanitized screenshots of my settings if you run you have questions.
+- I didn't detail all the separate settings in all cloud services (like Vercel, Terraform), but [contact me](#✉️-contact-me) and I can send you sanitized screenshots of my settings if you run you have questions.
 -  The site is not responsive nor done with mobile-first design (maybe a few parts, but the `Edit-Carts` page).
 -  The Dark Mode needs some finishing.
 -  The Products, Dashboard, and some parts of the Cart Lines are only mocked-up, and do not work fully.
