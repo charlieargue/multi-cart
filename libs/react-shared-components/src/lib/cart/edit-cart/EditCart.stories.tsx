@@ -16,16 +16,3 @@ export const primary = () => {
     <EditCart id={props.id} />
   </AppLayout>;
 };
-
-// primary.parameters = {
-//   urql: op => {
-//     console.log(`🚀 ~ op.query`, op.query);
-//     // if (getQueryName(op.query) === 'GetUser') {
-//     //   return { data: { user: { id: 1234, name: 'Steve' } } };
-//     // }
-
-//     // if (getQueryName(op.query) === 'GetFeed') {
-//     //   return { data: { feed: [{ id: 1, title: 'Fake news' }] } };
-//     // }
-//   },
-// };

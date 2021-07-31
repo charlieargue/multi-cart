@@ -1,9 +1,3 @@
-#   data_source       = aws_appsync_datasource.multicart_dynamodb_user_datasource.name
-#   request_template  = file("./AppSync/resolvers/user-resolvers/updateUser/request-mapping.vtl")
-#   response_template = file("./AppSync/resolvers/user-resolvers/updateUser/response-mapping.vtl")
-
-
-
 
 # TODO: owner security!
 # PIPELINE 

@@ -106,14 +106,14 @@ export const cache = cacheExchange({
                 // PLURAL
                 // ------------------------
                 // NOTE: this needs to update the CARTS query, but CONFUSION: because this happens on the EDIT CART page?
-                cache.updateQuery({ query: CartsDocument }, (data: CartsQuery | null) => {
+                cache.updateQuery({ query: CartsDocument }, (data: CartsQuery | null | undefined) => {
                     if (data) {
                         // TODO: use cache.readQuery() here instead???
                         const foundCachedCart = (data as any).carts.find((c: Cart) => c.id === (args as AddCartLineAccountMutationVariables).cartId);
                         if (!foundCachedCart) {
                             throw new Error("🔴 did not find cached cart");
                         }
-                        const foundCachedCartLine = foundCachedCart.cartLines.find(cl => cl.id === (args as AddCartLineAccountMutationVariables).cartLineId);
+                        const foundCachedCartLine = foundCachedCart.cartLines.find((cl: CartLine) => cl.id === (args as AddCartLineAccountMutationVariables).cartLineId);
                         if (!foundCachedCartLine) {
                             throw new Error("🔴 did not find cached cart line");
                         }

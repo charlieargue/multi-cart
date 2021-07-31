@@ -440,6 +440,7 @@ In addition to the Implementation Notes above, some other things to be aware of:
 - I didn't detail all the separate settings in all cloud services (like Vercel, Terraform), but [contact me](#✉️-contact-me) and I can send you sanitized screenshots of my settings if you run you have questions.
 -  The site is not responsive nor done with mobile-first design (maybe a few parts, but the `Edit-Carts` page).
 -  The Dark Mode needs some finishing.
+-  Needless to say, the testing coverage is still incomplete. Visual Regression tests are needed on all the stories exercised by Cypress, etc.
 -  The Products, Dashboard, and some parts of the Cart Lines are only mocked-up, and do not work fully.
 - IAC Security: I was thinking about adding security checks to all the endpoints that only allow record-owners from performing CRUD operations on those records, either by:
   -  a) including the currently-logged-in-user's email in the AWS Cognito $context object,or
@@ -521,6 +522,43 @@ yarn nx migrate --run-migrations=migrations.json
 ```
 
 
+
+## 👾 Code Samples
+
+React / Next.js
+
+* [Register](apps/multi-cart/pages/register.tsx) Next Page, [RegisterContainer](apps/multi-cart/appViews/auth/RegisterContainer.tsx), and [RegistrationForm](libs/react-shared-components/src/lib/auth/registration-form/RegistrationForm.tsx)
+* [EditCartContainer](apps/multi-cart/appViews/EditCartContainer.tsx),  [EditCart](libs/react-shared-components/src/lib/cart/edit-cart/EditCart.tsx) component (good example of component composition to avoid prop-drilling)
+* Custom [incoming webhook](apps/multi-cart/pages/api/webhook-incoming.ts) (devops glue between Terraform Cloud and GitHub Actions)
+
+Redux
+
+Context (coming soon!)
+
+Custom HOC and Hooks
+
+* AutoSave (formik inputs)
+* [useIsAuth](libs/react-shared-components/src/lib/_hooks/useIsAuth.ts), [useMyToasts](libs/react-shared-components/src/lib/_hooks/useMyToasts.ts)
+
+urql Graphcache
+
+Schema
+
+* [GraphQL AppSync Schema](libs/multi-cart-iac/AppSync/schema/schema.gql)
+
+YML CICD Workflows
+
+Cypress E2E Tests:
+
+- [Custom commands](apps/multi-cart-e2e/src/support/commands.ts)
+- [EDIT CART tests](apps/multi-cart-e2e/src/integration/pages/edit-cart.ts)
+
+Terraform / AppSync / AWS
+
+* TF [Register Module](libs/multi-cart-iac/Modules/register), module [definition](libs/multi-cart-iac/tf-modules.tf), [Register Pipeline](libs/multi-cart-iac/tf-pipeline-register.tf) resolver
+* TF [Roles and Policies](libs/multi-cart-iac/tf-policies-roles.tf)
+* VTL Templates ([addCartLineAccount ReqMapping](libs/multi-cart-iac/AppSync/functions/addCartLineAccount/request-mapping.vtl), [addUser ReqMapping](libs/multi-cart-iac/AppSync/functions/addUser/request-mapping.vtl)) for pipeline AppSync functions
+* Lambdas: [register lambda](libs/multi-cart-iac/AppSync/lambdas/register/exports.js), 
 
 
 

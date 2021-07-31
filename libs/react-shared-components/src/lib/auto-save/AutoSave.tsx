@@ -2,7 +2,7 @@
 import { Box } from '@chakra-ui/react';
 import { useFormikContext } from 'formik';
 import debounce from 'just-debounce-it';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect } from 'react';
 
 // thx: https://itnext.io/formik-introduction-autosave-react-19d4c15cfb90
 // thx: https://codesandbox.io/s/formik-autosave-example-wfcb6?file=/src/AutoSavingForm.tsx:124-242
@@ -10,7 +10,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 export const AutoSave = ({ debounceMs = 500 }) => {
   const formik = useFormikContext();
 
-  // TODO: not sure about this, was getting error: React Hook useCallback received a function whose dependencies are unknown. Pass an inline function instead
+  // WORK-AROUND b/c error: React Hook useCallback received a function whose dependencies are unknown. Pass an inline function instead...
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const debouncedSubmit = useCallback(
     debounce(() => formik.submitForm(), debounceMs),
