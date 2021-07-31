@@ -29,7 +29,9 @@ And:
 
 
 
-## Demo
+
+
+## ▶️ Demo
 
 ![multi-cart-overview](https://github.com/charlieargue/readme-assets/blob/main/multi-cart/Multi-Cart-trimmed-xs-TEMP.gif?raw=true)
 
@@ -37,7 +39,7 @@ And:
 
 
 
-## Purpose 
+## 🎯 Purpose 
 
 This was built for purposes of `self-study as I was upskilling` from angular & node/REST APIs **to React**, and I incrementally changed the GraphQL backends along the way, namely:
 
@@ -45,18 +47,7 @@ This was built for purposes of `self-study as I was upskilling` from angular & n
 * then **react** & a <u>mocked</u> GraphQL backend (for rapid UI development, using Next.js' public api pages)
 * and finally **react** & a <u>serverless</u> backend (with Terraform+AppSync+DynamoDB+Cognito)
 
-In addition to building the app, I also strove to include the latest web development **best practices and tools**, that I had been wanting to learn and use for a long time, such as using:
-
-- React (urql, formik, redux, Context, etc.)
-- nx mono-repo (shared libraries)
-- Chakra-UI
-- Storybook
-- Jest
-- Cypress
-- Next.js
-- Terraform
-- AWS (AppSync, Cognito, DynamoDB, etc.)
-- etc.
+While building the app, I strove to include the latest web development **best practices and tools**, that I had been wanting to learn and use for a long time.
 
 I also did my best to keep things as **Production-ready** as I could, for instance with multiple environments and safe secrets management, as well as keeping the project **Team-ready** as well, so that other contributors could jump right in and pitch in development into the CICD workflows. 
 
@@ -82,9 +73,59 @@ This was **inspired by** the many shopping cart and e-commerce projects I have w
 
 
 
-## How to install
+## 🚀 Technologies Used
 
-You will need `yarn` and `node` installed on your machine for this to work:
+- [React](https://reactjs.org/)
+  - [react-icons](https://react-icons.github.io/react-icons/search)
+  - [urql](https://formidable.com/open-source/urql/)
+  - [Formik](https://formik.org/) / [yup](https://formik.org/docs/guides/validation)
+  - [Redux](https://redux.js.org/)
+- [Chakra-UI](https://chakra-ui.com/)
+- sass / SCSS
+- [husky](https://typicode.github.io/husky/#/)
+- GraphQL
+  - [GraphQL Code Generator](https://graphql-code-generator.com/)
+- [Next.js](https://nextjs.org/)
+- [nx monorepo](https://nx.dev/)
+- [Storybook](https://storybook.js.org/)
+- [Jest](https://jestjs.io/)
+- [Cypress](https://www.cypress.io/)
+- [Postman](https://www.postman.com/) / [Newman](https://github.com/postmanlabs/newman)
+- [Typescript](https://www.typescriptlang.org/)
+- [ESLint](https://eslint.org/)
+- [Terraform](https://www.terraform.io/)
+- [VTL templates](https://docs.aws.amazon.com/appsync/latest/devguide/resolver-mapping-template-reference-programming-guide.html)
+- AWS services, such as:
+  - [AppSync](https://aws.amazon.com/appsync/)
+  - Amazon [Simple Email Service](https://aws.amazon.com/ses/)
+  - [CloudWatch](https://aws.amazon.com/cloudwatch/)
+  - [Cognito](https://aws.amazon.com/cognito/)
+  - [DynamoDB](https://aws.amazon.com/dynamodb/)
+  - [IAM](https://aws.amazon.com/iam/)
+  - [Lambda](https://aws.amazon.com/lambda/)
+- and various cloud services for **CICD** and devops:
+  - [Vercel](https://vercel.com/)
+  - [Terraform Cloud](https://www.terraform.io/cloud)
+  - [GitHub Actions](https://github.com/features/actions)
+  - [Cypress Dashboard](https://www.cypress.io/dashboard/)
+
+
+
+
+
+## ✅ Requirements
+
+Before starting 🏁, you need to have these installed on your machine:
+
+* [Git](https://git-scm.com/) 
+* [Node](https://nodejs.org/en/) 
+* and [yarn](https://classic.yarnpkg.com/en/docs/install)  
+
+
+
+
+
+## 👨🏻‍💻 How to install
 
 ```sh
 # clone the repo
@@ -101,7 +142,7 @@ yarn
 
 
 
-## Quick Start
+## ⚡️ Quick Start
 
 **1. Setup environment variables**
 
@@ -135,7 +176,7 @@ You can view the site at:
 
 
 
-## Project Overview
+## 🗂 Project Overview
 
 This nx monorepo contains the following projects (screenshot taken of [nx console](https://marketplace.visualstudio.com/items?itemName=nrwl.angular-console)), in a flattened view:
 
@@ -190,7 +231,7 @@ Output from the `nx dep-graph` command:
 
 
 
-## Testing
+## 👩‍🔬 Testing
 
 <img src="https://github.com/charlieargue/readme-assets/blob/main/multi-cart/testing-pyramid.png?raw=true" alt="testing-pyramid" style="zoom:70%;" />
 
@@ -291,9 +332,7 @@ Which should look something like this:
 
 
 
-
-
-## CICD
+## ⛅️ CICD
 
 The CICD workflows are composed of a few separate pieces:
 
@@ -374,7 +413,7 @@ Service Tests running simultaneously with E2E Integration Tests:
 
 
 
-## Serverless (Terraform Cloud & AWS):
+## ✨ Serverless (Terraform Cloud & AWS):
 
 There are only 2 environments on the back-end (BE): **dev** and **prod**. There's no localhost for the BE since it's serverless, obviously, and all local development and testing and all CICD testing is done against the **dev** BE environment/workspace.
 
@@ -392,7 +431,7 @@ I recently passed the [HashiCorp Certified: Terraform Associate](https://www.cre
 
 
 
-## Caveats, Known Issues, & Room for Improvement
+## 🐞 Caveats, Known Issues, & Room for Improvement
 
 In addition to the Implementation Notes above, some other things to be aware of:
 
@@ -421,13 +460,14 @@ In addition to the Implementation Notes above, some other things to be aware of:
 
 
 
-
-
-## Other Helpful Commands
+## ⚙️ Other Helpful Commands
 
 ```sh
 # you can skip CICD GitHub Actions by adding [skip ci] anywhere in your commit message, i.e.:
 git add -A && git commit -m "[skip ci] feat: README touchups" && git push
+
+# automatically generate code based on GraphQL schema and documents
+yarn generate
 
 # build production front-end bundle
 yarn nx run multi-cart:build --prod
@@ -478,17 +518,17 @@ yarn
 
 # 4) update the nx repo with these migrations
 yarn nx migrate --run-migrations=migrations.json
-
-
 ```
 
 
 
 
 
-## Contact Me
+## ✉️ Contact Me
 
 My personal website is https://karlgolka.com/ and you can email me at contact@karlgolka.com 
+
+
 
 
 

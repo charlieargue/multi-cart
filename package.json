@@ -31,8 +31,7 @@
     "precommit": "eslint src/**/*.js",
     "prepare": "husky install",
     "postinstall": "husky install",
-    "generate": "nx run react-data-access:generate",
-    "tfa": "terraform -chdir=libs/multi-cart-iac apply -auto-approve"
+    "generate": "nx run react-data-access:generate"
   },
   "private": true,
   "devDependencies": {
