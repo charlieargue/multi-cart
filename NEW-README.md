@@ -13,7 +13,19 @@ It is built with:
 * **Terraform** + **AppSync**
 * and other tech...
 
+It showcases the following functionality and features:
 
+1. <u>User Authentication</u> (login, logout, register, forgot/change password)
+2. Managing and editing multiple shopping <u>Carts</u>
+3. Adding mocked products as cart line items, and associating multiple funding <u>Accounts</u> (by percentages) with each cart line
+
+And:
+
+​	✔️ <u>Public and private pages</u>, and support for hybrid static & server rendering
+
+​	✔️ Both a <u>GraphQL</u> cloud-managed API as well as a REST API (just 1 page) -- and even a mocked GraphQL API
+
+​	✔️ <u>Auto-generated</u> custom React useMutation hooks and types allowing for strong typing across the whole stack
 
 
 
@@ -325,7 +337,7 @@ In detailed steps, here's what happens when a developer makes a local commit to 
 
 #### Additional Notes
 
-The whole build and test and deployment process for both the FE and BE takes under 20 minutes, and needless to say has a lot of room for improvement (see notes below for some). But for my purposes, as the sole developer of a server-less API that I could switch over to a mocked-API for rapid UI development ... this worked really, really well! And I image with a team of developers, who could at anytime do the same, this would work very well also -- of course with some additional changes and upgrades.
+The whole build and test and deployment process for both the FE and BE takes under 20 minutes, and needless to say has a lot of room for improvement (see caveats below). But for my purposes, as the sole developer of a server-less API that I could switch over to a mocked-API for rapid UI development ... this worked really, really well! And I image with a team of developers, who could at anytime do the same, this would work very well also -- of course with some additional changes and upgrades.
 
 
 
@@ -362,43 +374,125 @@ Service Tests running simultaneously with E2E Integration Tests:
 
 
 
-# Serverless (Terraform Cloud & AWS):
+## Serverless (Terraform Cloud & AWS):
 
-[ ] there are only 2 environments on the BE, where as there are atleast 3 (or an infinite dep on how you look at preview branches) on the FE... there's no localhost for the BE since it's serverless, and all local development and testing and all CICD testing is done against the DEV TF environment
+There are only 2 environments on the back-end (BE): **dev** and **prod**. There's no localhost for the BE since it's serverless, obviously, and all local development and testing and all CICD testing is done against the **dev** BE environment/workspace.
 
-[ ] explain that remote execution, so need to setup TF CLoud, env vars, etc... (screen shots, or NO, SKIP ALL THAT< not the point here?!) just broadly, show settings screenshots quickly, it's easy maybe, ok?)
+Terraform Cloud is used for remote state, remote execution, env variables, and workspaces, as well as CICD triggers via notifications (I started without TF Cloud, and eventually migrated to it).
 
-[ ] explain that only DEV and PROD envs (no local, never tf plan/apply locally, etc... remote state)
+```
+TERRAFORM PLAN and TERRAFORM APPLY commands are NEVER RAN LOCALLY!
+```
+
+I have AWS credentials setup as Terraform Cloud *Environment Variables*, that are then available to the `"aws"` provider, [as documented here](https://registry.terraform.io/providers/hashicorp/aws/latest/docs#environment-variables).
+
+I recently passed the [HashiCorp Certified: Terraform Associate](https://www.credly.com/badges/546427ad-5f4e-4324-8fc5-29117d872a0c) certification, and have to say that definitely helped a lot, especially with pushing my configurations to be more enterprise and team-ready.
 
 
 
 
 
+## Caveats, Known Issues, & Room for Improvement
+
+In addition to the Implementation Notes above, some other things to be aware of:
+
+- I'm still using the ROOT AWS USER, instead of a creating a new IAM user just for Terraform.
+- I probably exposed secrets in this repo along the way (don't worry, I have since destroyed all those).
+- I didn't detail all the separate settings in all cloud services (like Vercel, Terraform), but [contact me](#contact-me) and I can send you sanitized screenshots of my settings if you run you have questions.
+-  The site is not responsive nor done with mobile-first design (maybe a few parts, but the `Edit-Carts` page).
+-  The Dark Mode needs some finishing.
+-  The Products, Dashboard, and some parts of the Cart Lines are only mocked-up, and do not work fully.
+- IAC Security: I was thinking about adding security checks to all the endpoints that only allow record-owners from performing CRUD operations on those records, either by:
+  -  a) including the currently-logged-in-user's email in the AWS Cognito $context object,or
+  -  b) converting all endpoint resolvers into pipeline resolvers, creating a OwnerCheck Terraform Module, and always calling its function at the begining of all pipelines
 
 
-# Caveats/Issues
 
-### 🔴 CURRENT KNOWN ISSUES:
-- you will need AWS credentials installed globally
-- I'm still using ROOT USER instead of a sub-AWS-user, WIP
--  (not responsive or mobile-first design at this stage),
-- etc... see my GOOGLE DOC list
+**Room for CICD Improvement:**
 
-Room for Improvement:
-
-- granularize the CICD workflows so more idempotent, i.e. only run UI unit tests if there are changes to front-end code, etc... (the next plan was to split up the GitHub Actions into separate workflows, and then they can easily be filtered to only run when FE/BE/relevant code is changed, as well as see if I can leverage the `nx affected` command for more efficient testing, etc.)
+- I'd like to granularize the CICD workflows so they're more idempotent, i.e. only run UI unit tests if there are changes to front-end code, etc... (the next plan was to split up the GitHub Actions into separate workflows, and then they can easily be filtered to only run when FE/BE/relevant code is changed, as well as see if I can leverage the `nx affected` command for more efficient testing, etc.)
 - the `01-feature-promotion.yml` GitHub action is currently hard-coded for only my feature branches (see `'kg-**'`); the next thing to do would be to switch to a `feature/kg-2021-...` branch naming convetion to include the `feature/` prefix slug for every developer's branch
-- Add additional CICD step that runs smoke tests against PROD (a few e2e integration tests) once everything is complete
+- I'd like an additional CICD step that runs **once the entire CICD pipeline is done** -- smoke tests against PROD (a few e2e integration tests). 
+- It may be necessary to include a new ***integration*** branch, for team-based development.
+- I didn't utilize Jest tests sufficiently for UI Unit Testing, and feel a lot of the E2E Storybook tests could be converted to Jest tests that also exercise the components
+- The multi-cart-e2e tests are just a beginning, and also need to exercise the User Auth app views (login, logout, register, forgot-password, change-password)
 
 
 
 
 
-# Other helpful Commands
+
+
+## Other Helpful Commands
+
+```sh
+# you can skip CICD GitHub Actions by adding [skip ci] anywhere in your commit message, i.e.:
+git add -A && git commit -m "[skip ci] feat: README touchups" && git push
+
+# build production front-end bundle
+yarn nx run multi-cart:build --prod
+
+
+# ------------------ misc. nx schematics commands used (NOTE: dry runs) ---------------
+
+# create a new nx workspace (with a Next.js main project)
+npx create-nx-workspace@latest multi-cart --preset=next
+
+# generate an nx react library
+yarn nx generate @nrwl/react:lib react-shared-components --style=scss
+
+# generate an nx agnostic library
+yarn nx g @nrwl/workspace:lib util --pascalCaseFiles --dry-run
+
+# generate a Next.js page
+yarn nx g @nrwl/next:page --name=id --project=multi-cart  --directory=shop --dry-run
+
+# generate a React component (react-ui)
+yarn nx g @nrwl/react:component --name=FullScreenSpinner --project=react-ui --style=scss --export --pascalCaseFiles --dry-run
+
+# or (react-shared-components)
+yarn nx g @nrwl/react:component --name=DeleteLineAccountButton --export --project=react-shared-components --style=scss --pascalCaseFiles --directory=lib/line-account  --dry-run
+
+# only run e2e tests for current changes
+yarn nx affected:e2e
+
+# only run affected tests or only lint affected projects
+yarn nx affected --target=lint
+yarn nx affected --target=test
+
+# removing a workspace or node project
+yarn nx g @nrwl/workspace:remove multi-cart-util --dry-run
+yarn nx g @nrwl/node:remove multi-cart-api --dry-run
+
+
+# ------------------ upgrading nx ------------------ 
+# 1) upgrade everything (this doesn't install new libraries yet...)
+yarn nx migrate latest
+
+# 2) manually inspect packages.json diffs and make sure you are ok with them (edit them if not)
+
+# 3) install new libraries
+yarn
+
+# ATTENTION: if CICD commands are using --frozen-lockfile, you may need instead: yarn upgrade
+
+# 4) update the nx repo with these migrations
+yarn nx migrate --run-migrations=migrations.json
+
+
+```
 
 
 
-# 📝 License
+
+
+## Contact Me
+
+My personal website is https://karlgolka.com/ and you can email me at contact@karlgolka.com 
+
+
+
+## 📝 License
 
 [MIT](https://github.com/charlieargue/multi-cart/blob/develop/LICENSE)
 
