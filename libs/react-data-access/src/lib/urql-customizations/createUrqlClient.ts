@@ -112,7 +112,7 @@ export const createUrqlClient = (ssrExchange: any) => ({
             { headers: { "x-api-key": NEXT_PUBLIC_API_KEY } };
     },
     exchanges: [
-        devtoolsExchange,
+        // devtoolsExchange,
         dedupExchange,
         cache,
         errorExchange,
