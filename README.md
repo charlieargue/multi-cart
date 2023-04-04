@@ -336,9 +336,9 @@ Which should look something like this:
 
 The CICD workflows are composed of a few separate pieces:
 
-* **GitHub action #1** triggered both by commits to any feature branches (`01-feature-promotion.yml`)
+* **GitHub action #1** triggered by commits to any feature branches (`01-feature-promotion.yml`)
 * **GitHub action #2** triggered by a repository dispatch event (which comes from `webhook-incoming.ts`)
-* an **Incoming Webhook** on the multi-cart webiste (hosted thanks to Next.js' api pages)
+* an **Incoming Webhook** on the multi-cart website (hosted thanks to Next.js' api pages)
 * **Vercel**'s automatic builds and deployments 
 * **Terraform Cloud**'s automatic planning and applying of configurations and <u>notifications</u>
 * **Cypress Dashboard**'s <u>parallel testing</u> across multiple GitHub Action machines
@@ -592,3 +592,4 @@ Multi-Cart:
 
 [MIT](https://github.com/charlieargue/multi-cart/blob/develop/LICENSE)
 
+*Updated March 2023 @ 9:31pm*
