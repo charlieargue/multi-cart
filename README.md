@@ -592,3 +592,4 @@ Multi-Cart:
 
 [MIT](https://github.com/charlieargue/multi-cart/blob/develop/LICENSE)
 
+*Updated March 2023*
