@@ -25,6 +25,7 @@ export const EditCart = ({ id }: EditCartProps) => {
   });
   const [, updateUser] = useUpdateUserMutation();
 
+  // what? this shouldn't be here....
   useEffect(() => {
     updateUser({ currentCartId: id });
   }, [id, updateUser]);
