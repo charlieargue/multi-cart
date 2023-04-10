@@ -1,0 +1,70 @@
+{
+  "name": "multi-cart-e2e",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/multi-cart-e2e/src",
+  "projectType": "application",
+  "targets": {
+    "e2e": {
+      "executor": "@nrwl/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/multi-cart-e2e/cypress.json",
+        "tsConfig": "apps/multi-cart-e2e/tsconfig.e2e.json",
+        "devServerTarget": "",
+        "record": true,
+        "watch": false,
+        "headless": true,
+        "parallel": false,
+        "key": "5fb2e603-db6d-4aa1-9d35-d34afc70689f"
+      },
+      "configurations": {
+        "ci": {
+          "devServerTarget": ""
+        }
+      }
+    },
+    "e2e-local": {
+      "executor": "@nrwl/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/multi-cart-e2e/cypress.json",
+        "tsConfig": "apps/multi-cart-e2e/tsconfig.e2e.json",
+        "baseUrl": "http://localhost:4200/",
+        "devServerTarget": "multi-cart:serve",
+        "exit": false,
+        "record": false,
+        "skipServe": true,
+        "watch": true
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "multi-cart:serve:production"
+        }
+      }
+    },
+    "e2e-local-cicd": {
+      "executor": "@nrwl/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/multi-cart-e2e/cypress.json",
+        "tsConfig": "apps/multi-cart-e2e/tsconfig.e2e.json",
+        "baseUrl": "http://localhost:4200/",
+        "devServerTarget": "multi-cart:serve",
+        "record": false,
+        "headless": true,
+        "skipServe": true
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "multi-cart:serve:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["apps/multi-cart-e2e/**/*.{js,ts}"]
+      },
+      "outputs": ["{options.outputFile}"]
+    }
+  },
+  "tags": [],
+  "implicitDependencies": ["multi-cart"]
+}

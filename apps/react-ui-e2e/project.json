@@ -1,0 +1,55 @@
+{
+  "name": "react-ui-e2e",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/react-ui-e2e/src",
+  "projectType": "application",
+  "targets": {
+    "e2e": {
+      "executor": "@nrwl/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/react-ui-e2e/cypress.json",
+        "tsConfig": "apps/react-ui-e2e/tsconfig.e2e.json",
+        "devServerTarget": "react-ui:storybook",
+        "record": true,
+        "watch": false,
+        "headless": true,
+        "parallel": true,
+        "ciBuildId": "react-ui-e2e-CI-00",
+        "key": "6b6d4144-811f-4c38-a741-ffea2012ddee"
+      },
+      "configurations": {
+        "ci": {
+          "devServerTarget": "",
+          "skipServe": true,
+          "browser": "chrome"
+        }
+      }
+    },
+    "e2e-local": {
+      "executor": "@nrwl/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/react-ui-e2e/cypress.json",
+        "tsConfig": "apps/react-ui-e2e/tsconfig.e2e.json",
+        "devServerTarget": "react-ui:storybook",
+        "exit": false,
+        "record": false,
+        "skipServe": true,
+        "watch": true
+      },
+      "configurations": {
+        "ci": {
+          "devServerTarget": "react-ui:storybook:ci"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["apps/react-ui-e2e/**/*.{js,ts}"]
+      },
+      "outputs": ["{options.outputFile}"]
+    }
+  },
+  "tags": [],
+  "implicitDependencies": ["react-ui"]
+}

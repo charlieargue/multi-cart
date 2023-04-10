@@ -1,0 +1,19 @@
+{
+  "name": "multi-cart-iac-tests",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/multi-cart-iac-tests/src",
+  "projectType": "library",
+  "targets": {
+    "test-ci": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          {
+            "command": "npx newman run https://www.getpostman.com/collections/ec112b09c0431f111fe3 --folder API-tests -e libs/multi-cart-iac-tests/src/env-variables/Multi-Cart.postman_environment.json"
+          }
+        ]
+      }
+    }
+  },
+  "tags": []
+}

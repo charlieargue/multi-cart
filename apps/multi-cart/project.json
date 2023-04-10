@@ -1,0 +1,55 @@
+{
+  "name": "multi-cart",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/multi-cart",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/next:build",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "root": "apps/multi-cart",
+        "outputPath": "dist/apps/multi-cart"
+      },
+      "configurations": {
+        "production": {},
+        "development": {
+          "outputPath": "apps/multi-cart"
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@nrwl/next:server",
+      "options": {
+        "buildTarget": "multi-cart:build",
+        "dev": true
+      },
+      "configurations": {
+        "production": {
+          "buildTarget": "multi-cart:build:production",
+          "dev": false
+        },
+        "development": {
+          "buildTarget": "multi-cart:build:development",
+          "dev": true
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "export": {
+      "executor": "@nrwl/next:export",
+      "options": {
+        "buildTarget": "multi-cart:build:production"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["apps/multi-cart/**/*.{ts,tsx,js,jsx}"]
+      },
+      "outputs": ["{options.outputFile}"]
+    }
+  },
+  "tags": []
+}

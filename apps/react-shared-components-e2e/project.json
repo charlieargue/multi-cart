@@ -1,0 +1,55 @@
+{
+  "name": "react-shared-components-e2e",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/react-shared-components-e2e/src",
+  "projectType": "application",
+  "targets": {
+    "e2e": {
+      "executor": "@nrwl/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/react-shared-components-e2e/cypress.json",
+        "tsConfig": "apps/react-shared-components-e2e/tsconfig.e2e.json",
+        "devServerTarget": "react-shared-components:storybook",
+        "record": true,
+        "watch": false,
+        "headless": true,
+        "parallel": true,
+        "ciBuildId": "react-shared-components-e2e-CI-00",
+        "key": "296299f4-0d1d-4b87-8738-afeb1226e9ae"
+      },
+      "configurations": {
+        "ci": {
+          "devServerTarget": "",
+          "skipServe": true,
+          "browser": "chrome"
+        }
+      }
+    },
+    "e2e-local": {
+      "executor": "@nrwl/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/react-shared-components-e2e/cypress.json",
+        "tsConfig": "apps/react-shared-components-e2e/tsconfig.e2e.json",
+        "devServerTarget": "react-shared-components:storybook",
+        "exit": false,
+        "record": false,
+        "skipServe": true,
+        "watch": true
+      },
+      "configurations": {
+        "ci": {
+          "devServerTarget": "react-shared-components:storybook:ci"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["apps/react-shared-components-e2e/**/*.{js,ts}"]
+      },
+      "outputs": ["{options.outputFile}"]
+    }
+  },
+  "tags": [],
+  "implicitDependencies": ["react-shared-components"]
+}

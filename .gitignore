@@ -73,3 +73,6 @@ libs/mock-api/mock-database.json
 
 # postman newman env. variables
 libs/multi-cart-iac-tests/src/env-variables/*.json
+
+# Next.js
+.next
