@@ -20,10 +20,6 @@ export const StatCard = (props: StatCardProps) => {
     )
 }
 
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
-interface DashboardContainerProps {
-}
-
 // TODO: componentize into Dashboard shared cmpnt
 export const DashboardContainer = () => {
 

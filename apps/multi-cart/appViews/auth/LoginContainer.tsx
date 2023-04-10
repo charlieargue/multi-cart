@@ -11,11 +11,6 @@ import NextLink from 'next/link';
 import React from 'react';
 import { FaFacebook, FaGithub, FaGoogle } from 'react-icons/fa';
 
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
-interface LoginContainerProps {
-
-}
-
 export const LoginContainer = () => {
   return (
     <MicroLayout
