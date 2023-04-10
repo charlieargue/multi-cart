@@ -25,5 +25,6 @@
         "*.tfvars.backup": "terraform",
         "*.tfstate*": "terraform",
         "*.terraform*": "terraform"
-    }
+    },
+    "dimmer.enabled": true
 }

@@ -16,7 +16,7 @@ export function CartAvatarRow({ c, currentCartId }: CartAvatarRowProps) {
     <NextLink
       key={c.id}
       href="/cart/[id]"
-      as={`/cart/${c.id}`}>
+      as={`/cart/${c.id}`} legacyBehavior>
       <a href={`/cart/${c.id}`}>
         <MenuItem
           bgColor={c.id === currentCartId ? mode("green.50", "gray.900") : null}>

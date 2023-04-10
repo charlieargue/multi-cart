@@ -17,7 +17,7 @@ export const LoginContainer = () => {
       heading="Welcome back!"
       subHeading={<>
         <span>Don&apos;t have an account?</span>
-        <NextLink href="/register">
+        <NextLink href="/register" legacyBehavior>
           <Box
             as="a"
             marginStart="1"

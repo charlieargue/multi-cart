@@ -14,7 +14,7 @@ export const Logo = ({ clickHandler = null }: LogoProps) => {
 
   return (
     <LinkBox cursor="pointer">
-      <NextLink href="/">
+      <NextLink href="/" legacyBehavior>
         <a href="/" style={{ outline: "none" }}>
           <Flex justifyContent="center">
             <Box {...logoClickFixer} className={styles["logo__scale-up"]}>🛍</Box>

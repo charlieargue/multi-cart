@@ -23,7 +23,7 @@ export const ChangePasswordForm = () => {
         <Box mb={2}>
           <Alert borderRadius="4px" status="error">
             <span role='img' aria-label='emoji'>❗️</span><strong>Error: &nbsp;</strong>
-            <NextLink href="/forgot-password">
+            <NextLink href="/forgot-password" legacyBehavior>
               <Box href="/forgot-password" as="a" color={mode('pink.600', 'pink.200')} fontWeight="semibold" fontSize="sm">
                 Please try a fresh token
                     </Box>
