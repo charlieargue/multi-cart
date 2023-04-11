@@ -20,6 +20,7 @@
 # IDE - VSCode (just because I am the only developer for now, normally not-like-this)
 .vscode/*
 .vscode/settings.json
+**/.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json

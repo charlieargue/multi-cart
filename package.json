@@ -151,7 +151,7 @@
     "react-icons": "^4.2.0",
     "react-is": "18.2.0",
     "react-redux": "8.0.5",
-    "react-select": "^4.3.0",
+    "react-select": "^5.7.2",
     "redux": "^4.1.0",
     "redux-devtools-extension": "^2.13.9",
     "tslib": "^2.0.0",

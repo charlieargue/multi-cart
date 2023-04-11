@@ -1,3 +1,7 @@
+// ##################################################################################
+// ℹ️ NOT READY YET or NOT MY CODE (chakra templates) ----- please ignore this file, thanks!
+// ##################################################################################
+
 import { Avatar, Badge, Box, Divider, Flex, Heading, HStack, SimpleGrid, Stack, Stat, StatLabel, StatNumber, Switch, Table, Tbody, Td, Text, Th, Thead, Tr, useColorModeValue as mode } from '@chakra-ui/react';
 import { AppLayout, Card } from '@multi-cart/react-shared-components';
 import React from 'react';
