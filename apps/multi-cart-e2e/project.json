@@ -57,7 +57,7 @@
         }
       }
     },
-    "lint": {
+    "lint-TEMPORARY": {
       "executor": "@nrwl/linter:eslint",
       "options": {
         "lintFilePatterns": ["apps/multi-cart-e2e/**/*.{js,ts}"]

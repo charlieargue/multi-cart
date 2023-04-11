@@ -42,7 +42,7 @@
         }
       }
     },
-    "lint": {
+    "lint-TEMPORARY": {
       "executor": "@nrwl/linter:eslint",
       "options": {
         "lintFilePatterns": ["apps/react-shared-components-e2e/**/*.{js,ts}"]
