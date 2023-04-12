@@ -1,3 +1,4 @@
+export * from './lib/cart/edit-cart-table/EditCartTable';
 export * from './lib/auth/change-password-form/ChangePasswordForm';
 export * from './lib/auth/forgot-password-form/ForgotPasswordForm';
 export * from './lib/auth/login-form/LoginForm';
@@ -41,4 +42,3 @@ export * from './lib/_layout/side-bar-item/SideBarItem';
 export * from './lib/_layout/side-bar/SideBar';
 export * from './lib/_layout/theme';
 export * from './lib/_layout/providers/Providers';
-

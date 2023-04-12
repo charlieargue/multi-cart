@@ -6,6 +6,9 @@ import { useCartQuery } from '@multi-cart/react-data-access';
 import { AppLayout, EditCart } from '@multi-cart/react-shared-components';
 import { BigAlert, Breadcrumbs, FullScreenSpinner } from '@multi-cart/react-ui';
 import { useRouter } from 'next/router';
+import EditCartHeader from '../edit-cart-header/EditCartHeader';
+import EditCartTable from '../edit-cart-table/EditCartTable';
+
 // import { SkeletonCircle, SkeletonText } from '@chakra-ui/react';
 
 export const EditCartContainer = () => {
@@ -103,7 +106,8 @@ export const EditCartContainer = () => {
   return (
     <AppLayout>
       {breadcrumbs}
-      <EditCart id={id} cart={data?.cart} />
+      <EditCartHeader cart={data?.cart} />
+      <EditCartTable  cart={data?.cart} />
     </AppLayout>
   );
 };
