@@ -1,3 +1,7 @@
+// ##################################################################################
+// ℹ️ NOT READY YET or NOT MY CODE (chakra templates) ----- please ignore this file, thanks!
+// ##################################################################################
+
 import { Badge, BadgeProps, Button, ButtonGroup, HStack, IconButton, Text } from '@chakra-ui/react';
 import { CartLine } from '@multi-cart/react-data-access';
 import { areLineAccountsValid, getTotalAmounts, getTotalPercentages, toFriendlyCurrency } from '@multi-cart/util';

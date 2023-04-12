@@ -1,3 +1,7 @@
+// ##################################################################################
+// ℹ️ NOT READY YET or NOT MY CODE (chakra templates) ----- please ignore this file, thanks!
+// ##################################################################################
+
 import { Button } from '@chakra-ui/react';
 import React from 'react';
 import { ImPlus as PlusIcon } from 'react-icons/im';

@@ -1,3 +1,7 @@
+// ##################################################################################
+// ℹ️ NOT READY YET or NOT MY CODE (chakra templates) ----- please ignore this file, thanks!
+// ##################################################################################
+
 import { Td, Tr, useColorModeValue as mode } from '@chakra-ui/react';
 import { Account } from '@multi-cart/react-data-access';
 import { toFriendlyCurrency } from '@multi-cart/util';

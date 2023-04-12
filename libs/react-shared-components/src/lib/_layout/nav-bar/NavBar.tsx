@@ -1,3 +1,7 @@
+// ##################################################################################
+// ℹ️ NOT READY YET or NOT MY CODE (chakra templates) ----- please ignore this file, thanks!
+// ##################################################################################
+ 
 import {
     Avatar, Box,
     Button, Flex,
@@ -5,7 +9,7 @@ import {
     Menu,
     MenuButton,
     MenuItem, MenuList, Spinner,
-    useColorModeValue as mode, useDisclosure, useToast
+    useColorModeValue as mode, useDisclosure
 } from '@chakra-ui/react';
 import { StateType } from '@multi-cart/react-app-state';
 import { useLogoutMutation, useMeQuery } from '@multi-cart/react-data-access';
@@ -14,8 +18,8 @@ import { useRouter } from 'next/router';
 import React from 'react';
 import { FiLogOut as LogoutIcon } from 'react-icons/fi';
 import { useSelector } from 'react-redux';
-import { CartAvatar } from '../../cart/cart-avatar/CartAvatar';
 import useMyToasts from '../../_hooks/useMyToasts';
+import { CartAvatar } from '../../cart/cart-avatar/CartAvatar';
 import SideBar from '../side-bar/SideBar';
 import styles from './NavBar.module.scss'; // TODO: the red squiggly goes away if you don't use the styles, and just straight import the scss...
 

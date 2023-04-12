@@ -1,3 +1,7 @@
+// ##################################################################################
+// ℹ️ NOT READY YET or NOT MY CODE (chakra templates) ----- please ignore this file, thanks!
+// ##################################################################################
+
 import { LinkBox, LinkOverlay, ListIcon, ListItem } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import React from 'react';

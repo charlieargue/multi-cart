@@ -1,3 +1,7 @@
+// ##################################################################################
+// ℹ️ NOT READY YET or NOT MY CODE (chakra templates) ----- please ignore this file, thanks!
+// ##################################################################################
+
 import './DarkModeSwitch.module.scss';
 import React from 'react';
 import { useColorMode, Switch } from '@chakra-ui/react'

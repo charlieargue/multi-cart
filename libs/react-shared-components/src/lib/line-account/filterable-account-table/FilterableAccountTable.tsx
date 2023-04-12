@@ -1,3 +1,7 @@
+// ##################################################################################
+// ℹ️ NOT READY YET or NOT MY CODE (chakra templates) ----- please ignore this file, thanks!
+// ##################################################################################
+
 import { Table, Tbody, Th, Thead, Tr } from '@chakra-ui/react';
 import { TextMuted } from '@multi-cart/react-ui';
 import React from 'react';

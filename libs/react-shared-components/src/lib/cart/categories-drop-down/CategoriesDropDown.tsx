@@ -1,3 +1,7 @@
+// ##################################################################################
+// ℹ️ NOT READY YET or NOT MY CODE (chakra templates) ----- please ignore this file, thanks!
+// ##################################################################################
+
 import './CategoriesDropDown.module.scss';
 import React, { useState } from 'react'
 import Select from "react-select";

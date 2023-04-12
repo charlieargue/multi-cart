@@ -1,3 +1,7 @@
+// ##################################################################################
+// ℹ️ NOT READY YET or NOT MY CODE (chakra templates) ----- please ignore this file, thanks!
+// ##################################################################################
+
 import { HStack, Tag, TagLabel, TagLeftIcon } from '@chakra-ui/react';
 import { Cart } from '@multi-cart/react-data-access';
 import { sumTotalCost, sumTotalItems, toFriendlyCurrency } from '@multi-cart/util';

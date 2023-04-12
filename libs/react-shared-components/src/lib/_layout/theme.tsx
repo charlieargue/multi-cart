@@ -1,3 +1,7 @@
+// ##################################################################################
+// ℹ️ NOT READY YET or NOT MY CODE (chakra templates) ----- please ignore this file, thanks!
+// ##################################################################################
+
 import { extendTheme } from '@chakra-ui/react'
 import { createBreakpoints } from '@chakra-ui/theme-tools'
 

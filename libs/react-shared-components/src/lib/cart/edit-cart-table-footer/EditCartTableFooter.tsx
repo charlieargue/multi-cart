@@ -1,3 +1,7 @@
+// ##################################################################################
+// ℹ️ NOT READY YET or NOT MY CODE (chakra templates) ----- please ignore this file, thanks!
+// ##################################################################################
+
 import { Box, Button, Flex, Stat, StatHelpText, StatLabel, StatNumber, TableCaption, Td, Tfoot, Tr } from '@chakra-ui/react';
 import { actionIsDeletingCart, store } from '@multi-cart/react-app-state';
 import { Cart, useDeleteCartMutation, useUpdateUserMutation } from '@multi-cart/react-data-access';
