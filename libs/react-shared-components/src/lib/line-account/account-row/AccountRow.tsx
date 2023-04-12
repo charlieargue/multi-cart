@@ -1,36 +1,34 @@
-// ##################################################################################
-// ℹ️ NOT READY YET or NOT MY CODE (chakra templates) ----- please ignore this file, thanks!
-// ##################################################################################
-
 import { Td, Tr, useColorModeValue as mode } from '@chakra-ui/react';
 import { Account } from '@multi-cart/react-data-access';
 import { toFriendlyCurrency } from '@multi-cart/util';
-import clsx from 'clsx';
 import React from 'react';
-import './AccountRow.module.scss';
 
 export interface AccountRowProps {
-  account: Account,
+  account: Account;
   isAlreadySelected: boolean;
   handleSelect(a: Account);
 }
 
-export function AccountRow({ isAlreadySelected, account: a, handleSelect }: AccountRowProps) {
-  // className={clsx("cursor-hand", "bg-warning text-muted" : null)}
+export const AccountRow = ({
+  isAlreadySelected,
+  account: a,
+  handleSelect,
+}: AccountRowProps) => {
   return (
     <Tr
       cursor={'pointer'}
-      backgroundColor={isAlreadySelected ? "yellow.100" : "inherit"}
+      backgroundColor={isAlreadySelected ? 'yellow.100' : 'inherit'}
       _hover={{
-        "backgroundColor": mode("gray.100", "gray.900"),
+        backgroundColor: mode('gray.100', 'gray.900'),
       }}
       key={a.accountNumber}
-      onClick={() => isAlreadySelected ? null : handleSelect(a as Account)}>
+      onClick={() => (isAlreadySelected ? null : handleSelect(a as Account))}
+    >
       <Td>{a.accountNumber}</Td>
       <Td>{a.accountName}</Td>
       <Td>{toFriendlyCurrency(a.amountRemaining)}</Td>
     </Tr>
   );
-}
+};
 
 export default AccountRow;

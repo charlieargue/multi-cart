@@ -35,14 +35,15 @@ export const DrawerContainer = ({
   const handleSelect = async (a: Account) => {
     // TODO: since line is updated super-fast, it already has the NEW CLA in there,  somehow??
     const remainingAmount = getRemainingAmount(line);
+    console.log(`🚀  remainingAmount:`, remainingAmount);
     // TODO: possible to hack sums and get negative amounts, need to prohibit that (so setting it to .01, so yup doesn't jank things and make it so cannot update a negative auto-poplated amount)
     await addCartLineAccount({
       cartId: line.cartId,
       cartLineId: line.id,
       accountNumber: a.accountNumber,
-      amount: remainingAmount > 0 ? remainingAmount : 0.01,
+      // DECOMISH/BUG prolly: amount: remainingAmount > 0 ? remainingAmount : 0.01,
+      amount: remainingAmount,
     });
-    // TODO: cache will auto-refresh so behind modal will already show newest CLA (so? confused by this note, TBD)
     onClose();
   };
 
