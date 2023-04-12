@@ -2,18 +2,33 @@
 // ℹ️ NOT READY YET or NOT MY CODE (chakra templates) ----- please ignore this file, thanks!
 // ##################################################################################
 
-import { Badge, Box, HStack, InputGroup, InputLeftAddon, InputRightAddon } from '@chakra-ui/react';
-import { CartLine, CartLineAccount, useUpdateCartLineAccountMutation } from '@multi-cart/react-data-access';
+import {
+  Badge,
+  Box,
+  HStack,
+  InputGroup,
+  InputLeftAddon,
+  InputRightAddon,
+} from '@chakra-ui/react';
+import {
+  CartLine,
+  CartLineAccount,
+  useUpdateCartLineAccountMutation,
+} from '@multi-cart/react-data-access';
 import { InputField } from '@multi-cart/react-ui';
-import { areLineAccountsValid, computeAmountGivenPercentage, computePercentageGivenAmount, toFriendlyCurrency } from '@multi-cart/util';
-import { Form, Formik } from "formik";
+import {
+  areLineAccountsValid,
+  computeAmountGivenPercentage,
+  computePercentageGivenAmount,
+  toFriendlyCurrency,
+} from '@multi-cart/util';
+import { Form, Formik } from 'formik';
 import React, { useCallback, useEffect, useRef } from 'react';
 import { FaPercentage as PercentageIcon } from 'react-icons/fa';
 import * as Yup from 'yup';
 import { AutoSave } from '../../auto-save/AutoSave';
 import DeleteLineAccountButton from '../delete-line-account-button/DeleteLineAccountButton';
 import LineAccountTooltip from '../line-account-tooltip/LineAccountTooltip';
-
 
 // -------------------
 // OVERVIEW of DILEMMA:
@@ -29,7 +44,7 @@ export interface LineAccountProps {
 
 const LineAccountFormSchema = Yup.object().shape({
   percentage: Yup.number()
-    .min(.01, 'Cannot be zero')
+    .min(0.01, 'Cannot be zero')
     .max(100, 'Maximum is 100%')
     .required('Required'),
 });
@@ -48,17 +63,22 @@ export const LineAccount = ({ lineAccount, line }: LineAccountProps) => {
       linePrice: line.price,
       lineQuantity: line.quantity,
       lineTax: 0,
-      lineAccountPercentage: percentage.current
+      lineAccountPercentage: percentage.current,
     });
     await updateCartLineAccount({
       cartId: line.cartId,
       cartLineId: line.id,
       id: lineAccount.id,
-      amount: newAmount
+      amount: newAmount,
     });
-  },
-    [line.cartId, line.id, line.price, line.quantity, lineAccount.id, updateCartLineAccount],
-  )
+  }, [
+    line.cartId,
+    line.id,
+    line.price,
+    line.quantity,
+    lineAccount.id,
+    updateCartLineAccount,
+  ]);
 
   // ------------------- update LA.AMOUNT when line.price|qty changes!
   // • anytime line.price or line.quantity changes
@@ -74,11 +94,10 @@ export const LineAccount = ({ lineAccount, line }: LineAccountProps) => {
     initializingForUseEffect.current = false; // but now that skipped, make sure not initializing anymore
   }, [line.price, line.quantity, saveLineAccount]);
 
-
   return (
     <Formik
       initialValues={{
-        percentage: percentage.current
+        percentage: percentage.current,
       }}
       validationSchema={LineAccountFormSchema}
       onSubmit={async (values) => {
@@ -87,55 +106,63 @@ export const LineAccount = ({ lineAccount, line }: LineAccountProps) => {
           // console.log(`🔵 🔵 🔵 🔵 🔵 🔵  ~ FORMIK onSubmit!`);
           // 1. calculate new AMOUNT based on this NEW percentage
           // 2. and must update the actual percentage ref (our "view model")
-          // 3. update the DB 
+          // 3. update the DB
           percentage.current = values.percentage;
-          await saveLineAccount()
+          await saveLineAccount();
         }
         initializingForFormik.current = false;
-      }}>
+      }}
+    >
       {({ /*isSubmitting, values, setValues,*/ errors, touched }) => (
-        <Form>
-          <InputGroup maxWidth="400px">
-
-            {/* LEFT PART */}
-            <LineAccountTooltip accountNumber={lineAccount.accountNumber}>
-              <InputLeftAddon children={<HStack cursor={'help'} >
-                <Box data-testid="lineAccountNumber"><strong>#</strong> {lineAccount.accountNumber}</Box>
-                <Badge
-                  rounded="md"
-                  shadow="xs"
-                  ml={2}
-                  mt={-.5}
-                  variant="warning"
-                  data-testid="lineAccountAmount"
-                  bg="yellow.100">{toFriendlyCurrency(lineAccount.amount)}</Badge>
-                <DeleteLineAccountButton lineAccount={lineAccount} line={line} />
-
-              </HStack >} />
-            </LineAccountTooltip>
-
-            {/* INPUT for PERCENTAGE */}
-            <Box minW="60px" maxW="80px">
-              <InputField
-                style={areLineAccountsValid(line) ? { "border": "1px solid green" } : { "border": "1px solid red" }}
-                required
-                type="number"
-                aria-label="percentage"
-                name="percentage"
-                id={`percentage_${lineAccount.id}`}
-                unwrapped={true}
-                radius="none">
-              </InputField>
-              <AutoSave debounceMs={300} />
-            </Box>
-
-            {/* RIGHT PART */}
-            <InputRightAddon children={<PercentageIcon />} />
-          </InputGroup>
-        </Form>
+        <InputGroup maxWidth="400px">
+          <LineAccountTooltip accountNumber={lineAccount.accountNumber}>
+            <InputLeftAddon
+              children={
+                <HStack cursor={'help'}>
+                  <Box data-testid="lineAccountNumber">
+                    <strong>#</strong> {lineAccount.accountNumber}
+                  </Box>
+                  <Badge
+                    rounded="md"
+                    shadow="xs"
+                    ml={2}
+                    mt={-0.5}
+                    variant="warning"
+                    data-testid="lineAccountAmount"
+                    bg="yellow.100"
+                  >
+                    {toFriendlyCurrency(lineAccount.amount)}
+                  </Badge>
+                  <DeleteLineAccountButton
+                    lineAccount={lineAccount}
+                    line={line}
+                  />
+                </HStack>
+              }
+            />
+          </LineAccountTooltip>
+          <Box minW="60px" maxW="80px">
+            <InputField
+              style={
+                areLineAccountsValid(line)
+                  ? { border: '1px solid green' }
+                  : { border: '1px solid red' }
+              }
+              required
+              type="number"
+              aria-label="percentage"
+              name="percentage"
+              id={`percentage_${lineAccount.id}`}
+              unwrapped={true}
+              radius="none"
+            ></InputField>
+            <AutoSave debounceMs={300} />
+          </Box>
+          <InputRightAddon children={<PercentageIcon />} />
+        </InputGroup>
       )}
     </Formik>
   );
-}
+};
 
 export default LineAccount;

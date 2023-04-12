@@ -1,16 +1,16 @@
 import { Box, useDisclosure } from '@chakra-ui/react';
 import React from 'react';
 import Logo from '../logo/Logo';
-import { DrawerContainer } from './DrawerContainer';
+import { Drawer } from './Drawer';
 
 export default {
-  component: DrawerContainer,
-  title: 'DrawerContainer',
+  component: Drawer,
+  title: 'Drawer',
 };
 
 export const withNavBar: React.FC<null>  = () => {
   
-  return <DrawerContainer
+  return <Drawer
       placement="left"
       size="xs"
       isOpen={true}
@@ -25,5 +25,5 @@ export const withNavBar: React.FC<null>  = () => {
           </Box>
       }>
       
-  </DrawerContainer>;
+  </Drawer>;
 };

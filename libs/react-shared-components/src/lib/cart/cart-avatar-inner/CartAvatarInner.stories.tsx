@@ -1,4 +1,3 @@
-import { text } from '@storybook/addon-knobs';
 import React from 'react';
 import { CartAvatarInner, CartAvatarInnerProps } from './CartAvatarInner';
 import { Cart } from '@multi-cart/react-data-access';

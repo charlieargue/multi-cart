@@ -1,8 +1,7 @@
-import { text } from '@storybook/addon-knobs';
-import React from 'react';
-import { Cart } from '@multi-cart/react-data-access';
-import CartAvatarRow, { CartAvatarRowProps } from './CartAvatarRow';
 import { Menu, MenuList } from '@chakra-ui/react';
+import { Cart } from '@multi-cart/react-data-access';
+import React from 'react';
+import CartAvatarRow from './CartAvatarRow';
 
 export default {
   component: CartAvatarRow,

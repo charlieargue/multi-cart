@@ -1,11 +1,9 @@
 // ##################################################################################
 // ℹ️ NOT READY YET or NOT MY CODE (chakra templates) ----- please ignore this file, thanks!
 // ##################################################################################
-
 import { Box, Flex } from '@chakra-ui/react';
-import { Wrapper } from '@multi-cart/react-ui';
+import { DarkModeSwitch, Wrapper } from '@multi-cart/react-ui';
 import React from 'react';
-import DarkModeSwitch from '../../dark-mode-switch/DarkModeSwitch';
 import { NavBar } from '../nav-bar/NavBar';
 import './AppLayout.module.scss';
 

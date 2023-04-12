@@ -1,10 +1,8 @@
+import { Box, useColorModeValue as mode } from '@chakra-ui/react';
+import NextLink from 'next/link';
 import React from 'react';
 import MicroLayout from '../../_layout/micro-layout/MicroLayout';
-import NextLink from 'next/link';
 import LoginForm from './LoginForm';
-import { Box, Button, SimpleGrid, useColorModeValue as mode, VisuallyHidden } from '@chakra-ui/react';
-import { DividerWithText } from '@multi-cart/react-ui';
-import { FaFacebook } from 'react-icons/fa';
 
 export default {
   component: LoginForm,

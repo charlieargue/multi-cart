@@ -1,27 +1,22 @@
-// ##################################################################################
-// ℹ️ NOT READY YET or NOT MY CODE (chakra templates) ----- please ignore this file, thanks!
-// ##################################################################################
-
 import { Button } from '@chakra-ui/react';
 import React from 'react';
 import { ImPlus as PlusIcon } from 'react-icons/im';
-import './AddLineAccountButton.module.scss';
 
 export interface AddLineAccountButtonProps {
   btnRef: React.MutableRefObject<undefined>
-  clickHandler()
+  clickHandler(): void | React.MouseEventHandler<HTMLButtonElement>;
 }
 
 export function AddLineAccountButton(props: AddLineAccountButtonProps) {
   return (
     <Button
+      colorScheme="green"
       data-testid="btnAddLineAccount"
-      ref={props.btnRef}
       onClick={props.clickHandler}
-      size="xs"
-      colorScheme="green">
-      <PlusIcon />
-              &nbsp;Add&nbsp;<strong>account</strong>
+      ref={props.btnRef}
+      size="xs">
+        <PlusIcon />
+        &nbsp;Add&nbsp;<strong>account</strong>
     </Button>
   );
 }

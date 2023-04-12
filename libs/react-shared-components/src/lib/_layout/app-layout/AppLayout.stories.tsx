@@ -1,6 +1,5 @@
-import { text } from '@storybook/addon-knobs';
 import React from 'react';
-import { AppLayout, AppLayoutProps } from './AppLayout';
+import { AppLayout } from './AppLayout';
 
 export default {
   component: AppLayout,
@@ -8,9 +7,5 @@ export default {
 };
 
 export const primary = () => {
-  const props: AppLayoutProps = {
-    
-  };
-  
   return <AppLayout>Testing</AppLayout>;
 };

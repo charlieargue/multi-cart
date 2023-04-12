@@ -5,13 +5,12 @@
 import { useCartQuery } from '@multi-cart/react-data-access';
 import {
   AppLayout,
+  CartSkeletons,
   EditCartHeader,
   EditCartTable,
 } from '@multi-cart/react-shared-components';
-import { BigAlert, Breadcrumbs, FullScreenSpinner } from '@multi-cart/react-ui';
+import { BigAlert, Breadcrumbs } from '@multi-cart/react-ui';
 import { useRouter } from 'next/router';
-
-// import { SkeletonCircle, SkeletonText } from '@chakra-ui/react';
 
 export const EditCartContainer = () => {
   const router = useRouter();
@@ -23,24 +22,6 @@ export const EditCartContainer = () => {
   });
 
   // todo: separate component all this!
-  // const cartSkeleton = (
-  //   <Fade in={true}>
-  //     <Box padding="6" boxShadow="lg" bg="white">
-  //       <SkeletonCircle size="10" />
-  //       <SkeletonText mt="4" noOfLines={4} spacing="4" />
-  //     </Box>
-  //     <Box padding="6" boxShadow="lg" bg="white" mt={8}>
-  //       <SkeletonCircle size="10" />
-  //       <SkeletonText mt="4" noOfLines={4} spacing="4" />
-  //     </Box>
-  //     <Box padding="6" boxShadow="lg" bg="white" mt={8}>
-  //       <SkeletonCircle size="10" />
-  //       <SkeletonText mt="4" noOfLines={4} spacing="4" />
-  //     </Box>
-  //   </Fade>
-  // );
-
-  // todo: separate component all this!
   const links = [
     {
       isActive: true,
@@ -49,8 +30,8 @@ export const EditCartContainer = () => {
       id: data?.cart?.name,
     },
   ];
-  const breadcrumbs = <Breadcrumbs links={links} />;
 
+  
   // const isDeletingCart = useSelector(
   //   (state: StateType) => state?.isDeletingCart
   // );
@@ -61,36 +42,29 @@ export const EditCartContainer = () => {
   //   updateUser({ currentCartId: id });
   // }, [id, updateUser]);
 
-  // fetching?
-  // TODO: loading indicator
-  // if (fetching) {
-  //   return (
-  //     <>
-  //       {breadcrumbs}
-  //       {cartSkeleton}
-  //     </>
-  //   );
-  // }
-
-  if (fetching || !data?.cart) {
-    return <FullScreenSpinner />;
+  if (!id || fetching || !data?.cart) {
+    return (
+      <AppLayout>
+        <Breadcrumbs links={links} />
+        <CartSkeletons />
+      </AppLayout>
+    );
   }
 
-  // big error
   // TODO: error boundary this, right?
   if (error) {
     console.log('🚀 ~ error', error);
     return (
-      <>
-        {breadcrumbs}
+      <AppLayout>
+        <Breadcrumbs links={links} />
         <BigAlert type="error" title="Ooops, sorry! An error occurred:">
-          <BigAlert.Message>{error.message}</BigAlert.Message>
+          <BigAlert.Message>{error?.message || 'Unknown error, contact support please.'}</BigAlert.Message>
         </BigAlert>
-      </>
+      </AppLayout>
     );
   }
 
-  // bad cart ID?
+  // TODO: bad cart ID?
   // if (!cart && !isDeletingCart) {
   //   return (
   //     <>
@@ -104,10 +78,10 @@ export const EditCartContainer = () => {
   //   );
   // }
 
-  // TODO: DRY this UI here
+  // TODO: DRY this UI here (don't repeat AppLayout and Bread, rule of 3s!), wrap it!
   return (
     <AppLayout>
-      {breadcrumbs}
+      <Breadcrumbs links={links} />
       <EditCartHeader cart={data?.cart} />
       <EditCartTable cart={data?.cart} />
     </AppLayout>

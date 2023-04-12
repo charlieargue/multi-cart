@@ -18,14 +18,13 @@ import {
 } from '@chakra-ui/react';
 import { Cart, useCartsQuery } from '@multi-cart/react-data-access';
 import { Sort } from '@multi-cart/react-ui';
-import { useRouter } from 'next/router';
 import React from 'react';
 import { CgChevronDown as ChevronDownIcon } from 'react-icons/cg';
 import { RiErrorWarningFill as WarningIcon } from 'react-icons/ri';
 import { CartAvatarInner } from '../cart-avatar-inner/CartAvatarInner';
 import CartAvatarRow from '../cart-avatar-row/CartAvatarRow';
 import NewCartButton from '../new-cart-button/NewCartButton';
-import styles from './CartAvatar.module.scss'; // NOTE: getting red-squiggly again, but ITS WORKING!?
+import styles from './CartAvatar.module.scss';
 
 export interface CartAvatarProps {
   currentCartId?: string | null;
@@ -60,7 +59,6 @@ const cartSkeletons = [1, 2, 3, 4].map((idx) => CartSkeleton(idx.toString()));
 
 // -------------------
 export const CartAvatar = ({ currentCartId = null }: CartAvatarProps) => {
-  const router = useRouter();
   const [{ data, fetching }] = useCartsQuery();
 
   const currentCart = (): Cart => {
