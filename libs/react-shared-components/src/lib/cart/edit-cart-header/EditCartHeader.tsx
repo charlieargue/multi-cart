@@ -1,23 +1,17 @@
-// ##################################################################################
-// ℹ️ NOT READY YET or NOT MY CODE (chakra templates) ----- please ignore this file, thanks!
-// ##################################################################################
-
 import { Badge, Box, Button, Flex, HStack } from '@chakra-ui/react';
 import { Cart, useBlankCartLineMutation } from '@multi-cart/react-data-access';
 import { toDaysAgo } from '@multi-cart/util';
 import React from 'react';
 import { ImPlus as PlusIcon } from 'react-icons/im';
 import CartNameEditable from '../cart-name-editable/CartNameEditable';
-import './EditCartHeader.module.scss';
 
 export interface EditCartHeaderProps {
   cart: Cart
 }
 
-export function EditCartHeader({ cart }: EditCartHeaderProps) {
+export const EditCartHeader = ({ cart }: EditCartHeaderProps) => {
   const [, blankCartLine] = useBlankCartLineMutation();
 
-  // 🛍 cart header
   return (
     <Flex
       justify="space-between"
