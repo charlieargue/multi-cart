@@ -33,7 +33,7 @@ import LineAccountTooltip from '../line-account-tooltip/LineAccountTooltip';
 // -------------------
 // OVERVIEW of DILEMMA:
 // - we show on the UI the percentage, and that's what the user changes
-// - but we don't store it in the db, it's just a view model
+// - but we don't store it in the db, it's just a view model / computed / derived
 // - on the db we store the computed amount (an actual field, not vm))
 // -------------------
 
@@ -87,6 +87,7 @@ export const LineAccount = ({ lineAccount, line }: LineAccountProps) => {
   // CONFIRMED: graphe-cache IS automatically updating lineAccount.amount after database update!
   useEffect(() => {
     // need to skip first call during loading
+    // THIS ISSUE MIGHT BE THE EXTRA RENDER JUST IN DEVELOPMENT MODE! right? 
     if (initializingForUseEffect.current === false) {
       // console.log(`🟡 🟡 🟡 🟡  ~ USE EFFECT!`);
       saveLineAccount();
