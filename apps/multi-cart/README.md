@@ -2,40 +2,7 @@
 🔴 NEEDS UPDATING after nx
 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴
 
-`package.json` scripts:
 
-```json
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "gen": "graphql-codegen --config codegen.yml",
-    "debug": "NODE_OPTIONS='--inspect' next dev",
-    "e2e:open": "cypress open",
-    "e2e:cicd": "cypress run",
-    "e2e:run:chrome": "cypress run",
-    "e2e:run:firefox": "cypress run  --browser firefox",
-    "e2e:run:edge": "cypress run  --browser edge"
-```
-
-🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴
-
-❓ And where does this go???
-
-```json
-"browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 2 safari version",
-      "ie 11"
-    ]
-  }
-```
 
 🔴 🔴 🔴 🔴 🔴 🔴 🔴 🔴
 

@@ -1,8 +1,8 @@
-// ##################################################################################
-// ℹ️ NOT READY YET or NOT MY CODE (chakra templates) ----- please ignore this file, thanks!
-// ##################################################################################
-
-import { CartLine, CartLineAccount, useDeleteCartLineAccountMutation } from '@multi-cart/react-data-access';
+import {
+  CartLine,
+  CartLineAccount,
+  useDeleteCartLineAccountMutation,
+} from '@multi-cart/react-data-access';
 import React from 'react';
 import { TiDelete as DeleteIcon } from 'react-icons/ti';
 import './DeleteLineAccountButton.module.scss';
@@ -12,16 +12,27 @@ export interface DeleteLineAccountButtonProps {
   line: CartLine;
 }
 
-export function DeleteLineAccountButton({ lineAccount, line }: DeleteLineAccountButtonProps) {
+export const DeleteLineAccountButton = ({
+  lineAccount,
+  line,
+}: DeleteLineAccountButtonProps) => {
   const [, deleteCartLineAccount] = useDeleteCartLineAccountMutation();
 
   return (
-    <DeleteIcon data-testid="btnDeleteCartLineAccount" size="16" cursor={'pointer'} color="red" onClick={() => deleteCartLineAccount({
-      cartId: line.cartId,
-      cartLineId: line.id,
-      cartLineAccountId: lineAccount.id
-    })} />
+    <DeleteIcon
+      data-testid="btnDeleteCartLineAccount"
+      size="16"
+      cursor={'pointer'}
+      color="red"
+      onClick={() =>
+        deleteCartLineAccount({
+          cartId: line.cartId,
+          cartLineId: line.id,
+          cartLineAccountId: lineAccount.id,
+        })
+      }
+    />
   );
-}
+};
 
 export default DeleteLineAccountButton;
