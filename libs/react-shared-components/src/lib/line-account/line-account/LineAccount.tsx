@@ -30,13 +30,6 @@ import { AutoSave } from '../../auto-save/AutoSave';
 import DeleteLineAccountButton from '../delete-line-account-button/DeleteLineAccountButton';
 import LineAccountTooltip from '../line-account-tooltip/LineAccountTooltip';
 
-// -------------------
-// OVERVIEW of DILEMMA:
-// - we show on the UI the percentage, and that's what the user changes
-// - but we don't store it in the db, it's just a view model / computed / derived
-// - on the db we store the computed amount (an actual field, not vm))
-// -------------------
-
 export interface LineAccountProps {
   lineAccount: CartLineAccount;
   line: CartLine;
@@ -49,72 +42,24 @@ const LineAccountFormSchema = Yup.object().shape({
     .required('Required'),
 });
 
-// -------------------
 export const LineAccount = ({ lineAccount, line }: LineAccountProps) => {
-  const [, updateCartLineAccount] = useUpdateCartLineAccountMutation();
-  const initializingForUseEffect = useRef(true);
-  const initializingForFormik = useRef(true);
-  // NOTE: using useRef because don't want changes to percentage to trigger re-renders (afaik)
-  // NOTE: auto-computing remaining percentage done implicitly on New CLA Button Side (see LineAccountsCOntainer), const remainingAmount = getRemainingAmount(line)
-  const percentage = useRef(computePercentageGivenAmount(lineAccount, line));
-
-  const saveLineAccount = useCallback(async () => {
-    const newAmount = computeAmountGivenPercentage({
-      linePrice: line.price,
-      lineQuantity: line.quantity,
-      lineTax: 0,
-      lineAccountPercentage: percentage.current,
-    });
-    await updateCartLineAccount({
-      cartId: line.cartId,
-      cartLineId: line.id,
-      id: lineAccount.id,
-      amount: newAmount,
-    });
-  }, [
-    line.cartId,
-    line.id,
-    line.price,
-    line.quantity,
-    lineAccount.id,
-    updateCartLineAccount,
-  ]);
-
-  // ------------------- update LA.AMOUNT when line.price|qty changes!
-  // • anytime line.price or line.quantity changes
-  // • need to hit a) calculate new AMOUNT for this LA
-  // • and hit the DB saving that!
-  // CONFIRMED: graphe-cache IS automatically updating lineAccount.amount after database update!
-  useEffect(() => {
-    // need to skip first call during loading
-    // THIS ISSUE MIGHT BE THE EXTRA RENDER JUST IN DEVELOPMENT MODE! right? 
-    if (initializingForUseEffect.current === false) {
-      // console.log(`🟡 🟡 🟡 🟡  ~ USE EFFECT!`);
-      saveLineAccount();
-    }
-    initializingForUseEffect.current = false; // but now that skipped, make sure not initializing anymore
-  }, [line.price, line.quantity, saveLineAccount]);
+  const skipFormikInit = useRef(true);
+  const percentage = computePercentageGivenAmount(lineAccount, line);
 
   return (
     <Formik
       initialValues={{
-        percentage: percentage.current,
+        percentage: percentage,
       }}
       validationSchema={LineAccountFormSchema}
       onSubmit={async (values) => {
-        // don't over fire when Formik hydrates form
-        if (!initializingForFormik.current) {
-          // console.log(`🔵 🔵 🔵 🔵 🔵 🔵  ~ FORMIK onSubmit!`);
-          // 1. calculate new AMOUNT based on this NEW percentage
-          // 2. and must update the actual percentage ref (our "view model")
-          // 3. update the DB
-          percentage.current = values.percentage;
-          await saveLineAccount();
+        if (!skipFormikInit.current) {
+          console.log(`🔵 🔵 🔵 🔵 🔵 🔵  ~ FORMIK onSubmit!`);
         }
-        initializingForFormik.current = false;
+        skipFormikInit.current = false;
       }}
     >
-      {({ /*isSubmitting, values, setValues,*/ errors, touched }) => (
+      {({ errors, touched }) => (
         <InputGroup maxWidth="400px">
           <LineAccountTooltip accountNumber={lineAccount.accountNumber}>
             <InputLeftAddon
