@@ -22,8 +22,8 @@ import {
   computePercentageGivenAmount,
   toFriendlyCurrency,
 } from '@multi-cart/util';
-import { Form, Formik } from 'formik';
-import React, { useCallback, useEffect, useRef } from 'react';
+import { Formik } from 'formik';
+import React, { useMemo, useRef } from 'react';
 import { FaPercentage as PercentageIcon } from 'react-icons/fa';
 import * as Yup from 'yup';
 import { AutoSave } from '../../auto-save/AutoSave';
@@ -43,8 +43,34 @@ const LineAccountFormSchema = Yup.object().shape({
 });
 
 export const LineAccount = ({ lineAccount, line }: LineAccountProps) => {
+  const [, updateCartLineAccount] = useUpdateCartLineAccountMutation();
   const skipFormikInit = useRef(true);
   const percentage = computePercentageGivenAmount(lineAccount, line);
+
+  const saveLineAccount = async (newPercentage: number) => {
+    const newAmount = computeAmountGivenPercentage({
+      linePrice: line.price,
+      lineQuantity: line.quantity,
+      lineTax: 0,
+      lineAccountPercentage: newPercentage,
+    });
+    console.log(`🚀  newAmount:`, newAmount);
+    await updateCartLineAccount({
+      cartId: line.cartId,
+      cartLineId: line.id,
+      id: lineAccount.id,
+      amount: newAmount,
+    });
+  };
+  // const saveLineAccount = useCallback(async () => {
+  // }, [
+  //   line.cartId,
+  //   line.id,
+  //   line.price,
+  //   line.quantity,
+  //   lineAccount.id,
+  //   updateCartLineAccount,
+  // ]);
 
   return (
     <Formik
@@ -54,6 +80,8 @@ export const LineAccount = ({ lineAccount, line }: LineAccountProps) => {
       validationSchema={LineAccountFormSchema}
       onSubmit={async (values) => {
         if (!skipFormikInit.current) {
+          console.log(`🚀  values:`, values);
+          await saveLineAccount(values.percentage);
           console.log(`🔵 🔵 🔵 🔵 🔵 🔵  ~ FORMIK onSubmit!`);
         }
         skipFormikInit.current = false;

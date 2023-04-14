@@ -94,7 +94,7 @@ export const computePercentageGivenAmount = (
   if (total === 0) {
     return 100;
   } else {
-    const nicelyRoundedPercentage = roundToTwo((account.amount / total) * 100); 
+    const nicelyRoundedPercentage = roundToTwo((account.amount / total) * 100);
     // NOTE: cannot do Math.round() because I want to allow .1 percent, which will round incorrectly to zero
     return nicelyRoundedPercentage;
   }
