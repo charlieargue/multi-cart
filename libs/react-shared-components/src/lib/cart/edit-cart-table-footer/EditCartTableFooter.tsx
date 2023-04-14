@@ -1,7 +1,3 @@
-// ##################################################################################
-// ℹ️ NOT READY YET or NOT MY CODE (chakra templates) ----- please ignore this file, thanks!
-// ##################################################################################
-
 import {
   Box,
   Button,
@@ -31,52 +27,48 @@ export interface EditCartTableFooterProps {
   cart: Cart;
 }
 
-export function EditCartTableFooter({ cart }: EditCartTableFooterProps) {
+export const EditCartTableFooter = ({ cart }: EditCartTableFooterProps) => {
   const router = useRouter();
   const [, deleteCart] = useDeleteCartMutation();
   const [, updateUser] = useUpdateUserMutation();
   const { toastInfo, toastError } = useMyToasts();
 
+  const clickHandler = async () => {
+    if (cart?.id) {
+      if (window.confirm('Are you SURE you want to 🛑 DELETE this cart?')) {
+        // without this, the "we could not find your cart" ERROR flashes briefly
+        store.dispatch(actionIsDeletingCart);
+        try {
+          const response = await deleteCart({
+            id: cart.id,
+          });
+          if (response.data?.deleteCart === true) {
+            const { error, data: updatedUser } = await updateUser({
+              currentCartId: '',
+            });
+            if (!error && updatedUser?.updateUser?.user?.currentCartId === '') {
+              toastInfo('Deleted!');
+              router.push('/dashboard');
+            } else if (error) {
+              toastError(error.message);
+            }
+          }
+        } finally {
+          setTimeout(() => store.dispatch(actionIsDeletingCart), 2000);
+        }
+      }
+    }
+  };
+
   return (
     <>
       <TableCaption>
-        Prices are estimates and subject to change
+        Prices are estimates and subject to change.
         <Button
           data-testid="btnDeleteCart"
           ml={2}
           size="sm"
-          onClick={async () => {
-            if (cart?.id) {
-              if (
-                window.confirm('Are you SURE you want to 🛑 DELETE this cart?')
-              ) {
-                // TODO: hacky, do we need a setDeleting and unsetDeleting instead of just toggle? or ok... TBD
-                store.dispatch(actionIsDeletingCart); // TOGGLE ON
-                try {
-                  const response = await deleteCart({
-                    id: cart.id,
-                  });
-                  if (response.data?.deleteCart === true) {
-                    // and update so NO current cart for this user
-                    const { error, data: updatedUser } = await updateUser({
-                      currentCartId: '',
-                    }); // VIP: empty string, just like on iac-side
-                    if (
-                      !error &&
-                      updatedUser?.updateUser?.user?.currentCartId === ''
-                    ) {
-                      toastInfo('Deleted!');
-                      router.push('/dashboard');
-                    } else if (error) {
-                      toastError(error.message);
-                    }
-                  }
-                } finally {
-                  setTimeout(() => store.dispatch(actionIsDeletingCart), 2000); // TOGGLE OFF (with delay)
-                }
-              }
-            }
-          }}
+          onClick={clickHandler}
         >
           <strong>Delete</strong> Cart
         </Button>
@@ -88,8 +80,8 @@ export function EditCartTableFooter({ cart }: EditCartTableFooterProps) {
               justifyContent="flex-end"
               mr={{ base: -3, md: -3, xl: '75px' }}
             >
-              <Box>
-                <Stat align="right">
+              <Box textAlign="right">
+                <Stat>
                   <StatLabel>Total:</StatLabel>
                   <StatNumber>
                     {toFriendlyCurrency(sumTotalCost(cart))}
@@ -105,6 +97,6 @@ export function EditCartTableFooter({ cart }: EditCartTableFooterProps) {
       </Tfoot>
     </>
   );
-}
+};
 
 export default EditCartTableFooter;

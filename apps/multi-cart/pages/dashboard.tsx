@@ -6,7 +6,7 @@ import React from 'react';
 import { DashboardContainer } from '../appViews/DashboardContainer';
 
 const DashboardPage: NextPage = () => {
-  useIsAuth(); // 🛡 session authentication
+  useIsAuth();
   
   return (
     <DashboardContainer />

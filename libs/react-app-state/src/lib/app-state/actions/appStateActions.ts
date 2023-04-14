@@ -1,7 +1,4 @@
-// -------------------------------------
-// ACTION TYPES (string constants)
-// -------------------------------------
-// TODO: check for better patterns/standard ways of writing these Actions/Types/etc.
+// ACTION string constants
 export const typeActionFetching = {
     start: 'FETCHING_START',
     stop: 'FETCHING_STOP',
@@ -11,9 +8,7 @@ export const typeActionIsDeletingCart = {
 };
 
 
-// -------------------------------------
-// ACTIONS (objects pre-populated w/ types)
-// -------------------------------------
+// ACTIONS TYPE OBJECTS
 export const actionFetchingStart = {
     type: typeActionFetching.start,
 };

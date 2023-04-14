@@ -23,7 +23,7 @@ export const NavBar = () => {
   const [{ data, fetching }] = useMeQuery();
   const [, logout] = useLogoutMutation();
   const { toastInfo } = useMyToasts();
-  const isFetching = useSelector((state: StateType) => state?.isFetching);
+  const isGlobalFetching = useSelector((state: StateType) => state?.isGlobalFetching);
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const logoutFunction = async () => {
@@ -51,11 +51,11 @@ export const NavBar = () => {
           </Box>
           <Spinner
             style={{
-              display: isFetching ? 'inline-block' : 'none',
+              display: isGlobalFetching ? 'inline-block' : 'none',
               marginLeft: '-22px',
             }}
             data-testid="fetchingStatus"
-            data-value={isFetching ? 'fetching' : ''}
+            data-value={isGlobalFetching ? 'fetching' : ''}
             size="sm"
             color="brand.pink"
             thickness="2px"

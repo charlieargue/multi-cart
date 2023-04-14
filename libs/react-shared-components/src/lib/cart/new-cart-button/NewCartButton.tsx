@@ -17,7 +17,7 @@ export interface NewCartButtonProps {
 }
 
 export function NewCartButton({ className }: NewCartButtonProps) {
-  useIsAuth(); // 🛡 session authentication
+  useIsAuth();
 
   const [, blankCart] = useBlankCartMutation();
   const router = useRouter();
