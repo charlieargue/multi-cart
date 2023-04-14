@@ -8,27 +8,23 @@ import {
   HStack,
   InputGroup,
   InputLeftAddon,
-  InputRightAddon,
 } from '@chakra-ui/react';
 import {
   CartLine,
   CartLineAccount,
   useUpdateCartLineAccountMutation,
 } from '@multi-cart/react-data-access';
-import { InputField, TooltipMC } from '@multi-cart/react-ui';
 import {
-  areLineAccountsValid,
   computeAmountGivenPercentage,
   computePercentageGivenAmount,
   toFriendlyCurrency,
 } from '@multi-cart/util';
-import { Formik } from 'formik';
-import React, { useMemo, useRef } from 'react';
-import { FaPercentage as PercentageIcon } from 'react-icons/fa';
+import { Formik, useFormikContext } from 'formik';
+import React, { useEffect, useRef } from 'react';
 import * as Yup from 'yup';
-import { AutoSave } from '../../auto-save/AutoSave';
 import DeleteLineAccountButton from '../delete-line-account-button/DeleteLineAccountButton';
 import LineAccountTooltip from '../line-account-tooltip/LineAccountTooltip';
+import LineAccountPercentageInput from './LineAccountPercentageInput';
 
 export interface LineAccountProps {
   lineAccount: CartLineAccount;
@@ -45,8 +41,10 @@ const LineAccountFormSchema = Yup.object().shape({
 export const LineAccount = ({ lineAccount, line }: LineAccountProps) => {
   const [, updateCartLineAccount] = useUpdateCartLineAccountMutation();
   const skipFormikInit = useRef(true);
-  const percentage = computePercentageGivenAmount(lineAccount, line);
-
+  const computedPercentage = computePercentageGivenAmount(lineAccount, line); // NOTE, if you update Line.Price|Quant, this will be WRONG because the GivenAmount will be wrong! (it's stale/previous from the CLA database)
+  // console.log(`🚀  percentage:`, computedPercentage);
+  
+  // put useCallback for this, right?
   const saveLineAccount = async (newPercentage: number) => {
     const newAmount = computeAmountGivenPercentage({
       linePrice: line.price,
@@ -54,7 +52,7 @@ export const LineAccount = ({ lineAccount, line }: LineAccountProps) => {
       lineTax: 0,
       lineAccountPercentage: newPercentage,
     });
-    console.log(`🚀  newAmount:`, newAmount);
+    // console.log(`🚀  newAmount:`, newAmount);
     await updateCartLineAccount({
       cartId: line.cartId,
       cartLineId: line.id,
@@ -62,20 +60,11 @@ export const LineAccount = ({ lineAccount, line }: LineAccountProps) => {
       amount: newAmount,
     });
   };
-  // const saveLineAccount = useCallback(async () => {
-  // }, [
-  //   line.cartId,
-  //   line.id,
-  //   line.price,
-  //   line.quantity,
-  //   lineAccount.id,
-  //   updateCartLineAccount,
-  // ]);
 
   return (
     <Formik
       initialValues={{
-        percentage: percentage,
+        percentage: computedPercentage,
       }}
       validationSchema={LineAccountFormSchema}
       onSubmit={async (values) => {
@@ -115,34 +104,7 @@ export const LineAccount = ({ lineAccount, line }: LineAccountProps) => {
               }
             />
           </LineAccountTooltip>
-          <TooltipMC
-            isHidden={areLineAccountsValid(line)}
-            label={
-              areLineAccountsValid(line)
-                ? ''
-                : '🛑 Percentage must be greater than 0 and less than 100, all percentages should sum to exactly 100, and line unit price cannot be zero'
-            }
-            placement="bottom"
-          >
-            <Box minW="60px" maxW="80px">
-              <InputField
-                style={
-                  areLineAccountsValid(line)
-                    ? { border: '1px solid green' }
-                    : { border: '1px solid red' }
-                }
-                required
-                type="number"
-                aria-label="percentage"
-                name="percentage"
-                id={`percentage_${lineAccount.id}`}
-                unwrapped={true}
-                radius="none"
-              ></InputField>
-              <AutoSave debounceMs={100} />
-            </Box>
-          </TooltipMC>
-          <InputRightAddon children={<PercentageIcon />} />
+          <LineAccountPercentageInput lineAccount={lineAccount} line={line} />
         </InputGroup>
       )}
     </Formik>

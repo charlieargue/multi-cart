@@ -38,6 +38,7 @@ export * from './lib/line-account/delete-line-account-button/DeleteLineAccountBu
 export * from './lib/line-account/line-account-tooltip/LineAccountTooltip';
 export * from './lib/line-account/line-account-validators/LineAccountValidators';
 export * from './lib/line-account/line-account/LineAccount';
+export * from './lib/line-account/line-account/LineAccountPercentageInput';
 export * from './lib/line-account/line-accounts-container/LineAccountsContainer';
 export * from './lib/product/product-card/ProductCard';
 export * from './lib/product/product-card/ProductTypes';
