@@ -15,7 +15,7 @@ import {
   CartLineAccount,
   useUpdateCartLineAccountMutation,
 } from '@multi-cart/react-data-access';
-import { InputField } from '@multi-cart/react-ui';
+import { InputField, TooltipMC } from '@multi-cart/react-ui';
 import {
   areLineAccountsValid,
   computeAmountGivenPercentage,
@@ -115,23 +115,33 @@ export const LineAccount = ({ lineAccount, line }: LineAccountProps) => {
               }
             />
           </LineAccountTooltip>
-          <Box minW="60px" maxW="80px">
-            <InputField
-              style={
-                areLineAccountsValid(line)
-                  ? { border: '1px solid green' }
-                  : { border: '1px solid red' }
-              }
-              required
-              type="number"
-              aria-label="percentage"
-              name="percentage"
-              id={`percentage_${lineAccount.id}`}
-              unwrapped={true}
-              radius="none"
-            ></InputField>
-            <AutoSave debounceMs={300} />
-          </Box>
+          <TooltipMC
+            isHidden={areLineAccountsValid(line)}
+            label={
+              areLineAccountsValid(line)
+                ? ''
+                : '🛑 Number must be greater than 0 and less than 100, and percentages should sum to exactly 100'
+            }
+            placement="bottom"
+          >
+            <Box minW="60px" maxW="80px">
+              <InputField
+                style={
+                  areLineAccountsValid(line)
+                    ? { border: '1px solid green' }
+                    : { border: '1px solid red' }
+                }
+                required
+                type="number"
+                aria-label="percentage"
+                name="percentage"
+                id={`percentage_${lineAccount.id}`}
+                unwrapped={true}
+                radius="none"
+              ></InputField>
+              <AutoSave debounceMs={300} />
+            </Box>
+          </TooltipMC>
           <InputRightAddon children={<PercentageIcon />} />
         </InputGroup>
       )}

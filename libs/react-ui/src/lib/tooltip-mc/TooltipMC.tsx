@@ -6,20 +6,27 @@ export interface TooltipMCProps {
   label: string;
   children?: React.ReactNode;
   placement?: Placement;
+  isHidden?: boolean;
 }
 
-// ------------------- MultiCart Tooltip
-export function TooltipMC({ label, children, placement = "bottom" }: TooltipMCProps) {
+export const TooltipMC = ({
+  label,
+  children,
+  placement = 'bottom',
+  isHidden = false,
+}: TooltipMCProps) => {
   return (
     <Tooltip
+      hidden={isHidden}
       hasArrow
       label={label}
       bg="gray.300"
       color="black"
-      placement={placement}>
+      placement={placement}
+    >
       {children}
     </Tooltip>
   );
-}
+};
 
 export default TooltipMC;

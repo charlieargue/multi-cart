@@ -1,7 +1,3 @@
-// ##################################################################################
-// ℹ️ NOT READY YET or NOT MY CODE (chakra templates) ----- please ignore this file, thanks!
-// ##################################################################################
-
 import { useAccountsQuery } from '@multi-cart/react-data-access';
 import { TooltipMC } from '@multi-cart/react-ui';
 import React from 'react';
@@ -12,16 +8,22 @@ export interface LineAccountTooltipProps {
   children?: React.ReactNode;
 }
 
-export function LineAccountTooltip({ accountNumber, children }: LineAccountTooltipProps) {
-  const [{ data, fetching }] = useAccountsQuery(); // NOTE: this is instead of adding in one more leftJoinAndSelect() to all the cart/carts queries, etc...
+export const LineAccountTooltip = ({
+  accountNumber,
+  children,
+}: LineAccountTooltipProps) => {
+  const [{ data }] = useAccountsQuery();
 
   return (
     <TooltipMC
-      label={data?.accounts && data.accounts.find(a => a.accountNumber === accountNumber).accountName}
+      label={
+        (data?.accounts || []).find((a) => a.accountNumber === accountNumber)
+          ?.accountName
+      }
     >
       {children}
     </TooltipMC>
   );
-}
+};
 
 export default LineAccountTooltip;
