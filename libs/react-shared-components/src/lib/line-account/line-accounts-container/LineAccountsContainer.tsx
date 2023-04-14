@@ -61,12 +61,7 @@ export const LineAccountsContainer = ({ line }: LineAccountsContainerProps) => {
                 <AddLineAccountButton btnRef={btnRef} clickHandler={onOpen} />
                 <LineAccountValidators line={line} />
               </Stack>
-              <DrawerContainer
-                line={line}
-                btnRef={btnRef}
-                isOpen={isOpen}
-                onClose={onClose}
-              />
+              <DrawerContainer line={line} btnRef={btnRef} isOpen={isOpen} onClose={onClose}  />
             </WrapItem>
             <Sort by="createdAt" childType="cla">
               {line?.cartLineAccounts?.map((cla) => (
@@ -80,6 +75,6 @@ export const LineAccountsContainer = ({ line }: LineAccountsContainerProps) => {
       </Td>
     </Tr>
   );
-};
+}
 
 export default LineAccountsContainer;

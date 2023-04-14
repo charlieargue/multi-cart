@@ -1,18 +1,18 @@
 import { Box, InputRightAddon } from '@chakra-ui/react';
+import {
+    CartLine,
+    CartLineAccount,
+    useUpdateCartLineAccountMutation,
+} from '@multi-cart/react-data-access';
 import { InputField, TooltipMC } from '@multi-cart/react-ui';
 import {
-  areLineAccountsValid,
-  computeAmountGivenPercentage,
+    areLineAccountsValid,
+    computeAmountGivenPercentage,
 } from '@multi-cart/util';
+import { useFormikContext } from 'formik';
 import React, { useEffect, useRef } from 'react';
 import { FaPercentage as PercentageIcon } from 'react-icons/fa';
 import { AutoSave } from '../../auto-save/AutoSave';
-import {
-  CartLine,
-  CartLineAccount,
-  useUpdateCartLineAccountMutation,
-} from '@multi-cart/react-data-access';
-import { useFormikContext } from 'formik';
 
 export interface LineAccountPercentageInputProps {
   lineAccount: CartLineAccount;
@@ -23,46 +23,33 @@ export const LineAccountPercentageInput = ({
   lineAccount,
   line,
 }: LineAccountPercentageInputProps) => {
-  const { values } = useFormikContext();
-  const formikPercentage = (values as any)?.percentage;
-//   console.log(`🚀  formikPercentage:`, formikPercentage);
+  const { values } = useFormikContext<{ percentage: number }>();
+  const formikPercentage = values?.percentage;
   const skipUseEffectInit = useRef(true);
   const [, updateCartLineAccount] = useUpdateCartLineAccountMutation();
+  const newAmountIfLinePriceOrQuantityChanges = computeAmountGivenPercentage({
+    linePrice: line.price,
+    lineQuantity: line.quantity,
+    lineTax: 0,
+    lineAccountPercentage: formikPercentage,
+  });
 
   useEffect(() => {
     if (skipUseEffectInit.current === false) {
-      console.log(`🟡 🟡 🟡 🟡  ~ USE EFFECT - LINE PRICE or QUANT changed!!!`, lineAccount.accountNumber);
-      // ------------------- update LA.AMOUNT when line.price|qty changes!
-      // • anytime line.price or line.quantity changes
-      // • need to hit a) calculate new AMOUNT for this LA
-      // • and hit the DB saving that!
-    //   console.log(`🚀  formikPercentage:`, formikPercentage);
-
-      // ok, at this point, only a LINE P or Q has changed, AND we have access to the latest PERCENTAGE for this CLA, so we need to:
-      // new NEW TOTAL * PERCENTAGE = new AMOUNT!
-
-      const newAmount = computeAmountGivenPercentage({
-        linePrice: line.price,
-        lineQuantity: line.quantity,
-        lineTax: 0,
-        lineAccountPercentage: formikPercentage,
-      });
       updateCartLineAccount({
         cartId: line.cartId,
         cartLineId: line.id,
         id: lineAccount.id,
-        amount: newAmount,
+        amount: newAmountIfLinePriceOrQuantityChanges,
       });
     }
-    skipUseEffectInit.current = false; // but now that skipped, make sure not initializing anymore
+    skipUseEffectInit.current = false;
   }, [
     line.cartId,
     line.id,
-    line.price,
-    line.quantity,
+    newAmountIfLinePriceOrQuantityChanges,
     lineAccount.id,
     updateCartLineAccount,
-    formikPercentage,
   ]);
 
   return (
