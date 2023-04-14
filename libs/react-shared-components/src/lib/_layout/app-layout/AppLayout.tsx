@@ -5,8 +5,6 @@ import { Box, Flex } from '@chakra-ui/react';
 import { DarkModeSwitch, Wrapper } from '@multi-cart/react-ui';
 import React from 'react';
 import { NavBar } from '../nav-bar/NavBar';
-import './AppLayout.module.scss';
-
 export interface AppLayoutProps {
   children?: React.ReactNode;
 }

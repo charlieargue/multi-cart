@@ -1,10 +1,10 @@
 import React from 'react';
-import { CartAvatarInner, CartAvatarInnerProps } from './CartAvatarInner';
+import { CartSummary, CartSummaryProps } from './CartSummary';
 import { Cart } from '@multi-cart/react-data-access';
 
 export default {
-  component: CartAvatarInner,
-  title: 'CartAvatarInner',
+  component: CartSummary,
+  title: 'CartSummary',
 };
 
 export const primary = () => {
@@ -42,8 +42,8 @@ export const primary = () => {
       }
     ]
   }
-  const props: CartAvatarInnerProps = {
+  const props: CartSummaryProps = {
     cart
   };
-  return <CartAvatarInner cart={props.cart} />;
+  return <CartSummary cart={props.cart} />;
 };

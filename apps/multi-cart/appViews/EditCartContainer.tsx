@@ -2,7 +2,7 @@
 // ℹ️ NOT READY YET or NOT MY CODE (chakra templates) ----- please ignore this file, thanks!
 // ##################################################################################
 
-import { useCartQuery } from '@multi-cart/react-data-access';
+import { useCartQuery, useUpdateUserMutation } from '@multi-cart/react-data-access';
 import {
   AppLayout,
   CartSkeletons,
@@ -11,10 +11,12 @@ import {
 } from '@multi-cart/react-shared-components';
 import { BigAlert, Breadcrumbs } from '@multi-cart/react-ui';
 import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 
 export const EditCartContainer = () => {
   const router = useRouter();
   const id = router.query.id as string;
+  const [, updateUser] = useUpdateUserMutation();
   const [{ data, error, fetching }] = useCartQuery({
     variables: {
       id,
@@ -35,12 +37,10 @@ export const EditCartContainer = () => {
   // const isDeletingCart = useSelector(
   //   (state: StateType) => state?.isDeletingCart
   // );
-  // const [, updateUser] = useUpdateUserMutation();
 
-  // what? this shouldn't be here....
-  // useEffect(() => {
-  //   updateUser({ currentCartId: id });
-  // }, [id, updateUser]);
+  useEffect(() => {
+    updateUser({ currentCartId: id });
+  }, [id, updateUser]);
 
   if (!id || fetching || !data?.cart) {
     return (

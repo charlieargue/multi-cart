@@ -1,11 +1,11 @@
 import { Menu, MenuList } from '@chakra-ui/react';
 import { Cart } from '@multi-cart/react-data-access';
 import React from 'react';
-import CartAvatarRow from './CartAvatarRow';
+import CartMenuRow from './CartMenuRow';
 
 export default {
-  component: CartAvatarRow,
-  title: 'CartAvatarRow',
+  component: CartMenuRow,
+  title: 'CartMenuRow',
 };
 
 const carts: Cart[] = [{
@@ -81,7 +81,7 @@ export const primary = () => {
   return <Menu isOpen={true}>
     <MenuList>
       {carts.map((cart) => (
-        <CartAvatarRow
+        <CartMenuRow
           key={cart.id}
           c={cart}
           currentCartId="555555-865d-48ea-b5c0-9935f01b5cf1" />

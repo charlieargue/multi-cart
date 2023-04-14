@@ -1,5 +1,5 @@
-describe('react-shared-components: CartAvatarInner component', () => {
-  beforeEach(() => cy.visit('/iframe.html?id=cartavatarinner--primary'));
+describe('react-shared-components: CartSummary component', () => {
+  beforeEach(() => cy.visit('/iframe.html?id=CartSummary--primary'));
 
   it('should render the component', () => {
     cy.findByTestId('currentCartTotalItems').should('have.text', '3');
