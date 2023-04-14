@@ -62,7 +62,7 @@ export const NavBar = () => {
       <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
         <HStack>
           <Box className={styles['nav-bar__scale-down']}>
-            <Logo clickHandler={onOpen} />
+            <Logo clickHandler={onOpen} skipLink={true}/>
           </Box>
           <Spinner
             style={{
