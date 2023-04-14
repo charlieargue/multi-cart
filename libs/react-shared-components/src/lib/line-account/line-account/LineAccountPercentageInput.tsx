@@ -1,18 +1,17 @@
 import { Box, InputRightAddon } from '@chakra-ui/react';
 import {
-    CartLine,
-    CartLineAccount,
-    useUpdateCartLineAccountMutation,
+  CartLine,
+  CartLineAccount,
+  useUpdateCartLineAccountMutation,
 } from '@multi-cart/react-data-access';
 import { InputField, TooltipMC } from '@multi-cart/react-ui';
 import {
-    areLineAccountsValid,
-    computeAmountGivenPercentage,
+  areLineAccountsValid,
+  computeAmountGivenPercentage,
 } from '@multi-cart/util';
 import { useFormikContext } from 'formik';
 import React, { useEffect, useRef } from 'react';
 import { FaPercentage as PercentageIcon } from 'react-icons/fa';
-import { AutoSave } from '../../auto-save/AutoSave';
 
 export interface LineAccountPercentageInputProps {
   lineAccount: CartLineAccount;
@@ -27,28 +26,39 @@ export const LineAccountPercentageInput = ({
   const formikPercentage = values?.percentage;
   const skipUseEffectInit = useRef(true);
   const [, updateCartLineAccount] = useUpdateCartLineAccountMutation();
-  const newAmountIfLinePriceOrQuantityChanges = computeAmountGivenPercentage({
-    linePrice: line.price,
-    lineQuantity: line.quantity,
-    lineTax: 0,
-    lineAccountPercentage: formikPercentage,
-  });
 
   useEffect(() => {
-    if (skipUseEffectInit.current === false) {
-      updateCartLineAccount({
+    const resaveLineAccount = async () => {
+      console.log(`🚀  formikPercentage:`, formikPercentage);
+      const newAmountIfLinePriceOrQuantityChanges =
+        computeAmountGivenPercentage({
+          linePrice: line.price,
+          lineQuantity: line.quantity,
+          lineTax: 0,
+          lineAccountPercentage: formikPercentage,
+        });
+      await updateCartLineAccount({
         cartId: line.cartId,
         cartLineId: line.id,
         id: lineAccount.id,
         amount: newAmountIfLinePriceOrQuantityChanges,
       });
-    }
-    skipUseEffectInit.current = false;
+      // skipUseEffectInit.current = false;
+    };
+
+    // if (skipUseEffectInit.current === false) {
+    console.log(`🚀 UPDATING CLA.amount because LINE PRICE or QUANTITY changed!`);
+    resaveLineAccount().catch((err) => {
+      console.log(`🚀  err:`, err);
+    });
+    // }
   }, [
     line.cartId,
     line.id,
-    newAmountIfLinePriceOrQuantityChanges,
+    line.price,
+    line.quantity,
     lineAccount.id,
+    // skipUseEffectInit,
     updateCartLineAccount,
   ]);
 
@@ -78,7 +88,6 @@ export const LineAccountPercentageInput = ({
             unwrapped={true}
             radius="none"
           ></InputField>
-          <AutoSave debounceMs={100} />
         </Box>
       </TooltipMC>
       <InputRightAddon children={<PercentageIcon />} />

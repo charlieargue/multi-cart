@@ -2,6 +2,7 @@
 // ℹ️ NOT READY YET or NOT MY CODE (chakra templates) ----- please ignore this file, thanks!
 // ##################################################################################
 
+import { AutoSave } from '../../auto-save/AutoSave';
 import {
   Badge,
   Box,
@@ -42,7 +43,7 @@ export const LineAccount = ({ lineAccount, line }: LineAccountProps) => {
   const [, updateCartLineAccount] = useUpdateCartLineAccountMutation();
   const skipFormikInit = useRef(true);
   const derivedPercentage = computePercentageGivenAmount(lineAccount, line);
-  
+
   const saveLineAccount = async (newPercentage: number) => {
     const newAmount = computeAmountGivenPercentage({
       linePrice: line.price,
@@ -66,6 +67,7 @@ export const LineAccount = ({ lineAccount, line }: LineAccountProps) => {
       validationSchema={LineAccountFormSchema}
       onSubmit={async (values) => {
         if (!skipFormikInit.current) {
+          console.log(`🚀 AUTOSAVE because changing PERCENTAGE`);
           await saveLineAccount(values.percentage);
         }
         skipFormikInit.current = false;
@@ -100,6 +102,7 @@ export const LineAccount = ({ lineAccount, line }: LineAccountProps) => {
             />
           </LineAccountTooltip>
           <LineAccountPercentageInput lineAccount={lineAccount} line={line} />
+          <AutoSave debounceMs={100} />
         </InputGroup>
       )}
     </Formik>
