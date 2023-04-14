@@ -11,7 +11,7 @@ import {
 } from '@multi-cart/react-data-access';
 import { Drawer, SearchBar, TextMuted } from '@multi-cart/react-ui';
 import { getRemainingAmount } from '@multi-cart/util';
-import React from 'react';
+import React, { useCallback } from 'react';
 import AccountRow from '../account-row/AccountRow';
 
 export interface DrawerContainerProps {
@@ -27,11 +27,13 @@ export const DrawerContainer = ({
   line,
   onClose,
 }: DrawerContainerProps) => {
-  const [{ data, fetching }] = useAccountsQuery();
+  const [{ data }] = useAccountsQuery();
   const [, addCartLineAccount] = useAddCartLineAccountMutation();
   const [searchTerm, setSearchTerm] = React.useState('');
-  const onSearchChange = (event) => setSearchTerm(event.target.value);
 
+  // 🚧 -----------------------------------------------------
+  // 🚧  🚧  🚧  🚧  🚧  🚧  Work-in-Progress 🚧  🚧  🚧  🚧  🚧
+  // 🚧 ----------------------------------------------------
   const handleSelect = async (a: Account) => {
     // TODO: since line is updated super-fast, it already has the NEW CLA in there,  somehow??
     const remainingAmount = getRemainingAmount(line);
@@ -47,36 +49,19 @@ export const DrawerContainer = ({
     onClose();
   };
 
-  // ------------------ TODO: useMemo this?
-  // BUT HOW?
-  // const isAlreadySelected = useMemo((accountNumber: string) =>line.cartLineAccounts ? line.cartLineAccounts.filter((a) => a.accountNumber === accountNumber).length !== 0 : false,
-  // [accountNumber, line.cartLineAccounts]) as boolean;
-  //
-  const isAlreadySelected = (accountNumber: string): boolean => {
-    return line.cartLineAccounts
-      ? line.cartLineAccounts.filter((a) => a.accountNumber === accountNumber)
-          .length !== 0
-      : false;
-  };
+  const isAlreadySelected = useCallback(
+    (accountNumber: string) => {
+      return line.cartLineAccounts
+        ? line.cartLineAccounts.filter((a) => a.accountNumber === accountNumber)
+            .length !== 0
+        : false;
+    },
+    [line.cartLineAccounts]
+  );
 
-  const searchResults = [];
-  data?.accounts.forEach((account: Account) => {
-    // TODO: if you keep this, use actual .filter() to filter search results
-    if (
-      account.accountNumber.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      account.accountName.toLowerCase().includes(searchTerm.toLowerCase())
-    ) {
-      // NOTE: re-computing this each render, no need for state/useEffect
-      searchResults.push(
-        <AccountRow
-          account={account}
-          isAlreadySelected={isAlreadySelected(account.accountNumber)}
-          handleSelect={handleSelect}
-          key={account.accountNumber}
-        />
-      );
-    }
-  });
+  const filterFn = (account: Account) => 
+    account.accountNumber.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    account.accountName.toLowerCase().includes(searchTerm.toLowerCase());
 
   return (
     <Drawer
@@ -84,13 +69,10 @@ export const DrawerContainer = ({
       onClose={onClose}
       btnRef={btnRef}
       drawerHeader={
-        <SearchBar searchTerm={searchTerm} onSearchChange={onSearchChange} />
+        <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
       }
     >
       <Divider />
-      {searchResults.length === 0 && fetching ? (
-        <div>Loading...</div>
-      ) : (
         <Table variant="simple" colorScheme="gray">
           <Thead>
             <Tr>
@@ -107,9 +89,17 @@ export const DrawerContainer = ({
               </Th>
             </Tr>
           </Thead>
-          <Tbody>{searchResults}</Tbody>
+          <Tbody>
+          {data?.accounts.filter(filterFn).map((filteredAccount: Account) => (
+            <AccountRow
+                account={filteredAccount}
+                isAlreadySelected={isAlreadySelected(filteredAccount.accountNumber)}
+                handleSelect={handleSelect}
+                key={filteredAccount.accountNumber}
+              />
+          ))}
+          </Tbody>
         </Table>
-      )}
     </Drawer>
   );
 };

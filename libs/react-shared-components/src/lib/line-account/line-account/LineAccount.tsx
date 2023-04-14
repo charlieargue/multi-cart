@@ -120,7 +120,7 @@ export const LineAccount = ({ lineAccount, line }: LineAccountProps) => {
             label={
               areLineAccountsValid(line)
                 ? ''
-                : '🛑 Number must be greater than 0 and less than 100, and percentages should sum to exactly 100'
+                : '🛑 Percentage must be greater than 0 and less than 100, all percentages should sum to exactly 100, and line unit price cannot be zero'
             }
             placement="bottom"
           >
@@ -139,7 +139,7 @@ export const LineAccount = ({ lineAccount, line }: LineAccountProps) => {
                 unwrapped={true}
                 radius="none"
               ></InputField>
-              <AutoSave debounceMs={300} />
+              <AutoSave debounceMs={100} />
             </Box>
           </TooltipMC>
           <InputRightAddon children={<PercentageIcon />} />

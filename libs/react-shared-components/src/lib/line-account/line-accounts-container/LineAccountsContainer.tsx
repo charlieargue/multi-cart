@@ -22,7 +22,7 @@ export interface LineAccountsContainerProps {
   line?: CartLine;
 }
 
-export function LineAccountsContainer({ line }: LineAccountsContainerProps) {
+export const LineAccountsContainer = ({ line }: LineAccountsContainerProps) => {
   const btnRef = useRef();
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -61,7 +61,12 @@ export function LineAccountsContainer({ line }: LineAccountsContainerProps) {
                 <AddLineAccountButton btnRef={btnRef} clickHandler={onOpen} />
                 <LineAccountValidators line={line} />
               </Stack>
-              <DrawerContainer line={line} btnRef={btnRef} isOpen={isOpen} onClose={onClose}  />
+              <DrawerContainer
+                line={line}
+                btnRef={btnRef}
+                isOpen={isOpen}
+                onClose={onClose}
+              />
             </WrapItem>
             <Sort by="createdAt" childType="cla">
               {line?.cartLineAccounts?.map((cla) => (
@@ -75,6 +80,6 @@ export function LineAccountsContainer({ line }: LineAccountsContainerProps) {
       </Td>
     </Tr>
   );
-}
+};
 
 export default LineAccountsContainer;

@@ -92,10 +92,9 @@ export const computePercentageGivenAmount = (
 ) => {
   const total: number = getLineTotalWithTax(line.price, line.quantity, 0);
   if (total === 0) {
-    return 100;
+    return 0;
   } else {
     const nicelyRoundedPercentage = roundToTwo((account.amount / total) * 100);
-    // NOTE: cannot do Math.round() because I want to allow .1 percent, which will round incorrectly to zero
     return nicelyRoundedPercentage;
   }
 };

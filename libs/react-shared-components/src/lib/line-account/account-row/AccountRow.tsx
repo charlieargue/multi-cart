@@ -11,7 +11,7 @@ export interface AccountRowProps {
 
 export const AccountRow = ({
   isAlreadySelected,
-  account: a,
+  account,
   handleSelect,
 }: AccountRowProps) => {
   return (
@@ -21,12 +21,12 @@ export const AccountRow = ({
       _hover={{
         backgroundColor: mode('gray.100', 'gray.900'),
       }}
-      key={a.accountNumber}
-      onClick={() => (isAlreadySelected ? null : handleSelect(a as Account))}
+      key={account.accountNumber}
+      onClick={() => (isAlreadySelected ? null : handleSelect(account))}
     >
-      <Td>{a.accountNumber}</Td>
-      <Td>{a.accountName}</Td>
-      <Td>{toFriendlyCurrency(a.amountRemaining)}</Td>
+      <Td>{account.accountNumber}</Td>
+      <Td>{account.accountName}</Td>
+      <Td>{toFriendlyCurrency(account.amountRemaining)}</Td>
     </Tr>
   );
 };
