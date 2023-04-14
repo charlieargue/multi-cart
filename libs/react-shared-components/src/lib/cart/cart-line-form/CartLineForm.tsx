@@ -7,7 +7,7 @@ import {
 import { InputField } from '@multi-cart/react-ui';
 import { toFriendlyCurrency } from '@multi-cart/util';
 import { Form, Formik } from 'formik';
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { CgClose as CloseIcon } from 'react-icons/cg';
 import { AutoSave } from '../../auto-save/AutoSave';
 import { CategoriesDropDown } from '../categories-drop-down/CategoriesDropDown';
@@ -22,26 +22,42 @@ export const CartLineForm = ({ idx, line }: CartLineFormProps) => {
   const [{ fetching: deleting }, deleteCartLine] = useDeleteCartLineMutation();
   const [, updateCartLine] = useUpdateCartLineMutation();
   const skipAutoSaveWhenFormikInits = useRef(true);
+  const skipUseEffectInit = useRef(true);
+
+  useEffect(() => {
+    if (skipUseEffectInit.current === false) {
+      console.log(`🚀 💪 LINE PRICE or QUANTITY changed!`);
+      // OPTION 1: life saveLineAccount out of LineAccount CMPNT into CartLineContainer, pass it down into both CartLineForm and LineAccount...
+      // ........... and then what? how will you get the formikPercentage up into CartLineFOrm? no go...
+
+      // OPTION 2: fire a dispatch here, which will take one arg: the LINE ID...
+      // ... the action (async) will need access to the whole line also! so pass that to the dispatch!
+      // ... then the action will have the line + CLAs.... and you can just iterate thru each CLA and fire off an async call
+      // ... but you'll still need the percentages! unless you keep the OLD line price vs
+
+      // no, you're fucked cuz the freshest FORMIK percentages for all the CLAs, that you need when the line changes
+      // is down below in the LINE Acct formik context... not up here...
+
+      // and if you put this useEffect down into the LIneAccount, it fires too much or not enough, because of the Line account re-rendering I think, not sure...
+      // ugh man, this sucks...
+    }
+    skipUseEffectInit.current = false;
+  }, [line.price, line.quantity]);
 
   const submit = async (values) => {
     if (!skipAutoSaveWhenFormikInits.current) {
-      if (
-        typeof values.price == 'number' &&
-        typeof values.quantity == 'number'
-      ) {
-        await updateCartLine({
-          cartLine: {
-            id: line.id,
-            cartId: line.cartId,
-            categoryId: line.categoryId,
-            uom: line.uom,
-            itemId: values.itemId,
-            description: values.description,
-            quantity: Number(values.quantity),
-            price: Number(values.price),
-          },
-        });
-      }
+      await updateCartLine({
+        cartLine: {
+          id: line.id,
+          cartId: line.cartId,
+          categoryId: line.categoryId,
+          uom: line.uom,
+          itemId: values.itemId,
+          description: values.description,
+          quantity: Number(values.quantity),
+          price: Number(values.price),
+        },
+      });
     }
     skipAutoSaveWhenFormikInits.current = false;
   };

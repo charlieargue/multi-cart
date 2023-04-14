@@ -27,40 +27,41 @@ export const LineAccountPercentageInput = ({
   const skipUseEffectInit = useRef(true);
   const [, updateCartLineAccount] = useUpdateCartLineAccountMutation();
 
-  useEffect(() => {
-    const resaveLineAccount = async () => {
-      console.log(`🚀  formikPercentage:`, formikPercentage);
-      const newAmountIfLinePriceOrQuantityChanges =
-        computeAmountGivenPercentage({
-          linePrice: line.price,
-          lineQuantity: line.quantity,
-          lineTax: 0,
-          lineAccountPercentage: formikPercentage,
-        });
-      await updateCartLineAccount({
-        cartId: line.cartId,
-        cartLineId: line.id,
-        id: lineAccount.id,
-        amount: newAmountIfLinePriceOrQuantityChanges,
-      });
-      // skipUseEffectInit.current = false;
-    };
 
-    // if (skipUseEffectInit.current === false) {
-    console.log(`🚀 UPDATING CLA.amount because LINE PRICE or QUANTITY changed!`);
-    resaveLineAccount().catch((err) => {
-      console.log(`🚀  err:`, err);
-    });
-    // }
-  }, [
-    line.cartId,
-    line.id,
-    line.price,
-    line.quantity,
-    lineAccount.id,
-    // skipUseEffectInit,
-    updateCartLineAccount,
-  ]);
+  // useEffect(() => {
+  //   const resaveLineAccount = async () => {
+  //     console.log(`🚀  formikPercentage:`, formikPercentage);
+  //     const newAmountIfLinePriceOrQuantityChanges =
+  //       computeAmountGivenPercentage({
+  //         linePrice: line.price,
+  //         lineQuantity: line.quantity,
+  //         lineTax: 0,
+  //         lineAccountPercentage: formikPercentage,
+  //       });
+  //     await updateCartLineAccount({
+  //       cartId: line.cartId,
+  //       cartLineId: line.id,
+  //       id: lineAccount.id,
+  //       amount: newAmountIfLinePriceOrQuantityChanges,
+  //     });
+  //     // skipUseEffectInit.current = false;
+  //   };
+
+  //   // if (skipUseEffectInit.current === false) {
+  //   console.log(`🚀 UPDATING CLA.amount because LINE PRICE or QUANTITY changed!`);
+  //   resaveLineAccount().catch((err) => {
+  //     console.log(`🚀  err:`, err);
+  //   });
+  //   // }
+  // }, [
+  //   line.cartId,
+  //   line.id,
+  //   line.price,
+  //   line.quantity,
+  //   lineAccount.id,
+  //   // skipUseEffectInit,
+  //   updateCartLineAccount,
+  // ]);
 
   return (
     <>
