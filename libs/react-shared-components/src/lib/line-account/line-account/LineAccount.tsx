@@ -1,8 +1,6 @@
 // ##################################################################################
 // ℹ️ NOT READY YET or NOT MY CODE (chakra templates) ----- please ignore this file, thanks!
 // ##################################################################################
-
-import { AutoSave } from '../../auto-save/AutoSave';
 import {
   Badge,
   Box,
@@ -10,19 +8,16 @@ import {
   InputGroup,
   InputLeftAddon,
 } from '@chakra-ui/react';
+import { useCartLineContext } from '@multi-cart/react-app-state';
+import { CartLine, CartLineAccount } from '@multi-cart/react-data-access';
 import {
-  CartLine,
-  CartLineAccount,
-  useUpdateCartLineAccountMutation,
-} from '@multi-cart/react-data-access';
-import {
-  computeAmountGivenPercentage,
   computePercentageGivenAmount,
   toFriendlyCurrency,
 } from '@multi-cart/util';
 import { Formik } from 'formik';
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import * as Yup from 'yup';
+import { AutoSave } from '../../auto-save/AutoSave';
 import DeleteLineAccountButton from '../delete-line-account-button/DeleteLineAccountButton';
 import LineAccountTooltip from '../line-account-tooltip/LineAccountTooltip';
 import LineAccountPercentageInput from './LineAccountPercentageInput';
@@ -30,6 +25,7 @@ import LineAccountPercentageInput from './LineAccountPercentageInput';
 export interface LineAccountProps {
   lineAccount: CartLineAccount;
   line: CartLine;
+  saveLineAccount(newPercentage: number, lineAccountId: string): void;
 }
 
 const LineAccountFormSchema = Yup.object().shape({
@@ -39,25 +35,22 @@ const LineAccountFormSchema = Yup.object().shape({
     .required('Required'),
 });
 
-export const LineAccount = ({ lineAccount, line }: LineAccountProps) => {
-  const [, updateCartLineAccount] = useUpdateCartLineAccountMutation();
+export const LineAccount = ({
+  lineAccount,
+  line,
+  saveLineAccount,
+}: LineAccountProps) => {
   const skipFormikInit = useRef(true);
   const derivedPercentage = computePercentageGivenAmount(lineAccount, line);
+  const dispatch = useCartLineContext();
 
-  const saveLineAccount = async (newPercentage: number) => {
-    const newAmount = computeAmountGivenPercentage({
-      linePrice: line.price,
-      lineQuantity: line.quantity,
-      lineTax: 0,
-      lineAccountPercentage: newPercentage,
+  useEffect(() => {
+    // hydrate percentage map for this line account's initial value
+    dispatch({
+      type: 'UPDATE_PERCENTAGE_MAP',
+      percentageMap: { [lineAccount.id]: derivedPercentage },
     });
-    await updateCartLineAccount({
-      cartId: line.cartId,
-      cartLineId: line.id,
-      id: lineAccount.id,
-      amount: newAmount,
-    });
-  };
+  }, []);
 
   return (
     <Formik
@@ -67,8 +60,15 @@ export const LineAccount = ({ lineAccount, line }: LineAccountProps) => {
       validationSchema={LineAccountFormSchema}
       onSubmit={async (values) => {
         if (!skipFormikInit.current) {
-          console.log(`🚀 AUTOSAVE because changing PERCENTAGE`);
-          await saveLineAccount(values.percentage);
+          console.log(
+            `🚀 AUTOSAVE because changing PERCENTAGE... updating %map, savingLA ...`
+          );
+          dispatch({
+            type: 'UPDATE_PERCENTAGE_MAP',
+            percentageMap: { [lineAccount.id]: values.percentage },
+          });
+
+          await saveLineAccount(values.percentage, lineAccount.id);
         }
         skipFormikInit.current = false;
       }}

@@ -20,9 +20,13 @@ import LineAccountValidators from '../line-account-validators/LineAccountValidat
 
 export interface LineAccountsContainerProps {
   line?: CartLine;
+  saveLineAccount(newPercentage: number, lineAccountId: string): void;
 }
 
-export const LineAccountsContainer = ({ line }: LineAccountsContainerProps) => {
+export const LineAccountsContainer = ({
+  line,
+  saveLineAccount,
+}: LineAccountsContainerProps) => {
   const btnRef = useRef();
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -61,12 +65,21 @@ export const LineAccountsContainer = ({ line }: LineAccountsContainerProps) => {
                 <AddLineAccountButton btnRef={btnRef} clickHandler={onOpen} />
                 <LineAccountValidators line={line} />
               </Stack>
-              <DrawerContainer line={line} btnRef={btnRef} isOpen={isOpen} onClose={onClose}  />
+              <DrawerContainer
+                line={line}
+                btnRef={btnRef}
+                isOpen={isOpen}
+                onClose={onClose}
+              />
             </WrapItem>
             <Sort by="createdAt" childType="cla">
               {line?.cartLineAccounts?.map((cla) => (
                 <WrapItem key={cla.id}>
-                  <LineAccount lineAccount={cla} line={line} />
+                  <LineAccount
+                    lineAccount={cla}
+                    line={line}
+                    saveLineAccount={saveLineAccount}
+                  />
                 </WrapItem>
               ))}
             </Sort>
@@ -75,6 +88,6 @@ export const LineAccountsContainer = ({ line }: LineAccountsContainerProps) => {
       </Td>
     </Tr>
   );
-}
+};
 
 export default LineAccountsContainer;

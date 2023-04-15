@@ -1,7 +1,9 @@
-// ##################################################################################
-// ℹ️ NOT READY YET or NOT MY CODE (chakra templates) ----- please ignore this file, thanks!
-// ##################################################################################
-import { CartLine } from '@multi-cart/react-data-access';
+import { CartLineContextProvider } from '@multi-cart/react-app-state';
+import {
+  CartLine,
+  useUpdateCartLineAccountMutation,
+} from '@multi-cart/react-data-access';
+import { computeAmountGivenPercentage } from '@multi-cart/util';
 import React from 'react';
 import LineAccountsContainer from '../../line-account/line-accounts-container/LineAccountsContainer';
 import CartLineForm from '../cart-line-form/CartLineForm';
@@ -12,15 +14,38 @@ export interface CartLineContainerProps {
 }
 
 export const CartLineContainer = ({ line, idx }: CartLineContainerProps) => {
+  const [, updateCartLineAccount] = useUpdateCartLineAccountMutation();
+  
+  const saveLineAccount = async (
+    newPercentage: number,
+    lineAccountId: string
+  ) => {
+    const newAmount = computeAmountGivenPercentage({
+      linePrice: line.price,
+      lineQuantity: line.quantity,
+      lineTax: 0,
+      lineAccountPercentage: newPercentage,
+    });
+    await updateCartLineAccount({
+      cartId: line.cartId,
+      cartLineId: line.id,
+      id: lineAccountId,
+      amount: newAmount,
+    });
+  };
+
   if (!line) {
     return <div>Loading...</div>;
   }
 
   return (
-    <>
-      <CartLineForm idx={idx} line={line} />
-      <LineAccountsContainer line={line} />
-    </>
+    <CartLineContextProvider>
+      <CartLineForm idx={idx} line={line} saveLineAccount={saveLineAccount} />
+      <LineAccountsContainer
+        line={line}
+        saveLineAccount={saveLineAccount}
+      />
+    </CartLineContextProvider>
   );
 };
 
