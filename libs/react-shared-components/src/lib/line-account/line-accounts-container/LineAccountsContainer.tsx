@@ -20,12 +20,14 @@ import LineAccountValidators from '../line-account-validators/LineAccountValidat
 
 export interface LineAccountsContainerProps {
   line?: CartLine;
-  saveLineAccount(newPercentage: number, lineAccountId: string): void;
+  saveLineAccount(newPercentage: number, lineAccountId: string, line: CartLine): void;
+  setPercentageMap: React.Dispatch<React.SetStateAction<Record<string, number>>>;
 }
 
 export const LineAccountsContainer = ({
   line,
   saveLineAccount,
+  setPercentageMap
 }: LineAccountsContainerProps) => {
   const btnRef = useRef();
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -79,6 +81,7 @@ export const LineAccountsContainer = ({
                     lineAccount={cla}
                     line={line}
                     saveLineAccount={saveLineAccount}
+                    setPercentageMap={setPercentageMap}
                   />
                 </WrapItem>
               ))}

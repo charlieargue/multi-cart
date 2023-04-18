@@ -7,38 +7,33 @@ import {
 import { InputField } from '@multi-cart/react-ui';
 import { toFriendlyCurrency } from '@multi-cart/util';
 import { Form, Formik } from 'formik';
-import React, { useRef, useEffect } from 'react';
+import React, { useRef } from 'react';
 import { CgClose as CloseIcon } from 'react-icons/cg';
 import { AutoSave } from '../../auto-save/AutoSave';
 import { CategoriesDropDown } from '../categories-drop-down/CategoriesDropDown';
 import UOMDropDown from '../uomdrop-down/UOMDropDown';
-import { useCartLineContext } from '@multi-cart/react-app-state';
 
 export interface CartLineFormProps {
   idx: number;
   line: CartLine;
-  saveLineAccount(newPercentage: number, lineAccountId: string): void;
+  saveLineAccount(
+    newPercentage: number,
+    lineAccountId: string,
+    line: CartLine
+  ): void;
+  percentageMap: Record<string, number>;
 }
 
-export const CartLineForm = ({ idx, line, saveLineAccount }: CartLineFormProps) => {
+export const CartLineForm = ({
+  idx,
+  line,
+  saveLineAccount,
+  percentageMap,
+}: CartLineFormProps) => {
   const [{ fetching: deleting }, deleteCartLine] = useDeleteCartLineMutation();
   const [, updateCartLine] = useUpdateCartLineMutation();
   const skipAutoSaveWhenFormikInits = useRef(true);
-  const skipUseEffectInit = useRef(true);
-  const dispatch = useCartLineContext();
-
-  useEffect(() => {
-    if (
-      skipUseEffectInit.current === false &&
-      skipAutoSaveWhenFormikInits.current === false
-    ) {
-      console.log(`🚀 💪 LINE PRICE or QUANTITY changed!`);
-      dispatch({ type: 'UPDATE_LINE_ACCOUNTS', saveFn: saveLineAccount });
-    }
-    skipUseEffectInit.current = false;
-  }, [line.price, line.quantity]);
-
-  // TODO: dispatch is not pure for some reason, had to remove it manually frmo the dep chain
+  const previousLineValues = useRef(line);
 
   const submit = async (values) => {
     if (!skipAutoSaveWhenFormikInits.current) {
@@ -54,6 +49,24 @@ export const CartLineForm = ({ idx, line, saveLineAccount }: CartLineFormProps) 
           price: Number(values.price),
         },
       });
+      if (
+        Number(values.quantity) !==
+          Number(previousLineValues.current.quantity) ||
+        Number(values.price) !== Number(previousLineValues.current.price)
+      ) {
+        for await (const lineAccount of line.cartLineAccounts) {
+          const freshestPercentage: number = percentageMap[lineAccount.id];
+          const freshestLineValues = {
+            ...line,
+            ...values,
+          };
+          await saveLineAccount(
+            freshestPercentage,
+            lineAccount.id,
+            freshestLineValues
+          );
+        }
+      }
     }
     skipAutoSaveWhenFormikInits.current = false;
   };

@@ -10,11 +10,15 @@ import './DeleteLineAccountButton.module.scss';
 export interface DeleteLineAccountButtonProps {
   lineAccount: CartLineAccount;
   line: CartLine;
+  setPercentageMap: React.Dispatch<
+    React.SetStateAction<Record<string, number>>
+  >;
 }
 
 export const DeleteLineAccountButton = ({
   lineAccount,
   line,
+  setPercentageMap,
 }: DeleteLineAccountButtonProps) => {
   const [, deleteCartLineAccount] = useDeleteCartLineAccountMutation();
 
@@ -24,13 +28,17 @@ export const DeleteLineAccountButton = ({
       size="16"
       cursor={'pointer'}
       color="red"
-      onClick={() =>
-        deleteCartLineAccount({
+      onClick={async () => {
+        await deleteCartLineAccount({
           cartId: line.cartId,
           cartLineId: line.id,
           cartLineAccountId: lineAccount.id,
-        })
-      }
+        });
+        setPercentageMap((state) => {
+          delete state[lineAccount.id];
+          return state;
+        });
+      }}
     />
   );
 };

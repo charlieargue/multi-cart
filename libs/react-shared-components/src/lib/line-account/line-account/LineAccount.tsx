@@ -8,7 +8,6 @@ import {
   InputGroup,
   InputLeftAddon,
 } from '@chakra-ui/react';
-import { useCartLineContext } from '@multi-cart/react-app-state';
 import { CartLine, CartLineAccount } from '@multi-cart/react-data-access';
 import {
   computePercentageGivenAmount,
@@ -25,7 +24,10 @@ import LineAccountPercentageInput from './LineAccountPercentageInput';
 export interface LineAccountProps {
   lineAccount: CartLineAccount;
   line: CartLine;
-  saveLineAccount(newPercentage: number, lineAccountId: string): void;
+  saveLineAccount(newPercentage: number, lineAccountId: string, line: CartLine): void;
+  setPercentageMap: React.Dispatch<
+    React.SetStateAction<Record<string, number>>
+  >;
 }
 
 const LineAccountFormSchema = Yup.object().shape({
@@ -39,17 +41,17 @@ export const LineAccount = ({
   lineAccount,
   line,
   saveLineAccount,
+  setPercentageMap,
 }: LineAccountProps) => {
   const skipFormikInit = useRef(true);
   const derivedPercentage = computePercentageGivenAmount(lineAccount, line);
-  const dispatch = useCartLineContext();
 
+  // hydrate percentage map for this line account's initial value
   useEffect(() => {
-    // hydrate percentage map for this line account's initial value
-    dispatch({
-      type: 'UPDATE_PERCENTAGE_MAP',
-      percentageMap: { [lineAccount.id]: derivedPercentage },
-    });
+    setPercentageMap((state) => ({
+      ...state,
+      [lineAccount.id]: derivedPercentage,
+    }));
   }, []);
 
   return (
@@ -60,15 +62,12 @@ export const LineAccount = ({
       validationSchema={LineAccountFormSchema}
       onSubmit={async (values) => {
         if (!skipFormikInit.current) {
-          console.log(
-            `🚀 AUTOSAVE because changing PERCENTAGE... updating %map, savingLA ...`
-          );
-          dispatch({
-            type: 'UPDATE_PERCENTAGE_MAP',
-            percentageMap: { [lineAccount.id]: values.percentage },
-          });
-
-          await saveLineAccount(values.percentage, lineAccount.id);
+          // having to keep state for freshest percentages as they change, and move them up and down into CartLineForm
+          setPercentageMap((state) => ({
+            ...state,
+            [lineAccount.id]: values.percentage,
+          }));
+          await saveLineAccount(values.percentage, lineAccount.id, line);
         }
         skipFormikInit.current = false;
       }}
@@ -96,13 +95,14 @@ export const LineAccount = ({
                   <DeleteLineAccountButton
                     lineAccount={lineAccount}
                     line={line}
+                    setPercentageMap={setPercentageMap}
                   />
                 </HStack>
               }
             />
           </LineAccountTooltip>
           <LineAccountPercentageInput lineAccount={lineAccount} line={line} />
-          <AutoSave debounceMs={100} />
+          <AutoSave debounceMs={50} />
         </InputGroup>
       )}
     </Formik>
