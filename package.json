@@ -123,8 +123,8 @@
   "dependencies": {
     "@chakra-ui/react": "^2.5.5",
     "@chakra-ui/theme-tools": "^1.3.6",
-    "@emotion/react": "11.10.5",
-    "@emotion/styled": "11.10.5",
+    "@emotion/react": "11.10.6",
+    "@emotion/styled": "11.10.6",
     "@graphql-tools/schema": "^7.1.3",
     "@storybook/builder-webpack5": "~6.4.5",
     "@storybook/core-server": "6.4.22",
@@ -158,5 +158,8 @@
     "type-graphql": "^1.1.1",
     "urql": "^2.0.1",
     "yup": "^0.32.9"
+  },
+  "resolutions": {
+    "@storybook/addon-actions/**/@emotion/sheet": "^1.0.1"
   }
 }
