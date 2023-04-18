@@ -11,7 +11,6 @@ import {
   Tfoot,
   Tr,
 } from '@chakra-ui/react';
-import { actionIsDeletingCart, store } from '@multi-cart/react-app-state';
 import {
   Cart,
   useDeleteCartMutation,
@@ -21,13 +20,16 @@ import { sumTotalCost, toFriendlyCurrency } from '@multi-cart/util';
 import { useRouter } from 'next/router';
 import React from 'react';
 import useMyToasts from '../../_hooks/useMyToasts';
-import './EditCartTableFooter.module.scss';
 
 export interface EditCartTableFooterProps {
   cart: Cart;
+  setIsDeletingCart: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export const EditCartTableFooter = ({ cart }: EditCartTableFooterProps) => {
+export const EditCartTableFooter = ({
+  cart,
+  setIsDeletingCart,
+}: EditCartTableFooterProps) => {
   const router = useRouter();
   const [, deleteCart] = useDeleteCartMutation();
   const [, updateUser] = useUpdateUserMutation();
@@ -36,8 +38,7 @@ export const EditCartTableFooter = ({ cart }: EditCartTableFooterProps) => {
   const clickHandler = async () => {
     if (cart?.id) {
       if (window.confirm('Are you SURE you want to 🛑 DELETE this cart?')) {
-        // without this, the "we could not find your cart" ERROR flashes briefly
-        store.dispatch(actionIsDeletingCart);
+        setIsDeletingCart(true);
         try {
           const response = await deleteCart({
             id: cart.id,
@@ -50,11 +51,15 @@ export const EditCartTableFooter = ({ cart }: EditCartTableFooterProps) => {
               toastInfo('Deleted!');
               router.push('/dashboard');
             } else if (error) {
+              console.log(`🚀  error:`, error);
               toastError(error.message);
             }
           }
+        } catch (error) {
+          console.log(`🚀  error:`, error);
+          toastError(error.message);
         } finally {
-          setTimeout(() => store.dispatch(actionIsDeletingCart), 2000);
+          setTimeout(() => setIsDeletingCart(false), 1500);
         }
       }
     }

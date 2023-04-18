@@ -1,5 +1,5 @@
 import { Action } from 'redux';
-import { typeActionFetching, typeActionIsDeletingCart, initialState } from "..";
+import { typeActionFetching, initialState } from "..";
 
 export const appStateReducer = (state = initialState, action: Action) => {
     switch (action.type) {
@@ -13,12 +13,6 @@ export const appStateReducer = (state = initialState, action: Action) => {
             return {
                 ...state,
                 isGlobalFetching: false
-            };
-            break;
-        case typeActionIsDeletingCart.toggle:
-            return {
-                ...state,
-                isDeletingCart: !state.isDeletingCart
             };
             break;
         default:

@@ -1,10 +1,8 @@
+// TODO: upgrade to RTK
 // ACTION string constants
 export const typeActionFetching = {
     start: 'FETCHING_START',
     stop: 'FETCHING_STOP',
-};
-export const typeActionIsDeletingCart = {
-    toggle: 'TOGGLE_IS_DELETING_CART',
 };
 
 
@@ -15,7 +13,4 @@ export const actionFetchingStart = {
 
 export const actionFetchingStop = {
     type: typeActionFetching.stop,
-};
-export const actionIsDeletingCart = {
-    type: typeActionIsDeletingCart.toggle,
 };

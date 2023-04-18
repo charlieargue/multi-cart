@@ -9,9 +9,10 @@ import EmptyCart from './EmptyCart';
 
 export interface EditCartTableProps {
   cart: Cart;
+  setIsDeletingCart: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export const EditCartTable = ({ cart }: EditCartTableProps) => {
+export const EditCartTable = ({ cart, setIsDeletingCart }: EditCartTableProps) => {
   return (
     <Table
       variant="simple"
@@ -32,7 +33,7 @@ export const EditCartTable = ({ cart }: EditCartTableProps) => {
       ) : (
         <EmptyCart />
       )}
-      <EditCartTableFooter cart={cart} />
+      <EditCartTableFooter cart={cart} setIsDeletingCart={setIsDeletingCart}/>
     </Table>
   );
 };

@@ -1,4 +1,3 @@
-import { StateType } from '@multi-cart/react-app-state';
 import {
   useCartQuery,
   useUpdateUserMutation,
@@ -10,16 +9,12 @@ import {
 } from '@multi-cart/react-shared-components';
 import { BigAlert, Breadcrumbs } from '@multi-cart/react-ui';
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
 
 export const EditCartContainer = () => {
   const router = useRouter();
   const id = router.query.id as string;
-  const isDeletingCart = useSelector(
-    (state: StateType) => state?.isDeletingCart
-  );
-
+  const [isDeletingCart, setIsDeletingCart] = useState(false);
   const [, updateUser] = useUpdateUserMutation();
   const [{ data, error, fetching }] = useCartQuery({
     variables: {
@@ -80,7 +75,7 @@ export const EditCartContainer = () => {
     <>
       <Breadcrumbs links={links} />
       <EditCartHeader cart={data?.cart} />
-      <EditCartTable cart={data?.cart} />
+      <EditCartTable cart={data?.cart} setIsDeletingCart={setIsDeletingCart} />
     </>
   );
 };
