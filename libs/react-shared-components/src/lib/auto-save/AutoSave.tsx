@@ -1,16 +1,15 @@
-/* eslint-disable no-extra-boolean-cast */
+// ##################################################################################
+// ℹ️ NOT READY YET or NOT MY CODE (chakra templates) ----- please ignore this file, thanks!
+// ##################################################################################
+
 import { Box } from '@chakra-ui/react';
 import { useFormikContext } from 'formik';
 import debounce from 'just-debounce-it';
 import React, { useCallback, useEffect } from 'react';
 
-// thx: https://itnext.io/formik-introduction-autosave-react-19d4c15cfb90
-// thx: https://codesandbox.io/s/formik-autosave-example-wfcb6?file=/src/AutoSavingForm.tsx:124-242
-// -------------------
 export const AutoSave = ({ debounceMs = 500 }) => {
   const formik = useFormikContext();
 
-  // WORK-AROUND b/c error: React Hook useCallback received a function whose dependencies are unknown. Pass an inline function instead...
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const debouncedSubmit = useCallback(
     debounce(() => formik.submitForm(), debounceMs),

@@ -1,3 +1,7 @@
+// ##################################################################################
+// ℹ️ NOT READY YET or NOT MY CODE (chakra templates) ----- please ignore this file, thanks!
+// ##################################################################################
+
 import { ChakraProvider, ColorModeProvider } from '@chakra-ui/react';
 import { store } from '@multi-cart/react-app-state';
 import { theme } from '../theme';

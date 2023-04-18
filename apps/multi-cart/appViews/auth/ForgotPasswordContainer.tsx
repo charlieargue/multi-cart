@@ -1,10 +1,9 @@
+// ##################################################################################
+// ℹ️ NOT READY YET or NOT MY CODE (chakra templates) ----- please ignore this file, thanks!
+// ##################################################################################
+
 import React from 'react';
 import { ForgotPasswordForm } from '@multi-cart/react-shared-components';
-
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
-interface ForgotPasswordContainerProps {
-
-}
 
 export const ForgotPasswordContainer = () => {
 

@@ -4,8 +4,7 @@ const path = require('path');
 const toPath = (_path) => path.join(process.cwd(), _path);
 
 module.exports = {
-  stories: [],
-  addons: ['@storybook/addon-essentials', '@storybook/addon-knobs'],
+  addons: ['@storybook/addon-knobs'],
   webpackFinal: async (config, { configType }) => {
     // `configType` has a value of 'DEVELOPMENT' or 'PRODUCTION'
     // You can change the configuration based on that.

@@ -4,16 +4,14 @@ import { toDaysAgo } from '@multi-cart/util';
 import React from 'react';
 import { ImPlus as PlusIcon } from 'react-icons/im';
 import CartNameEditable from '../cart-name-editable/CartNameEditable';
-import './EditCartHeader.module.scss';
 
 export interface EditCartHeaderProps {
   cart: Cart
 }
 
-export function EditCartHeader({ cart }: EditCartHeaderProps) {
+export const EditCartHeader = ({ cart }: EditCartHeaderProps) => {
   const [, blankCartLine] = useBlankCartLineMutation();
 
-  // 🛍 cart header
   return (
     <Flex
       justify="space-between"

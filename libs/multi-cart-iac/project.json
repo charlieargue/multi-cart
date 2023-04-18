@@ -1,0 +1,8 @@
+{
+  "name": "multi-cart-iac",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/multi-cart-iac/src",
+  "projectType": "library",
+  "targets": {},
+  "tags": []
+}

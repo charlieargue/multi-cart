@@ -1,3 +1,7 @@
+// ##################################################################################
+// ℹ️ NOT READY YET or NOT MY CODE (chakra templates) ----- please ignore this file, thanks!
+// ##################################################################################
+
 import {
   Box,
   Button,
@@ -11,18 +15,13 @@ import NextLink from 'next/link';
 import React from 'react';
 import { FaFacebook, FaGithub, FaGoogle } from 'react-icons/fa';
 
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
-interface LoginContainerProps {
-
-}
-
 export const LoginContainer = () => {
   return (
     <MicroLayout
       heading="Welcome back!"
       subHeading={<>
         <span>Don&apos;t have an account?</span>
-        <NextLink href="/register">
+        <NextLink href="/register" legacyBehavior>
           <Box
             as="a"
             marginStart="1"

@@ -1,8 +1,13 @@
-import { Badge, Breadcrumb, BreadcrumbItem, BreadcrumbLink } from '@chakra-ui/react';
+import {
+  Badge,
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+} from '@chakra-ui/react';
 import NextLink from 'next/link';
 import React from 'react';
 import { CgChevronRight as ChevronRightIcon } from 'react-icons/cg';
-import { } from 'react-icons/fa';
+import {} from 'react-icons/fa';
 import TextMuted from '../text-muted/TextMuted';
 import './Breadcrumbs.module.scss';
 
@@ -25,34 +30,50 @@ export function Breadcrumbs<BreadcrumbsProps>({ links = [] }) {
       fontWeight="medium"
       mb={10}
       spacing="8px"
-      separator={<ChevronRightIcon style={{ "marginTop": "7px" }}
-        size={14}
-        color="gray.400" />}>
-
+      separator={
+        <ChevronRightIcon
+          style={{ marginTop: '7px' }}
+          size={14}
+          color="gray.400"
+        />
+      }
+    >
       {/* Home */}
       <BreadcrumbItem>
-        <NextLink href="/dashboard">
-          <BreadcrumbLink href="/dashboard"><TextMuted fontSize="14px">Dashboard</TextMuted></BreadcrumbLink>
+        <NextLink href="/dashboard" legacyBehavior>
+          <BreadcrumbLink href="/dashboard">
+            <TextMuted fontSize="14px">Dashboard</TextMuted>
+          </BreadcrumbLink>
         </NextLink>
       </BreadcrumbItem>
 
       {/* Links */}
-      {links?.map((link) => !link ? null : (
-        <BreadcrumbItem key={link.id || link.label} isCurrentPage={link.isActive}>
-          <NextLink
-            href={link.href}
+      {links?.map((link) =>
+        !link ? null : (
+          <BreadcrumbItem
+            key={link.id || link.label}
+            isCurrentPage={link.isActive}
           >
-            <BreadcrumbLink href={link.href}>
-              <TextMuted fontSize="14px">
-                {link.label}
-                {link.id && (
-                  <Badge textTransform="none" mb={.5} colorScheme="pink" ml={2}>{link.id}</Badge>
-                )}
-              </TextMuted>
-            </BreadcrumbLink>
-          </NextLink>
-        </BreadcrumbItem>
-      ))}
+            <NextLink href={link.href} legacyBehavior>
+              <BreadcrumbLink href={link.href}>
+                <TextMuted fontSize="14px">
+                  {link.label}
+                  {link.id && (
+                    <Badge
+                      textTransform="none"
+                      mb={0.5}
+                      colorScheme="pink"
+                      ml={2}
+                    >
+                      {link.id}
+                    </Badge>
+                  )}
+                </TextMuted>
+              </BreadcrumbLink>
+            </NextLink>
+          </BreadcrumbItem>
+        )
+      )}
     </Breadcrumb>
   );
 }

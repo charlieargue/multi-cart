@@ -62,7 +62,7 @@ interface TestimonialCardProps {
 }
 
 function TestmonialCard(props: TestimonialCardProps) {
-  const { name, role, content, avatar, index, url, oss = false } = props;
+  const { name, role, content, avatar, url, oss = false } = props;
   return (
     <LinkBox cursor="pointer">
       <Flex

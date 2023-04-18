@@ -1,0 +1,19 @@
+{
+  "name": "react-data-access",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/react-data-access/src",
+  "projectType": "library",
+  "targets": {
+    "generate": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          {
+            "command": "npx graphql-codegen --config libs/react-data-access/codegen.yml"
+          }
+        ]
+      }
+    }
+  },
+  "tags": []
+}

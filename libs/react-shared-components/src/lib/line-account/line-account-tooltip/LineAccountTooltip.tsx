@@ -8,16 +8,22 @@ export interface LineAccountTooltipProps {
   children?: React.ReactNode;
 }
 
-export function LineAccountTooltip({ accountNumber, children }: LineAccountTooltipProps) {
-  const [{ data, fetching }] = useAccountsQuery(); // NOTE: this is instead of adding in one more leftJoinAndSelect() to all the cart/carts queries, etc...
+export const LineAccountTooltip = ({
+  accountNumber,
+  children,
+}: LineAccountTooltipProps) => {
+  const [{ data }] = useAccountsQuery();
 
   return (
     <TooltipMC
-      label={data?.accounts && data.accounts.find(a => a.accountNumber === accountNumber).accountName}
+      label={
+        (data?.accounts || []).find((a) => a.accountNumber === accountNumber)
+          ?.accountName
+      }
     >
       {children}
     </TooltipMC>
   );
-}
+};
 
 export default LineAccountTooltip;

@@ -1,3 +1,7 @@
+// ##################################################################################
+// ℹ️ NOT READY YET or NOT MY CODE (chakra templates) ----- please ignore this file, thanks!
+// ##################################################################################
+
 import React from "react";
 import { Box, Flex, Text, Button, useColorModeValue as mode } from "@chakra-ui/react";
 import { Logo } from "@multi-cart/react-ui";
