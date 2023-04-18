@@ -1,7 +1,3 @@
-// ##################################################################################
-// ℹ️ NOT READY YET or NOT MY CODE (chakra templates) ----- please ignore this file, thanks!
-// ##################################################################################
-
 import { Badge, Box, Image, LinkBox } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import React, { FC } from 'react';
@@ -33,8 +29,7 @@ export const ProductCard: FC<ProductCardProps> = ({ product, ...props }) => {
             alt="mocked"
           />
           <Box p="6">
-            {/* OH, thats how you do it */}
-            <Box d="flex" alignItems="baseline" ml="-.5">
+            <Box display="flex" alignItems="baseline" ml="-.5">
               <Badge borderRadius="full" px="2" colorScheme="teal">
                 {product.sku.substring(0, 3)}
               </Badge>
@@ -49,8 +44,6 @@ export const ProductCard: FC<ProductCardProps> = ({ product, ...props }) => {
                 {product.slug}
               </Box>
             </Box>
-
-            {/* NAME */}
             <Box
               mt="1"
               fontWeight="normal"
@@ -60,8 +53,6 @@ export const ProductCard: FC<ProductCardProps> = ({ product, ...props }) => {
             >
               {product.name}
             </Box>
-
-            {/* PRICE */}
             <Box fontWeight="extrabold">
               ${product.price}
               <Box as="span" color="gray.600" fontSize="sm" ml="1">
