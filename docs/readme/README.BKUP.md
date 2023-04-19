@@ -4,74 +4,14 @@
 
 [multicart.app](https://multicart.app/)
 
-This is a full-stack **React** **serverless** web application built for demo & study purposes. It was built 3 years ago when I was first  learning React and GraphQL. 
+This is a full-stack **serverless** web application (built for demo & self-study purposes) that is very nearly production-ready and enterprise-grade, can be used as a starter project, includes robust testing, CICD, shared libraries between the FE & BE, and is team-ready.
 
-I have since upgraded the core shopping cart React code with what I have learned these past few years, implementing many React principles and best practices along the way -- detailed in the section below. 
+It is built with:
 
-
-
-
-
-
-
-On the core UI shopping cart features, 
-
-I have made an effort to implement 
-
-I've tried to apply 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# ✅ Tasks: 
-
-- [ ] Break each below into its own page
-
-
-
-
-
-
-
-🔘🔘🔘🔘🔘🔘🔘🔘🔘🔘🔘🔘🔘🔘🔘🔘🔘🔘🔘🔘 
-
-
-
-# ✈️ 10,000 Foot View
-
-
-
-==It is built with:==
-
-* ==**React**==
-* ==**GraphQL**==
-* ==**Terraform** + **AppSync**==
-* ==and [other tech](https://github.com/charlieargue/multi-cart#-technologies-used)...==
-
-
-
-==production-ready and enterprise-grade== 
-
-==It also includes a robust testing pyramid, CI/CD, and shared libraries between the FE & BE.==
-
-==The Terraform-powered serverless **backend** leverages "cloud native" AppSync VTL resolvers for hi-throughput communication with DynamoDB, giving if performance-at-scale and **no cold starts**.==
-
-
-
-
+* **React**
+* **GraphQL**
+* **Terraform** + **AppSync**
+* and other tech...
 
 It showcases the following functionality and features:
 
