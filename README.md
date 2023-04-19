@@ -4,21 +4,17 @@
 
 [multicart.app](https://multicart.app/)
 
-This is a full-stack **React** **serverless** web application built for demo & study purposes. It was built 3 years ago when I was first  learning React and GraphQL. 
+This is a full-stack **React** **serverless** web application built for demo & study purposes, when I was learning React and GraphQL. 
 
-I have since upgraded the core shopping cart React code with what I have learned these past few years, implementing many React principles and best practices along the way -- detailed in the section below. 
-
-
+In April 2023, I upgraded the shopping cart code, guided by React principles and best practices learned over the past couple years, detailed in the section below. 
 
 
 
 
 
-On the core UI shopping cart features, 
 
-I have made an effort to implement 
 
-I've tried to apply 
+# 📐 Principles and Best Practices
 
 
 
@@ -30,15 +26,14 @@ I've tried to apply
 
 
 
+# ✅ ==Tasks==: 
 
-
-
-
-
-
-# ✅ Tasks: 
-
-- [ ] Break each below into its own page
+- [ ] **Break** each below into its own page
+- [ ] Make **LOOM** demo reel, with me in it? Going over it in detail... make at least 2 different kinds....
+  - [ ] Going thru the project repo and why
+  - [ ] Going thru the codebase / component heirarchy, and "where everything is"
+  - [ ] Going thru deployment process fully (👾🛸 FUTURE:👽 )
+- [ ] Those quick start API keys need updating
 
 
 
@@ -50,187 +45,29 @@ I've tried to apply
 
 
 
-# ✈️ 10,000 Foot View
+# Table of Contents
 
+1. [✈️ 10,000 Foot View](docs/readme/01-ten-thousand-foot-view.md)
+2. [▶️ Demo Reels](docs/readme/02-demo-reels.md)
+3. [🎯 Purpose](docs/readme/03-purpose.md)
+4. [🚀 Technologies Used](docs/readme/04-technologies-used.md)
+5. [👨🏻‍💻 Installation and Quick Start](docs/readme/06-installation-quick-start.md)
 
 
-==It is built with:==
 
-* ==**React**==
-* ==**GraphQL**==
-* ==**Terraform** + **AppSync**==
-* ==and [other tech](https://github.com/charlieargue/multi-cart#-technologies-used)...==
 
 
 
-==production-ready and enterprise-grade== 
 
-==It also includes a robust testing pyramid, CI/CD, and shared libraries between the FE & BE.==
 
-==The Terraform-powered serverless **backend** leverages "cloud native" AppSync VTL resolvers for hi-throughput communication with DynamoDB, giving if performance-at-scale and **no cold starts**.==
 
 
 
 
 
-It showcases the following functionality and features:
 
-1. <u>User Authentication</u> (login, logout, register, forgot/change password)
-2. Managing and editing multiple shopping <u>Carts</u>
-3. Adding mocked products as cart line items, and associating multiple funding <u>Accounts</u> (by percentages) with each cart line
 
-And:
 
-​	✔️ <u>Public and private pages</u>, and support for hybrid static & server rendering
-
-​	✔️ Both a <u>GraphQL</u> cloud-managed API as well as a REST API (just 1 page) -- and even a mocked GraphQL API
-
-​	✔️ <u>Auto-generated</u> custom React useMutation hooks and types allowing for strong typing across the whole stack
-
-
-
-
-
-## ▶️ Demo
-
-![multi-cart-overview](https://github.com/charlieargue/readme-assets/blob/main/multi-cart/Multi-Cart-trimmed-xs-TEMP.gif?raw=true)
-
-
-
-
-
-## 🎯 Purpose 
-
-This was built for purposes of `self-study as I was upskilling` from angular & node/REST APIs **to React**, and I incrementally changed the GraphQL backends along the way, namely:
-
-* first **react** & <u>PostgreSQL+TypeOrm+TypeGraphQL</u> (after diligently going thru [Ben Awad's 14-hour Full-Stack React Course](https://www.youtube.com/watch?v=I6ypD7qv3Z8))
-* then **react** & a <u>mocked</u> GraphQL backend (for rapid UI development, using Next.js' public api pages)
-* and finally **react** & a <u>serverless</u> backend (with Terraform+AppSync+DynamoDB+Cognito)
-
-While building the app, I strove to include the latest web development **best practices and tools**, that I had been wanting to learn and use for a long time.
-
-I also did my best to keep things as **Production-ready** as I could, for instance with multiple environments and safe secrets management, as well as keeping the project **Team-ready** as well, so that other contributors could jump right in and pitch in development into the CICD workflows. 
-
-I designed the **CICD** workflows to make full use of my testing pyramid -- i.e. not merging PRs if tests fail, and keeping things as automated as possible. There's definitely room for improvement, see the CICD section below details, but it all works fine as-is and does not take too long (dozens of e2e tests running in parallel complete in a couple minutes, the entire pipeline taking less than 20 minutes).
-
-Additionally, I tried to leverage **cloud** and  **"Cloud-Native"** technologies as much as possible, for example:
-
-* using Terraform Cloud, Cypress Dashboard, GitHub Actions, and Vercel
-
-* choosing AWS "Cloud Native" **VTL** template resolvers over Lambdas wherever possible
-
-  * > to minimize cold start and latency due to network I/O for resolver invocation...
-
-Finally, one of my primary goals was to basically build a **enterprise-grade starter boilerplate** that I could use on future projects, that was also **scalable**. Using Terraform, AppSync, DynamoDB, and Cognito allow for that. Cognito apparently can handle millions of users for authentication out-of-the-gate with minimal adjustment. With DynamoDB, you would need to add some `autoscaling` configurations, and so forth.  On the front-end, the Vercel Edge Network handles most of that for us.
-
-Keep in mind this is a **work-in-progress**, many things are mocked (like Products and the dashboard), and incomplete (like UOMs and Categories). Caveats, limitations, and issues are detailed below.
-
-This was **inspired by** the many shopping cart and e-commerce projects I have worked on in the past, and is a loose conglomeration of some of them.
-
-*NOTE: I built this in approx. 4 months at the beginning of 2021, you can see all my GIT commits for more info.*
-
-
-
-
-
-## 🚀 Technologies Used
-
-- [React](https://reactjs.org/)
-  - [react-icons](https://react-icons.github.io/react-icons/search)
-  - [urql](https://formidable.com/open-source/urql/)
-  - [Formik](https://formik.org/) / [yup](https://formik.org/docs/guides/validation)
-  - [Redux](https://redux.js.org/)
-- [Chakra-UI](https://chakra-ui.com/)
-- sass / SCSS
-- [husky](https://typicode.github.io/husky/#/)
-- GraphQL
-  - [GraphQL Code Generator](https://graphql-code-generator.com/)
-- [Next.js](https://nextjs.org/)
-- [nx monorepo](https://nx.dev/)
-- [Storybook](https://storybook.js.org/)
-- [Jest](https://jestjs.io/)
-- [Cypress](https://www.cypress.io/)
-- [Postman](https://www.postman.com/) / [Newman](https://github.com/postmanlabs/newman)
-- [Typescript](https://www.typescriptlang.org/)
-- [ESLint](https://eslint.org/)
-- [Terraform](https://www.terraform.io/)
-- [VTL templates](https://docs.aws.amazon.com/appsync/latest/devguide/resolver-mapping-template-reference-programming-guide.html)
-- AWS services, such as:
-  - [AppSync](https://aws.amazon.com/appsync/)
-  - Amazon [Simple Email Service](https://aws.amazon.com/ses/)
-  - [CloudWatch](https://aws.amazon.com/cloudwatch/)
-  - [Cognito](https://aws.amazon.com/cognito/)
-  - [DynamoDB](https://aws.amazon.com/dynamodb/)
-  - [IAM](https://aws.amazon.com/iam/)
-  - [Lambda](https://aws.amazon.com/lambda/)
-- and various cloud services for **CICD** and devops:
-  - [Vercel](https://vercel.com/)
-  - [Terraform Cloud](https://www.terraform.io/cloud)
-  - [GitHub Actions](https://github.com/features/actions)
-  - [Cypress Dashboard](https://www.cypress.io/dashboard/)
-
-
-
-
-
-## ✅ Requirements
-
-Before starting 🏁, you need to have these installed on your machine:
-
-* [Git](https://git-scm.com/) 
-* [Node](https://nodejs.org/en/) 
-* and [yarn](https://classic.yarnpkg.com/en/docs/install)  
-
-
-
-
-
-## 👨🏻‍💻 How to install
-
-```sh
-# clone the repo
-git clone https://github.com/charlieargue/multi-cart
-
-# change directory 
-cd multi-cart
-
-# install libraries (this can take a few minutes)
-yarn
-```
-
-
-
-
-
-## ⚡️ Quick Start
-
-**1. Setup environment variables**
-
-In order to run the front-end locally, you'll need a `.env.local` environment variable file in the `apps/multi-cart/` directory:
-
-```sh
-# copy env file (this assumes you are in the root multi-cart directory)
-cp apps/multi-cart/.env.dist apps/multi-cart/.env.local
-```
-
-Edit `apps/multi-cart/.env.local` to have these two keys (you can ignore the other ones):
-
-```
-NEXT_PUBLIC_API_URL=https://pcuynwb3tfbbzjfygrljfoej3q.appsync-api.us-west-2.amazonaws.com/graphql
-NEXT_PUBLIC_API_KEY=da2-zrexcuvmlvhj3oxbzp3nby7ipq
-```
-
-**2. Start the front-end**
-
-Then you can start the local web development server and fire up the front-end with:
-
-```sh
-yarn start		
-```
-
-You can view the site at:
-
-* http://localhost:4200/
 
 
 
@@ -240,7 +77,7 @@ You can view the site at:
 
 This nx monorepo contains the following projects (screenshot taken of [nx console](https://marketplace.visualstudio.com/items?itemName=nrwl.angular-console)), in a flattened view:
 
-<img src="https://raw.githubusercontent.com/charlieargue/readme-assets/main/multi-cart/project-overview-all.png" alt="image-20210729162309390" style="zoom:70%;" />
+<img src="/Users/karlgolka/PROJECTS/FYI/_typora_images/project-overview-all-1926420.png" alt="image-20210729162309390" style="zoom:70%;" />
 
 
 
@@ -285,7 +122,7 @@ This nx monorepo contains the following projects (screenshot taken of [nx consol
 
 Output from the `nx dep-graph` command:
 
-<img src="https://github.com/charlieargue/readme-assets/blob/main/multi-cart/project-overview-depgraph.png?raw=true" alt="nx dep-graph" style="zoom:70%;" />
+<img src="/Users/karlgolka/PROJECTS/FYI/_typora_images/project-overview-depgraph.png" alt="nx dep-graph" style="zoom:70%;" />
 
 
 
@@ -293,7 +130,7 @@ Output from the `nx dep-graph` command:
 
 ## 👩‍🔬 Testing
 
-<img src="https://github.com/charlieargue/readme-assets/blob/main/multi-cart/testing-pyramid.png?raw=true" alt="testing-pyramid" style="zoom:70%;" />
+<img src="/Users/karlgolka/PROJECTS/FYI/_typora_images/testing-pyramid-1926421.png" alt="testing-pyramid" style="zoom:70%;" />
 
 
 
@@ -316,7 +153,7 @@ yarn nx run util:test
 
 Results should look something like this:
 
-<img src="https://github.com/charlieargue/readme-assets/blob/main/multi-cart/testing-jest.png?raw=true" alt="testing-jest" />
+<img src="/Users/karlgolka/PROJECTS/FYI/_typora_images/testing-jest.png" alt="testing-jest" />
 
 
 
@@ -343,13 +180,13 @@ yarn nx run react-shared-components-e2e:e2e-local
 
 So for example, the `react-ui` **Storybook** should look something like this:
 
-<img src="https://github.com/charlieargue/readme-assets/blob/main/multi-cart/storybook-react-ui.png?raw=true" alt="storybook-react-ui" />
+<img src="/Users/karlgolka/PROJECTS/FYI/_typora_images/storybook-react-ui.png" alt="storybook-react-ui" />
 
 
 
 And the `react-shared-components` **Storybook** should look something like this:
 
-<img src="https://github.com/charlieargue/readme-assets/blob/main/multi-cart/storybook-shared-cmpnts-sm.png?raw=true" alt="storybook-shared-cmpnts.png" />
+<img src="/Users/karlgolka/PROJECTS/FYI/_typora_images/storybook-shared-cmpnts-sm.png" alt="storybook-shared-cmpnts.png" />
 
 
 
@@ -368,7 +205,7 @@ yarn test-iac
 
 These were first created in **Postman**, and then can be run locally or in CICD workflows via **Newman**. Your local output should look something like this:
 
-<img src="https://github.com/charlieargue/readme-assets/blob/main/multi-cart/testing-postman-sm.png?raw=true" alt="testing-postman" style="zoom:50%;" />
+<img src="/Users/karlgolka/PROJECTS/FYI/_typora_images/testing-postman-sm.png" alt="testing-postman" style="zoom:50%;" />
 
 
 
@@ -409,7 +246,7 @@ The CICD workflows are composed of a few separate pieces:
 
 This illustration tries to simplify and explain the workflow in its entirety:
 
-<img src="https://github.com/charlieargue/readme-assets/blob/main/multi-cart/MultiCart-CICD-Workflows-Updated.png?raw=true" alt="MultiCart-CICD-Workflows-Updated" style="zoom:100%;" />
+<img src="/Users/karlgolka/PROJECTS/FYI/_typora_images/MultiCart-CICD-Workflows-Updated.png" alt="MultiCart-CICD-Workflows-Updated" style="zoom:100%;" />
 
 
 
@@ -461,13 +298,13 @@ The whole build and test and deployment process for both the FE and BE takes und
 
 UI Unit Tests running in-parallel (via Cypress Dashboard) while simultaneously running Jest Unit Tests as well:
 
-<img src="https://github.com/charlieargue/readme-assets/blob/main/multi-cart/testing-01-feature-promotion.png?raw=true" alt="testing-01-feature-promotion"/>
+<img src="/Users/karlgolka/PROJECTS/FYI/_typora_images/testing-01-feature-promotion.png" alt="testing-01-feature-promotion"/>
 
 
 
 Service Tests running simultaneously with E2E Integration Tests:
 
-<img src="https://github.com/charlieargue/readme-assets/blob/main/multi-cart/testing-02-dev-promotion.png?raw=true" alt="testing-02-dev-promotion"/>
+<img src="/Users/karlgolka/PROJECTS/FYI/_typora_images/testing-02-dev-promotion.png" alt="testing-02-dev-promotion"/>
 
 
 
