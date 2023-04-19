@@ -6,7 +6,7 @@ import React from 'react';
 import ProductsContainer from '../../appViews/products/ProductsContainer';
 
 const ProductsPage: NextPage = () => {
-  useIsAuth(); // 🛡 session authentication
+  useIsAuth();
 
   return <ProductsContainer />;
 };

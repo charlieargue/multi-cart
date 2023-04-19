@@ -19,7 +19,8 @@
 
 # IDE - VSCode (just because I am the only developer for now, normally not-like-this)
 .vscode/*
-!.vscode/settings.json
+.vscode/settings.json
+**/.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
@@ -73,3 +74,6 @@ libs/mock-api/mock-database.json
 
 # postman newman env. variables
 libs/multi-cart-iac-tests/src/env-variables/*.json
+
+# Next.js
+.next

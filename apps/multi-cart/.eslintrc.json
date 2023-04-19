@@ -4,7 +4,26 @@
     "../../.eslintrc.json",
     "plugin:react-hooks/recommended"
   ],
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "env": {
+    "browser": true,
+    "node": true
+  },
   "ignorePatterns": ["!**/*"],
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
+  "rules": {
+    "react/prop-types": "off",
+    "react/react-in-jsx-scope": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off"
+  },
   "overrides": [
     {
       "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
@@ -20,6 +39,40 @@
     {
       "files": ["*.js", "*.jsx"],
       "rules": {}
+    },
+    {
+      "files": [".next/**/*.js"],
+      "rules": {
+        "strict": ["warn", "never"],
+        "no-eval": "off",
+        "no-template-curly-in-string": ["off"],
+        "no-restricted-globals": ["off"],
+        "@typescript-eslint/no-empty-function": "off",
+        "no-sequences": ["off"],
+        "@typescript-eslint/no-unused-expressions": "off",
+        "eqeqeq": "off",
+        "no-undef": "off",
+        "@typescript-eslint/ban-ts-comment": "off",
+        "@typescript-eslint/no-unused-vars": "off",
+        "no-prototype-builtins": "off",
+        "no-new-func": "off",
+        "no-empty": "off",
+        "no-self-compare": "off",
+        "no-cond-assign": "off",
+        "no-useless-escape": "off",
+        "no-script-url": "off",
+        "array-callback-return": "off",
+        "@typescript-eslint/no-this-alias": "off",
+        "@typescript-eslint/no-use-before-define": "off",
+        "no-control-regex": "off",
+        "no-console": "off",
+        "no-unused-vars": "off",
+        "no-throw-literal": "off",
+        "no-new-wrappers": "off",
+        "no-redeclare": "off",
+        "no-loop-func": "off",
+        "no-fallthrough": "off"
+      }
     }
   ]
 }

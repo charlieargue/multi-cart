@@ -1,25 +1,28 @@
-import { Button } from '@chakra-ui/react';
+import { Box, Button } from '@chakra-ui/react';
 import React from 'react';
 import { ImPlus as PlusIcon } from 'react-icons/im';
-import './AddLineAccountButton.module.scss';
 
 export interface AddLineAccountButtonProps {
-  btnRef: React.MutableRefObject<undefined>
-  clickHandler()
+  btnRef: React.MutableRefObject<undefined>;
+  clickHandler(): void | React.MouseEventHandler<HTMLButtonElement>;
 }
 
-export function AddLineAccountButton(props: AddLineAccountButtonProps) {
+export const AddLineAccountButton = ({
+  btnRef,
+  clickHandler,
+}: AddLineAccountButtonProps) => {
   return (
     <Button
+      colorScheme="green"
       data-testid="btnAddLineAccount"
-      ref={props.btnRef}
-      onClick={props.clickHandler}
+      onClick={clickHandler}
+      ref={btnRef}
       size="xs"
-      colorScheme="green">
+    >
       <PlusIcon />
-              &nbsp;Add&nbsp;<strong>account</strong>
+      <Box p={1}>Add account</Box>
     </Button>
   );
-}
+};
 
 export default AddLineAccountButton;

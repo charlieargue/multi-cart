@@ -1,3 +1,7 @@
+// ##################################################################################
+// ℹ️ NOT READY YET or NOT MY CODE (chakra templates) ----- please ignore this file, thanks!
+// ##################################################################################
+
 import './Footer.module.scss';
 import { Box, ButtonGroup, Flex, IconButton, Link, Stack, Text } from '@chakra-ui/react';
 import * as React from 'react';

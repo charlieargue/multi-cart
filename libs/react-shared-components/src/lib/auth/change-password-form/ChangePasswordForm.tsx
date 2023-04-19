@@ -1,3 +1,7 @@
+// ##################################################################################
+// ℹ️ NOT READY YET or NOT MY CODE (chakra templates) ----- please ignore this file, thanks!
+// ##################################################################################
+
 import { Alert, Box, Button, Stack, useColorModeValue as mode } from '@chakra-ui/react';
 import { ChangePasswordMutation, Exact, useChangePasswordMutation } from '@multi-cart/react-data-access';
 import { InputField } from '@multi-cart/react-ui';
@@ -23,7 +27,7 @@ export const ChangePasswordForm = () => {
         <Box mb={2}>
           <Alert borderRadius="4px" status="error">
             <span role='img' aria-label='emoji'>❗️</span><strong>Error: &nbsp;</strong>
-            <NextLink href="/forgot-password">
+            <NextLink href="/forgot-password" legacyBehavior>
               <Box href="/forgot-password" as="a" color={mode('pink.600', 'pink.200')} fontWeight="semibold" fontSize="sm">
                 Please try a fresh token
                     </Box>

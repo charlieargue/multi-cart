@@ -1,14 +1,16 @@
+// ##################################################################################
+// ℹ️ NOT READY YET or NOT MY CODE (chakra templates) ----- please ignore this file, thanks!
+// ##################################################################################
+
 import React from 'react';
 import {
   Box,
   Heading,
   Text,
-  useColorModeValue as mode
+  useColorModeValue as mode,
 } from '@chakra-ui/react';
-import { Logo } from '@multi-cart/react-ui';
-import './MicroLayout.module.scss';
-import { Wrapper } from "@multi-cart/react-ui";
-import DarkModeSwitch from '../../dark-mode-switch/DarkModeSwitch';
+import { DarkModeSwitch, Logo } from '@multi-cart/react-ui';
+import { Wrapper } from '@multi-cart/react-ui';
 
 export interface MicroLayoutProps {
   heading: string | React.ReactElement;
@@ -16,17 +18,20 @@ export interface MicroLayoutProps {
   children?: React.ReactNode;
 }
 
-/**
- * Streamlined Layout for "little" pages like Login, Register, Forgot Password, etc...
- *
- * @export
- * @param {MicroLayoutProps} { heading, subHeading, children }
- * @return {*} 
- */
-export function MicroLayout({ heading, subHeading, children }: MicroLayoutProps) {
+export const MicroLayout = ({
+  heading,
+  subHeading,
+  children,
+}: MicroLayoutProps) => {
   return (
     <Wrapper data-testid="bkgndAppLayout">
-      <Box bg={mode('gray.50', 'inherit')} minH="100vh" minWidth="100vw" py="20" px={{ sm: '6', lg: '8' }}>
+      <Box
+        bg={mode('gray.50', 'inherit')}
+        minH="100vh"
+        minWidth="100vw"
+        py="20"
+        px={{ sm: '6', lg: '8' }}
+      >
         <Box maxW={{ sm: 'md' }} mx={{ sm: 'auto' }} w={{ sm: 'full' }}>
           <Box mb={{ base: '8', md: '16' }}>
             <Logo />
@@ -53,6 +58,6 @@ export function MicroLayout({ heading, subHeading, children }: MicroLayoutProps)
       </Box>
     </Wrapper>
   );
-}
+};
 
 export default MicroLayout;

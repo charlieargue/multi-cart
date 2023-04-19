@@ -156,21 +156,6 @@
 			]
 		},
 		{
-			"path": "libs/react-shared-components/src/lib/cart/edit-cart/EditCart.tsx",
-			"bookmarks": [
-				{
-					"line": 116,
-					"column": 33,
-					"label": ""
-				},
-				{
-					"line": 137,
-					"column": 62,
-					"label": ""
-				}
-			]
-		},
-		{
 			"path": "apps/react-ui-e2e/cypress.json",
 			"bookmarks": [
 				{

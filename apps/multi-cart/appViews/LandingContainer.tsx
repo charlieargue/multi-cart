@@ -1,7 +1,7 @@
 import { Box, chakra, Divider, Flex, Link, SimpleGrid, Stack, Text, useColorModeValue as mode } from '@chakra-ui/react';
 import { Hero, LandingLayout } from '@multi-cart/react-shared-components';
 import React from 'react';
-import { FcOk, FcFlowChart, FcSportsMode, FcPositiveDynamic, FcCollaboration, FcEnteringHeavenAlive, FcMindMap, FcPrivacy, FcTimeline, FcVip, FcWorkflow } from 'react-icons/fc';
+import { FcOk, FcFlowChart, FcSportsMode, FcPositiveDynamic, FcCollaboration, FcEnteringHeavenAlive, FcMindMap, FcVip, FcWorkflow } from 'react-icons/fc';
 import { FiExternalLink as ExternalLink } from 'react-icons/fi';
 import { GoMarkGithub as GithubIcon } from 'react-icons/go';
 import GridBlurredBackdrop from './_testimonials';
@@ -27,11 +27,6 @@ const Feature = (props: FeatureProps) => {
     )
 }
 
-
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
-interface LandingContainerProps {
-
-}
 
 // Demo App built with React • Next.js • Nx • Chakra-UI • Storybook • urql • codegen • type-graphql • and more!
 export const LandingContainer = () => {

@@ -1,10 +1,7 @@
-// keeping it simple, not combining reducers, simple one bstate, etc.
 export interface StateType {
-    isFetching: boolean;
-    isDeletingCart: boolean;
+    isGlobalFetching: boolean;
 }
 
 export const initialState: StateType = {
-    isFetching: false,
-    isDeletingCart: false,
+    isGlobalFetching: false,
 };

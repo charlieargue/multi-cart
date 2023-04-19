@@ -1,22 +1,11 @@
 {
-  "implicitDependencies": {
-    "workspace.json": "*",
-    "package.json": {
-      "dependencies": "*",
-      "devDependencies": "*"
-    },
-    "tsconfig.base.json": "*",
-    "tslint.json": "*",
-    ".eslintrc.json": "*",
-    "nx.json": "*"
-  },
   "affected": {
     "defaultBase": "develop"
   },
   "npmScope": "multi-cart",
   "tasksRunnerOptions": {
     "default": {
-      "runner": "@nrwl/workspace/tasks-runners/default",
+      "runner": "@nrwl/nx-cloud",
       "options": {
         "cacheableOperations": [
           "build",
@@ -24,57 +13,54 @@
           "test",
           "e2e",
           "build-storybook"
-        ]
+        ],
+        "accessToken": "ZDAzOGI4NjUtNDBlYi00MWFlLTk1NzUtYWM2OWNhNWI2Njk1fHJlYWQtd3JpdGU=",
+        "parallel": 1
       }
     }
   },
-  "projects": {
-    "mock-api": {
-      "tags": []
+  "$schema": "./node_modules/nx/schemas/nx-schema.json",
+  "targetDefaults": {
+    "build": {
+      "dependsOn": ["^build"],
+      "inputs": ["production", "^production"]
     },
-    "multi-cart": {
-      "tags": []
+    "test": {
+      "inputs": ["default", "^production", "{workspaceRoot}/jest.preset.js"]
     },
-    "multi-cart-e2e": {
-      "tags": [],
-      "implicitDependencies": ["multi-cart"]
+    "lint": {
+      "inputs": ["default", "{workspaceRoot}/.eslintrc.json"]
     },
-    "multi-cart-iac": {
-      "tags": []
+    "e2e": {
+      "inputs": ["default", "^production"]
     },
-    "multi-cart-iac-tests": {
-      "tags": []
+    "e2e-local": {
+      "inputs": ["default", "^production"]
     },
-    "react-app-state": {
-      "tags": []
+    "e2e-local-cicd": {
+      "inputs": ["default", "^production"]
     },
-    "react-data-access": {
-      "tags": []
-    },
-    "react-shared-components": {
-      "tags": []
-    },
-    "react-shared-components-e2e": {
-      "tags": [],
-      "implicitDependencies": ["react-shared-components"]
-    },
-    "react-ui": {
-      "tags": []
-    },
-    "react-ui-e2e": {
-      "tags": [],
-      "implicitDependencies": ["react-ui"]
-    },
-    "util": {
-      "tags": []
+    "build-storybook": {
+      "inputs": ["default", "^production", "{workspaceRoot}/.storybook/**/*"]
     }
   },
-  "targetDependencies": {
-    "build": [
-      {
-        "target": "build",
-        "projects": "dependencies"
-      }
+  "namedInputs": {
+    "default": ["{projectRoot}/**/*", "sharedGlobals"],
+    "sharedGlobals": [
+      "{workspaceRoot}/workspace.json",
+      "{workspaceRoot}/tsconfig.base.json",
+      "{workspaceRoot}/tslint.json",
+      "{workspaceRoot}/nx.json",
+      "{workspaceRoot}/babel.config.json"
+    ],
+    "production": [
+      "default",
+      "!{projectRoot}/**/?(*.)+(spec|test).[jt]s?(x)?(.snap)",
+      "!{projectRoot}/tsconfig.spec.json",
+      "!{projectRoot}/jest.config.[jt]s",
+      "!{projectRoot}/.eslintrc.json",
+      "!{projectRoot}/.storybook/**/*",
+      "!{projectRoot}/**/*.stories.@(js|jsx|ts|tsx|mdx)"
     ]
   }
 }

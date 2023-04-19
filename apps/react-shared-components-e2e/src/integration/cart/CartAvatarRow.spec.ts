@@ -1,5 +1,5 @@
-describe('react-shared-components: CartAvatarRow component', () => {
-  beforeEach(() => cy.visit('/iframe.html?id=cartavatarrow--primary'));
+describe('react-shared-components: CartMenuRow component', () => {
+  beforeEach(() => cy.visit('/iframe.html?id=CartMenuRow--primary'));
 
   it('should render the component', () => {
     // confirm 2 menu items
