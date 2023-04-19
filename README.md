@@ -29,19 +29,10 @@ This is a full-stack **React** **serverless** web application built for demo and
 - [ ] component **composition** (eg. `drawerHeader={<SearchBar...`) eg. [1](https://github.com/charlieargue/multi-cart/blob/fc38ffa2e4e781b1bfcf3b1ddbccbe65e708289a/libs/react-shared-components/src/lib/_layout/nav-bar/NavBar.tsx#L80) [2](https://github.com/charlieargue/multi-cart/blob/fc38ffa2e4e781b1bfcf3b1ddbccbe65e708289a/libs/react-shared-components/src/lib/line-account/drawer-container/DrawerContainer.tsx#L60) [3](https://github.com/charlieargue/multi-cart/blob/0d957feb277e5f1e43e9b6e97d20a246e40c2ab7/apps/multi-cart/appViews/auth/RegisterContainer.tsx#L8-L9)
 - [ ] **minimal** state management
 - [ ] minimal `useEffects`, and **encapsulation** into custom hooks where appropriate, eg. [1](https://github.com/charlieargue/multi-cart/blob/647c9a8c3a6b0c27bc61a7bb9520c4e8e8a55a96/libs/react-data-access/src/lib/hooks/useSaveAsCurrentCart.ts) [2](https://github.com/charlieargue/multi-cart/blob/647c9a8c3a6b0c27bc61a7bb9520c4e8e8a55a96/apps/multi-cart/appViews/EditCartContainer.tsx#L18)
-- [ ] basic hooks: use memo use call back, use ref 
-- [ ] Custom hooks: useSaveAsCurrentCart
-- [ ] 
-- [ ] strongly typed auto generated react hooks for data fetching by codegen from graphql schema.
-- [ ] Typescript generics (show betterUpdateQuery)
-- [ ] Edit Cart -> CL cont -> LA cont -> LA (show the **component maps** )
-- [ ] url for data management (create Client .ts)
-- [ ] Pure state updates - show urql normalized graphe-cache .ts
-- [ ] 
-- [ ] CLA Update 2x ISSUE: Let's have that illustrated too like Dan Abramoff's solution number blank for a synchronous middleware, reduce their actions or whatever.
-- [ ] ==Other Principles and Standards and Best Practices:==
-  - [ ] Normalized component-zation and show links to the **component maps** 
-  - [ ] clear container vs dummy component 
+- [ ] strongly typed auto-generated React hooks from graphql schema (by codegen), eg. [1](https://github.com/charlieargue/multi-cart/blob/647c9a8c3a6b0c27bc61a7bb9520c4e8e8a55a96/libs/react-data-access/src/lib/generated/graphql.ts)
+- [ ] Typescript 
+- [ ] Clear **componentization** and hierarchy, eg. [1](https://github.com/charlieargue/multi-cart/blob/647c9a8c3a6b0c27bc61a7bb9520c4e8e8a55a96/apps/multi-cart/component-guides/EditCart-Component-GUIDE.png)
+- [ ] clear container vs dummy component 
   - [ ] show single responsibility S R P like all little functions, they all have less than 100 lines, right?
 - [ ] No superfluous comments, 
 - [ ] avoided hasty abstractions 
@@ -87,7 +78,7 @@ Please see this **"Component Guide"** for referencing what components make-up wh
 
 **urql**
 
-* [Graphcache Custom Exchange](libs/react-data-access/src/lib/urql-customizations/cache.ts)
+* [Graphcache Custom Exchange](libs/react-data-access/src/lib/urql-customizations/cache.ts) (==hmmm, lots of any, maybe don't surface here, nope==!)
 * [Custom GlobalFetching Exchange](libs/react-data-access/src/lib/urql-customizations/createUrqlClient.ts) (uses redux, for logo spinner state)
 
 
