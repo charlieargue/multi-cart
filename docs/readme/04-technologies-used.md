@@ -1,0 +1,36 @@
+## 🚀 Technologies Used
+
+- [React](https://reactjs.org/)
+  - [react-icons](https://react-icons.github.io/react-icons/search)
+  - [urql](https://formidable.com/open-source/urql/)
+  - [Formik](https://formik.org/) / [yup](https://formik.org/docs/guides/validation)
+  - [Redux](https://redux.js.org/)
+- [Chakra-UI](https://chakra-ui.com/)
+- sass / SCSS
+- [husky](https://typicode.github.io/husky/#/)
+- GraphQL
+  - [GraphQL Code Generator](https://graphql-code-generator.com/)
+- [Next.js](https://nextjs.org/)
+- [nx monorepo](https://nx.dev/)
+- [Storybook](https://storybook.js.org/)
+- [Jest](https://jestjs.io/)
+- [Cypress](https://www.cypress.io/)
+- [Postman](https://www.postman.com/) / [Newman](https://github.com/postmanlabs/newman)
+- [Typescript](https://www.typescriptlang.org/)
+- [ESLint](https://eslint.org/)
+- [Terraform](https://www.terraform.io/)
+- [VTL templates](https://docs.aws.amazon.com/appsync/latest/devguide/resolver-mapping-template-reference-programming-guide.html)
+- AWS services, such as:
+  - [AppSync](https://aws.amazon.com/appsync/)
+  - Amazon [Simple Email Service](https://aws.amazon.com/ses/)
+  - [CloudWatch](https://aws.amazon.com/cloudwatch/)
+  - [Cognito](https://aws.amazon.com/cognito/)
+  - [DynamoDB](https://aws.amazon.com/dynamodb/)
+  - [IAM](https://aws.amazon.com/iam/)
+  - [Lambda](https://aws.amazon.com/lambda/)
+- and various cloud services for **CICD** and devops:
+  - [Vercel](https://vercel.com/)
+  - [Terraform Cloud](https://www.terraform.io/cloud)
+  - [GitHub Actions](https://github.com/features/actions)
+  - [Cypress Dashboard](https://www.cypress.io/dashboard/)
+
