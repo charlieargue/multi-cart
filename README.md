@@ -55,7 +55,7 @@ In April 2023, I upgraded the shopping cart code, guided by React principles and
 
 Please see this **"Component Guide"** for referencing what components make-up what UI/UX:
 
-[<img src="/Users/karlgolka/PROJECTS/FYI/_typora_images/image-20230419115330971.png">](apps/multi-cart/component-guides/EditCart-Component-GUIDE.png)
+[<img src="/Users/karlgolka/PROJECTS/multi-cart/docs/images/image-20230419115330971.png">](apps/multi-cart/component-guides/EditCart-Component-GUIDE.png)
 
 
 
