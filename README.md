@@ -12,49 +12,24 @@ This is a full-stack **React** **serverless** web application built for demo and
 
 # 📐 2023: Guiding Principles and Best Practices
 
-
-
-# ✅ Tasks: 
-
-- [ ] Only principles and best practices here!
-- [ ] Codes samples go down below
-- [ ] So up here we'd have "useEncapsulation", and down below `useSaveAsCurrentCart` for code samples..
-- [ ] Why not combine? Or say:
-- [ ] 
-
-
-
 *Where applicable, I've linked to a relevant sample:*
 
 - [ ] component **composition** (eg. `drawerHeader={<SearchBar...`) eg. [1](https://github.com/charlieargue/multi-cart/blob/fc38ffa2e4e781b1bfcf3b1ddbccbe65e708289a/libs/react-shared-components/src/lib/_layout/nav-bar/NavBar.tsx#L80) [2](https://github.com/charlieargue/multi-cart/blob/fc38ffa2e4e781b1bfcf3b1ddbccbe65e708289a/libs/react-shared-components/src/lib/line-account/drawer-container/DrawerContainer.tsx#L60) [3](https://github.com/charlieargue/multi-cart/blob/0d957feb277e5f1e43e9b6e97d20a246e40c2ab7/apps/multi-cart/appViews/auth/RegisterContainer.tsx#L8-L9)
 - [ ] **minimal** state management
 - [ ] minimal `useEffects`, and **encapsulation** into custom hooks where appropriate, eg. [1](https://github.com/charlieargue/multi-cart/blob/647c9a8c3a6b0c27bc61a7bb9520c4e8e8a55a96/libs/react-data-access/src/lib/hooks/useSaveAsCurrentCart.ts) [2](https://github.com/charlieargue/multi-cart/blob/647c9a8c3a6b0c27bc61a7bb9520c4e8e8a55a96/apps/multi-cart/appViews/EditCartContainer.tsx#L18)
-- [ ] strongly typed auto-generated React hooks from graphql schema (by codegen), eg. [1](https://github.com/charlieargue/multi-cart/blob/647c9a8c3a6b0c27bc61a7bb9520c4e8e8a55a96/libs/react-data-access/src/lib/generated/graphql.ts)
-- [ ] Typescript 
-- [ ] Clear **componentization** and hierarchy, eg. [1](https://github.com/charlieargue/multi-cart/blob/647c9a8c3a6b0c27bc61a7bb9520c4e8e8a55a96/apps/multi-cart/component-guides/EditCart-Component-GUIDE.png)
-- [ ] clear container vs dummy component 
-  - [ ] show single responsibility S R P like all little functions, they all have less than 100 lines, right?
-- [ ] No superfluous comments, 
-- [ ] avoided hasty abstractions 
-- [ ] tuned for the optimal backend calls.
-  - [ ] So there's no superfluous backend calls it tuned for rendering.
-- [ ] So there's no superfluous rendering that might be what to do you might need to install.
-  - [ ] Why did you render and make sure that's true.
-- [ ] I made the components as **testable** as possible, big exclamation point on this one by injecting blah, blah, blah blah blah. Testing!
-- [ ] I didn't religiously follow the container component pads and I wonder if I'll end up regretting that, but I don't think so because **MSW** solves a lot of those issues now, you don't have to worry about injecting data, you just mock it.
-- [ ] optimistic update is coming soon
-- [ ] ...that's just on the front end, the back end ==stays as is/README for now==
+- [ ] strongly-typed **auto-generated** React hooks from graphql schema (by codegen), eg. [1](https://github.com/charlieargue/multi-cart/blob/647c9a8c3a6b0c27bc61a7bb9520c4e8e8a55a96/libs/react-data-access/src/lib/generated/graphql.ts)
+- [ ] Typescript, eg. [1](https://github.com/charlieargue/multi-cart/blob/ae5c94593605ff660b37ea1323b8f7f530a421ce/libs/react-shared-components/src/lib/auth/login-form/LoginForm.types.tsx)
+- [ ] clear **componentization** and hierarchy, eg. [1](https://github.com/charlieargue/multi-cart/blob/647c9a8c3a6b0c27bc61a7bb9520c4e8e8a55a96/apps/multi-cart/component-guides/EditCart-Component-GUIDE.png) 
+- [ ] **simple**, short functions, components, and files (under 200 lines) that are [D.R.Y.](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself) and [S.R.P.](https://en.wikipedia.org/wiki/Single-responsibility_principle)
+- [ ] Clean and no unnecessary **comments**
+- [ ] [Avoided Hasty Abstractions](https://kentcdodds.com/blog/aha-programming) and [Rule of Threes](https://en.wikipedia.org/wiki/Rule_of_three_(computer_programming)) 
+- [ ] performant **data-fetching** (no unnecessary API calls)
+- [ ] **testable** components, with minimal dependencies and allowing easy-mocking with msw
+- [ ] **"Smart"** container vs "Dumb" component (loosely, not strictly)
 
 
 
-*Coming Soon:* ==get this outta here! Into CODDX and done!==
 
-- [ ] Error boundary 
-- [ ] Suspense
-- [ ] Compound components
-- [ ] react context 
-
-[<img src="docs/images/image-20230419115330971.png">](apps/multi-cart/component-guides/EditCart-Component-GUIDE.png)
 
 
 # 👾 2023: Front-end Code Samples
