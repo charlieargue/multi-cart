@@ -46,7 +46,6 @@ export const LineAccount = ({
   const skipFormikInit = useRef(true);
   const derivedPercentage = computePercentageGivenAmount(lineAccount, line);
 
-  // hydrate percentage map for this line account's initial value
   useEffect(() => {
     setPercentageMap((state) => ({
       ...state,
@@ -62,7 +61,6 @@ export const LineAccount = ({
       validationSchema={LineAccountFormSchema}
       onSubmit={async (values) => {
         if (!skipFormikInit.current) {
-          // having to keep state for freshest percentages as they change, and move them up and down into CartLineForm
           setPercentageMap((state) => ({
             ...state,
             [lineAccount.id]: values.percentage,
