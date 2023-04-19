@@ -16,6 +16,37 @@ In April 2023, I upgraded the shopping cart code, guided by React principles and
 
 # 📐 Principles and Best Practices
 
+*With specific examples linked, this React demo app uses:*
+
+- [ ] ==?== :new: **or Coming Soon...** compound components ==if that's true ... make sense to implement somewhere?==
+- [ ] component composition (eg. `header=<whatever`)
+- [ ] Local state 
+- [ ] ==?== :new: **or Coming Soon...** react context 
+  - [ ] I'd like to say context option three for the React context over rendering problem.
+- [ ] basic hooks: use memo use call back, use ref 
+- [ ] strongly typed auto generated react hooks for data fetching by codegen from graphql schema.
+- [ ] Typescript generics (show betterUpdateQuery)
+- [ ] Edit Cart -> CL cont -> LA cont -> LA (show the **component maps** )
+- [ ] url for data management (create Client .ts)
+- [ ] Pure state updates - show urql normalized graphe-cache .ts
+- [ ] ==?== :new: **or Coming Soon...** Error boundary 
+- [ ] ==?== :new: **or Coming Soon...** suspense.
+- [ ] CLA Update 2x ISSUE: Let's have that illustrated too like Dan Abramoff's solution number blank for a synchronous middleware, reduce their actions or whatever.
+- [ ] ==Other Principles and Standards and Best Practices:==
+  - [ ] Normalized component-zation and show links to the **component maps** 
+  - [ ] clear container vs dummy component 
+  - [ ] show single responsibility S R P like all little functions, they all have less than 100 lines, right?
+- [ ] No superfluous comments, 
+- [ ] avoided hasty abstractions 
+- [ ] tuned for the optimal backend calls.
+  - [ ] So there's no superfluous backend calls it tuned for rendering.
+- [ ] So there's no superfluous rendering that might be what to do you might need to install.
+  - [ ] Why did you render and make sure that's true.
+- [ ] I made the components as **testable** as possible, big exclamation point on this one by injecting blah, blah, blah blah blah. Testing!
+- [ ] I didn't religiously follow the container component pads and I wonder if I'll end up regretting that, but I don't think so because **MSW** solves a lot of those issues now, you don't have to worry about injecting data, you just mock it.
+- [ ] optimistic update is coming soon
+- [ ] ...that's just on the front end, the back end ==stays as is/README for now==
+
 
 
 
