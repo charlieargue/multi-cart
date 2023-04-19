@@ -1,5 +1,6 @@
 
 # TODO: owner security!
+# TODO: there should really be a "me" endpoint, and this should be called "updateMe"
 # PIPELINE 
 # (UPDATE) USER - just currentCartId
 resource "aws_appsync_resolver" "update_user_pipeline_resolver" {
