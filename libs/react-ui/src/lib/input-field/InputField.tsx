@@ -11,17 +11,8 @@ export type InputFieldProps = InputHTMLAttributes<HTMLInputElement> & {
   radius?: string;
   ref?: (node: HTMLInputElement) => void;
 }
-  & InputProps
-  // TODO: hacky, but confused on merging in input prop types for Chakra + Password useRef + Formik to work...
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  & any;
+  & InputProps;
 
-
-// thx: https://formik.org/docs/api/useField
-// TODO: {/* {meta.touched && meta.error ? ( 
-//    <div className="error">{meta.error}</div>
-//  ) : null}
-// */}
 export const InputField = ({
   id,
   label,
