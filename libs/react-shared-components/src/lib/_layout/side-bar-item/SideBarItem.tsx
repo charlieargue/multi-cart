@@ -23,11 +23,7 @@ export interface SideBarItemProps {
 export const SideBarItem = ({ item, isCurrent }: SideBarItemProps) => {
   return (
     <LinkBox cursor="pointer">
-<<<<<<< HEAD
       <NextLink href={item.href} style={{ outline: 'none' }} legacyBehavior>
-=======
-      <NextLink href={item.href} style={{ outline: 'none' }}>
->>>>>>> main
         <ListItem
           borderRadius="5px"
           cursor="pointer"

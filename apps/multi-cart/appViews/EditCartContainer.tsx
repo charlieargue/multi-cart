@@ -1,10 +1,6 @@
 import {
   useCartQuery,
-<<<<<<< HEAD
   useSaveAsCurrentCart,
-=======
-  useUpdateUserMutation,
->>>>>>> main
 } from '@multi-cart/react-data-access';
 import {
   CartSkeletons,
@@ -12,7 +8,6 @@ import {
   EditCartTable,
 } from '@multi-cart/react-shared-components';
 import { BigAlert, Breadcrumbs } from '@multi-cart/react-ui';
-<<<<<<< HEAD
 import { useState } from 'react';
 
 interface EditCartContainerProps {
@@ -22,16 +17,6 @@ interface EditCartContainerProps {
 export const EditCartContainer = ({ id }: EditCartContainerProps) => {
   useSaveAsCurrentCart(id);
   const [isDeletingCart, setIsDeletingCart] = useState(false);
-=======
-import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
-
-export const EditCartContainer = () => {
-  const router = useRouter();
-  const id = router.query.id as string;
-  const [isDeletingCart, setIsDeletingCart] = useState(false);
-  const [, updateUser] = useUpdateUserMutation();
->>>>>>> main
   const [{ data, error, fetching }] = useCartQuery({
     variables: {
       id,
@@ -47,13 +32,6 @@ export const EditCartContainer = () => {
     },
   ];
 
-<<<<<<< HEAD
-=======
-  useEffect(() => {
-    updateUser({ currentCartId: id });
-  }, [id, updateUser]);
-
->>>>>>> main
   if (!fetching && !data?.cart && !isDeletingCart) {
     return (
       <>

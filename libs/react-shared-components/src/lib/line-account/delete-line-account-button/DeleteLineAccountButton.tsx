@@ -10,13 +10,7 @@ import { SetPercentageMapType } from '../../cart/cart-line-container/CartLineCon
 export interface DeleteLineAccountButtonProps {
   lineAccount: CartLineAccount;
   line: CartLine;
-<<<<<<< HEAD
   setPercentageMap: SetPercentageMapType;
-=======
-  setPercentageMap: React.Dispatch<
-    React.SetStateAction<Record<string, number>>
-  >;
->>>>>>> main
 }
 
 export const DeleteLineAccountButton = ({

@@ -1,9 +1,3 @@
-<<<<<<< HEAD
-=======
-// ##################################################################################
-// ℹ️ NOT READY YET or NOT MY CODE (chakra templates) ----- please ignore this file, thanks!
-// ##################################################################################
->>>>>>> main
 import {
   Badge,
   Box,
@@ -31,15 +25,8 @@ import LineAccountPercentageInput from './LineAccountPercentageInput';
 export interface LineAccountProps {
   lineAccount: CartLineAccount;
   line: CartLine;
-<<<<<<< HEAD
   saveLineAccount: SaveLineAccountFnType;
   setPercentageMap: SetPercentageMapType;
-=======
-  saveLineAccount(newPercentage: number, lineAccountId: string, line: CartLine): void;
-  setPercentageMap: React.Dispatch<
-    React.SetStateAction<Record<string, number>>
-  >;
->>>>>>> main
 }
 
 const LineAccountFormSchema = Yup.object().shape({
@@ -58,10 +45,6 @@ export const LineAccount = ({
   const skipFormikInit = useRef(true);
   const derivedPercentage = computePercentageGivenAmount(lineAccount, line);
 
-<<<<<<< HEAD
-=======
-  // hydrate percentage map for this line account's initial value
->>>>>>> main
   useEffect(() => {
     setPercentageMap((state) => ({
       ...state,
@@ -77,10 +60,6 @@ export const LineAccount = ({
       validationSchema={LineAccountFormSchema}
       onSubmit={async (values) => {
         if (!skipFormikInit.current) {
-<<<<<<< HEAD
-=======
-          // having to keep state for freshest percentages as they change, and move them up and down into CartLineForm
->>>>>>> main
           setPercentageMap((state) => ({
             ...state,
             [lineAccount.id]: values.percentage,

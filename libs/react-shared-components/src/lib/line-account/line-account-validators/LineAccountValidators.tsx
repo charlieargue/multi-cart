@@ -13,10 +13,6 @@ export interface LineAccountValidatorsProps {
 }
 
 export function LineAccountValidators({ line }: LineAccountValidatorsProps) {
-<<<<<<< HEAD
-=======
-
->>>>>>> main
   const badgeAttribs: BadgeProps = {
     textTransform: 'none',
     borderRadius: '6px',

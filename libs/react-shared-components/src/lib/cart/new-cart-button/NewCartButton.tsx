@@ -17,11 +17,6 @@ export interface NewCartButtonProps {
 
 export function NewCartButton({ className }: NewCartButtonProps) {
   useIsAuth();
-<<<<<<< HEAD
-=======
-
-  const [, blankCart] = useBlankCartMutation();
->>>>>>> main
   const router = useRouter();
   const { toastError, toastSuccess } = useMyToasts();
   const [, blankCart] = useBlankCartMutation();
