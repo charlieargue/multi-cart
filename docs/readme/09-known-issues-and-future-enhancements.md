@@ -2,8 +2,6 @@
 
 In addition to the Implementation Notes above, some other things to be aware of:
 
-- I'm still using the ROOT AWS USER, instead of a creating a new IAM user just for Terraform.
-- I didn't detail all the separate settings in all cloud services (like Vercel, Terraform), but [contact me](#other-info) and I can send you sanitized screenshots of my settings if you run you have questions.
 - The site is not responsive nor done with mobile-first design (maybe a few parts, but the `Edit-Carts` page).
 - The Dark Mode needs some finishing.
 - Needless to say, the testing coverage is still incomplete. Visual Regression tests are needed on all the stories exercised by Cypress, etc.
