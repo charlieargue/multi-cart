@@ -61,12 +61,8 @@ This is a full-stack **React** **serverless** web application built for demo and
             * [AutoSave](https://github.com/charlieargue/multi-cart/blob/db080813913a6ea53355ac01aaf544e94c90dea2/libs/react-shared-components/src/lib/auto-save/AutoSave.tsx)
 
 * Other code samples (not React):
-
   * Custom [incoming webhook](https://github.com/charlieargue/multi-cart/blob/db080813913a6ea53355ac01aaf544e94c90dea2/apps/multi-cart/pages/api/webhook-incoming.ts) (**devops glue** between Terraform Cloud and GitHub Actions)
-
   * Custom **urql** [Graphcache](https://github.com/charlieargue/multi-cart/blob/db080813913a6ea53355ac01aaf544e94c90dea2/libs/react-data-access/src/lib/urql-customizations/cache.ts) and [GlobalFetching](https://github.com/charlieargue/multi-cart/blob/db080813913a6ea53355ac01aaf544e94c90dea2/libs/react-data-access/src/lib/urql-customizations/createUrqlClient.ts) exchanges
-
-
 
 
 
@@ -84,7 +80,6 @@ This is a full-stack **React** **serverless** web application built for demo and
 9. [🐞 Known Issues and Future Enhancements](docs/readme/09-known-issues-and-future-enhancements.md)
 10. [⚙️ Helpful Commands](docs/readme/10-helpful-commands.md)
 11. [🔋Backend Code Samples](docs/readme/11-backend-code-samples.md)
-
 
 
 
