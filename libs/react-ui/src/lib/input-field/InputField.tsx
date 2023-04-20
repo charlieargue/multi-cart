@@ -17,7 +17,12 @@ export type InputFieldProps = InputHTMLAttributes<HTMLInputElement> & {
   unwrapped?: boolean;
   radius?: string;
   ref?: (node: HTMLInputElement) => void;
+<<<<<<< HEAD
 } & InputProps;
+=======
+}
+  & InputProps;
+>>>>>>> main
 
 export const InputField = ({
   id,
