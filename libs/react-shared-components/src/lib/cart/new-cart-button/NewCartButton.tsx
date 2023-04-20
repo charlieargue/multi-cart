@@ -1,3 +1,7 @@
+// ##################################################################################
+// ℹ️ NOT READY YET or NOT MY CODE (chakra templates) ----- please ignore this file, thanks!
+// ##################################################################################
+
 import { Button } from '@chakra-ui/react';
 import { useBlankCartMutation } from '@multi-cart/react-data-access';
 import clsx from 'clsx';
@@ -13,6 +17,11 @@ export interface NewCartButtonProps {
 
 export function NewCartButton({ className }: NewCartButtonProps) {
   useIsAuth();
+<<<<<<< HEAD
+=======
+
+  const [, blankCart] = useBlankCartMutation();
+>>>>>>> main
   const router = useRouter();
   const { toastError, toastSuccess } = useMyToasts();
   const [, blankCart] = useBlankCartMutation();

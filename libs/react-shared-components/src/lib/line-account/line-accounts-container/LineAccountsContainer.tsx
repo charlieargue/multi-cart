@@ -13,6 +13,7 @@ import { Sort } from '@multi-cart/react-ui';
 import { areLineAccountsValid } from '@multi-cart/util';
 import React, { useRef } from 'react';
 import { FaRegCreditCard as LineAccountsIcon } from 'react-icons/fa';
+<<<<<<< HEAD
 import {
   SaveLineAccountFnType,
   SetPercentageMapType,
@@ -20,18 +21,32 @@ import {
 import LineAccount from '../../line-account/line-account/LineAccount';
 import AddLineAccountButton from '../add-line-account-button/AddLineAccountButton';
 import DrawerContainer from '../drawer-container/DrawerContainer';
+=======
+import DrawerContainer from '../drawer-container/DrawerContainer';
+import LineAccount from '../../line-account/line-account/LineAccount';
+import AddLineAccountButton from '../add-line-account-button/AddLineAccountButton';
+>>>>>>> main
 import LineAccountValidators from '../line-account-validators/LineAccountValidators';
 
 export interface LineAccountsContainerProps {
   line?: CartLine;
+<<<<<<< HEAD
   saveLineAccount: SaveLineAccountFnType;
   setPercentageMap: SetPercentageMapType;
+=======
+  saveLineAccount(newPercentage: number, lineAccountId: string, line: CartLine): void;
+  setPercentageMap: React.Dispatch<React.SetStateAction<Record<string, number>>>;
+>>>>>>> main
 }
 
 export const LineAccountsContainer = ({
   line,
   saveLineAccount,
+<<<<<<< HEAD
   setPercentageMap,
+=======
+  setPercentageMap
+>>>>>>> main
 }: LineAccountsContainerProps) => {
   const btnRef = useRef();
   const { isOpen, onOpen, onClose } = useDisclosure();

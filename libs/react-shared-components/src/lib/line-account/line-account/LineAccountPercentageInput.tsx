@@ -1,8 +1,23 @@
 import { Box, InputRightAddon } from '@chakra-ui/react';
+<<<<<<< HEAD
 import { CartLine, CartLineAccount } from '@multi-cart/react-data-access';
 import { InputField, TooltipMC } from '@multi-cart/react-ui';
 import { areLineAccountsValid } from '@multi-cart/util';
 import React from 'react';
+=======
+import {
+  CartLine,
+  CartLineAccount,
+  useUpdateCartLineAccountMutation,
+} from '@multi-cart/react-data-access';
+import { InputField, TooltipMC } from '@multi-cart/react-ui';
+import {
+  areLineAccountsValid,
+  computeAmountGivenPercentage,
+} from '@multi-cart/util';
+import { useFormikContext } from 'formik';
+import React, { useEffect, useRef } from 'react';
+>>>>>>> main
 import { FaPercentage as PercentageIcon } from 'react-icons/fa';
 
 export interface LineAccountPercentageInputProps {
@@ -14,6 +29,50 @@ export const LineAccountPercentageInput = ({
   lineAccount,
   line,
 }: LineAccountPercentageInputProps) => {
+<<<<<<< HEAD
+=======
+  const { values } = useFormikContext<{ percentage: number }>();
+  const formikPercentage = values?.percentage;
+  const skipUseEffectInit = useRef(true);
+  const [, updateCartLineAccount] = useUpdateCartLineAccountMutation();
+
+
+  // useEffect(() => {
+  //   const resaveLineAccount = async () => {
+  //     console.log(`🚀  formikPercentage:`, formikPercentage);
+  //     const newAmountIfLinePriceOrQuantityChanges =
+  //       computeAmountGivenPercentage({
+  //         linePrice: line.price,
+  //         lineQuantity: line.quantity,
+  //         lineTax: 0,
+  //         lineAccountPercentage: formikPercentage,
+  //       });
+  //     await updateCartLineAccount({
+  //       cartId: line.cartId,
+  //       cartLineId: line.id,
+  //       id: lineAccount.id,
+  //       amount: newAmountIfLinePriceOrQuantityChanges,
+  //     });
+  //     // skipUseEffectInit.current = false;
+  //   };
+
+  //   // if (skipUseEffectInit.current === false) {
+  //   console.log(`🚀 UPDATING CLA.amount because LINE PRICE or QUANTITY changed!`);
+  //   resaveLineAccount().catch((err) => {
+  //     console.log(`🚀  err:`, err);
+  //   });
+  //   // }
+  // }, [
+  //   line.cartId,
+  //   line.id,
+  //   line.price,
+  //   line.quantity,
+  //   lineAccount.id,
+  //   // skipUseEffectInit,
+  //   updateCartLineAccount,
+  // ]);
+
+>>>>>>> main
   return (
     <>
       <TooltipMC

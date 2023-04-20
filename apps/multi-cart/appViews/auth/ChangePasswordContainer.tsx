@@ -1,7 +1,14 @@
+<<<<<<< HEAD
 import {
   ChangePasswordForm,
   MicroLayout,
 } from '@multi-cart/react-shared-components';
+=======
+import { ChangePasswordForm } from '@multi-cart/react-shared-components';
+import React from 'react';
+import { MicroLayout } from '@multi-cart/react-shared-components';
+
+>>>>>>> main
 
 export const ChangePasswordContainer = () => {
   return (

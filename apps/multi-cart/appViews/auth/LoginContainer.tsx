@@ -1,3 +1,7 @@
+// ##################################################################################
+// ℹ️ NOT READY YET or NOT MY CODE (chakra templates) ----- please ignore this file, thanks!
+// ##################################################################################
+
 import {
   Box,
   Button,
@@ -14,6 +18,7 @@ export const LoginContainer = () => {
   return (
     <MicroLayout
       heading="Welcome back!"
+<<<<<<< HEAD
       subHeading={
         <>
           <span>Don&apos;t have an account?</span>
@@ -32,6 +37,23 @@ export const LoginContainer = () => {
         </>
       }
     >
+=======
+      subHeading={<>
+        <span>Don&apos;t have an account?</span>
+        <NextLink href="/register" legacyBehavior>
+          <Box
+            as="a"
+            marginStart="1"
+            href="/register"
+            color={mode('pink.600', 'pink.200')}
+            _hover={{ color: 'pink.600' }}
+            display={{ base: 'block', sm: 'revert' }}
+          >
+            Register an account.
+              </Box>
+        </NextLink>
+      </>}>
+>>>>>>> main
       <LoginForm />
       <DividerWithText mt="6">coming soon...</DividerWithText>
       <SimpleGrid mt="6" columns={3} spacing="3">

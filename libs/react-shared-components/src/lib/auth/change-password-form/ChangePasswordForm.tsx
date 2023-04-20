@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import {
   Alert,
   Box,
@@ -10,6 +11,14 @@ import {
   Exact,
   useChangePasswordMutation,
 } from '@multi-cart/react-data-access';
+=======
+// ##################################################################################
+// ℹ️ NOT READY YET or NOT MY CODE (chakra templates) ----- please ignore this file, thanks!
+// ##################################################################################
+
+import { Alert, Box, Button, Stack, useColorModeValue as mode } from '@chakra-ui/react';
+import { ChangePasswordMutation, Exact, useChangePasswordMutation } from '@multi-cart/react-data-access';
+>>>>>>> main
 import { InputField } from '@multi-cart/react-ui';
 import { passwordAttributes } from '@multi-cart/util';
 import { Form, Formik } from 'formik';
@@ -41,6 +50,7 @@ export const ChangePasswordForm = () => {
       {tokenError && (
         <Box mb={2}>
           <Alert borderRadius="4px" status="error">
+<<<<<<< HEAD
             <span role="img" aria-label="emoji">
               ❗️
             </span>
@@ -53,6 +63,11 @@ export const ChangePasswordForm = () => {
                 fontWeight="semibold"
                 fontSize="sm"
               >
+=======
+            <span role='img' aria-label='emoji'>❗️</span><strong>Error: &nbsp;</strong>
+            <NextLink href="/forgot-password" legacyBehavior>
+              <Box href="/forgot-password" as="a" color={mode('pink.600', 'pink.200')} fontWeight="semibold" fontSize="sm">
+>>>>>>> main
                 Please try a fresh token
               </Box>
             </NextLink>
