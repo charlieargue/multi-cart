@@ -3,7 +3,6 @@ import { useToast } from '@chakra-ui/react';
 export const useMyToasts = () => {
     const toast = useToast();
 
-    // TODO: could use a factory approach here on all these
     const toastAttribs = (message: string) => ({
         isClosable: true,
         variant: "top-accent",

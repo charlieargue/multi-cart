@@ -10,17 +10,14 @@ import { Form, Formik } from 'formik';
 import React, { useRef } from 'react';
 import { CgClose as CloseIcon } from 'react-icons/cg';
 import { AutoSave } from '../../auto-save/AutoSave';
+import { SaveLineAccountFnType } from '../cart-line-container/CartLineContainer';
 import { CategoriesDropDown } from '../categories-drop-down/CategoriesDropDown';
 import UOMDropDown from '../uomdrop-down/UOMDropDown';
 
 export interface CartLineFormProps {
   idx: number;
   line: CartLine;
-  saveLineAccount(
-    newPercentage: number,
-    lineAccountId: string,
-    line: CartLine
-  ): void;
+  saveLineAccount: SaveLineAccountFnType;
   percentageMap: Record<string, number>;
 }
 

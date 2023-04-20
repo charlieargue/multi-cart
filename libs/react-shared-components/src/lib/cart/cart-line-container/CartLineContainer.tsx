@@ -12,13 +12,23 @@ export interface CartLineContainerProps {
   idx: number;
 }
 
+export type SaveLineAccountFnType = (
+  newPercentage: number,
+  lineAccountId: string,
+  line: CartLine
+) => void;
+
+export type SetPercentageMapType = React.Dispatch<
+  React.SetStateAction<Record<string, number>>
+>;
+
 export const CartLineContainer = ({ line, idx }: CartLineContainerProps) => {
   const [, updateCartLineAccount] = useUpdateCartLineAccountMutation();
   const [percentageMap, setPercentageMap] = useState<Record<string, number>>(
     {}
   );
 
-  const saveLineAccount = async (
+  const saveLineAccount: SaveLineAccountFnType = async (
     newPercentage: number,
     lineAccountId: string,
     line: CartLine
