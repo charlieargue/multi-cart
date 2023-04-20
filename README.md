@@ -10,22 +10,18 @@ This is a full-stack **React** **serverless** web application built for demo and
 
 
 
-# ✅ Tasks: 
-
-- [ ] ==once done, deploy all to DEV, then make ONE permanent link, find the blob ID, and then VSCODE > replace 'em all here==
-
 
 
 # 📐 2023: Guiding Principles and Best Practices
 
 *Where applicable, I've linked to relevant code samples:*
 
-- component **composition** (eg. `drawerHeader={<SearchBar...`) eg. [1](https://github.com/charlieargue/multi-cart/blob/fc38ffa2e4e781b1bfcf3b1ddbccbe65e708289a/libs/react-shared-components/src/lib/_layout/nav-bar/NavBar.tsx#L80) [2](https://github.com/charlieargue/multi-cart/blob/fc38ffa2e4e781b1bfcf3b1ddbccbe65e708289a/libs/react-shared-components/src/lib/line-account/drawer-container/DrawerContainer.tsx#L60) [3](https://github.com/charlieargue/multi-cart/blob/0d957feb277e5f1e43e9b6e97d20a246e40c2ab7/apps/multi-cart/appViews/auth/RegisterContainer.tsx#L8-L9)
+- component **composition** (eg. `drawerHeader={<SearchBar...`) eg. [1](https://github.com/charlieargue/multi-cart/blob/db080813913a6ea53355ac01aaf544e94c90dea2/libs/react-shared-components/src/lib/_layout/nav-bar/NavBar.tsx#L74) [2](https://github.com/charlieargue/multi-cart/blob/db080813913a6ea53355ac01aaf544e94c90dea2/libs/react-shared-components/src/lib/line-account/drawer-container/DrawerContainer.tsx#L60) [3](https://github.com/charlieargue/multi-cart/blob/db080813913a6ea53355ac01aaf544e94c90dea2/apps/multi-cart/appViews/auth/RegisterContainer.tsx#L8-L9)
 - minimal **state management**
-- minimal `useEffects`, and **encapsulation** into custom hooks where appropriate, eg. [1](https://github.com/charlieargue/multi-cart/blob/647c9a8c3a6b0c27bc61a7bb9520c4e8e8a55a96/libs/react-data-access/src/lib/hooks/useSaveAsCurrentCart.ts) [2](https://github.com/charlieargue/multi-cart/blob/647c9a8c3a6b0c27bc61a7bb9520c4e8e8a55a96/apps/multi-cart/appViews/EditCartContainer.tsx#L18)
-- strongly-typed **auto-generated** React hooks from graphql schema (by codegen), eg. [1](https://github.com/charlieargue/multi-cart/blob/647c9a8c3a6b0c27bc61a7bb9520c4e8e8a55a96/libs/react-data-access/src/lib/generated/graphql.ts)
-- Typescript, eg. [1](https://github.com/charlieargue/multi-cart/blob/ae5c94593605ff660b37ea1323b8f7f530a421ce/libs/react-shared-components/src/lib/auth/login-form/LoginForm.types.tsx)
-- clear **componentization** and hierarchy, eg. [1](https://github.com/charlieargue/multi-cart/blob/647c9a8c3a6b0c27bc61a7bb9520c4e8e8a55a96/apps/multi-cart/component-guides/EditCart-Component-GUIDE.png) (in `react-shared-components` library)
+- minimal `useEffects`, and **encapsulation** into custom hooks where appropriate, eg. [1](https://github.com/charlieargue/multi-cart/blob/db080813913a6ea53355ac01aaf544e94c90dea2/libs/react-data-access/src/lib/hooks/useSaveAsCurrentCart.ts) [2](https://github.com/charlieargue/multi-cart/blob/db080813913a6ea53355ac01aaf544e94c90dea2/apps/multi-cart/appViews/EditCartContainer.tsx#L18)
+- strongly-typed **auto-generated** React hooks from graphql schema (by codegen), eg. [1](https://github.com/charlieargue/multi-cart/blob/db080813913a6ea53355ac01aaf544e94c90dea2/libs/react-data-access/src/lib/generated/graphql.ts)
+- Typescript, eg. [1](https://github.com/charlieargue/multi-cart/blob/db080813913a6ea53355ac01aaf544e94c90dea2/libs/react-shared-components/src/lib/auth/login-form/LoginForm.types.tsx)
+- clear **componentization** and hierarchy, eg. [1](https://github.com/charlieargue/multi-cart/blob/db080813913a6ea53355ac01aaf544e94c90dea2/apps/multi-cart/component-guides/EditCart-Component-GUIDE.png) (in `react-shared-components` library)
 - **simple**, short functions, components, and files (under 200 lines) that are [D.R.Y.](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself) and [S.R.P.](https://en.wikipedia.org/wiki/Single-responsibility_principle)
 - Clean and no unnecessary **comments**
 - [Avoided Hasty Abstractions](https://kentcdodds.com/blog/aha-programming) and [Rule of Threes](https://en.wikipedia.org/wiki/Rule_of_three_(computer_programming)) 
@@ -50,23 +46,19 @@ This is a full-stack **React** **serverless** web application built for demo and
 
 * They can then edit that cart:
 
-  * [EditCartPage](https://github.com/charlieargue/multi-cart/blob/647c9a8c3a6b0c27bc61a7bb9520c4e8e8a55a96/apps/multi-cart/pages/cart/%5Bid%5D.tsx)
-    * [EditCartContainer](https://github.com/charlieargue/multi-cart/blob/647c9a8c3a6b0c27bc61a7bb9520c4e8e8a55a96/apps/multi-cart/appViews/EditCartContainer.tsx)
-      * [EditCartTable](https://github.com/charlieargue/multi-cart/blob/647c9a8c3a6b0c27bc61a7bb9520c4e8e8a55a96/libs/react-shared-components/src/lib/cart/edit-cart-table/EditCartTable.tsx)
-        * [CartLineContainer](https://github.com/charlieargue/multi-cart/blob/647c9a8c3a6b0c27bc61a7bb9520c4e8e8a55a96/libs/react-shared-components/src/lib/cart/cart-line-container/CartLineContainer.tsx)
-          *  [CartLineForm](https://github.com/charlieargue/multi-cart/blob/647c9a8c3a6b0c27bc61a7bb9520c4e8e8a55a96/libs/react-shared-components/src/lib/cart/cart-line-form/CartLineForm.tsx)
-          *  [LineAccountsContainer](https://github.com/charlieargue/multi-cart/blob/647c9a8c3a6b0c27bc61a7bb9520c4e8e8a55a96/libs/react-shared-components/src/lib/line-account/line-accounts-container/LineAccountsContainer.tsx)
-            * [DrawerContainer](https://github.com/charlieargue/multi-cart/blob/647c9a8c3a6b0c27bc61a7bb9520c4e8e8a55a96/libs/react-shared-components/src/lib/line-account/drawer-container/DrawerContainer.tsx#L20)
-            * [LineAccount](https://github.com/charlieargue/multi-cart/blob/647c9a8c3a6b0c27bc61a7bb9520c4e8e8a55a96/libs/react-shared-components/src/lib/line-account/line-account/LineAccount.tsx)
-            * [AutoSave](https://github.com/charlieargue/multi-cart/blob/647c9a8c3a6b0c27bc61a7bb9520c4e8e8a55a96/libs/react-shared-components/src/lib/auto-save/AutoSave.tsx)
+  * [EditCartPage](https://github.com/charlieargue/multi-cart/blob/db080813913a6ea53355ac01aaf544e94c90dea2/apps/multi-cart/pages/cart/%5Bid%5D.tsx)
+    * [EditCartContainer](https://github.com/charlieargue/multi-cart/blob/db080813913a6ea53355ac01aaf544e94c90dea2/apps/multi-cart/appViews/EditCartContainer.tsx)
+      * [EditCartTable](https://github.com/charlieargue/multi-cart/blob/db080813913a6ea53355ac01aaf544e94c90dea2/libs/react-shared-components/src/lib/cart/edit-cart-table/EditCartTable.tsx)
+        * [CartLineContainer](https://github.com/charlieargue/multi-cart/blob/db080813913a6ea53355ac01aaf544e94c90dea2/libs/react-shared-components/src/lib/cart/cart-line-container/CartLineContainer.tsx)
+          *  [CartLineForm](https://github.com/charlieargue/multi-cart/blob/db080813913a6ea53355ac01aaf544e94c90dea2/libs/react-shared-components/src/lib/cart/cart-line-form/CartLineForm.tsx)
+          *  [LineAccountsContainer](https://github.com/charlieargue/multi-cart/blob/db080813913a6ea53355ac01aaf544e94c90dea2/libs/react-shared-components/src/lib/line-account/line-accounts-container/LineAccountsContainer.tsx)
+            * [DrawerContainer](https://github.com/charlieargue/multi-cart/blob/db080813913a6ea53355ac01aaf544e94c90dea2/libs/react-shared-components/src/lib/line-account/drawer-container/DrawerContainer.tsx#L20)
+            * [LineAccount](https://github.com/charlieargue/multi-cart/blob/db080813913a6ea53355ac01aaf544e94c90dea2/libs/react-shared-components/src/lib/line-account/line-account/LineAccount.tsx)
+            * [AutoSave](https://github.com/charlieargue/multi-cart/blob/db080813913a6ea53355ac01aaf544e94c90dea2/libs/react-shared-components/src/lib/auto-save/AutoSave.tsx)
 
 * Other code samples (not React):
-
-  * Custom [incoming webhook](apps/multi-cart/pages/api/webhook-incoming.ts) (**devops glue** between Terraform Cloud and GitHub Actions)
-
-  * Custom **urql** [Graphcache](libs/react-data-access/src/lib/urql-customizations/cache.ts) and [GlobalFetching](libs/react-data-access/src/lib/urql-customizations/createUrqlClient.ts) exchanges
-
-
+  * Custom [incoming webhook](https://github.com/charlieargue/multi-cart/blob/db080813913a6ea53355ac01aaf544e94c90dea2/apps/multi-cart/pages/api/webhook-incoming.ts) (**devops glue** between Terraform Cloud and GitHub Actions)
+  * Custom **urql** [Graphcache](https://github.com/charlieargue/multi-cart/blob/db080813913a6ea53355ac01aaf544e94c90dea2/libs/react-data-access/src/lib/urql-customizations/cache.ts) and [GlobalFetching](https://github.com/charlieargue/multi-cart/blob/db080813913a6ea53355ac01aaf544e94c90dea2/libs/react-data-access/src/lib/urql-customizations/createUrqlClient.ts) exchanges
 
 
 
@@ -84,7 +76,6 @@ This is a full-stack **React** **serverless** web application built for demo and
 9. [🐞 Known Issues and Future Enhancements](docs/readme/09-known-issues-and-future-enhancements.md)
 10. [⚙️ Helpful Commands](docs/readme/10-helpful-commands.md)
 11. [🔋Backend Code Samples](docs/readme/11-backend-code-samples.md)
-
 
 
 
