@@ -1,6 +1,5 @@
 import { Cache, QueryInput } from '@urql/exchange-graphcache';
 
-// Allows passing in two generics (result and query) and it returns a properly-typed function
 export const betterUpdateQuery = <Result, Query>(
     cache: Cache,
     qi: QueryInput,

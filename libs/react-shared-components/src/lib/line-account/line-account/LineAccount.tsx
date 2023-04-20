@@ -1,6 +1,3 @@
-// ##################################################################################
-// ℹ️ NOT READY YET or NOT MY CODE (chakra templates) ----- please ignore this file, thanks!
-// ##################################################################################
 import {
   Badge,
   Box,
@@ -17,6 +14,10 @@ import { Formik } from 'formik';
 import React, { useEffect, useRef } from 'react';
 import * as Yup from 'yup';
 import { AutoSave } from '../../auto-save/AutoSave';
+import {
+  SaveLineAccountFnType,
+  SetPercentageMapType,
+} from '../../cart/cart-line-container/CartLineContainer';
 import DeleteLineAccountButton from '../delete-line-account-button/DeleteLineAccountButton';
 import LineAccountTooltip from '../line-account-tooltip/LineAccountTooltip';
 import LineAccountPercentageInput from './LineAccountPercentageInput';
@@ -24,10 +25,8 @@ import LineAccountPercentageInput from './LineAccountPercentageInput';
 export interface LineAccountProps {
   lineAccount: CartLineAccount;
   line: CartLine;
-  saveLineAccount(newPercentage: number, lineAccountId: string, line: CartLine): void;
-  setPercentageMap: React.Dispatch<
-    React.SetStateAction<Record<string, number>>
-  >;
+  saveLineAccount: SaveLineAccountFnType;
+  setPercentageMap: SetPercentageMapType;
 }
 
 const LineAccountFormSchema = Yup.object().shape({
@@ -46,7 +45,6 @@ export const LineAccount = ({
   const skipFormikInit = useRef(true);
   const derivedPercentage = computePercentageGivenAmount(lineAccount, line);
 
-  // hydrate percentage map for this line account's initial value
   useEffect(() => {
     setPercentageMap((state) => ({
       ...state,
@@ -62,7 +60,6 @@ export const LineAccount = ({
       validationSchema={LineAccountFormSchema}
       onSubmit={async (values) => {
         if (!skipFormikInit.current) {
-          // having to keep state for freshest percentages as they change, and move them up and down into CartLineForm
           setPercentageMap((state) => ({
             ...state,
             [lineAccount.id]: values.percentage,

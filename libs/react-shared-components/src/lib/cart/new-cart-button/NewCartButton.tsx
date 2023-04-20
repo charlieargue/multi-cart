@@ -10,7 +10,6 @@ import React from 'react';
 import { ImPlus as PlusIcon } from 'react-icons/im';
 import { useIsAuth } from '../../_hooks/useIsAuth';
 import useMyToasts from '../../_hooks/useMyToasts';
-import './NewCartButton.module.scss';
 
 export interface NewCartButtonProps {
   className?: string;
@@ -18,30 +17,29 @@ export interface NewCartButtonProps {
 
 export function NewCartButton({ className }: NewCartButtonProps) {
   useIsAuth();
-
-  const [, blankCart] = useBlankCartMutation();
   const router = useRouter();
   const { toastError, toastSuccess } = useMyToasts();
-
+  const [, blankCart] = useBlankCartMutation();
 
   return (
     <Button
-      leftIcon={<PlusIcon />}
+      className={clsx(className)}
       colorScheme="pink"
+      data-testid="btnNewCart"
+      leftIcon={<PlusIcon />}
+      size="xs"
       variant="solid"
       onClick={async () => {
         const { error, data } = await blankCart();
         if (!error && data?.blankCart?.id) {
-          toastSuccess("Successfully created new cart!")
+          toastSuccess('Successfully created new cart!');
           router.push(`/cart/${data.blankCart.id}`);
-        } else if(error) {
+        } else if (error) {
           toastError(error.message);
         }
-        
       }}
-      size="xs"
-      className={clsx(className)}
-      data-testid="btnNewCart">New Cart
+    >
+      New Cart
     </Button>
   );
 }

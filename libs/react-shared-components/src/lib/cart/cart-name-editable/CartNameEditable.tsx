@@ -10,7 +10,6 @@ import React, { useState } from 'react';
 import * as Yup from 'yup';
 import { AutoSave } from '../../auto-save/AutoSave';
 
-// TODO: UPDATE: NO, see Chakra Editable... abstract this cmpnt further (with color, size, nothing cart-related) so more re-usable, and move to react-ui... 
 export interface CartNameEditableProps {
   name: string;
   id: string;
@@ -22,12 +21,10 @@ const CartNameEditableFormSchema = Yup.object().shape({
 });
 
 
-// -------------------
-export function CartNameEditable({ name, id }: CartNameEditableProps) {
-  const [, updateCart] = useUpdateCartMutation();
+export const CartNameEditable = ({ name, id }: CartNameEditableProps) => {
   const [isEditing, setIsEditing] = useState(false);
+  const [, updateCart] = useUpdateCartMutation();
 
-  // -------------------
   return (
     <Box onClick={() => isEditing === false ? setIsEditing(!isEditing) : null} >
       <Button
@@ -40,8 +37,6 @@ export function CartNameEditable({ name, id }: CartNameEditableProps) {
         borderWidth="3px"
         bgGradient="linear(to-l, brand.yellow, brand.pink)">
         {isEditing && (
-
-          // EDIT FORM -------------------- start
           <Formik
             initialValues={{
               name
@@ -53,12 +48,9 @@ export function CartNameEditable({ name, id }: CartNameEditableProps) {
               });
 
             }}>
-            {({ errors, touched }) => (
+            {() => (
               <Form
                 onClick={(e) => { e.stopPropagation() }}>
-
-                {/* // style={(errors.percentage && touched.percentage) ? { "border": "2px dotted red" } : null} */}
-                {/* unwrapped INPUT FIELD */}
                 <InputField
                   style={{ "background": "white", "color": "black" }}
                   type="text"
@@ -73,7 +65,6 @@ export function CartNameEditable({ name, id }: CartNameEditableProps) {
               </Form>
             )}
           </Formik>
-          // EDIT FORM -------------------- end
 
         )}
         {!isEditing && (
