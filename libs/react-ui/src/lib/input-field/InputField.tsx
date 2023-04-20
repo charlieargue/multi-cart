@@ -1,6 +1,13 @@
-import { FormControl, FormHelperText, FormLabel, Input, InputProps, useColorModeValue as mode } from '@chakra-ui/react';
-import { useField } from "formik";
-import React, { InputHTMLAttributes } from "react";
+import {
+  FormControl,
+  FormHelperText,
+  FormLabel,
+  Input,
+  InputProps,
+  useColorModeValue as mode,
+} from '@chakra-ui/react';
+import { useField } from 'formik';
+import React, { InputHTMLAttributes } from 'react';
 
 export type InputFieldProps = InputHTMLAttributes<HTMLInputElement> & {
   id?: string;
@@ -10,8 +17,12 @@ export type InputFieldProps = InputHTMLAttributes<HTMLInputElement> & {
   unwrapped?: boolean;
   radius?: string;
   ref?: (node: HTMLInputElement) => void;
+<<<<<<< HEAD
+} & InputProps;
+=======
 }
   & InputProps;
+>>>>>>> main
 
 export const InputField = ({
   id,
@@ -19,31 +30,39 @@ export const InputField = ({
   muted,
   size: _,
   unwrapped = false,
-  radius = "md",
+  radius = 'md',
   ...props
 }: InputFieldProps) => {
-  const [field, meta] = useField(props);
-  const jsxLabel = (<FormLabel>{label}</FormLabel>);
-  const jsxField = (<Input
-    p={2}
-    color={mode("inherit", "gray.900")}
-    borderRadius={radius}
-    {...field}
-    {...props}
-    id={id ? id : field.name} />);
+  const [field] = useField(props);
+  const jsxLabel = <FormLabel>{label}</FormLabel>;
+  const jsxField = (
+    <Input
+      p={2}
+      color={mode('inherit', 'gray.900')}
+      borderRadius={radius}
+      {...field}
+      {...props}
+      id={id ? id : field.name}
+    />
+  );
 
   if (field.value !== null && props.value !== null) {
     if (!unwrapped) {
       return (
         <FormControl id={id}>
-          {label ? <>{jsxLabel}{jsxField}</> : jsxField}
-          {muted && (
-            <FormHelperText>{muted}</FormHelperText>
+          {label ? (
+            <>
+              {jsxLabel}
+              {jsxField}
+            </>
+          ) : (
+            jsxField
           )}
-        </FormControl >
+          {muted && <FormHelperText>{muted}</FormHelperText>}
+        </FormControl>
       );
     } else {
-      return (jsxField);
+      return jsxField;
     }
   }
   return null;
