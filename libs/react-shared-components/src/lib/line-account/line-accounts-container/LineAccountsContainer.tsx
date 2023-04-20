@@ -13,21 +13,25 @@ import { Sort } from '@multi-cart/react-ui';
 import { areLineAccountsValid } from '@multi-cart/util';
 import React, { useRef } from 'react';
 import { FaRegCreditCard as LineAccountsIcon } from 'react-icons/fa';
-import DrawerContainer from '../drawer-container/DrawerContainer';
+import {
+  SaveLineAccountFnType,
+  SetPercentageMapType,
+} from '../../cart/cart-line-container/CartLineContainer';
 import LineAccount from '../../line-account/line-account/LineAccount';
 import AddLineAccountButton from '../add-line-account-button/AddLineAccountButton';
+import DrawerContainer from '../drawer-container/DrawerContainer';
 import LineAccountValidators from '../line-account-validators/LineAccountValidators';
 
 export interface LineAccountsContainerProps {
   line?: CartLine;
-  saveLineAccount(newPercentage: number, lineAccountId: string, line: CartLine): void;
-  setPercentageMap: React.Dispatch<React.SetStateAction<Record<string, number>>>;
+  saveLineAccount: SaveLineAccountFnType;
+  setPercentageMap: SetPercentageMapType;
 }
 
 export const LineAccountsContainer = ({
   line,
   saveLineAccount,
-  setPercentageMap
+  setPercentageMap,
 }: LineAccountsContainerProps) => {
   const btnRef = useRef();
   const { isOpen, onOpen, onClose } = useDisclosure();

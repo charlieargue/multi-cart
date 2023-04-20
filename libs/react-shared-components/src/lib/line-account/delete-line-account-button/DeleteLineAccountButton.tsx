@@ -5,14 +5,12 @@ import {
 } from '@multi-cart/react-data-access';
 import React from 'react';
 import { TiDelete as DeleteIcon } from 'react-icons/ti';
-import './DeleteLineAccountButton.module.scss';
+import { SetPercentageMapType } from '../../cart/cart-line-container/CartLineContainer';
 
 export interface DeleteLineAccountButtonProps {
   lineAccount: CartLineAccount;
   line: CartLine;
-  setPercentageMap: React.Dispatch<
-    React.SetStateAction<Record<string, number>>
-  >;
+  setPercentageMap: SetPercentageMapType;
 }
 
 export const DeleteLineAccountButton = ({
