@@ -10,10 +10,6 @@ This is a full-stack **React** **serverless** web application built for demo and
 
 
 
-# ✅ Tasks: 
-
-- [ ] ==once done, deploy all to DEV, then make ONE permanent link, find the blob ID, and then VSCODE > replace 'em all here==
-
 
 
 # 📐 2023: Guiding Principles and Best Practices
